@@ -72,7 +72,7 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
   "headline": "ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)",
   "description" : "#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．\n観測されたデータ$D={(x_i,y_i);i=1,2,\u0026hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\\Phi$を$x$の基底関数，$\\epsilon$を誤差項とする．\n$$ y_i= \\Phi w\u002b \\epsilon $$\nベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\\hat{w}$を求める．\n$$ S(w)=\\epsilon^{T}\\epsilon=(y-\\Phi w)^T(y-\\Phi w) $$\n$$ \\frac{dS(w)}{dw}=-\\Phi^{T}y\u002b\\Phi^T\\Phi w $$ $\\frac{dS(w)}{dw}=0$のときを考えると，\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．\n$$ \\hat{y}=\\Phi\\hat{w}=\\Phi(\\Phi^T\\Phi)^{-1}y $$\n最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\\Phi w$，分散行列$\\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．\n$$ y= \\Phi w\u002b \\epsilon,\\epsilon \\sim \\mathcal{N}(0,\\sigma^2I_n) $$ $$ P(y\\mid w,\\sigma^2)=\\mathcal{N}(\\Phi w,\\sigma^2I_n) =\\frac{1}{(2\\pi\\sigma^2)^{\\frac{n}{2}}}exp{-\\frac{1}{2\\sigma^2}(y-\\Phi w)^T(y-\\Phi w)} $$\n$P(y\\mid w)$の対数を$w$で偏微分し，$\\hat{w}$を求める．\n$$ \\log P(y\\mid w) = -\\frac{n}{2}\\log(2\\pi\\sigma^2)-\\frac{(y-\\Phi w)^T(y-\\Phi w)}{2\\sigma^2} $$\n$$ \\frac{1}{P(y\\mid w)}\\frac{P(y\\mid w)}{dw}=-(\\Phi^{T}y\u002b\\Phi^{T}\\Phi w) $$ $\\frac{dP(y\\mid w)}{dw}=0$のときを考えると．\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$",
   "inLanguage" : "en",
-  "wordCount":  224 ,
+  "wordCount":  223 ,
   "datePublished" : "2021-01-08T15:17:23",
   "dateModified" : "2021-01-08T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -336,7 +336,7 @@ P(w \mid y)=\frac{P(y \mid w)P(w)}{P(y)}
 $$</p>
 <p>ここで．$P(y|w)$は尤度を，$P(w)$は事前確率を表す．</p>
 <p>$$
-P(w \mid y)=\frac{\frac{1}{(2\pi \beta^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\beta^2}(y-\Phi w)^T(y-\Phi w)\frac{1}{(2\pi \alpha^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\alpha^2}w^{T}w} }{P(y)}
+P(w \mid y)=\frac{\frac{1}{(2\pi \beta^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\beta^2}(y-\Phi w)^T(y-\Phi w)\frac{1}{(2\pi\alpha^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\alpha^2}w^{T}w} }{P(y)}
 $$</p>
 <p>$$
 P(w \mid y)=\frac{\frac{1}{ (2\pi)^{n}(\alpha\beta)^{-\frac{n}{2}} }
