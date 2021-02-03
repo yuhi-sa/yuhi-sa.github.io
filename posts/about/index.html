@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>とまとまとブログ - とまとまとブログ</title>
+  <title>about - とまとまとブログ</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -28,13 +28,61 @@
   
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/about\/",
+          "name": "About"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "about",
+  "description" : "",
+  "inLanguage" : "ja",
+  "wordCount":  0 ,
+  "datePublished" : "2020-08-16T15:17:23",
+  "dateModified" : "2020-08-16T15:17:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/about\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
 
-<meta property="og:title" content="とまとまとブログ" />
-<meta property="og:url" content="https://yuhi-sa.github.io/" />
+<meta property="og:title" content="about" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/about/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
-  <meta name="twitter:title" content="とまとまとブログ" />
+  <meta name="twitter:title" content="about" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -162,17 +210,13 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="posts-heading">
               
-                <h1>とまとまとブログ</h1>
+                <h1>about</h1>
               
               
                 <hr class="small">
               
-              
-                
-                  <span class="page-subheading">yuhi-sa</span>
-                
               
               
             </div>
@@ -184,113 +228,100 @@
 
 
     
-  <div role="main" class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
         
 
-        <div class="posts-list">
-          
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200816/">
-        <h2 class="post-title">[ROS]PublisherとSubscriberを1つのノードに書く方法</h2>
         
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;August 16, 2020に投稿
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        はじめに ROSを使った際に，Subscriberとして機能しているノードからも，計測データをトピックとして通信したいなと思ったのですが，SubscriberとPublisherを一つのプログラムに書く方法が見つけられずに困ったので(Google検索力低いだけの可能性大)，ROSの理解を深めるためにまとめようと思います．最近使い始めたばかりで，間違ってることもあるかと思いますので詳しい方，間違っていたらご指摘いただきたいです．勉強になります．
-ROS(Robot Operating System)とは ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．具体的には，ロボット同士の通信が簡易にできるようになります．
-Pub &amp; Sub通信 ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます． 実行環境  ROS kinetic Ubuntu 16.04 LTS Python 3.8.5  Publisherのサンプルプログラム #!/usr/bin/env python # license removed for brevity import rospy from std_msgs.msg import String #使うデータ型をインポート def talker(): #Publisherを作成(&#39;トピック名&#39;,型,サイズ) pub = rospy.Publisher(&#39;chatter&#39;, String, queue_size=10) #ノード名を宣言 rospy.init_node(&#39;talker&#39;, anonymous=True) #ループの周期を宣言 rate = rospy.Rate(10) # 10hz while not rospy.is_shutdown(): #パブリッシュするデータを記入 hello_str = &#34;hello world %s&#34; % rospy.get_time() #パブリッシュするデータをターミナルに表示 rospy.loginfo(hello_str) #データをパブリッシュ pub.publish(hello_str) rate.sleep() if __name__ == &#39;__main__&#39;: try: talker() except rospy.
-        <a href="https://yuhi-sa.github.io/posts/20200816/" class="post-read-more">[続きを読む]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
-        
-        <a href="https://yuhi-sa.github.io//tags/ros/">ros</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/about/">
-        <h2 class="post-title">about</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;August 16, 2020に投稿
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        
-        
-    </div>
-
-    
-
-</article>
-          
-        </div>
 
         
-      </div>
-    </div>
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;text=about&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;description=about" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
   </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
 
       
-    <div class="page-meta">
-  
-  
-  
+        <ul class="pager blog-pager">
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20200816/" data-toggle="tooltip" data-placement="top" title="[ROS]PublisherとSubscriberを1つのノードに書く方法">次ページ &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
 </div>
 
-
-  
+      
 <footer>
   <div class="container">
     <div class="row">

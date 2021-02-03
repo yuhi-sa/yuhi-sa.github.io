@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>とまとまとブログ</title>
-    <link>https://yuhi-sa.github.io/</link>
-    <description>Recent content on とまとまとブログ</description>
+    <title>ros on とまとまとブログ</title>
+    <link>https://yuhi-sa.github.io/tags/ros/</link>
+    <description>Recent content in ros on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Aug 2020 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Aug 2020 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[ROS]PublisherとSubscriberを1つのノードに書く方法</title>
       <link>https://yuhi-sa.github.io/posts/20200816/</link>
@@ -15,15 +15,6 @@
       <description>はじめに ROSを使った際に，Subscriberとして機能しているノードからも，計測データをトピックとして通信したいなと思ったのですが，SubscriberとPublisherを一つのプログラムに書く方法が見つけられずに困ったので(Google検索力低いだけの可能性大)，ROSの理解を深めるためにまとめようと思います．最近使い始めたばかりで，間違ってることもあるかと思いますので詳しい方，間違っていたらご指摘いただきたいです．勉強になります．
 ROS(Robot Operating System)とは ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．具体的には，ロボット同士の通信が簡易にできるようになります．
 Pub &amp;amp; Sub通信 ROSでは，ROSのネットワークにつながった実行可能なものを&amp;quot;ノード&amp;quot;とよび，ノード間で&amp;quot;トピック&amp;quot;とよばれるメッセージをやり取りします．メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます． 実行環境  ROS kinetic Ubuntu 16.04 LTS Python 3.8.5  Publisherのサンプルプログラム #!/usr/bin/env python # license removed for brevity import rospy from std_msgs.msg import String #使うデータ型をインポート def talker(): #Publisherを作成(&amp;#39;トピック名&amp;#39;,型,サイズ) pub = rospy.Publisher(&amp;#39;chatter&amp;#39;, String, queue_size=10) #ノード名を宣言 rospy.init_node(&amp;#39;talker&amp;#39;, anonymous=True) #ループの周期を宣言 rate = rospy.Rate(10) # 10hz while not rospy.is_shutdown(): #パブリッシュするデータを記入 hello_str = &amp;#34;hello world %s&amp;#34; % rospy.get_time() #パブリッシュするデータをターミナルに表示 rospy.loginfo(hello_str) #データをパブリッシュ pub.publish(hello_str) rate.sleep() if __name__ == &amp;#39;__main__&amp;#39;: try: talker() except rospy.</description>
-    </item>
-    
-    <item>
-      <title>about</title>
-      <link>https://yuhi-sa.github.io/posts/about/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/about/</guid>
-      <description></description>
     </item>
     
   </channel>
