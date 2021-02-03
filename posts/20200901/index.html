@@ -338,12 +338,10 @@ $$</p>
 <p>テーラー展開(推定値を$\hat{x}_k$とする)</p>
 </blockquote>
 <p>$$
-f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots
-\tag{8}
-$$
-$$
-h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots
-\tag{9}
+f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots \tag{8}
+$$</p>
+<p>$$
+h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots \tag{9}
 $$</p>
 <p>以下，カルマンフィルタと同様</p>
 <h1 id="unscented-カルマンフィルタunscented-kalman-filter-ukf">Unscented カルマンフィルタ(Unscented Kalman Filter, UKF)</h1>
@@ -355,38 +353,31 @@ $$</p>
 <p>シグマ点</p>
 </blockquote>
 <p>$$
-\chi^0=\mu
-\tag{13}
-$$
-$$
-\chi^i=\mu \pm(\sqrt{(n+\lambda)\Sigma})_i
-\tag{14}
+\chi^0=\mu \tag{13}
+$$</p>
+<p>$$
+\chi^i=\mu \pm(\sqrt{(n+\lambda)\Sigma})_i \tag{14}
 $$</p>
 <blockquote>
 <p>重みの計算</p>
 </blockquote>
 <p>$$
-w^0=\frac{\lambda}{\lambda+n}
-\tag{15}
-$$
-$$
-w^i=\frac{0.5}{\lambda+n}
-\tag{16}
+w^0=\frac{\lambda}{\lambda+n} \tag{15}
+$$</p>
+<p>$$
+w^i=\frac{0.5}{\lambda+n} \tag{16}
 $$</p>
 <blockquote>
 <p>重み付き平均で、観測値とその共分散を推定</p>
 </blockquote>
 <p>$$
-\hat{X}<em>t=f(X</em>{t-1},u_t)
-\tag{17}
-$$
-$$
-\hat{\mu_t}=\sum_iw^i\hat{\chi}_t^i
-\tag{18}
-$$
-$$
-\hat{\Sigma}_t=\sum_iw^i(\hat{\chi}-\hat{\mu_t}) (\hat{\chi}-\hat{\mu_t}) ^T+Q_t
-\tag{19}
+\hat{X}<em>t=f(X</em>{t-1},u_t) \tag{17}
+$$</p>
+<p>$$
+\hat{\mu_t}=\sum_iw^i\hat{\chi}_t^i \tag{18}
+$$</p>
+<p>$$
+\hat{\Sigma}_t=\sum_iw^i(\hat{\chi}-\hat{\mu_t}) (\hat{\chi}-\hat{\mu_t}) ^T+Q_t \tag{19}
 $$</p>
 <h1 id="モンテカルロ-unscented-カルマンフィルタmonte-carlo-unscented-kalman-filter-mcukf">モンテカルロ Unscented カルマンフィルタ(Monte Carlo Unscented Kalman Filter, MCUKF)</h1>
 <h2 id="目的-3">目的</h2>
