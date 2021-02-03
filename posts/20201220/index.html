@@ -7,7 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>about - とまとまとブログ</title>
+  <title>バイナリ法 - とまとまとブログ</title>
+  <meta name="description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
+具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
+2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
+アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +47,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/about\/",
-          "name": "About"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20201220\/",
+          "name": "バイナリ法"
         }
     }]
 }
@@ -55,15 +59,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "about",
-  "description" : "",
+  "headline": "バイナリ法",
+  "description" : "バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．\n具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$\n2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．\nアルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k\/\/2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ",
   "inLanguage" : "en",
-  "wordCount":  0 ,
-  "datePublished" : "2020-08-16T15:17:23",
-  "dateModified" : "2020-08-16T15:17:23",
+  "wordCount":  51 ,
+  "datePublished" : "2020-12-20T15:17:23",
+  "dateModified" : "2020-12-20T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/about\/",
+  "keywords" : [ "python, アルゴリズム" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20201220\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +81,19 @@
 }
 </script>
 
-<meta property="og:title" content="about" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/about/" />
+<meta property="og:title" content="バイナリ法" />
+<meta property="og:description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
+具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
+2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
+アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20201220/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
-  <meta name="twitter:title" content="about" />
+  <meta name="twitter:title" content="バイナリ法" />
+  <meta name="twitter:description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
+具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
+2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する． …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -222,7 +233,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>about</h1>
+                <h1>バイナリ法</h1>
               
               
                 <hr class="small">
@@ -242,8 +253,39 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
+        <h1 id="バイナリ法">バイナリ法</h1>
+<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．
+計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．</p>
+<h2 id="具体例">具体例</h2>
+<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
+<p>2進数に展開し，左から順に展開することにより計算を実行する．
+これにより，$g^k(mod p)$を計算する．</p>
+<h1 id="アルゴリズム">アルゴリズム</h1>
+<div class="highlight"><pre class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+</code></pre></div>
 
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
+            
+              <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
+            
+          </div>
         
 
         
@@ -256,42 +298,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;text=about&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f&amp;text=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;title=about" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2fabout%2f&amp;description=about" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220%2f&amp;description=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -305,6 +347,25 @@
 
         
           
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20210125/">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
+                
+                    <li><a href="/posts/20210109/">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
+                
+                    <li><a href="/posts/20201223/">Pythonでslackに実験結果(テキストと画像)を送る</a></li>
+                
+                    <li><a href="/posts/20201223_2/">楕円曲線上のElGamal暗号</a></li>
+                
+                    <li><a href="/posts/20201015/">ユークリッドの互除法と拡張ユークリッドの互除法</a></li>
+                
+              </ul>
 
           
         
@@ -313,9 +374,13 @@
       
         <ul class="pager blog-pager">
           
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20201015/" data-toggle="tooltip" data-placement="top" title="ユークリッドの互除法と拡張ユークリッドの互除法">&larr; Previous Post</a>
+            </li>
+          
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20200816/" data-toggle="tooltip" data-placement="top" title="[ROS]PublisherとSubscriberを1つのノードに書く方法">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20201223_2/" data-toggle="tooltip" data-placement="top" title="楕円曲線上のElGamal暗号">Next Post &rarr;</a>
             </li>
           
         </ul>

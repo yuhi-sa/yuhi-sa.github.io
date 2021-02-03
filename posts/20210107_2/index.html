@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>情報理論(エントロピーから相互情報量, PRML1.6) - とまとまとブログ</title>
+  <meta name="description" content="情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．
+ $h(x,y)=h(x)&#43;h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である．  この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．
+$$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．
+エントロピー ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．
+$$ H[x]=-\sum_x p(x) \log_{2}p(x) $$
+ビット数の下限 ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．
+ 8個それぞれの確率が等確率であるとする．  $$ H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット $$
+ 8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．  $$ H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット $$
+上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる． ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．
+エントロピーの高低 少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．
+最大のエントロピーを持つ確率分布 まず，エントロピーの二階微分二階微分を計算する．
+$$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．
+微分エントロピー $x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．
+$$ \int_{i\Delta}^{(i&#43;1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．
+$$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．
+$$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．">
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "とまとまとブログ",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210107_2\/",
+          "name": "情報理論(エントロピーから相互情報量, p r m l1.6)"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "情報理論(エントロピーから相互情報量, PRML1.6)",
+  "description" : "情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．\n $h(x,y)=h(x)\u002bh(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である．  この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．\n$$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．\nエントロピー ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．\n$$ H[x]=-\\sum_x p(x) \\log_{2}p(x) $$\nビット数の下限 ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．\n 8個それぞれの確率が等確率であるとする．  $$ H[x]= -8*\\frac{1}{8}\\log_{2}\\frac{1}{8}=3ビット $$\n 8個それぞれの確率が{$\\frac{1}{2},\\frac{1}{4},\\frac{1}{8},\\frac{1}{16},\\frac{1}{64},\\frac{1}{64},\\frac{1}{64},\\frac{1}{64},$}で与えられるとする．  $$ H[x]=-\\frac{1}{2}\\log_2\\frac{1}{2}-\\frac{1}{4}\\log_2\\frac{1}{4}-\\frac{1}{8}\\log_2\\frac{1}{8}-\\frac{1}{16}\\log_2\\frac{1}{16}-\\frac{4}{64}\\log_2\\frac{1}{64}=2ビット $$\n上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる． ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．\nエントロピーの高低 少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．\n最大のエントロピーを持つ確率分布 まず，エントロピーの二階微分二階微分を計算する．\n$$ \\frac{\\delta H[x]}{\\delta p(x_i)\\delta p(x_j)}=-I_{ij}\\frac{1}{p_i} $$ $I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．\n微分エントロピー $x$を等間隔の区間$\\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．\n$$ \\int_{i\\Delta}^{(i\u002b1)\\Delta}p(x)dx = p(x_i)\\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\\Delta$となる．よって離散分布のエントロピーは，以下のようになる．\n$$ H_{\\Delta}=-\\sum_ip(x_i)\\Delta\\ln(p(x_i)\\Delta)= -\\sum_i p(x_i)\\Delta\\ln p(x_i)- \\ln \\Delta $$ 第二項を無視して$\\Delta\\rightarrow 0$の極限を考える．\n$$ \\lim_{\\Delta\\rightarrow 0}{ -\\sum_i p(x_i)\\Delta\\ln p(x_i) } = -\\int p(x)\\ln p(x)dx $$ 右辺が微分エントロピーとなる．",
+  "inLanguage" : "en",
+  "wordCount":  163 ,
+  "datePublished" : "2021-01-07T15:17:23",
+  "dateModified" : "2021-01-07T15:17:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210107_2\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="情報理論(エントロピーから相互情報量, PRML1.6)" />
+<meta property="og:description" content="情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．
+ $h(x,y)=h(x)&#43;h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である．  この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．
+$$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．
+エントロピー ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．
+$$ H[x]=-\sum_x p(x) \log_{2}p(x) $$
+ビット数の下限 ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．
+ 8個それぞれの確率が等確率であるとする．  $$ H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット $$
+ 8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．  $$ H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット $$
+上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる． ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．
+エントロピーの高低 少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．
+最大のエントロピーを持つ確率分布 まず，エントロピーの二階微分二階微分を計算する．
+$$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．
+微分エントロピー $x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．
+$$ \int_{i\Delta}^{(i&#43;1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．
+$$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．
+$$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210107_2/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="とまとまとブログ" />
+
+  <meta name="twitter:title" content="情報理論(エントロピーから相互情報量, PRML1.6)" />
+  <meta name="twitter:description" content="情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．
+ $h(x,y)=h(x)&#43;h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統 …">
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="とまとまとブログ"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>情報理論(エントロピーから相互情報量, PRML1.6)</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="情報量の表し方">情報量の表し方</h1>
+<p>情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える．
+情報量として用いる場合，以下の2点を満たしている必要がある．</p>
+<ul>
+<li>$h(x,y)=h(x)+h(y)$
+2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる．</li>
+<li>$p(x,y)=p(x)p(y)$
+2つの無関係な事象は統計的に独立である．</li>
+</ul>
+<p>この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．</p>
+<p>$$
+h(x)=-log_2p(x)
+$$
+情報理論では一般的に底2が用いられる．</p>
+<h1 id="エントロピー">エントロピー</h1>
+<p>ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．</p>
+<p>$$
+H[x]=-\sum_x p(x) \log_{2}p(x)
+$$</p>
+<h2 id="ビット数の下限">ビット数の下限</h2>
+<p>ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．</p>
+<ol>
+<li>8個それぞれの確率が等確率であるとする．</li>
+</ol>
+<p>$$
+H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット
+$$</p>
+<ol>
+<li>8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．</li>
+</ol>
+<p>$$
+H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット
+$$</p>
+<p>上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる．
+ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．</p>
+<h2 id="エントロピーの高低">エントロピーの高低</h2>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/9371519e-2af3-f682-4137-b1f87122b374.png" alt="fig1.png">
+少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．</p>
+<h2 id="最大のエントロピーを持つ確率分布">最大のエントロピーを持つ確率分布</h2>
+<p>まず，エントロピーの二階微分二階微分を計算する．</p>
+<p>$$
+\frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i}
+$$
+$I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．</p>
+<h3 id="微分エントロピー">微分エントロピー</h3>
+<p>$x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．</p>
+<p>$$
+\int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta
+$$
+$x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．</p>
+<p>$$
+H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)=
+-\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta
+$$
+第二項を無視して$\Delta\rightarrow 0$の極限を考える．</p>
+<p>$$
+\lim_{\Delta\rightarrow 0}{
+-\sum_i p(x_i)\Delta\ln p(x_i)
+}
+= -\int p(x)\ln p(x)dx
+$$
+右辺が微分エントロピーとなる．</p>
+<h3 id="微分エントロピーの最大化">微分エントロピーの最大化</h3>
+<p>微分エントロピーは</p>
+<p>$$
+H[x]= - \int p(x)\ln p(x)dx
+$$
+で与えられる．
+微分エントロピーを以下の3つの制約のもとで最大化する．</p>
+<ul>
+<li>$\int_{-\infty}^{\infty}p(x)dx = 1$</li>
+<li>$\int_{-\infty}^{\infty}xp(x)dx = \mu$</li>
+<li>$\int_{-\infty}^{\infty}(x-\mu)^2p(x)dx = \sigma^2$</li>
+</ul>
+<p>ラグランジュの未定乗数法を用いて解くと最終的に以下の結果となる．(計算省略)</p>
+<p>$$
+p(x)=\frac{1}{2\pi\sigma^2}\exp{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$
+<!-- raw HTML omitted -->つまり，微分エントロピーを最大にする分布はガウス分布となる．<!-- raw HTML omitted -->
+ガウス分布の微分エントロピーを計算すると，以下のようになる．</p>
+<p>$$
+H[x]=\frac{1}{2}{1 + \ln(2\pi\sigma^2)}
+$$
+エントロピーは分散$\sigma^2$が増えるごとに大きくなることがわかる．</p>
+<h2 id="同時分布のエントロピー">同時分布のエントロピー</h2>
+<p>同時分布$p(x,y)$を考える．$x$の値が既知であるとすれば，対応する$y$の値を特定するのに付加的な情報は，$p(y|x)$である．よって，$y$を特定するための付加的な情報量の平均は，以下のようにかける．</p>
+<p>$$
+H[y|x]=-\int\int p(y,x)\ln p(y|x)dydx
+$$
+これを，$x$に対する$y$の条件付きエントロピーと呼ぶ，</p>
+<p>確率の乗法定理を使うと，条件付きエントロピーは以下の関係を満たすことがわかる．</p>
+<p>$$
+H[x,y]=H[y|x]+H[x]
+$$
+つまり，<!-- raw HTML omitted -->$x$と$y$を記述するのに必要な乗法は，$x$だけを記述するするための情報量と$x$が与えられた下で$y$を記述するために必要な付加的な付加的な情報量情報量との和で与えられる．<!-- raw HTML omitted --></p>
+<h1 id="相対エントロピー">相対エントロピー</h1>
+<p>ある未知の分布$p(x)$があり，これを近似的に$q(x)$でモデル化したっとする．真の分布$p(x)$の代わりに$q(x)$を使うことで，$x$の値を特定するのに追加で必要となる情報量は，条件付き条件付きエントロピーの概念を用いて以下のように表すことができる．</p>
+<p>$$
+KL(p||q)=-\int p(x)\ln q(x)dx-(-\int p(x)\ln p(x)dx) \<br>
+= -\int p(x) \ln {\frac{q(x)}{p(x)}}
+$$
+これは，分布$p(x)$と$q(x)$の間の相対エントロピーあるいは，カルバックライブラー(KL)ダイバージェンスと呼ばれる．
+イェンセンの不等式をKLダイバージェンスに適応することで，KLダイバージェンスは，<!-- raw HTML omitted -->$KL(p||q)&gt;= 0$を満たし，かつ等式が成り立つのは$p(x)=q(x)$のときのみである<!-- raw HTML omitted -->ことが示されている．
+よって，<!-- raw HTML omitted -->KLダイバージェンスは2つの分布間の距離を表す尺度として解釈できる．<!-- raw HTML omitted --></p>
+<h2 id="klダイバージェンス最小化と尤度の最大化">KLダイバージェンス最小化と尤度の最大化</h2>
+<p>データが未知の分布$p(x)$から生成され，それをモデル化することを考える．パラメータ$\theta$をもつ分布$q(x|\theta)$を使って近似をおこなう．</p>
+<p>このとき，$p(x)$と$q(x|\theta)$のKLダイバージェンスを$\theta$について最小化する．しかし，$p(x)$を知らないため，これを直接行うことはできない．</p>
+<p>そこで，p(x)に関する期待値を，訓練用のサンプルデータ$x_n$を用いて近似する．</p>
+<p>$$
+KL(p||q) \simeq \frac{1}{N} \sum_{n=1}^N{</p>
+<ul>
+<li>\ln q(x_n|\theta)+\ln p(x_n) }
+$$
+右辺の第一項は，訓練集合を使って評価した分布$q(x|\theta)$の下での$\theta$の負の対数尤度であり，第二項は$\theta$と独立である．
+つまり，<!-- raw HTML omitted -->KLダイバージェンスの最小化は，尤度の最大化<!-- raw HTML omitted -->となる．</li>
+</ul>
+<h2 id="相互情報量">相互情報量</h2>
+<p>2つの変数集合$x$と$y$の同時分布$p(x,y)$について考える．変数が独立出ない場合において，変数が独立に近いかどうかを知るために，同時分布$p(x,y)$と周辺分布の積$p(x)p(y)$の間のKLダイバージェンスを考えることができる．</p>
+<p>$$
+I[x,y]\equiv
+KL(p(x,y)||p(x)p(y)) \<br>
+= -\int \int p(x,y)\ln (\frac{p(x)p(y)}{p(x,y)})dxdy
+$$</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f&amp;text=%e6%83%85%e5%a0%b1%e7%90%86%e8%ab%96%28%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e3%81%8b%e3%82%89%e7%9b%b8%e4%ba%92%e6%83%85%e5%a0%b1%e9%87%8f%2c%20PRML1.6%29&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f&amp;title=%e6%83%85%e5%a0%b1%e7%90%86%e8%ab%96%28%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e3%81%8b%e3%82%89%e7%9b%b8%e4%ba%92%e6%83%85%e5%a0%b1%e9%87%8f%2c%20PRML1.6%29" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f&amp;title=%e6%83%85%e5%a0%b1%e7%90%86%e8%ab%96%28%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e3%81%8b%e3%82%89%e7%9b%b8%e4%ba%92%e6%83%85%e5%a0%b1%e9%87%8f%2c%20PRML1.6%29" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f&amp;title=%e6%83%85%e5%a0%b1%e7%90%86%e8%ab%96%28%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e3%81%8b%e3%82%89%e7%9b%b8%e4%ba%92%e6%83%85%e5%a0%b1%e9%87%8f%2c%20PRML1.6%29" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_2%2f&amp;description=%e6%83%85%e5%a0%b1%e7%90%86%e8%ab%96%28%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e3%81%8b%e3%82%89%e7%9b%b8%e4%ba%92%e6%83%85%e5%a0%b1%e9%87%8f%2c%20PRML1.6%29" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20210125/">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
+                
+                    <li><a href="/posts/20210109/">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
+                
+                    <li><a href="/posts/20210108/">ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</a></li>
+                
+                    <li><a href="/posts/20210107/">粒子群最適化(PSO)とTCPSO</a></li>
+                
+                    <li><a href="/posts/20200831/">強化学習の全体像まとめ</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20210107/" data-toggle="tooltip" data-placement="top" title="粒子群最適化(PSO)とTCPSO">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20210108/" data-toggle="tooltip" data-placement="top" title="ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/yuhi-sa" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

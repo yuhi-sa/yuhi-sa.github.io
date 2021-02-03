@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>強化学習の全体像まとめ - とまとまとブログ</title>
+  <meta name="description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
+強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
+ 価値反復法
+ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)} $$ $$ V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$
+ 方策反復法
+ベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)&#43;\gamma \sum_{s&#39;}p_T(s&#39;|s,a)V^\pi(s&#39;)} $$
+強化学習 環境が既知の場合の逐次的意思決定問題
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．
+価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．
+ オフライン
+ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$
+ オンライン    TD法
+TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#43;\gamma \hat{V}(s_{t&#43;1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)&#43;\alpha_t\delta $$
+  TD($\lambda$)法
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．">
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "とまとまとブログ",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20200831\/",
+          "name": "強化学習の全体像まとめ"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "強化学習の全体像まとめ",
+  "description" : "はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．\n強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題\n 価値反復法\nベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\\max_a{\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)} $$ $$ V^{*}=\\lim_{k\\rightarrow \\infty}(B_{*}^kV)(s) $$\n 方策反復法\nベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\\pi}v)(s)=\\sum_a\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)) $$ $$ V^{\\pi}=\\lim_{k\\rightarrow \\infty}(B_{\\pi}^kV)(s) $$ $$ \\pi(s)=\\arg\\max_a{g(s,a)\u002b\\gamma \\sum_{s\u0027}p_T(s\u0027|s,a)V^\\pi(s\u0027)} $$\n強化学習 環境が既知の場合の逐次的意思決定問題\n報酬や次状態を観測することでデータを収集して，データから方策を学習する．\n価値関数Vの推定 方策$\\pi$を固定して価値関数の推定を行う．\n オフライン\nベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \\hat{V}(s)=\\hat{B}(\\hat{V},h_T^\\pi)(s) $$\n オンライン    TD法\nTD誤差$\\delta$を計算して価値関数を更新する．   $$ \\delta=r_t\u002b\\gamma \\hat{V}(s_{t\u002b1})-\\hat{V}(s_t) $$ $$ \\hat{V}(s_t)=\\hat{V}(s_t)\u002b\\alpha_t\\delta $$\n  TD($\\lambda$)法\nエリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\\pi$を固定して行動価値関数の推定を行う．",
+  "inLanguage" : "en",
+  "wordCount":  184 ,
+  "datePublished" : "2020-08-31T15:17:23",
+  "dateModified" : "2020-08-31T15:17:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20200831\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="強化学習の全体像まとめ" />
+<meta property="og:description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
+強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
+ 価値反復法
+ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)} $$ $$ V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$
+ 方策反復法
+ベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)&#43;\gamma \sum_{s&#39;}p_T(s&#39;|s,a)V^\pi(s&#39;)} $$
+強化学習 環境が既知の場合の逐次的意思決定問題
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．
+価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．
+ オフライン
+ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$
+ オンライン    TD法
+TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#43;\gamma \hat{V}(s_{t&#43;1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)&#43;\alpha_t\delta $$
+  TD($\lambda$)法
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20200831/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="とまとまとブログ" />
+
+  <meta name="twitter:title" content="強化学習の全体像まとめ" />
+  <meta name="twitter:description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
+強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
+ 価値反復法
+ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ …">
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="とまとまとブログ"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>強化学習の全体像まとめ</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="はじめに">はじめに</h1>
+<p>強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．</p>
+<h1 id="強化学習の全体像">強化学習の全体像</h1>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/3a637da6-d173-9b1a-2642-7406a7ec7282.jpeg" alt="RLmap.jpeg"></p>
+<h1 id="プランニング問題">プランニング問題</h1>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題</p>
+<ul>
+<li>価値反復法<br>
+ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li>
+</ul>
+<p>$$
+(B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')}
+$$
+$$
+V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
+$$</p>
+<ul>
+<li>方策反復法<br>
+ベルマン<code>期待</code>作用素を繰り返し用いて最適方策を求める．</li>
+</ul>
+<p>$$
+(B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s'))
+$$
+$$
+V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s)
+$$
+$$
+\pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s'}p_T(s'|s,a)V^\pi(s')}
+$$</p>
+<h1 id="強化学習">強化学習</h1>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題<br>
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．</p>
+<h2 id="価値関数vの推定">価値関数Vの推定</h2>
+<p>方策$\pi$を固定して価値関数の推定を行う．</p>
+<ul>
+<li>オフライン<br>
+ベルマン作用素を直接求められないので，まず標本近似によって<code>近似</code>ベルマン作用素を求める．そして，<code>近似</code>ベルマン作用素を価値関数用いて更新する．</li>
+</ul>
+<p>$$
+\hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s)
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>TD法<br>
+TD誤差$\delta$を計算して価値関数を更新する．</li>
+</ul>
+</blockquote>
+<p>$$
+\delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t)
+$$
+$$
+\hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta
+$$</p>
+<blockquote>
+<ul>
+<li>TD($\lambda$)法<br>
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．</li>
+</ul>
+</blockquote>
+<h2 id="行動価値関数qの推定">行動価値関数Qの推定</h2>
+<p>方策$\pi$を固定して行動価値関数の推定を行う．</p>
+<blockquote>
+<ul>
+<li>Q学習法<br>
+価値ベース：maxを取っているため推定行動価値関数が方策に依存しない．</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma \max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)<br>
+$$</p>
+<p>$$
+\hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
+$$</p>
+<blockquote>
+<ul>
+<li>SARSA<br>
+方策ベース</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma \hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+$$</p>
+<p>$$
+\hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
+$$</p>
+<h3 id="アクタークリティック法">アクタークリティック法</h3>
+<p>アクターは行動を決定し，クリティックは環境から情報を集めることで状態の価値を推定し，これに基づき行動を評価を行う．</p>
+<ul>
+<li>クリティック</li>
+</ul>
+<p>$$
+\delta_t=r_t+\gamma\hat{V}(s_{t+1})-\hat{V}(s_t)
+$$</p>
+<p>$$
+\hat{V}(s_{t}=\hat{V}(s_t)+\alpha\delta_t
+$$</p>
+<ul>
+<li>アクター</li>
+</ul>
+<p>$$
+q(s_t,a_t)=q(s_t,a_t)+\alpha\delta_t
+$$</p>
+<p>*$q$は効用関数(価値観数は効用関数により得られる)</p>
+<h2 id="関数近似">関数近似</h2>
+<p>状態数が膨大であったり，状態空間が連続の場合，計算量が多くなりすぎるため関数近似を行う．</p>
+<h3 id="価値関数近似">価値関数近似</h3>
+<p>パラメータ$w$で規定される関数近似器を用いる．</p>
+<ul>
+<li>オフライン<br>
+適合価値反復法では収束性を担保できない．安定化の1つのアプローチとして関数近似の自由度を上げる方法がある．代表例として，<code>ニューラル適合Q反復</code>，<code>深層Qネットワーク</code>がある．</li>
+</ul>
+<blockquote>
+<ul>
+<li>適合価値反復法(価値関数$V$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
+V_n^{target}=\hat{B}(\hat{V}_w)(s_n)=r_n+\gamma \hat{V}_w(s'_n)
+$$</p>
+<p>$$
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+$$</p>
+<p>$$
+w=\arg\min_w\frac{1}{N}\sum_1^N(V_n^{target}-\hat{V}_w(s_n))^2
+$$</p>
+<blockquote>
+<ul>
+<li>適合Q反復法(行動価値関数$Q$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+$$</p>
+<p>$$
+w=\arg\min_w\frac{1}{N}\sum_1^N(Q_n^{target}-\hat{Q}_w(s_n))^2
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>近似TD法<br>
+TD誤差を再定義</li>
+</ul>
+</blockquote>
+<p>$$
+\delta=r_t+\gamma\hat{V}<em>{w_t}(s</em>{t+1})-\hat{V}_{w_t}(s_t)<br>
+$$</p>
+<p>$\hat{V}<em>w$の$w$に関する偏微分ベクトル$\nabla_w\hat{V}</em>{w_t}(s)$を用いて</p>
+<p>$$
+w_{t+1}=w_t+\alpha\delta_t\nabla_w\hat{V}_{w_t}(s_t)
+$$</p>
+<blockquote>
+<ul>
+<li>近似Q学習法</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma\max_{a'}\hat{Q}_{w_t}(s_{t+1},a')-\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<blockquote>
+<ul>
+<li>近似SARSA法</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma\hat{Q}<em>{w_t}(s</em>{t+1},a')-\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<h3 id="方策近似">方策近似</h3>
+<blockquote>
+<ul>
+<li>方策勾配法<br>
+目的関数</li>
+</ul>
+</blockquote>
+<p>$$
+f_0=\sum_sp_{s_0}(s)V^{\pi_\theta}(s)
+$$</p>
+<p>$$
+f_\infty=\lim_{T \rightarrow \infty}\mathbb{E}[\frac{1}{T}\sum_{t=0}^{T-1}g(S_t,A_t)=\sum_{s}\sum_{a}p_{\infty}^{\pi_\theta}(a|s)g(s,a)
+$$</p>
+<p>確率的勾配法に従い
+$$
+\theta=\theta+\alpha_tG_t^\theta
+$$</p>
+<blockquote>
+<ul>
+<li>モンテカルロ方策勾配法</li>
+</ul>
+</blockquote>
+<p>$$
+c_t=\sum_{k=t}^{T-1}r_k
+$$</p>
+<p>$$
+\theta=\theta+\alpha_n\frac{1}{T}\sum_{t=0}^{T-1}(c_t-b(s_t))\nabla_\theta \log\pi_\theta(s_t,a_t)
+$$</p>
+<blockquote>
+<ul>
+<li>アクタークリティック方策勾配法</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>クリティックの更新<br>
+推定平均報酬$\hat{f}$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$
+\hat{f}<em>t=\hat{f}</em>{t-1}+\alpha_t(r_t-\hat{f}_{t-1}
+$$</p>
+<p>TD誤差の計算</p>
+<p>$$
+\delta_t=r_t-\hat{f}<em>t+\hat{Q}w</em>{t}(s_{t+1},a_{t+1})-\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<p>エリジビリティ・トレースと関数近似器パラメータの更新</p>
+<p>$$
+z_t=\lambda z_{t-1}+\nabla_w\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<p>$$
+w_{t+1}=w_t+\alpha_t\delta_tz_t
+$$</p>
+<blockquote>
+<blockquote>
+<ul>
+<li>アクターの更新<br>
+方策パラメータ$\theta$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$
+\theta_{t+1}=\theta+\alpha_t\hat{Q}_{w_t}(s_t,a_t)\nabla_\theta\log\pi_\theta(a_t|s_t)
+$$</p>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>森村 哲郎, &ldquo;MLP機械学習プロフェッショナルシリーズ 強化学習&rdquo;</li>
+</ul>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f&amp;text=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831%2f&amp;description=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20210125/">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
+                
+                    <li><a href="/posts/20210109/">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
+                
+                    <li><a href="/posts/20210108/">ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</a></li>
+                
+                    <li><a href="/posts/20210107_2/">情報理論(エントロピーから相互情報量, PRML1.6)</a></li>
+                
+                    <li><a href="/posts/20210107/">粒子群最適化(PSO)とTCPSO</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20200816/" data-toggle="tooltip" data-placement="top" title="[ROS]PublisherとSubscriberを1つのノードに書く方法">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20200901/" data-toggle="tooltip" data-placement="top" title="フィルタまとめ">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/yuhi-sa" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

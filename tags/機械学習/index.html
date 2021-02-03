@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>とまとまとブログ - とまとまとブログ</title>
+  <title>機械学習 - とまとまとブログ</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -29,12 +29,12 @@
 }
 </script>
 
-<meta property="og:title" content="とまとまとブログ" />
-<meta property="og:url" content="https://yuhi-sa.github.io/" />
+<meta property="og:title" content="機械学習" />
+<meta property="og:url" content="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
-  <meta name="twitter:title" content="とまとまとブログ" />
+  <meta name="twitter:title" content="機械学習" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -172,17 +172,13 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
+            <div class="tags-heading">
               
-                <h1>とまとまとブログ</h1>
+                <h1>機械学習</h1>
               
               
                 <hr class="small">
               
-              
-                
-                  <span class="page-subheading">yuhi-sa</span>
-                
               
               
             </div>
@@ -194,13 +190,11 @@
 
 
     
-  <div role="main" class="container">
+  <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-
         <div class="posts-list">
-          
           
             <article class="post-preview">
     <a href="https://yuhi-sa.github.io/posts/20210125/">
@@ -486,8 +480,8 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201223/">
-        <h2 class="post-title">Pythonでslackに実験結果(テキストと画像)を送る</h2>
+    <a href="https://yuhi-sa.github.io/posts/20200831/">
+        <h2 class="post-title">強化学習の全体像まとめ</h2>
         
         
         
@@ -497,7 +491,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
         <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on December 23, 2020
+  <i class="fas fa-calendar"></i>&nbsp;Posted on August 31, 2020
   
   
   
@@ -513,322 +507,29 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
     </p>
     <div class="post-entry">
         
-        テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&#34;コピーした Webhook URL&#34;) def notify(title, text, color): attachments = [{&#34;title&#34;: title, &#34;text&#34;: text, &#34;color&#34;: color, #good, warning, danger &#34;footer&#34;: &#34;Send from Python&#34;, }] slack.notify(text=None, attachments=attachments) notify(&#34;テスト&#34;,&#34;おはよう&#34;,&#34;good&#34;) notify(&#34;テスト&#34;,&#34;こんにちは&#34;,&#34;warning&#34;) notify(&#34;テスト&#34;,&#34;こんばんは&#34;,&#34;danger&#34;) attachmentsの構文は，以下を参考
- Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&#39;file&#39;: open(imageURL, &#39;rb&#39;)} param = { &#39;token&#39;: &#34;コピーした APIトークン&#34;, &#39;channels&#39;:&#39;投稿したいチャンネル名&#39;, &#39;filename&#39;:&#34;filename&#34;, &#39;title&#39;: title, } requests.
-        <a href="https://yuhi-sa.github.io/posts/20201223/" class="post-read-more">[Read More]</a>
+        はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
+強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
+ 価値反復法
+ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')} $$ $$ V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$
+ 方策反復法
+ベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s'}p_T(s'|s,a)V^\pi(s')} $$
+強化学習 環境が既知の場合の逐次的意思決定問題
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．
+価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．
+ オフライン
+ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$
+ オンライン    TD法
+TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta $$
+  TD($\lambda$)法
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．
+        <a href="https://yuhi-sa.github.io/posts/20200831/" class="post-read-more">[Read More]</a>
         
     </div>
 
     
     <div class="blog-tags">
         
-        <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201223_2/">
-        <h2 class="post-title">楕円曲線上のElGamal暗号</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on December 23, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <h1 id="鍵生成">鍵生成</h1>
-<ol>
-<li>楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数)</li>
-<li>秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．</li>
-</ol>
-<p>秘密鍵$x$，公開鍵$E,G,Y$</p>
-<h1 id="暗号化">暗号化</h1>
-<p>$m$を送信したいメッセージとする．</p>
-<ol>
-<li>$r$wお乱数で生成し，$U=rG=(u_x,u_y)$を計算する．</li>
-<li>公開鍵$Y$を用いて，$V = xU =(v_x,v_y)$と，$c=v_x\oplus m$
-$\oplus$は排他的論理和</li>
-<li>$(U,c)$を暗号文として，送信する．</li>
-</ol>
-<h1 id="復号化">復号化</h1>
-<ol>
-<li>以下のように複合する．
-$V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
-</ol>
-<h1 id="コード">コード</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 乱数</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="c1"># 秘密鍵</span>
-<span class="n">key</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="c1"># ベースポイント</span>
-<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># 位数</span>
-<span class="n">l</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="c1"># y^2 = x^3 + ax +b</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="k">def</span> <span class="nf">Mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
-  <span class="k">return</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span>
-
-<span class="k">def</span> <span class="nf">invMod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-  <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">count</span>
-    <span class="k">if</span> <span class="n">tmp</span><span class="o">%</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">count</span>
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="k">def</span> <span class="nf">Ellipse</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">Mod</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">),</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">invMod</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">l</span><span class="p">),</span><span class="n">l</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">s</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="n">U</span> <span class="o">=</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-    <span class="c1"># 排他的論理和をとる</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">m</span>
-    <span class="k">return</span> <span class="n">U</span><span class="p">,</span><span class="n">c</span>
-
-<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">c</span>
-    <span class="k">return</span> <span class="n">m</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-    <span class="c1"># 公開鍵の作成</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">g</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;公開鍵：&#34;</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-
-    <span class="c1"># 平文</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;平文：&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-
-    <span class="c1"># 暗号化</span>
-    <span class="n">U</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;暗号文：&#34;</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
-
-    <span class="c1"># 復号化</span>
-    <span class="n">decrypt_message</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;復号化メッセージ&#34;</span><span class="p">,</span> <span class="n">decrypt_message</span><span class="p">)</span>
-    
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</code></pre></div>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
-        
-        <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201220/">
-        <h2 class="post-title">バイナリ法</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on December 20, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <h1 id="バイナリ法">バイナリ法</h1>
-<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．
-計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．</p>
-<h2 id="具体例">具体例</h2>
-<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
-<p>2進数に展開し，左から順に展開することにより計算を実行する．
-これにより，$g^k(mod p)$を計算する．</p>
-<h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
-        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">y</span>
-</code></pre></div>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
-        
-        <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201015/">
-        <h2 class="post-title">ユークリッドの互除法と拡張ユークリッドの互除法</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 15, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &lt; b: a_list.append(b) a_list.append(a) if a &gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
-1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \
-        <a href="https://yuhi-sa.github.io/posts/20201015/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
-        
-        <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200901/">
-        <h2 class="post-title">フィルタまとめ</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on September 1, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
-想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
-$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．
-$$ q\sim N(0,Q) $$ $$ r\sim N(0,R) $$
-カルマンフィルタ(Kalman Filter, EKF) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．
-方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．
-$$ x \sim	(\mu,\Sigma) $$
- Step1 予測ステップ
- 事前状態推定値
-$$ \hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3} $$ 事前誤差共分散行列
-$$ \hat{\Sigma}{t}=A\Sigma{t-1}A^T+Q_{t-1} \tag{4} $$
- Step2 状態推定
- カルマンゲイン
-$$ K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T+R_t})^{-1} \tag{5} $$ 状態推定値
-$$ \mu_t=\hat{\mu_t}+K_t(z_t-H\hat{\mu_t}) \tag{6} $$ 事後誤差共分散行列
-$$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$
-        <a href="https://yuhi-sa.github.io/posts/20200901/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/%E5%88%B6%E5%BE%A1%E5%B7%A5%E5%AD%A6/">制御工学</a>&nbsp;
+        <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
         
     </div>
     
@@ -836,30 +537,12 @@ $$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$
 </article>
           
         </div>
-
-        
-          <ul class="pager main-pager">
-            
-            
-              <li class="next">
-                <a href="https://yuhi-sa.github.io/page/2/">Older Posts &rarr;</a>
-              </li>
-            
-          </ul>
         
       </div>
     </div>
   </div>
 
       
-    <div class="page-meta">
-  
-  
-  
-</div>
-
-
-  
 <footer>
   <div class="container">
     <div class="row">

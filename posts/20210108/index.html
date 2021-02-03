@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定) - とまとまとブログ</title>
+  <meta name="description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
+観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
+$$ y_i= \Phi w&#43; \epsilon $$
+ベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．
+$$ S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w) $$
+$$ \frac{dS(w)}{dw}=-\Phi^{T}y&#43;\Phi^T\Phi w $$ $\frac{dS(w)}{dw}=0$のときを考えると，
+$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．
+$$ \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y $$
+最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．
+$$ y= \Phi w&#43; \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n) $$ $$ P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n) =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)} $$
+$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
+$$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
+$$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y&#43;\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
+$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "とまとまとブログ",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210108\/",
+          "name": "ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定， m a p推定，ベイズ推定)"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)",
+  "description" : "#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．\n観測されたデータ$D={(x_i,y_i);i=1,2,\u0026hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\\Phi$を$x$の基底関数，$\\epsilon$を誤差項とする．\n$$ y_i= \\Phi w\u002b \\epsilon $$\nベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\\hat{w}$を求める．\n$$ S(w)=\\epsilon^{T}\\epsilon=(y-\\Phi w)^T(y-\\Phi w) $$\n$$ \\frac{dS(w)}{dw}=-\\Phi^{T}y\u002b\\Phi^T\\Phi w $$ $\\frac{dS(w)}{dw}=0$のときを考えると，\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．\n$$ \\hat{y}=\\Phi\\hat{w}=\\Phi(\\Phi^T\\Phi)^{-1}y $$\n最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\\Phi w$，分散行列$\\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．\n$$ y= \\Phi w\u002b \\epsilon,\\epsilon \\sim \\mathcal{N}(0,\\sigma^2I_n) $$ $$ P(y\\mid w,\\sigma^2)=\\mathcal{N}(\\Phi w,\\sigma^2I_n) =\\frac{1}{(2\\pi\\sigma^2)^{\\frac{n}{2}}}exp{-\\frac{1}{2\\sigma^2}(y-\\Phi w)^T(y-\\Phi w)} $$\n$P(y\\mid w)$の対数を$w$で偏微分し，$\\hat{w}$を求める．\n$$ \\log P(y\\mid w) = -\\frac{n}{2}\\log(2\\pi\\sigma^2)-\\frac{(y-\\Phi w)^T(y-\\Phi w)}{2\\sigma^2} $$\n$$ \\frac{1}{P(y\\mid w)}\\frac{P(y\\mid w)}{dw}=-(\\Phi^{T}y\u002b\\Phi^{T}\\Phi w) $$ $\\frac{dP(y\\mid w)}{dw}=0$のときを考えると．\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$",
+  "inLanguage" : "en",
+  "wordCount":  224 ,
+  "datePublished" : "2021-01-08T15:17:23",
+  "dateModified" : "2021-01-08T15:17:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210108\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)" />
+<meta property="og:description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
+観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
+$$ y_i= \Phi w&#43; \epsilon $$
+ベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．
+$$ S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w) $$
+$$ \frac{dS(w)}{dw}=-\Phi^{T}y&#43;\Phi^T\Phi w $$ $\frac{dS(w)}{dw}=0$のときを考えると，
+$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．
+$$ \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y $$
+最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．
+$$ y= \Phi w&#43; \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n) $$ $$ P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n) =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)} $$
+$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
+$$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
+$$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y&#43;\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
+$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210108/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="とまとまとブログ" />
+
+  <meta name="twitter:title" content="ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)" />
+  <meta name="twitter:description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
+観測されたデー …">
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="とまとまとブログ"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>#背景
+回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．</p>
+<p>観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．</p>
+<p>$$
+y_i= \Phi w+ \epsilon
+$$</p>
+<h1 id="ベイズ線形回帰について">ベイズ線形回帰について</h1>
+<h2 id="最小二乗推定">最小二乗推定</h2>
+<p>最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．</p>
+<p>$$
+S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w)
+$$</p>
+<p>$$
+\frac{dS(w)}{dw}=-\Phi^{T}y+\Phi^T\Phi w
+$$
+$\frac{dS(w)}{dw}=0$のときを考えると，</p>
+<p>$$
+\hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y
+$$
+従って，最小二乗推定による予測モデルは以下のようになる．</p>
+<p>$$
+\hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y
+$$</p>
+<h2 id="最尤推定">最尤推定</h2>
+<p>最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．</p>
+<p>$$
+y= \Phi w+ \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n)
+$$
+$$
+P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n)
+=\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)}
+$$</p>
+<p>$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．</p>
+<p>$$
+\log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2}
+$$</p>
+<p>$$
+\frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y+\Phi^{T}\Phi w)
+$$
+$\frac{dP(y\mid w)}{dw}=0$のときを考えると．</p>
+<p>$$
+\hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y
+$$</p>
+<p>従って，最尤推定による予測モデルは以下のようになる．</p>
+<p>$$
+\hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y
+$$
+これは，最小二乗法によって求められる予測モデルと同じである．</p>
+<h2 id="map推定">MAP推定</h2>
+<p>最小二乗法，最尤推定に基づく方法では，モデルパラメータの数が多く，観測データの数が小さい時に過学習を起こしやすいという問題点がある．過学習が生じると，汎化性能が期待できないため，過学習を防ぐことが重要となる．MAP推定は，$w$を確率変数として扱う．
+$w$の事前分布と観測データの尤度関数を以下のように導入する．$\alpha$,$\beta$はハイパーパラメータとする．</p>
+<p>$$
+P(w;\alpha)=\mathcal{N}(w\mid0,\alpha^{-1}I_n)
+$$</p>
+<p>$$
+P(y \mid w;\beta)=\mathcal{N}(\Phi w,\beta^{-1}I_n)
+$$
+MAP推定では，$w$の事後分布$P(w \mid y)$を最大化する$\hat{w}$を求める手法である．
+ベイズの定理より，</p>
+<p>$$
+P(w \mid y)=\frac{P(y \mid w)P(w)}{P(y)}
+$$</p>
+<p>ここで．$P(y|w)$は尤度を，$P(w)$は事前確率を表す．</p>
+<p>$$
+P(w \mid y)=\frac{\frac{1}{(2\pi \beta^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\beta^2}(y-\Phi w)^T(y-\Phi w)\frac{1}{(2\pi \alpha^{-1})^{\frac{n}{2}}}exp{-\frac{1}{2\alpha^2}w^{T}w} }{P(y)}
+$$</p>
+<p>$$
+P(w \mid y)=\frac{\frac{1}{ (2\pi)^{n}(\alpha\beta)^{-\frac{n}{2}} }
+exp{-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w)    -     \frac{1}{2\alpha^2} w^{T}w
+}
+}{P(y)}
+$$</p>
+<p>$P(w \mid y)$を最大化する$\hat{w}$は，$Z=-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w)    -     \frac{1}{2\alpha^2} w^{T}w $を最大化する$\hat{w}$に等しい．</p>
+<p>$$
+\frac{dZ}{dw}=-\frac{1}{2\beta^{-1}}(-\Phi^T+\Phi^T\Phi w)- \frac{1}{2 \alpha^{-1}}w^{T}w
+$$</p>
+<p>$\frac{dZ}{dw}=0$のときを考えると，</p>
+<p>$$
+\hat{w}=(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
+$$
+従って，MAP推定による予測モデルは以下のようになる．</p>
+<p>$$
+\hat{y}=\Phi\hat{w}=\Phi(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
+$$</p>
+<h2 id="ベイズ推定">ベイズ推定</h2>
+<p>最小二乗法，最尤推定，MAP推定では，パラメータの推定値を一つの解として求めた．しかし，これではデータの予測にパラメータの不確かさを考慮することができない．事後分布をそのまま確率分布として取り扱うことで，パラメータ推定の不確かさを加味した予測分布を求める．MAP推定では，$P(w \mid y)$の最大化を考えたため，$P(D)$については無視できたが，ベイズ推定では考える必要がある．同時確率$P(y,w)$から一方の確率変数を取り除き，周辺確率$P(y)$を求める．</p>
+<p>$$
+P(y)=\int P(y\mid w)P(w)dw
+$$</p>
+<p>$$
+P(w \mid y) = \frac{P(y \mid w)P(w)}{\int P(y\mid w)P(w)dw}
+$$</p>
+<p>ここで，ガウス分布に対するベイズの定理より，</p>
+<p>$$
+P(w \mid y) = \mathcal{N}(\mu_N,\Sigma_N)
+$$
+参考文献1のP90ガウス分布の周辺分布と条件付き分布を用いて計算すると</p>
+<p>$$
+\mu_N=(\frac{\alpha}{\beta}I_n+\Phi^{T}\Phi)^{-1}\Phi^{T}y
+$$</p>
+<p>$$
+\Sigma_{N}=(\alpha I_n + \beta \Phi^{T}\Phi)^{-1}
+$$
+従って，以上よりベイズ推定による予測モデルは以下のようになる．</p>
+<p>$$
+\hat{y}=\Phi\hat{w}=\Phi(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
+$$</p>
+<p>$$
+\Sigma_{N}=(\alpha I_n + \beta \Phi^{T}\Phi)^{-1}
+$$</p>
+<h1 id="実験">実験</h1>
+<p>$D={(x.train_i,y.train_i);i=1,2,&hellip;,15}$の訓練データに対して，最小二乗推定，最尤推定，MAP推定，ベイズ推定を用いて予測モデルを作成した．それぞれのモデルで$D={(x.test_i,y.test_i);i=1,2,&hellip;,100}$のテストデータに対して予測分布を確認した．
+コードは<a href="https://github.com/yuhi-sa/Bayes_startup">こちら</a></p>
+<p>基底関数は以下のものを用いる．</p>
+<p>$$
+f_j(x)=x^{j},j=0,1,&hellip;9
+$$</p>
+<p>ハイパーパラメータ$\alpha=10,\beta=10$とする．</p>
+<ul>
+<li>最小二乗推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/f0a8d9be-e4e3-7338-1594-6bd865fefe20.png" alt="1.png"></li>
+<li>MAP推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/1d8e171f-cdd7-d71b-1096-7a379594591b.png" alt="3.png"></li>
+<li>ベイズ推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/9424512b-cf1d-9654-30f9-bdfa16275579.png" alt="4.png"></li>
+</ul>
+<p>決定係数$R^2$により点推定の評価を行う．決定係数とは回帰によって導いたモデルの当てはまりの良さを表現する値で、モデルによって予測した値が実際の値とどの程度一致しているかを表現する評価指標である．決定係数$R^2$は実際のデータを$(x_i,y_i)$、回帰式から推定されたデータを$(x_i,\bar{y_i})$として$R^2=1-\frac{\sum_{i=1}^n{(y_i-\hat{y_i})^2}}{\sum_{i=1}^n(y_i-\bar{y})^2}$で求められる．0から1の範囲で1に近づくほど良い値である．
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/d53e90c1-fe10-4be5-0941-79476a4d42ea.png" alt="fig8.png"></p>
+<p>尤度関数の分散$\beta$の値を変更する．</p>
+<ul>
+<li>$\beta=50$のときのベイズ推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/fc89fae3-6b46-f115-9baf-31d4606dfd19.png" alt="50.png"></li>
+<li>$\beta=100$のときのベイズ推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/cb7719de-1587-92ac-043b-642bcd74d593.png" alt="100.png"></li>
+<li>$\beta=1000$のときのベイズ推定
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/f2b79e74-7c12-12bc-fd8e-7026194cf13e.png" alt="1000.png"></li>
+</ul>
+<h1 id="まとめ">まとめ</h1>
+<ul>
+<li>回帰問題に対して，最小二乗法，最尤推定，MAP推定，ベイズ推定を適応して計算した．訓練データが存在しない部分の予測精度が下がることがわかった．</li>
+<li>点推定である最小二乗法，最尤推定，MAP推定については，今回の場合においてはMAP推定の方がより外れ値が減少し，すぐれたモデルを作成できることがわかる．</li>
+<li>ベイズ推定，MAP推定においては，尤度関数の分散を小さくするほど，誤差が小さくなるが，分散を小さくしすぎると過学習を起こして汎化性能が下がることがわかった．</li>
+</ul>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>C.M.ビショップ，&ldquo;パターン認識と機械学習上ベイズ理論による統計的予測&rdquo;，シュプリンガー・ジャパン</li>
+<li>須山 敦志，&ldquo;ベイズ推論による機械学習入門&rdquo;, 株式会社講談社サイエンティフィク</li>
+</ul>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f&amp;text=%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e7%b7%9a%e5%bd%a2%e5%9b%9e%e5%b8%b0%28%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%97%e6%8e%a8%e5%ae%9a%ef%bc%8c%e6%9c%80%e5%b0%a4%e6%8e%a8%e5%ae%9a%ef%bc%8cMAP%e6%8e%a8%e5%ae%9a%ef%bc%8c%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%29&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f&amp;title=%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e7%b7%9a%e5%bd%a2%e5%9b%9e%e5%b8%b0%28%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%97%e6%8e%a8%e5%ae%9a%ef%bc%8c%e6%9c%80%e5%b0%a4%e6%8e%a8%e5%ae%9a%ef%bc%8cMAP%e6%8e%a8%e5%ae%9a%ef%bc%8c%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%29" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f&amp;title=%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e7%b7%9a%e5%bd%a2%e5%9b%9e%e5%b8%b0%28%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%97%e6%8e%a8%e5%ae%9a%ef%bc%8c%e6%9c%80%e5%b0%a4%e6%8e%a8%e5%ae%9a%ef%bc%8cMAP%e6%8e%a8%e5%ae%9a%ef%bc%8c%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%29" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f&amp;title=%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e7%b7%9a%e5%bd%a2%e5%9b%9e%e5%b8%b0%28%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%97%e6%8e%a8%e5%ae%9a%ef%bc%8c%e6%9c%80%e5%b0%a4%e6%8e%a8%e5%ae%9a%ef%bc%8cMAP%e6%8e%a8%e5%ae%9a%ef%bc%8c%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%29" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210108%2f&amp;description=%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%8f%e7%b7%9a%e5%bd%a2%e5%9b%9e%e5%b8%b0%28%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%97%e6%8e%a8%e5%ae%9a%ef%bc%8c%e6%9c%80%e5%b0%a4%e6%8e%a8%e5%ae%9a%ef%bc%8cMAP%e6%8e%a8%e5%ae%9a%ef%bc%8c%e3%83%99%e3%82%a4%e3%82%ba%e6%8e%a8%e5%ae%9a%29" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20210125/">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
+                
+                    <li><a href="/posts/20210109/">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
+                
+                    <li><a href="/posts/20210107_2/">情報理論(エントロピーから相互情報量, PRML1.6)</a></li>
+                
+                    <li><a href="/posts/20210107/">粒子群最適化(PSO)とTCPSO</a></li>
+                
+                    <li><a href="/posts/20200831/">強化学習の全体像まとめ</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20210107_2/" data-toggle="tooltip" data-placement="top" title="情報理論(エントロピーから相互情報量, PRML1.6)">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20210109/" data-toggle="tooltip" data-placement="top" title="遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/yuhi-sa" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
