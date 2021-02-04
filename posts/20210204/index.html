@@ -9,14 +9,16 @@
 
   <title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo] - とまとまとブログ</title>
   <meta name="description" content="はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages &#43; 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
-全体通して，参考にした記事たち 参考1：Hugo &#43; GitHub Pages（独自ドメイン適応）でサイトを作成・公開する 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
+全体通して，参考にした記事たち 参考1：Hugo &#43; GitHub Pages（独自ドメイン適応）でサイトを作成・公開する
+参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
 Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．
 Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，
  ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．
-参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る 参考2：Hugoとは？静的サイトジェネレータについて解説
+参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る
+参考2：Hugoとは？静的サイトジェネレータについて解説
 Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
 サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
-フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成 参考2：Directory Structure">
+フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -65,7 +67,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
     "name" : "yuhi-sa"
   },
   "headline": "markdownで記事を作成して無料ブログをつくる[Github Pages\u002bHugo]",
-  "description" : "はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages \u002b 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．\n全体通して，参考にした記事たち 参考1：Hugo \u002b GitHub Pages（独自ドメイン適応）でサイトを作成・公開する 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】\nHugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．\nHugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，\n ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．\n参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る 参考2：Hugoとは？静的サイトジェネレータについて解説\nHugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo\nサイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http:\/\/localhost:1313で確認できる\nフォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成 参考2：Directory Structure",
+  "description" : "はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages \u002b 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．\n全体通して，参考にした記事たち 参考1：Hugo \u002b GitHub Pages（独自ドメイン適応）でサイトを作成・公開する\n参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】\nHugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．\nHugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，\n ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．\n参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る\n参考2：Hugoとは？静的サイトジェネレータについて解説\nHugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo\nサイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http:\/\/localhost:1313で確認できる\nフォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成",
   "inLanguage" : "en",
   "wordCount":  254 ,
   "datePublished" : "2021-02-04T13:00:23",
@@ -88,14 +90,16 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
 
 <meta property="og:title" content="markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]" />
 <meta property="og:description" content="はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages &#43; 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
-全体通して，参考にした記事たち 参考1：Hugo &#43; GitHub Pages（独自ドメイン適応）でサイトを作成・公開する 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
+全体通して，参考にした記事たち 参考1：Hugo &#43; GitHub Pages（独自ドメイン適応）でサイトを作成・公開する
+参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
 Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．
 Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，
  ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．
-参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る 参考2：Hugoとは？静的サイトジェネレータについて解説
+参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る
+参考2：Hugoとは？静的サイトジェネレータについて解説
 Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
 サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
-フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成 参考2：Directory Structure">
+フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20210204/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
@@ -274,7 +278,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
         <h1 id="はじめに">はじめに</h1>
 <p>Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．</p>
 <p>全体通して，参考にした記事たち
-参考1：<a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3">Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する</a>
+参考1：<a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3">Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する</a><br>
 参考2：<a href="https://qiita.com/ryoma-tokushige/items/eba3e6cd415e9755af87">【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】</a></p>
 <h1 id="hugoとは">Hugoとは</h1>
 <p>ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つが<a href="https://gohugo.io/">Hugo</a>である．</p>
@@ -286,7 +290,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
 <li>データベース不要で管理が簡単</li>
 </ul>
 <p>ということがあげられる．</p>
-<p>参考1：<a href="https://knowledge.sakura.ad.jp/22908/">静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る</a>
+<p>参考1：<a href="https://knowledge.sakura.ad.jp/22908/">静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る</a><br>
 参考2：<a href="https://programming-world.net/ssg/hugo/">Hugoとは？静的サイトジェネレータについて解説</a></p>
 <h1 id="hugoでサイトを作成">Hugoでサイトを作成</h1>
 <h2 id="hugoのインストール">Hugoのインストール</h2>
@@ -310,7 +314,7 @@ hugo # このコマンドで生成
 ├── public # 生成されるhtmlなどのコード(これを公開する)
 ├── static # サイト内の静的ファイルを置くファイル
 └── themes # テーマファイルを置く
-</code></pre></div><p>参考1：<a href="https://blog.chick-p.work/hugo-site-directory/">HUGO のディレクトリ構成</a>
+</code></pre></div><p>参考1：<a href="https://blog.chick-p.work/hugo-site-directory/">HUGO のディレクトリ構成</a><br>
 参考2：<a href="https://gohugo.io/getting-started/directory-structure/">Directory Structure</a></p>
 <h2 id="テンプレートを利用する">テンプレートを利用する</h2>
 <p><a href="https://themes.gohugo.io/">Hugo Themes</a>から好きなテーマを選択し，themesフォルダの中にcloneする．</p>
