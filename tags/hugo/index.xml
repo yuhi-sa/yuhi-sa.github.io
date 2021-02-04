@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on とまとまとブログ</title>
+    <link>https://yuhi-sa.github.io/tags/hugo/</link>
+    <description>Recent content in Hugo on とまとまとブログ</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 04 Feb 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</title>
+      <link>https://yuhi-sa.github.io/posts/20210204/</link>
+      <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210204/</guid>
+      <description>はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
+全体通して，参考にした記事たち 参考1：Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
+Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．
+Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，
+ ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．
+参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る 参考2：Hugoとは？静的サイトジェネレータについて解説
+Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
+サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
+フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成 参考2：Directory Structure</description>
+    </item>
+    
+  </channel>
+</rss>

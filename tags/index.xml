@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/</link>
     <description>Recent content in Tags on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 25 Jan 2021 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Feb 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo</title>
+      <link>https://yuhi-sa.github.io/tags/hugo/</link>
+      <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>python</title>
       <link>https://yuhi-sa.github.io/tags/python/</link>

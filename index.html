@@ -212,6 +212,57 @@
           
           
             <article class="post-preview">
+    <a href="https://yuhi-sa.github.io/posts/20210204/">
+        <h2 class="post-title">markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on February 4, 2021
+  
+  
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
+全体通して，参考にした記事たち 参考1：Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
+Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．
+Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，
+ ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．
+参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る 参考2：Hugoとは？静的サイトジェネレータについて解説
+Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
+サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
+フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成 参考2：Directory Structure
+        <a href="https://yuhi-sa.github.io/posts/20210204/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://yuhi-sa.github.io//tags/hugo/">Hugo</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
     <a href="https://yuhi-sa.github.io/posts/20210125/">
         <h2 class="post-title">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</h2>
         
@@ -780,64 +831,6 @@ a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
         <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
         
         <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200901/">
-        <h2 class="post-title">フィルタまとめ</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on September 1, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
-想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
-$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．
-$$ q\sim N(0,Q) $$ $$ r\sim N(0,R) $$
-カルマンフィルタ(Kalman Filter, EKF) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．
-方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．
-$$ x \sim	(\mu,\Sigma) $$
- Step1 予測ステップ
- 事前状態推定値
-$$ \hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3} $$ 事前誤差共分散行列
-$$ \hat{\Sigma}{t}=A\Sigma{t-1}A^T+Q_{t-1} \tag{4} $$
- Step2 状態推定
- カルマンゲイン
-$$ K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T+R_t})^{-1} \tag{5} $$ 状態推定値
-$$ \mu_t=\hat{\mu_t}+K_t(z_t-H\hat{\mu_t}) \tag{6} $$ 事後誤差共分散行列
-$$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$
-        <a href="https://yuhi-sa.github.io/posts/20200901/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/%E5%88%B6%E5%BE%A1%E5%B7%A5%E5%AD%A6/">制御工学</a>&nbsp;
         
     </div>
     

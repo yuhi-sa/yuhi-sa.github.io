@@ -3,8 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://yuhi-sa.github.io/tags/hugo/</loc>
+    <lastmod>2021-02-04T13:00:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yuhi-sa.github.io/posts/20210204/</loc>
+    <lastmod>2021-02-04T13:00:23+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://yuhi-sa.github.io/posts/</loc>
-    <lastmod>2021-01-25T15:17:23+09:00</lastmod>
+    <lastmod>2021-02-04T13:00:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yuhi-sa.github.io/tags/</loc>
+    <lastmod>2021-02-04T13:00:23+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://yuhi-sa.github.io/</loc>
+    <lastmod>2021-02-04T13:00:23+09:00</lastmod>
   </url>
   
   <url>
@@ -13,17 +33,7 @@
   </url>
   
   <url>
-    <loc>https://yuhi-sa.github.io/tags/</loc>
-    <lastmod>2021-01-25T15:17:23+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://yuhi-sa.github.io/posts/20210125/</loc>
-    <lastmod>2021-01-25T15:17:23+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://yuhi-sa.github.io/</loc>
     <lastmod>2021-01-25T15:17:23+09:00</lastmod>
   </url>
   
