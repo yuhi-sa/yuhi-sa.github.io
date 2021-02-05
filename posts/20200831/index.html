@@ -73,7 +73,7 @@ TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#4
   "headline": "強化学習の全体像まとめ",
   "description" : "はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．\n強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題\n 価値反復法\nベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\\max_a{\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)} $$ $$ V^{*}=\\lim_{k\\rightarrow \\infty}(B_{*}^kV)(s) $$\n 方策反復法\nベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\\pi}v)(s)=\\sum_a\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)) $$ $$ V^{\\pi}=\\lim_{k\\rightarrow \\infty}(B_{\\pi}^kV)(s) $$ $$ \\pi(s)=\\arg\\max_a{g(s,a)\u002b\\gamma \\sum_{s\u0027}p_T(s\u0027|s,a)V^\\pi(s\u0027)} $$\n強化学習 環境が既知の場合の逐次的意思決定問題\n報酬や次状態を観測することでデータを収集して，データから方策を学習する．\n価値関数Vの推定 方策$\\pi$を固定して価値関数の推定を行う．\n オフライン\nベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \\hat{V}(s)=\\hat{B}(\\hat{V},h_T^\\pi)(s) $$\n オンライン    TD法\nTD誤差$\\delta$を計算して価値関数を更新する．   $$ \\delta=r_t\u002b\\gamma \\hat{V}(s_{t\u002b1})-\\hat{V}(s_t) $$ $$ \\hat{V}(s_t)=\\hat{V}(s_t)\u002b\\alpha_t\\delta $$\n  TD($\\lambda$)法\nエリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\\pi$を固定して行動価値関数の推定を行う．",
   "inLanguage" : "en",
-  "wordCount":  184 ,
+  "wordCount":  188 ,
   "datePublished" : "2020-08-31T15:17:23",
   "dateModified" : "2020-08-31T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -432,13 +432,15 @@ $$</p>
 <blockquote>
 <ul>
 <li>近似TD法<br>
-TD誤差を再定義</li>
+　TD誤差を再定義</li>
 </ul>
 </blockquote>
 <p>$$
-\delta=r_t+\gamma\hat{V}<em>{w_t}(s</em>{t+1})-\hat{V}_{w_t}(s_t)<br>
+\delta=r_t+\gamma\hat{V}<em>{w_t}(s</em>{t+1})-\hat{V}_{w_t}(s_t)
 $$</p>
-<p>$\hat{V}<em>w$の$w$に関する偏微分ベクトル$\nabla_w\hat{V}</em>{w_t}(s)$を用いて</p>
+<p>$\hat{V}_w$の $w$ に関する偏微分ベクトル</p>
+<p>$$\nabla_w\hat{V}_{w_t}(s)$$</p>
+<p>を用いて</p>
 <p>$$
 w_{t+1}=w_t+\alpha\delta_t\nabla_w\hat{V}_{w_t}(s_t)
 $$</p>
