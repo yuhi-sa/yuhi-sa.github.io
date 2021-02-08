@@ -297,18 +297,18 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
 参考2：<a href="https://programming-world.net/ssg/hugo/">Hugoとは？静的サイトジェネレータについて解説</a></p>
 <h1 id="hugoでサイトを作成">Hugoでサイトを作成</h1>
 <h2 id="hugoのインストール">Hugoのインストール</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># Homebrew(macOS)の場合
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># Homebrew(macOS)の場合
 brew install hugo
 </code></pre></div><p>その他の方法でのインストール方法は，<a href="https://gohugo.io/getting-started/installing/">Install Hugo</a></p>
 <h2 id="サイトの作成">サイトの作成</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new site test # testは好きな名前
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo new site test # testは好きな名前
 cd test
 hugo # このコマンドで生成
 </code></pre></div><h2 id="サーバーでプレビュー">サーバーでプレビュー</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server 
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo server 
 </code></pre></div><p><a href="http://localhost:1313">http://localhost:1313</a>で確認できる</p>
 <h2 id="フォルダの中身の確認">フォルダの中身の確認</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.
 ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル
 ├── config.toml # hugoの設定ファイル
 ├── content # 記事ファイルを置くファイル
@@ -321,16 +321,16 @@ hugo # このコマンドで生成
 参考2：<a href="https://gohugo.io/getting-started/directory-structure/">Directory Structure</a></p>
 <h2 id="テンプレートを利用する">テンプレートを利用する</h2>
 <p><a href="https://themes.gohugo.io/">Hugo Themes</a>から好きなテーマを選択し，themesフォルダの中にcloneする．</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd themes
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd themes
 git clone テーマフォルダ
 </code></pre></div><p>config.tomlに以下の行を追記する．</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">theme = &#34;選んだテーマ名&#34;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">theme = &#34;選んだテーマ名&#34;
 </code></pre></div><p><img src=".././fig2.png" alt="temple.png"></p>
 <h2 id="ブログ記事を作成する">ブログ記事を作成する</h2>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd test
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd test
 hugo new post/new-post.md
 </code></pre></div><p>new-post.mdの中身</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">---
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">---
 title: &#34;タイトル&#34;
 date: 2020-08-16T15:17:23+09:00
 draft: false # trueの場合は表示されない
@@ -340,7 +340,7 @@ tags: [&#34;python&#34;, &#34;ros&#34;]
 </code></pre></div><ul>
 <li>hugoコマンドで、public以下に静的ファイルが生成</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd test
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd test
 hugo
 </code></pre></div><h1 id="github-pages">Github Pages</h1>
 <h2 id="githubにリポジトリを作成する">Githubにリポジトリを作成する</h2>
@@ -357,12 +357,12 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 <h1 id="その他">その他</h1>
 <h2 id="hugo-実行方法">hugo 実行方法</h2>
 <p>ローカルのサーバーで確認</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo server
 </code></pre></div><p>ローカルのサーバーで確認(ドラフトも対象)</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server -D
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo server -D
 </code></pre></div><h2 id="latex-数式を使うための編集">latex 数式を使うための編集</h2>
 <p>/layouts/partials/add_mathjax.htmlを作成</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;script&gt;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;script&gt;
     MathJax = {
         tex: {
         inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]]
@@ -372,17 +372,17 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 
 &lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&#34;&gt;&lt;/script&gt;
 </code></pre></div><p>/layouts/partials/site-header.htmlに追記</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{{ partial &#34;add_mathjax.html&#34; . }}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{{ partial &#34;add_mathjax.html&#34; . }}
 </code></pre></div><p>参考：<a href="https://somei-tec.com/article/computer-science/framework/hugo/hugo_mathjax/">MathJaxを用いてHugoで数式を表現する</a></p>
 <h2 id="google-analytics">google Analytics</h2>
 <p>config.tomlに以下の行を追加</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">googleAnalytics = &#34;測定ID&#34;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">googleAnalytics = &#34;測定ID&#34;
 </code></pre></div><p>Google Analyticsとの連携のための組み込みテンプレート({{ template &ldquo;_internal/google_analytics_async.html&rdquo; . }})が古いため変更を追加</p>
 <p>layouts/partials/head.htmlを編集</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">- {{ template &#34;_internal/google_analytics_async.html&#34; . }}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">- {{ template &#34;_internal/google_analytics_async.html&#34; . }}
 + {{- partial &#34;analytics&#34; . -}}
 </code></pre></div><p>layouts/partials/analytics.htmlを作成</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{{ if not .Site.IsServer }}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{{ if not .Site.IsServer }}
 {{ with .Site.GoogleAnalytics }}
 &lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
 &lt;script async src=&#34;https://www.googletagmanager.com/gtag/js?id={{ . }}&#34;&gt;&lt;/script&gt;
@@ -397,7 +397,7 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 </code></pre></div><p>参考：<a href="https://qiita.com/momotaro98/items/4de7934fd79cd6b34fce">Hugoで未だ対応していないgtag.jsを利用して Googleアナリティクスする</a></p>
 <h2 id="sitemapを作成">Sitemapを作成</h2>
 <p>layouts/sitemap.xmlを作成</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
 {{ range .Data.Pages }}{{ if .IsPage }}
 &lt;url&gt;
   &lt;loc&gt;{{ .Permalink }}&lt;/loc&gt;
@@ -409,9 +409,9 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 {{ end }}{{ end }}
 &lt;/urlset&gt;
 </code></pre></div><p>layouts/robots.txtを作成</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Sitemap : {{ $.Site.BaseURL }}sitemap.xml
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Sitemap : {{ $.Site.BaseURL }}sitemap.xml
 </code></pre></div><p>config.tomlを編集</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">enableRobotsTXT = true
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">enableRobotsTXT = true
 </code></pre></div><p>url/sitemap.xmlで表示される．
 <a href="https://yuhi-sa.github.io/sitemap.xml">https://yuhi-sa.github.io/sitemap.xml</a></p>
 <p>参考：<a href="https://takaken.tokyo/dev/hugo/sitemaps/hugo-create-sitemaps/">XMLサイトマップの作り方</a></p>

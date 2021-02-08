@@ -275,20 +275,20 @@
 <img src=".././fig6.png" alt="fig6.png"></li>
 </ol>
 <h2 id="コード">コード</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">slackweb</span>
-<span class="n">slack</span> <span class="o">=</span> <span class="n">slackweb</span><span class="o">.</span><span class="n">Slack</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&#34;コピーした Webhook URL&#34;</span><span class="p">)</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="color:#555">slackweb</span>
+slack <span style="font-weight:bold">=</span> slackweb<span style="font-weight:bold">.</span>Slack(url<span style="font-weight:bold">=</span><span style="color:#b84">&#34;コピーした Webhook URL&#34;</span>)
 
-<span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
-    <span class="n">attachments</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-                <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-                <span class="s2">&#34;color&#34;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span> <span class="c1">#good, warning, danger</span>
-                <span class="s2">&#34;footer&#34;</span><span class="p">:</span> <span class="s2">&#34;Send from Python&#34;</span><span class="p">,</span>
-                <span class="p">}]</span>
-    <span class="n">slack</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">attachments</span><span class="o">=</span><span class="n">attachments</span><span class="p">)</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">notify</span>(title, text, color):
+    attachments <span style="font-weight:bold">=</span> [{<span style="color:#b84">&#34;title&#34;</span>: title,
+                <span style="color:#b84">&#34;text&#34;</span>: text,
+                <span style="color:#b84">&#34;color&#34;</span>: color, <span style="color:#998;font-style:italic">#good, warning, danger</span>
+                <span style="color:#b84">&#34;footer&#34;</span>: <span style="color:#b84">&#34;Send from Python&#34;</span>,
+                }]
+    slack<span style="font-weight:bold">.</span>notify(text<span style="font-weight:bold">=</span>None, attachments<span style="font-weight:bold">=</span>attachments)
 
-<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;おはよう&#34;</span><span class="p">,</span><span class="s2">&#34;good&#34;</span><span class="p">)</span>
-<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;こんにちは&#34;</span><span class="p">,</span><span class="s2">&#34;warning&#34;</span><span class="p">)</span>
-<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;こんばんは&#34;</span><span class="p">,</span><span class="s2">&#34;danger&#34;</span><span class="p">)</span>
+notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;おはよう&#34;</span>,<span style="color:#b84">&#34;good&#34;</span>)
+notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;こんにちは&#34;</span>,<span style="color:#b84">&#34;warning&#34;</span>)
+notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;こんばんは&#34;</span>,<span style="color:#b84">&#34;danger&#34;</span>)
 </code></pre></div><p>attachmentsの構文は，以下を参考</p>
 <ul>
 <li><a href="https://api.slack.com/messaging/composing/layouts">Creating rich message layouts</a></li>
@@ -305,20 +305,20 @@
 <li>API トークンをコピーする．</li>
 </ol>
 <h2 id="コード-1">コード</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="color:#555">requests</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">json</span>
 
-<span class="k">def</span> <span class="nf">notifyImg</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">imageURL</span><span class="p">):</span>
-        <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="n">imageURL</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
-        <span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s2">&#34;コピーした APIトークン&#34;</span><span class="p">,</span> 
-        <span class="s1">&#39;channels&#39;</span><span class="p">:</span><span class="s1">&#39;投稿したいチャンネル名&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;filename&#39;</span><span class="p">:</span><span class="s2">&#34;filename&#34;</span><span class="p">,</span>
-        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://slack.com/api/files.upload&#34;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">notifyImg</span>(title, imageURL):
+        files <span style="font-weight:bold">=</span> {<span style="color:#b84">&#39;file&#39;</span>: <span style="color:#999">open</span>(imageURL, <span style="color:#b84">&#39;rb&#39;</span>)}
+        param <span style="font-weight:bold">=</span> {
+        <span style="color:#b84">&#39;token&#39;</span>: <span style="color:#b84">&#34;コピーした APIトークン&#34;</span>, 
+        <span style="color:#b84">&#39;channels&#39;</span>:<span style="color:#b84">&#39;投稿したいチャンネル名&#39;</span>,
+        <span style="color:#b84">&#39;filename&#39;</span>:<span style="color:#b84">&#34;filename&#34;</span>,
+        <span style="color:#b84">&#39;title&#39;</span>: title,
+        }
+        requests<span style="font-weight:bold">.</span>post(url<span style="font-weight:bold">=</span><span style="color:#b84">&#34;https://slack.com/api/files.upload&#34;</span>,params<span style="font-weight:bold">=</span>param, files<span style="font-weight:bold">=</span>files)
 
-<span class="n">notifyImg</span><span class="p">(</span><span class="s2">&#34;テスト画像&#34;</span><span class="p">,</span> <span class="s2">&#34;test.png&#34;</span><span class="p">)</span> <span class="c1">#imageURLは，ファイルパス</span>
+notifyImg(<span style="color:#b84">&#34;テスト画像&#34;</span>, <span style="color:#b84">&#34;test.png&#34;</span>) <span style="color:#998;font-style:italic">#imageURLは，ファイルパス</span>
 
 </code></pre></div><p><a href="http://kuralab.jugem.jp/?eid=41#:~:text=%E9%96%8B%E9%96%89%E3%83%9C%E3%82%BF%E3%83%B3%E3%80%8D%20%3E%3E-,%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%82%B9%EF%BC%88File%20Path%EF%BC%89%E3%81%A8%E3%81%AF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E3%81%82%E3%82%8B,%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E3%81%93%E3%81%A8%E3%81%A7%E3%81%99%E3%80%82">ファイルパスとは</a></p>
 <h2 id="実行結果-1">実行結果</h2>

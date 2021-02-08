@@ -302,11 +302,11 @@ $$</p>
 <p>線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．</p>
 <p>まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．</p>
 <p>参考1：<a href="https://www.jstage.jst.go.jp/article/isciesci/50/7/50_KJ00004329717/_pdf">UKF （Unscented Kalman Filter）っ て何 ？</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="color:#555">matplotlib.pyplot</span> <span style="font-weight:bold">as</span> <span style="color:#555">plt</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">numpy</span> <span style="font-weight:bold">as</span> <span style="color:#555">np</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">random</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">math</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">scipy.linalg</span>
 </code></pre></div><p>入力には$X=(X_1,X_2)$を用いる．</p>
 <p>平均ベクトルは，</p>
 <p>$$
@@ -342,20 +342,20 @@ P_x = [
 $$
 となる．</p>
 <p>これを入力として用いる．出力は1次元とし$f(x)=x[0]*x[1]$の非線形変換を考える．</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># xの次元数</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="c1"># yの次元数</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># xの次元数</span>
+n <span style="font-weight:bold">=</span> <span style="color:#099">2</span>
+<span style="color:#998;font-style:italic"># yの次元数</span>
+m <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
 
-<span class="c1"># xの平均と分散</span>
-<span class="n">x_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">x_P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;xの平均&#34;</span><span class="p">,</span><span class="n">x_mean</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;xの分散共分散行列&#34;</span><span class="p">,</span><span class="n">x_P</span><span class="p">)</span>
+<span style="color:#998;font-style:italic"># xの平均と分散</span>
+x_mean <span style="font-weight:bold">=</span> np<span style="font-weight:bold">.</span>array([<span style="color:#099">0</span>, <span style="color:#099">1</span>])
+x_P <span style="font-weight:bold">=</span> np<span style="font-weight:bold">.</span>array([[<span style="color:#099">1</span>,<span style="color:#099">2</span>],[<span style="color:#099">2</span>,<span style="color:#099">4</span>]])
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;xの平均&#34;</span>,x_mean)
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;xの分散共分散行列&#34;</span>,x_P)
 
-<span class="c1"># xの非線形変換</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-  <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span style="color:#998;font-style:italic"># xの非線形変換</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">f</span>(x):
+  <span style="font-weight:bold">return</span> [x[<span style="color:#099">0</span>]<span style="font-weight:bold">*</span>x[<span style="color:#099">1</span>]]
 </code></pre></div><p>xの平均 [0 1]
 xの分散共分散行列 [[1 2]
 [2 4]]</p>
@@ -378,28 +378,28 @@ $$</p>
 <p>$\kappa$：通常は0に設定されます．値が小さいほど，シグマポイントは平均の状態に近くなります．広がりは$\kappa$の平方根に比例します。</p>
 <p>参考1：<a href="https://jp.mathworks.com/help/control/ref/ukf_block.html">Unscented Kalman Filter， MathWorks</a><br>
 参考2：<a href="https://myenigma.hatenablog.com/entry/20140614/1402731732">Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># パラメータ</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">kappa</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># 式4</span>
-<span class="n">lambd</span><span class="o">=</span><span class="n">alpha</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">kappa</span><span class="p">)</span><span class="o">-</span><span class="n">n</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;ラムダ&#34;</span><span class="p">,</span> <span class="n">lambd</span><span class="p">)</span>
-<span class="c1"># シグマ点をサンプリング</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># パラメータ</span>
+alpha <span style="font-weight:bold">=</span> <span style="color:#099">0.5</span>
+kappa <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
+<span style="color:#998;font-style:italic"># 式4</span>
+lambd<span style="font-weight:bold">=</span>alpha<span style="font-weight:bold">**</span><span style="color:#099">2</span><span style="font-weight:bold">*</span>(n<span style="font-weight:bold">+</span>kappa)<span style="font-weight:bold">-</span>n
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;ラムダ&#34;</span>, lambd)
+<span style="color:#998;font-style:italic"># シグマ点をサンプリング</span>
+sigma <span style="font-weight:bold">=</span> np<span style="font-weight:bold">.</span>zeros((n, <span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>))
 
-<span class="c1"># 式1</span>
-<span class="n">sigma</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_mean</span>
-<span class="n">gamma</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lamda</span><span class="p">)</span>
-<span class="c1"># 式2</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_mean</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">x_P</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
-<span class="c1"># 式3</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span><span class="n">x_mean</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">x_P</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+<span style="color:#998;font-style:italic"># 式1</span>
+sigma[:,<span style="color:#099">0</span>] <span style="font-weight:bold">=</span> x_mean
+gamma<span style="font-weight:bold">=</span>math<span style="font-weight:bold">.</span>sqrt(n<span style="font-weight:bold">+</span>lamda)
+<span style="color:#998;font-style:italic"># 式2</span>
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(n):
+    sigma[:,i<span style="font-weight:bold">+</span><span style="color:#099">1</span>] <span style="font-weight:bold">=</span> x_mean <span style="font-weight:bold">+</span> gamma <span style="font-weight:bold">*</span> x_P[:,i]
+<span style="color:#998;font-style:italic"># 式3</span>
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(n):
+    sigma[:,i<span style="font-weight:bold">+</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>] <span style="font-weight:bold">=</span>x_mean <span style="font-weight:bold">-</span> gamma <span style="font-weight:bold">*</span> x_P[:,i]
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;選択されたシグマ点&#34;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;選択されたシグマ点&#34;</span>)
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(<span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>):
+  <span style="font-weight:bold">print</span>(sigma[:,i])
 </code></pre></div><p>ラムダ -1.5
 選択されたシグマ点
 [0. 1.]
@@ -426,30 +426,30 @@ $$</p>
 <p>$$
 P_y \simeq \sum_{i=0}^{2n} w_i (y_{\sigma i}-\bar{y})*(y_{\sigma i}-\bar{y})^T \tag{9}
 $$</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<span class="c1"># 非線形変換　式5</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sigma</span><span class="p">)):</span>
-  <span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sigma_y <span style="font-weight:bold">=</span> np<span style="font-weight:bold">.</span>zeros((m, <span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>))
+<span style="color:#998;font-style:italic"># 非線形変換　式5</span>
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(<span style="color:#999">len</span>(sigma)):
+  sigma_y[:,i] <span style="font-weight:bold">=</span> f(sigma[:,i])
 
-<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<span class="c1"># 重み関数計算　式6,7</span>
-<span class="n">w</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambd</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lambd</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">):</span>
-  <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lambd</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;重み関数&#34;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-<span class="n">y_mean</span><span class="o">=</span><span class="mi">0</span>
-<span class="c1"># yの平均計算 式8</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="n">y_mean</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+w <span style="font-weight:bold">=</span> np<span style="font-weight:bold">.</span>zeros((<span style="color:#099">1</span>, <span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>))
+<span style="color:#998;font-style:italic"># 重み関数計算　式6,7</span>
+w[:,<span style="color:#099">0</span>] <span style="font-weight:bold">=</span> lambd<span style="font-weight:bold">/</span>(n<span style="font-weight:bold">+</span>lambd)
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(<span style="color:#099">2</span><span style="font-weight:bold">*</span>n):
+  w[:,i<span style="font-weight:bold">+</span><span style="color:#099">1</span>] <span style="font-weight:bold">=</span> <span style="color:#099">1</span><span style="font-weight:bold">/</span>(<span style="color:#099">2</span><span style="font-weight:bold">*</span>(n<span style="font-weight:bold">+</span>lambd))
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;重み関数&#34;</span>, w)
+y_mean<span style="font-weight:bold">=</span><span style="color:#099">0</span>
+<span style="color:#998;font-style:italic"># yの平均計算 式8</span>
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(<span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>):
+  y_mean <span style="font-weight:bold">+=</span> w[:,i]<span style="font-weight:bold">*</span>sigma_y[:,i]
 
-<span class="n">y_P</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c1"># yの分散共分散計算 式9</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-  <span class="n">y_P</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">y_mean</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">y_mean</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+y_P <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
+<span style="color:#998;font-style:italic"># yの分散共分散計算 式9</span>
+<span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(<span style="color:#099">2</span><span style="font-weight:bold">*</span>n<span style="font-weight:bold">+</span><span style="color:#099">1</span>):
+  y_P <span style="font-weight:bold">+=</span> w[:,i]<span style="font-weight:bold">*</span>(sigma_y[:,i]<span style="font-weight:bold">-</span>y_mean)<span style="font-weight:bold">*</span>(sigma_y[:,i]<span style="font-weight:bold">-</span>y_mean)<span style="font-weight:bold">.</span>T
 
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;yの平均&#34;</span><span class="p">,</span><span class="n">y_mean</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;yの分散共分散行列&#34;</span><span class="p">,</span><span class="n">y_P</span><span class="p">)</span>
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;yの平均&#34;</span>,y_mean)
+<span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;yの分散共分散行列&#34;</span>,y_P)
 </code></pre></div><p>重み関数 [[-3.  1.  1.  1.  1.]]
 yの平均 [0.00141821]
 yの分散共分散行列 [-8.47032947e-22]</p>

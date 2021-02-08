@@ -283,71 +283,71 @@ $\oplus$は排他的論理和</li>
 $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
 </ol>
 <h1 id="コード">コード</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 乱数</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="c1"># 秘密鍵</span>
-<span class="n">key</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="c1"># ベースポイント</span>
-<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-<span class="c1"># 位数</span>
-<span class="n">l</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="c1"># y^2 = x^3 + ax +b</span>
-<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># 乱数</span>
+r <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
+<span style="color:#998;font-style:italic"># 秘密鍵</span>
+key <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
+<span style="color:#998;font-style:italic"># ベースポイント</span>
+g <span style="font-weight:bold">=</span> [<span style="color:#099">2</span>,<span style="color:#099">2</span>]
+<span style="color:#998;font-style:italic"># 位数</span>
+l <span style="font-weight:bold">=</span> <span style="color:#099">5</span>
+<span style="color:#998;font-style:italic"># y^2 = x^3 + ax +b</span>
+a <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
+b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
 
-<span class="k">def</span> <span class="nf">Mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
-  <span class="k">return</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Mod</span>(x,y):
+  <span style="font-weight:bold">if</span> x <span style="font-weight:bold">&lt;</span> <span style="color:#099">0</span>:
+    x <span style="font-weight:bold">=</span> x<span style="font-weight:bold">+</span>y
+  <span style="font-weight:bold">return</span> x<span style="font-weight:bold">%</span>y
 
-<span class="k">def</span> <span class="nf">invMod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-  <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">count</span>
-    <span class="k">if</span> <span class="n">tmp</span><span class="o">%</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">count</span>
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">invMod</span>(x,y):
+  count <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
+  <span style="font-weight:bold">while</span> True:
+    tmp <span style="font-weight:bold">=</span> x<span style="font-weight:bold">*</span>count
+    <span style="font-weight:bold">if</span> tmp<span style="font-weight:bold">%</span>y <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
+      <span style="font-weight:bold">return</span> count
+    count <span style="font-weight:bold">+=</span> <span style="color:#099">1</span>
 
-<span class="k">def</span> <span class="nf">Ellipse</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">Mod</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">),</span><span class="n">l</span><span class="p">)</span><span class="o">*</span><span class="n">invMod</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">l</span><span class="p">),</span><span class="n">l</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">s</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">Mod</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">l</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Ellipse</span>(p,r):
+    <span style="font-weight:bold">for</span> _ <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(r):
+        s <span style="font-weight:bold">=</span> Mod(Mod((<span style="color:#099">3</span><span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">+</span>a),l)<span style="font-weight:bold">*</span>invMod((<span style="color:#099">2</span><span style="font-weight:bold">*</span>p[<span style="color:#099">1</span>]),l),l)
+        x <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>s<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>],l)
+        y <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>(p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>x)<span style="font-weight:bold">-</span>p[<span style="color:#099">1</span>],l)
+    <span style="font-weight:bold">return</span> [x,y]
 
-<span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="n">U</span> <span class="o">=</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span><span class="n">Ellipse</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
-    <span class="c1"># 排他的論理和をとる</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">m</span>
-    <span class="k">return</span> <span class="n">U</span><span class="p">,</span><span class="n">c</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">encrypt</span>(G,Y, m):
+    U <span style="font-weight:bold">=</span>Ellipse(G,r)
+    V <span style="font-weight:bold">=</span>Ellipse(Y,r)
+    <span style="color:#998;font-style:italic"># 排他的論理和をとる</span>
+    c <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> m
+    <span style="font-weight:bold">return</span> U,c
 
-<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="n">c</span>
-    <span class="k">return</span> <span class="n">m</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">decrypt</span>(U, c, key):
+    V <span style="font-weight:bold">=</span> Ellipse(U,key)
+    m <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> c
+    <span style="font-weight:bold">return</span> m
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
 
-    <span class="c1"># 公開鍵の作成</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">g</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;公開鍵：&#34;</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+    <span style="color:#998;font-style:italic"># 公開鍵の作成</span>
+    Y <span style="font-weight:bold">=</span> g
+    Y <span style="font-weight:bold">=</span> Ellipse(Y, key) 
+    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;公開鍵：&#34;</span>,[a,b], g,Y)
 
-    <span class="c1"># 平文</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;平文：&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span style="color:#998;font-style:italic"># 平文</span>
+    message <span style="font-weight:bold">=</span> <span style="color:#099">4</span>
+    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;平文：&#34;</span>, message)
 
-    <span class="c1"># 暗号化</span>
-    <span class="n">U</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;暗号文：&#34;</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span style="color:#998;font-style:italic"># 暗号化</span>
+    U,c <span style="font-weight:bold">=</span> encrypt(g, Y, message)
+    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;暗号文：&#34;</span>,U,c)
 
-    <span class="c1"># 復号化</span>
-    <span class="n">decrypt_message</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;復号化メッセージ&#34;</span><span class="p">,</span> <span class="n">decrypt_message</span><span class="p">)</span>
+    <span style="color:#998;font-style:italic"># 復号化</span>
+    decrypt_message <span style="font-weight:bold">=</span> decrypt(U, c, key)
+    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;復号化メッセージ&#34;</span>, decrypt_message)
     
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+<span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#34;__main__&#34;</span>:
+    main()
 </code></pre></div>
 
         

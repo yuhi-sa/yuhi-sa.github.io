@@ -277,91 +277,91 @@ Pub &amp; Sub通信 ROSでは，ROSのネットワークにつながった実行
 <li>Python 3.8.5</li>
 </ul>
 <h1 id="publisherのサンプルプログラム">Publisherのサンプルプログラム</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># license removed for brevity</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
-<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span> <span class="c1">#使うデータ型をインポート</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python:talker.py" data-lang="python:talker.py"><span style="color:#998;font-style:italic">#!/usr/bin/env python</span>
+<span style="color:#998;font-style:italic"># license removed for brevity</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">rospy</span>
+<span style="font-weight:bold">from</span> <span style="color:#555">std_msgs.msg</span> <span style="font-weight:bold">import</span> String <span style="color:#998;font-style:italic">#使うデータ型をインポート</span>
 
-<span class="k">def</span> <span class="nf">talker</span><span class="p">():</span>
-    <span class="c1">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
-    <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;chatter&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="c1">#ノード名を宣言</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c1">#ループの周期を宣言</span>
-    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 10hz</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">talker</span>():
+    <span style="color:#998;font-style:italic">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
+    pub <span style="font-weight:bold">=</span> rospy<span style="font-weight:bold">.</span>Publisher(<span style="color:#b84">&#39;chatter&#39;</span>, String, queue_size<span style="font-weight:bold">=</span><span style="color:#099">10</span>)
+    <span style="color:#998;font-style:italic">#ノード名を宣言</span>
+    rospy<span style="font-weight:bold">.</span>init_node(<span style="color:#b84">&#39;talker&#39;</span>, anonymous<span style="font-weight:bold">=</span>True)
+    <span style="color:#998;font-style:italic">#ループの周期を宣言</span>
+    rate <span style="font-weight:bold">=</span> rospy<span style="font-weight:bold">.</span>Rate(<span style="color:#099">10</span>) <span style="color:#998;font-style:italic"># 10hz</span>
     
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-        <span class="c1">#パブリッシュするデータを記入</span>
-        <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-        <span class="c1">#パブリッシュするデータをターミナルに表示</span>
-        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="c1">#データをパブリッシュ</span>
-        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
+    <span style="font-weight:bold">while</span> <span style="font-weight:bold">not</span> rospy<span style="font-weight:bold">.</span>is_shutdown():
+        <span style="color:#998;font-style:italic">#パブリッシュするデータを記入</span>
+        hello_str <span style="font-weight:bold">=</span> <span style="color:#b84">&#34;hello world </span><span style="color:#b84">%s</span><span style="color:#b84">&#34;</span> <span style="font-weight:bold">%</span> rospy<span style="font-weight:bold">.</span>get_time()
+        <span style="color:#998;font-style:italic">#パブリッシュするデータをターミナルに表示</span>
+        rospy<span style="font-weight:bold">.</span>loginfo(hello_str)
+        <span style="color:#998;font-style:italic">#データをパブリッシュ</span>
+        pub<span style="font-weight:bold">.</span>publish(hello_str)
+        rate<span style="font-weight:bold">.</span>sleep()
 
-  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-       <span class="k">try</span><span class="p">:</span>
-         <span class="n">talker</span><span class="p">()</span>
-     <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInterruptException</span><span class="p">:</span>
-         <span class="k">pass</span>
+  <span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#39;__main__&#39;</span>:
+       <span style="font-weight:bold">try</span>:
+         talker()
+     <span style="font-weight:bold">except</span> rospy<span style="font-weight:bold">.</span>ROSInterruptException:
+         <span style="font-weight:bold">pass</span>
 </code></pre></div><p>Writing a Simple Publisher and Subscriber (Python)より引用，説明補足</p>
 <h1 id="subscriberのサンプルプログラム">Subscriberのサンプルプログラム</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python:listener.py" data-lang="python:listener.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
-<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span> <span class="c1">#使うデータ型をインポート</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python:listener.py" data-lang="python:listener.py"><span style="color:#998;font-style:italic">#!/usr/bin/env python</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">rospy</span>
+<span style="font-weight:bold">from</span> <span style="color:#555">std_msgs.msg</span> <span style="font-weight:bold">import</span> String <span style="color:#998;font-style:italic">#使うデータ型をインポート</span>
 
-<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="c1">#受け取ったデータをターミナルに表示</span>
-    <span class="c1">#データはdata.dataで受け取っている</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">callback</span>(data):
+    <span style="color:#998;font-style:italic">#受け取ったデータをターミナルに表示</span>
+    <span style="color:#998;font-style:italic">#データはdata.dataで受け取っている</span>
+    rospy<span style="font-weight:bold">.</span>loginfo(rospy<span style="font-weight:bold">.</span>get_caller_id() <span style="font-weight:bold">+</span> <span style="color:#b84">&#34;I heard </span><span style="color:#b84">%s</span><span style="color:#b84">&#34;</span>, data<span style="font-weight:bold">.</span>data)
      
-<span class="k">def</span> <span class="nf">listener</span><span class="p">():</span>
-    <span class="c1">#ノード名を宣言</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c1">#Subscriberを作成(&#39;トピック名&#39;,型,callback関数)</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-    <span class="c1">#callback関数を呼び続ける</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">listener</span>():
+    <span style="color:#998;font-style:italic">#ノード名を宣言</span>
+    rospy<span style="font-weight:bold">.</span>init_node(<span style="color:#b84">&#39;listener&#39;</span>, anonymous<span style="font-weight:bold">=</span>True)
+    <span style="color:#998;font-style:italic">#Subscriberを作成(&#39;トピック名&#39;,型,callback関数)</span>
+    rospy<span style="font-weight:bold">.</span>Subscriber(<span style="color:#b84">&#34;chatter&#34;</span>, String, callback)
+    <span style="color:#998;font-style:italic">#callback関数を呼び続ける</span>
+    rospy<span style="font-weight:bold">.</span>spin()
 
- <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">listener</span><span class="p">()</span>
+ <span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#39;__main__&#39;</span>:
+    listener()
 </code></pre></div><p>Writing a Simple Publisher and Subscriber (Python)より引用，説明補足</p>
 <h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
 <p>rospy.spin()を使わない(callback関数待機状態のまま止めってしまうから)ってだけで，まとめてみるとくっつけただけやなって感じなんですけど，まる二日ぐらいこれで悩みました笑．</p>
-<div class="highlight"><pre class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># coding: utf-8</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
-<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python:controller.py" data-lang="python:controller.py"><span style="color:#998;font-style:italic">#!/usr/bin/env python</span>
+<span style="color:#998;font-style:italic"># coding: utf-8</span>
+<span style="font-weight:bold">import</span> <span style="color:#555">rospy</span>
+<span style="font-weight:bold">from</span> <span style="color:#555">std_msgs.msg</span> <span style="font-weight:bold">import</span> String
 
-<span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="c1">#受け取ったデータをターミナルに表示</span>
-    <span class="c1">#データはdata.dataで受け取っている</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">callback</span>(data):
+    <span style="color:#998;font-style:italic">#受け取ったデータをターミナルに表示</span>
+    <span style="color:#998;font-style:italic">#データはdata.dataで受け取っている</span>
+    rospy<span style="font-weight:bold">.</span>loginfo(rospy<span style="font-weight:bold">.</span>get_caller_id() <span style="font-weight:bold">+</span> <span style="color:#b84">&#34;I heard </span><span style="color:#b84">%s</span><span style="color:#b84">&#34;</span>, data<span style="font-weight:bold">.</span>data)
       
-<span class="k">def</span> <span class="nf">controller</span><span class="p">():</span>
-    <span class="c1">#ノード名を宣言</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="c1">#Subscriberを作成．トピックを読み込む．</span>
-    <span class="n">sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-    <span class="c1">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
-    <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1">#ループの周期．</span>
-    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">controller</span>():
+    <span style="color:#998;font-style:italic">#ノード名を宣言</span>
+    rospy<span style="font-weight:bold">.</span>init_node(<span style="color:#b84">&#39;controller&#39;</span>, anonymous<span style="font-weight:bold">=</span>True)
+    <span style="color:#998;font-style:italic">#Subscriberを作成．トピックを読み込む．</span>
+    sub <span style="font-weight:bold">=</span> rospy<span style="font-weight:bold">.</span>Subscriber(<span style="color:#b84">&#39;listener&#39;</span>, String, callback)
+    <span style="color:#998;font-style:italic">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
+    pub <span style="font-weight:bold">=</span> rospy<span style="font-weight:bold">.</span>Publisher(<span style="color:#b84">&#39;talker&#39;</span>, String, queue_size<span style="font-weight:bold">=</span><span style="color:#099">1</span>)
+    <span style="color:#998;font-style:italic">#ループの周期．</span>
+    rate <span style="font-weight:bold">=</span> rospy<span style="font-weight:bold">.</span>Rate(<span style="color:#099">10</span>)
     
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-        <span class="c1">#パブリッシュするデータを記入</span>
-        <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-        <span class="c1">#パブリッシュするデータをターミナルに表示</span>
-        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="c1">#データをパブリッシュ</span>
-        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
+    <span style="font-weight:bold">while</span> <span style="font-weight:bold">not</span> rospy<span style="font-weight:bold">.</span>is_shutdown():
+        <span style="color:#998;font-style:italic">#パブリッシュするデータを記入</span>
+        hello_str <span style="font-weight:bold">=</span> <span style="color:#b84">&#34;hello world </span><span style="color:#b84">%s</span><span style="color:#b84">&#34;</span> <span style="font-weight:bold">%</span> rospy<span style="font-weight:bold">.</span>get_time()
+        <span style="color:#998;font-style:italic">#パブリッシュするデータをターミナルに表示</span>
+        rospy<span style="font-weight:bold">.</span>loginfo(hello_str)
+        <span style="color:#998;font-style:italic">#データをパブリッシュ</span>
+        pub<span style="font-weight:bold">.</span>publish(hello_str)
+        rate<span style="font-weight:bold">.</span>sleep()
     
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">controller</span><span class="p">()</span>
-    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInitException</span><span class="p">:</span>
-        <span class="k">pass</span>
+<span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#39;__main__&#39;</span>:
+    <span style="font-weight:bold">try</span>:
+        controller()
+    <span style="font-weight:bold">except</span> rospy<span style="font-weight:bold">.</span>ROSInitException:
+        <span style="font-weight:bold">pass</span>
 </code></pre></div><h1 id="参考">参考</h1>
 <ul>
 <li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">Writing a Simple Publisher and Subscriber (Python)</a></li>

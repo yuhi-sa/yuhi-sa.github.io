@@ -273,21 +273,21 @@
 <p>2進数に展開し，左から順に展開することにより計算を実行する．
 これにより，$g^k(mod p)$を計算する．</p>
 <h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
-        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">y</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-binary.py" data-lang="binary.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Binary</span>(k, g, p):
+    k_binary <span style="font-weight:bold">=</span> []
+    <span style="font-weight:bold">while</span>(k <span style="font-weight:bold">!=</span> <span style="color:#099">0</span>):
+        k_binary<span style="font-weight:bold">.</span>append(k<span style="font-weight:bold">%</span><span style="color:#099">2</span>)
+        k <span style="font-weight:bold">=</span> k<span style="font-weight:bold">//</span><span style="color:#099">2</span>
+        <span style="font-weight:bold">if</span> k <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
+            k_binary<span style="font-weight:bold">.</span>append(k)
+            k <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
+    y <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
+    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">reversed</span>(<span style="color:#999">range</span>(<span style="color:#999">len</span>(k_binary))):
+        <span style="font-weight:bold">if</span> k_binary[i] <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
+            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)<span style="font-weight:bold">*</span>g<span style="font-weight:bold">%</span>p
+        <span style="font-weight:bold">else</span>:
+            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)
+    <span style="font-weight:bold">return</span> y
 </code></pre></div>
 
         
