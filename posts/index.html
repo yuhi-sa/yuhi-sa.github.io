@@ -209,7 +209,7 @@
         <div class="posts-list">
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210204/">
+    <a href="https://yuhi-sa.github.io/posts/20210204/20210204/">
         <h2 class="post-title">markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</h2>
         
         
@@ -247,7 +247,7 @@ Hugoは，Go言語で開発された静的サイトジェネレータである�
 Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
 サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
 フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成
-        <a href="https://yuhi-sa.github.io/posts/20210204/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210204/20210204/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -262,7 +262,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210125/">
+    <a href="https://yuhi-sa.github.io/posts/20210125/20210125/">
         <h2 class="post-title">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</h2>
         
         
@@ -304,7 +304,7 @@ $$ \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2) $$ 分散共分散ベクトルは�
 $$ P_x = [ \begin{array}{cc} var[X_1] &amp; cov[X_1,X_2] \
 cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp; \sigma_1\sigma_2 \
 \sigma_1\sigma_2 &amp; \sigma_2^2 \end{array} ] $$
-        <a href="https://yuhi-sa.github.io/posts/20210125/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210125/20210125/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -321,7 +321,7 @@ cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp;
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210109/">
+    <a href="https://yuhi-sa.github.io/posts/20210109/20210109/">
         <h2 class="post-title">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</h2>
         
         
@@ -354,7 +354,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
  個体の初期生成： 初期の個体をランダムに生成する． 適合度(評価値)の算出 各個体の適合度(評価値)決定する． 再生 各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される． 交叉 Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す． 突然変異 突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える． 終了条件判定 終了条件を満たせば終了，そうでなければStep2に戻る．  GAアルゴリズムの性質 GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．
 実装 遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った． コードはこちら
 パラメータなどを設定 # 世代 GEN = 100 # NNの個数 In = 2 Hidden = 2 Out = 1 # NNの個体数 Number = 1000 # 教師信号の数 Num = 1000 # 交叉確率 kousa = 0.8 # 突然変異確率 change = 0.05 # 学習する関数 def kansu(x): return((math.
-        <a href="https://yuhi-sa.github.io/posts/20210109/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210109/20210109/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -371,7 +371,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210108/">
+    <a href="https://yuhi-sa.github.io/posts/20210108/20210108/">
         <h2 class="post-title">ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</h2>
         
         
@@ -412,7 +412,7 @@ $P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
 $$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
 $$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y+\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
 $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
-        <a href="https://yuhi-sa.github.io/posts/20210108/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210108/20210108/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -427,7 +427,7 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210107_2/">
+    <a href="https://yuhi-sa.github.io/posts/20210107_2/20210107_2/">
         <h2 class="post-title">情報理論(エントロピーから相互情報量, PRML1.6)</h2>
         
         
@@ -470,7 +470,7 @@ $$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は
 $$ \int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．
 $$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．
 $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．
-        <a href="https://yuhi-sa.github.io/posts/20210107_2/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210107_2/20210107_2/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -485,7 +485,7 @@ $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln 
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210107/">
+    <a href="https://yuhi-sa.github.io/posts/20210107/20210107/">
         <h2 class="post-title">粒子群最適化(PSO)とTCPSO</h2>
         
         
@@ -528,7 +528,7 @@ $w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重
 TCPSO(Two-swarm Cooperative Particle Swarm Optimization) TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．
 粒子の更新 スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．
 $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(t+1)=x_i^S(t)+v_i^S(t+1) $$ $$ v_i^M(t+1)=w^Mv_i^M(t)C_1^Mr_1(P_i^M(t)-x_i^M(t)) +C_2^Mr_2(P_G^S(t)-x_i^M(t))+C_3^Mr_3(P_G(t)-x_i^M(t)) $$ $$ x_i^M(t+1)=x_i^M(t)+v_i^M(t+1) $$ マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている． スレーブ粒子とマスター粒子の更新の概念を以下に示す．
-        <a href="https://yuhi-sa.github.io/posts/20210107/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210107/20210107/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -545,7 +545,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201223/">
+    <a href="https://yuhi-sa.github.io/posts/20201223/20201223/">
         <h2 class="post-title">Pythonでslackに実験結果(テキストと画像)を送る</h2>
         
         
@@ -574,7 +574,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
         
         テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&#34;コピーした Webhook URL&#34;) def notify(title, text, color): attachments = [{&#34;title&#34;: title, &#34;text&#34;: text, &#34;color&#34;: color, #good, warning, danger &#34;footer&#34;: &#34;Send from Python&#34;, }] slack.notify(text=None, attachments=attachments) notify(&#34;テスト&#34;,&#34;おはよう&#34;,&#34;good&#34;) notify(&#34;テスト&#34;,&#34;こんにちは&#34;,&#34;warning&#34;) notify(&#34;テスト&#34;,&#34;こんばんは&#34;,&#34;danger&#34;) attachmentsの構文は，以下を参考
  Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&#39;file&#39;: open(imageURL, &#39;rb&#39;)} param = { &#39;token&#39;: &#34;コピーした APIトークン&#34;, &#39;channels&#39;:&#39;投稿したいチャンネル名&#39;, &#39;filename&#39;:&#34;filename&#34;, &#39;title&#39;: title, } requests.
-        <a href="https://yuhi-sa.github.io/posts/20201223/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20201223/20201223/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -589,7 +589,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201223_2/">
+    <a href="https://yuhi-sa.github.io/posts/20201223_2/20201223_2/">
         <h2 class="post-title">楕円曲線上のElGamal暗号</h2>
         
         
@@ -718,7 +718,7 @@ $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201220/">
+    <a href="https://yuhi-sa.github.io/posts/20201220/20201220/">
         <h2 class="post-title">バイナリ法</h2>
         
         
@@ -785,7 +785,7 @@ $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20201015/">
+    <a href="https://yuhi-sa.github.io/posts/20201015/20201015/">
         <h2 class="post-title">ユークリッドの互除法と拡張ユークリッドの互除法</h2>
         
         
@@ -820,7 +820,7 @@ a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
 a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
 a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
 1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \
-        <a href="https://yuhi-sa.github.io/posts/20201015/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20201015/20201015/" class="post-read-more">[Read More]</a>
         
     </div>
 

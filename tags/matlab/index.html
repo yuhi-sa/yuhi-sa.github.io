@@ -209,7 +209,7 @@
         <div class="posts-list">
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210107/">
+    <a href="https://yuhi-sa.github.io/posts/20210107/20210107/">
         <h2 class="post-title">粒子群最適化(PSO)とTCPSO</h2>
         
         
@@ -252,7 +252,7 @@ $w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重
 TCPSO(Two-swarm Cooperative Particle Swarm Optimization) TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．
 粒子の更新 スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．
 $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(t+1)=x_i^S(t)+v_i^S(t+1) $$ $$ v_i^M(t+1)=w^Mv_i^M(t)C_1^Mr_1(P_i^M(t)-x_i^M(t)) +C_2^Mr_2(P_G^S(t)-x_i^M(t))+C_3^Mr_3(P_G(t)-x_i^M(t)) $$ $$ x_i^M(t+1)=x_i^M(t)+v_i^M(t+1) $$ マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている． スレーブ粒子とマスター粒子の更新の概念を以下に示す．
-        <a href="https://yuhi-sa.github.io/posts/20210107/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210107/20210107/" class="post-read-more">[Read More]</a>
         
     </div>
 

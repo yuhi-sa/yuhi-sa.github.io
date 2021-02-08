@@ -8,10 +8,10 @@
     <lastBuildDate>Mon, 25 Jan 2021 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</title>
-      <link>https://yuhi-sa.github.io/posts/20210125/</link>
+      <link>https://yuhi-sa.github.io/posts/20210125/20210125/</link>
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210125/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210125/20210125/</guid>
       <description>はじめに Unscented Transformation(アンセンテッド変換,U変換)は，Unscented Kalman Filterの中で出てくるけど，U変換単体での説明がなくて困ってるので今の理解をまとめました． 間違ってる所など教えていただけるととてもありがたいです．
 Unscented Transformationの概要 U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．
 まず，この場合，モンテカロ的に
@@ -31,10 +31,10 @@ cov[X_2,X_1] &amp;amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &
     
     <item>
       <title>遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210109/</link>
+      <link>https://yuhi-sa.github.io/posts/20210109/20210109/</link>
       <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210109/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210109/20210109/</guid>
       <description>はじめに $$ f(x,y)=\frac{(\frac{\sin x^2}{cos y}+x^2-5y+30)}{80} $$ の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる． (学部のときの課題で，できなかったのでリベンジしてみた)
 遺伝的アルゴリズム(GA:Genetic Algorithms)とは GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．
 GAのアルゴリズム GAのアルゴリズムを以下に示す．
@@ -45,10 +45,10 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
     
     <item>
       <title>ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title>
-      <link>https://yuhi-sa.github.io/posts/20210108/</link>
+      <link>https://yuhi-sa.github.io/posts/20210108/20210108/</link>
       <pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210108/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210108/20210108/</guid>
       <description>#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
 観測されたデータ$D={(x_i,y_i);i=1,2,&amp;hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
 $$ y_i= \Phi w+ \epsilon $$
@@ -67,10 +67,10 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$</description>
     
     <item>
       <title>情報理論(エントロピーから相互情報量, PRML1.6)</title>
-      <link>https://yuhi-sa.github.io/posts/20210107_2/</link>
+      <link>https://yuhi-sa.github.io/posts/20210107_2/20210107_2/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210107_2/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210107_2/20210107_2/</guid>
       <description>情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．
  $h(x,y)=h(x)+h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である．  この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．
 $$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．
@@ -91,10 +91,10 @@ $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln 
     
     <item>
       <title>粒子群最適化(PSO)とTCPSO</title>
-      <link>https://yuhi-sa.github.io/posts/20210107/</link>
+      <link>https://yuhi-sa.github.io/posts/20210107/20210107/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210107/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210107/20210107/</guid>
       <description>粒子群最適化(PSO:Particle Swarm Optimization) PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．
 PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．
 粒子の更新 粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．
@@ -115,10 +115,10 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
     
     <item>
       <title>強化学習の全体像まとめ</title>
-      <link>https://yuhi-sa.github.io/posts/20200831/</link>
+      <link>https://yuhi-sa.github.io/posts/20200831/20200831/</link>
       <pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20200831/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20200831/20200831/</guid>
       <description>はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
 強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
  価値反復法

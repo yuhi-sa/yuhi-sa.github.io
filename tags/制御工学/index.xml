@@ -8,10 +8,10 @@
     <lastBuildDate>Tue, 01 Sep 2020 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E5%88%B6%E5%BE%A1%E5%B7%A5%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>フィルタまとめ</title>
-      <link>https://yuhi-sa.github.io/posts/20200901/</link>
+      <link>https://yuhi-sa.github.io/posts/20200901/20200901/</link>
       <pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20200901/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20200901/20200901/</guid>
       <description>フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
 想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
 $$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．

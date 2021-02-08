@@ -8,10 +8,10 @@
     <lastBuildDate>Thu, 04 Feb 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</title>
-      <link>https://yuhi-sa.github.io/posts/20210204/</link>
+      <link>https://yuhi-sa.github.io/posts/20210204/20210204/</link>
       <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210204/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210204/20210204/</guid>
       <description>はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
 全体通して，参考にした記事たち 参考1：Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する
 参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】

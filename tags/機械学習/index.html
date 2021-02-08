@@ -209,7 +209,7 @@
         <div class="posts-list">
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210125/">
+    <a href="https://yuhi-sa.github.io/posts/20210125/20210125/">
         <h2 class="post-title">Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</h2>
         
         
@@ -251,7 +251,7 @@ $$ \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2) $$ 分散共分散ベクトルは�
 $$ P_x = [ \begin{array}{cc} var[X_1] &amp; cov[X_1,X_2] \
 cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp; \sigma_1\sigma_2 \
 \sigma_1\sigma_2 &amp; \sigma_2^2 \end{array} ] $$
-        <a href="https://yuhi-sa.github.io/posts/20210125/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210125/20210125/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -268,7 +268,7 @@ cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp;
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210109/">
+    <a href="https://yuhi-sa.github.io/posts/20210109/20210109/">
         <h2 class="post-title">遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</h2>
         
         
@@ -301,7 +301,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
  個体の初期生成： 初期の個体をランダムに生成する． 適合度(評価値)の算出 各個体の適合度(評価値)決定する． 再生 各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される． 交叉 Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す． 突然変異 突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える． 終了条件判定 終了条件を満たせば終了，そうでなければStep2に戻る．  GAアルゴリズムの性質 GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．
 実装 遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った． コードはこちら
 パラメータなどを設定 # 世代 GEN = 100 # NNの個数 In = 2 Hidden = 2 Out = 1 # NNの個体数 Number = 1000 # 教師信号の数 Num = 1000 # 交叉確率 kousa = 0.8 # 突然変異確率 change = 0.05 # 学習する関数 def kansu(x): return((math.
-        <a href="https://yuhi-sa.github.io/posts/20210109/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210109/20210109/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -318,7 +318,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210108/">
+    <a href="https://yuhi-sa.github.io/posts/20210108/20210108/">
         <h2 class="post-title">ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</h2>
         
         
@@ -359,7 +359,7 @@ $P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
 $$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
 $$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y+\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
 $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
-        <a href="https://yuhi-sa.github.io/posts/20210108/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210108/20210108/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -374,7 +374,7 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210107_2/">
+    <a href="https://yuhi-sa.github.io/posts/20210107_2/20210107_2/">
         <h2 class="post-title">情報理論(エントロピーから相互情報量, PRML1.6)</h2>
         
         
@@ -417,7 +417,7 @@ $$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は
 $$ \int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．
 $$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．
 $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．
-        <a href="https://yuhi-sa.github.io/posts/20210107_2/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210107_2/20210107_2/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -432,7 +432,7 @@ $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln 
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20210107/">
+    <a href="https://yuhi-sa.github.io/posts/20210107/20210107/">
         <h2 class="post-title">粒子群最適化(PSO)とTCPSO</h2>
         
         
@@ -475,7 +475,7 @@ $w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重
 TCPSO(Two-swarm Cooperative Particle Swarm Optimization) TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．
 粒子の更新 スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．
 $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(t+1)=x_i^S(t)+v_i^S(t+1) $$ $$ v_i^M(t+1)=w^Mv_i^M(t)C_1^Mr_1(P_i^M(t)-x_i^M(t)) +C_2^Mr_2(P_G^S(t)-x_i^M(t))+C_3^Mr_3(P_G(t)-x_i^M(t)) $$ $$ x_i^M(t+1)=x_i^M(t)+v_i^M(t+1) $$ マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている． スレーブ粒子とマスター粒子の更新の概念を以下に示す．
-        <a href="https://yuhi-sa.github.io/posts/20210107/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20210107/20210107/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -492,7 +492,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
 </article>
           
             <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200831/">
+    <a href="https://yuhi-sa.github.io/posts/20200831/20200831/">
         <h2 class="post-title">強化学習の全体像まとめ</h2>
         
         
@@ -534,7 +534,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
 TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta $$
   TD($\lambda$)法
 エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．
-        <a href="https://yuhi-sa.github.io/posts/20200831/" class="post-read-more">[Read More]</a>
+        <a href="https://yuhi-sa.github.io/posts/20200831/20200831/" class="post-read-more">[Read More]</a>
         
     </div>
 

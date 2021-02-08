@@ -8,10 +8,10 @@
     <lastBuildDate>Thu, 07 Jan 2021 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/matlab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>粒子群最適化(PSO)とTCPSO</title>
-      <link>https://yuhi-sa.github.io/posts/20210107/</link>
+      <link>https://yuhi-sa.github.io/posts/20210107/20210107/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210107/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210107/20210107/</guid>
       <description>粒子群最適化(PSO:Particle Swarm Optimization) PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．
 PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．
 粒子の更新 粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．
