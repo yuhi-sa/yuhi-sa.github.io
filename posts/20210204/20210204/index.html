@@ -69,7 +69,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
   "headline": "markdownで記事を作成して無料ブログをつくる[Github Pages\u002bHugo]",
   "description" : "はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages \u002b 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．\n全体通して，参考にした記事たち 参考1：Hugo \u002b GitHub Pages（独自ドメイン適応）でサイトを作成・公開する\n参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】\nHugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．\nHugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，\n ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．\n参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る\n参考2：Hugoとは？静的サイトジェネレータについて解説\nHugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo\nサイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http:\/\/localhost:1313で確認できる\nフォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成",
   "inLanguage" : "en",
-  "wordCount":  254 ,
+  "wordCount":  305 ,
   "datePublished" : "2021-02-04T13:00:23",
   "dateModified" : "2021-02-04T13:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -395,6 +395,26 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 {{ end }}
 {{ end }}
 </code></pre></div><p>参考：<a href="https://qiita.com/momotaro98/items/4de7934fd79cd6b34fce">Hugoで未だ対応していないgtag.jsを利用して Googleアナリティクスする</a></p>
+<h2 id="sitemapを作成">Sitemapを作成</h2>
+<p>layouts/sitemap.xmlを作成</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
+{{ range .Data.Pages }}{{ if .IsPage }}
+&lt;url&gt;
+  &lt;loc&gt;{{ .Permalink }}&lt;/loc&gt;
+  {{ if not .Lastmod.IsZero }}
+  &lt;lastmod&gt;{{ safeHTML ( .Lastmod.Format &#34;2006-01-02T15:04:05-07:00&#34; ) }}&lt;/lastmod&gt;
+  &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+  {{ end }}
+&lt;/url&gt;
+{{ end }}{{ end }}
+&lt;/urlset&gt;
+</code></pre></div><p>layouts/robots.txtを作成</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Sitemap : {{ $.Site.BaseURL }}sitemap.xml
+</code></pre></div><p>config.tomlを編集</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">enableRobotsTXT = true
+</code></pre></div><p>url/sitemap.xmlで表示される．
+<a href="https://yuhi-sa.github.io/sitemap.xml">https://yuhi-sa.github.io/sitemap.xml</a></p>
+<p>参考：<a href="https://takaken.tokyo/dev/hugo/sitemaps/hugo-create-sitemaps/">XMLサイトマップの作り方</a></p>
 <h2 id="作成したサイト">作成したサイト</h2>
 <ul>
 <li><a href="https://yuhi-sa.github.io/">とまとまとブログ</a></li>
