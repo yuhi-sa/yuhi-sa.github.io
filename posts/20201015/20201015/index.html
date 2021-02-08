@@ -8,14 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>ユークリッドの互除法と拡張ユークリッドの互除法 - とまとまとブログ</title>
-  <meta name="description" content="ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i&#43;a_{i&#43;1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &lt; b: a_list.append(b) a_list.append(a) if a &gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i&#43;1]) i &#43;=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax&#43;by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i&#43;a_{i&#43;1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
-1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -64,7 +56,7 @@ a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
     "name" : "yuhi-sa"
   },
   "headline": "ユークリッドの互除法と拡張ユークリッドの互除法",
-  "description" : "ユークリッドの互除法 整数$a,b(a\u0026gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．\nアルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$\n $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i\u002ba_{i\u002b1}$として2に戻る  コード def euclid(a,b): a_list = [] if a \u0026lt; b: a_list.append(b) a_list.append(a) if a \u0026gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i\u002b1]) i \u002b=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax\u002bby=d$を求める場合$a_0=a,a_1=b$とおく．\n$[\\begin{array}{cc} a_{i-1} \\\na_i \\end{array}]= [\\begin{array}{cc} a_iq_i\u002ba_{i\u002b1} \\\na_i \\end{array}]$ とすると， $[\\begin{array}{cc} a_{i-1} \\\na_i \\end{array}]= [\\begin{array}{cc} q_i \u0026amp; 1 \\\n1 \u0026amp; 0 \\end{array}] [\\begin{array}{cc} a_i \\",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  188 ,
   "datePublished" : "2020-10-15T15:17:23",
@@ -86,22 +78,11 @@ a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
 </script>
 
 <meta property="og:title" content="ユークリッドの互除法と拡張ユークリッドの互除法" />
-<meta property="og:description" content="ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i&#43;a_{i&#43;1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &lt; b: a_list.append(b) a_list.append(a) if a &gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i&#43;1]) i &#43;=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax&#43;by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i&#43;a_{i&#43;1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
-1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20201015/20201015/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="ユークリッドの互除法と拡張ユークリッドの互除法" />
-  <meta name="twitter:description" content="ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のと …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -285,20 +266,20 @@ $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除�
 <li>$a_{i-1}=a_iq_i+a_{i+1}$として2に戻る</li>
 </ol>
 <h2 id="コード">コード</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-euclid.py" data-lang="euclid.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">euclid</span>(a,b):
-    a_list <span style="font-weight:bold">=</span> []
-    <span style="font-weight:bold">if</span> a <span style="font-weight:bold">&lt;</span> b: 
-        a_list<span style="font-weight:bold">.</span>append(b)
-        a_list<span style="font-weight:bold">.</span>append(a)
-    <span style="font-weight:bold">if</span> a <span style="font-weight:bold">&gt;=</span> b:
-        a_list<span style="font-weight:bold">.</span>append(a)
-        a_list<span style="font-weight:bold">.</span>append(b)
+<div class="highlight"><pre class="chroma"><code class="language-euclid.py" data-lang="euclid.py"><span class="k">def</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span> 
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
-    i <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-    <span style="font-weight:bold">while</span>(a_list[<span style="font-weight:bold">-</span><span style="color:#099">1</span>]<span style="font-weight:bold">!=</span><span style="color:#099">0</span>):
-        a_list<span style="font-weight:bold">.</span>append(a_list[i]<span style="font-weight:bold">%</span>a_list[i<span style="font-weight:bold">+</span><span style="color:#099">1</span>])
-        i <span style="font-weight:bold">+=</span><span style="color:#099">1</span>
-    <span style="font-weight:bold">return</span> a_list[<span style="font-weight:bold">-</span><span style="color:#099">2</span>]
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 </code></pre></div><h1 id="拡張ユークリッドの互除法">拡張ユークリッドの互除法</h1>
 <p>以下の仕組みを用いて一次不定方程式の一つの解を求める方法．
 $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．</p>
@@ -362,31 +343,31 @@ $y_i+1=y_i−1−q_iy_i$
 として3に戻る．</li>
 </ol>
 <h2 id="コード-1">コード</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-exEuclid.py" data-lang="exEuclid.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">exEuclid</span>(a,b):
-    a_list <span style="font-weight:bold">=</span> []
-    <span style="font-weight:bold">if</span> a <span style="font-weight:bold">&lt;</span> b: 
-        a_list<span style="font-weight:bold">.</span>append(b)
-        a_list<span style="font-weight:bold">.</span>append(a)
-    <span style="font-weight:bold">if</span> a <span style="font-weight:bold">&gt;=</span> b:
-        a_list<span style="font-weight:bold">.</span>append(a)
-        a_list<span style="font-weight:bold">.</span>append(b)
+<div class="highlight"><pre class="chroma"><code class="language-exEuclid.py" data-lang="exEuclid.py"><span class="k">def</span> <span class="nf">exEuclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span> 
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
-    q <span style="font-weight:bold">=</span> []
-    x <span style="font-weight:bold">=</span> []
-    x<span style="font-weight:bold">.</span>append(<span style="color:#099">1</span>)
-    x<span style="font-weight:bold">.</span>append(<span style="color:#099">0</span>)
-    y <span style="font-weight:bold">=</span> []
-    y<span style="font-weight:bold">.</span>append(<span style="color:#099">0</span>)
-    y<span style="font-weight:bold">.</span>append(<span style="color:#099">1</span>)
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-    i <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-    <span style="font-weight:bold">while</span>(a_list[<span style="font-weight:bold">-</span><span style="color:#099">1</span>]<span style="font-weight:bold">!=</span><span style="color:#099">0</span>):
-        a_list<span style="font-weight:bold">.</span>append(a_list[i]<span style="font-weight:bold">%</span>a_list[i<span style="font-weight:bold">+</span><span style="color:#099">1</span>])
-        q<span style="font-weight:bold">.</span>append(a_list[i]<span style="font-weight:bold">//</span>a_list[i<span style="font-weight:bold">+</span><span style="color:#099">1</span>])
-        x<span style="font-weight:bold">.</span>append(x[<span style="font-weight:bold">-</span><span style="color:#099">2</span>]<span style="font-weight:bold">-</span>q[<span style="font-weight:bold">-</span><span style="color:#099">1</span>]<span style="font-weight:bold">*</span>x[<span style="font-weight:bold">-</span><span style="color:#099">1</span>])
-        y<span style="font-weight:bold">.</span>append(y[<span style="font-weight:bold">-</span><span style="color:#099">2</span>]<span style="font-weight:bold">-</span>q[<span style="font-weight:bold">-</span><span style="color:#099">1</span>]<span style="font-weight:bold">*</span>y[<span style="font-weight:bold">-</span><span style="color:#099">1</span>])
-        i <span style="font-weight:bold">+=</span><span style="color:#099">1</span>
-    <span style="font-weight:bold">return</span> x[<span style="font-weight:bold">-</span><span style="color:#099">2</span>],y[<span style="font-weight:bold">-</span><span style="color:#099">2</span>],a_list[<span style="font-weight:bold">-</span><span style="color:#099">2</span>]
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">//</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 </code></pre></div>
 
         

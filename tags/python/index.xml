@@ -12,21 +12,7 @@
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210125/20210125/</guid>
-      <description>はじめに Unscented Transformation(アンセンテッド変換,U変換)は，Unscented Kalman Filterの中で出てくるけど，U変換単体での説明がなくて困ってるので今の理解をまとめました． 間違ってる所など教えていただけるととてもありがたいです．
-Unscented Transformationの概要 U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．
-まず，この場合，モンテカロ的に
-$$ \bar{y}\simeq\frac{1}{N}\sum_{i=1}^Nf(x_i) $$
-$$ P_y \simeq \frac{1}{N}\sum_{i=1}^N(f(x_i)-\bar{y})(f(x_i)-\bar{y})^T $$
-のように計算することが思いつくが，精度をよく計算するにはNを大きくする必要があり，実用上問題がある．
-線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．
-まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．
-参考1：UKF （Unscented Kalman Filter）っ て何 ？
-import matplotlib.pyplot as plt import numpy as np import random import math import scipy.linalg 入力には$X=(X_1,X_2)$を用いる．
-平均ベクトルは，
-$$ \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2) $$ 分散共分散ベクトルは，
-$$ P_x = [ \begin{array}{cc} var[X_1] &amp;amp; cov[X_1,X_2] \
-cov[X_2,X_1] &amp;amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp;amp; \sigma_1\sigma_2 \
-\sigma_1\sigma_2 &amp;amp; \sigma_2^2 \end{array} ] $$</description>
+      <description></description>
     </item>
     
     <item>
@@ -35,12 +21,7 @@ cov[X_2,X_1] &amp;amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &
       <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210109/20210109/</guid>
-      <description>はじめに $$ f(x,y)=\frac{(\frac{\sin x^2}{cos y}+x^2-5y+30)}{80} $$ の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる． (学部のときの課題で，できなかったのでリベンジしてみた)
-遺伝的アルゴリズム(GA:Genetic Algorithms)とは GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．
-GAのアルゴリズム GAのアルゴリズムを以下に示す．
- 個体の初期生成： 初期の個体をランダムに生成する． 適合度(評価値)の算出 各個体の適合度(評価値)決定する． 再生 各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される． 交叉 Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す． 突然変異 突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える． 終了条件判定 終了条件を満たせば終了，そうでなければStep2に戻る．  GAアルゴリズムの性質 GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．
-実装 遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った． コードはこちら
-パラメータなどを設定 # 世代 GEN = 100 # NNの個数 In = 2 Hidden = 2 Out = 1 # NNの個体数 Number = 1000 # 教師信号の数 Num = 1000 # 交叉確率 kousa = 0.8 # 突然変異確率 change = 0.05 # 学習する関数 def kansu(x): return((math.</description>
+      <description></description>
     </item>
     
     <item>
@@ -49,8 +30,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201223/20201223/</guid>
-      <description>テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&amp;#34;コピーした Webhook URL&amp;#34;) def notify(title, text, color): attachments = [{&amp;#34;title&amp;#34;: title, &amp;#34;text&amp;#34;: text, &amp;#34;color&amp;#34;: color, #good, warning, danger &amp;#34;footer&amp;#34;: &amp;#34;Send from Python&amp;#34;, }] slack.notify(text=None, attachments=attachments) notify(&amp;#34;テスト&amp;#34;,&amp;#34;おはよう&amp;#34;,&amp;#34;good&amp;#34;) notify(&amp;#34;テスト&amp;#34;,&amp;#34;こんにちは&amp;#34;,&amp;#34;warning&amp;#34;) notify(&amp;#34;テスト&amp;#34;,&amp;#34;こんばんは&amp;#34;,&amp;#34;danger&amp;#34;) attachmentsの構文は，以下を参考
- Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&amp;#39;file&amp;#39;: open(imageURL, &amp;#39;rb&amp;#39;)} param = { &amp;#39;token&amp;#39;: &amp;#34;コピーした APIトークン&amp;#34;, &amp;#39;channels&amp;#39;:&amp;#39;投稿したいチャンネル名&amp;#39;, &amp;#39;filename&amp;#39;:&amp;#34;filename&amp;#34;, &amp;#39;title&amp;#39;: title, } requests.</description>
+      <description></description>
     </item>
     
     <item>
@@ -59,9 +39,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201223_2/20201223_2/</guid>
-      <description>鍵生成  楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数) 秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．  秘密鍵$x$，公開鍵$E,G,Y$
-暗号化 $m$を送信したいメッセージとする．
- $r$wお乱数で生成し，$U=rG=(u_x,u_y)$を計算する． 公開鍵$Y$を用いて，$V = xU =(v_x,v_y)$と，$c=v_x\oplus m$ $\oplus$は排他的論理和 $(U,c)$を暗号文として，送信する．  復号化  以下のように複合する． $V=xU=(v_x,v_y)$,$m=v_x\oplus c$  コード # 乱数 r = 3 # 秘密鍵 key = 3 # ベースポイント g = [2,2] # 位数 l = 5 # y^2 = x^3 + ax +b a = 0 b = 1 def Mod(x,y): if x &amp;lt; 0: x = x+y return x%y def invMod(x,y): count = 1 while True: tmp = x*count if tmp%y == 1: return count count += 1 def Ellipse(p,r): for _ in range(r): s = Mod(Mod((3*p[0]*p[0]+a),l)*invMod((2*p[1]),l),l) x = Mod(s*s-p[0]-p[0],l) y = Mod(s*(p[0]-x)-p[1],l) return [x,y] def encrypt(G,Y, m): U =Ellipse(G,r) V =Ellipse(Y,r) # 排他的論理和をとる c = V[1] ^ m return U,c def decrypt(U, c, key): V = Ellipse(U,key) m = V[1] ^ c return m def main(): # 公開鍵の作成 Y = g Y = Ellipse(Y, key) print(&amp;#34;公開鍵：&amp;#34;,[a,b], g,Y) # 平文 message = 4 print(&amp;#34;平文：&amp;#34;, message) # 暗号化 U,c = encrypt(g, Y, message) print(&amp;#34;暗号文：&amp;#34;,U,c) # 復号化 decrypt_message = decrypt(U, c, key) print(&amp;#34;復号化メッセージ&amp;#34;, decrypt_message) if __name__ == &amp;#34;__main__&amp;#34;: main() </description>
+      <description></description>
     </item>
     
     <item>
@@ -70,10 +48,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201220/20201220/</guid>
-      <description>バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
-具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
-2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
-アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y </description>
+      <description></description>
     </item>
     
     <item>
@@ -82,14 +57,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201015/20201015/</guid>
-      <description>ユークリッドの互除法 整数$a,b(a&amp;gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &amp;lt; b: a_list.append(b) a_list.append(a) if a &amp;gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp;amp; 1 \
-1 &amp;amp; 0 \end{array}] [\begin{array}{cc} a_i \</description>
+      <description></description>
     </item>
     
     <item>
@@ -98,10 +66,7 @@ a_i \end{array}]= [\begin{array}{cc} q_i &amp;amp; 1 \
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20200816/20200816/</guid>
-      <description>はじめに ROSを使った際に，Subscriberとして機能しているノードからも，計測データをトピックとして通信したいなと思ったのですが，SubscriberとPublisherを一つのプログラムに書く方法が見つけられずに困ったので(Google検索力低いだけの可能性大)，ROSの理解を深めるためにまとめようと思います．最近使い始めたばかりで，間違ってることもあるかと思いますので詳しい方，間違っていたらご指摘いただきたいです．勉強になります．
-ROS(Robot Operating System)とは ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．具体的には，ロボット同士の通信が簡易にできるようになります．
-Pub &amp;amp; Sub通信 ROSでは，ROSのネットワークにつながった実行可能なものを&amp;quot;ノード&amp;quot;とよび，ノード間で&amp;quot;トピック&amp;quot;とよばれるメッセージをやり取りします．メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．
-実行環境  ROS kinetic Ubuntu 16.04 LTS Python 3.8.5  Publisherのサンプルプログラム #!/usr/bin/env python # license removed for brevity import rospy from std_msgs.msg import String #使うデータ型をインポート def talker(): #Publisherを作成(&amp;#39;トピック名&amp;#39;,型,サイズ) pub = rospy.Publisher(&amp;#39;chatter&amp;#39;, String, queue_size=10) #ノード名を宣言 rospy.init_node(&amp;#39;talker&amp;#39;, anonymous=True) #ループの周期を宣言 rate = rospy.Rate(10) # 10hz while not rospy.is_shutdown(): #パブリッシュするデータを記入 hello_str = &amp;#34;hello world %s&amp;#34; % rospy.get_time() #パブリッシュするデータをターミナルに表示 rospy.loginfo(hello_str) #データをパブリッシュ pub.publish(hello_str) rate.sleep() if __name__ == &amp;#39;__main__&amp;#39;: try: talker() except rospy.</description>
+      <description></description>
     </item>
     
   </channel>

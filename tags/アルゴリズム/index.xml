@@ -12,9 +12,7 @@
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201223_2/20201223_2/</guid>
-      <description>鍵生成  楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数) 秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．  秘密鍵$x$，公開鍵$E,G,Y$
-暗号化 $m$を送信したいメッセージとする．
- $r$wお乱数で生成し，$U=rG=(u_x,u_y)$を計算する． 公開鍵$Y$を用いて，$V = xU =(v_x,v_y)$と，$c=v_x\oplus m$ $\oplus$は排他的論理和 $(U,c)$を暗号文として，送信する．  復号化  以下のように複合する． $V=xU=(v_x,v_y)$,$m=v_x\oplus c$  コード # 乱数 r = 3 # 秘密鍵 key = 3 # ベースポイント g = [2,2] # 位数 l = 5 # y^2 = x^3 + ax +b a = 0 b = 1 def Mod(x,y): if x &amp;lt; 0: x = x+y return x%y def invMod(x,y): count = 1 while True: tmp = x*count if tmp%y == 1: return count count += 1 def Ellipse(p,r): for _ in range(r): s = Mod(Mod((3*p[0]*p[0]+a),l)*invMod((2*p[1]),l),l) x = Mod(s*s-p[0]-p[0],l) y = Mod(s*(p[0]-x)-p[1],l) return [x,y] def encrypt(G,Y, m): U =Ellipse(G,r) V =Ellipse(Y,r) # 排他的論理和をとる c = V[1] ^ m return U,c def decrypt(U, c, key): V = Ellipse(U,key) m = V[1] ^ c return m def main(): # 公開鍵の作成 Y = g Y = Ellipse(Y, key) print(&amp;#34;公開鍵：&amp;#34;,[a,b], g,Y) # 平文 message = 4 print(&amp;#34;平文：&amp;#34;, message) # 暗号化 U,c = encrypt(g, Y, message) print(&amp;#34;暗号文：&amp;#34;,U,c) # 復号化 decrypt_message = decrypt(U, c, key) print(&amp;#34;復号化メッセージ&amp;#34;, decrypt_message) if __name__ == &amp;#34;__main__&amp;#34;: main() </description>
+      <description></description>
     </item>
     
     <item>
@@ -23,10 +21,7 @@
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201220/20201220/</guid>
-      <description>バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
-具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
-2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
-アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y </description>
+      <description></description>
     </item>
     
     <item>
@@ -35,14 +30,7 @@
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20201015/20201015/</guid>
-      <description>ユークリッドの互除法 整数$a,b(a&amp;gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &amp;lt; b: a_list.append(b) a_list.append(a) if a &amp;gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp;amp; 1 \
-1 &amp;amp; 0 \end{array}] [\begin{array}{cc} a_i \</description>
+      <description></description>
     </item>
     
   </channel>

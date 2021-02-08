@@ -236,92 +236,8 @@
     </p>
     <div class="post-entry">
         
-        <h1 id="鍵生成">鍵生成</h1>
-<ol>
-<li>楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数)</li>
-<li>秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．</li>
-</ol>
-<p>秘密鍵$x$，公開鍵$E,G,Y$</p>
-<h1 id="暗号化">暗号化</h1>
-<p>$m$を送信したいメッセージとする．</p>
-<ol>
-<li>$r$wお乱数で生成し，$U=rG=(u_x,u_y)$を計算する．</li>
-<li>公開鍵$Y$を用いて，$V = xU =(v_x,v_y)$と，$c=v_x\oplus m$
-$\oplus$は排他的論理和</li>
-<li>$(U,c)$を暗号文として，送信する．</li>
-</ol>
-<h1 id="復号化">復号化</h1>
-<ol>
-<li>以下のように複合する．
-$V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
-</ol>
-<h1 id="コード">コード</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># 乱数</span>
-r <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
-<span style="color:#998;font-style:italic"># 秘密鍵</span>
-key <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
-<span style="color:#998;font-style:italic"># ベースポイント</span>
-g <span style="font-weight:bold">=</span> [<span style="color:#099">2</span>,<span style="color:#099">2</span>]
-<span style="color:#998;font-style:italic"># 位数</span>
-l <span style="font-weight:bold">=</span> <span style="color:#099">5</span>
-<span style="color:#998;font-style:italic"># y^2 = x^3 + ax +b</span>
-a <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Mod</span>(x,y):
-  <span style="font-weight:bold">if</span> x <span style="font-weight:bold">&lt;</span> <span style="color:#099">0</span>:
-    x <span style="font-weight:bold">=</span> x<span style="font-weight:bold">+</span>y
-  <span style="font-weight:bold">return</span> x<span style="font-weight:bold">%</span>y
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">invMod</span>(x,y):
-  count <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-  <span style="font-weight:bold">while</span> True:
-    tmp <span style="font-weight:bold">=</span> x<span style="font-weight:bold">*</span>count
-    <span style="font-weight:bold">if</span> tmp<span style="font-weight:bold">%</span>y <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-      <span style="font-weight:bold">return</span> count
-    count <span style="font-weight:bold">+=</span> <span style="color:#099">1</span>
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Ellipse</span>(p,r):
-    <span style="font-weight:bold">for</span> _ <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(r):
-        s <span style="font-weight:bold">=</span> Mod(Mod((<span style="color:#099">3</span><span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">+</span>a),l)<span style="font-weight:bold">*</span>invMod((<span style="color:#099">2</span><span style="font-weight:bold">*</span>p[<span style="color:#099">1</span>]),l),l)
-        x <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>s<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>],l)
-        y <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>(p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>x)<span style="font-weight:bold">-</span>p[<span style="color:#099">1</span>],l)
-    <span style="font-weight:bold">return</span> [x,y]
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">encrypt</span>(G,Y, m):
-    U <span style="font-weight:bold">=</span>Ellipse(G,r)
-    V <span style="font-weight:bold">=</span>Ellipse(Y,r)
-    <span style="color:#998;font-style:italic"># 排他的論理和をとる</span>
-    c <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> m
-    <span style="font-weight:bold">return</span> U,c
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">decrypt</span>(U, c, key):
-    V <span style="font-weight:bold">=</span> Ellipse(U,key)
-    m <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> c
-    <span style="font-weight:bold">return</span> m
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
-
-    <span style="color:#998;font-style:italic"># 公開鍵の作成</span>
-    Y <span style="font-weight:bold">=</span> g
-    Y <span style="font-weight:bold">=</span> Ellipse(Y, key) 
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;公開鍵：&#34;</span>,[a,b], g,Y)
-
-    <span style="color:#998;font-style:italic"># 平文</span>
-    message <span style="font-weight:bold">=</span> <span style="color:#099">4</span>
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;平文：&#34;</span>, message)
-
-    <span style="color:#998;font-style:italic"># 暗号化</span>
-    U,c <span style="font-weight:bold">=</span> encrypt(g, Y, message)
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;暗号文：&#34;</span>,U,c)
-
-    <span style="color:#998;font-style:italic"># 復号化</span>
-    decrypt_message <span style="font-weight:bold">=</span> decrypt(U, c, key)
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;復号化メッセージ&#34;</span>, decrypt_message)
-    
-<span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#34;__main__&#34;</span>:
-    main()
-</code></pre></div>
+        
+        <a href="https://yuhi-sa.github.io/posts/20201223_2/20201223_2/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -365,30 +281,8 @@ b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
     </p>
     <div class="post-entry">
         
-        <h1 id="バイナリ法">バイナリ法</h1>
-<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．
-計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．</p>
-<h2 id="具体例">具体例</h2>
-<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
-<p>2進数に展開し，左から順に展開することにより計算を実行する．
-これにより，$g^k(mod p)$を計算する．</p>
-<h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-binary.py" data-lang="binary.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Binary</span>(k, g, p):
-    k_binary <span style="font-weight:bold">=</span> []
-    <span style="font-weight:bold">while</span>(k <span style="font-weight:bold">!=</span> <span style="color:#099">0</span>):
-        k_binary<span style="font-weight:bold">.</span>append(k<span style="font-weight:bold">%</span><span style="color:#099">2</span>)
-        k <span style="font-weight:bold">=</span> k<span style="font-weight:bold">//</span><span style="color:#099">2</span>
-        <span style="font-weight:bold">if</span> k <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            k_binary<span style="font-weight:bold">.</span>append(k)
-            k <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-    y <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">reversed</span>(<span style="color:#999">range</span>(<span style="color:#999">len</span>(k_binary))):
-        <span style="font-weight:bold">if</span> k_binary[i] <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)<span style="font-weight:bold">*</span>g<span style="font-weight:bold">%</span>p
-        <span style="font-weight:bold">else</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)
-    <span style="font-weight:bold">return</span> y
-</code></pre></div>
+        
+        <a href="https://yuhi-sa.github.io/posts/20201220/20201220/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -432,14 +326,7 @@ b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
     </p>
     <div class="post-entry">
         
-        ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &lt; b: a_list.append(b) a_list.append(a) if a &gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
-1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \
+        
         <a href="https://yuhi-sa.github.io/posts/20201015/20201015/" class="post-read-more">[Read More]</a>
         
     </div>

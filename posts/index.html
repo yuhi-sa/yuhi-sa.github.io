@@ -236,17 +236,7 @@
     </p>
     <div class="post-entry">
         
-        はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．
-全体通して，参考にした記事たち 参考1：Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する
-参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】
-Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．
-Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，
- ビルド，表示処理が早い データベース不要で管理が簡単  ということがあげられる．
-参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る
-参考2：Hugoとは？静的サイトジェネレータについて解説
-Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo
-サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる
-フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成
+        
         <a href="https://yuhi-sa.github.io/posts/20210204/20210204/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -289,21 +279,7 @@ Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 b
     </p>
     <div class="post-entry">
         
-        はじめに Unscented Transformation(アンセンテッド変換,U変換)は，Unscented Kalman Filterの中で出てくるけど，U変換単体での説明がなくて困ってるので今の理解をまとめました． 間違ってる所など教えていただけるととてもありがたいです．
-Unscented Transformationの概要 U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．
-まず，この場合，モンテカロ的に
-$$ \bar{y}\simeq\frac{1}{N}\sum_{i=1}^Nf(x_i) $$
-$$ P_y \simeq \frac{1}{N}\sum_{i=1}^N(f(x_i)-\bar{y})(f(x_i)-\bar{y})^T $$
-のように計算することが思いつくが，精度をよく計算するにはNを大きくする必要があり，実用上問題がある．
-線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．
-まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．
-参考1：UKF （Unscented Kalman Filter）っ て何 ？
-import matplotlib.pyplot as plt import numpy as np import random import math import scipy.linalg 入力には$X=(X_1,X_2)$を用いる．
-平均ベクトルは，
-$$ \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2) $$ 分散共分散ベクトルは，
-$$ P_x = [ \begin{array}{cc} var[X_1] &amp; cov[X_1,X_2] \
-cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp; \sigma_1\sigma_2 \
-\sigma_1\sigma_2 &amp; \sigma_2^2 \end{array} ] $$
+        
         <a href="https://yuhi-sa.github.io/posts/20210125/20210125/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -348,12 +324,7 @@ cov[X_2,X_1] &amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp;
     </p>
     <div class="post-entry">
         
-        はじめに $$ f(x,y)=\frac{(\frac{\sin x^2}{cos y}+x^2-5y+30)}{80} $$ の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる． (学部のときの課題で，できなかったのでリベンジしてみた)
-遺伝的アルゴリズム(GA:Genetic Algorithms)とは GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．
-GAのアルゴリズム GAのアルゴリズムを以下に示す．
- 個体の初期生成： 初期の個体をランダムに生成する． 適合度(評価値)の算出 各個体の適合度(評価値)決定する． 再生 各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される． 交叉 Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す． 突然変異 突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える． 終了条件判定 終了条件を満たせば終了，そうでなければStep2に戻る．  GAアルゴリズムの性質 GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．
-実装 遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った． コードはこちら
-パラメータなどを設定 # 世代 GEN = 100 # NNの個数 In = 2 Hidden = 2 Out = 1 # NNの個体数 Number = 1000 # 教師信号の数 Num = 1000 # 交叉確率 kousa = 0.8 # 突然変異確率 change = 0.05 # 学習する関数 def kansu(x): return((math.
+        
         <a href="https://yuhi-sa.github.io/posts/20210109/20210109/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -398,20 +369,7 @@ GAのアルゴリズム GAのアルゴリズムを以下に示す．
     </p>
     <div class="post-entry">
         
-        #背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
-観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
-$$ y_i= \Phi w+ \epsilon $$
-ベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．
-$$ S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w) $$
-$$ \frac{dS(w)}{dw}=-\Phi^{T}y+\Phi^T\Phi w $$ $\frac{dS(w)}{dw}=0$のときを考えると，
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．
-$$ \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y $$
-最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．
-$$ y= \Phi w+ \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n) $$ $$ P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n) =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)} $$
-$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
-$$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
-$$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y+\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
+        
         <a href="https://yuhi-sa.github.io/posts/20210108/20210108/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -454,22 +412,7 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$
     </p>
     <div class="post-entry">
         
-        情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．
- $h(x,y)=h(x)+h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である．  この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．
-$$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．
-エントロピー ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．
-$$ H[x]=-\sum_x p(x) \log_{2}p(x) $$
-ビット数の下限 ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．
- 8個それぞれの確率が等確率であるとする．  $$ H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット $$
- 8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．  $$ H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット $$
-上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる． ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．
-エントロピーの高低 少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．
-最大のエントロピーを持つ確率分布 まず，エントロピーの二階微分二階微分を計算する．
-$$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．
-微分エントロピー $x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．
-$$ \int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．
-$$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．
-$$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．
+        
         <a href="https://yuhi-sa.github.io/posts/20210107_2/20210107_2/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -512,22 +455,7 @@ $$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln 
     </p>
     <div class="post-entry">
         
-        粒子群最適化(PSO:Particle Swarm Optimization) PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．
-PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．
-粒子の更新 粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．
-このとき，$n$は粒子数，$m$は次元数である．粒子$i$が各時刻まで探索した解のうち最良の位置情報ベクトルを$P_i(t)$として保持し，粒子群の中で最良の粒子の位置情報ベクトルを$P_G(t)$として群全体で共有する．
-以下に位置情報ベクトルと速度ベクトルの更新式を示す．
-$$ v_i(t+1)=w{v}_i(t)+C_1r_1(P_i(t)-m{x}_i(t))+C_2r_2(P_G(t)-x_i(t)) $$
-$$ x_i(t+1)=x_i(t)+{v}_i(t+1) $$
-$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．
-また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．
-更新の概念図を以下に示す． アルゴリズム PSOのアルゴリズムを以下に示す．
- 粒子の初期生成 初期の粒子の位置情報ベクトル$x_i$と速度ベクトル$v_i$を乱数に基づいて生成する． 評価値の算出 各粒子の位置から評価値を決定する． 探索開始($t=0$)から現在までの各粒子$i$の最良位置 情報$P_G (t)$の更新，各粒子ごとに，現在までの最良の評価値を記録する． 群全体の最良位置情報$P_G (t)$の更新 全粒子の中から，最良の評価値を記憶する． 各粒子の速度を計算 各粒子の位置を計算 終了条件判定 終了条件を満たすまで，Step2からStep6を繰り返す．  アルゴリズムの性質 単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．
-以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す． コードはこちら
- $t=0$のとき  $t=250$のとき  $t=500$のとき   収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．
-TCPSO(Two-swarm Cooperative Particle Swarm Optimization) TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．
-粒子の更新 スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．
-$$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(t+1)=x_i^S(t)+v_i^S(t+1) $$ $$ v_i^M(t+1)=w^Mv_i^M(t)C_1^Mr_1(P_i^M(t)-x_i^M(t)) +C_2^Mr_2(P_G^S(t)-x_i^M(t))+C_3^Mr_3(P_G(t)-x_i^M(t)) $$ $$ x_i^M(t+1)=x_i^M(t)+v_i^M(t+1) $$ マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている． スレーブ粒子とマスター粒子の更新の概念を以下に示す．
+        
         <a href="https://yuhi-sa.github.io/posts/20210107/20210107/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -572,8 +500,7 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
     </p>
     <div class="post-entry">
         
-        テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&#34;コピーした Webhook URL&#34;) def notify(title, text, color): attachments = [{&#34;title&#34;: title, &#34;text&#34;: text, &#34;color&#34;: color, #good, warning, danger &#34;footer&#34;: &#34;Send from Python&#34;, }] slack.notify(text=None, attachments=attachments) notify(&#34;テスト&#34;,&#34;おはよう&#34;,&#34;good&#34;) notify(&#34;テスト&#34;,&#34;こんにちは&#34;,&#34;warning&#34;) notify(&#34;テスト&#34;,&#34;こんばんは&#34;,&#34;danger&#34;) attachmentsの構文は，以下を参考
- Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&#39;file&#39;: open(imageURL, &#39;rb&#39;)} param = { &#39;token&#39;: &#34;コピーした APIトークン&#34;, &#39;channels&#39;:&#39;投稿したいチャンネル名&#39;, &#39;filename&#39;:&#34;filename&#34;, &#39;title&#39;: title, } requests.
+        
         <a href="https://yuhi-sa.github.io/posts/20201223/20201223/" class="post-read-more">[Read More]</a>
         
     </div>
@@ -616,92 +543,8 @@ $$ v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t)) $$ $$ x_i^S(
     </p>
     <div class="post-entry">
         
-        <h1 id="鍵生成">鍵生成</h1>
-<ol>
-<li>楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数)</li>
-<li>秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．</li>
-</ol>
-<p>秘密鍵$x$，公開鍵$E,G,Y$</p>
-<h1 id="暗号化">暗号化</h1>
-<p>$m$を送信したいメッセージとする．</p>
-<ol>
-<li>$r$wお乱数で生成し，$U=rG=(u_x,u_y)$を計算する．</li>
-<li>公開鍵$Y$を用いて，$V = xU =(v_x,v_y)$と，$c=v_x\oplus m$
-$\oplus$は排他的論理和</li>
-<li>$(U,c)$を暗号文として，送信する．</li>
-</ol>
-<h1 id="復号化">復号化</h1>
-<ol>
-<li>以下のように複合する．
-$V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
-</ol>
-<h1 id="コード">コード</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#998;font-style:italic"># 乱数</span>
-r <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
-<span style="color:#998;font-style:italic"># 秘密鍵</span>
-key <span style="font-weight:bold">=</span> <span style="color:#099">3</span>
-<span style="color:#998;font-style:italic"># ベースポイント</span>
-g <span style="font-weight:bold">=</span> [<span style="color:#099">2</span>,<span style="color:#099">2</span>]
-<span style="color:#998;font-style:italic"># 位数</span>
-l <span style="font-weight:bold">=</span> <span style="color:#099">5</span>
-<span style="color:#998;font-style:italic"># y^2 = x^3 + ax +b</span>
-a <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Mod</span>(x,y):
-  <span style="font-weight:bold">if</span> x <span style="font-weight:bold">&lt;</span> <span style="color:#099">0</span>:
-    x <span style="font-weight:bold">=</span> x<span style="font-weight:bold">+</span>y
-  <span style="font-weight:bold">return</span> x<span style="font-weight:bold">%</span>y
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">invMod</span>(x,y):
-  count <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-  <span style="font-weight:bold">while</span> True:
-    tmp <span style="font-weight:bold">=</span> x<span style="font-weight:bold">*</span>count
-    <span style="font-weight:bold">if</span> tmp<span style="font-weight:bold">%</span>y <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-      <span style="font-weight:bold">return</span> count
-    count <span style="font-weight:bold">+=</span> <span style="color:#099">1</span>
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Ellipse</span>(p,r):
-    <span style="font-weight:bold">for</span> _ <span style="font-weight:bold">in</span> <span style="color:#999">range</span>(r):
-        s <span style="font-weight:bold">=</span> Mod(Mod((<span style="color:#099">3</span><span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">*</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">+</span>a),l)<span style="font-weight:bold">*</span>invMod((<span style="color:#099">2</span><span style="font-weight:bold">*</span>p[<span style="color:#099">1</span>]),l),l)
-        x <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>s<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>p[<span style="color:#099">0</span>],l)
-        y <span style="font-weight:bold">=</span> Mod(s<span style="font-weight:bold">*</span>(p[<span style="color:#099">0</span>]<span style="font-weight:bold">-</span>x)<span style="font-weight:bold">-</span>p[<span style="color:#099">1</span>],l)
-    <span style="font-weight:bold">return</span> [x,y]
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">encrypt</span>(G,Y, m):
-    U <span style="font-weight:bold">=</span>Ellipse(G,r)
-    V <span style="font-weight:bold">=</span>Ellipse(Y,r)
-    <span style="color:#998;font-style:italic"># 排他的論理和をとる</span>
-    c <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> m
-    <span style="font-weight:bold">return</span> U,c
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">decrypt</span>(U, c, key):
-    V <span style="font-weight:bold">=</span> Ellipse(U,key)
-    m <span style="font-weight:bold">=</span> V[<span style="color:#099">1</span>] <span style="font-weight:bold">^</span> c
-    <span style="font-weight:bold">return</span> m
-
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">main</span>():
-
-    <span style="color:#998;font-style:italic"># 公開鍵の作成</span>
-    Y <span style="font-weight:bold">=</span> g
-    Y <span style="font-weight:bold">=</span> Ellipse(Y, key) 
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;公開鍵：&#34;</span>,[a,b], g,Y)
-
-    <span style="color:#998;font-style:italic"># 平文</span>
-    message <span style="font-weight:bold">=</span> <span style="color:#099">4</span>
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;平文：&#34;</span>, message)
-
-    <span style="color:#998;font-style:italic"># 暗号化</span>
-    U,c <span style="font-weight:bold">=</span> encrypt(g, Y, message)
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;暗号文：&#34;</span>,U,c)
-
-    <span style="color:#998;font-style:italic"># 復号化</span>
-    decrypt_message <span style="font-weight:bold">=</span> decrypt(U, c, key)
-    <span style="font-weight:bold">print</span>(<span style="color:#b84">&#34;復号化メッセージ&#34;</span>, decrypt_message)
-    
-<span style="font-weight:bold">if</span> __name__ <span style="font-weight:bold">==</span> <span style="color:#b84">&#34;__main__&#34;</span>:
-    main()
-</code></pre></div>
+        
+        <a href="https://yuhi-sa.github.io/posts/20201223_2/20201223_2/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -745,30 +588,8 @@ b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
     </p>
     <div class="post-entry">
         
-        <h1 id="バイナリ法">バイナリ法</h1>
-<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．
-計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．</p>
-<h2 id="具体例">具体例</h2>
-<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
-<p>2進数に展開し，左から順に展開することにより計算を実行する．
-これにより，$g^k(mod p)$を計算する．</p>
-<h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-binary.py" data-lang="binary.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Binary</span>(k, g, p):
-    k_binary <span style="font-weight:bold">=</span> []
-    <span style="font-weight:bold">while</span>(k <span style="font-weight:bold">!=</span> <span style="color:#099">0</span>):
-        k_binary<span style="font-weight:bold">.</span>append(k<span style="font-weight:bold">%</span><span style="color:#099">2</span>)
-        k <span style="font-weight:bold">=</span> k<span style="font-weight:bold">//</span><span style="color:#099">2</span>
-        <span style="font-weight:bold">if</span> k <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            k_binary<span style="font-weight:bold">.</span>append(k)
-            k <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-    y <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">reversed</span>(<span style="color:#999">range</span>(<span style="color:#999">len</span>(k_binary))):
-        <span style="font-weight:bold">if</span> k_binary[i] <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)<span style="font-weight:bold">*</span>g<span style="font-weight:bold">%</span>p
-        <span style="font-weight:bold">else</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)
-    <span style="font-weight:bold">return</span> y
-</code></pre></div>
+        
+        <a href="https://yuhi-sa.github.io/posts/20201220/20201220/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -812,14 +633,7 @@ b <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
     </p>
     <div class="post-entry">
         
-        ユークリッドの互除法 整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると， $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．
-アルゴリズム 入力　整数$a,b$ 出力　最大公約数 $d$
- $a_0 = a$,$a_1 = b$ $a_i=0$のとき，$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$として2に戻る  コード def euclid(a,b): a_list = [] if a &lt; b: a_list.append(b) a_list.append(a) if a &gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法 以下の仕組みを用いて一次不定方程式の一つの解を求める方法． $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．
-$[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \
-a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \
-a_i \end{array}]= [\begin{array}{cc} q_i &amp; 1 \
-1 &amp; 0 \end{array}] [\begin{array}{cc} a_i \
+        
         <a href="https://yuhi-sa.github.io/posts/20201015/20201015/" class="post-read-more">[Read More]</a>
         
     </div>

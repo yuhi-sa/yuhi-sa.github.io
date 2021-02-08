@@ -8,22 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>フィルタまとめ - とまとまとブログ</title>
-  <meta name="description" content="フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
-想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
-$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．
-$$ q\sim N(0,Q) $$ $$ r\sim N(0,R) $$
-カルマンフィルタ(Kalman Filter, EKF) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．
-方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．
-$$ x \sim	(\mu,\Sigma) $$
- Step1 予測ステップ
- 事前状態推定値
-$$ \hat{\mu}=A\mu_{t-1}&#43;B\mu_t \tag{3} $$ 事前誤差共分散行列
-$$ \hat{\Sigma}{t}=A\Sigma{t-1}A^T&#43;Q_{t-1} \tag{4} $$
- Step2 状態推定
- カルマンゲイン
-$$ K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T&#43;R_t})^{-1} \tag{5} $$ 状態推定値
-$$ \mu_t=\hat{\mu_t}&#43;K_t(z_t-H\hat{\mu_t}) \tag{6} $$ 事後誤差共分散行列
-$$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -72,7 +56,7 @@ $$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$">
     "name" : "yuhi-sa"
   },
   "headline": "フィルタまとめ",
-  "description" : "フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．\n想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．\n$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \\tag{1} $$ $$ z_t=h(x_t,r_t) \\tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．\n$$ q\\sim N(0,Q) $$ $$ r\\sim N(0,R) $$\nカルマンフィルタ(Kalman Filter, EKF) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．\n方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\\mu$と共分散$\\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．\n$$ x \\sim\t(\\mu,\\Sigma) $$\n Step1 予測ステップ\n 事前状態推定値\n$$ \\hat{\\mu}=A\\mu_{t-1}\u002bB\\mu_t \\tag{3} $$ 事前誤差共分散行列\n$$ \\hat{\\Sigma}{t}=A\\Sigma{t-1}A^T\u002bQ_{t-1} \\tag{4} $$\n Step2 状態推定\n カルマンゲイン\n$$ K_t=\\hat{\\Sigma_t}H^T(\\hat{\\Sigma_tH^T\u002bR_t})^{-1} \\tag{5} $$ 状態推定値\n$$ \\mu_t=\\hat{\\mu_t}\u002bK_t(z_t-H\\hat{\\mu_t}) \\tag{6} $$ 事後誤差共分散行列\n$$ \\Sigma_t = (I_n-K_tH)\\hat{\\Sigma_t} \\tag{7} $$",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  161 ,
   "datePublished" : "2020-09-01T15:17:23",
@@ -94,30 +78,11 @@ $$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$">
 </script>
 
 <meta property="og:title" content="フィルタまとめ" />
-<meta property="og:description" content="フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
-想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
-$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．
-$$ q\sim N(0,Q) $$ $$ r\sim N(0,R) $$
-カルマンフィルタ(Kalman Filter, EKF) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．
-方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．
-$$ x \sim	(\mu,\Sigma) $$
- Step1 予測ステップ
- 事前状態推定値
-$$ \hat{\mu}=A\mu_{t-1}&#43;B\mu_t \tag{3} $$ 事前誤差共分散行列
-$$ \hat{\Sigma}{t}=A\Sigma{t-1}A^T&#43;Q_{t-1} \tag{4} $$
- Step2 状態推定
- カルマンゲイン
-$$ K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T&#43;R_t})^{-1} \tag{5} $$ 状態推定値
-$$ \mu_t=\hat{\mu_t}&#43;K_t(z_t-H\hat{\mu_t}) \tag{6} $$ 事後誤差共分散行列
-$$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20200901/20200901/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="フィルタまとめ" />
-  <meta name="twitter:description" content="フィルタ(Filter)とは フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．
-想定するモデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．
-$$ …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -407,7 +372,6 @@ PFでは，この問題に対応する．</p>
 <p>$$
 \chi:\pi_t^i=\pi_{t-1}^ip(z_t|\chi_t^i) \tag{20}
 $$</p>
-
 
         
           <div class="blog-tags">

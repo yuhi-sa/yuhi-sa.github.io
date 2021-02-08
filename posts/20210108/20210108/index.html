@@ -8,20 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定) - とまとまとブログ</title>
-  <meta name="description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
-観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
-$$ y_i= \Phi w&#43; \epsilon $$
-ベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．
-$$ S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w) $$
-$$ \frac{dS(w)}{dw}=-\Phi^{T}y&#43;\Phi^T\Phi w $$ $\frac{dS(w)}{dw}=0$のときを考えると，
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．
-$$ \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y $$
-最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．
-$$ y= \Phi w&#43; \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n) $$ $$ P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n) =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)} $$
-$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
-$$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
-$$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y&#43;\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -70,7 +56,7 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
     "name" : "yuhi-sa"
   },
   "headline": "ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)",
-  "description" : "#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．\n観測されたデータ$D={(x_i,y_i);i=1,2,\u0026hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\\Phi$を$x$の基底関数，$\\epsilon$を誤差項とする．\n$$ y_i= \\Phi w\u002b \\epsilon $$\nベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\\hat{w}$を求める．\n$$ S(w)=\\epsilon^{T}\\epsilon=(y-\\Phi w)^T(y-\\Phi w) $$\n$$ \\frac{dS(w)}{dw}=-\\Phi^{T}y\u002b\\Phi^T\\Phi w $$ $\\frac{dS(w)}{dw}=0$のときを考えると，\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．\n$$ \\hat{y}=\\Phi\\hat{w}=\\Phi(\\Phi^T\\Phi)^{-1}y $$\n最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\\Phi w$，分散行列$\\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．\n$$ y= \\Phi w\u002b \\epsilon,\\epsilon \\sim \\mathcal{N}(0,\\sigma^2I_n) $$ $$ P(y\\mid w,\\sigma^2)=\\mathcal{N}(\\Phi w,\\sigma^2I_n) =\\frac{1}{(2\\pi\\sigma^2)^{\\frac{n}{2}}}exp{-\\frac{1}{2\\sigma^2}(y-\\Phi w)^T(y-\\Phi w)} $$\n$P(y\\mid w)$の対数を$w$で偏微分し，$\\hat{w}$を求める．\n$$ \\log P(y\\mid w) = -\\frac{n}{2}\\log(2\\pi\\sigma^2)-\\frac{(y-\\Phi w)^T(y-\\Phi w)}{2\\sigma^2} $$\n$$ \\frac{1}{P(y\\mid w)}\\frac{P(y\\mid w)}{dw}=-(\\Phi^{T}y\u002b\\Phi^{T}\\Phi w) $$ $\\frac{dP(y\\mid w)}{dw}=0$のときを考えると．\n$$ \\hat{w}=(\\Phi^T\\Phi)^{-1}\\Phi^{T}y $$",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  214 ,
   "datePublished" : "2021-01-08T15:17:23",
@@ -92,27 +78,11 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
 </script>
 
 <meta property="og:title" content="ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)" />
-<meta property="og:description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
-観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．
-$$ y_i= \Phi w&#43; \epsilon $$
-ベイズ線形回帰について 最小二乗推定 最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．
-$$ S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w) $$
-$$ \frac{dS(w)}{dw}=-\Phi^{T}y&#43;\Phi^T\Phi w $$ $\frac{dS(w)}{dw}=0$のときを考えると，
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$ 従って，最小二乗推定による予測モデルは以下のようになる．
-$$ \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y $$
-最尤推定 最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．
-$$ y= \Phi w&#43; \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n) $$ $$ P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n) =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)} $$
-$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．
-$$ \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2} $$
-$$ \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y&#43;\Phi^{T}\Phi w) $$ $\frac{dP(y\mid w)}{dw}=0$のときを考えると．
-$$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20210108/20210108/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)" />
-  <meta name="twitter:description" content="#背景 回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．
-観測されたデー …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -284,8 +254,8 @@ $$ \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y $$">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>#背景
-回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．</p>
+        <h1 id="背景">背景</h1>
+<p>回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．</p>
 <p>観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．</p>
 <p>$$
 y_i= \Phi w+ \epsilon
@@ -429,7 +399,6 @@ $$</p>
 <li>C.M.ビショップ，&ldquo;パターン認識と機械学習上ベイズ理論による統計的予測&rdquo;，シュプリンガー・ジャパン</li>
 <li>須山 敦志，&ldquo;ベイズ推論による機械学習入門&rdquo;, 株式会社講談社サイエンティフィク</li>
 </ul>
-
 
         
           <div class="blog-tags">

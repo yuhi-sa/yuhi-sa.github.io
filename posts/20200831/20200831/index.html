@@ -8,21 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>強化学習の全体像まとめ - とまとまとブログ</title>
-  <meta name="description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
-強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
- 価値反復法
-ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)} $$ $$ V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$
- 方策反復法
-ベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)&#43;\gamma \sum_{s&#39;}p_T(s&#39;|s,a)V^\pi(s&#39;)} $$
-強化学習 環境が既知の場合の逐次的意思決定問題
-報酬や次状態を観測することでデータを収集して，データから方策を学習する．
-価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．
- オフライン
-ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$
- オンライン    TD法
-TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#43;\gamma \hat{V}(s_{t&#43;1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)&#43;\alpha_t\delta $$
-  TD($\lambda$)法
-エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -71,7 +56,7 @@ TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#4
     "name" : "yuhi-sa"
   },
   "headline": "強化学習の全体像まとめ",
-  "description" : "はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．\n強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題\n 価値反復法\nベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\\max_a{\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)} $$ $$ V^{*}=\\lim_{k\\rightarrow \\infty}(B_{*}^kV)(s) $$\n 方策反復法\nベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\\pi}v)(s)=\\sum_a\\pi(a|s)(g(s,a)\u002b\\gamma \\sum p_T(s\u0027|s,a)v(s\u0027)) $$ $$ V^{\\pi}=\\lim_{k\\rightarrow \\infty}(B_{\\pi}^kV)(s) $$ $$ \\pi(s)=\\arg\\max_a{g(s,a)\u002b\\gamma \\sum_{s\u0027}p_T(s\u0027|s,a)V^\\pi(s\u0027)} $$\n強化学習 環境が既知の場合の逐次的意思決定問題\n報酬や次状態を観測することでデータを収集して，データから方策を学習する．\n価値関数Vの推定 方策$\\pi$を固定して価値関数の推定を行う．\n オフライン\nベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \\hat{V}(s)=\\hat{B}(\\hat{V},h_T^\\pi)(s) $$\n オンライン    TD法\nTD誤差$\\delta$を計算して価値関数を更新する．   $$ \\delta=r_t\u002b\\gamma \\hat{V}(s_{t\u002b1})-\\hat{V}(s_t) $$ $$ \\hat{V}(s_t)=\\hat{V}(s_t)\u002b\\alpha_t\\delta $$\n  TD($\\lambda$)法\nエリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\\pi$を固定して行動価値関数の推定を行う．",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  188 ,
   "datePublished" : "2020-08-31T15:17:23",
@@ -93,30 +78,11 @@ TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#4
 </script>
 
 <meta property="og:title" content="強化学習の全体像まとめ" />
-<meta property="og:description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
-強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
- 価値反復法
-ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ (B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)} $$ $$ V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$
- 方策反復法
-ベルマン期待作用素を繰り返し用いて最適方策を求める．  $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)&#43;\gamma \sum p_T(s&#39;|s,a)v(s&#39;)) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)&#43;\gamma \sum_{s&#39;}p_T(s&#39;|s,a)V^\pi(s&#39;)} $$
-強化学習 環境が既知の場合の逐次的意思決定問題
-報酬や次状態を観測することでデータを収集して，データから方策を学習する．
-価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．
- オフライン
-ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する．  $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$
- オンライン    TD法
-TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#43;\gamma \hat{V}(s_{t&#43;1})-\hat{V}(s_t) $$ $$ \hat{V}(s_t)=\hat{V}(s_t)&#43;\alpha_t\delta $$
-  TD($\lambda$)法
-エリジビリティートレースを用いて1エピソード分の価値を一括更新する．   行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20200831/20200831/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="強化学習の全体像まとめ" />
-  <meta name="twitter:description" content="はじめに 強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．
-強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題
- 価値反復法
-ベルマン最適作用素を繰り返し用いて最適価値関数を求める．  $$ …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -289,7 +255,7 @@ TD誤差$\delta$を計算して価値関数を更新する．   $$ \delta=r_t&#4
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h1 id="はじめに">はじめに</h1>
-<p>強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．間違っている箇所などあれば教えていただけると勉強になります．</p>
+<p>強化学習について，学んでいく中でごちゃごちゃしてきたので頭を整理するために自分なりに要所をまとめてみました．</p>
 <h1 id="強化学習の全体像">強化学習の全体像</h1>
 <p><img src=".././fig1.jpeg" alt="RLmap.jpeg"></p>
 <h1 id="プランニング問題">プランニング問題</h1>
@@ -533,7 +499,6 @@ $$</p>
 <ul>
 <li>森村 哲郎, &ldquo;MLP機械学習プロフェッショナルシリーズ 強化学習&rdquo;</li>
 </ul>
-
 
         
           <div class="blog-tags">

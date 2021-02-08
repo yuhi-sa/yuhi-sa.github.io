@@ -8,8 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Pythonでslackに実験結果(テキストと画像)を送る - とまとまとブログ</title>
-  <meta name="description" content="テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&#34;コピーした Webhook URL&#34;) def notify(title, text, color): attachments = [{&#34;title&#34;: title, &#34;text&#34;: text, &#34;color&#34;: color, #good, warning, danger &#34;footer&#34;: &#34;Send from Python&#34;, }] slack.notify(text=None, attachments=attachments) notify(&#34;テスト&#34;,&#34;おはよう&#34;,&#34;good&#34;) notify(&#34;テスト&#34;,&#34;こんにちは&#34;,&#34;warning&#34;) notify(&#34;テスト&#34;,&#34;こんばんは&#34;,&#34;danger&#34;) attachmentsの構文は，以下を参考
- Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&#39;file&#39;: open(imageURL, &#39;rb&#39;)} param = { &#39;token&#39;: &#34;コピーした APIトークン&#34;, &#39;channels&#39;:&#39;投稿したいチャンネル名&#39;, &#39;filename&#39;:&#34;filename&#34;, &#39;title&#39;: title, } requests.">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -58,7 +56,7 @@
     "name" : "yuhi-sa"
   },
   "headline": "Pythonでslackに実験結果(テキストと画像)を送る",
-  "description" : "テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=\u0026#34;コピーした Webhook URL\u0026#34;) def notify(title, text, color): attachments = [{\u0026#34;title\u0026#34;: title, \u0026#34;text\u0026#34;: text, \u0026#34;color\u0026#34;: color, #good, warning, danger \u0026#34;footer\u0026#34;: \u0026#34;Send from Python\u0026#34;, }] slack.notify(text=None, attachments=attachments) notify(\u0026#34;テスト\u0026#34;,\u0026#34;おはよう\u0026#34;,\u0026#34;good\u0026#34;) notify(\u0026#34;テスト\u0026#34;,\u0026#34;こんにちは\u0026#34;,\u0026#34;warning\u0026#34;) notify(\u0026#34;テスト\u0026#34;,\u0026#34;こんばんは\u0026#34;,\u0026#34;danger\u0026#34;) attachmentsの構文は，以下を参考\n Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots\u0008」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {\u0026#39;file\u0026#39;: open(imageURL, \u0026#39;rb\u0026#39;)} param = { \u0026#39;token\u0026#39;: \u0026#34;コピーした APIトークン\u0026#34;, \u0026#39;channels\u0026#39;:\u0026#39;投稿したいチャンネル名\u0026#39;, \u0026#39;filename\u0026#39;:\u0026#34;filename\u0026#34;, \u0026#39;title\u0026#39;: title, } requests.",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  93 ,
   "datePublished" : "2020-12-23T15:17:23",
@@ -80,14 +78,11 @@
 </script>
 
 <meta property="og:title" content="Pythonでslackに実験結果(テキストと画像)を送る" />
-<meta property="og:description" content="テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb slack = slackweb.Slack(url=&#34;コピーした Webhook URL&#34;) def notify(title, text, color): attachments = [{&#34;title&#34;: title, &#34;text&#34;: text, &#34;color&#34;: color, #good, warning, danger &#34;footer&#34;: &#34;Send from Python&#34;, }] slack.notify(text=None, attachments=attachments) notify(&#34;テスト&#34;,&#34;おはよう&#34;,&#34;good&#34;) notify(&#34;テスト&#34;,&#34;こんにちは&#34;,&#34;warning&#34;) notify(&#34;テスト&#34;,&#34;こんばんは&#34;,&#34;danger&#34;) attachmentsの構文は，以下を参考
- Creating rich message layouts Slack API attachmentsチートシート  実行結果 画像を送る  slack側のAPIを設定   上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする．  コード import requests import json def notifyImg(title, imageURL): files = {&#39;file&#39;: open(imageURL, &#39;rb&#39;)} param = { &#39;token&#39;: &#34;コピーした APIトークン&#34;, &#39;channels&#39;:&#39;投稿したいチャンネル名&#39;, &#39;filename&#39;:&#34;filename&#34;, &#39;title&#39;: title, } requests.">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20201223/20201223/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="Pythonでslackに実験結果(テキストと画像)を送る" />
-  <meta name="twitter:description" content="テキストを送る slack側のAPIを設定  slackの「設定と管理」から「アプリを管理する」を開く．  AppディレクトリIncoming Webhookを検索して追加する．  チャンネルを選択して，「Incoming Webhookインテグレーションの追加」  「Webhook URL」をコピーする．  botのアイコンと名前をここで変更できる．   コード import slackweb …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -275,20 +270,20 @@
 <img src=".././fig6.png" alt="fig6.png"></li>
 </ol>
 <h2 id="コード">コード</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="color:#555">slackweb</span>
-slack <span style="font-weight:bold">=</span> slackweb<span style="font-weight:bold">.</span>Slack(url<span style="font-weight:bold">=</span><span style="color:#b84">&#34;コピーした Webhook URL&#34;</span>)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">slackweb</span>
+<span class="n">slack</span> <span class="o">=</span> <span class="n">slackweb</span><span class="o">.</span><span class="n">Slack</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&#34;コピーした Webhook URL&#34;</span><span class="p">)</span>
 
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">notify</span>(title, text, color):
-    attachments <span style="font-weight:bold">=</span> [{<span style="color:#b84">&#34;title&#34;</span>: title,
-                <span style="color:#b84">&#34;text&#34;</span>: text,
-                <span style="color:#b84">&#34;color&#34;</span>: color, <span style="color:#998;font-style:italic">#good, warning, danger</span>
-                <span style="color:#b84">&#34;footer&#34;</span>: <span style="color:#b84">&#34;Send from Python&#34;</span>,
-                }]
-    slack<span style="font-weight:bold">.</span>notify(text<span style="font-weight:bold">=</span>None, attachments<span style="font-weight:bold">=</span>attachments)
+<span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="n">attachments</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+                <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+                <span class="s2">&#34;color&#34;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span> <span class="c1">#good, warning, danger</span>
+                <span class="s2">&#34;footer&#34;</span><span class="p">:</span> <span class="s2">&#34;Send from Python&#34;</span><span class="p">,</span>
+                <span class="p">}]</span>
+    <span class="n">slack</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">attachments</span><span class="o">=</span><span class="n">attachments</span><span class="p">)</span>
 
-notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;おはよう&#34;</span>,<span style="color:#b84">&#34;good&#34;</span>)
-notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;こんにちは&#34;</span>,<span style="color:#b84">&#34;warning&#34;</span>)
-notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b84">&#34;こんばんは&#34;</span>,<span style="color:#b84">&#34;danger&#34;</span>)
+<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;おはよう&#34;</span><span class="p">,</span><span class="s2">&#34;good&#34;</span><span class="p">)</span>
+<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;こんにちは&#34;</span><span class="p">,</span><span class="s2">&#34;warning&#34;</span><span class="p">)</span>
+<span class="n">notify</span><span class="p">(</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span><span class="s2">&#34;こんばんは&#34;</span><span class="p">,</span><span class="s2">&#34;danger&#34;</span><span class="p">)</span>
 </code></pre></div><p>attachmentsの構文は，以下を参考</p>
 <ul>
 <li><a href="https://api.slack.com/messaging/composing/layouts">Creating rich message layouts</a></li>
@@ -305,20 +300,20 @@ notify(<span style="color:#b84">&#34;テスト&#34;</span>,<span style="color:#b
 <li>API トークンをコピーする．</li>
 </ol>
 <h2 id="コード-1">コード</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="font-weight:bold">import</span> <span style="color:#555">requests</span>
-<span style="font-weight:bold">import</span> <span style="color:#555">json</span>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">notifyImg</span>(title, imageURL):
-        files <span style="font-weight:bold">=</span> {<span style="color:#b84">&#39;file&#39;</span>: <span style="color:#999">open</span>(imageURL, <span style="color:#b84">&#39;rb&#39;</span>)}
-        param <span style="font-weight:bold">=</span> {
-        <span style="color:#b84">&#39;token&#39;</span>: <span style="color:#b84">&#34;コピーした APIトークン&#34;</span>, 
-        <span style="color:#b84">&#39;channels&#39;</span>:<span style="color:#b84">&#39;投稿したいチャンネル名&#39;</span>,
-        <span style="color:#b84">&#39;filename&#39;</span>:<span style="color:#b84">&#34;filename&#34;</span>,
-        <span style="color:#b84">&#39;title&#39;</span>: title,
-        }
-        requests<span style="font-weight:bold">.</span>post(url<span style="font-weight:bold">=</span><span style="color:#b84">&#34;https://slack.com/api/files.upload&#34;</span>,params<span style="font-weight:bold">=</span>param, files<span style="font-weight:bold">=</span>files)
+<span class="k">def</span> <span class="nf">notifyImg</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">imageURL</span><span class="p">):</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">(</span><span class="n">imageURL</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)}</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s2">&#34;コピーした APIトークン&#34;</span><span class="p">,</span> 
+        <span class="s1">&#39;channels&#39;</span><span class="p">:</span><span class="s1">&#39;投稿したいチャンネル名&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;filename&#39;</span><span class="p">:</span><span class="s2">&#34;filename&#34;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&#34;https://slack.com/api/files.upload&#34;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 
-notifyImg(<span style="color:#b84">&#34;テスト画像&#34;</span>, <span style="color:#b84">&#34;test.png&#34;</span>) <span style="color:#998;font-style:italic">#imageURLは，ファイルパス</span>
+<span class="n">notifyImg</span><span class="p">(</span><span class="s2">&#34;テスト画像&#34;</span><span class="p">,</span> <span class="s2">&#34;test.png&#34;</span><span class="p">)</span> <span class="c1">#imageURLは，ファイルパス</span>
 
 </code></pre></div><p><a href="http://kuralab.jugem.jp/?eid=41#:~:text=%E9%96%8B%E9%96%89%E3%83%9C%E3%82%BF%E3%83%B3%E3%80%8D%20%3E%3E-,%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%82%B9%EF%BC%88File%20Path%EF%BC%89%E3%81%A8%E3%81%AF%E3%80%81%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8C%E3%81%82%E3%82%8B,%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E3%81%93%E3%81%A8%E3%81%A7%E3%81%99%E3%80%82">ファイルパスとは</a></p>
 <h2 id="実行結果-1">実行結果</h2>
@@ -331,7 +326,6 @@ notifyImg(<span style="color:#b84">&#34;テスト画像&#34;</span>, <span style
 <li><a href="https://qiita.com/shtnkgm/items/4f0e4dcbb9eb52fdf316">Python3でslackに投稿する</a></li>
 <li><a href="https://qiita.com/stkdev/items/992921572eefc7de4ad8">プログラムからSlackに画像投稿する方法まとめ</a></li>
 </ul>
-
 
         
           <div class="blog-tags">

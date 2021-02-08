@@ -8,10 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>バイナリ法 - とまとまとブログ</title>
-  <meta name="description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
-具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
-2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
-アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -60,7 +56,7 @@
     "name" : "yuhi-sa"
   },
   "headline": "バイナリ法",
-  "description" : "バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．\n具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$\n2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．\nアルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k\/\/2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  51 ,
   "datePublished" : "2020-12-20T15:17:23",
@@ -82,18 +78,11 @@
 </script>
 
 <meta property="og:title" content="バイナリ法" />
-<meta property="og:description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
-具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
-2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する．
-アルゴリズム def Binary(k, g, p): k_binary = [] while(k != 0): k_binary.append(k%2) k = k//2 if k == 1: k_binary.append(k) k = 0 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y*y%p)*g%p else: y = (y*y%p) return y ">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20201220/20201220/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="バイナリ法" />
-  <meta name="twitter:description" content="バイナリ法 $x=a^k$のとき，2乗計算を$k$回行うことになる． 計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．
-具体例 $5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$
-2進数に展開し，左から順に展開することにより計算を実行する． これにより，$g^k(mod p)$を計算する． …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.80.0" />
@@ -273,21 +262,21 @@
 <p>2進数に展開し，左から順に展開することにより計算を実行する．
 これにより，$g^k(mod p)$を計算する．</p>
 <h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-binary.py" data-lang="binary.py"><span style="font-weight:bold">def</span> <span style="color:#900;font-weight:bold">Binary</span>(k, g, p):
-    k_binary <span style="font-weight:bold">=</span> []
-    <span style="font-weight:bold">while</span>(k <span style="font-weight:bold">!=</span> <span style="color:#099">0</span>):
-        k_binary<span style="font-weight:bold">.</span>append(k<span style="font-weight:bold">%</span><span style="color:#099">2</span>)
-        k <span style="font-weight:bold">=</span> k<span style="font-weight:bold">//</span><span style="color:#099">2</span>
-        <span style="font-weight:bold">if</span> k <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            k_binary<span style="font-weight:bold">.</span>append(k)
-            k <span style="font-weight:bold">=</span> <span style="color:#099">0</span>
-    y <span style="font-weight:bold">=</span> <span style="color:#099">1</span>
-    <span style="font-weight:bold">for</span> i <span style="font-weight:bold">in</span> <span style="color:#999">reversed</span>(<span style="color:#999">range</span>(<span style="color:#999">len</span>(k_binary))):
-        <span style="font-weight:bold">if</span> k_binary[i] <span style="font-weight:bold">==</span> <span style="color:#099">1</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)<span style="font-weight:bold">*</span>g<span style="font-weight:bold">%</span>p
-        <span style="font-weight:bold">else</span>:
-            y <span style="font-weight:bold">=</span> (y<span style="font-weight:bold">*</span>y<span style="font-weight:bold">%</span>p)
-    <span style="font-weight:bold">return</span> y
+<div class="highlight"><pre class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
 </code></pre></div>
 
         
