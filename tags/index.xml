@@ -5,20 +5,11 @@
     <link>https://yuhi-sa.github.io/tags/</link>
     <description>Recent content in Tags on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Feb 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hugo</title>
-      <link>https://yuhi-sa.github.io/tags/hugo/</link>
-      <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Mon, 15 Feb 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python</title>
       <link>https://yuhi-sa.github.io/tags/python/</link>
-      <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
+      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/tags/python/</guid>
       <description></description>
@@ -27,9 +18,18 @@
     <item>
       <title>機械学習</title>
       <link>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</link>
-      <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
+      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://yuhi-sa.github.io/tags/hugo/</link>
+      <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
