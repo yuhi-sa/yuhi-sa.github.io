@@ -5,7 +5,43 @@
     <link>https://yuhi-sa.github.io/tags/%E3%83%99%E3%82%A4%E3%82%BA/</link>
     <description>Recent content in ベイズ on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 15 Mar 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%83%99%E3%82%A4%E3%82%BA/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Mar 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%83%99%E3%82%A4%E3%82%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ベイズ推定</title>
+      <link>https://yuhi-sa.github.io/posts/202103bayes/5/</link>
+      <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/202103bayes/5/</guid>
+      <description>参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>正規分布における最尤推定</title>
+      <link>https://yuhi-sa.github.io/posts/202103bayes/4/</link>
+      <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/202103bayes/4/</guid>
+      <description>20世紀初頭に統計学者ロナウド・フィッシャーにより提案された統計的推定手法．
+最尤推定 尤度とは，xを観測値,$\theta$をパラメータとしたときの条件付き確率$p(x|\theta)$である．このとき，$p(x|\theta)$はパラメータが$\theta$であるときの観測値xの確率分布である．
+$$p(x|\theta)=\Pi_{i=1}^np(x^i|\theta)$$
+この尤度関数$p(x|\theta)$を最大化する$\theta$を求める方法を最尤推定とよぶ．
+正規分布における最尤推定 統計学や機械学習では指数分布の形をした確率分布を使うことが多いため，式変形の簡単化から対数尤度関数$\log p(x|\theta)$の最大化を行う場合が多い．
+ここでは，観測値xが正規分布に従って生成されるモデルを考える．正規分布のもつパラメータは$\mu$と$\sigma$であり，これらが$ \theta$に相当する．
+$\mu$の推定 正規分布の対数尤度関数を式変形する
+$$\log p(x|\mu,\sigma) = - \frac{\sum_{i=1}^n(x^i-\mu)^2}{2\sigma^2}-\frac{n}{2}\log \sigma^2-\frac{n}{2}\log2\pi$$
+この右辺を最大化する$\mu$を求めたいので，$\mu$で微分する．
+$$\frac{d \log p(x|\mu,\sigma)}{d\mu}=\frac{\sum_{i=1}^n(x^i-\mu)}{\sigma^2}$$
+これが，0となる場合
+$$\mu = \frac{1}{n}\sum_{i=1}^nx^i$$
+観測値$x^i$の平均が正規分布における$\mu$の最尤推定値となる． これが，算術平均が幾何平均よりも広く使われている理由となっている．
+ 算術平均：n個の標本の値を足し合わせ，$n$で割ること 幾何平均：n個の標本の値をかけ合わせ，それの$n$乗根を求めること  $\sigma^2$の推定 $\sigma^2$で正規分布の対数尤度関数を微分する．
+$$\frac{d \log p(x|\mu,\sigma)}{d\sigma^2}= \frac{\sum_{i=1}^n(x^i-\mu)^2}{2(\sigma^2)^2}-\frac{n}{2\sigma^2}$$
+これが，0となる場合
+$$\sigma^2 = \frac{1}{n}\sum_{i=1}^n(x^i-\mu)^2$$
+$\mu$の推定値である標本平均を上式に代入して得られるのが標本分散となる．
+参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot;</description>
+    </item>
+    
     <item>
       <title>正規分布(ガウス分布)</title>
       <link>https://yuhi-sa.github.io/posts/202103bayes/3/</link>
