@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>ベイズ推定 - とまとまとブログ</title>
-  <meta name="description" content="参考 手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,9 +56,9 @@
     "name" : "yuhi-sa"
   },
   "headline": "ベイズ推定",
-  "description" : "参考 手塚 太郎，\u0026quot;しくみがわかるベイズ統計と機械学習\u0026quot;",
+  "description" : "",
   "inLanguage" : "en",
-  "wordCount":  3 ,
+  "wordCount":  55 ,
   "datePublished" : "2021-03-16T13:00:23",
   "dateModified" : "2021-03-16T13:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -79,13 +78,11 @@
 </script>
 
 <meta property="og:title" content="ベイズ推定" />
-<meta property="og:description" content="参考 手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/202103bayes/5/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="ベイズ推定" />
-  <meta name="twitter:description" content="参考 手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -257,9 +254,54 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="参考">参考</h1>
-<p>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</p>
-
+        <p>最尤推定に事前知識を加えることでより妥当な推定にすることを考える．
+事前知識の事前分布$p(\theta)$と呼ぶ．</p>
+<ul>
+<li>事前分布$p(\theta)$：パラメータ$\theta$がどのような値であるかについて，観測値がない状態での新念の分布</li>
+</ul>
+<h1 id="ベイズの定理">ベイズの定理</h1>
+<p>確率変数をx,パラメータを$\theta$として</p>
+<ul>
+<li>$p(\theta|x)=\frac{p(\theta,x)}{p(x)}$</li>
+<li>$p(x|\theta)=\frac{p(x,\theta)}{p(\theta)}$</li>
+</ul>
+<p>の2式が成り立つことより
+$p(\theta|x)p(x)=p(\theta,x)=p(x,\theta)=p(x|\theta)p(\theta)$
+が成り立ち，以下の式が求まる．</p>
+<p>$$p(\theta|x)=\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
+<p>これがベイズの定理である．
+ベイズの定理において</p>
+<ul>
+<li>$p(\theta|x)$を事後分布
+パラメータ$\theta$がどのような値であるかについて，観測値xの値を知った状態での新念の分布</li>
+<li>$p(\theta)$を事前分布</li>
+<li>$p(x|\theta)$を尤度</li>
+<li>$p(x)$を規格化定数<br>
+$p(x)$は分子の総和が1となるように規格化するための定数であり，周辺化によって求める．
+$p(x)=\int p(x,\theta')d\theta'=\int p(x|\theta')P(\theta')d\theta'$
+とよぶ．</li>
+</ul>
+<h1 id="map推定">MAP推定</h1>
+<p>事後確率$p(\theta|x)$を最大にする最尤推定量$\theta$を求める．</p>
+<p>$$\hat{\theta}<em>{MAP}=arg\max</em>\theta p(\theta|x)=arg\max_\theta \frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
+<h1 id="ベイズ推定">ベイズ推定</h1>
+<p>MAP推定では，事後分布$p(\theta|x)$を最も大きくする$\theta$の値が推定量$\hat{\theta}_{MAP}$として点推定される．しかし，これでは予測値の分布がわからない．
+そこで，ベイズ推定では$\theta$をひとつに求めるのではなく，事後分布$p(\theta|x)$を使って予測を行う．</p>
+<p>たとえば，予測したいのが確率変数yの分布である場合，$p(\theta|x)$による期待値を計算する．</p>
+<p>$$p(y|x) = \mathbb{E}_{p(\theta|x)}[p(y|\theta)]\int p(y|\theta)p(\theta|x)d\theta=\int p(y,\theta|x)d\theta$$</p>
+<p>得られた分布$p(y|x)$に基づいて予測値をひとつに定めたい場合はyについての期待値を求めればいい．</p>
+<p>$$\hat{y}=\mathbb{E}_{p(y|x)}[y]=\int yp(y|x)dy = \int y p(y|\theta)p(\theta|x)d\theta dy$$</p>
+<p>このようにベイズ推定では，事前確率$p(\theta)$と尤度関数$p(x|\theta)$，ならびに観測値xに基づき事後確率$p(\theta|x)$を求める．</p>
+<h1 id="ベイズ更新">ベイズ更新</h1>
+<p>データが増えるたび，過去に推定した事後分布とベイズの定理を使って事後分布を更新していくことをベイズ更新と呼ぶ．</p>
+<p>$$p(\theta|x^{(1)},x^{(2)},\alpha)=
+\frac{p(x^{(2)|\theta}p(\theta|x^{(1)},\alpha))}{p(x^{(2)}|\alpha)}$$</p>
+<p>時刻tまでの観測値に基づく事後分布$p(\theta|x^{(1)},&hellip;,x^{(t)},\alpha)$を事前分布として使い，観測値$x^{t+1}$も考慮した場合の事後分布$p(\theta|x^{(1)},&hellip;,x^{t+1},\alpha)$が計算される．</p>
+<p>ベイズ更新では，一度使用した観測値をふたたび使う必要がないため，記憶容量が少なくて済む．</p>
+<h1 id="参考">参考</h1>
+<ul>
+<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+</ul>
 
         
           <div class="blog-tags">

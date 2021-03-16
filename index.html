@@ -238,9 +238,8 @@
     </p>
     <div class="post-entry">
         
-        <h1 id="参考">参考</h1>
-<p>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</p>
-
+        
+        <a href="https://yuhi-sa.github.io/posts/202103bayes/5/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -282,37 +281,8 @@
     </p>
     <div class="post-entry">
         
-        <p>20世紀初頭に統計学者ロナウド・フィッシャーにより提案された統計的推定手法．</p>
-<h2 id="最尤推定">最尤推定</h2>
-<p>尤度とは，xを観測値,$\theta$をパラメータとしたときの条件付き確率$p(x|\theta)$である．このとき，$p(x|\theta)$はパラメータが$\theta$であるときの観測値xの確率分布である．</p>
-<p>$$p(x|\theta)=\Pi_{i=1}^np(x^i|\theta)$$</p>
-<p>この尤度関数$p(x|\theta)$を最大化する$\theta$を求める方法を最尤推定とよぶ．</p>
-<h2 id="正規分布における最尤推定">正規分布における最尤推定</h2>
-<p>統計学や機械学習では指数分布の形をした確率分布を使うことが多いため，式変形の簡単化から対数尤度関数$\log p(x|\theta)$の最大化を行う場合が多い．</p>
-<p>ここでは，観測値xが正規分布に従って生成されるモデルを考える．正規分布のもつパラメータは$\mu$と$\sigma$であり，これらが$ \theta$に相当する．</p>
-<h3 id="muの推定">$\mu$の推定</h3>
-<p>正規分布の対数尤度関数を式変形する</p>
-<p>$$\log p(x|\mu,\sigma) = - \frac{\sum_{i=1}^n(x^i-\mu)^2}{2\sigma^2}-\frac{n}{2}\log \sigma^2-\frac{n}{2}\log2\pi$$</p>
-<p>この右辺を最大化する$\mu$を求めたいので，$\mu$で微分する．</p>
-<p>$$\frac{d \log p(x|\mu,\sigma)}{d\mu}=\frac{\sum_{i=1}^n(x^i-\mu)}{\sigma^2}$$</p>
-<p>これが，0となる場合</p>
-<p>$$\mu = \frac{1}{n}\sum_{i=1}^nx^i$$</p>
-<p>観測値$x^i$の平均が正規分布における$\mu$の最尤推定値となる．
-これが，算術平均が幾何平均よりも広く使われている理由となっている．</p>
-<ul>
-<li>算術平均：n個の標本の値を足し合わせ，$n$で割ること</li>
-<li>幾何平均：n個の標本の値をかけ合わせ，それの$n$乗根を求めること</li>
-</ul>
-<h3 id="sigma2の推定">$\sigma^2$の推定</h3>
-<p>$\sigma^2$で正規分布の対数尤度関数を微分する．</p>
-<p>$$\frac{d \log p(x|\mu,\sigma)}{d\sigma^2}=
-\frac{\sum_{i=1}^n(x^i-\mu)^2}{2(\sigma^2)^2}-\frac{n}{2\sigma^2}$$</p>
-<p>これが，0となる場合</p>
-<p>$$\sigma^2 = \frac{1}{n}\sum_{i=1}^n(x^i-\mu)^2$$</p>
-<p>$\mu$の推定値である標本平均を上式に代入して得られるのが標本分散となる．</p>
-<h1 id="参考">参考</h1>
-<p>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</p>
-
+        
+        <a href="https://yuhi-sa.github.io/posts/202103bayes/4/" class="post-read-more">[Read More]</a>
         
     </div>
 
