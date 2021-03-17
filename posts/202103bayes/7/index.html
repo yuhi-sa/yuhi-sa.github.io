@@ -8,32 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>ラグランジュの未定数法 - とまとまとブログ</title>
-  <meta name="description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
-２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
-$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
-目的関数fを制約gのもとで解くことくを考えると．
-$$\nabla f(\mu) = \lambda \nabla g(\mu)$$
-が成り立ち，$\mu$が制約付き最適化の答えの候補となる． ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．
-ラグランジュ関数を以下のように定義すると，
-$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$
-ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．
-例1 $g(x,y)=2x&#43;y&#43;1=0$という制約条件を満たすx,yで$f(x,y)=x^2&#43;y^2$を最小化するものを求める．
-$$\nabla f(x,y) = (2x,2y)$$
-$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$
-よって，
- $2x = 2\lambda$ $2y = \lambda$  さらに$g(x,y)=2x&#43;y&#43;1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．
-多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．
-$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$
-$$g=\sum_{j=1}^k\mu_j-1$$
-ラグランジュの未定乗数法より
-$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$
-両辺を$\hat{\mu}_h$で微分すると
-$$\frac{x_h}{\hat{\mu}_h}=\lambda$$
-制約条件を用いて$\lambda$を求めると
-$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$
-したがって，
-$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
-参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -82,7 +56,7 @@ $$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
     "name" : "yuhi-sa"
   },
   "headline": "ラグランジュの未定数法",
-  "description" : "制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．\n２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\\nabla$を用いて以下のように定義される．\n$$\\nabla f = (\\frac{df}{dx}, \\frac{df}{dy})$$\n目的関数fを制約gのもとで解くことくを考えると．\n$$\\nabla f(\\mu) = \\lambda \\nabla g(\\mu)$$\nが成り立ち，$\\mu$が制約付き最適化の答えの候補となる． ここで，$\\lambda$はラグランジュ未定乗数と呼ばれる．\nラグランジュ関数を以下のように定義すると，\n$$\\mathcal{L}(\\mu,\\lambda)=f(\\mu)-\\lambda g(\\mu)$$\nラグランジュの未定乗数法は，$\\nabla \\mathcal{L}=0$を満たす$\\mu$と$\\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．\n例1 $g(x,y)=2x\u002by\u002b1=0$という制約条件を満たすx,yで$f(x,y)=x^2\u002by^2$を最小化するものを求める．\n$$\\nabla f(x,y) = (2x,2y)$$\n$$\\lambda \\nabla g(x,y) = (2\\lambda, \\lambda)$$\nよって，\n $2x = 2\\lambda$ $2y = \\lambda$  さらに$g(x,y)=2x\u002by\u002b1=0$を用いて計算すると，$x=-2\/5,y=-1\/5,$となる．\n多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\\sum_{j=1}^k\\mu_j-1$となる．\n$$f= \\frac{(\\sum_{j=1}^kx_j)!}{\\Pi_{j=1}^kx_j!}\\Pi_{j=1}^k\\mu_j^{x_j}$$\n$$g=\\sum_{j=1}^k\\mu_j-1$$\nラグランジュの未定乗数法より\n$$\\nabla (\\frac{(\\sum_{j=1}^kx_j)!}{\\Pi_{j=1}^kx_j!}\\Pi_{j=1}^k\\mu_j^{x_j})=\\lambda \\nabla(\\sum_{j=1}^k\\mu_j-1)$$\n両辺を$\\hat{\\mu}_h$で微分すると\n$$\\frac{x_h}{\\hat{\\mu}_h}=\\lambda$$\n制約条件を用いて$\\lambda$を求めると\n$$\\lambda = \\sum_{h=1}^k \\hat{\\mu}_h=m(試行の総和)$$\nしたがって，\n$$\\hat{\\mu}_j=\\frac{x_j}{\\lambda}= \\frac{x_j}{m}$$\n参考  手塚 太郎，\u0026quot;しくみがわかるベイズ統計と機械学習\u0026quot;  ",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  64 ,
   "datePublished" : "2021-03-16T15:00:23",
@@ -104,42 +78,11 @@ $$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
 </script>
 
 <meta property="og:title" content="ラグランジュの未定数法" />
-<meta property="og:description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
-２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
-$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
-目的関数fを制約gのもとで解くことくを考えると．
-$$\nabla f(\mu) = \lambda \nabla g(\mu)$$
-が成り立ち，$\mu$が制約付き最適化の答えの候補となる． ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．
-ラグランジュ関数を以下のように定義すると，
-$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$
-ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．
-例1 $g(x,y)=2x&#43;y&#43;1=0$という制約条件を満たすx,yで$f(x,y)=x^2&#43;y^2$を最小化するものを求める．
-$$\nabla f(x,y) = (2x,2y)$$
-$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$
-よって，
- $2x = 2\lambda$ $2y = \lambda$  さらに$g(x,y)=2x&#43;y&#43;1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．
-多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．
-$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$
-$$g=\sum_{j=1}^k\mu_j-1$$
-ラグランジュの未定乗数法より
-$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$
-両辺を$\hat{\mu}_h$で微分すると
-$$\frac{x_h}{\hat{\mu}_h}=\lambda$$
-制約条件を用いて$\lambda$を求めると
-$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$
-したがって，
-$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
-参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/202103bayes/7/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="ラグランジュの未定数法" />
-  <meta name="twitter:description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
-２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
-$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
-目的関数fを制約gのもとで解くことくを考えると．
-$$\nabla …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -348,7 +291,6 @@ $$\nabla …">
 <ul>
 <li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
 </ul>
-
 
         
           <div class="blog-tags">

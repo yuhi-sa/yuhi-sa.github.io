@@ -8,25 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>共役事前分布 - とまとまとブログ</title>
-  <meta name="description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
-ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
-$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$
-ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．
-$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$
-ベータ分布 二項分布の事前分布として使えるのがベータ分布である．
-$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$
-ここで，$B(a,b)$は2次元の多項ベータ関数を表す．
-$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$
-ガンマ分布 観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える． 分散$\sigma^2$に対してベイズ推定を行う場合を考える． $\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．
-$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$
-$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．
-ガンマ分布の余談 $\kappa=1$のガンマ分布は指数分布と一致する．
-$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$
-$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．
-$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$
-正規-ガンマ分布 正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\mu$と$\lambda$を同時に求めることを考える． $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．
-$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$
-一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -75,7 +56,7 @@ $$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \l
     "name" : "yuhi-sa"
   },
   "headline": "共役事前分布",
-  "description" : "事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．\nディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\\mathcal{D}(\\mu|\\alpha)$である．\n$$\\mathcal{D}(\\mu|\\alpha)= \\frac{\\Gamma(\\sum_{j=1}^{k}\\alpha_j)}{\\Pi_{j=1}^k\\Gamma(\\alpha_j)}\\Pi_{j=1}^k\\mu_j^{\\alpha_j-1}$$\nここで，$\\alpha$はディリクレ分布のパラメータであり，$\\Gamma$は以下に示すガンマ関数である．\n$$\\Gamma(x)=\\int_0^\\infty t^{x-1}e^{-t}dt$$\nベータ分布 二項分布の事前分布として使えるのがベータ分布である．\n$$p(\\mu|a,b)=\\frac{1}{B(a,b)}\\mu^{\\alpha-1}(1-\\mu)^{b-1}$$\nここで，$B(a,b)$は2次元の多項ベータ関数を表す．\n$$B(a,b)=\\int_0^1\\mu^{a-1}(1-\\mu)^{b-1}d\\mu$$\nガンマ分布 観測値が正規分布$\\mathcal{N}(x|\\mu,\\sigma^2)$に従うとする時，その平均パラメータ$\\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\\mathcal{N}(\\mu|\\Psi,\\rho^2)$が使える． 分散$\\sigma^2$に対してベイズ推定を行う場合を考える． $\\sigma^2$の事前分布として正規分布$\\mathcal{N}(\\sigma^2|\\phi,\\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\\lambda=1\/\\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\\mathcal{G}(\\lambda|\\kappa,\\xi)$を用いる．\n$$\\mathcal{G}(\\lambda|\\kappa,\\xi)=\\frac{\\xi^\\kappa}{\\Gamma(\\kappa)}\\lambda^{\\kappa-1}\\exp(-\\xi\\lambda)$$\n$\\kappa$は形状パラメータ，$\\xi$はレートパラメータと呼ばれる．\nガンマ分布の余談 $\\kappa=1$のガンマ分布は指数分布と一致する．\n$$\\mathcal{G}(\\lambda|1,\\xi)=\\frac{\\xi}{\\Gamma(1)}\\exp(-\\xi\\lambda)=\\xi\\exp(-\\xi\\lambda)$$\n$\\xi=\\frac{1}{2}$に設定し$\\nu=2\\kappa$で定義されるパラメータで表したものは$\\chi^2$分布と呼ばれる．\n$$\\chi^2(\\lambda|\\nu)=\\mathcal{G}(\\lambda|\\frac{\\nu}{2},\\frac{1}{2})$$\n正規-ガンマ分布 正規分布$\\mathcal{N}(\\mu,\\lambda^{-1})$のパラメーターについて平均$\\mu$は正規分布，精度$\\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\\mu$と$\\lambda$を同時に求めることを考える． $\\mu$と$\\lambda$の同時分布を正規-ガンマ分布$\\mathcal{NG}$とよぶ．\n$$\\mathcal{NG}(\\mu,\\lambda|\\psi,\\beta,\\kappa,\\xi)=\\mathcal{N}(\\mu|\\psi,(\\beta \\lambda)^{-1}\\mathcal{G}(\\lambda|\\kappa,\\xi)$$\n一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，\u0026quot;しくみがわかるベイズ統計と機械学習\u0026quot;  ",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  35 ,
   "datePublished" : "2021-03-16T15:00:23",
@@ -97,33 +78,11 @@ $$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \l
 </script>
 
 <meta property="og:title" content="共役事前分布" />
-<meta property="og:description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
-ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
-$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$
-ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．
-$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$
-ベータ分布 二項分布の事前分布として使えるのがベータ分布である．
-$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$
-ここで，$B(a,b)$は2次元の多項ベータ関数を表す．
-$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$
-ガンマ分布 観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える． 分散$\sigma^2$に対してベイズ推定を行う場合を考える． $\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．
-$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$
-$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．
-ガンマ分布の余談 $\kappa=1$のガンマ分布は指数分布と一致する．
-$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$
-$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．
-$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$
-正規-ガンマ分布 正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\mu$と$\lambda$を同時に求めることを考える． $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．
-$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$
-一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/202103bayes/8/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
   <meta name="twitter:title" content="共役事前分布" />
-  <meta name="twitter:description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
-ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
-$$\mathcal{D}(\mu|\alpha)= …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -329,7 +288,6 @@ $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ
 <ul>
 <li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
 </ul>
-
 
         
           <div class="blog-tags">
