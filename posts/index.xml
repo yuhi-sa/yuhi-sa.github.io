@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/posts/</link>
     <description>Recent content in Posts on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 16 Mar 2021 16:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Mar 2021 13:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EMアルゴリズム</title>
+      <link>https://yuhi-sa.github.io/posts/202103bayes/9/</link>
+      <pubDate>Wed, 17 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/202103bayes/9/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>共役事前分布</title>
       <link>https://yuhi-sa.github.io/posts/202103bayes/8/</link>
