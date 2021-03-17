@@ -58,7 +58,7 @@
   "headline": "ベイズ推定",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  54 ,
+  "wordCount":  55 ,
   "datePublished" : "2021-03-16T13:00:23",
   "dateModified" : "2021-03-16T13:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -281,7 +281,7 @@ $p(x)=\int p(x,\theta')d\theta'=\int p(x|\theta')P(\theta')d\theta'$
 </ul>
 <h1 id="map推定">MAP推定</h1>
 <p>事後確率$p(\theta|x)$を最大にする最尤推定量$\theta$を求める．</p>
-<p>$$\hat{\theta}<em>{MAP}=\arg\max</em>\theta p(\theta|x)=\arg\max_{\theta}\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
+<p>$$\hat{\theta}=arg\max_{\theta} p(\theta|x)=arg\max_{\theta}\frac{p(x|\theta)p(\theta)}{p(x)} $$</p>
 <h1 id="ベイズ推定">ベイズ推定</h1>
 <p>MAP推定では，事後分布$p(\theta|x)$を最も大きくする$\theta$の値が推定量$\hat{\theta}_{MAP}$として点推定される．しかし，これでは予測値の分布がわからない．
 そこで，ベイズ推定では$\theta$をひとつに求めるのではなく，事後分布$p(\theta|x)$を使って予測を行う．</p>
