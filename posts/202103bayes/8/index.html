@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>共役事前分布 - とまとまとブログ</title>
+  <meta name="description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
+ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
+$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$
+ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．
+$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$
+ベータ分布 二項分布の事前分布として使えるのがベータ分布である．
+$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$
+ここで，$B(a,b)$は2次元の多項ベータ関数を表す．
+$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$
+ガンマ分布 観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える． 分散$\sigma^2$に対してベイズ推定を行う場合を考える． $\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．
+$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$
+$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．
+ガンマ分布の余談 $\kappa=1$のガンマ分布は指数分布と一致する．
+$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$
+$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．
+$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$
+正規-ガンマ分布 正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\mu$と$\lambda$を同時に求めることを考える． $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．
+$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$
+一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "とまとまとブログ",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/202103bayes\/8\/",
+          "name": "共役事前分布"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "共役事前分布",
+  "description" : "事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．\nディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\\mathcal{D}(\\mu|\\alpha)$である．\n$$\\mathcal{D}(\\mu|\\alpha)= \\frac{\\Gamma(\\sum_{j=1}^{k}\\alpha_j)}{\\Pi_{j=1}^k\\Gamma(\\alpha_j)}\\Pi_{j=1}^k\\mu_j^{\\alpha_j-1}$$\nここで，$\\alpha$はディリクレ分布のパラメータであり，$\\Gamma$は以下に示すガンマ関数である．\n$$\\Gamma(x)=\\int_0^\\infty t^{x-1}e^{-t}dt$$\nベータ分布 二項分布の事前分布として使えるのがベータ分布である．\n$$p(\\mu|a,b)=\\frac{1}{B(a,b)}\\mu^{\\alpha-1}(1-\\mu)^{b-1}$$\nここで，$B(a,b)$は2次元の多項ベータ関数を表す．\n$$B(a,b)=\\int_0^1\\mu^{a-1}(1-\\mu)^{b-1}d\\mu$$\nガンマ分布 観測値が正規分布$\\mathcal{N}(x|\\mu,\\sigma^2)$に従うとする時，その平均パラメータ$\\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\\mathcal{N}(\\mu|\\Psi,\\rho^2)$が使える． 分散$\\sigma^2$に対してベイズ推定を行う場合を考える． $\\sigma^2$の事前分布として正規分布$\\mathcal{N}(\\sigma^2|\\phi,\\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\\lambda=1\/\\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\\mathcal{G}(\\lambda|\\kappa,\\xi)$を用いる．\n$$\\mathcal{G}(\\lambda|\\kappa,\\xi)=\\frac{\\xi^\\kappa}{\\Gamma(\\kappa)}\\lambda^{\\kappa-1}\\exp(-\\xi\\lambda)$$\n$\\kappa$は形状パラメータ，$\\xi$はレートパラメータと呼ばれる．\nガンマ分布の余談 $\\kappa=1$のガンマ分布は指数分布と一致する．\n$$\\mathcal{G}(\\lambda|1,\\xi)=\\frac{\\xi}{\\Gamma(1)}\\exp(-\\xi\\lambda)=\\xi\\exp(-\\xi\\lambda)$$\n$\\xi=\\frac{1}{2}$に設定し$\\nu=2\\kappa$で定義されるパラメータで表したものは$\\chi^2$分布と呼ばれる．\n$$\\chi^2(\\lambda|\\nu)=\\mathcal{G}(\\lambda|\\frac{\\nu}{2},\\frac{1}{2})$$\n正規-ガンマ分布 正規分布$\\mathcal{N}(\\mu,\\lambda^{-1})$のパラメーターについて平均$\\mu$は正規分布，精度$\\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\\mu$と$\\lambda$を同時に求めることを考える． $\\mu$と$\\lambda$の同時分布を正規-ガンマ分布$\\mathcal{NG}$とよぶ．\n$$\\mathcal{NG}(\\mu,\\lambda|\\psi,\\beta,\\kappa,\\xi)=\\mathcal{N}(\\mu|\\psi,(\\beta \\lambda)^{-1}\\mathcal{G}(\\lambda|\\kappa,\\xi)$$\n一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，\u0026quot;しくみがわかるベイズ統計と機械学習\u0026quot;  ",
+  "inLanguage" : "en",
+  "wordCount":  35 ,
+  "datePublished" : "2021-03-16T15:00:23",
+  "dateModified" : "2021-03-16T15:00:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "ベイズ" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/202103bayes\/8\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="共役事前分布" />
+<meta property="og:description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
+ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
+$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$
+ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．
+$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$
+ベータ分布 二項分布の事前分布として使えるのがベータ分布である．
+$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$
+ここで，$B(a,b)$は2次元の多項ベータ関数を表す．
+$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$
+ガンマ分布 観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える． 分散$\sigma^2$に対してベイズ推定を行う場合を考える． $\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．
+$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$
+$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．
+ガンマ分布の余談 $\kappa=1$のガンマ分布は指数分布と一致する．
+$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$
+$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．
+$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$
+正規-ガンマ分布 正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\mu$と$\lambda$を同時に求めることを考える． $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．
+$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$
+一般的な確率分布のパラメータとその共益事前分布 参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/202103bayes/8/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="とまとまとブログ" />
+
+  <meta name="twitter:title" content="共役事前分布" />
+  <meta name="twitter:description" content="事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．
+ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．
+$$\mathcal{D}(\mu|\alpha)= …">
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.81.0" />
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="とまとまとブログ"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'G-LN6QP6VVM3');
+</script>
+
+
+<script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>共役事前分布</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．</p>
+<h1 id="ディリクレ分布">ディリクレ分布</h1>
+<p>多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．</p>
+<p>$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$</p>
+<p>ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．</p>
+<p>$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$</p>
+<h1 id="ベータ分布">ベータ分布</h1>
+<p>二項分布の事前分布として使えるのがベータ分布である．</p>
+<p>$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$</p>
+<p>ここで，$B(a,b)$は2次元の多項ベータ関数を表す．</p>
+<p>$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$</p>
+<h1 id="ガンマ分布">ガンマ分布</h1>
+<p>観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える．
+分散$\sigma^2$に対してベイズ推定を行う場合を考える．
+$\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97)
+そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．</p>
+<p>$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$</p>
+<p>$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．</p>
+<h2 id="ガンマ分布の余談">ガンマ分布の余談</h2>
+<p>$\kappa=1$のガンマ分布は指数分布と一致する．</p>
+<p>$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$</p>
+<p>$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．</p>
+<p>$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$</p>
+<h1 id="正規-ガンマ分布">正規-ガンマ分布</h1>
+<p>正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた．
+今回は，$\mu$と$\lambda$を同時に求めることを考える．
+$\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．</p>
+<p>$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$</p>
+<h1 id="一般的な確率分布のパラメータとその共益事前分布">一般的な確率分布のパラメータとその共益事前分布</h1>
+<p><img src=".././%E5%85%B1%E5%BD%B9%E4%BA%8B%E5%89%8D%E5%88%86%E5%B8%83.png" alt="共役事前分布"></p>
+<h1 id="参考">参考</h1>
+<ul>
+<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+</ul>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/%E3%83%99%E3%82%A4%E3%82%BA/">ベイズ</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f&amp;text=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f8%2f&amp;description=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/202103bayes/7/">ラグランジュの未定数法</a></li>
+                
+                    <li><a href="/posts/202103bayes/6/">二項分布とその仲間たち</a></li>
+                
+                    <li><a href="/posts/202103bayes/5/">ベイズ推定</a></li>
+                
+                    <li><a href="/posts/202103bayes/4/">正規分布における最尤推定</a></li>
+                
+                    <li><a href="/posts/202103bayes/3/">正規分布(ガウス分布)</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/202103bayes/6/" data-toggle="tooltip" data-placement="top" title="二項分布とその仲間たち">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/202103bayes/7/" data-toggle="tooltip" data-placement="top" title="ラグランジュの未定数法">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/yuhi-sa" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">とまとまとブログ</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.81.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

@@ -7,7 +7,33 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>二項分布とその仲間たち - とまとまとブログ</title>
+  <title>ラグランジュの未定数法 - とまとまとブログ</title>
+  <meta name="description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
+２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
+$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
+目的関数fを制約gのもとで解くことくを考えると．
+$$\nabla f(\mu) = \lambda \nabla g(\mu)$$
+が成り立ち，$\mu$が制約付き最適化の答えの候補となる． ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．
+ラグランジュ関数を以下のように定義すると，
+$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$
+ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．
+例1 $g(x,y)=2x&#43;y&#43;1=0$という制約条件を満たすx,yで$f(x,y)=x^2&#43;y^2$を最小化するものを求める．
+$$\nabla f(x,y) = (2x,2y)$$
+$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$
+よって，
+ $2x = 2\lambda$ $2y = \lambda$  さらに$g(x,y)=2x&#43;y&#43;1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．
+多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．
+$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$
+$$g=\sum_{j=1}^k\mu_j-1$$
+ラグランジュの未定乗数法より
+$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$
+両辺を$\hat{\mu}_h$で微分すると
+$$\frac{x_h}{\hat{\mu}_h}=\lambda$$
+制約条件を用いて$\lambda$を求めると
+$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$
+したがって，
+$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
+参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,7 +70,7 @@
         "position": 3,
         "item": {
           "@id": "https:\/\/yuhi-sa.github.io\/posts\/202103bayes\/7\/",
-          "name": "二項分布とその仲間たち"
+          "name": "ラグランジュの未定数法"
         }
     }]
 }
@@ -55,12 +81,12 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "二項分布とその仲間たち",
-  "description" : "",
+  "headline": "ラグランジュの未定数法",
+  "description" : "制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．\n２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\\nabla$を用いて以下のように定義される．\n$$\\nabla f = (\\frac{df}{dx}, \\frac{df}{dy})$$\n目的関数fを制約gのもとで解くことくを考えると．\n$$\\nabla f(\\mu) = \\lambda \\nabla g(\\mu)$$\nが成り立ち，$\\mu$が制約付き最適化の答えの候補となる． ここで，$\\lambda$はラグランジュ未定乗数と呼ばれる．\nラグランジュ関数を以下のように定義すると，\n$$\\mathcal{L}(\\mu,\\lambda)=f(\\mu)-\\lambda g(\\mu)$$\nラグランジュの未定乗数法は，$\\nabla \\mathcal{L}=0$を満たす$\\mu$と$\\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．\n例1 $g(x,y)=2x\u002by\u002b1=0$という制約条件を満たすx,yで$f(x,y)=x^2\u002by^2$を最小化するものを求める．\n$$\\nabla f(x,y) = (2x,2y)$$\n$$\\lambda \\nabla g(x,y) = (2\\lambda, \\lambda)$$\nよって，\n $2x = 2\\lambda$ $2y = \\lambda$  さらに$g(x,y)=2x\u002by\u002b1=0$を用いて計算すると，$x=-2\/5,y=-1\/5,$となる．\n多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\\sum_{j=1}^k\\mu_j-1$となる．\n$$f= \\frac{(\\sum_{j=1}^kx_j)!}{\\Pi_{j=1}^kx_j!}\\Pi_{j=1}^k\\mu_j^{x_j}$$\n$$g=\\sum_{j=1}^k\\mu_j-1$$\nラグランジュの未定乗数法より\n$$\\nabla (\\frac{(\\sum_{j=1}^kx_j)!}{\\Pi_{j=1}^kx_j!}\\Pi_{j=1}^k\\mu_j^{x_j})=\\lambda \\nabla(\\sum_{j=1}^k\\mu_j-1)$$\n両辺を$\\hat{\\mu}_h$で微分すると\n$$\\frac{x_h}{\\hat{\\mu}_h}=\\lambda$$\n制約条件を用いて$\\lambda$を求めると\n$$\\lambda = \\sum_{h=1}^k \\hat{\\mu}_h=m(試行の総和)$$\nしたがって，\n$$\\hat{\\mu}_j=\\frac{x_j}{\\lambda}= \\frac{x_j}{m}$$\n参考  手塚 太郎，\u0026quot;しくみがわかるベイズ統計と機械学習\u0026quot;  ",
   "inLanguage" : "en",
-  "wordCount":  18 ,
-  "datePublished" : "2021-03-16T13:00:23",
-  "dateModified" : "2021-03-16T13:00:23",
+  "wordCount":  64 ,
+  "datePublished" : "2021-03-16T15:00:23",
+  "dateModified" : "2021-03-16T15:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
   "keywords" : [ "ベイズ" ],
   "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/202103bayes\/7\/",
@@ -77,12 +103,43 @@
 }
 </script>
 
-<meta property="og:title" content="二項分布とその仲間たち" />
+<meta property="og:title" content="ラグランジュの未定数法" />
+<meta property="og:description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
+２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
+$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
+目的関数fを制約gのもとで解くことくを考えると．
+$$\nabla f(\mu) = \lambda \nabla g(\mu)$$
+が成り立ち，$\mu$が制約付き最適化の答えの候補となる． ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．
+ラグランジュ関数を以下のように定義すると，
+$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$
+ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．
+例1 $g(x,y)=2x&#43;y&#43;1=0$という制約条件を満たすx,yで$f(x,y)=x^2&#43;y^2$を最小化するものを求める．
+$$\nabla f(x,y) = (2x,2y)$$
+$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$
+よって，
+ $2x = 2\lambda$ $2y = \lambda$  さらに$g(x,y)=2x&#43;y&#43;1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．
+多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．
+$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$
+$$g=\sum_{j=1}^k\mu_j-1$$
+ラグランジュの未定乗数法より
+$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$
+両辺を$\hat{\mu}_h$で微分すると
+$$\frac{x_h}{\hat{\mu}_h}=\lambda$$
+制約条件を用いて$\lambda$を求めると
+$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$
+したがって，
+$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$
+参考  手塚 太郎，&quot;しくみがわかるベイズ統計と機械学習&quot;  ">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/202103bayes/7/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="とまとまとブログ" />
 
-  <meta name="twitter:title" content="二項分布とその仲間たち" />
+  <meta name="twitter:title" content="ラグランジュの未定数法" />
+  <meta name="twitter:description" content="制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．
+２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．
+$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$
+目的関数fを制約gのもとで解くことくを考えると．
+$$\nabla …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -234,7 +291,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>二項分布とその仲間たち</h1>
+                <h1>ラグランジュの未定数法</h1>
               
               
                 <hr class="small">
@@ -254,25 +311,44 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>#　ベルヌーイ分布
-まず，離散変数のとりうる値が2種，すなわち0か1のいずれかの値をとる場合を考える．
-1が現れる確率を$\mu$,0が現れる確率を$1-\mu$とする．$\mu$は0から1までをとる．このように定義される分布をベルヌーイ分布とよぶ．</p>
-<p>$$p(x|\mu)=\mu^x(1-\mu)^{1-x}$$</p>
-<p>このように確率変数を引数として，その値が確率であるような関数は確率質量関数とよばれる．</p>
-<h1 id="二項分布">二項分布</h1>
-<p>ベルヌーイ分布の試行回数を増やすことを考える．</p>
-<p>$$p(r|m,\mu)=\frac{m!}{r!(m-r)!}\mu^r(1-\mu)^{m-r}$$</p>
-<h1 id="多項分布">多項分布</h1>
-<p>サイコロの確率を考える場合，取りうる値を1から6まで拡張する必要がある．ベルヌーイ分布や二項分布を一般化したものの多項分布とよぶ．</p>
-<p>$$p(x|\mu)=p(x_1,x_2,&hellip;,x_k|\mu_1,\mu_2,&hellip;,\mu_k)=\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}
-\Pi_{j=1}^k\mu_{j}^{x_j}$$</p>
-<p>m=1の場合をマルチヌーイ分布とよぶ．</p>
-<p>$$\mathcal{M}(x|\mu)=p(x|\mu)=\Pi_{j=1}^k\mu_j^{x_j}$$</p>
-<p><img src="././%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%88%86%E5%B8%83.png" alt="多項式分布"></p>
+        <p>制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．</p>
+<p>２接線が重なる点を求めるには勾配を求めることが有効である．
+勾配は勾配作用素$\nabla$を用いて以下のように定義される．</p>
+<p>$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$</p>
+<p>目的関数fを制約gのもとで解くことくを考えると．</p>
+<p>$$\nabla f(\mu) = \lambda \nabla g(\mu)$$</p>
+<p>が成り立ち，$\mu$が制約付き最適化の答えの候補となる．
+ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．</p>
+<p>ラグランジュ関数を以下のように定義すると，</p>
+<p>$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$</p>
+<p>ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．</p>
+<h2 id="例1">例1</h2>
+<p>$g(x,y)=2x+y+1=0$という制約条件を満たすx,yで$f(x,y)=x^2+y^2$を最小化するものを求める．</p>
+<p>$$\nabla f(x,y) = (2x,2y)$$</p>
+<p>$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$</p>
+<p>よって，</p>
+<ul>
+<li>$2x = 2\lambda$</li>
+<li>$2y = \lambda$</li>
+</ul>
+<p>さらに$g(x,y)=2x+y+1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．</p>
+<h1 id="多項分布の最尤推定">多項分布の最尤推定</h1>
+<p>ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．</p>
+<p>$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$</p>
+<p>$$g=\sum_{j=1}^k\mu_j-1$$</p>
+<p>ラグランジュの未定乗数法より</p>
+<p>$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$</p>
+<p>両辺を$\hat{\mu}_h$で微分すると</p>
+<p>$$\frac{x_h}{\hat{\mu}_h}=\lambda$$</p>
+<p>制約条件を用いて$\lambda$を求めると</p>
+<p>$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$</p>
+<p>したがって，</p>
+<p>$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$</p>
 <h1 id="参考">参考</h1>
 <ul>
 <li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
 </ul>
+
 
         
           <div class="blog-tags">
@@ -292,7 +368,7 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;text=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;text=%e3%83%a9%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%b8%e3%83%a5%e3%81%ae%e6%9c%aa%e5%ae%9a%e6%95%b0%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -306,28 +382,28 @@
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e3%83%a9%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%b8%e3%83%a5%e3%81%ae%e6%9c%aa%e5%ae%9a%e6%95%b0%e6%b3%95" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e3%83%a9%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%b8%e3%83%a5%e3%81%ae%e6%9c%aa%e5%ae%9a%e6%95%b0%e6%b3%95" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;title=%e3%83%a9%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%b8%e3%83%a5%e3%81%ae%e6%9c%aa%e5%ae%9a%e6%95%b0%e6%b3%95" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;description=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f202103bayes%2f7%2f&amp;description=%e3%83%a9%e3%82%b0%e3%83%a9%e3%83%b3%e3%82%b8%e3%83%a5%e3%81%ae%e6%9c%aa%e5%ae%9a%e6%95%b0%e6%b3%95" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -349,15 +425,15 @@
                   <ul>
                 
                 
+                    <li><a href="/posts/202103bayes/8/">共役事前分布</a></li>
+                
+                    <li><a href="/posts/202103bayes/6/">二項分布とその仲間たち</a></li>
+                
                     <li><a href="/posts/202103bayes/5/">ベイズ推定</a></li>
                 
                     <li><a href="/posts/202103bayes/4/">正規分布における最尤推定</a></li>
                 
                     <li><a href="/posts/202103bayes/3/">正規分布(ガウス分布)</a></li>
-                
-                    <li><a href="/posts/202103bayes/2/">確率の基礎</a></li>
-                
-                    <li><a href="/posts/202103bayes/1/">統計学と機械学習の用語</a></li>
                 
               </ul>
 
@@ -369,13 +445,9 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/202103bayes/4/" data-toggle="tooltip" data-placement="top" title="正規分布における最尤推定">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/202103bayes/8/" data-toggle="tooltip" data-placement="top" title="共役事前分布">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/202103bayes/5/" data-toggle="tooltip" data-placement="top" title="ベイズ推定">Next Post &rarr;</a>
-            </li>
           
         </ul>
       

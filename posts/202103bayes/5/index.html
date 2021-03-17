@@ -58,7 +58,7 @@
   "headline": "ベイズ推定",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  55 ,
+  "wordCount":  54 ,
   "datePublished" : "2021-03-16T13:00:23",
   "dateModified" : "2021-03-16T13:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -281,7 +281,7 @@ $p(x)=\int p(x,\theta')d\theta'=\int p(x|\theta')P(\theta')d\theta'$
 </ul>
 <h1 id="map推定">MAP推定</h1>
 <p>事後確率$p(\theta|x)$を最大にする最尤推定量$\theta$を求める．</p>
-<p>$$\hat{\theta}<em>{MAP}=arg\max</em>\theta p(\theta|x)=arg\max_\theta \frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
+<p>$$\hat{\theta}<em>{MAP}=\arg\max</em>\theta p(\theta|x)=\arg\max_{\theta}\frac{p(x|\theta)p(\theta)}{p(x)}$$</p>
 <h1 id="ベイズ推定">ベイズ推定</h1>
 <p>MAP推定では，事後分布$p(\theta|x)$を最も大きくする$\theta$の値が推定量$\hat{\theta}_{MAP}$として点推定される．しかし，これでは予測値の分布がわからない．
 そこで，ベイズ推定では$\theta$をひとつに求めるのではなく，事後分布$p(\theta|x)$を使って予測を行う．</p>
@@ -376,15 +376,15 @@ $p(x)=\int p(x,\theta')d\theta'=\int p(x|\theta')P(\theta')d\theta'$
                   <ul>
                 
                 
+                    <li><a href="/posts/202103bayes/7/">ラグランジュの未定数法</a></li>
+                
+                    <li><a href="/posts/202103bayes/8/">共役事前分布</a></li>
+                
                     <li><a href="/posts/202103bayes/6/">二項分布とその仲間たち</a></li>
                 
                     <li><a href="/posts/202103bayes/4/">正規分布における最尤推定</a></li>
                 
                     <li><a href="/posts/202103bayes/3/">正規分布(ガウス分布)</a></li>
-                
-                    <li><a href="/posts/202103bayes/2/">確率の基礎</a></li>
-                
-                    <li><a href="/posts/202103bayes/1/">統計学と機械学習の用語</a></li>
                 
               </ul>
 
