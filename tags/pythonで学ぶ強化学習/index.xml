@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pythonで学ぶ強化学習 on yuhi-sa</title>
+    <link>https://yuhi-sa.github.io/tags/python%E3%81%A7%E5%AD%A6%E3%81%B6%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/</link>
+    <description>Recent content in Pythonで学ぶ強化学習 on yuhi-sa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 18 Mar 2021 18:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python%E3%81%A7%E5%AD%A6%E3%81%B6%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>強化学習とは</title>
+      <link>https://yuhi-sa.github.io/posts/20210319/1/</link>
+      <pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319/1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
