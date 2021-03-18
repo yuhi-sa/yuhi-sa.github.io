@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>PID制御 - yuhi-sa</title>
+  <title>変分オートエンコーダ(VAE) - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210318\/1\/",
-          "name": "Pid制御"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/13\/",
+          "name": "変分オートエンコーダ( vae)"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "PID制御",
+  "headline": "変分オートエンコーダ(VAE)",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  16 ,
-  "datePublished" : "2021-03-18T15:00:23",
-  "dateModified" : "2021-03-18T15:00:23",
+  "wordCount":  41 ,
+  "datePublished" : "2021-03-18T12:00:23",
+  "dateModified" : "2021-03-18T12:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "制御" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210318\/1\/",
+  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/13\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="PID制御" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210318/1/" />
+<meta property="og:title" content="変分オートエンコーダ(VAE)" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/13/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="PID制御" />
+  <meta name="twitter:title" content="変分オートエンコーダ(VAE)" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -234,7 +234,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>PID制御</h1>
+                <h1>変分オートエンコーダ(VAE)</h1>
               
               
                 <hr class="small">
@@ -254,27 +254,49 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="pid制御とは">PID制御とは</h1>
-<p>あるシステムを制御の出力値$y(t)$を制御するために，制御対象の出力をコントローラにフィードバックさせて，その情報をもとに制御する手法がある(フィードバック制御)．フィードバック制御では，出力値$y(t)$と目標値$r(t)$との偏差$e(t)$に基づいて操作量の計算を行うことで，制御系の安定化，目標値への追従性の向上，外乱抑制が可能となる．</p>
-<h1 id="p制御">P制御</h1>
-<p>P制御の入力値$u(t)$は以下の式で与えられる．このとき，$e(t)=r(t)-y(t)$とする．</p>
-<p>$$u(t)=K_Pe(t)$$</p>
-<p>$K_p$を大きくすると，偏差は小さくなる．しかし，$K_p$を大きくすると，応答が振動的になり，最終的には制御が不安定となり発散してしまう．また，偏差が小さくなると，入力値が消失するため，定常偏差(定常状態での偏差)を完全になくすことはできない．</p>
-<h1 id="pi制御">PI制御</h1>
-<p>PI制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$ u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau$$</p>
-<p>I制御は，偏差の積分値をフィードバックするため，偏差が小さくなったとしても入力値が消失することはない．これにより，定常偏差を解消する．ただし，積分動作により位相が遅れてしまうため出力値が急激に変化した場合，オーバーシュートやハンチングが生じることがある．</p>
-<h1 id="pid制御">PID制御</h1>
-<p>PID制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau+K_D\frac{de(t)}{dt}$$</p>
-<p>D制御は，偏差の微分値をフィードバックするため，出力値の急激な変化に対して早めに偏差の増減を抑制し，応答の遅れを改善することができる．</p>
-<p>PID制御は，偏差のP「現在」，I「過去」，D「未来」に基づいて制御することにより，安定性，追従性，即応性を満足する制御系を構成することができる．PID制御では，$K_P$，$K_I$，$K_D$のパラメータを適切に決定することが求められる．</p>
-<p><img src=".././PID.png" alt="ブロック線図"></p>
+        <p>EMアルゴリズムでは，完全データの分布$p(z|x,\theta)$と不完全データの分布$p(z|x,\hat{\theta})$の関数系は同じであった．
+VAEでは，2つの分布の関数系が異なってもよいという一般化を行う．
+そのため以下の表記では，</p>
+<ul>
+<li>$p(z|x,\hat{\theta})$を認識モデル(エンコーダ)$q_\Phi(z|x)$</li>
+<li>$p(z|x,\theta)$を生成モデル(デコーダ)$p_\theta(x|z)$</li>
+</ul>
+<p>とする．
+また，潜在変数$z$は観測値$x$の持つ情報を別の形で表現しているため符号(コード)とよぶ．</p>
+<h1 id="オートエンコーダ自己符号化器">オートエンコーダ(自己符号化器)</h1>
+<p>オートエンコーダは，入力と出力が一致するようにパラメータの学習を行う装置である．VAEは変分下界を使って訓練を行うオートエンコーダである．</p>
+<p>入力と同じ内容を出力する装置では中間的な層において符号化が行われており，これは情報圧縮をしていることに相当する．</p>
+<h1 id="vaeにおける変分下界">VAEにおける変分下界</h1>
+<p>EMアルゴリズムで使用した変分下界を$\theta$と$\phi$を用いて書き直す．</p>
+<p>$$\mathcal{B}(\theta,\phi)=\sum_{i=1}^n(\mathbb{E}_{q_\phi(z^{(i)}|x^{(i)})}[\log p_\theta (x^{(\theta)}|z^{(i)})]-\mathcal{D}(q_\phi(z^{(i)}|x^{(i)})||p_\theta(z^{(i)}))$$</p>
+<p>EMアルゴリズムによる混合ガウスモデルの学習では$z$はone-hotベクトルとしたが，VAEでは連続値である．よって$z$は多変量正規分布に従うモデルを用いる．</p>
+<h2 id="認識モデル">認識モデル</h2>
+<p>VAEでは認識モデル$q_\Phi(z|x)$として以下のように定義される多変量正規分布を用いる．</p>
+<p>$$q_\Phi(z|x)=\Pi_{j=1}^k\mathcal{N}(z_j|\mu_j(x),\sigma^2(x))$$</p>
+<p>$\mu_j,\sigma_j^2$としてニューラルネットワークを使用するのが一般的である．</p>
+<h2 id="生成モデル">生成モデル</h2>
+<p>生成モデル$p_\theta(x|z)$としてどのような確率分布が使われるかは$x$がどのような変数であるかに依存する．$x$がone-hot表現であればマルチヌーイ分布が使える．$x$が連続値ベクトルの場合，以下のように分散を1とする多変量正規分布が使える．</p>
+<p>$$p_\theta(x|z)=\Pi_{h=1}^m \mathcal{N}(x_h|\nu_h(z),1)$$</p>
+<h2 id="符号の事前分布">符号の事前分布</h2>
+<p>標準正規分布の積を使用することが多い．</p>
+<p>$$p_\theta(z)=\Pi_{j=1}^k\mathcal{N}(z_j|0,1)$$</p>
+<h1 id="勾配降下法">勾配降下法</h1>
+<p>VAEの学習は変分下界が増加していくように，パラメータ$\theta$と$\phi$を変えていくことで行われる．
+具体的には$\mathcal{B}(\theta,\phi)$の$\theta$と$\phi$での微分，すなわち勾配を求め，勾配方向にパラメータを少しづつ変える．</p>
+<p>事前分布を上記のように定義した場合は，事前分布に$\theta$を使わないため，$\mathcal{D}(q_\phi(z|x)||p_\theta(z))$は$\theta$を含まない．そのため$\theta$による勾配は不要である．$\phi$による勾配は合成関数の微分を使うと以下のように展開される．</p>
+<p>$$\nabla_\phi \mathcal{D}(q_\phi(z|x)||p_\theta(z))=\sum_{j=1}^k
+(\frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\mu_j}\nabla_\theta \mu_j
++
+\frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\sigma_j^2}\nabla_\theta \sigma_j^2)$$</p>
+<h1 id="参考">参考</h1>
+<ul>
+<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+</ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E5%88%B6%E5%BE%A1/">制御</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
             
           </div>
         
@@ -289,42 +311,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;text=PID%e5%88%b6%e5%be%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f&amp;text=%e5%a4%89%e5%88%86%e3%82%aa%e3%83%bc%e3%83%88%e3%82%a8%e3%83%b3%e3%82%b3%e3%83%bc%e3%83%80%28VAE%29&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f&amp;title=%e5%a4%89%e5%88%86%e3%82%aa%e3%83%bc%e3%83%88%e3%82%a8%e3%83%b3%e3%82%b3%e3%83%bc%e3%83%80%28VAE%29" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f&amp;title=%e5%a4%89%e5%88%86%e3%82%aa%e3%83%bc%e3%83%88%e3%82%a8%e3%83%b3%e3%82%b3%e3%83%bc%e3%83%80%28VAE%29" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f&amp;title=%e5%a4%89%e5%88%86%e3%82%aa%e3%83%bc%e3%83%88%e3%82%a8%e3%83%b3%e3%82%b3%e3%83%bc%e3%83%80%28VAE%29" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;description=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f13%2f&amp;description=%e5%a4%89%e5%88%86%e3%82%aa%e3%83%bc%e3%83%88%e3%82%a8%e3%83%b3%e3%82%b3%e3%83%bc%e3%83%80%28VAE%29" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -346,7 +368,15 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20200901/20200901/">フィルタまとめ</a></li>
+                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
+                
+                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
+                
+                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
+                
+                    <li><a href="/posts/20210317/9/">EMアルゴリズム</a></li>
+                
+                    <li><a href="/posts/20210317/8/">共役事前分布</a></li>
                 
               </ul>
 
@@ -358,12 +388,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/13/" data-toggle="tooltip" data-placement="top" title="変分オートエンコーダ(VAE)">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210317/12/" data-toggle="tooltip" data-placement="top" title="マルコフ連鎖モンテカルロ法(MCMC)">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210318/2/" data-toggle="tooltip" data-placement="top" title="K-means法">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20210318/1/" data-toggle="tooltip" data-placement="top" title="PID制御">Next Post &rarr;</a>
             </li>
           
         </ul>

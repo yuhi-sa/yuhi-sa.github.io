@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>PID制御 - yuhi-sa</title>
+  <title>二項分布とその仲間たち - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210318\/1\/",
-          "name": "Pid制御"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/6\/",
+          "name": "二項分布とその仲間たち"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "PID制御",
+  "headline": "二項分布とその仲間たち",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  16 ,
-  "datePublished" : "2021-03-18T15:00:23",
-  "dateModified" : "2021-03-18T15:00:23",
+  "wordCount":  17 ,
+  "datePublished" : "2021-03-16T14:00:23",
+  "dateModified" : "2021-03-16T14:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "制御" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210318\/1\/",
+  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/6\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="PID制御" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210318/1/" />
+<meta property="og:title" content="二項分布とその仲間たち" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/6/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="PID制御" />
+  <meta name="twitter:title" content="二項分布とその仲間たち" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.81.0" />
@@ -234,7 +234,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>PID制御</h1>
+                <h1>二項分布とその仲間たち</h1>
               
               
                 <hr class="small">
@@ -254,27 +254,30 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="pid制御とは">PID制御とは</h1>
-<p>あるシステムを制御の出力値$y(t)$を制御するために，制御対象の出力をコントローラにフィードバックさせて，その情報をもとに制御する手法がある(フィードバック制御)．フィードバック制御では，出力値$y(t)$と目標値$r(t)$との偏差$e(t)$に基づいて操作量の計算を行うことで，制御系の安定化，目標値への追従性の向上，外乱抑制が可能となる．</p>
-<h1 id="p制御">P制御</h1>
-<p>P制御の入力値$u(t)$は以下の式で与えられる．このとき，$e(t)=r(t)-y(t)$とする．</p>
-<p>$$u(t)=K_Pe(t)$$</p>
-<p>$K_p$を大きくすると，偏差は小さくなる．しかし，$K_p$を大きくすると，応答が振動的になり，最終的には制御が不安定となり発散してしまう．また，偏差が小さくなると，入力値が消失するため，定常偏差(定常状態での偏差)を完全になくすことはできない．</p>
-<h1 id="pi制御">PI制御</h1>
-<p>PI制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$ u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau$$</p>
-<p>I制御は，偏差の積分値をフィードバックするため，偏差が小さくなったとしても入力値が消失することはない．これにより，定常偏差を解消する．ただし，積分動作により位相が遅れてしまうため出力値が急激に変化した場合，オーバーシュートやハンチングが生じることがある．</p>
-<h1 id="pid制御">PID制御</h1>
-<p>PID制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau+K_D\frac{de(t)}{dt}$$</p>
-<p>D制御は，偏差の微分値をフィードバックするため，出力値の急激な変化に対して早めに偏差の増減を抑制し，応答の遅れを改善することができる．</p>
-<p>PID制御は，偏差のP「現在」，I「過去」，D「未来」に基づいて制御することにより，安定性，追従性，即応性を満足する制御系を構成することができる．PID制御では，$K_P$，$K_I$，$K_D$のパラメータを適切に決定することが求められる．</p>
-<p><img src=".././PID.png" alt="ブロック線図"></p>
+        <p><img src=".././%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%88%86%E5%B8%83.png" alt="多項式分布"></p>
+<h1 id="ベルヌーイ分布">ベルヌーイ分布</h1>
+<p>まず，離散変数のとりうる値が2種，すなわち0か1のいずれかの値をとる場合を考える．
+1が現れる確率を$\mu$,0が現れる確率を$1-\mu$とする．$\mu$は0から1までをとる．このように定義される分布をベルヌーイ分布とよぶ．</p>
+<p>$$p(x|\mu)=\mu^x(1-\mu)^{1-x}$$</p>
+<p>このように確率変数を引数として，その値が確率であるような関数は確率質量関数とよばれる．</p>
+<h1 id="二項分布">二項分布</h1>
+<p>ベルヌーイ分布の試行回数を増やすことを考える．</p>
+<p>$$p(r|m,\mu)=\frac{m!}{r!(m-r)!}\mu^r(1-\mu)^{m-r}$$</p>
+<h1 id="多項分布">多項分布</h1>
+<p>サイコロの確率を考える場合，取りうる値を1から6まで拡張する必要がある．ベルヌーイ分布や二項分布を一般化したものの多項分布とよぶ．</p>
+<p>$$p(x|\mu)=p(x_1,x_2,&hellip;,x_k|\mu_1,\mu_2,&hellip;,\mu_k)=\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}
+\Pi_{j=1}^k\mu_{j}^{x_j}$$</p>
+<p>$m=1$の場合をマルチヌーイ分布とよぶ．</p>
+<p>$$\mathcal{M}(x|\mu)=p(x|\mu)=\Pi_{j=1}^k\mu_j^{x_j}$$</p>
+<h1 id="参考">参考</h1>
+<ul>
+<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+</ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E5%88%B6%E5%BE%A1/">制御</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
             
           </div>
         
@@ -289,42 +292,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;text=PID%e5%88%b6%e5%be%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;text=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318%2f1%2f&amp;description=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;description=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -346,7 +349,15 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20200901/20200901/">フィルタまとめ</a></li>
+                    <li><a href="/posts/20210317/13/">変分オートエンコーダ(VAE)</a></li>
+                
+                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
+                
+                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
+                
+                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
+                
+                    <li><a href="/posts/20210317/9/">EMアルゴリズム</a></li>
                 
               </ul>
 
@@ -358,12 +369,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/13/" data-toggle="tooltip" data-placement="top" title="変分オートエンコーダ(VAE)">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210317/5/" data-toggle="tooltip" data-placement="top" title="ベイズ推定">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210318/2/" data-toggle="tooltip" data-placement="top" title="K-means法">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20210317/7/" data-toggle="tooltip" data-placement="top" title="ラグランジュの未定数法">Next Post &rarr;</a>
             </li>
           
         </ul>
