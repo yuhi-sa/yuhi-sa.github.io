@@ -5,7 +5,25 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on とまとまとブログ</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 17 Mar 2021 13:05:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Mar 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>マルコフ連鎖モンテカルロ法(MCMC)</title>
+      <link>https://yuhi-sa.github.io/posts/202103bayes/12/</link>
+      <pubDate>Thu, 18 Mar 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/202103bayes/12/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>変分ベイズ</title>
+      <link>https://yuhi-sa.github.io/posts/202103bayes/11/</link>
+      <pubDate>Thu, 18 Mar 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/202103bayes/11/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>EMアルゴリズム2(変分下界とKLダイバージェンス)</title>
       <link>https://yuhi-sa.github.io/posts/202103bayes/10/</link>
