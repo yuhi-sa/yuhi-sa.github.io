@@ -12,24 +12,7 @@
       <pubDate>Thu, 18 Mar 2021 12:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/202103bayes/13/</guid>
-      <description>EMアルゴリズムでは，完全データの分布$p(z|x,\theta)$と不完全データの分布$p(z|x,\hat{\theta})$の関数系は同じであった． VAEでは，2つの分布の関数系が異なってもよいという一般化を行う． そのため以下の表記では，
- $p(z|x,\hat{\theta})$を認識モデル(エンコーダ)$q_\Phi(z|x)$ $p(z|x,\theta)$を生成モデル(デコーダ)$p_\theta(x|z)$  とする． また，潜在変数$z$は観測値$x$の持つ情報を別の形で表現しているため符号(コード)とよぶ．
-オートエンコーダ(自己符号化器) オートエンコーダは，入力と出力が一致するようにパラメータの学習を行う装置である．VAEは変分下界を使って訓練を行うオートエンコーダである．
-入力と同じ内容を出力する装置では中間的な層において符号化が行われており，これは情報圧縮をしていることに相当する．
-VAEにおける変分下界 EMアルゴリズムで使用した変分下界を$\theta$と$\phi$を用いて書き直す．
-$$\mathcal{B}(\theta,\phi)=\sum_{i=1}^n(\mathbb{E}_{q_\phi(z^{(i)}|x^{(i)})}[\log p_\theta (x^{(\theta)}|z^{(i)})]-\mathcal{D}(q_\phi(z^{(i)}|x^{(i)})||p_\theta(z^{(i)}))$$
-EMアルゴリズムによる混合ガウスモデルの学習では$z$はone-hotベクトルとしたが，VAEでは連続値である．よって$z$は多変量正規分布に従うモデルを用いる．
-認識モデル VAEでは認識モデル$q_\Phi(z|x)$として以下のように定義される多変量正規分布を用いる．
-$$q_\Phi(z|x)=\Pi_{j=1}^k\mathcal{N}(z_j|\mu_j(x),\sigma^2(x))$$
-$\mu_j,\sigma_j^2$としてニューラルネットワークを使用するのが一般的である．
-生成モデル 生成モデル$p_\theta(x|z)$としてどのような確率分布が使われるかは$x$がどのような変数であるかに依存する．$x$がone-hot表現であればマルチヌーイ分布が使える．$x$が連続値ベクトルの場合，以下のように分散を1とする多変量正規分布が使える．
-$$p_\theta(x|z)=\Pi_{h=1}^m \mathcal{N}(x_h|\nu_h(z),1)$$
-符号の事前分布 標準正規分布の積を使用することが多い．
-$$p_\theta(z)=\Pi_{j=1}^k\mathcal{N}(z_j|0,1)$$
-勾配降下法 VAEの学習は変分下界が増加していくように，パラメータ$\theta$と$\phi$を変えていくことで行われる． 具体的には$\mathcal{B}(\theta,\phi)$の$\theta$と$\phi$での微分，すなわち勾配を求め，勾配方向にパラメータを少しづつ変える．
-事前分布を上記のように定義した場合は，事前分布に$\theta$を使わないため，$\mathcal{D}(q_\phi(z|x)||p_\theta(z))$は$\theta$を含まない．そのため$\theta$による勾配は不要である．$\phi$による勾配は合成関数の微分を使うと以下のように展開される．
-$$\nabla_\phi \mathcal{D}(q_\phi(z|x)||p_\theta(z))=\sum_{j=1}^k (\frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\mu_j}\nabla_\theta \mu_j + \frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\sigma_j^2}\nabla_\theta \sigma_j^2)$$
-参考  手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot;  </description>
+      <description></description>
     </item>
     
     <item>

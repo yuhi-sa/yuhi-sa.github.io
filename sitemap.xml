@@ -105,7 +105,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210215_2/20210215_2/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210215/20210215/</loc>
   
   <lastmod>2021-02-15T13:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -113,7 +113,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210215/20210215/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210215_2/20210215_2/</loc>
   
   <lastmod>2021-02-15T13:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -153,14 +153,6 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210107_2/20210107_2/</loc>
-  
-  <lastmod>2021-01-07T15:17:23+09:00</lastmod>
-  <changefreq>weekly</changefreq>
-  
-</url>
-
-<url>
   <loc>https://yuhi-sa.github.io/posts/20210107/20210107/</loc>
   
   <lastmod>2021-01-07T15:17:23+09:00</lastmod>
@@ -169,7 +161,15 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20201223/20201223/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210107_2/20210107_2/</loc>
+  
+  <lastmod>2021-01-07T15:17:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/posts/20201223_2/20201223_2/</loc>
   
   <lastmod>2020-12-23T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -177,7 +177,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20201223_2/20201223_2/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20201223/20201223/</loc>
   
   <lastmod>2020-12-23T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
