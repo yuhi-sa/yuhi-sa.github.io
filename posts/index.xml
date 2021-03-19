@@ -5,30 +5,23 @@
     <link>https://yuhi-sa.github.io/posts/</link>
     <description>Recent content in Posts on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 18 Mar 2021 19:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Mar 2021 12:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>モデルフリー強化学習</title>
+      <link>https://yuhi-sa.github.io/posts/20210319/3/</link>
+      <pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319/3/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>モデルベース強化学習</title>
       <link>https://yuhi-sa.github.io/posts/20210319/2/</link>
       <pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210319/2/</guid>
-      <description>強化学習は，価値評価と方策の学習が必要であり，モデルを利用するかどうかで2種類に別れます．
- モデルベース強化学習：モデル(遷移関数$T(s&#39;|s,a)$・報酬関数$R(s,s&#39;)$)をベースに行動を学習する手法(遷移関数・報酬関数が既知でなくても推定して利用可) モデルフリー強化学習：モデル(遷移関数・報酬関数)を使わない学習  以下は，モデルベースについてまとめる．
-価値の定義 価値の定義には2つの問題がある．
- 将来の即時報酬$G_{t}$の値が判明している必要がある点
-→価値を再帰的な式に変換する
-$G_t=r_{t+1}+\gamma G_{t+1}$ それが必ず得られるとしている点
-→即時報酬に確率をかける(期待値計算と同義)
-$V_\pi(s_t)=E_\pi[r_{t+1}+\gamma V_\pi(s_{t+1})]$  ベルマン方程式 価値を再帰的かつ期待値で表現した式をベルマン方程式とよぶ． $$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&#39;}T(s&#39;|s,a)(R(s,s&#39;)+\gamma V_\pi(s&#39;))$$
-学習 動的計画法の枠組みでの学習を考える．動的計画法では$V(s&#39;)$に適当な値を設定しておき，複数回計算を繰り返すことで値の精度を上げる．
-動的計画法による最適行動の獲得では，価値を直接行動決定に利用する価値ベース，価値を方策の評価に利用する方策ベースの2種類がある．
-価値ベース エージェントは各状態の価値を算出し，値が最も高い状態に遷移するように行動する．
-動的計画法により各状態の価値を算出する方法を価値反復法とよぶ． $$V_{t+1}(s)=\max_{a}{\sum_{s&#39;}T(s&#39;|s,a)(R(s)+\gamma V_t{s&#39;})}$$
-方策ベース エージェントは方策に基づき行動する．
-方策は状態における行動確率を出力するが，この行動確率から価値の計算が可能になる． 方策により価値を計算し，価値を最大化するように方策を更新する．これを方策反復法とよぶ．
-$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&#39;}T(s&#39;|s,a)(R(s,s&#39;),\gamma V_\pi(s&#39;))$$
-モデルベースとモデルフリーの違い モデルベースの動的計画法において，エージェントは動かさないで環境の情報のみから方策を得ている．これが可能なのは，遷移関数と報酬関数が既知だからである． モデルフリーでは，実際にエージェントを動かしその経験から学習を行う．
-参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
+      <description></description>
     </item>
     
     <item>
