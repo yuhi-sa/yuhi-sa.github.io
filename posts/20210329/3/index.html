@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>[Python]2進数変換と論理演算(or,xor) - yuhi-sa</title>
-  <meta name="description" content="2進数変換 def binBin(num1,num2): binNum1 = list(bin(num1)) binNum1.pop(0) binNum1.pop(0) binNum2 = list(bin(num2)) binNum2.pop(0) binNum2.pop(0) while(len(binNum1) != len(binNum2)): if len(binNum1) &lt; len(binNum2): binNum1.insert(0,0) elif len(binNum2) &lt; len(binNum1): binNum1.insert(0,0) return binNum1, binNum2 10進数変換 def binNum(binNum): Num = 0 for i in range(len(binNum)): if int(binNum[len(binNum)-i-1]) == 1: Num &#43;= pow(2,i) return Num or計算 def orCal(num1,num2): binNum1, binNum2 = binBin(num1,num2) # orの計算 orValue = [] for i in range(len(binNum1)): if int(binNum1[i]) == 1 or int(binNum2[i]) == 1: orValue.">
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,7 +56,7 @@
     "name" : "yuhi-sa"
   },
   "headline": "[Python]2進数変換と論理演算(or,xor)",
-  "description" : "2進数変換 def binBin(num1,num2): binNum1 = list(bin(num1)) binNum1.pop(0) binNum1.pop(0) binNum2 = list(bin(num2)) binNum2.pop(0) binNum2.pop(0) while(len(binNum1) != len(binNum2)): if len(binNum1) \u0026lt; len(binNum2): binNum1.insert(0,0) elif len(binNum2) \u0026lt; len(binNum1): binNum1.insert(0,0) return binNum1, binNum2 10進数変換 def binNum(binNum): Num = 0 for i in range(len(binNum)): if int(binNum[len(binNum)-i-1]) == 1: Num \u002b= pow(2,i) return Num or計算 def orCal(num1,num2): binNum1, binNum2 = binBin(num1,num2) # orの計算 orValue = [] for i in range(len(binNum1)): if int(binNum1[i]) == 1 or int(binNum2[i]) == 1: orValue.",
+  "description" : "",
   "inLanguage" : "en",
   "wordCount":  112 ,
   "datePublished" : "2021-03-29T12:00:23",
@@ -79,13 +78,11 @@
 </script>
 
 <meta property="og:title" content="[Python]2進数変換と論理演算(or,xor)" />
-<meta property="og:description" content="2進数変換 def binBin(num1,num2): binNum1 = list(bin(num1)) binNum1.pop(0) binNum1.pop(0) binNum2 = list(bin(num2)) binNum2.pop(0) binNum2.pop(0) while(len(binNum1) != len(binNum2)): if len(binNum1) &lt; len(binNum2): binNum1.insert(0,0) elif len(binNum2) &lt; len(binNum1): binNum1.insert(0,0) return binNum1, binNum2 10進数変換 def binNum(binNum): Num = 0 for i in range(len(binNum)): if int(binNum[len(binNum)-i-1]) == 1: Num &#43;= pow(2,i) return Num or計算 def orCal(num1,num2): binNum1, binNum2 = binBin(num1,num2) # orの計算 orValue = [] for i in range(len(binNum1)): if int(binNum1[i]) == 1 or int(binNum2[i]) == 1: orValue.">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20210329/3/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
   <meta name="twitter:title" content="[Python]2進数変換と論理演算(or,xor)" />
-  <meta name="twitter:description" content="2進数変換 def binBin(num1,num2): binNum1 = list(bin(num1)) binNum1.pop(0) binNum1.pop(0) binNum2 = list(bin(num2)) binNum2.pop(0) binNum2.pop(0) while(len(binNum1) != len(binNum2)): if len(binNum1) &lt; …">
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.82.0" />
