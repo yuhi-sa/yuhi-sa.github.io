@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 22 Mar 2021 11:35:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>クロスエントロピー法(Cross Entropy Method)</title>
+      <link>https://yuhi-sa.github.io/posts/20210329/1/</link>
+      <pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210329/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>DNNを利用した強化学習の仲間たち</title>
       <link>https://yuhi-sa.github.io/posts/20210319/7/</link>

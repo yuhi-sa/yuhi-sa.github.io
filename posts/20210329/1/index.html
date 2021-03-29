@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>二項分布とその仲間たち - yuhi-sa</title>
+  <title>クロスエントロピー法(Cross Entropy Method) - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/6\/",
-          "name": "二項分布とその仲間たち"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210329\/1\/",
+          "name": "クロスエントロピー法( cross entropy method)"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "二項分布とその仲間たち",
+  "headline": "クロスエントロピー法(Cross Entropy Method)",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  17 ,
-  "datePublished" : "2021-03-16T14:00:23",
-  "dateModified" : "2021-03-16T14:00:23",
+  "wordCount":  35 ,
+  "datePublished" : "2021-03-29T11:00:23",
+  "dateModified" : "2021-03-29T11:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/6\/",
+  "keywords" : [ "機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210329\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="二項分布とその仲間たち" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/6/" />
+<meta property="og:title" content="クロスエントロピー法(Cross Entropy Method)" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210329/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="二項分布とその仲間たち" />
+  <meta name="twitter:title" content="クロスエントロピー法(Cross Entropy Method)" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.82.0" />
@@ -234,7 +234,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>二項分布とその仲間たち</h1>
+                <h1>クロスエントロピー法(Cross Entropy Method)</h1>
               
               
                 <hr class="small">
@@ -254,30 +254,39 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p><img src=".././%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%88%86%E5%B8%83.png" alt="多項式分布"></p>
-<h1 id="ベルヌーイ分布">ベルヌーイ分布</h1>
-<p>まず，離散変数のとりうる値が2種，すなわち0か1のいずれかの値をとる場合を考える．
-1が現れる確率を$\mu$,0が現れる確率を$1-\mu$とする．$\mu$は0から1までをとる．このように定義される分布をベルヌーイ分布とよぶ．</p>
-<p>$$p(x|\mu)=\mu^x(1-\mu)^{1-x}$$</p>
-<p>このように確率変数を引数として，その値が確率であるような関数は確率質量関数とよばれる．</p>
-<h1 id="二項分布">二項分布</h1>
-<p>ベルヌーイ分布の試行回数を増やすことを考える．</p>
-<p>$$p(r|m,\mu)=\frac{m!}{r!(m-r)!}\mu^r(1-\mu)^{m-r}$$</p>
-<h1 id="多項分布">多項分布</h1>
-<p>サイコロの確率を考える場合，取りうる値を1から6まで拡張する必要がある．ベルヌーイ分布や二項分布を一般化したものの多項分布とよぶ．</p>
-<p>$$p(x|\mu)=p(x_1,x_2,&hellip;,x_k|\mu_1,\mu_2,&hellip;,\mu_k)=\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}
-\Pi_{j=1}^k\mu_{j}^{x_j}$$</p>
-<p>$m=1$の場合をマルチヌーイ分布とよぶ．</p>
-<p>$$\mathcal{M}(x|\mu)=p(x|\mu)=\Pi_{j=1}^k\mu_j^{x_j}$$</p>
-<h1 id="参考">参考</h1>
+        <p>クロスエントロピー法は，モンテカルロ法における重点サンプリング法の一種となる．</p>
+<h1 id="モンテカルロサンプリング">モンテカルロサンプリング</h1>
+<p>モンテカルロ法は，乱数を用いる数値計算法の総称である．</p>
+<p>問題設定として，$X$を確率変数，$H$を目的の関数，$f$を$H$の$X$における確率密度関数とした場合，期待値</p>
+<p>$$l=\int H(x)f(x)dx = E[H(X)]$$</p>
+<p>を知りたいとする．
+モンテカルロサンプリングでは，以下のようにこれを近似する．</p>
+<p>$$l_{MS}=\frac{1}{N}\sum_{i=1}^{N}(X_i)$$</p>
+<h2 id="重点サンプリングimportance-sampling">重点サンプリング(Importance Sampling)</h2>
+<p>重点サンプリングでは，モンテカルロサンプリングより効率よくサンプリングを行うために，分散の小さい分布からサンプリングすることを考える．</p>
+<p>重点サンプリングでは，$g(x)=0$のとき$H(x)f(x)=0$となる，確率密度関数$g$を用意して以下のように推定量の近似を行う．</p>
+<p>$$l_{IS}=\frac{1}{N}\sum_{i=1}^NH(X_i)\frac{f(X_i)}{g(X_i)}=E[H(X)\frac{f(X)}{g(X)}]$$</p>
+<h2 id="クロスエントロピー法">クロスエントロピー法</h2>
+<p>クロスエントロピー法では，重点サンプリングでの$g$の最適分布$g^*$と近い分布を用いることを考える．</p>
+<p>ここで，確率分布間の距離を測る指標としてクロスエントロピーを用いる．クロスエントロピー$D$は，以下の式で表される．</p>
+<p>$$D(g,h)=\int \log \frac{g(x)}{h(x)}g(x)dx$$</p>
+<p>$D(g^<em>,h)$を最小にする$h$を求めれば，$g^</em>$に近い分布，つまり分散の小さい分布が獲得可能である．</p>
+<p>$$l_{CEM}=E[H(X)\frac{f(X;u)}{g(X;v)}]$$</p>
+<p>$$v^<em>=\arg \min_v D[g^</em>,g(x;v)]$$</p>
+<h1 id="参考文献">参考文献</h1>
 <ul>
-<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+<li>
+<p><a href="https://sci-tech.ksc.kwansei.ac.jp/~chiyonobu/gseminar/urushihara.pdf">漆原 勉,&ldquo;モンテカルロシミュレーションにおける重点サンプリング法に対する大偏差理論の適用について&rdquo;</a></p>
+</li>
+<li>
+<p><a href="https://nipponkaigi.net/wiki/Cross-entropy_method">クロスエントロピー法 - Cross-coupling reactionWikipedia  site:nipponkaigi.net</a></p>
+</li>
 </ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
             
           </div>
         
@@ -292,42 +301,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;text=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f&amp;text=%e3%82%af%e3%83%ad%e3%82%b9%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e6%b3%95%28Cross%20Entropy%20Method%29&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f&amp;title=%e3%82%af%e3%83%ad%e3%82%b9%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e6%b3%95%28Cross%20Entropy%20Method%29" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f&amp;title=%e3%82%af%e3%83%ad%e3%82%b9%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e6%b3%95%28Cross%20Entropy%20Method%29" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;title=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f&amp;title=%e3%82%af%e3%83%ad%e3%82%b9%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e6%b3%95%28Cross%20Entropy%20Method%29" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f6%2f&amp;description=%e4%ba%8c%e9%a0%85%e5%88%86%e5%b8%83%e3%81%a8%e3%81%9d%e3%81%ae%e4%bb%b2%e9%96%93%e3%81%9f%e3%81%a1" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210329%2f1%2f&amp;description=%e3%82%af%e3%83%ad%e3%82%b9%e3%82%a8%e3%83%b3%e3%83%88%e3%83%ad%e3%83%94%e3%83%bc%e6%b3%95%28Cross%20Entropy%20Method%29" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -349,15 +358,15 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20210317/13/">変分オートエンコーダ(VAE)</a></li>
+                    <li><a href="/posts/20210215/20210215/">[Pytorch]教師あり学習でニューラルネットワークを学習</a></li>
                 
-                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
+                    <li><a href="/posts/20210125/20210125/">[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
                 
-                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
+                    <li><a href="/posts/20210109/20210109/">[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
                 
-                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
+                    <li><a href="/posts/20210108/20210108/">[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</a></li>
                 
-                    <li><a href="/posts/20210317/9/">EMアルゴリズム</a></li>
+                    <li><a href="/posts/20210107/20210107/">[Matlab]粒子群最適化(PSO)とTCPSO</a></li>
                 
               </ul>
 
@@ -369,13 +378,9 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/5/" data-toggle="tooltip" data-placement="top" title="ベイズ推定">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210319/7/" data-toggle="tooltip" data-placement="top" title="DNNを利用した強化学習の仲間たち">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210317/7/" data-toggle="tooltip" data-placement="top" title="ラグランジュの未定数法">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
