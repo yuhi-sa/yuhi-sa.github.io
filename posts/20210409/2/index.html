@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Posts - yuhi-sa</title>
+  <title>Ubuntuのsshの設定 - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -28,13 +28,61 @@
   
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210409\/2\/",
+          "name": "Ubuntuのsshの設定"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "Ubuntuのsshの設定",
+  "description" : "",
+  "inLanguage" : "en",
+  "wordCount":  34 ,
+  "datePublished" : "2021-04-09T10:00:23",
+  "dateModified" : "2021-04-09T10:00:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "その他" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210409\/2\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
 
-<meta property="og:title" content="Posts" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/" />
+<meta property="og:title" content="Ubuntuのsshの設定" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210409/2/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="Posts" />
+  <meta name="twitter:title" content="Ubuntuのsshの設定" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.82.0" />
@@ -192,7 +240,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Posts</h1>
+                <h1>Ubuntuのsshの設定</h1>
               
               
                 <hr class="small">
@@ -208,186 +256,133 @@
 
 
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="posts-list">
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200831/20200831/">
-        <h2 class="post-title">強化学習の全体像まとめ</h2>
-        
-        
-        
-    </a>
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="sshの設定">sshの設定</h1>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo apt-get install aptitude
+$ sudo aptitude install ssh
+</code></pre></div><p>/etc/ssh/sshd_configを編集</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">PermitRootLogin no
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ sudo /etc/init.d/ssh restart
+</code></pre></div><h1 id="warningが発生した場合">warningが発生した場合</h1>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</code></pre></div><p>となった場合</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ssh-keygen -R ipアドレス
+</code></pre></div><p>で鍵情報を消す</p>
 
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on August 31, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
         
-        
-        <a href="https://yuhi-sa.github.io/posts/20200831/20200831/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/20200816/20200816/">
-        <h2 class="post-title">[ROS]PublisherとSubscriberを1つのノードに書く方法</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on August 16, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        
-        <a href="https://yuhi-sa.github.io/posts/20200816/20200816/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://yuhi-sa.github.io//tags/ros/">ROS</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/about/">
-        <h2 class="post-title">about</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on August 16, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        
-        <a href="https://yuhi-sa.github.io/posts/about/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://yuhi-sa.github.io/posts/quotations/">
-        <h2 class="post-title">いいなって思った言葉</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on August 16, 2020
-  
-  
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        
-        <a href="https://yuhi-sa.github.io/posts/quotations/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-
-</article>
-          
-        </div>
-        
-          <ul class="pager main-pager">
+          <div class="blog-tags">
             
-              <li class="previous">
-                <a href="https://yuhi-sa.github.io/posts/page/4/">&larr; Newer Posts</a>
-              </li>
+              <a href="https://yuhi-sa.github.io//tags/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a>&nbsp;
             
-            
-          </ul>
+          </div>
         
-      </div>
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f&amp;text=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409%2f2%2f&amp;description=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20210409/1/">UbuntuでローカルDNSサーバーが指定できないときの編集方法</a></li>
+                
+                    <li><a href="/posts/20210204/20210204/">markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20210405/1/" data-toggle="tooltip" data-placement="top" title="H無限大制御">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20210409/1/" data-toggle="tooltip" data-placement="top" title="UbuntuでローカルDNSサーバーが指定できないときの編集方法">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
     </div>
   </div>
+</div>
 
       
 <footer>
