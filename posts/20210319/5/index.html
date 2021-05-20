@@ -58,7 +58,7 @@
   "headline": "方策勾配法",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  32 ,
+  "wordCount":  30 ,
   "datePublished" : "2021-03-22T11:00:23",
   "dateModified" : "2021-03-22T11:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -267,7 +267,7 @@
 <p>$$\nabla J(\theta) \propto \sum_s d^{\pi_\theta}(s)\sum_a \nabla \pi_\theta(a|s)Q^{\pi_\theta}(s,a)$$</p>
 <p>$$\nabla\pi_\theta(a|s)=\pi_\theta(a|s)\frac{\nabla \pi_\theta(a|s)}{\pi_\theta (a|s)}=\pi_\theta(a|s)\nabla \log \pi_\theta(a|s)$$</p>
 <p>以上より，</p>
-<p>$$\nabla J(\theta) \propto \mathbb{E}<em>{\pi</em>{\theta}}[\nabla \log \pi_{\theta(a|s)}Q^{\pi_{\theta}}(s,a)]$$</p>
+<p>$$\nabla J(\theta) \propto E_{\pi_{\theta}}[\nabla\log\pi_{\theta(a|s)}Q^{\pi_{\theta}}(s,a)]$$</p>
 <p>勾配である$\nabla \log \pi_\theta(a|s)$が移動方向，$Q^{\pi_\theta}(s,a)$が大きさというふうに解釈できる．</p>
 <h1 id="参考">参考</h1>
 <p>久保隆宏,&quot;<a href="https://amzn.to/3tA1S4W">Pythonで学ぶ強化学習 入門から実践まで</a>&quot;</p>

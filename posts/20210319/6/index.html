@@ -264,7 +264,7 @@
 <p>$$A(s,a)=Q(s,a)-V(s)$$</p>
 <p>この$A(s,a)$をAdvantageと呼ぶ．
 Advantageを利用する場合の方策勾配は以下のようになる．</p>
-<p>$$\nabla J(\theta) = \mathbb{E}<em>{\pi</em>{\theta}}[\nabla \log \pi_{\theta(a|s)}A(s,a)]$$</p>
+<p>$$\nabla J(\theta) = E_{\pi_{\theta}}[\nabla \log \pi_{\theta(a|s)}A(s,a)]$$</p>
 <p>$\pi_\theta(a|s)$をActor，Advantageの計算に必要な$V(s)$をCriticとしてActor Critic法を使用することができる．
 これをAdvantage Actor Critic(A2C)と呼ぶ．</p>
 <h1 id="参考">参考</h1>

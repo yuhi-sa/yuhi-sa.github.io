@@ -58,7 +58,7 @@
   "headline": "フィルタまとめ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  161 ,
+  "wordCount":  166 ,
   "datePublished" : "2020-09-01T15:17:23",
   "dateModified" : "2020-09-01T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -292,10 +292,10 @@ $$</p>
 <p>事前状態推定値</p>
 <p>$$
 \hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3}
-$$
-事前誤差共分散行列</p>
+$$</p>
+<p>事前誤差共分散行列</p>
 <p>$$
-\hat{\Sigma}<em>{t}=A\Sigma</em>{t-1}A^T+Q_{t-1} \tag{4}
+\hat{\Sigma}=A\Sigma_{t-1}A^T+Q_{t-1} \tag{4}
 $$</p>
 <blockquote>
 <p>Step2 状態推定</p>
@@ -321,10 +321,10 @@ $$</p>
 <p>テーラー展開(推定値を$\hat{x}_k$とする)</p>
 </blockquote>
 <p>$$
-f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots \tag{8}
+f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{8}
 $$</p>
 <p>$$
-h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}<em>k}]</em>{x_t=\hat{x}_k}(x_t-\hat{x}_k)+\dots \tag{9}
+h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{9}
 $$</p>
 <p>以下，カルマンフィルタと同様</p>
 <h1 id="unscented-カルマンフィルタunscented-kalman-filter-ukf">Unscented カルマンフィルタ(Unscented Kalman Filter, UKF)</h1>
@@ -354,7 +354,7 @@ $$</p>
 <p>重み付き平均で、観測値とその共分散を推定</p>
 </blockquote>
 <p>$$
-\hat{X}<em>t=f(X</em>{t-1},u_t) \tag{17}
+\hat{X} = f(X_{t-1}, u_t) \tag{17}
 $$</p>
 <p>$$
 \hat{\mu_t}=\sum_iw^i\hat{\chi}_t^i \tag{18}

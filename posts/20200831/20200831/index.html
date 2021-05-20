@@ -58,7 +58,7 @@
   "headline": "強化学習の全体像まとめ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  186 ,
+  "wordCount":  194 ,
   "datePublished" : "2020-08-31T15:17:23",
   "dateModified" : "2020-08-31T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -310,8 +310,8 @@ TD誤差$\delta$を計算して価値関数を更新する．</li>
 </blockquote>
 <p>$$
 \delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t)
-$$
-$$
+$$</p>
+<p>$$
 \hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta
 $$</p>
 <blockquote>
@@ -408,9 +408,7 @@ $$</p>
 　TD誤差を再定義</li>
 </ul>
 </blockquote>
-<p>$$
-\delta=r_t+\gamma\hat{V}<em>{w_t}(s</em>{t+1})-\hat{V}_{w_t}(s_t)
-$$</p>
+<p>$$ \delta = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$$</p>
 <p>$\hat{V}_w$の $w$ に関する偏微分ベクトル</p>
 <p>$$\nabla_w\hat{V}_{w_t}(s)$$</p>
 <p>を用いて</p>
@@ -423,7 +421,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma\max_{a'}\hat{Q}_{w_t}(s_{t+1},a')-\hat{Q}_{w_t}(s_t,a_t)
+\delta_t=r_t+\gamma\max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
 $$</p>
 <blockquote>
 <ul>
@@ -431,7 +429,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma\hat{Q}<em>{w_t}(s</em>{t+1},a')-\hat{Q}_{w_t}(s_t,a_t)
+\delta_t=r_t+\gamma\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
 $$</p>
 <h3 id="方策近似">方策近似</h3>
 <blockquote>
@@ -470,16 +468,14 @@ $$</p>
 <blockquote>
 <ul>
 <li>クリティックの更新<br>
-推定平均報酬$\hat{f}$の更新</li>
+推定平均報酬$f$の更新</li>
 </ul>
 </blockquote>
 </blockquote>
-<p>$$
-\hat{f}<em>t=\hat{f}</em>{t-1}+\alpha_t(r_t-\hat{f}_{t-1}
-$$</p>
+<p>$$f_t=f_{t-1}+\alpha_t(r_t-f_{t-1})$$</p>
 <p>TD誤差の計算</p>
 <p>$$
-\delta_t=r_t-\hat{f}<em>t+\hat{Q}w</em>{t}(s_{t+1},a_{t+1})-\hat{Q}_{w_t}(s_t,a_t)
+\delta_t=r_t - f_t + \hat{Q}w_{t}(s_{t+1},a_{t+1})-\hat{Q}_{w_t}(s_t,a_t)
 $$</p>
 <p>エリジビリティ・トレースと関数近似器パラメータの更新</p>
 <p>$$
