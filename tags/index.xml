@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/</link>
     <description>Recent content in Tags on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 20 Apr 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>機械学習</title>
+      <link>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</link>
+      <pubDate>Thu, 27 May 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>その他</title>
       <link>https://yuhi-sa.github.io/tags/%E3%81%9D%E3%81%AE%E4%BB%96/</link>
@@ -39,15 +48,6 @@
       <pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>機械学習</title>
-      <link>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</link>
-      <pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</guid>
       <description></description>
     </item>
     
