@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="[Python]楕円曲線上のElGamal暗号" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.84.1" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -299,7 +299,7 @@ $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
 
 <span class="k">def</span> <span class="nf">invMod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
   <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">count</span>
     <span class="k">if</span> <span class="n">tmp</span><span class="o">%</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
       <span class="k">return</span> <span class="n">count</span>
@@ -329,19 +329,19 @@ $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
     <span class="c1"># 公開鍵の作成</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="n">g</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> 
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;公開鍵：&#34;</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;公開鍵：&#34;</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
 
     <span class="c1"># 平文</span>
     <span class="n">message</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;平文：&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;平文：&#34;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
     <span class="c1"># 暗号化</span>
     <span class="n">U</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;暗号文：&#34;</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;暗号文：&#34;</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
 
     <span class="c1"># 復号化</span>
     <span class="n">decrypt_message</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;復号化メッセージ&#34;</span><span class="p">,</span> <span class="n">decrypt_message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;復号化メッセージ&#34;</span><span class="p">,</span> <span class="n">decrypt_message</span><span class="p">)</span>
     
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
@@ -497,7 +497,7 @@ $V=xU=(v_x,v_y)$,$m=v_x\oplus c$</li>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.84.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
