@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/python/</link>
     <description>Recent content in python on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 16 Apr 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Python]matplotで三次元動画を作成する方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210630/1/</link>
+      <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210630/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>printの上書きをする方法</title>
       <link>https://yuhi-sa.github.io/posts/20210514/1/</link>

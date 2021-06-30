@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>EMアルゴリズム - yuhi-sa</title>
+  <title>[Python]matplotで三次元動画を作成する方法 - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/9\/",
-          "name": "Emアルゴリズム"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210630\/1\/",
+          "name": "[ python]matplotで三次元動画を作成する方法"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "EMアルゴリズム",
+  "headline": "[Python]matplotで三次元動画を作成する方法",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  35 ,
-  "datePublished" : "2021-03-17T13:00:23",
-  "dateModified" : "2021-03-17T13:00:23",
+  "wordCount":  108 ,
+  "datePublished" : "2021-06-30T10:17:23",
+  "dateModified" : "2021-06-30T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/9\/",
+  "keywords" : [ "python" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210630\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="EMアルゴリズム" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/9/" />
+<meta property="og:title" content="[Python]matplotで三次元動画を作成する方法" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210630/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="EMアルゴリズム" />
+  <meta name="twitter:title" content="[Python]matplotで三次元動画を作成する方法" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.84.2" />
@@ -240,7 +240,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>EMアルゴリズム</h1>
+                <h1>[Python]matplotで三次元動画を作成する方法</h1>
               
               
                 <hr class="small">
@@ -260,53 +260,70 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>あるフィットネスクラブにおける利用者の年齢分布のヒストグラムを考えると，筋トレを目的とした20代層とメタボ対策を目的とした50代層がおおきくなることが考えられる．</p>
-<p>モデル化を考えた場合，このグラフの会員を2つのグループに分けそれぞれについて正規分布の最尤推定を行うことで2つの正規分布を得て，それらを重ね合わせて混合ガウスモデルを作成することを考える．</p>
-<p>ここで，30代層は２つの山の裾野が重なる領域となるため扱いに困る．そこで，会員の目的は筋トレとメタボ対策の可能性が半分ずつとみなす．このように会員がどれだけの可能性で各潜在クラスjに所属するのかを負担率$r_{ij}$とよび，負担率をパラメータ推定の重みとしてかける．</p>
-<p>負担率に基づく2つの正規分布のパラメータ推定と，2つの正規分布にもとづく負担率の計算を交互に行っていけば，次第に両者が良い値に近づくだろうというのがEMアルゴリズムの基本的な考え方となっている．</p>
-<h1 id="混合ガウスモデル">混合ガウスモデル</h1>
-<p>複数の正規分布が重なり合って作られる混合ガウスモデルを用いて潜在変数変数を含むモデルをどう定義するかをまとめる．</p>
-<h1 id="q関数">Q関数</h1>
-<p>$$p(x,z|\theta)=\Pi_{i=1}^np(x^{(i)},z^{(i)}|\theta)$$</p>
-<p>観測変数xと潜在変数zの値を共に知ることができるという仮想的な状況におけるデータを完全データとよび，観測変数xの値のみしかわからない状況におけるデータを不完全データとよぶ．
-$p(x,z|\theta)$は完全データについて同時分布である．
-zは未知の値であるが，パラメータの推定量$\hat{\theta}$と観測値により決まる$p(z|x,\hat{\theta})$を使って完全データ$\log p(x,z|\theta)$の期待値を求めたものをQ関数と呼ぶ．</p>
-<p>$$Q(\theta,\hat{\theta})=\mathbb{E}_{p(z|x,\hat{\theta})}[\log p(x,z|\theta)]=\int p(z|x,\hat{\theta})\log p(x,z|\theta)dz$$</p>
-<p>Q関数は完全データの対数尤度の期待値であり，EMアルゴリズムではQ関数の最大化を考える</p>
-<h1 id="emアルゴリズムによる混合ガウスモデルのパラメータ推定の更新式">EMアルゴリズムによる混合ガウスモデルのパラメータ推定の更新式</h1>
-<ol>
-<li>
-<p>$t=1$と設定，各jについて$\hat{\pi}_j^{(0)},\hat{\mu_j}^{(0)},\hat{\sigma^{2(0)}_j}$をランダムな値で初期化する．($\pi$はマルチヌーイ分布のパラメータベクトル，$\mu$は各正規分布の平均パラメータ，$\sigma^2$は各正規分布の分散パラメータ)</p>
-</li>
-<li>
-<p>パラメータ値が収束するまで以下を繰り返す．</p>
-</li>
-</ol>
-<ul>
-<li>Eステップ(期待値計算)</li>
-</ul>
-<p>$$r_{ij}=\mathbb{E}_{p(z^{(i)}|x^{(i)},\hat{\theta})}[z_{ij}]$$</p>
-<ul>
-<li>Mステップ(最大化)$r_{ij}$を使いQ関数を最大化する$\hat{\pi}_j^{(t)},\hat{\mu}_j^{(t)}\hat{\sigma}_j^{2(t)}$を計算する．</li>
-</ul>
-<p>$$Q(\theta,\hat{\theta})=\sum_{i=1}^n\sum_{j=1}^kr_{ij}(\log\pi_j+\log\mathcal{N}(x^{(i)}|\mu_j,\sigma_j^2))$$</p>
-<p>より</p>
-<p>$$R_j^{(t)}=\sum_{i=1}^{n}r_{ij}^{t}$$
-$$\hat{\pi}_j^{(t)}=\frac{R_j^{(t)}}{\sum_{j=1}^kR_j^{(t)}}$$
-$$\hat{\mu}_j^{(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}x_i}{R_j^{(t)}}$$
-$$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}{R_j^{(t)}}$$</p>
-<ul>
-<li>$t = t+1$</li>
-</ul>
-<h1 id="参考">参考</h1>
-<ul>
-<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
-</ul>
+        <p><img src=".././ani.gif" alt=""></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+
+<span class="k">def</span> <span class="nf">makeAnimetion</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;make Flame&#34;</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="c1"># 3次元プロットに切り替える</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+    <span class="c1"># ラベル</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 次元</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">ims</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span> <span class="o">+</span> <span class="s2">&#34;%&#34;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">bar</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+
+        <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c1"># plot したものをList形式で保持する</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;o&#34;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&#34;red&#34;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+        <span class="n">ims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;make Animation&#34;</span><span class="p">)</span>
+
+    <span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">ArtistAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ims</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&#34;ani.gif&#34;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;ffmpeg&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># 適当にデータ作る</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">)])</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">])])</span>
+
+    <span class="n">makeAnimetion</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
             
           </div>
         
@@ -321,42 +338,42 @@ $$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f&amp;text=EM%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f&amp;text=%5bPython%5dmatplot%e3%81%a7%e4%b8%89%e6%ac%a1%e5%85%83%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f&amp;title=EM%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f&amp;title=%5bPython%5dmatplot%e3%81%a7%e4%b8%89%e6%ac%a1%e5%85%83%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f&amp;title=EM%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f&amp;title=%5bPython%5dmatplot%e3%81%a7%e4%b8%89%e6%ac%a1%e5%85%83%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f&amp;title=EM%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f&amp;title=%5bPython%5dmatplot%e3%81%a7%e4%b8%89%e6%ac%a1%e5%85%83%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f9%2f&amp;description=EM%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210630%2f1%2f&amp;description=%5bPython%5dmatplot%e3%81%a7%e4%b8%89%e6%ac%a1%e5%85%83%e5%8b%95%e7%94%bb%e3%82%92%e4%bd%9c%e6%88%90%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -378,15 +395,11 @@ $$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}
                   <ul>
                 
                 
-                    <li><a href="/posts/20210317/13/">変分オートエンコーダ(VAE)</a></li>
+                    <li><a href="/posts/20210514/1/">printの上書きをする方法</a></li>
                 
-                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
+                    <li><a href="/posts/20210416/1/">Python環境の設定</a></li>
                 
-                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
-                
-                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
-                
-                    <li><a href="/posts/20210317/8/">共役事前分布</a></li>
+                    <li><a href="/posts/20201223/20201223/">Pythonでslackに実験結果(テキストと画像)を送る</a></li>
                 
               </ul>
 
@@ -398,13 +411,9 @@ $$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/8/" data-toggle="tooltip" data-placement="top" title="共役事前分布">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210630/2/" data-toggle="tooltip" data-placement="top" title="GitHub Actions の書き方">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210317/10/" data-toggle="tooltip" data-placement="top" title="EMアルゴリズム2(変分下界とKLダイバージェンス)">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
