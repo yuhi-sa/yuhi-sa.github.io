@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>共役事前分布 - yuhi-sa</title>
+  <title>Posts - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -28,61 +28,13 @@
   
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/8\/",
-          "name": "共役事前分布"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "yuhi-sa"
-  },
-  "headline": "共役事前分布",
-  "description" : "",
-  "inLanguage" : "en",
-  "wordCount":  35 ,
-  "datePublished" : "2021-03-16T16:00:23",
-  "dateModified" : "2021-03-16T16:00:23",
-  "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/8\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/yuhi-sa.github.io\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/yuhi-sa.github.io\/",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
 
-<meta property="og:title" content="共役事前分布" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/8/" />
+<meta property="og:title" content="Posts" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="共役事前分布" />
+  <meta name="twitter:title" content="Posts" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.85.0" />
@@ -240,7 +192,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>共役事前分布</h1>
+                <h1>Posts</h1>
               
               
                 <hr class="small">
@@ -256,160 +208,63 @@
 
 
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．</p>
-<h1 id="ディリクレ分布">ディリクレ分布</h1>
-<p>多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．</p>
-<p>$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$</p>
-<p>ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．</p>
-<p>$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$</p>
-<h1 id="ベータ分布">ベータ分布</h1>
-<p>二項分布の事前分布として使えるのがベータ分布である．</p>
-<p>$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$</p>
-<p>ここで，$B(a,b)$は2次元の多項ベータ関数を表す．</p>
-<p>$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$</p>
-<h1 id="ガンマ分布">ガンマ分布</h1>
-<p>観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える．
-分散$\sigma^2$に対してベイズ推定を行う場合を考える．
-$\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97)
-そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．</p>
-<p>$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$</p>
-<p>$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．</p>
-<h2 id="ガンマ分布の余談">ガンマ分布の余談</h2>
-<p>$\kappa=1$のガンマ分布は指数分布と一致する．</p>
-<p>$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$</p>
-<p>$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．</p>
-<p>$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$</p>
-<h1 id="正規-ガンマ分布">正規-ガンマ分布</h1>
-<p>正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた．
-今回は，$\mu$と$\lambda$を同時に求めることを考える．
-$\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．</p>
-<p>$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$</p>
-<h1 id="一般的な確率分布のパラメータとその共益事前分布">一般的な確率分布のパラメータとその共益事前分布</h1>
-<p><img src=".././%E5%85%B1%E5%BD%B9%E4%BA%8B%E5%89%8D%E5%88%86%E5%B8%83.png" alt="共役事前分布"></p>
-<h1 id="参考">参考</h1>
-<ul>
-<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
-</ul>
-
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-          <div class="blog-tags">
+        <div class="posts-list">
+          
+            <article class="post-preview">
+    <a href="https://yuhi-sa.github.io/posts/quotations/">
+        <h2 class="post-title">いいなって思った言葉</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on August 16, 2020
+  
+  
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;yuhi-sa
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        
+        <a href="https://yuhi-sa.github.io/posts/quotations/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+
+</article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
+              <li class="previous">
+                <a href="https://yuhi-sa.github.io/posts/page/5/">&larr; Newer Posts</a>
+              </li>
             
-          </div>
-        
-
-        
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
-
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;text=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83&amp;via=" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on StumbleUpon">
-          <i class="fab fa-stumbleupon"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;description=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Pinterest">
-          <i class="fab fa-pinterest"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-  
-
-              </div>
-            </section>
-        
-
-        
-          
             
-          
-
-          
-                  <h4 class="see-also">See also</h4>
-                  <ul>
-                
-                
-                    <li><a href="/posts/20210317/13/">変分オートエンコーダ(VAE)</a></li>
-                
-                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
-                
-                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
-                
-                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
-                
-                    <li><a href="/posts/20210317/9/">EMアルゴリズム</a></li>
-                
-              </ul>
-
-          
+          </ul>
         
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/7/" data-toggle="tooltip" data-placement="top" title="ラグランジュの未定数法">&larr; Previous Post</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210317/9/" data-toggle="tooltip" data-placement="top" title="EMアルゴリズム">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      
-
-
-      
-        
-        
-      
-
+      </div>
     </div>
   </div>
-</div>
 
       
 <footer>

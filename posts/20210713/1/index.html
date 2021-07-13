@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>共役事前分布 - yuhi-sa</title>
+  <title>リーダブルコード読んだメモ - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210317\/8\/",
-          "name": "共役事前分布"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210713\/1\/",
+          "name": "リーダブルコード読んだメモ"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "共役事前分布",
+  "headline": "リーダブルコード読んだメモ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  35 ,
-  "datePublished" : "2021-03-16T16:00:23",
-  "dateModified" : "2021-03-16T16:00:23",
+  "wordCount":  122 ,
+  "datePublished" : "2021-07-13T10:17:23",
+  "dateModified" : "2021-07-13T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "しくみがわかるベイズ統計と機械学習" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210317\/8\/",
+  "keywords" : [ "その他" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210713\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="共役事前分布" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317/8/" />
+<meta property="og:title" content="リーダブルコード読んだメモ" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210713/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="共役事前分布" />
+  <meta name="twitter:title" content="リーダブルコード読んだメモ" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.85.0" />
@@ -240,7 +240,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>共役事前分布</h1>
+                <h1>リーダブルコード読んだメモ</h1>
               
               
                 <hr class="small">
@@ -260,45 +260,131 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．</p>
-<h1 id="ディリクレ分布">ディリクレ分布</h1>
-<p>多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．</p>
-<p>$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$</p>
-<p>ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．</p>
-<p>$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$</p>
-<h1 id="ベータ分布">ベータ分布</h1>
-<p>二項分布の事前分布として使えるのがベータ分布である．</p>
-<p>$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$</p>
-<p>ここで，$B(a,b)$は2次元の多項ベータ関数を表す．</p>
-<p>$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$</p>
-<h1 id="ガンマ分布">ガンマ分布</h1>
-<p>観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える．
-分散$\sigma^2$に対してベイズ推定を行う場合を考える．
-$\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97)
-そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．</p>
-<p>$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$</p>
-<p>$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．</p>
-<h2 id="ガンマ分布の余談">ガンマ分布の余談</h2>
-<p>$\kappa=1$のガンマ分布は指数分布と一致する．</p>
-<p>$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$</p>
-<p>$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．</p>
-<p>$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$</p>
-<h1 id="正規-ガンマ分布">正規-ガンマ分布</h1>
-<p>正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた．
-今回は，$\mu$と$\lambda$を同時に求めることを考える．
-$\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．</p>
-<p>$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$</p>
-<h1 id="一般的な確率分布のパラメータとその共益事前分布">一般的な確率分布のパラメータとその共益事前分布</h1>
-<p><img src=".././%E5%85%B1%E5%BD%B9%E4%BA%8B%E5%89%8D%E5%88%86%E5%B8%83.png" alt="共役事前分布"></p>
-<h1 id="参考">参考</h1>
+        <h1 id="名前に情報を詰め込む">名前に情報を詰め込む</h1>
 <ul>
-<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+<li>
+<p>汎用的な単語ではなく，明確な単語を使う．</p>
+<table>
+<thead>
+<tr>
+<th>単語</th>
+<th>代替案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get</td>
+<td>fetch, download</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Height, NumNodes, MemoryBytes</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>kill, pause</td>
+</tr>
+<tr>
+<td>send</td>
+<td>deliver, dispatch, announce, distribute, route</td>
+</tr>
+<tr>
+<td>find</td>
+<td>search, extract, locate, recover</td>
+</tr>
+<tr>
+<td>start</td>
+<td>lainch, create, begin, open</td>
+</tr>
+<tr>
+<td>make</td>
+<td>create, set up, build, generate, compose, add, new</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>抽象的な名前ではなく，具体的な名前</p>
+<ul>
+<li>tmpは生存期間が短く，一時的な保管が最も大切な変数のみに使う．</li>
+<li>イテレータは安易にi, j, kとするのではなく，club_i,member_i,user_iのように名付ける．</li>
+<li>より直接的で，明確な表現にする．
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ServerCanStart → CanListenOnPort
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>接尾辞，接頭辞で情報を追加する．</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">delay → delay_secs
+size → size_mb
+limit → max_kbp
+angle → degree_cw
+html → html_utf8
+</code></pre></div></li>
+<li>
+<p>名前の長さを決める．</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FormatString → FormatStr
+ConvertToString → ToString
+</code></pre></div></li>
+<li>
+<p>名前のフォーマットで情報を伝える．</p>
+<ul>
+<li>大文字やアンダースコアなどに意味を含める．</li>
+</ul>
+</li>
+</ul>
+<h1 id="誤解されない名前を使う">誤解されない名前を使う</h1>
+<ul>
+<li>多義語に気をつける．
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">filter → select, exclude
+clip → remove, truncate
+</code></pre></div></li>
+<li>限界値を含めるときは，<strong>min</strong>と<strong>max</strong>を使う．</li>
+<li>範囲を指定するときは，<strong>first</strong>と<strong>last</strong>を使う．</li>
+<li>包含/排他的範囲には，<strong>begin</strong>と<strong>end</strong>を使う．</li>
+<li>ブール値の頭には，<strong>is・has・can・shoud</strong>をつける．</li>
+<li>ユーザの期待に合わせる
+<ul>
+<li>get：軽量アクセサであるという認識がある．
+<ul>
+<li>大量のデータの場合はcomputeなどを使う．</li>
+</ul>
+</li>
+<li>size：計算量は$O(1)$にする．</li>
+</ul>
+</li>
+</ul>
+<h1 id="美しさ">美しさ</h1>
+<ul>
+<li>読み手がなれているパターンと一貫性のあるレイアウトを使う．</li>
+<li>似ているコードは似ているように見せる．</li>
+<li>関連するコードはまとめてブロックにする．</li>
+<li>一貫性のある改行</li>
+<li>縦の線を揃える．
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">details  = request.POST.get(&#39;detail&#39;)
+location = request.POST.get(&#39;location&#39;)
+phone    = request.POST.get(&#39;phone&#39;)
+</code></pre></div></li>
+<li>意味のある並びにする．</li>
+<li>宣言をブロックにまとめる．</li>
+</ul>
+<h1 id="コメント">コメント</h1>
+<ul>
+<li>コードからすぐわかることをコメントに書かない．</li>
+<li>定数にコメントをつける．</li>
+<li>代名詞の使用を避ける．</li>
+<li>関数の動作は正確に説明する．</li>
+<li>よくわからない引数にはインラインコメント</li>
+</ul>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>Dustin Boswell，&quot;<a href="https://amzn.to/3kjMmZc">リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック (Theory in practice) </a>&quot;，オライリージャパン</li>
 </ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a>&nbsp;
             
           </div>
         
@@ -313,42 +399,42 @@ $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;text=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f&amp;text=%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89%e8%aa%ad%e3%82%93%e3%81%a0%e3%83%a1%e3%83%a2&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f&amp;title=%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89%e8%aa%ad%e3%82%93%e3%81%a0%e3%83%a1%e3%83%a2" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f&amp;title=%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89%e8%aa%ad%e3%82%93%e3%81%a0%e3%83%a1%e3%83%a2" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;title=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f&amp;title=%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89%e8%aa%ad%e3%82%93%e3%81%a0%e3%83%a1%e3%83%a2" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210317%2f8%2f&amp;description=%e5%85%b1%e5%bd%b9%e4%ba%8b%e5%89%8d%e5%88%86%e5%b8%83" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210713%2f1%2f&amp;description=%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89%e8%aa%ad%e3%82%93%e3%81%a0%e3%83%a1%e3%83%a2" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -370,15 +456,15 @@ $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ
                   <ul>
                 
                 
-                    <li><a href="/posts/20210317/13/">変分オートエンコーダ(VAE)</a></li>
+                    <li><a href="/posts/20210630/2/">GitHub Actions の書き方</a></li>
                 
-                    <li><a href="/posts/20210317/12/">マルコフ連鎖モンテカルロ法(MCMC)</a></li>
+                    <li><a href="/posts/20210520/1/">MacのLaunchpadを初期化する方法</a></li>
                 
-                    <li><a href="/posts/20210317/11/">変分ベイズ</a></li>
+                    <li><a href="/posts/20210409/1/">UbuntuでローカルDNSサーバーが指定できないときの編集方法</a></li>
                 
-                    <li><a href="/posts/20210317/10/">EMアルゴリズム2(変分下界とKLダイバージェンス)</a></li>
+                    <li><a href="/posts/20210409/2/">Ubuntuのsshの設定</a></li>
                 
-                    <li><a href="/posts/20210317/9/">EMアルゴリズム</a></li>
+                    <li><a href="/posts/20210204/20210204/">markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</a></li>
                 
               </ul>
 
@@ -390,13 +476,9 @@ $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317/7/" data-toggle="tooltip" data-placement="top" title="ラグランジュの未定数法">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210630/1/" data-toggle="tooltip" data-placement="top" title="[Python]matplotで三次元動画を作成する方法">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210317/9/" data-toggle="tooltip" data-placement="top" title="EMアルゴリズム">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
