@@ -8,46 +8,46 @@
     <lastBuildDate>Wed, 30 Jun 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Python]matplotで三次元動画を作成する方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210630/1/</link>
+      <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210630/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>printの上書きをする方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210514/1/</link>
+      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210514/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python環境の設定</title>
-      <link>https://yuhi-sa.github.io/posts/20210416/1/</link>
+      <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210416/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>numpyからpytorchの変換で，dtypeを消す</title>
-      <link>https://yuhi-sa.github.io/posts/20210215_2/20210215_2/</link>
+      <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210215_2/20210215_2/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
-      <link>https://yuhi-sa.github.io/posts/20201223/20201223/</link>
+      <link>https://yuhi-sa.github.io/posts/20201223_slackapi/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20201223/20201223/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20201223_slackapi/1/</guid>
       <description></description>
     </item>
     

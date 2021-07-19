@@ -8,64 +8,64 @@
     <lastBuildDate>Mon, 22 Mar 2021 11:35:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python%E3%81%A7%E5%AD%A6%E3%81%B6%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DNNを利用した強化学習の仲間たち</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/7/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/7/</link>
       <pubDate>Mon, 22 Mar 2021 11:35:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/7/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/7/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Advantage Actor Critic(A2C)</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/6/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/6/</link>
       <pubDate>Mon, 22 Mar 2021 11:30:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/6/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>方策勾配法</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/5/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/5/</link>
       <pubDate>Mon, 22 Mar 2021 11:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/5/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/5/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ニューラルネットを適応した強化学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/4/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/4/</link>
       <pubDate>Mon, 22 Mar 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/4/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/4/</guid>
       <description></description>
     </item>
     
     <item>
       <title>モデルフリー強化学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/3/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/3/</link>
       <pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/3/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>モデルベース強化学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/2/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/2/</link>
       <pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/2/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>強化学習とは</title>
-      <link>https://yuhi-sa.github.io/posts/20210319/1/</link>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link>
       <pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210319/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid>
       <description></description>
     </item>
     
