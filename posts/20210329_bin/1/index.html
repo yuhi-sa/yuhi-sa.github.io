@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="[Python]2進数変換と論理演算(or,xor)" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.86.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -261,7 +261,7 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h1 id="2進数変換">2進数変換</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
     <span class="n">binNum1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">num1</span><span class="p">))</span>
     <span class="n">binNum1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">binNum1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -276,7 +276,7 @@
             <span class="n">binNum1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> 
     <span class="k">return</span> <span class="n">binNum1</span><span class="p">,</span> <span class="n">binNum2</span>
 </code></pre></div><h1 id="10進数変換">10進数変換</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">binNum</span><span class="p">(</span><span class="n">binNum</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">binNum</span><span class="p">(</span><span class="n">binNum</span><span class="p">):</span>
     <span class="n">Num</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">binNum</span><span class="p">)):</span>
  
@@ -284,7 +284,7 @@
             <span class="n">Num</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Num</span> 
 </code></pre></div><h1 id="or計算">or計算</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">orCal</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">orCal</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
     <span class="n">binNum1</span><span class="p">,</span> <span class="n">binNum2</span> <span class="o">=</span> <span class="n">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">)</span>
     <span class="c1"># orの計算</span>
     <span class="n">orValue</span> <span class="o">=</span> <span class="p">[]</span>
@@ -295,7 +295,7 @@
             <span class="n">orValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">binNum</span><span class="p">(</span><span class="n">orValue</span><span class="p">)</span>
 </code></pre></div><h1 id="xor計算">xor計算</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">xorCal</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">xorCal</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
     <span class="n">binNum1</span><span class="p">,</span> <span class="n">binNum2</span> <span class="o">=</span> <span class="n">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">)</span>
     <span class="c1"># xor の計算</span>
     <span class="n">xorValue</span> <span class="o">=</span> <span class="p">[]</span>
@@ -307,11 +307,11 @@
  
     <span class="k">return</span> <span class="n">binNum</span><span class="p">(</span><span class="n">xorValue</span><span class="p">)</span>
 </code></pre></div><h1 id="計算例">計算例</h1>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># orを計算</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># orを計算</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">orCal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="c1"># xorを計算</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">xorCal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="m">7</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="m">7</span>
 <span class="m">6</span>
 </code></pre></div>
 
@@ -465,7 +465,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.85.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.86.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

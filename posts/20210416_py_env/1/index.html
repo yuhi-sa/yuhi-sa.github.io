@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="Python環境の設定" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.86.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -269,7 +269,7 @@ macOSオペレーティングシステム上のパッケージ管理システム
 <li>ターミナルを開く</li>
 <li>下記スクリプトをターミナルで実行</li>
 </ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ /bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ /bin/bash -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&#34;</span>
 </code></pre></div><ol start="3">
 <li>インストールが進み，[Installation Success]と表示されたらインストール完了．</li>
 <li>デモ動画1(ターミナル開き方)<br>
@@ -297,10 +297,10 @@ Pythonの複数のバージョンを使い分けるコマンドラインツー�
 </ul>
 <ol>
 <li>Homebrewでpyenvをインストールする．
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install pyenv
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install pyenv
 </code></pre></div></li>
 <li>pathを通す
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> $ <span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.bash_profile
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> $ <span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.bash_profile
  $ <span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.bash_profile
  $ <span class="nb">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> &gt;&gt; ~/.bash_profile
 </code></pre></div><ul>
@@ -324,9 +324,9 @@ Pythonの標準的な環境を構築できるシステム．</p>
 </ul>
 <ol>
 <li>pyenvでインストール可能なAnacondaを検索．
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pyenv install -l <span class="p">|</span> grep anaconda
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pyenv install -l <span class="p">|</span> grep anaconda
 </code></pre></div><p>ログ</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> anaconda-1.4.0
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> anaconda-1.4.0
  ︙
  anaconda2-5.0.0
  ︙
@@ -337,10 +337,10 @@ Pythonの標準的な環境を構築できるシステム．</p>
 </ul>
 </li>
 <li>3系の最新版をインストール
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pyenv install anaconda3-5.3.1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pyenv install anaconda3-5.3.1
 </code></pre></div></li>
 <li>バージョンを切り替える
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pyenv global anaconda3-5.3.1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ pyenv global anaconda3-5.3.1
 </code></pre></div></li>
 <li>デモ動画4(Anacondaのインストール)<br>
 <a href="https://www.youtube.com/watch?v=Gb53A7G8-yk"><img src="https://img.youtube.com/vi/Gb53A7G8-yk/0.jpg" alt=""></a></li>
@@ -496,7 +496,7 @@ Pythonの標準的な環境を構築できるシステム．</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.85.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.86.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.86.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -291,7 +291,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
 <p>遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った．
 コードは<a href="https://github.com/yuhi-sa/NNGA">こちら</a></p>
 <h2 id="パラメータなどを設定">パラメータなどを設定</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 世代</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 世代</span>
 <span class="n">GEN</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="c1"># NNの個数</span>
@@ -327,7 +327,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
     <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.pdf&#39;</span><span class="p">)</span>
 
 </code></pre></div><h2 id="教師信号作成">教師信号作成</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python">
 <span class="k">class</span> <span class="nc">Kyoshi</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Num</span><span class="p">,</span> <span class="n">In</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span>
@@ -337,7 +337,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
         <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Num</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">=</span><span class="n">kansu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
 </code></pre></div><h2 id="ニューラルネットnnを作成">ニューラルネット(NN)を作成</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">NN</span><span class="p">:</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">NN</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">In</span><span class="p">,</span> <span class="n">Hidden</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#入力層-隠れ層の重み</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Hidden</span><span class="p">,</span> <span class="n">Out</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#隠れ層-出力層の重み</span>
@@ -358,7 +358,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
                 <span class="bp">self</span><span class="o">.</span><span class="n">Output</span><span class="o">+=</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">hidden_node</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Output</span><span class="o">-=</span><span class="bp">self</span><span class="o">.</span><span class="n">bias_o</span>
 </code></pre></div><h2 id="gaを用いてnnを最適化する">GAを用いてNNを最適化する</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">NNGA</span><span class="p">:</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">NNGA</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nn</span> <span class="o">=</span> <span class="p">[</span><span class="n">NN</span><span class="p">()]</span><span class="o">*</span><span class="n">Number</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">aveE</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#全体誤差平均</span>
@@ -483,7 +483,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
                     <span class="n">rm2</span> <span class="o">=</span> <span class="n">count</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">rm2</span><span class="p">]</span><span class="o">=</span><span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div><h2 id="main関数">main関数</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="c1"># 世代数のカウント</span>
     <span class="n">generation</span><span class="o">=</span><span class="mi">0</span>
     <span class="c1"># 初期の個体を生成する</span>
@@ -705,7 +705,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.85.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.86.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

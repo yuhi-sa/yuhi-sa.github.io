@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.85.0" />
+  <meta name="generator" content="Hugo 0.86.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -276,7 +276,7 @@ $$</p>
 <p>線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．</p>
 <p>まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．</p>
 <p>参考1：<a href="https://www.jstage.jst.go.jp/article/isciesci/50/7/50_KJ00004329717/_pdf">UKF （Unscented Kalman Filter）っ て何 ？</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">math</span>
@@ -316,7 +316,7 @@ P_x = [
 $$
 となる．</p>
 <p>これを入力として用いる．出力は1次元とし$f(x)=x[0]*x[1]$の非線形変換を考える．</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># xの次元数</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># xの次元数</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="c1"># yの次元数</span>
 <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
@@ -352,7 +352,7 @@ $$</p>
 <p>$\kappa$：通常は0に設定されます．値が小さいほど，シグマポイントは平均の状態に近くなります．広がりは$\kappa$の平方根に比例します。</p>
 <p>参考1：<a href="https://jp.mathworks.com/help/control/ref/ukf_block.html">Unscented Kalman Filter， MathWorks</a><br>
 参考2：<a href="https://myenigma.hatenablog.com/entry/20140614/1402731732">Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># パラメータ</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># パラメータ</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">kappa</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="c1"># 式4</span>
@@ -400,7 +400,7 @@ $$</p>
 <p>$$
 P_y \simeq \sum_{i=0}^{2n} w_i (y_{\sigma i}-\bar{y})*(y_{\sigma i}-\bar{y})^T \tag{9}
 $$</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 <span class="c1"># 非線形変換　式5</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sigma</span><span class="p">)):</span>
   <span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
@@ -580,7 +580,7 @@ yの分散共分散行列 [-8.47032947e-22]</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.85.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.86.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
