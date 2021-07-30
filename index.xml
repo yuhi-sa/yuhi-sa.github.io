@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 19 Jul 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jul 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>適応フィルタ</title>
+      <link>https://yuhi-sa.github.io/posts/20210730_filter/1/</link>
+      <pubDate>Fri, 30 Jul 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210730_filter/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>指数移動平均 (Exponential Moving Averages, EMA)</title>
       <link>https://yuhi-sa.github.io/posts/20210719_ema/1/</link>

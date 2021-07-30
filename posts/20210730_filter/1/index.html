@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>PID制御 - yuhi-sa</title>
+  <title>適応フィルタ - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210318_pid\/1\/",
-          "name": "Pid制御"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210730_filter\/1\/",
+          "name": "適応フィルタ"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "PID制御",
+  "headline": "適応フィルタ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  16 ,
-  "datePublished" : "2021-03-18T15:00:23",
-  "dateModified" : "2021-03-18T15:00:23",
+  "wordCount":  67 ,
+  "datePublished" : "2021-07-30T10:17:23",
+  "dateModified" : "2021-07-30T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
   "keywords" : [ "制御" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210318_pid\/1\/",
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210730_filter\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="PID制御" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210318_pid/1/" />
+<meta property="og:title" content="適応フィルタ" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210730_filter/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="PID制御" />
+  <meta name="twitter:title" content="適応フィルタ" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.86.0" />
@@ -240,7 +240,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>PID制御</h1>
+                <h1>適応フィルタ</h1>
               
               
                 <hr class="small">
@@ -260,22 +260,43 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="pid制御とは">PID制御とは</h1>
-<p>あるシステムを制御の出力値$y(t)$を制御するために，制御対象の出力をコントローラにフィードバックさせて，その情報をもとに制御する手法がある(フィードバック制御)．フィードバック制御では，出力値$y(t)$と目標値$r(t)$との偏差$e(t)$に基づいて操作量の計算を行うことで，制御系の安定化，目標値への追従性の向上，外乱抑制が可能となる．</p>
-<h1 id="p制御">P制御</h1>
-<p>P制御の入力値$u(t)$は以下の式で与えられる．このとき，$e(t)=r(t)-y(t)$とする．</p>
-<p>$$u(t)=K_Pe(t)$$</p>
-<p>$K_p$を大きくすると，偏差は小さくなる．しかし，$K_p$を大きくすると，応答が振動的になり，最終的には制御が不安定となり発散してしまう．また，偏差が小さくなると，入力値が消失するため，定常偏差(定常状態での偏差)を完全になくすことはできない．</p>
-<h1 id="pi制御">PI制御</h1>
-<p>PI制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$ u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau$$</p>
-<p>I制御は，偏差の積分値をフィードバックするため，偏差が小さくなったとしても入力値が消失することはない．これにより，定常偏差を解消する．ただし，積分動作により位相が遅れてしまうため出力値が急激に変化した場合，オーバーシュートやハンチングが生じることがある．</p>
-<h1 id="pid制御">PID制御</h1>
-<p>PID制御の入力値$u(t)$は以下の式で与えられる．</p>
-<p>$$u(t)=K_Pe(t)+K_I\int_0^te(\tau)d\tau+K_D\frac{de(t)}{dt}$$</p>
-<p>D制御は，偏差の微分値をフィードバックするため，出力値の急激な変化に対して早めに偏差の増減を抑制し，応答の遅れを改善することができる．</p>
-<p>PID制御は，偏差のP「現在」，I「過去」，D「未来」に基づいて制御することにより，安定性，追従性，即応性を満足する制御系を構成することができる．PID制御では，$K_P$，$K_I$，$K_D$のパラメータを適切に決定することが求められる．</p>
-<p><img src=".././PID.png" alt="ブロック線図"></p>
+        <h1 id="デジタルフィルタ">デジタルフィルタ</h1>
+<p>信号をあるサンプリング周期でサンプリングした時系列信号$x_0,x_1,&hellip;,x_N$に対する処理をデジタルフィルタとよぶ．代表的なデジタルフィルタに線形フィルタがある．</p>
+<h2 id="線形フィルタ">線形フィルタ</h2>
+<h3 id="fir有限インパルス応答フィルタ">FIR(有限インパルス応答)フィルタ</h3>
+<p>$$y_k=w_0x_k+w_1x_{k-1}+&hellip;+w_Nx_{k-N}$$
+$w$がフィルタ係数</p>
+<h3 id="iir無限インパルス応答フィルタ">IIR(無限インパルス応答)フィルタ</h3>
+<p>$$y_k=w_0x_k+w_1x_{k-1}+&hellip;+w_Nx_{k-N}-v_1y_{k-1}-&hellip;-v_My_{k-M}$$</p>
+<p>$w,v$がフィルタ係数</p>
+<h1 id="適応フィルタ">適応フィルタ</h1>
+<p>デジタルフィルタを学習によって構成する手法に適応フィルタがある．適応フィルタでは，FIRフィルタとIIRフィルタに対して同じ考え方でフィルタ設計を行うことができる．</p>
+<h2 id="適応フィルタの入出力">適応フィルタの入出力</h2>
+<p>入力：$x_k=x(kT,k=0,1,2,&hellip;)$<br>
+出力：$y_k= w_0 x_k + w_1 x_{k-1}+\dots+w_{N-1}x_{k-N+1}$<br>
+誤差：$e_k = d_k-y_k$</p>
+<h2 id="フィルタ設計">フィルタ設計</h2>
+<p>目標値$d_k$に対して適応フィルタの出力$y_k$をできるだけ近づけるように，係数を決定することが，フィルタ設計である．
+$$W = [W_0,w_1,&hellip;,w_{N-1}]^t$$</p>
+<p>$$X_k = [x_k,x_{k-1},&hellip;,x_{k-N+1}]^t$$</p>
+<p>とおくとフィルタ誤差は以下のように表すことができる．</p>
+<p>$$e_k=d_k-W^tX_k=d_k-X_k^tW$$</p>
+<p>誤差の二乗規範$J_k$を最小化することを考える．($E$は期待値)</p>
+<p>$$J_k \triangleq \frac{1}{2} E [e_k^2]$$</p>
+<p>$$J_k =\frac{1}{2}(E[d_k^2]+W^tE[X_kX_k^t]W-2E[d_kX_k^t]W)
+=\frac{1}{2}(E[d_k^2]+W^tRW-2R_{dX}W)$$</p>
+<p>$J_k$を$W_k$で微分した値を0とおく．</p>
+<p>$$\frac{\delta J_k}{\delta W_k} = RW -R_{dX}=0$$</p>
+<p>$J_k$を最小にする$W_k$を$W^o$とおく．</p>
+<p>$$EW^o=R_{dX}$$</p>
+<p>この関係式をWiener-Hopf方程式と呼び，$R$が逆行列を有する場合には以下のように最適値を求めることができる．</p>
+<p>$$W^o = R^{-1}R_{dX}$$</p>
+<h2 id="フィルタ係数の逐次計算">フィルタ係数の逐次計算</h2>
+<p>逆行列の計算を行わないでWiener-Hopf法的式を満たす$W^o$を求める場合には，勾配を用いて逐次計算を行う．</p>
+<p>$$\delta W= -\eta \frac{\delta J}{\delta W}=-\eta(RW(old)-R_{dX})$$</p>
+<p>ここで$\eta$は学習率</p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.jstage.jst.go.jp/article/sicejl1962/45/4/45_4_347/_pdf">大松 繁, &ldquo;信号処理ーデジタルフィルタ&rdquo;</a></p>
 
         
           <div class="blog-tags">
@@ -295,42 +316,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f&amp;text=PID%e5%88%b6%e5%be%a1&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f&amp;text=%e9%81%a9%e5%bf%9c%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f&amp;title=%e9%81%a9%e5%bf%9c%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f&amp;title=%e9%81%a9%e5%bf%9c%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f&amp;title=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f&amp;title=%e9%81%a9%e5%bf%9c%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210318_pid%2f1%2f&amp;description=PID%e5%88%b6%e5%be%a1" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210730_filter%2f1%2f&amp;description=%e9%81%a9%e5%bf%9c%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -352,9 +373,9 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20210730_filter/1/">適応フィルタ</a></li>
-                
                     <li><a href="/posts/20210405_hinf/1/">H無限大制御</a></li>
+                
+                    <li><a href="/posts/20210318_pid/1/">PID制御</a></li>
                 
                     <li><a href="/posts/20200901_filter/1/">フィルタまとめ</a></li>
                 
@@ -368,13 +389,9 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210317_bayes/13/" data-toggle="tooltip" data-placement="top" title="変分オートエンコーダ(VAE)">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210719_ema/1/" data-toggle="tooltip" data-placement="top" title="指数移動平均 (Exponential Moving Averages, EMA)">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210318_pid/2/" data-toggle="tooltip" data-placement="top" title="K-means法">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
