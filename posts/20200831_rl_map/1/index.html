@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>[Python]バイナリ法 - yuhi-sa</title>
+  <title>強化学習の全体像まとめ - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20201220_binary\/1\/",
-          "name": "[ python]バイナリ法"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20200831_rl_map\/1\/",
+          "name": "強化学習の全体像まとめ"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "[Python]バイナリ法",
+  "headline": "強化学習の全体像まとめ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  51 ,
-  "datePublished" : "2020-12-20T15:17:23",
-  "dateModified" : "2020-12-20T15:17:23",
+  "wordCount":  194 ,
+  "datePublished" : "2020-08-31T15:17:23",
+  "dateModified" : "2020-08-31T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "アルゴリズム" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20201220_binary\/1\/",
+  "keywords" : [ "機械学習" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20200831_rl_map\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="[Python]バイナリ法" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20201220_binary/1/" />
+<meta property="og:title" content="強化学習の全体像まとめ" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20200831_rl_map/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="[Python]バイナリ法" />
+  <meta name="twitter:title" content="強化学習の全体像まとめ" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.87.0" />
@@ -240,7 +240,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>[Python]バイナリ法</h1>
+                <h1>強化学習の全体像まとめ</h1>
               
               
                 <hr class="small">
@@ -260,35 +260,250 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="バイナリ法">バイナリ法</h1>
-<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．
-計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．</p>
-<h2 id="具体例">具体例</h2>
-<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
-<p>2進数に展開し，左から順に展開することにより計算を実行する．
-これにより，$g^k(mod p)$を計算する．</p>
-<h1 id="アルゴリズム">アルゴリズム</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
-        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">y</span>
-</code></pre></div>
+        <h1 id="強化学習の全体像">強化学習の全体像</h1>
+<p><img src=".././fig1.jpeg" alt="RLmap"></p>
+<h1 id="プランニング問題">プランニング問題</h1>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題</p>
+<ul>
+<li>価値反復法<br>
+ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li>
+</ul>
+<p>$$
+(B_{*}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')}
+$$
+$$
+V^{*}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
+$$</p>
+<ul>
+<li>方策反復法<br>
+ベルマン<code>期待</code>作用素を繰り返し用いて最適方策を求める．</li>
+</ul>
+<p>$$
+(B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s'))
+$$
+$$
+V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s)
+$$
+$$
+\pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s'}p_T(s'|s,a)V^\pi(s')}
+$$</p>
+<h1 id="強化学習">強化学習</h1>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題<br>
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．</p>
+<h2 id="価値関数vの推定">価値関数Vの推定</h2>
+<p>方策$\pi$を固定して価値関数の推定を行う．</p>
+<ul>
+<li>オフライン<br>
+ベルマン作用素を直接求められないので，まず標本近似によって<code>近似</code>ベルマン作用素を求める．そして，<code>近似</code>ベルマン作用素を価値関数用いて更新する．</li>
+</ul>
+<p>$$
+\hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s)
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>TD法<br>
+TD誤差$\delta$を計算して価値関数を更新する．</li>
+</ul>
+</blockquote>
+<p>$$
+\delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t)
+$$</p>
+<p>$$
+\hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta
+$$</p>
+<blockquote>
+<ul>
+<li>TD($\lambda$)法<br>
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．</li>
+</ul>
+</blockquote>
+<h2 id="行動価値関数qの推定">行動価値関数Qの推定</h2>
+<p>方策$\pi$を固定して行動価値関数の推定を行う．</p>
+<blockquote>
+<ul>
+<li>Q学習法<br>
+価値ベース：maxを取っているため推定行動価値関数が方策に依存しない．</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma \max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)<br>
+$$</p>
+<p>$$
+\hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
+$$</p>
+<blockquote>
+<ul>
+<li>SARSA<br>
+方策ベース</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma \hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+$$</p>
+<p>$$
+\hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
+$$</p>
+<h3 id="アクタークリティック法">アクタークリティック法</h3>
+<p>アクターは行動を決定し，クリティックは環境から情報を集めることで状態の価値を推定し，これに基づき行動を評価を行う．</p>
+<ul>
+<li>クリティック</li>
+</ul>
+<p>$$
+\delta_t=r_t+\gamma\hat{V}(s_{t+1})-\hat{V}(s_t)
+$$</p>
+<p>$$
+\hat{V}(s_{t}=\hat{V}(s_t)+\alpha\delta_t
+$$</p>
+<ul>
+<li>アクター</li>
+</ul>
+<p>$$
+q(s_t,a_t)=q(s_t,a_t)+\alpha\delta_t
+$$</p>
+<p>*$q$は効用関数(価値観数は効用関数により得られる)</p>
+<h2 id="関数近似">関数近似</h2>
+<p>状態数が膨大であったり，状態空間が連続の場合，計算量が多くなりすぎるため関数近似を行う．</p>
+<h3 id="価値関数近似">価値関数近似</h3>
+<p>パラメータ$w$で規定される関数近似器を用いる．</p>
+<ul>
+<li>オフライン<br>
+適合価値反復法では収束性を担保できない．安定化の1つのアプローチとして関数近似の自由度を上げる方法がある．代表例として，<code>ニューラル適合Q反復</code>，<code>深層Qネットワーク</code>がある．</li>
+</ul>
+<blockquote>
+<ul>
+<li>適合価値反復法(価値関数$V$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
+V_n^{target}=\hat{B}(\hat{V}_w)(s_n)=r_n+\gamma \hat{V}_w(s'_n)
+$$</p>
+<p>$$
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+$$</p>
+<p>$$
+w=\arg\min_w\frac{1}{N}\sum_1^N(V_n^{target}-\hat{V}_w(s_n))^2
+$$</p>
+<blockquote>
+<ul>
+<li>適合Q反復法(行動価値関数$Q$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+$$</p>
+<p>$$
+w=\arg\min_w\frac{1}{N}\sum_1^N(Q_n^{target}-\hat{Q}_w(s_n))^2
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>近似TD法<br>
+　TD誤差を再定義</li>
+</ul>
+</blockquote>
+<p>$$ \delta = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$$</p>
+<p>$\hat{V}_w$の $w$ に関する偏微分ベクトル</p>
+<p>$$\nabla_w\hat{V}_{w_t}(s)$$</p>
+<p>を用いて</p>
+<p>$$
+w_{t+1}=w_t+\alpha\delta_t\nabla_w\hat{V}_{w_t}(s_t)
+$$</p>
+<blockquote>
+<ul>
+<li>近似Q学習法</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma\max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+$$</p>
+<blockquote>
+<ul>
+<li>近似SARSA法</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+$$</p>
+<h3 id="方策近似">方策近似</h3>
+<blockquote>
+<ul>
+<li>方策勾配法<br>
+目的関数</li>
+</ul>
+</blockquote>
+<p>$$
+f_0=\sum_sp_{s_0}(s)V^{\pi_\theta}(s)
+$$</p>
+<p>$$
+f_\infty=\lim_{T \rightarrow \infty}\mathbb{E}[\frac{1}{T}\sum_{t=0}^{T-1}g(S_t,A_t)=\sum_{s}\sum_{a}p_{\infty}^{\pi_\theta}(a|s)g(s,a)
+$$</p>
+<p>確率的勾配法に従い
+$$
+\theta=\theta+\alpha_tG_t^\theta
+$$</p>
+<blockquote>
+<ul>
+<li>モンテカルロ方策勾配法</li>
+</ul>
+</blockquote>
+<p>$$
+c_t=\sum_{k=t}^{T-1}r_k
+$$</p>
+<p>$$
+\theta=\theta+\alpha_n\frac{1}{T}\sum_{t=0}^{T-1}(c_t-b(s_t))\nabla_\theta \log\pi_\theta(s_t,a_t)
+$$</p>
+<blockquote>
+<ul>
+<li>アクタークリティック方策勾配法</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>クリティックの更新<br>
+推定平均報酬$f$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$f_t=f_{t-1}+\alpha_t(r_t-f_{t-1})$$</p>
+<p>TD誤差の計算</p>
+<p>$$
+\delta_t=r_t - f_t + \hat{Q}w_{t}(s_{t+1},a_{t+1})-\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<p>エリジビリティ・トレースと関数近似器パラメータの更新</p>
+<p>$$
+z_t=\lambda z_{t-1}+\nabla_w\hat{Q}_{w_t}(s_t,a_t)
+$$</p>
+<p>$$
+w_{t+1}=w_t+\alpha_t\delta_tz_t
+$$</p>
+<blockquote>
+<blockquote>
+<ul>
+<li>アクターの更新<br>
+方策パラメータ$\theta$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$
+\theta_{t+1}=\theta+\alpha_t\hat{Q}_{w_t}(s_t,a_t)\nabla_\theta\log\pi_\theta(a_t|s_t)
+$$</p>
+<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>森村 哲郎, &ldquo;<a href="https://amzn.to/3eH8hHd">MLP機械学習プロフェッショナルシリーズ 強化学習</a>&rdquo;</li>
+</ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
             
           </div>
         
@@ -303,42 +518,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;text=%5bPython%5d%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f&amp;text=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%5bPython%5d%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%5bPython%5d%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%5bPython%5d%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f&amp;title=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;description=%5bPython%5d%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200831_rl_map%2f1%2f&amp;description=%e5%bc%b7%e5%8c%96%e5%ad%a6%e7%bf%92%e3%81%ae%e5%85%a8%e4%bd%93%e5%83%8f%e3%81%be%e3%81%a8%e3%82%81" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -360,13 +575,15 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20210329_bin/1/">[Python]2進数変換と論理演算(or,xor)</a></li>
+                    <li><a href="/posts/20210527_moment/1/">モーメント</a></li>
                 
-                    <li><a href="/posts/20210318_pid/2/">K-means法</a></li>
+                    <li><a href="/posts/20210329_cem/1/">クロスエントロピー法(Cross Entropy Method)</a></li>
                 
-                    <li><a href="/posts/20201223_elgamal/1/">[Python]楕円曲線上のElGamal暗号</a></li>
+                    <li><a href="/posts/20210215_nn/1/">[Pytorch]教師あり学習でニューラルネットワークを学習</a></li>
                 
-                    <li><a href="/posts/20201015_euclidean/1/">[Python]ユークリッドの互除法と拡張ユークリッドの互除法</a></li>
+                    <li><a href="/posts/20210125_ut/1/">[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</a></li>
+                
+                    <li><a href="/posts/20210109_nnga/1/">[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</a></li>
                 
               </ul>
 
@@ -378,12 +595,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20201015_euclidean/1/" data-toggle="tooltip" data-placement="top" title="[Python]ユークリッドの互除法と拡張ユークリッドの互除法">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/" data-toggle="tooltip" data-placement="top" title="[ROS]PublisherとSubscriberを1つのノードに書く方法">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20201223_slack_api/1/" data-toggle="tooltip" data-placement="top" title="Pythonでslackに実験結果(テキストと画像)を送る">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20200901_filter/1/" data-toggle="tooltip" data-placement="top" title="フィルタまとめ">Next Post &rarr;</a>
             </li>
           
         </ul>
