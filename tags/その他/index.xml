@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/%E3%81%9D%E3%81%AE%E4%BB%96/</link>
     <description>Recent content in その他 on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 05 Aug 2021 10:11:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%81%9D%E3%81%AE%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Aug 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%81%9D%E3%81%AE%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>githubへのssh接続メモ</title>
+      <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
+      <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Raspberry PiでAirplayをする方法メモ(RPiPlay)</title>
       <link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link>
