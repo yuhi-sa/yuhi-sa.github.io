@@ -1,6 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</loc>
+  
+  <lastmod>2021-09-12T10:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</loc>
   
   <lastmod>2021-08-18T10:00:23+09:00</lastmod>
