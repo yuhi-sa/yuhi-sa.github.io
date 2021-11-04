@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="情報理論(エントロピーから相互情報量, PRML1.6)" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name="generator" content="Hugo 0.89.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -358,7 +358,7 @@ $$
 <h1 id="相対エントロピー">相対エントロピー</h1>
 <p>ある未知の分布$p(x)$があり，これを近似的に$q(x)$でモデル化したっとする．真の分布$p(x)$の代わりに$q(x)$を使うことで，$x$の値を特定するのに追加で必要となる情報量は，条件付き条件付きエントロピーの概念を用いて以下のように表すことができる．</p>
 <p>$$
-KL(p||q)=-\int p(x)\ln q(x)dx-(-\int p(x)\ln p(x)dx) \<br>
+KL(p||q)=-\int p(x)\ln q(x)dx-(-\int p(x)\ln p(x)dx) \
 = -\int p(x) \ln {\frac{q(x)}{p(x)}}
 $$
 これは，分布$p(x)$と$q(x)$の間の相対エントロピーあるいは，カルバックライブラー(KL)ダイバージェンスと呼ばれる．
@@ -377,7 +377,7 @@ $$</p>
 <p>2つの変数集合$x$と$y$の同時分布$p(x,y)$について考える．変数が独立出ない場合において，変数が独立に近いかどうかを知るために，同時分布$p(x,y)$と周辺分布の積$p(x)p(y)$の間のKLダイバージェンスを考えることができる．</p>
 <p>$$
 I[x,y]\equiv
-KL(p(x,y)||p(x)p(y)) \<br>
+KL(p(x,y)||p(x)p(y)) \
 = -\int \int p(x,y)\ln (\frac{p(x)p(y)}{p(x,y)})dxdy
 $$</p>
 <h1 id="参考">参考</h1>
@@ -537,7 +537,7 @@ $$</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.89.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

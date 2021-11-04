@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="EMアルゴリズム" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.88.1" />
+  <meta name="generator" content="Hugo 0.89.0" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -285,16 +285,16 @@ zは未知の値であるが，パラメータの推定量$\hat{\theta}$と観�
 <ul>
 <li>Eステップ(期待値計算)</li>
 </ul>
-<p>$$r_{ij}=\mathbb{E}_{p(z^{(i)}|x^{(i)},\hat{\theta})}[z_{ij}]$$</p>
+<p>$$r_{ij}=\mathbb{E}<em>{p(z^{(i)}|x^{(i)},\hat{\theta})}[z</em>{ij}]$$</p>
 <ul>
 <li>Mステップ(最大化)$r_{ij}$を使いQ関数を最大化する$\hat{\pi}_j^{(t)},\hat{\mu}_j^{(t)}\hat{\sigma}_j^{2(t)}$を計算する．</li>
 </ul>
 <p>$$Q(\theta,\hat{\theta})=\sum_{i=1}^n\sum_{j=1}^kr_{ij}(\log\pi_j+\log\mathcal{N}(x^{(i)}|\mu_j,\sigma_j^2))$$</p>
 <p>より</p>
 <p>$$R_j^{(t)}=\sum_{i=1}^{n}r_{ij}^{t}$$
-$$\hat{\pi}_j^{(t)}=\frac{R_j^{(t)}}{\sum_{j=1}^kR_j^{(t)}}$$
-$$\hat{\mu}_j^{(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}x_i}{R_j^{(t)}}$$
-$$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}{R_j^{(t)}}$$</p>
+$$\hat{\pi}<em>j^{(t)}=\frac{R_j^{(t)}}{\sum</em>{j=1}^kR_j^{(t)}}$$
+$$\hat{\mu}<em>j^{(t)}=\frac{\sum</em>{i=1}^nr_{ij}^{(t)}x_i}{R_j^{(t)}}$$
+$$\hat{\sigma}<em>j^{2(t)}=\frac{\sum</em>{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}{R_j^{(t)}}$$</p>
 <ul>
 <li>$t = t+1$</li>
 </ul>
@@ -455,7 +455,7 @@ $$\hat{\sigma}_j^{2(t)}=\frac{\sum_{i=1}^nr_{ij}^{(t)}(x_i-\hat{\mu}_j^{(t)})^2}
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.89.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
