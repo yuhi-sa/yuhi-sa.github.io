@@ -5,7 +5,34 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 12 Nov 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/1/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>スーパーユーザ</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/1/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ユーザアカウント</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/2/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>オブジェクト指向</title>
       <link>https://yuhi-sa.github.io/posts/20211112_java/1/</link>
