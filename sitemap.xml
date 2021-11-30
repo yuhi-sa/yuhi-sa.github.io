@@ -1,6 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20211121_linux/4/</loc>
+  
+  <lastmod>2021-11-30T10:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20211121_db/2/</loc>
   
   <lastmod>2021-11-26T10:00:23+09:00</lastmod>
