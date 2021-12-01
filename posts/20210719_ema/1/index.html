@@ -58,7 +58,7 @@
   "headline": "指数移動平均 (Exponential Moving Averages, EMA)",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  199 ,
+  "wordCount":  202 ,
   "datePublished" : "2021-07-19T10:17:23",
   "dateModified" : "2021-07-19T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -145,6 +145,12 @@
           
             <li>
               <a title="About" href="https://profile-nu-gold.vercel.app">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="privacy policy" href="/posts/privacy_policy">privacy policy</a>
             </li>
           
         
@@ -260,8 +266,9 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>$$\bar{o}_{t+1}=\beta \bar{o}<em>t+(1-\beta)o</em>{t+1}$$</p>
-<p>$o_t$：観測値<br>
+        <p>$$o_{t+1}= \beta o_t+(1- \beta)s_{t+1}$$</p>
+<p>$s_t$：観測値<br>
+$o_t$：フィルタリング後の値<br>
 $\beta$：ハイパーパラメータ</p>
 <p>EMAは，平滑化しすぎると元データの特性をつぶしてしまい，平滑化が足りなけ ればノイズが除去しきれない.$\beta$を適切に設計する必要がある．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span>
