@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>MacのLaunchpadを初期化する方法 - yuhi-sa</title>
+  <title>op3_walk - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210520_mac_tips\/1\/",
-          "name": "Macの launchpadを初期化する方法"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211102_op3\/1\/",
+          "name": "Op3 walk"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "MacのLaunchpadを初期化する方法",
+  "headline": "op3_walk",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  9 ,
-  "datePublished" : "2021-04-20T10:00:23",
-  "dateModified" : "2021-04-20T10:00:23",
+  "wordCount":  244 ,
+  "datePublished" : "2021-11-02T10:17:23",
+  "dateModified" : "2021-11-02T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
   "keywords" : [ "その他" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210520_mac_tips\/1\/",
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20211102_op3\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="MacのLaunchpadを初期化する方法" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210520_mac_tips/1/" />
+<meta property="og:title" content="op3_walk" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20211102_op3/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="MacのLaunchpadを初期化する方法" />
+  <meta name="twitter:title" content="op3_walk" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.89.4" />
@@ -246,7 +246,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>MacのLaunchpadを初期化する方法</h1>
+                <h1>op3_walk</h1>
               
               
                 <hr class="small">
@@ -266,9 +266,54 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>以下のコマンドですべて初期化される</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">defaults write com.apple.dock ResetLaunchPad -bool true<span class="p">;</span> killall Dock
-</code></pre></div>
+        <h1 id="はじめに">はじめに</h1>
+<p>ROBOTIS OP3にGazeboシミュレーション内で強化学習を用いて歩行獲得させるROSパッケージのコード説明．<br>
+ROS package for ROBOTIS OP3 to acquire walking using reinforcement learning</p>
+<h1 id="結果の動画--result-video">結果の動画 / Result Video</h1>
+<ul>
+<li><a href="op3_controller_demo.mp4">op3_controller_demo</a></li>
+</ul>
+<h1 id="手法の説明--methods">手法の説明 / Methods</h1>
+<p>深層強化学習(DQN)を使用しています．<br>
+This package uses deep reinforcement learning (DQN).</p>
+<p>行動価値関数は，3層のニューラルネットワーク(NN)として定義しQ値を以下のように更新し，<br>
+The action value function is defined as a three-layer neural network (NN), and the Q-value is updated as follows</p>
+<p>$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$</p>
+<p>損失関数$L$を用いて誤差逆伝播しニューラルネットを更新しています．<br>
+The neural network is updated by back propagation using the loss function L.</p>
+<p>$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$</p>
+<h1 id="プログラムの説明--code">プログラムの説明 / code</h1>
+<h2 id="functionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsfunctionpy-and-motionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsmotionpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/function.py">function.py</a> and <a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/motion.py">motion.py</a></h2>
+<p>[function]にはエージェントの定義を書いています．<br>
+[function] contains the definition of the agent.</p>
+<p>Agentクラスが，ニューラルネットの定義をしているBrainクラスを持っています．<br>
+The Agent class has a Brain class that defines the neural network.</p>
+<p>ReplayMemoryクラスに蓄積される行動と状態で，Brainは損失の計算と更新を行います．<br>
+With the actions and states stored in the ReplayMemory class, Brain calculates and updates the loss.</p>
+<p>行動は離散化しており，[motion]で定義されている行動の中から，epsilon-greedy選択を行います．<br>
+The actions are discretized, and epsilon-greedy selection is made among the actions defined in [motion].</p>
+<p>こちらの書籍のコードを参考にしています．<br>
+I used the code from this book as a reference.</p>
+<ul>
+<li><a href="https://github.com/YutaroOgawa/Deep-Reinforcement-Learning-Book">Deep-Reinforcement-Learning-Book</a></li>
+</ul>
+<h2 id="learningpyhttpsgithubcomyuhi-saop3_walkblobmainscriptslearningpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/learning.py">learning.py</a></h2>
+<p>[learning]では，[function]で定義したAgentクラスを継承します．<br>
+In [learning], it inherits from the Agent class defined in [function].</p>
+<p>Agentに，[controller]からsubscribeした状態を入力，行動を計算し，publishします．<br>
+Input the state subscribed from [controller] to the Agent, calculate the action, and publish it.</p>
+<p>こちらはニューラルネットワークの定義にpytorchを使っているため，python3系で実行する必要があります． <br>
+This one uses pytorch to define the neural network, so it needs to be run in python3.</p>
+<h2 id="controllerpyhttpsgithubcomyuhi-saop3_walkblobmainscriptscontrollerpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/controller.py">controller.py</a></h2>
+<p>[controller]は．[learning]からpublishされた行動をsubscribeして，実際にop3を動かします．<br>
+[controller]. It subscribes to actions published by [learning] and actually runs op3.</p>
+<p>そして，状態をpublishします．<br>
+Then publish the state.</p>
+<p>こちらはop3のパッケージの関係で，python2系で実行する必要があります．<br>
+Due to the op3 package, you will need to run this in python2.</p>
+<h1 id="学習曲線">学習曲線</h1>
+<p>歩行距離の学習曲線 / Learning curve for walking distance</p>
+<p><img src="https://github.com/yuhi-sa/op3_walk/blob/main/docs/learning.png?raw=true" alt="歩行距離"></p>
 
         
           <div class="blog-tags">
@@ -288,42 +333,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f&amp;text=Mac%e3%81%aeLaunchpad%e3%82%92%e5%88%9d%e6%9c%9f%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f&amp;text=op3_walk&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f&amp;title=Mac%e3%81%aeLaunchpad%e3%82%92%e5%88%9d%e6%9c%9f%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f&amp;title=op3_walk" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f&amp;title=Mac%e3%81%aeLaunchpad%e3%82%92%e5%88%9d%e6%9c%9f%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f&amp;title=op3_walk" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f&amp;title=Mac%e3%81%aeLaunchpad%e3%82%92%e5%88%9d%e6%9c%9f%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f&amp;title=op3_walk" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210520_mac_tips%2f1%2f&amp;description=Mac%e3%81%aeLaunchpad%e3%82%92%e5%88%9d%e6%9c%9f%e5%8c%96%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211102_op3%2f1%2f&amp;description=op3_walk" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -345,8 +390,6 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20211102_op3/1/">op3_walk</a></li>
-                
                     <li><a href="/posts/20210912_google_cal_sync/1/">Appleへのgoogleカレンダーの他のカレンダー同期</a></li>
                 
                     <li><a href="/posts/20210818_github_ssh/1/">githubへのssh接続メモ</a></li>
@@ -354,6 +397,8 @@
                     <li><a href="/posts/20210805_rpiplay/1/">Raspberry PiでAirplayをする方法メモ(RPiPlay)</a></li>
                 
                     <li><a href="/posts/20210713_readable/1/">リーダブルコード読んだメモ</a></li>
+                
+                    <li><a href="/posts/20210630_gtihub_action/1/">GitHub Actions の書き方</a></li>
                 
               </ul>
 
@@ -365,12 +410,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210514_py_print/1/" data-toggle="tooltip" data-placement="top" title="printの上書きをする方法">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/" data-toggle="tooltip" data-placement="top" title="Appleへのgoogleカレンダーの他のカレンダー同期">&larr; Previous Post</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210527_moment/1/" data-toggle="tooltip" data-placement="top" title="モーメント">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20211112_java/1/" data-toggle="tooltip" data-placement="top" title="オブジェクト指向">Next Post &rarr;</a>
             </li>
           
         </ul>
