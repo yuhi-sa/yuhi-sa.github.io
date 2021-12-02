@@ -58,7 +58,7 @@
   "headline": "変分オートエンコーダ(VAE)",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  41 ,
+  "wordCount":  38 ,
   "datePublished" : "2021-03-18T12:00:23",
   "dateModified" : "2021-03-18T12:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -279,8 +279,9 @@ VAEでは，2つの分布の関数系が異なってもよいという一般化�
 <p>オートエンコーダは，入力と出力が一致するようにパラメータの学習を行う装置である．VAEは変分下界を使って訓練を行うオートエンコーダである．</p>
 <p>入力と同じ内容を出力する装置では中間的な層において符号化が行われており，これは情報圧縮をしていることに相当する．</p>
 <h1 id="vaeにおける変分下界">VAEにおける変分下界</h1>
-<p>EMアルゴリズムで使用した変分下界を$\theta$と$\phi$を用いて書き直す．</p>
-<p>$$\mathcal{B}(\theta,\phi)=\sum_{i=1}^n(\mathbb{E}<em>{q</em>\phi(z^{(i)}|x^{(i)})}[\log p_\theta (x^{(\theta)}|z^{(i)})]-\mathcal{D}(q_\phi(z^{(i)}|x^{(i)})||p_\theta(z^{(i)}))$$</p>
+<p>EMアルゴリズムで使用した変分下界を$\theta$と$\phi$を用いて書き直す．
+<img src=".././VAE%E5%A4%89%E5%88%86%E4%B8%8B%E7%95%8C.png" alt=""></p>
+<!-- raw HTML omitted -->
 <p>EMアルゴリズムによる混合ガウスモデルの学習では$z$はone-hotベクトルとしたが，VAEでは連続値である．よって$z$は多変量正規分布に従うモデルを用いる．</p>
 <h2 id="認識モデル">認識モデル</h2>
 <p>VAEでは認識モデル$q_\Phi(z|x)$として以下のように定義される多変量正規分布を用いる．</p>

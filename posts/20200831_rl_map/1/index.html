@@ -58,7 +58,7 @@
   "headline": "強化学習の全体像まとめ",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  194 ,
+  "wordCount":  201 ,
   "datePublished" : "2020-08-31T15:17:23",
   "dateModified" : "2020-08-31T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -275,10 +275,10 @@
 ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li>
 </ul>
 <p>$$
-(B_{<em>}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')}
+(B_{\star}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')}
 $$
 $$
-V^{</em>}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
+V^{\star}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
 $$</p>
 <ul>
 <li>方策反復法<br>
@@ -498,9 +498,7 @@ $$</p>
 </ul>
 </blockquote>
 </blockquote>
-<p>$$
-\theta_{t+1}=\theta+\alpha_t\hat{Q}<em>{w_t}(s_t,a_t)\nabla</em>\theta\log\pi_\theta(a_t|s_t)
-$$</p>
+<p>$$\theta_{t+1} = \theta + \alpha_t \hat{Q} (s_t,a_t) \nabla_\theta \log \pi_\theta(a_t|s_t)$$</p>
 <h1 id="参考文献">参考文献</h1>
 <ul>
 <li>森村 哲郎, &ldquo;<a href="https://amzn.to/3eH8hHd">MLP機械学習プロフェッショナルシリーズ 強化学習</a>&rdquo;</li>

@@ -283,9 +283,9 @@ Asynchronousな学習をしなくても十分な精度が出るためA2Cが生�
 <p>$$\mathbb{E}[KL[\pi_{\theta_{old}}(･|s_t),\pi_\theta(･|s_t)]] \leq \delta$$</p>
 <p>更新前の行動分布$\pi_{\theta_{old}}(･|s_t)$と更新後の行動分布$\pi_\theta(･|s_t)$の分布間の距離KLダイバージェンスが$\delta$以下になるように制約をかけ，制約の下でAdvantageが大きくなるように更新する．<br>
 Advantageには更新の前後の変化に応じて重み($\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}$)がかけられる．</p>
-<p>$$\max_\theta \mathbb{E}<em>t[\frac{\pi</em>\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t]$$</p>
+<p>$$\max_\theta \mathbb{E}[\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t]$$</p>
 <p>TRPOにおける距離の制約は，目的関数の中に組み込むことが可能である．</p>
-<p>$$r_t(\theta) =  E_t[\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t - \beta KL[\pi_{\theta_{old}}(･|s_t),\pi_\theta(･|s_t)]]$$</p>
+<p>$$r_t(\theta) =  \mathbb{E}[\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t - \beta KL[\pi_{\theta_{old}}(･|s_t),\pi_\theta(･|s_t)]]$$</p>
 <h2 id="proximal-policy-optimizationppo">Proximal Policy Optimization(PPO)</h2>
 <p>TRPOの距離制約を含んだ目的関数$r_t(\theta)$において，更新前後の分布が前後完全に一致した場合1となる.<br>
 $r_t(\theta)$が1から大きく離れる場合，一定の上限値で制限する．以下の式では，$r_t(\theta)$を$1-\epsilon$から$1+\epsilon$の範囲に制限している．</p>
