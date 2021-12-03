@@ -298,7 +298,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 <ul>
 <li>-t dsa：DSA暗号指定</li>
 <li>-t rsa1：RSA暗号指定(ver1)</li>
-<li>^t rsa：RSA暗号指定(ver2)</li>
+<li>-t rsa：RSA暗号指定(ver2)</li>
 <li>-p：パスフレーズ変更</li>
 <li>-f ファイル名：鍵ファイル指定</li>
 </ul>
@@ -310,7 +310,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 $ sudo chown <span class="o">[</span>ユーザ名<span class="o">]</span>:users /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
 $ sudo chmod <span class="m">700</span> /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
 </code></pre></div><ul>
-<li>700権限：自分以外は，そのファイルを操作できない</li>
+<li>700権限：所有者以外は操作できない</li>
 </ul>
 <h1 id="4-公開鍵を登録接続先pc">4. 公開鍵を登録[接続先PC]</h1>
 <p>「/.ssh」ディレクトリに「authorized_key」ファイル作成．</p>
