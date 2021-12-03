@@ -16,7 +16,7 @@
     </item>
     
     <item>
-      <title>ネットワークのトラブルシューティング</title>
+      <title>ネットワークのトラブルシューティングで利用する代表的なコマンド</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/4/</link>
       <pubDate>Tue, 30 Nov 2021 10:00:23 +0900</pubDate>
       
@@ -79,7 +79,7 @@
     </item>
     
     <item>
-      <title>op3_walk</title>
+      <title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title>
       <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
       

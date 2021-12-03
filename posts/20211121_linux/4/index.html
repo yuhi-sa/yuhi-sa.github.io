@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>ネットワークのトラブルシューティング - yuhi-sa</title>
+  <title>ネットワークのトラブルシューティングで利用する代表的なコマンド - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,7 +44,7 @@
         "position": 3,
         "item": {
           "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/4\/",
-          "name": "ネットワークのトラブルシューティング"
+          "name": "ネットワークのトラブルシューティングで利用する代表的なコマンド"
         }
     }]
 }
@@ -55,10 +55,10 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "ネットワークのトラブルシューティング",
+  "headline": "ネットワークのトラブルシューティングで利用する代表的なコマンド",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  15 ,
+  "wordCount":  89 ,
   "datePublished" : "2021-11-30T10:00:23",
   "dateModified" : "2021-11-30T10:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="ネットワークのトラブルシューティング" />
+<meta property="og:title" content="ネットワークのトラブルシューティングで利用する代表的なコマンド" />
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/4/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="ネットワークのトラブルシューティング" />
+  <meta name="twitter:title" content="ネットワークのトラブルシューティングで利用する代表的なコマンド" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.89.4" />
@@ -246,7 +246,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>ネットワークのトラブルシューティング</h1>
+                <h1>ネットワークのトラブルシューティングで利用する代表的なコマンド</h1>
               
               
                 <hr class="small">
@@ -275,13 +275,68 @@
 <li>開いているポートの確認</li>
 </ol>
 <h1 id="代表的なコマンド">代表的なコマンド</h1>
+<h2 id="ping">ping</h2>
+<p>宛先へのネットワークの疎通確認</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ping <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
+</code></pre></div><p>オプション</p>
 <ul>
-<li>ping：宛先へのネットワークの疎通確認</li>
-<li>telnet：アプリケーション層での疎通確認</li>
-<li>traceroute：始点から終点までのホスト間の経路情報確認</li>
-<li>ip route：ルーティングテーブルのエントリ情報の表示</li>
-<li>ss：ネットワーク接続の統計情報の出力(socket statistics)</li>
-<li>tcpdump：ネットワーク上を流れる通信パケットの閲覧</li>
+<li>-c　送信回数：送信回数指定</li>
+<li>-i　送信感覚：送信間隔指定</li>
+<li>-n：名前解決を行わない</li>
+</ul>
+<h2 id="telnet">telnet</h2>
+<p>アプリケーション層での疎通確認</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ telnet <span class="o">[</span>オプション<span class="o">]</span> 宛先IP <span class="o">[</span>ポート番号<span class="o">]</span>
+</code></pre></div><p>オプション</p>
+<ul>
+<li>-l ユーザ名：ユーザ名指定</li>
+</ul>
+<h2 id="traceroute">traceroute</h2>
+<p>始点から終点までのホスト間の経路情報確認</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ traceroute <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
+</code></pre></div><p>オプション</p>
+<ul>
+<li>-i インタフェース名：インタフェース名指定</li>
+<li>-T：TCPプロトコル利用</li>
+<li>-I：ICMPプロトコル利用</li>
+<li>-n：名前解決を行わない</li>
+</ul>
+<h2 id="ip-route">ip route</h2>
+<p>ルーティングテーブルのエントリ情報の表示</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip route <span class="o">[</span>サブコマンド<span class="o">]</span>
+</code></pre></div><p>サブコマンド</p>
+<ul>
+<li>show：ルーティングテーブルの情報表示</li>
+<li>add ネットワーク：ルーティングテーブルにエントリ追加</li>
+<li>del ネットワーク：ルーティングテーブルからエントリ削除</li>
+</ul>
+<h2 id="ss">ss</h2>
+<p>ネットワーク接続の統計情報の出力(socket statistics)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ss <span class="o">[</span>オプション<span class="o">]</span>
+</code></pre></div><p>オプション</p>
+<ul>
+<li>-a：すべて表示</li>
+<li>-l：Listenポートのみ表示</li>
+<li>-n：名前解決を行わない</li>
+<li>-t：TCPを表示</li>
+<li>-u：UDPを表示</li>
+</ul>
+<h2 id="tcpdump">tcpdump</h2>
+<p>ネットワーク上を流れる通信パケットの閲覧</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ tcpdump <span class="o">[</span>オプション<span class="o">]</span> <span class="o">[</span>条件<span class="o">]</span>
+</code></pre></div><p>オプション</p>
+<ul>
+<li>-c パケット数：パケット数指定</li>
+<li>-i インタフェース名：インタフェース指定</li>
+<li>-n ：名前解決を行わない</li>
+<li>-w ファイル名：ファイル名指定</li>
+<li>-v：IPヘッダの表示</li>
+</ul>
+<p>条件</p>
+<ul>
+<li>dst IPアドレス：宛先IPを指定</li>
+<li>src IPアドレス：送信元IPを指定</li>
+<li>prot ポート番号：ポート番号を指定</li>
 </ul>
 
         
@@ -302,7 +357,7 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;text=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;text=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%a7%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -316,28 +371,28 @@
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%a7%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%a7%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%a7%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;description=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f4%2f&amp;description=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e3%83%88%e3%83%a9%e3%83%96%e3%83%ab%e3%82%b7%e3%83%a5%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0%e3%81%a7%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
