@@ -269,7 +269,7 @@
         <h1 id="ユーザアカウント情報">ユーザアカウント情報</h1>
 <p>ユーザアカウント情報は「/etc/passwd」ファイルに保存されている．1行ごとに1ユーザの情報が：で区切られた7つのフィールドで構成されている．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>ユーザ名<span class="o">]</span>:<span class="o">[</span>パスワード<span class="o">]</span>:<span class="o">[</span>ユーザID<span class="o">]</span>:<span class="o">[</span>グループID<span class="o">]</span>:<span class="o">[</span>コメント<span class="o">]</span>:<span class="o">[</span>ホームディレクトリ<span class="o">]</span>:<span class="o">[</span>ログインシェル<span class="o">]</span>
-</code></pre></div><p>ここでパスワードはxと表示され，シャドウパスワードが用いられている．シャドウパスワードは「etc/shadou」ファイルに保存されており，rootユーザのみ読み取り専用として開くことができる．</p>
+</code></pre></div><p>ここでパスワードはxと表示され，シャドウパスワードが用いられている．シャドウパスワードは「etc/shadow」ファイルに保存されており，rootユーザのみ読み取り専用として開くことができる．</p>
 <h2 id="ユーザ情報の編集コマンド">ユーザ情報の編集コマンド</h2>
 <ul>
 <li>useradd：一般ユーザの追加</li>
@@ -362,6 +362,8 @@
                   <h4 class="see-also">See also</h4>
                   <ul>
                 
+                
+                    <li><a href="/posts/20211121_linux/5/">公開鍵認証方式を用いたSSH通信の設定方法</a></li>
                 
                     <li><a href="/posts/20211121_linux/4/">ネットワークのトラブルシューティングで利用する代表的なコマンド</a></li>
                 

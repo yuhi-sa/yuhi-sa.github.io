@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>ネットワークの基礎 - yuhi-sa</title>
+  <title>公開鍵認証方式を用いたSSH通信の設定方法 - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/3\/",
-          "name": "ネットワークの基礎"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/5\/",
+          "name": "公開鍵認証方式を用いた ssh通信の設定方法"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "ネットワークの基礎",
+  "headline": "公開鍵認証方式を用いたSSH通信の設定方法",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  47 ,
-  "datePublished" : "2021-11-22T10:00:23",
-  "dateModified" : "2021-11-22T10:00:23",
+  "wordCount":  144 ,
+  "datePublished" : "2021-12-03T10:00:23",
+  "dateModified" : "2021-12-03T10:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
   "keywords" : [ "Linux演習" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/3\/",
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/5\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="ネットワークの基礎" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/3/" />
+<meta property="og:title" content="公開鍵認証方式を用いたSSH通信の設定方法" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/5/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="ネットワークの基礎" />
+  <meta name="twitter:title" content="公開鍵認証方式を用いたSSH通信の設定方法" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.89.4" />
@@ -246,7 +246,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>ネットワークの基礎</h1>
+                <h1>公開鍵認証方式を用いたSSH通信の設定方法</h1>
               
               
                 <hr class="small">
@@ -266,57 +266,66 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="tcpip">TCP/IP</h1>
-<p>TCP/IPはネットワークのプロトコルであり，４階層のプロトコルスタック(上からアプリケーション層，トランスポート層，インターネット層，ネットワークインターフェース層)で構成される．
-中核となるプロトコルからTCP/IPと呼ばれる．</p>
-<h2 id="アプリケーション層">アプリケーション層</h2>
-<p>データを送受信する際の表現形式(文字コード，画像形式)の処理を実行</p>
+        <h1 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h1>
+<h2 id="etcsshsshd_configを編集">「/etc/ssh/sshd_config」を編集</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo vi /etc/ssh/sshd/sshd_config
+</code></pre></div><h2 id="公開鍵暗号方式の有効化とパスワード認証方式の無効化">公開鍵暗号方式の有効化とパスワード認証方式の無効化</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">+ PubkeyAuthentication yes # 追記
+
+- PasswordAuthentication yes
++ PasswordAuthentication no # 変更
+</code></pre></div><h2 id="リスタート">リスタート</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo systemctl restart sshd
+</code></pre></div><h1 id="2-秘密鍵と公開鍵を作成接続元pc">2. 秘密鍵と公開鍵を作成[接続<strong>元</strong>PC]</h1>
+<h2 id="鍵の作成">鍵の作成</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh-keygen -t rsa
+
+Generating public/private rsa key pair.
+
+Enter file in which to save the key <span class="o">(</span>/Users/yuhi-sa/.ssh/id_rsa<span class="o">)</span>: <span class="c1"># 無記入でEnter</span>
+
+Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>: <span class="c1"># パスフレーズを入力 </span>
+Enter same passphrase again: <span class="c1"># パスフレーズを入力 </span>
+
+Your identification has been saved in 保存先ディレクトリ
+Your public key has been saved in 保存名
+</code></pre></div><p>ファイル名を空白にした場合は「/.ssh/」以下にファイルが作成される．
+id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
+<h3 id="ssh-keygenコマンド">ssh-keygenコマンド</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh-keygen <span class="o">[</span>オプション<span class="o">]</span>
+</code></pre></div><ul>
+<li>オプション
 <ul>
-<li>HTTP</li>
-<li>SMTP</li>
+<li>-t dsa：DSA暗号指定</li>
+<li>-t rsa1：RSA暗号指定(ver1)</li>
+<li>^t rsa：RSA暗号指定(ver2)</li>
+<li>-p：パスフレーズ変更</li>
+<li>-f ファイル名：鍵ファイル指定</li>
 </ul>
-<h2 id="トランスポート層">トランスポート層</h2>
-<p>通信するプログラム間でのデータ伝送確立の処理を実行</p>
-<ul>
-<li>TCP</li>
-<li>UDP</li>
+</li>
 </ul>
-<h2 id="インターネット層">インターネット層</h2>
-<p>ネットワーク上のデータ送信先を検出，送信先までのルート計算処理を実行</p>
-<ul>
-<li>IP</li>
-<li>ICMP</li>
+<h1 id="3-sshディレクトリを作成接続先pc">3. 「/.ssh」ディレクトリを作成[接続先PC]</h1>
+<p>「/.ssh」ディレクトリを作成し，700の権限を与える．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo mkdir /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+$ sudo chown <span class="o">[</span>ユーザ名<span class="o">]</span>:users /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+$ sudo chmod <span class="m">700</span> /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+</code></pre></div><ul>
+<li>700権限：自分以外は，そのファイルを操作できない</li>
 </ul>
-<h2 id="ネットワークインタフェース層">ネットワークインタフェース層</h2>
-<p>インターネット層から受け取ったデータを電気信号に変換，ネットワーク媒体に送り出すための処理を実行</p>
-<h1 id="コネクション型とコネクションレス型">コネクション型とコネクションレス型</h1>
-<p>受信側がデータを受信したことを送信側に知らせる確認応答を行う通信をコネクション型，行わない通信をコネクションレス型とよぶ．
-前者は，メールやWeb通信，後者は動画配信などに適している．</p>
-<h1 id="通信方式">通信方式</h1>
-<ul>
-<li>ユニキャスト：1対1での通信</li>
-<li>ブロードキャスト：同一ネットワーク内の全ホストに対してデータを送信</li>
-<li>マルチキャスト：不特定多数のホストに対してデータを送信(同じIPアドレスが登録されたホストにデータを送信)</li>
-<li>エニーキャスト：不特定多数のホストに対してデータを送信(同じIPアドレスが登録されたホストのうち最も近いホストにデータを送信)</li>
+<h1 id="4-公開鍵を登録接続先pc">4. 公開鍵を登録[接続先PC]</h1>
+<p>「/.ssh」ディレクトリに「authorized_key」ファイル作成．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo touch /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</code></pre></div><p>先ほど作成した公開鍵暗号を登録．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo vi /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</code></pre></div><p>600の権限を与える．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo chmod <span class="m">600</span> /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</code></pre></div><ul>
+<li>600権限：所有者のみの読み書き可能</li>
 </ul>
-<h1 id="グローバルアドレスとプライベートアドレス">グローバルアドレスとプライベートアドレス</h1>
-<p>グローバルアドレスは，日本ネットワークインフォメーションセンター(JPNIC)から割り当てられるインターネットを使用するためのIPアドレスであり，一意の値が割り当てられる．プライベートアドレスは組織内のローカルネットワーク内でのみ使用可能なIPアドレス．</p>
-<p>グローバルIPアドレスは国際機関IANA(Internet Assigned Numbers Authority)が管理している．IANAの配下に地域別の管理機関があり日本ではJPNIC(Japan Network Information Center)が日本国内のグローバルIPアドレスを管理している．
-JPNICはISP(プロバイダ)の要求に応じてIPアドレスを配布する．</p>
-<h1 id="ポート">ポート</h1>
-<p>ネットワークアプリケーションを区別する際に使用される．
-0から1023までは標準化されており，ウェルノウンポートまたは特権ポートとよぶ．代表的なポートは以下の通り．</p>
-<ul>
-<li>20：FTP(データ転送)</li>
-<li>21：FTP(制御情報)</li>
-<li>22：SSH</li>
-<li>25：SMTP</li>
-<li>53：DNS</li>
-<li>80：HTTP</li>
-<li>110：POP3</li>
-<li>143：IMAP</li>
-<li>443：HTTPS</li>
-</ul>
+<h1 id="5-接続接続元pc">5. 接続[接続<strong>元</strong>PC]</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ssh <span class="o">[</span>ユーザ名<span class="o">]</span>@IPアドレス
+Enter passphrase <span class="k">for</span> key <span class="s1">&#39;/Users/[ユーザ名]/.ssh/id_rsa&#39;</span>: <span class="c1"># パスフレーズを入力 </span>
+</code></pre></div>
 
         
           <div class="blog-tags">
@@ -336,42 +345,42 @@ JPNICはISP(プロバイダ)の要求に応じてIPアドレスを配布する�
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f&amp;text=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%9f%ba%e7%a4%8e&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f&amp;text=%e5%85%ac%e9%96%8b%e9%8d%b5%e8%aa%8d%e8%a8%bc%e6%96%b9%e5%bc%8f%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fSSH%e9%80%9a%e4%bf%a1%e3%81%ae%e8%a8%ad%e5%ae%9a%e6%96%b9%e6%b3%95&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%9f%ba%e7%a4%8e" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f&amp;title=%e5%85%ac%e9%96%8b%e9%8d%b5%e8%aa%8d%e8%a8%bc%e6%96%b9%e5%bc%8f%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fSSH%e9%80%9a%e4%bf%a1%e3%81%ae%e8%a8%ad%e5%ae%9a%e6%96%b9%e6%b3%95" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%9f%ba%e7%a4%8e" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f&amp;title=%e5%85%ac%e9%96%8b%e9%8d%b5%e8%aa%8d%e8%a8%bc%e6%96%b9%e5%bc%8f%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fSSH%e9%80%9a%e4%bf%a1%e3%81%ae%e8%a8%ad%e5%ae%9a%e6%96%b9%e6%b3%95" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f&amp;title=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%9f%ba%e7%a4%8e" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f&amp;title=%e5%85%ac%e9%96%8b%e9%8d%b5%e8%aa%8d%e8%a8%bc%e6%96%b9%e5%bc%8f%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fSSH%e9%80%9a%e4%bf%a1%e3%81%ae%e8%a8%ad%e5%ae%9a%e6%96%b9%e6%b3%95" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f3%2f&amp;description=%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%9f%ba%e7%a4%8e" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20211121_linux%2f5%2f&amp;description=%e5%85%ac%e9%96%8b%e9%8d%b5%e8%aa%8d%e8%a8%bc%e6%96%b9%e5%bc%8f%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fSSH%e9%80%9a%e4%bf%a1%e3%81%ae%e8%a8%ad%e5%ae%9a%e6%96%b9%e6%b3%95" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -393,9 +402,9 @@ JPNICはISP(プロバイダ)の要求に応じてIPアドレスを配布する�
                   <ul>
                 
                 
-                    <li><a href="/posts/20211121_linux/5/">公開鍵認証方式を用いたSSH通信の設定方法</a></li>
-                
                     <li><a href="/posts/20211121_linux/4/">ネットワークのトラブルシューティングで利用する代表的なコマンド</a></li>
+                
+                    <li><a href="/posts/20211121_linux/3/">ネットワークの基礎</a></li>
                 
                     <li><a href="/posts/20211121_linux/1/">スーパーユーザ</a></li>
                 
@@ -411,13 +420,9 @@ JPNICはISP(プロバイダ)の要求に応じてIPアドレスを配布する�
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20211121_db/1/" data-toggle="tooltip" data-placement="top" title="SQL">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/20211121_db/3/" data-toggle="tooltip" data-placement="top" title="DBの検索のSQLコマンド">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20211121_db/2/" data-toggle="tooltip" data-placement="top" title="正規化">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
