@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</link>
     <description>Recent content in 機械学習 on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 27 May 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ガウス分布同士のクロスエントロピーの閉形式導出</title>
+      <link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link>
+      <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>モーメント</title>
       <link>https://yuhi-sa.github.io/posts/20210527_moment/1/</link>
