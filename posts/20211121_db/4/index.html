@@ -58,7 +58,7 @@
   "headline": "SQLの関数",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  53 ,
+  "wordCount":  39 ,
   "datePublished" : "2021-12-08T10:00:23",
   "dateModified" : "2021-12-08T10:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -268,48 +268,66 @@
       <article role="main" class="blog-post">
         <h1 id="文字列">文字列</h1>
 <ul>
-<li>UPPER(文字列)<br>
-文字列を大文字に変換</li>
-<li>LOWER(文字列)<br>
-文字列を小文字に変換</li>
-<li>SUBSTRING(文字列,開始位置,長さ)<br>
-開始位置から長さ分，文字列から抽出</li>
-<li>INSTR(対象文字列，検索文字列)<br>
-対象文字列から検索文字列が最初に出現する位置を返却</li>
-<li>LENGTH(文字列)<br>
-文字列の長さを返却</li>
-<li>CONCAT(文字列1, 文字列2)<br>
-文字列1と文字列2を結合</li>
-<li>RPAD(文字列, 文字数, 追加文字)<br>
-文字数に達するまで文字列の右側に追加文字を追加</li>
-<li>TRIM(文字A FROM 文字列)<br>
-文字列の先頭と末尾から文字Aを取り除く</li>
-<li>REPLACE(文字列, 文字A, 文字B)<br>
-文字列に含まれる文字Aを文字Bに変換</li>
+<li>文字列を大文字に変換
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">UPPER</span><span class="p">(</span><span class="err">文字列</span><span class="p">)</span><span class="w">  
+</span></code></pre></div></li>
+<li>文字列を小文字に変換
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">LOWER</span><span class="p">(</span><span class="err">文字列</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></li>
+<li>開始位置から長さ分，文字列から抽出
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SUBSTRING</span><span class="p">(</span><span class="err">文字列</span><span class="p">,</span><span class="err">開始位置</span><span class="p">,</span><span class="err">長さ</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></li>
+<li>対象文字列から検索文字列が最初に出現する位置を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">INSTR</span><span class="p">(</span><span class="err">対象文字列，検索文字列</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>文字列の長さを返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">LENGTH</span><span class="p">(</span><span class="err">文字列</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>文字列1と文字列2を結合
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">CONCAT</span><span class="p">(</span><span class="err">文字列</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">文字列</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>文字数に達するまで文字列の右側に追加文字を追加
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">RPAD</span><span class="p">(</span><span class="err">文字列</span><span class="p">,</span><span class="w"> </span><span class="err">文字数</span><span class="p">,</span><span class="w"> </span><span class="err">追加文字</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>文字列の先頭と末尾から文字Aを取り除く
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">TRIM</span><span class="p">(</span><span class="err">文字</span><span class="n">A</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">文字列</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>文字列に含まれる文字Aを文字Bに変換
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">REPLACE</span><span class="p">(</span><span class="err">文字列</span><span class="p">,</span><span class="w"> </span><span class="err">文字</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="err">文字</span><span class="n">B</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
 </ul>
 <h1 id="時間">時間</h1>
 <ul>
-<li>NOW()<br>
-現在の日時を返却</li>
-<li>CURDATE()<br>
-現在の日時を返却</li>
-<li>CURTIME()<br>
-現在の時刻を返却</li>
-<li>DATEDIFF(日付A, 日付B)<br>
-日付Bから日付Aまでの日数</li>
-<li>DATEADD(日付A, INTERVAL n DAY)<br>
-日付Aからn日後の日付を返却</li>
-<li>LAST_DAY(日付A)<br>
-日付Aの月の月末日付を返却</li>
+<li>現在の日時を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">NOW</span><span class="p">()</span><span class="w">
+</span></code></pre></div></li>
+<li>現在の日時を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">CURDATE</span><span class="p">()</span><span class="w">
+</span></code></pre></div></li>
+<li>現在の時刻を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">CURTIME</span><span class="p">()</span><span class="w">
+</span></code></pre></div></li>
+<li>日付Bから日付Aまでの日数
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">DATEDIFF</span><span class="p">(</span><span class="err">日付</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="err">日付</span><span class="n">B</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>日付Aからn日後の日付を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">DATEADD</span><span class="p">(</span><span class="err">日付</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">DAY</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>日付Aの月の月末日付を返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">LAST_DAY</span><span class="p">(</span><span class="err">日付</span><span class="n">A</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
 </ul>
 <h1 id="数字">数字</h1>
 <ul>
-<li>ROUND(数値, n)
-数値の小数点n以下を四捨五入</li>
-<li>TRUNCATE(数値, n)<br>
-数値の小数点n以下を切り捨て</li>
-<li>MOD(数値1, 数値2)
-数値1を数値2で割った余りを返却</li>
+<li>数値の小数点n以下を四捨五入
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="n">ROUND</span><span class="p">(</span><span class="err">数値</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>数値の小数点n以下を切り捨て
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">TRUNCATE</span><span class="p">(</span><span class="err">数値</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
+<li>数値1を数値2で割った余りを返却
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">MOD</span><span class="p">(</span><span class="err">数値</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">数値</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></li>
 </ul>
 
         
