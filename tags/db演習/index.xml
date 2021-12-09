@@ -5,31 +5,13 @@
     <link>https://yuhi-sa.github.io/tags/db%E6%BC%94%E7%BF%92/</link>
     <description>Recent content in DB演習 on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 02 Dec 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/db%E6%BC%94%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/db%E6%BC%94%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>DBの検索のSQLコマンド</title>
-      <link>https://yuhi-sa.github.io/posts/20211121_db/3/</link>
-      <pubDate>Thu, 02 Dec 2021 10:00:23 +0900</pubDate>
+      <title>SQLの条件式</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/4-2/</link>
+      <pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20211121_db/3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>正規化</title>
-      <link>https://yuhi-sa.github.io/posts/20211121_db/2/</link>
-      <pubDate>Fri, 26 Nov 2021 10:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20211121_db/2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SQL</title>
-      <link>https://yuhi-sa.github.io/posts/20211121_db/1/</link>
-      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/4-2/</guid>
       <description></description>
     </item>
     
