@@ -7,20 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Thu, 09 Dec 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>DB演習</title>
-      <link>https://yuhi-sa.github.io/tags/db%E6%BC%94%E7%BF%92/</link>
+      <title>SQL</title>
+      <link>https://yuhi-sa.github.io/tags/sql/</link>
       <pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/tags/db%E6%BC%94%E7%BF%92/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DB</title>
-      <link>https://yuhi-sa.github.io/tags/db/</link>
-      <pubDate>Wed, 08 Dec 2021 10:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/tags/db/</guid>
+      <guid>https://yuhi-sa.github.io/tags/sql/</guid>
       <description></description>
     </item>
     
