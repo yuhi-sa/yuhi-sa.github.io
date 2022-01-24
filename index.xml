@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 30 Dec 2021 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jan 2022 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>指数移動平均(Exponential Moving Averages)の周波数特性</title>
+      <link>https://yuhi-sa.github.io/posts/20220124_ema/1/</link>
+      <pubDate>Mon, 24 Jan 2022 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220124_ema/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>linuxのログファイルと閲覧コマンド</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/6/</link>

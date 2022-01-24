@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/python/</link>
     <description>Recent content in python on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 19 Jul 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jan 2022 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>指数移動平均(Exponential Moving Averages)の周波数特性</title>
+      <link>https://yuhi-sa.github.io/posts/20220124_ema/1/</link>
+      <pubDate>Mon, 24 Jan 2022 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220124_ema/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>指数移動平均 (Exponential Moving Averages, EMA)</title>
       <link>https://yuhi-sa.github.io/posts/20210719_ema/1/</link>
