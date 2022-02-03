@@ -58,7 +58,7 @@
   "headline": "[Python]ユークリッドの互除法と拡張ユークリッドの互除法",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  188 ,
+  "wordCount":  187 ,
   "datePublished" : "2020-10-15T15:17:23",
   "dateModified" : "2020-10-15T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -279,10 +279,9 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h1 id="ユークリッドの互除法">ユークリッドの互除法</h1>
-<p>整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とすると，
-$a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．</p>
+<p>整数$a,b(a&gt;b)$が与えられた時，$a$を$b$で割った余り$r$とする．$a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除法の原理)を利用し，割り算を繰り返すことによって$a,b$の最大公約数を求める方法．</p>
 <h2 id="アルゴリズム">アルゴリズム</h2>
-<p>入力　整数$a,b$
+<p>入力　整数$a,b$<br>
 出力　最大公約数 $d$</p>
 <ol>
 <li>$a_0 = a$,$a_1 = b$</li>
@@ -305,7 +304,7 @@ $a$と$b$の最大公約数と$b$と$r$の最大公約数は等しいこと(除�
         <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
     <span class="k">return</span> <span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 </code></pre></div><h1 id="拡張ユークリッドの互除法">拡張ユークリッドの互除法</h1>
-<p>以下の仕組みを用いて一次不定方程式の一つの解を求める方法．
+<p>以下の仕組みを用いて一次不定方程式の一つの解を求める方法．<br>
 $ax+by=d$を求める場合$a_0=a,a_1=b$とおく．</p>
 <p>$[\begin{array}{cc}
 a_{i-1} \
@@ -333,7 +332,8 @@ $
 $[\begin{array}{cc}
 q_i &amp; 1 \
 1 &amp; 0
-\end{array}]$の逆行列を，$L_i$とする．
+\end{array}]$
+の逆行列を，$L_i$とする．
 $[\begin{array}{cc}
 a_i \
 a_{i+1}
@@ -355,15 +355,16 @@ b
 $
 となる．</p>
 <h2 id="アルゴリズム-1">アルゴリズム</h2>
-<p>入力　整数$a,b$
+<p>入力　整数$a,b$<br>
 出力　最大公約数$d$ と $ax+by=d$となる整数$x, y$</p>
 <ol>
-<li>$a_0 =a$, $a_1 =b$ とする.</li>
-<li>$x_0 =1$, $x_1 =0$，$y_0 =0$, $y_1 =1$ とする.</li>
-<li>$a_i=0$のとき，$d=a_i−1$，$x=x_{i−1}$，$y=y_{i−1}$とし終了.</li>
-<li>$a_{i−1} = a_iq_i + a_{i+1}$により，$a_{i+1}$と$q_i$を定める.
+<li>$a_0 =a$, $a_1 =b$</li>
+<li>$x_0 =1$, $x_1 =0$，$y_0 =0$, $y_1 =1$</li>
+<li>$a_i=0$のとき，<br>
+$d=a_i−1$，$x=x_{i−1}$，$y=y_{i−1}$とし終了.</li>
+<li>$a_{i−1} = a_iq_i + a_{i+1}$により，$a_{i+1}$と$q_i$を定める.<br>
 $x_{i+1} = x_{i−1} − q_ix_i$
-$y_i+1=y_i−1−q_iy_i$
+$y_i+1=y_i−1−q_iy_i$<br>
 として3に戻る．</li>
 </ol>
 <h2 id="プログラム-1">プログラム</h2>
