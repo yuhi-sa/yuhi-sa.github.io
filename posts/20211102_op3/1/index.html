@@ -58,7 +58,7 @@
   "headline": "強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  245 ,
+  "wordCount":  44 ,
   "datePublished" : "2021-11-02T10:17:23",
   "dateModified" : "2021-11-02T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -279,56 +279,35 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h1 id="はじめに">はじめに</h1>
-<p>ROBOTIS OP3にGazeboシミュレーション内で強化学習を用いて歩行獲得させるROSパッケージのコード説明．<br>
-ROS package for ROBOTIS OP3 to acquire walking using reinforcement learning</p>
+<p>ROBOTIS OP3にGazeboシミュレーション内で強化学習を用いて歩行獲得させるROSパッケージのコード説明．</p>
 <ul>
 <li><a href="https://github.com/yuhi-sa/op3_walk">op3_walk</a></li>
 </ul>
-<h1 id="結果の動画--result-video">結果の動画 / Result Video</h1>
+<h1 id="結果の動画">結果の動画</h1>
 <ul>
 <li><a href="https://github.com/yuhi-sa/op3_walk/blob/main/docs/op3_controller_demo.mp4">op3_controller_demo</a></li>
 </ul>
-<h1 id="手法の説明--methods">手法の説明 / Methods</h1>
+<h1 id="手法の説明">手法の説明</h1>
 <p>深層強化学習(DQN)を使用しています．<br>
-This package uses deep reinforcement learning (DQN).</p>
-<p>行動価値関数は，3層のニューラルネットワーク(NN)として定義しQ値を以下のように更新し，<br>
-The action value function is defined as a three-layer neural network (NN), and the Q-value is updated as follows</p>
+行動価値関数は，3層のニューラルネットワーク(NN)として定義しQ値を以下のように更新し，</p>
 <p>$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$</p>
-<p>損失関数$L$を用いて誤差逆伝播しニューラルネットを更新しています．<br>
-The neural network is updated by back propagation using the loss function L.</p>
+<p>損失関数$L$を用いて誤差逆伝播しニューラルネットを更新しています．</p>
 <p>$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$</p>
-<h1 id="プログラムの説明--code">プログラムの説明 / code</h1>
+<h1 id="プログラムの説明">プログラムの説明</h1>
 <h2 id="functionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsfunctionpy-and-motionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsmotionpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/function.py">function.py</a> and <a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/motion.py">motion.py</a></h2>
 <p>[function]にはエージェントの定義を書いています．<br>
-[function] contains the definition of the agent.</p>
-<p>Agentクラスが，ニューラルネットの定義をしているBrainクラスを持っています．<br>
-The Agent class has a Brain class that defines the neural network.</p>
-<p>ReplayMemoryクラスに蓄積される行動と状態で，Brainは損失の計算と更新を行います．<br>
-With the actions and states stored in the ReplayMemory class, Brain calculates and updates the loss.</p>
-<p>行動は離散化しており，[motion]で定義されている行動の中から，epsilon-greedy選択を行います．<br>
-The actions are discretized, and epsilon-greedy selection is made among the actions defined in [motion].</p>
-<p>こちらの書籍のコードを参考にしています．<br>
-I used the code from this book as a reference.</p>
+Agentクラスが，ニューラルネットの定義をしているBrainクラスを持っています．ReplayMemoryクラスに蓄積される行動と状態で，Brainは損失の計算と更新を行います．行動は離散化しており，[motion]で定義されている行動の中から，epsilon-greedy選択を行います．<br>
+こちらの書籍のコードを参考にしています．</p>
 <ul>
 <li><a href="https://github.com/YutaroOgawa/Deep-Reinforcement-Learning-Book">Deep-Reinforcement-Learning-Book</a></li>
 </ul>
 <h2 id="learningpyhttpsgithubcomyuhi-saop3_walkblobmainscriptslearningpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/learning.py">learning.py</a></h2>
-<p>[learning]では，[function]で定義したAgentクラスを継承します．<br>
-In [learning], it inherits from the Agent class defined in [function].</p>
-<p>Agentに，[controller]からsubscribeした状態を入力，行動を計算し，publishします．<br>
-Input the state subscribed from [controller] to the Agent, calculate the action, and publish it.</p>
-<p>こちらはニューラルネットワークの定義にpytorchを使っているため，python3系で実行する必要があります． <br>
-This one uses pytorch to define the neural network, so it needs to be run in python3.</p>
+<p>[learning]では，[function]で定義したAgentクラスを継承します．Agentに，[controller]からsubscribeした状態を入力，行動を計算し，publishします．こちらはニューラルネットワークの定義にpytorchを使っているため，python3系で実行する必要があります．</p>
 <h2 id="controllerpyhttpsgithubcomyuhi-saop3_walkblobmainscriptscontrollerpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/controller.py">controller.py</a></h2>
-<p>[controller]は．[learning]からpublishされた行動をsubscribeして，実際にop3を動かします．<br>
-[controller]. It subscribes to actions published by [learning] and actually runs op3.</p>
-<p>そして，状態をpublishします．<br>
-Then publish the state.</p>
-<p>こちらはop3のパッケージの関係で，python2系で実行する必要があります．<br>
-Due to the op3 package, you will need to run this in python2.</p>
+<p>[controller]は．[learning]からpublishされた行動をsubscribeして，実際にop3を動かします．そして，状態をpublishします．こちらはop3のパッケージの関係で，python2系で実行する必要があります．</p>
 <h1 id="学習曲線">学習曲線</h1>
-<p>歩行距離の学習曲線 / Learning curve for walking distance</p>
-<p><img src="https://github.com/yuhi-sa/op3_walk/blob/main/docs/learning.png?raw=true" alt="歩行距離"></p>
+<p>歩行距離の学習曲線
+<img src="https://github.com/yuhi-sa/op3_walk/blob/main/docs/learning.png?raw=true" alt="歩行距離"></p>
 
         
           <div class="blog-tags">
@@ -405,7 +384,7 @@ Due to the op3 package, you will need to run this in python2.</p>
                   <ul>
                 
                 
-                    <li><a href="/posts/20210912_google_cal_sync/1/">Appleへのgoogleカレンダーの他のカレンダー同期</a></li>
+                    <li><a href="/posts/20210912_google_cal_sync/1/">Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</a></li>
                 
                     <li><a href="/posts/20210818_github_ssh/1/">githubへのssh接続メモ</a></li>
                 
@@ -425,7 +404,7 @@ Due to the op3 package, you will need to run this in python2.</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/" data-toggle="tooltip" data-placement="top" title="Appleへのgoogleカレンダーの他のカレンダー同期">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/" data-toggle="tooltip" data-placement="top" title="Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法">&larr; 前ページ</a>
             </li>
           
           

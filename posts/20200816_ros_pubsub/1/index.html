@@ -58,7 +58,7 @@
   "headline": "[ROS]PublisherとSubscriberを1つのノードに書く方法",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  218 ,
+  "wordCount":  212 ,
   "datePublished" : "2020-08-16T15:17:23",
   "dateModified" : "2020-08-16T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -278,11 +278,12 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="rosrobot-operating-systemとは">ROS(Robot Operating System)とは</h1>
-<p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．
+        <h1 id="rosrobot-operating-system">ROS(Robot Operating System)</h1>
+<p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．<br>
 具体的には，ロボット同士の通信が簡易にできるようになります．</p>
 <h1 id="pub--sub通信">Pub &amp; Sub通信</h1>
-<p>ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．</p>
+<p>ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．<br>
+メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．</p>
 <p><img src=".././fig1.png" alt="PubSub通信"></p>
 <h1 id="実行環境">実行環境</h1>
 <ul>
@@ -333,8 +334,7 @@
 
  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">listener</span><span class="p">()</span>
-</code></pre></div><p>Writing a Simple Publisher and Subscriber (Python)より引用，説明補足</p>
-<h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
+</code></pre></div><h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># coding: utf-8</span>
 <span class="kn">import</span> <span class="nn">rospy</span>

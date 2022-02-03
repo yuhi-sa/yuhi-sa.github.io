@@ -5,7 +5,43 @@
     <link>https://yuhi-sa.github.io/en/tags/</link>
     <description>Recent content in Tags on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 16 Aug 2020 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MachineLearning</title>
+      <link>https://yuhi-sa.github.io/en/tags/machinelearning/</link>
+      <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/tags/machinelearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>others</title>
+      <link>https://yuhi-sa.github.io/en/tags/others/</link>
+      <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/tags/others/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://yuhi-sa.github.io/en/tags/python/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>https://yuhi-sa.github.io/en/tags/algorithm/</link>
+      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>ROS</title>
       <link>https://yuhi-sa.github.io/en/tags/ros/</link>
