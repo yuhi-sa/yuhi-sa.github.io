@@ -58,7 +58,7 @@
   "headline": "指数移動平均の周波数特性(ゲイン，位相)",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  134 ,
+  "wordCount":  133 ,
   "datePublished" : "2022-01-24T10:17:23",
   "dateModified" : "2022-01-24T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -278,7 +278,7 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="指数移動平均とは">指数移動平均とは</h1>
+        <h1 id="指数移動平均">指数移動平均</h1>
 <p>入力$x$に対して，平滑化率$\beta$に応じて時系列平滑化を行い$y$を得る．</p>
 <p>$y_t=\beta y_{t-1}+(1-\beta)x_t$</p>
 <h1 id="ゲイン特性と位相特性">ゲイン特性と位相特性</h1>
@@ -295,8 +295,7 @@
 <p>$\angle G(jw) = \tan^{-1}
 (\frac{-\sin w}{\cos w-(1-\beta)})$</p>
 <p><img src=".././Phase.pdf" alt="位相特性"></p>
-<p>$\beta$が小さい場合は周波数帯域が大きいが位相遅れが大きくなり．$\beta$が大きい場合は位相遅れが小さくなるが周波数帯域を犠牲にする必要がある．</p>
-<h1 id="コード">コード</h1>
+<h1 id="プログラム">プログラム</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 

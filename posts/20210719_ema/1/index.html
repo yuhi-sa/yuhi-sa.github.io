@@ -58,7 +58,7 @@
   "headline": "指数移動平均 (Exponential Moving Averages, EMA)",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  202 ,
+  "wordCount":  196 ,
   "datePublished" : "2021-07-19T10:17:23",
   "dateModified" : "2021-07-19T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -309,7 +309,6 @@ $\beta$：ハイパーパラメータ</p>
   <span class="n">original</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="n">noisedata</span> <span class="o">=</span> <span class="p">[]</span>
 
-  <span class="c1">#rand = random.random() - 0.5</span>
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">LENGE</span><span class="p">):</span>
     <span class="n">time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">LENGE</span><span class="p">)</span>
 
@@ -317,15 +316,13 @@ $\beta$：ハイパーパラメータ</p>
     <span class="n">original</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">LENGE</span><span class="p">))</span>
     <span class="n">noisedata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">i</span><span class="o">/</span><span class="n">LENGE</span><span class="p">)</span> <span class="o">+</span> <span class="n">rand</span><span class="o">*</span><span class="n">noisescale</span><span class="p">)</span>
 
-  <span class="c1"># フィルタデータ</span>
-  <span class="c1">#low = 0.6</span>
-  <span class="c1">#high = 0.95</span>
+  <span class="c1"># Filter Data</span>
+  <span class="n">low</span> <span class="o">=</span> <span class="mf">0.6</span>
+  <span class="n">high</span> <span class="o">=</span> <span class="mf">0.95</span>
   <span class="n">ema05</span> <span class="o">=</span> <span class="n">EMA</span><span class="p">(</span><span class="n">noisedata</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
   <span class="n">ema095</span> <span class="o">=</span> <span class="n">EMA</span><span class="p">(</span><span class="n">noisedata</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
 
-
-  <span class="c1"># plo</span>
-  <span class="c1"># プロット</span>
+  <span class="c1"># Plot</span>
   <span class="n">lowlabel</span> <span class="o">=</span> <span class="s2">&#34;Beta =&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">low</span><span class="p">)</span>
   <span class="n">highlabel</span> <span class="o">=</span> <span class="s2">&#34;Beta =&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">high</span><span class="p">)</span>
   <span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;Noise scale =&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">noisescale</span><span class="p">)</span>
