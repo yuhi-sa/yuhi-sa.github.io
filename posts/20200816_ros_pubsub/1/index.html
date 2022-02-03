@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<html lang="ja" itemscope itemtype="http://schema.org/WebPage">
   <head>
     
 
@@ -57,8 +57,8 @@
   },
   "headline": "[ROS]PublisherとSubscriberを1つのノードに書く方法",
   "description" : "",
-  "inLanguage" : "en",
-  "wordCount":  213 ,
+  "inLanguage" : "ja",
+  "wordCount":  218 ,
   "datePublished" : "2020-08-16T15:17:23",
   "dateModified" : "2020-08-16T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="[ROS]PublisherとSubscriberを1つのノードに書く方法" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.0" />
+  <meta name="generator" content="Hugo 0.92.1" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="yuhi-sa"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -113,7 +113,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only">メニューを切り替え</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -155,6 +155,18 @@
           
         
 
+        
+          
+            <li>
+              
+                
+                  <a href="/en" lang="en">English</a>
+                
+              
+                
+              
+            </li>
+          
         
 
         
@@ -266,10 +278,9 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="はじめに">はじめに</h1>
-<p>ROSを使った際に，Subscriberとして機能しているノードからも，計測データをトピックとして通信したいなと思ったのですが，SubscriberとPublisherを一つのプログラムに書く方法が見つけられずに困ったので(Google検索力低いだけの可能性大)，ROSの理解を深めるためにまとめようと思います．</p>
-<h1 id="rosrobot-operating-systemとは">ROS(Robot Operating System)とは</h1>
-<p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．具体的には，ロボット同士の通信が簡易にできるようになります．</p>
+        <h1 id="rosrobot-operating-systemとは">ROS(Robot Operating System)とは</h1>
+<p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．
+具体的には，ロボット同士の通信が簡易にできるようになります．</p>
 <h1 id="pub--sub通信">Pub &amp; Sub通信</h1>
 <p>ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．</p>
 <p><img src=".././fig1.png" alt="PubSub通信"></p>
@@ -279,26 +290,24 @@
 <li>Ubuntu 16.04 LTS</li>
 <li>Python 3.8.5</li>
 </ul>
-<h1 id="publisherのサンプルプログラム">Publisherのサンプルプログラム</h1>
+<h1 id="publisherのプログラム">Publisherのプログラム</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># license removed for brevity</span>
 <span class="kn">import</span> <span class="nn">rospy</span>
-<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span> <span class="c1">#使うデータ型をインポート</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">talker</span><span class="p">():</span>
-    <span class="c1">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
+    <span class="c1"># Publisher(&#39;Topic Name&#39;, Type, Size)</span>
     <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;chatter&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="c1">#ノード名を宣言</span>
+    <span class="c1"># Init Nonde</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1">#ループの周期を宣言</span>
+    <span class="c1"># Roop Period</span>
     <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 10hz</span>
     
     <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-        <span class="c1">#パブリッシュするデータを記入</span>
         <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-        <span class="c1">#パブリッシュするデータをターミナルに表示</span>
         <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="c1">#データをパブリッシュ</span>
+        <span class="c1"># Publish Data</span>
         <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
         <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
 
@@ -307,56 +316,47 @@
          <span class="n">talker</span><span class="p">()</span>
      <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInterruptException</span><span class="p">:</span>
          <span class="k">pass</span>
-</code></pre></div><p>Writing a Simple Publisher and Subscriber (Python)より引用，説明補足</p>
-<h1 id="subscriberのサンプルプログラム">Subscriberのサンプルプログラム</h1>
+</code></pre></div><h1 id="subscriberのプログラム">Subscriberのプログラム</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:listener.py" data-lang="python:listener.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">rospy</span>
-<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span> <span class="c1">#使うデータ型をインポート</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="c1">#受け取ったデータをターミナルに表示</span>
-    <span class="c1">#データはdata.dataで受け取っている</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
      
 <span class="k">def</span> <span class="nf">listener</span><span class="p">():</span>
-    <span class="c1">#ノード名を宣言</span>
+    <span class="c1"># Init Nonde</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1">#Subscriberを作成(&#39;トピック名&#39;,型,callback関数)</span>
+    <span class="c1"># Subscriber(&#39;Topic Name&#39;, Type, Callback function)</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-    <span class="c1">#callback関数を呼び続ける</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
 
  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">listener</span><span class="p">()</span>
 </code></pre></div><p>Writing a Simple Publisher and Subscriber (Python)より引用，説明補足</p>
 <h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
-<p>rospy.spin()を使わない(callback関数待機状態のまま止めってしまうから)ってだけで，まとめてみるとくっつけただけやなって感じなんですけど，まる二日ぐらいこれで悩みました笑．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># coding: utf-8</span>
 <span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="c1">#受け取ったデータをターミナルに表示</span>
-    <span class="c1">#データはdata.dataで受け取っている</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
       
 <span class="k">def</span> <span class="nf">controller</span><span class="p">():</span>
-    <span class="c1">#ノード名を宣言</span>
+    <span class="c1"># Init Node</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1">#Subscriberを作成．トピックを読み込む．</span>
+    <span class="c1"># Subscriber</span>
     <span class="n">sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-    <span class="c1">#Publisherを作成(&#39;トピック名&#39;,型,サイズ)</span>
+    <span class="c1"># Publisher</span>
     <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1">#ループの周期．</span>
+    <span class="c1"># Roop Period</span>
     <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     
     <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-        <span class="c1">#パブリッシュするデータを記入</span>
         <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-        <span class="c1">#パブリッシュするデータをターミナルに表示</span>
         <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-        <span class="c1">#データをパブリッシュ</span>
+        <span class="c1"># Publish Data</span>
         <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
         <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
     
@@ -450,12 +450,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/quotations/" data-toggle="tooltip" data-placement="top" title="いいなって思った言葉">&larr; Previous Post</a>
+              <a href="https://yuhi-sa.github.io/posts/quotations/" data-toggle="tooltip" data-placement="top" title="いいなって思った言葉">&larr; 前ページ</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20200831_rl_map/1/" data-toggle="tooltip" data-placement="top" title="強化学習の全体像まとめ">Next Post &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20200831_rl_map/1/" data-toggle="tooltip" data-placement="top" title="強化学習の全体像まとめ">次ページ &rarr;</a>
             </li>
           
         </ul>
@@ -507,7 +507,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.92.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.92.1</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
