@@ -58,11 +58,11 @@
   "headline": "GitHub Actions の書き方",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  27 ,
+  "wordCount":  25 ,
   "datePublished" : "2021-06-30T10:17:23",
   "dateModified" : "2021-06-30T10:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "その他" ],
+  "keywords" : [ "Github" ],
   "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/",
   "publisher" : {
     "@type": "Organization",
@@ -138,13 +138,7 @@
         
           
             <li>
-              <a title="quotations" href="/posts/quotations">quotations</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="https://profile-yuhi-sa.vercel.app">About</a>
+              <a title="About" href="/posts/about">About</a>
             </li>
           
         
@@ -279,19 +273,18 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h1 id="github-actions">GitHub Actions</h1>
-<p>CI / CDで自動化することによりGitHubから直接コードをビルド、テスト、デプロイなどをすることができる機能．</p>
-<p>リポジトリ直下に以下のディレクトリを作成し，YAMLファイルで自動化内容を記入する．</p>
+<p>CI / CDで自動化することによりGitHubから直接コードをビルド、テスト、デプロイなどをすることができる機能である．</p>
+<p>リポジトリ直下に以下のディレクトリを作成し，YAMLファイルで自動化内容を記入することで実行できる．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.github/workflows/{自由な名前}.yml
 </code></pre></div><h1 id="yamlファイルの構成">YAMLファイルの構成</h1>
 <p>以下の形式で，YAMLファイルを作成する．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span>{<span class="l">このワークフローの名前}</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="c"># ワークフローが実行するトリガーを決める．</span><span class="w">
 </span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span><span class="w">　</span><span class="c"># pushされた時(blanchも指定できる)</span><span class="w">
+</span><span class="w">　</span><span class="c"># pushされた時に実行(blanchも指定できる)</span><span class="w">
 </span><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">master ]</span><span class="w">
-</span><span class="w">　</span><span class="c"># pullリクエストされた時(blanchも指定できる)</span><span class="w">
+</span><span class="w">　</span><span class="c"># pullリクエストされた時に実行(blanchも指定できる)</span><span class="w">
 </span><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">master ]</span><span class="w">
 </span><span class="w">　</span><span class="c"># 時間指定</span><span class="w">
@@ -301,14 +294,13 @@
 </span><span class="w">
 </span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span><span class="w">  　 </span><span class="c"># どのマシンで起動するかを指定(macやwindowsも指定可)</span><span class="w">
+</span><span class="w">  　 </span><span class="c"># 実行環境を指定(macやwindowsも指定可)</span><span class="w">
 </span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
 </span><span class="w">
 </span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># リポジトリのチェックアウト</span><span class="w">
 </span><span class="w">    </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="c"># 実行したい操作を記入</span><span class="w">
+</span><span class="w">    </span><span class="c"># 実行するコマンド</span><span class="w">
 </span><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span>{<span class="l">操作名}</span><span class="w">
 </span><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span><span class="sd">        </span><span class="w">        </span>{<span class="l">コマンド}</span><span class="w">
@@ -318,7 +310,7 @@
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/github/">Github</a>&nbsp;
             
           </div>
         
@@ -390,15 +382,7 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20211102_op3/1/">強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</a></li>
-                
-                    <li><a href="/posts/20210912_google_cal_sync/1/">Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</a></li>
-                
-                    <li><a href="/posts/20210818_github_ssh/1/">githubへのssh接続メモ</a></li>
-                
-                    <li><a href="/posts/20210805_rpiplay/1/">Raspberry PiでAirplayをする方法メモ(RPiPlay)</a></li>
-                
-                    <li><a href="/posts/20210713_readable/1/">リーダブルコード読んだメモ</a></li>
+                    <li><a href="/posts/20210818_github_ssh/1/">githubへのssh接続</a></li>
                 
               </ul>
 
@@ -410,12 +394,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210527_moment/1/" data-toggle="tooltip" data-placement="top" title="モーメント">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20210630_py_plot/1/" data-toggle="tooltip" data-placement="top" title="Pythonのmatplotで三次元動画を作成するプログラム">&larr; 前ページ</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210630_py_plot/1/" data-toggle="tooltip" data-placement="top" title="[Python]matplotで三次元動画を作成する方法">次ページ &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20210713_readable/1/" data-toggle="tooltip" data-placement="top" title="リーダブルコード読んだメモ">次ページ &rarr;</a>
             </li>
           
         </ul>

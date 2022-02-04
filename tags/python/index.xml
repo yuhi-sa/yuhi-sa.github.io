@@ -5,27 +5,9 @@
     <link>https://yuhi-sa.github.io/tags/python/</link>
     <description>Recent content in python on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 Jan 2022 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Jun 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>指数移動平均の周波数特性(ゲイン，位相)</title>
-      <link>https://yuhi-sa.github.io/posts/20220124_ema2/1/</link>
-      <pubDate>Mon, 24 Jan 2022 10:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20220124_ema2/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>指数移動平均 (Exponential Moving Averages, EMA)</title>
-      <link>https://yuhi-sa.github.io/posts/20210719_ema/1/</link>
-      <pubDate>Mon, 19 Jul 2021 10:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210719_ema/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>[Python]matplotで三次元動画を作成する方法</title>
+      <title>Pythonのmatplotで三次元動画を作成するプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       
@@ -34,16 +16,7 @@
     </item>
     
     <item>
-      <title>printの上書きをする方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
-      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python環境の設定</title>
+      <title>PyenvとAnacondaを用いたPython環境の設定</title>
       <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       
@@ -52,20 +25,20 @@
     </item>
     
     <item>
-      <title>numpyからpytorchの変換で，dtypeを消す</title>
-      <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
-      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
+      <title>pythonでprintの上書きをする方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
-      <link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link>
-      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
+      <title>Pythonによる2進数変換と論理演算(or,xor)</title>
+      <link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link>
+      <pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20210329_bin/1/</guid>
       <description></description>
     </item>
     

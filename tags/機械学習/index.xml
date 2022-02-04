@@ -5,31 +5,13 @@
     <link>https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/</link>
     <description>Recent content in 機械学習 on yuhi-sa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 Jan 2022 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>指数移動平均の周波数特性(ゲイン，位相)</title>
-      <link>https://yuhi-sa.github.io/posts/20220124_ema2/1/</link>
-      <pubDate>Mon, 24 Jan 2022 10:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20220124_ema2/1/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Thu, 09 Dec 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ガウス分布同士のクロスエントロピーの閉形式導出</title>
       <link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link>
       <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>指数移動平均 (Exponential Moving Averages, EMA)</title>
-      <link>https://yuhi-sa.github.io/posts/20210719_ema/1/</link>
-      <pubDate>Mon, 19 Jul 2021 10:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210719_ema/1/</guid>
       <description></description>
     </item>
     
@@ -52,7 +34,7 @@
     </item>
     
     <item>
-      <title>[Pytorch]教師あり学習でニューラルネットワークを学習</title>
+      <title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       
@@ -61,38 +43,11 @@
     </item>
     
     <item>
-      <title>[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</title>
+      <title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link>
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210125_ut/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link>
-      <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210109_nnga/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title>
-      <link>https://yuhi-sa.github.io/posts/20210108_bayes/1/</link>
-      <pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210108_bayes/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>[Matlab]粒子群最適化(PSO)とTCPSO</title>
-      <link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link>
-      <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid>
       <description></description>
     </item>
     
@@ -102,15 +57,6 @@
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>強化学習の全体像まとめ</title>
-      <link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link>
-      <pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid>
       <description></description>
     </item>
     

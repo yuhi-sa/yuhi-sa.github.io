@@ -160,7 +160,7 @@
     </item>
     
     <item>
-      <title>githubへのssh接続メモ</title>
+      <title>githubへのssh接続</title>
       <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
       <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
       
@@ -205,20 +205,20 @@
     </item>
     
     <item>
-      <title>[Python]matplotで三次元動画を作成する方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
-      <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>GitHub Actions の書き方</title>
       <link>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pythonのmatplotで三次元動画を作成するプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
+      <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid>
       <description></description>
     </item>
     
@@ -241,20 +241,20 @@
     </item>
     
     <item>
-      <title>printの上書きをする方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
-      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python環境の設定</title>
+      <title>PyenvとAnacondaを用いたPython環境の設定</title>
       <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pythonでprintの上書きをする方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
       <description></description>
     </item>
     
@@ -286,7 +286,7 @@
     </item>
     
     <item>
-      <title>[Python]2進数変換と論理演算(or,xor)</title>
+      <title>Pythonによる2進数変換と論理演算(or,xor)</title>
       <link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link>
       <pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate>
       
@@ -502,20 +502,20 @@
     </item>
     
     <item>
-      <title>[Pytorch]教師あり学習でニューラルネットワークを学習</title>
-      <link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link>
-      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>numpyからpytorchの変換で，dtypeを消す</title>
       <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link>
+      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid>
       <description></description>
     </item>
     
@@ -529,7 +529,7 @@
     </item>
     
     <item>
-      <title>[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定</title>
+      <title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link>
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       
@@ -538,7 +538,7 @@
     </item>
     
     <item>
-      <title>[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</title>
+      <title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link>
       <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
       
@@ -556,20 +556,20 @@
     </item>
     
     <item>
-      <title>[Matlab]粒子群最適化(PSO)とTCPSO</title>
-      <link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link>
-      <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>情報理論(エントロピーから相互情報量, PRML1.6)</title>
       <link>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>粒子群最適化(PSO)とTCPSOのMatlabプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link>
+      <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid>
       <description></description>
     </item>
     
@@ -592,15 +592,6 @@
     </item>
     
     <item>
-      <title>[Python]楕円曲線上のElGamal暗号</title>
-      <link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link>
-      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
       <link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
@@ -610,7 +601,16 @@
     </item>
     
     <item>
-      <title>[Python]バイナリ法</title>
+      <title>楕円曲線上のElGamal暗号のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link>
+      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>バイナリ法のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link>
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       
@@ -619,7 +619,7 @@
     </item>
     
     <item>
-      <title>[Python]ユークリッドの互除法と拡張ユークリッドの互除法</title>
+      <title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</link>
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       
@@ -628,7 +628,7 @@
     </item>
     
     <item>
-      <title>フィルタまとめ</title>
+      <title>代表的なフィルタ</title>
       <link>https://yuhi-sa.github.io/posts/20200901_filter/1/</link>
       <pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate>
       
@@ -655,6 +655,15 @@
     </item>
     
     <item>
+      <title>About</title>
+      <link>https://yuhi-sa.github.io/posts/about/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>いいなって思った言葉</title>
       <link>https://yuhi-sa.github.io/posts/quotations/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
@@ -673,7 +682,7 @@
     </item>
     
     <item>
-      <title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた．</title>
+      <title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</title>
       <link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

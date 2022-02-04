@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習 - yuhi-sa</title>
+  <title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,7 +44,7 @@
         "position": 3,
         "item": {
           "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210109_nnga\/1\/",
-          "name": "[ python]遺伝的アルゴリズム( ga)を用いたニューラルネットワークの学習"
+          "name": "遺伝的アルゴリズム( ga)を用いたニューラルネットワーク学習のpythonプログラム"
         }
     }]
 }
@@ -55,14 +55,14 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習",
+  "headline": "遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  571 ,
+  "wordCount":  569 ,
   "datePublished" : "2021-01-09T15:17:23",
   "dateModified" : "2021-01-09T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "機械学習" ],
+  "keywords" : [ "群知能" ],
   "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210109_nnga\/1\/",
   "publisher" : {
     "@type": "Organization",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習" />
+<meta property="og:title" content="遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム" />
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20210109_nnga/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習" />
+  <meta name="twitter:title" content="遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.92.1" />
@@ -138,13 +138,7 @@
         
           
             <li>
-              <a title="quotations" href="/posts/quotations">quotations</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="https://profile-yuhi-sa.vercel.app">About</a>
+              <a title="About" href="/posts/about">About</a>
             </li>
           
         
@@ -258,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>[Python]遺伝的アルゴリズム(GA)を用いたニューラルネットワークの学習</h1>
+                <h1>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</h1>
               
               
                 <hr class="small">
@@ -282,9 +276,8 @@
 <p>$$
 f(x,y)=\frac{(\frac{\sin x^2}{cos y}+x^2-5y+30)}{80}
 $$
-の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる．
-(学部のときの課題で，できなかったのでリベンジしてみた)</p>
-<h1 id="遺伝的アルゴリズムgagenetic-algorithmsとは">遺伝的アルゴリズム(GA:Genetic Algorithms)とは</h1>
+の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる．</p>
+<h1 id="遺伝的アルゴリズムgagenetic-algorithms">遺伝的アルゴリズム(GA:Genetic Algorithms)</h1>
 <p>GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．</p>
 <h2 id="gaのアルゴリズム">GAのアルゴリズム</h2>
 <p>GAのアルゴリズムを以下に示す．</p>
@@ -304,10 +297,8 @@ Step3で選択された個体群からランダムに選択された個体のペ
 </ol>
 <h2 id="gaアルゴリズムの性質">GAアルゴリズムの性質</h2>
 <p>GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．</p>
-<h1 id="実装">実装</h1>
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/689163/a4502025-65eb-ecb8-28f0-0b7088f8bd78.png" alt="fig1.png"></p>
-<p>遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った．
-コードは<a href="https://github.com/yuhi-sa/NNGA">こちら</a></p>
+<h1 id="プログラム">プログラム</h1>
+<p>遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った．</p>
 <h2 id="パラメータなどを設定">パラメータなどを設定</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 世代</span>
 <span class="n">GEN</span> <span class="o">=</span> <span class="mi">100</span>
@@ -568,13 +559,13 @@ Step3で選択された個体群からランダムに選択された個体のペ
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </code></pre></div><h1 id="実験結果">実験結果</h1>
-<p>各世代のエリート個体とテストデータの誤差の平均が以下のグラフとなった．横軸が世代数，縦軸が誤差．</p>
-<p><img src=".././fig1.png" alt="学習結果"></p>
+<p>各世代のエリート個体とテストデータの誤差の平均が以下のグラフとなった．横軸が世代数，縦軸が誤差．
+<img src=".././fig1.png" alt="学習結果"></p>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/">群知能</a>&nbsp;
             
           </div>
         
@@ -589,7 +580,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;text=%5bPython%5d%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%ad%a6%e7%bf%92&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;text=%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e5%ad%a6%e7%bf%92%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -603,28 +594,28 @@ Step3で選択された個体群からランダムに選択された個体のペ
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%5bPython%5d%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%ad%a6%e7%bf%92" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e5%ad%a6%e7%bf%92%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%5bPython%5d%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%ad%a6%e7%bf%92" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e5%ad%a6%e7%bf%92%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%5bPython%5d%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%ad%a6%e7%bf%92" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;title=%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e5%ad%a6%e7%bf%92%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;description=%5bPython%5d%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e5%ad%a6%e7%bf%92" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210109_nnga%2f1%2f&amp;description=%e9%81%ba%e4%bc%9d%e7%9a%84%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0%28GA%29%e3%82%92%e7%94%a8%e3%81%84%e3%81%9f%e3%83%8b%e3%83%a5%e3%83%bc%e3%83%a9%e3%83%ab%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e5%ad%a6%e7%bf%92%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -646,15 +637,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
                   <ul>
                 
                 
-                    <li><a href="/posts/20220124_ema2/1/">指数移動平均の周波数特性(ゲイン，位相)</a></li>
-                
-                    <li><a href="/posts/20211209_nd_ce/1/">ガウス分布同士のクロスエントロピーの閉形式導出</a></li>
-                
-                    <li><a href="/posts/20210719_ema/1/">指数移動平均 (Exponential Moving Averages, EMA)</a></li>
-                
-                    <li><a href="/posts/20210527_moment/1/">モーメント</a></li>
-                
-                    <li><a href="/posts/20210329_cem/1/">クロスエントロピー法(Cross Entropy Method)</a></li>
+                    <li><a href="/posts/20210107_pso_tcpso/1/">粒子群最適化(PSO)とTCPSOのMatlabプログラム</a></li>
                 
               </ul>
 
@@ -671,7 +654,7 @@ Step3で選択された個体群からランダムに選択された個体のペ
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210125_ut/1/" data-toggle="tooltip" data-placement="top" title="[Python]Unscented Transformation(アンセンテッド変換,U変換)：非線形変換後の確率変数の推定">次ページ &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20210125_ut/1/" data-toggle="tooltip" data-placement="top" title="Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム">次ページ &rarr;</a>
             </li>
           
         </ul>

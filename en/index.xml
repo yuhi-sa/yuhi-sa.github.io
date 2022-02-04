@@ -96,5 +96,23 @@
       <description></description>
     </item>
     
+    <item>
+      <title>About</title>
+      <link>https://yuhi-sa.github.io/en/posts/about/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/posts/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>プライバシーポリシー</title>
+      <link>https://yuhi-sa.github.io/en/posts/privacy_policy/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/en/posts/privacy_policy/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

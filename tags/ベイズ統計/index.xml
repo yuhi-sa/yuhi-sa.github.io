@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ベイズ統計 on yuhi-sa</title>
+    <link>https://yuhi-sa.github.io/tags/%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88/</link>
+    <description>Recent content in ベイズ統計 on yuhi-sa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 08 Jan 2021 15:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title>
+      <link>https://yuhi-sa.github.io/posts/20210108_bayes/1/</link>
+      <pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210108_bayes/1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

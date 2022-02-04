@@ -58,11 +58,11 @@
   "headline": "[ROS]PublisherとSubscriberを1つのノードに書く方法",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  212 ,
+  "wordCount":  198 ,
   "datePublished" : "2020-08-16T15:17:23",
   "dateModified" : "2020-08-16T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "ROS" ],
+  "keywords" : [ "ros" ],
   "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20200816_ros_pubsub\/1\/",
   "publisher" : {
     "@type": "Organization",
@@ -138,13 +138,7 @@
         
           
             <li>
-              <a title="quotations" href="/posts/quotations">quotations</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="https://profile-yuhi-sa.vercel.app">About</a>
+              <a title="About" href="/posts/about">About</a>
             </li>
           
         
@@ -280,11 +274,11 @@
       <article role="main" class="blog-post">
         <h1 id="rosrobot-operating-system">ROS(Robot Operating System)</h1>
 <p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．<br>
-具体的には，ロボット同士の通信が簡易にできるようになります．</p>
+これによりロボット同士の通信が簡易にできるようになります．</p>
 <h1 id="pub--sub通信">Pub &amp; Sub通信</h1>
 <p>ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．<br>
-メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．</p>
-<p><img src=".././fig1.png" alt="PubSub通信"></p>
+メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．<br>
+<img src=".././fig1.png" alt="PubSub通信"></p>
 <h1 id="実行環境">実行環境</h1>
 <ul>
 <li>ROS kinetic</li>
@@ -292,9 +286,7 @@
 <li>Python 3.8.5</li>
 </ul>
 <h1 id="publisherのプログラム">Publisherのプログラム</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># license removed for brevity</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">talker</span><span class="p">():</span>
@@ -318,8 +310,7 @@
      <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInterruptException</span><span class="p">:</span>
          <span class="k">pass</span>
 </code></pre></div><h1 id="subscriberのプログラム">Subscriberのプログラム</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:listener.py" data-lang="python:listener.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:listener.py" data-lang="python:listener.py"><span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -335,9 +326,7 @@
  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">listener</span><span class="p">()</span>
 </code></pre></div><h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="ch">#!/usr/bin/env python</span>
-<span class="c1"># coding: utf-8</span>
-<span class="kn">import</span> <span class="nn">rospy</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -377,7 +366,7 @@
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/ros/">ROS</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/ros/">ros</a>&nbsp;
             
           </div>
         
@@ -450,7 +439,7 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/quotations/" data-toggle="tooltip" data-placement="top" title="いいなって思った言葉">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/about/" data-toggle="tooltip" data-placement="top" title="About">&larr; 前ページ</a>
             </li>
           
           

@@ -177,7 +177,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</loc>
   
   <lastmod>2021-06-30T10:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -185,7 +185,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</loc>
   
   <lastmod>2021-06-30T10:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -209,7 +209,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210514_py_print/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210416_py_env/1/</loc>
   
   <lastmod>2021-04-16T10:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -217,7 +217,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210416_py_env/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210514_py_print/1/</loc>
   
   <lastmod>2021-04-16T10:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -441,7 +441,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210215_nn/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</loc>
   
   <lastmod>2021-02-15T13:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -449,7 +449,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210215_nn/1/</loc>
   
   <lastmod>2021-02-15T13:00:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -489,7 +489,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</loc>
   
   <lastmod>2021-01-07T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -497,7 +497,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</loc>
   
   <lastmod>2021-01-07T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -521,7 +521,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</loc>
   
   <lastmod>2020-12-23T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -529,7 +529,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</loc>
   
   <lastmod>2020-12-23T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -570,6 +570,14 @@
 
 <url>
   <loc>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</loc>
+  
+  <lastmod>2020-08-16T15:17:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/posts/about/</loc>
   
   <lastmod>2020-08-16T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>

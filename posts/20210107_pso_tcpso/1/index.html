@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>[Matlab]粒子群最適化(PSO)とTCPSO - yuhi-sa</title>
+  <title>粒子群最適化(PSO)とTCPSOのMatlabプログラム - yuhi-sa</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,7 +44,7 @@
         "position": 3,
         "item": {
           "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210107_pso_tcpso\/1\/",
-          "name": "[ matlab]粒子群最適化( pso)と tcpso"
+          "name": "粒子群最適化( pso)と tcpsoの matlabプログラム"
         }
     }]
 }
@@ -55,14 +55,14 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "[Matlab]粒子群最適化(PSO)とTCPSO",
+  "headline": "粒子群最適化(PSO)とTCPSOのMatlabプログラム",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  493 ,
+  "wordCount":  492 ,
   "datePublished" : "2021-01-07T15:17:23",
   "dateModified" : "2021-01-07T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "機械学習" ],
+  "keywords" : [ "群知能" ],
   "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210107_pso_tcpso\/1\/",
   "publisher" : {
     "@type": "Organization",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="[Matlab]粒子群最適化(PSO)とTCPSO" />
+<meta property="og:title" content="粒子群最適化(PSO)とTCPSOのMatlabプログラム" />
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="yuhi-sa" />
 
-  <meta name="twitter:title" content="[Matlab]粒子群最適化(PSO)とTCPSO" />
+  <meta name="twitter:title" content="粒子群最適化(PSO)とTCPSOのMatlabプログラム" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.92.1" />
@@ -138,13 +138,7 @@
         
           
             <li>
-              <a title="quotations" href="/posts/quotations">quotations</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="https://profile-yuhi-sa.vercel.app">About</a>
+              <a title="About" href="/posts/about">About</a>
             </li>
           
         
@@ -258,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>[Matlab]粒子群最適化(PSO)とTCPSO</h1>
+                <h1>粒子群最適化(PSO)とTCPSOのMatlabプログラム</h1>
               
               
                 <hr class="small">
@@ -313,8 +307,7 @@ $$</p>
 </ol>
 <h2 id="アルゴリズムの性質">アルゴリズムの性質</h2>
 <p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p>
-<p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．
-コードは<a href="https://github.com/yuhi-sa/func_PSO">こちら</a></p>
+<p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p>
 <ul>
 <li>$t=0$のとき
 <img src=".././fig2.png" alt="pso1.png"></li>
@@ -380,7 +373,7 @@ $$
 <img src=".././fig9.png" alt="tcpso3.png"></li>
 </ul>
 <p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p>
-<h1 id="コード">コード</h1>
+<h1 id="プログラム">プログラム</h1>
 <h2 id="pso">PSO</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="c">%/////// &lt;PSOパラメータ定義&gt; /////////</span>
 <span class="n">ns</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span>          <span class="c">% 粒子数</span>
@@ -577,7 +570,7 @@ $$
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/">群知能</a>&nbsp;
             
           </div>
         
@@ -592,7 +585,7 @@ $$
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;text=%5bMatlab%5d%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;text=%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO%e3%81%aeMatlab%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -606,28 +599,28 @@ $$
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%5bMatlab%5d%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO%e3%81%aeMatlab%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%5bMatlab%5d%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO%e3%81%aeMatlab%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%5bMatlab%5d%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;title=%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO%e3%81%aeMatlab%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;description=%5bMatlab%5d%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210107_pso_tcpso%2f1%2f&amp;description=%e7%b2%92%e5%ad%90%e7%be%a4%e6%9c%80%e9%81%a9%e5%8c%96%28PSO%29%e3%81%a8TCPSO%e3%81%aeMatlab%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -649,15 +642,7 @@ $$
                   <ul>
                 
                 
-                    <li><a href="/posts/20220124_ema2/1/">指数移動平均の周波数特性(ゲイン，位相)</a></li>
-                
-                    <li><a href="/posts/20211209_nd_ce/1/">ガウス分布同士のクロスエントロピーの閉形式導出</a></li>
-                
-                    <li><a href="/posts/20210719_ema/1/">指数移動平均 (Exponential Moving Averages, EMA)</a></li>
-                
-                    <li><a href="/posts/20210527_moment/1/">モーメント</a></li>
-                
-                    <li><a href="/posts/20210329_cem/1/">クロスエントロピー法(Cross Entropy Method)</a></li>
+                    <li><a href="/posts/20210109_nnga/1/">遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</a></li>
                 
               </ul>
 
@@ -669,12 +654,12 @@ $$
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210107_prml_ent/1/" data-toggle="tooltip" data-placement="top" title="情報理論(エントロピーから相互情報量, PRML1.6)">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20211121_db/7/" data-toggle="tooltip" data-placement="top" title="SQLの表の作成">&larr; 前ページ</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210108_bayes/1/" data-toggle="tooltip" data-placement="top" title="[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)">次ページ &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20210107_prml_ent/1/" data-toggle="tooltip" data-placement="top" title="情報理論(エントロピーから相互情報量, PRML1.6)">次ページ &rarr;</a>
             </li>
           
         </ul>
