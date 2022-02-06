@@ -5,11 +5,11 @@
     <link>https://yuhi-sa.github.io/posts/</link>
     <description>Recent content in Posts on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Feb 2022 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Feb 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>リパラメタライゼーショントリック(Reparameterization trick)</title>
       <link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link>
-      <pubDate>Sun, 06 Feb 2022 10:17:23 +0900</pubDate>
+      <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid>
       <description></description>
@@ -17,10 +17,10 @@
     
     <item>
       <title>指数移動平均(Exponential Moving Averages)フィルタの周波数特性</title>
-      <link>https://yuhi-sa.github.io/posts/20220124_ema/1/</link>
-      <pubDate>Mon, 24 Jan 2022 10:17:23 +0900</pubDate>
+      <link>https://yuhi-sa.github.io/posts/20220206_ema/1/</link>
+      <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
       
-      <guid>https://yuhi-sa.github.io/posts/20220124_ema/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20220206_ema/1/</guid>
       <description></description>
     </item>
     
