@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="モデルベース強化学習" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.97.3" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -274,7 +274,7 @@
       <article role="main" class="blog-post">
         <p>強化学習は，価値評価と方策の学習が必要であり，モデルを利用するかどうかで2種類に別れます．</p>
 <ul>
-<li>モデルベース強化学習：モデル(遷移関数$T(s'|s,a)$・報酬関数$R(s,s')$)をベースに行動を学習する手法(遷移関数・報酬関数が既知でなくても推定して利用可)</li>
+<li>モデルベース強化学習：モデル(遷移関数$T(s&rsquo;|s,a)$・報酬関数$R(s,s&rsquo;)$)をベースに行動を学習する手法(遷移関数・報酬関数が既知でなくても推定して利用可)</li>
 <li>モデルフリー強化学習：モデル(遷移関数・報酬関数)を使わない学習</li>
 </ul>
 <p>以下は，モデルベースについてまとめる．</p>
@@ -290,19 +290,19 @@ $V_\pi(s_t)=E_\pi[r_{t+1}+\gamma V_\pi(s_{t+1})]$</li>
 </ol>
 <h2 id="ベルマン方程式">ベルマン方程式</h2>
 <p>価値を再帰的かつ期待値で表現した式をベルマン方程式とよぶ．
-$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s'}T(s'|s,a)(R(s,s')+\gamma V_\pi(s'))$$</p>
+$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&rsquo;}T(s&rsquo;|s,a)(R(s,s&rsquo;)+\gamma V_\pi(s&rsquo;))$$</p>
 <h1 id="学習">学習</h1>
-<p>動的計画法の枠組みでの学習を考える．動的計画法では$V(s')$に適当な値を設定しておき，複数回計算を繰り返すことで値の精度を上げる．</p>
+<p>動的計画法の枠組みでの学習を考える．動的計画法では$V(s&rsquo;)$に適当な値を設定しておき，複数回計算を繰り返すことで値の精度を上げる．</p>
 <p>動的計画法による最適行動の獲得では，価値を直接行動決定に利用する<!-- raw HTML omitted -->価値ベース<!-- raw HTML omitted -->，価値を方策の評価に利用する<!-- raw HTML omitted -->方策ベース<!-- raw HTML omitted -->の2種類がある．</p>
 <h2 id="価値ベース">価値ベース</h2>
 <p>エージェントは各状態の価値を算出し，値が最も高い状態に遷移するように行動する．<br>
 動的計画法により各状態の価値を算出する方法を<!-- raw HTML omitted -->価値反復法<!-- raw HTML omitted -->とよぶ．
-$$V_{t+1}(s)=\max_{a}{\sum_{s'}T(s'|s,a)(R(s)+\gamma V_t{s'})}$$</p>
+$$V_{t+1}(s)=\max_{a}{\sum_{s&rsquo;}T(s&rsquo;|s,a)(R(s)+\gamma V_t{s&rsquo;})}$$</p>
 <h2 id="方策ベース">方策ベース</h2>
 <p>エージェントは方策に基づき行動する．<br>
 方策は状態における行動確率を出力するが，この行動確率から価値の計算が可能になる．
 方策により価値を計算し，価値を最大化するように方策を更新する．これを<!-- raw HTML omitted -->方策反復法<!-- raw HTML omitted -->とよぶ．</p>
-<p>$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s'}T(s'|s,a)(R(s,s'),\gamma V_\pi(s'))$$</p>
+<p>$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&rsquo;}T(s&rsquo;|s,a)(R(s,s&rsquo;),\gamma V_\pi(s&rsquo;))$$</p>
 <h1 id="モデルベースとモデルフリーの違い">モデルベースとモデルフリーの違い</h1>
 <p>モデルベースの動的計画法において，エージェントは動かさないで環境の情報のみから方策を得ている．これが可能なのは，遷移関数と報酬関数が既知だからである．
 モデルフリーでは，実際にエージェントを動かしその経験から学習を行う．</p>
@@ -432,14 +432,6 @@ $$V_{t+1}(s)=\max_{a}{\sum_{s'}T(s'|s,a)(R(s)+\gamma V_t{s'})}$$</p>
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/yuhi-sa" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
@@ -461,7 +453,7 @@ $$V_{t+1}(s)=\max_{a}{\sum_{s'}T(s'|s,a)(R(s)+\gamma V_t{s'})}$$</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.92.2</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.97.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

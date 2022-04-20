@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="強化学習の全体像まとめ" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.97.3" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -281,7 +281,7 @@
 ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li>
 </ul>
 <p>$$
-(B_{\star}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s')}
+(B_{\star}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s&rsquo;|s,a)v(s&rsquo;)}
 $$
 $$
 V^{\star}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
@@ -291,13 +291,13 @@ $$</p>
 ベルマン<code>期待</code>作用素を繰り返し用いて最適方策を求める．</li>
 </ul>
 <p>$$
-(B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s'|s,a)v(s'))
+(B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s&rsquo;|s,a)v(s&rsquo;))
 $$
 $$
 V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s)
 $$
 $$
-\pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s'}p_T(s'|s,a)V^\pi(s')}
+\pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s&rsquo;}p_T(s&rsquo;|s,a)V^\pi(s&rsquo;)}
 $$</p>
 <h1 id="強化学習">強化学習</h1>
 <p>環境が<code>既知</code>の場合の逐次的意思決定問題<br>
@@ -341,7 +341,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma \max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)<br>
+\delta_t=r_t+\gamma \max_{a&rsquo;}\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)<br>
 $$</p>
 <p>$$
 \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
@@ -353,7 +353,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma \hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+\delta_t=r_t+\gamma \hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
 $$</p>
 <p>$$
 \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
@@ -391,10 +391,10 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-V_n^{target}=\hat{B}(\hat{V}_w)(s_n)=r_n+\gamma \hat{V}_w(s'_n)
+V_n^{target}=\hat{B}(\hat{V}_w)(s_n)=r_n+\gamma \hat{V}_w(s&rsquo;_n)
 $$</p>
 <p>$$
-Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s&rsquo;_n)
 $$</p>
 <p>$$
 w=\arg\min_w\frac{1}{N}\sum_1^N(V_n^{target}-\hat{V}_w(s_n))^2
@@ -406,7 +406,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s'_n)
+Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s&rsquo;_n)
 $$</p>
 <p>$$
 w=\arg\min_w\frac{1}{N}\sum_1^N(Q_n^{target}-\hat{Q}_w(s_n))^2
@@ -433,7 +433,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma\max_{a'}\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+\delta_t=r_t+\gamma\max_{a&rsquo;}\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
 $$</p>
 <blockquote>
 <ul>
@@ -441,7 +441,7 @@ $$</p>
 </ul>
 </blockquote>
 <p>$$
-\delta_t=r_t+\gamma\hat{Q}(s_{t+1},a')-\hat{Q}(s_t,a_t)
+\delta_t=r_t+\gamma\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
 $$</p>
 <h3 id="方策近似">方策近似</h3>
 <blockquote>
@@ -625,14 +625,6 @@ $$</p>
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/yuhi-sa" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
@@ -654,7 +646,7 @@ $$</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.92.2</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.97.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

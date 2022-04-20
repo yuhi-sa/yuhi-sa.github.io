@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="Raspberry PiでAirplayをする方法メモ(RPiPlay)" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.97.3" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -274,94 +274,94 @@
       <article role="main" class="blog-post">
         <h1 id="raspberrypiを更新">Raspberrypiを更新</h1>
 <h2 id="パッケージの更新">パッケージの更新</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get upgrade
-</code></pre></div><h2 id="osのアップデート">OSのアップデート</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install rpi-update
-sudo rpi-update
-sudo reboot
-</code></pre></div><h1 id="rpiplayの設定">RPiPlayの設定</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get upgrade
+</span></span></code></pre></div><h2 id="osのアップデート">OSのアップデート</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install rpi-update
+</span></span><span class="line"><span class="cl">sudo rpi-update
+</span></span><span class="line"><span class="cl">sudo reboot
+</span></span></code></pre></div><h1 id="rpiplayの設定">RPiPlayの設定</h1>
 <p>以下のコードを使う．</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">https://github.com/FD-/RPiPlay
-</code></pre></div><h2 id="必要なパッケージのインストール">必要なパッケージのインストール</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install cmake
-sudo apt-get install libavahi-compat-libdnssd-dev
-sudo apt-get install libssl-dev
-sudo apt-get install libplist-dev
-</code></pre></div><p>他の人のやり方だと最後の行なかったけど，自分の環境だと必要だった，</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://github.com/FD-/RPiPlay
+</span></span></code></pre></div><h2 id="必要なパッケージのインストール">必要なパッケージのインストール</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install cmake
+</span></span><span class="line"><span class="cl">sudo apt-get install libavahi-compat-libdnssd-dev
+</span></span><span class="line"><span class="cl">sudo apt-get install libssl-dev
+</span></span><span class="line"><span class="cl">sudo apt-get install libplist-dev
+</span></span></code></pre></div><p>他の人のやり方だと最後の行なかったけど，自分の環境だと必要だった，</p>
 <h3 id="環境">環境</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux 10 (buster)&#34;</span>
-<span class="nv">NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux&#34;</span>
-<span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&#34;10&#34;</span>
-<span class="nv">VERSION</span><span class="o">=</span><span class="s2">&#34;10 (buster)&#34;</span>
-<span class="nv">VERSION_CODENAME</span><span class="o">=</span>buster
-<span class="nv">ID</span><span class="o">=</span>raspbian
-<span class="nv">ID_LIKE</span><span class="o">=</span>debian
-<span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/&#34;</span>
-<span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianForums&#34;</span>
-<span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianBugs&#34;</span>
-</code></pre></div><h2 id="rpiplayのインストール">RPiPlayのインストール</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/FD-/RPiPlay.git
-<span class="nb">cd</span> RPiPlay
-</code></pre></div><h2 id="ビルド">ビルド</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir build
-<span class="nb">cd</span> build
-cmake ..
-make
-</code></pre></div><p>buildディレクトリにrpiplayという実行ファイルが作られる．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux 10 (buster)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&#34;10&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">VERSION</span><span class="o">=</span><span class="s2">&#34;10 (buster)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">VERSION_CODENAME</span><span class="o">=</span>buster
+</span></span><span class="line"><span class="cl"><span class="nv">ID</span><span class="o">=</span>raspbian
+</span></span><span class="line"><span class="cl"><span class="nv">ID_LIKE</span><span class="o">=</span>debian
+</span></span><span class="line"><span class="cl"><span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianForums&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianBugs&#34;</span>
+</span></span></code></pre></div><h2 id="rpiplayのインストール">RPiPlayのインストール</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/FD-/RPiPlay.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> RPiPlay
+</span></span></code></pre></div><h2 id="ビルド">ビルド</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">cmake ..
+</span></span><span class="line"><span class="cl">make
+</span></span></code></pre></div><p>buildディレクトリにrpiplayという実行ファイルが作られる．</p>
 <h2 id="起動">起動</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">./rpiplay
-</code></pre></div><p>起動時に以下の内容を引数に取り，詳細な設定を行うことができる．</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ネットワーク名の設定</span>
--n name: Specify the network name of the AirPlay server.
-
-<span class="c1"># 黒い背景表示</span>
--b <span class="o">(</span>on<span class="p">|</span>auto<span class="p">|</span>off<span class="o">)</span>: Show black background always, only during active connection, or never.
-
-<span class="c1"># 画像の回転角度</span>
--r <span class="o">(</span>90<span class="p">|</span>180<span class="p">|</span>270<span class="o">)</span>: Specify image rotation in multiples of <span class="m">90</span> degrees.
-
-<span class="c1"># 画像の反転</span>
--f <span class="o">(</span>horiz<span class="p">|</span>vert<span class="p">|</span>both<span class="o">)</span>: Specify image flipping.
-
-<span class="c1"># 低遅延モード</span>
--l: Enables low-latency mode. Low-latency mode reduces latency by effectively rendering audio and video frames as soon as they are received, ignoring the associated timestamps. As a side effect, playback will be choppy and audio-video sync will be noticably off.
-
-<span class="c1"># オーディオ出力デバイス</span>
--a <span class="o">(</span>hdmi<span class="p">|</span>analog<span class="p">|</span>off<span class="o">)</span>: Set audio output device
-
-<span class="c1"># video renderer</span>
--vr renderer: Select a video renderer to use <span class="o">(</span>rpi, gstreamer, or dummy<span class="o">)</span>
-
-<span class="c1"># audio renderer</span>
--ar renderer: Select an audio renderer to use <span class="o">(</span>rpi, gstreamer, or dummy<span class="o">)</span>
-
-<span class="c1"># デバックモード</span>
--d: Enables debug logging. Will lead to choppy playback due to heavy console output.
-
-<span class="c1"># ヘルプとバージョン情報</span>
--v/-h: Displays short <span class="nb">help</span> and version information.
-</code></pre></div><h1 id="raspberrypi起動時に実行">Raspberrypi起動時に実行</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./rpiplay
+</span></span></code></pre></div><p>起動時に以下の内容を引数に取り，詳細な設定を行うことができる．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ネットワーク名の設定</span>
+</span></span><span class="line"><span class="cl">-n name: Specify the network name of the AirPlay server.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 黒い背景表示</span>
+</span></span><span class="line"><span class="cl">-b <span class="o">(</span>on<span class="p">|</span>auto<span class="p">|</span>off<span class="o">)</span>: Show black background always, only during active connection, or never.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 画像の回転角度</span>
+</span></span><span class="line"><span class="cl">-r <span class="o">(</span>90<span class="p">|</span>180<span class="p">|</span>270<span class="o">)</span>: Specify image rotation in multiples of <span class="m">90</span> degrees.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 画像の反転</span>
+</span></span><span class="line"><span class="cl">-f <span class="o">(</span>horiz<span class="p">|</span>vert<span class="p">|</span>both<span class="o">)</span>: Specify image flipping.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 低遅延モード</span>
+</span></span><span class="line"><span class="cl">-l: Enables low-latency mode. Low-latency mode reduces latency by effectively rendering audio and video frames as soon as they are received, ignoring the associated timestamps. As a side effect, playback will be choppy and audio-video sync will be noticably off.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># オーディオ出力デバイス</span>
+</span></span><span class="line"><span class="cl">-a <span class="o">(</span>hdmi<span class="p">|</span>analog<span class="p">|</span>off<span class="o">)</span>: Set audio output device
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># video renderer</span>
+</span></span><span class="line"><span class="cl">-vr renderer: Select a video renderer to use <span class="o">(</span>rpi, gstreamer, or dummy<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># audio renderer</span>
+</span></span><span class="line"><span class="cl">-ar renderer: Select an audio renderer to use <span class="o">(</span>rpi, gstreamer, or dummy<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># デバックモード</span>
+</span></span><span class="line"><span class="cl">-d: Enables debug logging. Will lead to choppy playback due to heavy console output.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ヘルプとバージョン情報</span>
+</span></span><span class="line"><span class="cl">-v/-h: Displays short <span class="nb">help</span> and version information.
+</span></span></code></pre></div><h1 id="raspberrypi起動時に実行">Raspberrypi起動時に実行</h1>
 <p>以下のディレクトリにサービスファイルを作成する．</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">/etc/systemd/system/
-</code></pre></div><h3 id="rpiplayservice">rpiplay.service</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rpiplay.service" data-lang="rpiplay.service"><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">RPi Play</span>
-<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
-<span class="na">StartLimitIntervalSec</span><span class="o">=</span><span class="s">30</span>
-
-<span class="k">[Service]</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
-<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-<span class="na">RestartSec</span><span class="o">=</span><span class="s">10</span>
-<span class="na">User</span><span class="o">=</span><span class="s">pi</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/pi/RPiPlay/build/rpiplay -n ISC@AppleTV -b auto -a hdmi</span>
-<span class="na">StandardOutput</span><span class="o">=</span><span class="s">inherit</span>
-<span class="na">StandardError</span><span class="o">=</span><span class="s">journal</span>
-
-<span class="k">[Install]</span>
-<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</code></pre></div><h1 id="参考">参考</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/systemd/system/
+</span></span></code></pre></div><h3 id="rpiplayservice">rpiplay.service</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rpiplay.service" data-lang="rpiplay.service"><span class="line"><span class="cl"><span class="k">[Unit]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">RPi Play</span>
+</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+</span></span><span class="line"><span class="cl"><span class="na">StartLimitIntervalSec</span><span class="o">=</span><span class="s">30</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
+</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
+</span></span><span class="line"><span class="cl"><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+</span></span><span class="line"><span class="cl"><span class="na">RestartSec</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="na">User</span><span class="o">=</span><span class="s">pi</span>
+</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/pi/RPiPlay/build/rpiplay -n ISC@AppleTV -b auto -a hdmi</span>
+</span></span><span class="line"><span class="cl"><span class="na">StandardOutput</span><span class="o">=</span><span class="s">inherit</span>
+</span></span><span class="line"><span class="cl"><span class="na">StandardError</span><span class="o">=</span><span class="s">journal</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
+</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></span></code></pre></div><h1 id="参考">参考</h1>
 <ul>
 <li><a href="https://github.com/FD-/RPiPlay">FD-/RPiPlay</a></li>
 <li><a href="https://www.nakamuland.com/?p=9842">ラズパイをAppleTV代わりにする。（9/24追記あり)</a></li>
@@ -493,14 +493,6 @@ make
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/yuhi-sa" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
@@ -522,7 +514,7 @@ make
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.92.2</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.97.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="UbuntuでローカルDNSサーバーが指定できないときの編集方法" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.97.3" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -272,27 +272,27 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">/etc/resolv.conf
-</code></pre></div><p>を編集する．</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># This file is managed by man:systemd-resolved(8). Do not edit.</span>
-<span class="c1">#</span>
-<span class="c1"># This is a dynamic resolv.conf file for connecting local clients to the</span>
-<span class="c1"># internal DNS stub resolver of systemd-resolved. This file lists all</span>
-<span class="c1"># configured search domains.</span>
-<span class="c1">#</span>
-<span class="c1"># Run &#34;resolvectl status&#34; to see details about the uplink DNS servers</span>
-<span class="c1"># currently in use.</span>
-<span class="c1">#</span>
-<span class="c1"># Third party programs must not access this file directly, but only through the</span>
-<span class="c1"># symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,</span>
-<span class="c1"># replace this symlink by a static file or a different symlink.</span>
-<span class="c1">#</span>
-<span class="c1"># See man:systemd-resolved.service(8) for details about the supported modes of</span>
-<span class="c1"># operation for /etc/resolv.conf.</span>
-nameserver ここを書き換える
-options edns0 trust-ad
-search 
-</code></pre></div>
+        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/resolv.conf
+</span></span></code></pre></div><p>を編集する．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># This file is managed by man:systemd-resolved(8). Do not edit.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># This is a dynamic resolv.conf file for connecting local clients to the</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># internal DNS stub resolver of systemd-resolved. This file lists all</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># configured search domains.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Run &#34;resolvectl status&#34; to see details about the uplink DNS servers</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># currently in use.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Third party programs must not access this file directly, but only through the</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># replace this symlink by a static file or a different symlink.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># See man:systemd-resolved.service(8) for details about the supported modes of</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># operation for /etc/resolv.conf.</span>
+</span></span><span class="line"><span class="cl">nameserver ここを書き換える
+</span></span><span class="line"><span class="cl">options edns0 trust-ad
+</span></span><span class="line"><span class="cl">search 
+</span></span></code></pre></div>
 
         
           <div class="blog-tags">
@@ -417,14 +417,6 @@ search
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/yuhi-sa" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
@@ -446,7 +438,7 @@ search
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.92.2</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.97.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="ネットワークのトラブルシューティングで利用する代表的なコマンド" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.92.2" />
+  <meta name="generator" content="Hugo 0.97.3" />
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -283,8 +283,8 @@
 <h1 id="代表的なコマンド">代表的なコマンド</h1>
 <h2 id="ping">ping</h2>
 <p>宛先へのネットワークの疎通確認</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ping <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
-</code></pre></div><p>オプション</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ping <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
+</span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-c　送信回数：送信回数指定</li>
 <li>-i　送信間隔：送信間隔指定</li>
@@ -292,15 +292,15 @@
 </ul>
 <h2 id="telnet">telnet</h2>
 <p>アプリケーション層での疎通確認</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ telnet <span class="o">[</span>オプション<span class="o">]</span> 宛先IP <span class="o">[</span>ポート番号<span class="o">]</span>
-</code></pre></div><p>オプション</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ telnet <span class="o">[</span>オプション<span class="o">]</span> 宛先IP <span class="o">[</span>ポート番号<span class="o">]</span>
+</span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-l ユーザ名：ユーザ名指定</li>
 </ul>
 <h2 id="traceroute">traceroute</h2>
 <p>始点から終点までのホスト間の経路情報確認</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ traceroute <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
-</code></pre></div><p>オプション</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ traceroute <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
+</span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-i インタフェース名：インタフェース名指定</li>
 <li>-T：TCPプロトコル利用</li>
@@ -309,8 +309,8 @@
 </ul>
 <h2 id="ip-route">ip route</h2>
 <p>ルーティングテーブルのエントリ情報の表示</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ip route <span class="o">[</span>サブコマンド<span class="o">]</span>
-</code></pre></div><p>サブコマンド</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ip route <span class="o">[</span>サブコマンド<span class="o">]</span>
+</span></span></code></pre></div><p>サブコマンド</p>
 <ul>
 <li>show：ルーティングテーブルの情報表示</li>
 <li>add ネットワーク：ルーティングテーブルにエントリ追加</li>
@@ -318,8 +318,8 @@
 </ul>
 <h2 id="ss">ss</h2>
 <p>ネットワーク接続の統計情報の出力(socket statistics)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ss <span class="o">[</span>オプション<span class="o">]</span>
-</code></pre></div><p>オプション</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ss <span class="o">[</span>オプション<span class="o">]</span>
+</span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-a：すべて表示</li>
 <li>-l：Listenポートのみ表示</li>
@@ -329,8 +329,8 @@
 </ul>
 <h2 id="tcpdump">tcpdump</h2>
 <p>ネットワーク上を流れる通信パケットの閲覧</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ tcpdump <span class="o">[</span>オプション<span class="o">]</span> <span class="o">[</span>条件<span class="o">]</span>
-</code></pre></div><p>オプション</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tcpdump <span class="o">[</span>オプション<span class="o">]</span> <span class="o">[</span>条件<span class="o">]</span>
+</span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-c パケット数：パケット数指定</li>
 <li>-i インタフェース名：インタフェース指定</li>
@@ -468,14 +468,6 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/yuhi-sa" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
@@ -497,7 +489,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.92.2</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.97.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
