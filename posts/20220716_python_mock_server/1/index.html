@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>バイナリ法のpythonプログラム - tomato blog</title>
+  <title>pythonを用いたjsonを返却する簡易mockserver - tomato blog</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20201220_binary\/1\/",
-          "name": "バイナリ法のpythonプログラム"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20220716_python_mock_server\/1\/",
+          "name": "Pythonを用いたjsonを返却する簡易mockserver"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "バイナリ法のpythonプログラム",
+  "headline": "pythonを用いたjsonを返却する簡易mockserver",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  54 ,
-  "datePublished" : "2020-12-20T15:17:23",
-  "dateModified" : "2020-12-20T15:17:23",
+  "wordCount":  78 ,
+  "datePublished" : "2022-07-16T15:00:23",
+  "dateModified" : "2022-07-16T15:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "アルゴリズム" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20201220_binary\/1\/",
+  "keywords" : [ "python" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20220716_python_mock_server\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="バイナリ法のpythonプログラム" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20201220_binary/1/" />
+<meta property="og:title" content="pythonを用いたjsonを返却する簡易mockserver" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="tomato blog" />
 
-  <meta name="twitter:title" content="バイナリ法のpythonプログラム" />
+  <meta name="twitter:title" content="pythonを用いたjsonを返却する簡易mockserver" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.101.0" />
@@ -252,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>バイナリ法のpythonプログラム</h1>
+                <h1>pythonを用いたjsonを返却する簡易mockserver</h1>
               
               
                 <hr class="small">
@@ -272,37 +272,51 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="バイナリ法">バイナリ法</h1>
-<p>$x=a^k$のとき，2乗計算を$k$回行うことになる．<br>
-計算を効率よくする方法として，$a^{2^i}$を順次求めることで，計算量を$log(k)$回に抑える方法がバイナリ法である．<br>
-RSA暗号の複合時のべき乗計算などで用いられる。</p>
-<h2 id="具体例">具体例</h2>
-<p>$5^{21}$を計算する場合、以下のように展開する。</p>
-<p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
-<p>2進数に展開し，左から順に展開することにより計算を実行する．
-$ans= g^k(mod p)$を計算する．</p>
-<h1 id="プログラム">プログラム</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">Binary</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">k_binary</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">//</span><span class="mi">2</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">k_binary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_binary</span><span class="p">))):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">k_binary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="o">%</span><span class="n">p</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">%</span><span class="n">p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">y</span>
-</span></span></code></pre></div>
+        <h1 id="wsgi-web-server-gateway-interface-を用いてweb-サーバを起動する">WSGI (Web Server Gateway Interface) を用いてWeb サーバを起動する</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">wsgiref.simple_server</span> <span class="kn">import</span> <span class="n">make_server</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PORT</span> <span class="o">=</span> <span class="mi">8081</span>
+</span></span><span class="line"><span class="cl"><span class="n">SETTING</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;PATH&#34;</span><span class="p">:</span><span class="s2">&#34;/api/1&#34;</span><span class="p">,</span><span class="s2">&#34;VALUE&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;items&#34;</span><span class="p">:[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s2">&#34;item1&#34;</span><span class="p">:</span><span class="s2">&#34;test1&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s2">&#34;item2&#34;</span><span class="p">:</span><span class="s2">&#34;test2&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]}},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;PATH&#34;</span><span class="p">:</span><span class="s2">&#34;/api/2&#34;</span><span class="p">,</span><span class="s2">&#34;VALUE&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;items2&#34;</span><span class="p">:[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s2">&#34;itemA&#34;</span><span class="p">:</span><span class="s2">&#34;test1&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="s2">&#34;itemB&#34;</span><span class="p">:</span><span class="s2">&#34;test2&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]}}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">path</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&#34;PATH_INFO&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">setting</span> <span class="ow">in</span> <span class="n">SETTING</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">setting</span><span class="p">[</span><span class="s2">&#34;PATH&#34;</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json; charset=utf-8&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">setting</span><span class="p">[</span><span class="s2">&#34;VALUE&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">httpd</span> <span class="o">=</span> <span class="n">make_server</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">PORT</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">httpd</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</span></span></code></pre></div><h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://pod.hatenablog.com/entry/2017/11/23/190634">標準ライブラリの範囲でpythonでweb APIのmock serverが欲しくなった場合</a></li>
+<li><a href="https://docs.python.org/ja/3/library/wsgiref.html">wsgiref &mdash; WSGI ユーティリティとリファレンス実装</a></li>
+</ul>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/">アルゴリズム</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/python/">python</a>&nbsp;
             
           </div>
         
@@ -317,42 +331,42 @@ $ans= g^k(mod p)$を計算する．</p>
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;text=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f&amp;text=python%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fjson%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e7%b0%a1%e6%98%93mockserver&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f&amp;title=python%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fjson%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e7%b0%a1%e6%98%93mockserver" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f&amp;title=python%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fjson%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e7%b0%a1%e6%98%93mockserver" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;title=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f&amp;title=python%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fjson%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e7%b0%a1%e6%98%93mockserver" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20201220_binary%2f1%2f&amp;description=%e3%83%90%e3%82%a4%e3%83%8a%e3%83%aa%e6%b3%95%e3%81%aepython%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220716_python_mock_server%2f1%2f&amp;description=python%e3%82%92%e7%94%a8%e3%81%84%e3%81%9fjson%e3%82%92%e8%bf%94%e5%8d%b4%e3%81%99%e3%82%8b%e7%b0%a1%e6%98%93mockserver" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -374,11 +388,13 @@ $ans= g^k(mod p)$を計算する．</p>
                   <ul>
                 
                 
-                    <li><a href="/posts/20210318_pid/2/">K-means法</a></li>
+                    <li><a href="/posts/20210630_py_plot/1/">Pythonのmatplotで三次元動画を作成するプログラム</a></li>
                 
-                    <li><a href="/posts/20201223_elgamal/1/">楕円曲線上のElGamal暗号のpythonプログラム</a></li>
+                    <li><a href="/posts/20210416_py_env/1/">PyenvとAnacondaを用いたPython環境の設定</a></li>
                 
-                    <li><a href="/posts/20201015_euclidean/1/">ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</a></li>
+                    <li><a href="/posts/20210514_py_print/1/">pythonでprintの上書きをする方法</a></li>
+                
+                    <li><a href="/posts/20210329_bin/1/">Pythonによる2進数変換と論理演算(or,xor)</a></li>
                 
               </ul>
 
@@ -390,13 +406,9 @@ $ans= g^k(mod p)$を計算する．</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20201015_euclidean/1/" data-toggle="tooltip" data-placement="top" title="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20220220_aws_set/1/" data-toggle="tooltip" data-placement="top" title="Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)">&larr; 前ページ</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20201223_elgamal/1/" data-toggle="tooltip" data-placement="top" title="楕円曲線上のElGamal暗号のpythonプログラム">次ページ &rarr;</a>
-            </li>
           
         </ul>
       
