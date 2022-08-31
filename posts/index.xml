@@ -5,7 +5,25 @@
     <link>https://yuhi-sa.github.io/posts/</link>
     <description>Recent content in Posts on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 31 Aug 2022 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dockerファイルの命令文</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesをローカル環境に構築する</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>pythonを用いたjsonを返却する簡易mockserver</title>
       <link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link>

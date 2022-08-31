@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>k8s on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/k8s/</link>
+    <description>Recent content in k8s on tomato blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 31 Aug 2022 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dockerファイルの命令文</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesをローカル環境に構築する</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

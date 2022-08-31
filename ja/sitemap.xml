@@ -1,6 +1,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20220831_k8s/1/</loc>
+  
+  <lastmod>2022-08-31T10:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/posts/20220831_k8s/2/</loc>
+  
+  <lastmod>2022-08-31T10:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</loc>
   
   <lastmod>2022-07-16T15:00:23+09:00</lastmod>
