@@ -58,7 +58,7 @@
   "headline": "Kubernetesの初期状態のNamespace",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  1 ,
+  "wordCount":  16 ,
   "datePublished" : "2022-09-01T10:00:23",
   "dateModified" : "2022-09-01T10:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -273,6 +273,19 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>kubernetes(k8s)では初期状態で以下の4つのNameSpaceが作成される。</p>
+<h1 id="kube-system">kube-system</h1>
+<p>k8sクラスタのコンポーネントやアドオンがデプロイされるNameSpace<br>
+Dashboardやアドオンなど</p>
+<h1 id="kube-public">kube-public</h1>
+<p>全ユーザが利用できるConfigMapなどを配置するNameSpace</p>
+<h1 id="kube-node-lease">kube-node-lease</h1>
+<p>ノードのハードビート情報が保存されるNameSpace</p>
+<h1 id="default">default</h1>
+<p>デフォルトのNamespace</p>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
+</ul>
 
         
           <div class="blog-tags">
@@ -349,9 +362,9 @@
                   <ul>
                 
                 
-                    <li><a href="/posts/20220831_k8s/3/">Kubernetesのリソースカテゴリ</a></li>
+                    <li><a href="/posts/20220831_k8s/5/">Kubernetesの認証情報(Context)</a></li>
                 
-                    <li><a href="/posts/20220831_k8s/5/">Kubernetesの初期状態のNamespace</a></li>
+                    <li><a href="/posts/20220831_k8s/3/">Kubernetesのリソースカテゴリ</a></li>
                 
                     <li><a href="/posts/20220831_k8s/1/">dockerファイルの命令文</a></li>
                 
@@ -367,7 +380,7 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20220831_k8s/5/" data-toggle="tooltip" data-placement="top" title="Kubernetesの初期状態のNamespace">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20220831_k8s/1/" data-toggle="tooltip" data-placement="top" title="dockerファイルの命令文">&larr; 前ページ</a>
             </li>
           
           
