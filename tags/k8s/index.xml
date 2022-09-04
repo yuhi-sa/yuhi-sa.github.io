@@ -5,7 +5,34 @@
     <link>https://yuhi-sa.github.io/tags/k8s/</link>
     <description>Recent content in k8s on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 31 Aug 2022 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Sep 2022 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetesのリソースカテゴリ</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/3/</link>
+      <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesの初期状態のNamespace</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/4/</link>
+      <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesの初期状態のNamespace</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/5/</link>
+      <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/5/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>dockerファイルの命令文</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
