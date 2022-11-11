@@ -58,7 +58,7 @@
   "headline": "webpackとbabelでReactを使える環境を作成する",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  324 ,
+  "wordCount":  341 ,
   "datePublished" : "2022-11-11T09:00:23",
   "dateModified" : "2022-11-11T09:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -300,19 +300,21 @@ Webpackでビルドすることでnode_modulesの依存関係を解消し、1つ
 </span></span><span class="line"><span class="cl"><span class="c1"># プロジェクトの初期化</span>
 </span></span><span class="line"><span class="cl">npm init -y
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># WebpackでBabelを使用するのに必要なモジュール</span>
-</span></span><span class="line"><span class="cl">npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript
+</span></span><span class="line"><span class="cl"><span class="c1"># Babelを使用するのに必要なモジュール</span>
+</span></span><span class="line"><span class="cl">npm i -D @babel/core <span class="c1"># Babel本体</span>
+</span></span><span class="line"><span class="cl">npm i -D @babel/preset-env <span class="c1"># 必要なプラグインを自動で選択して変換処理しれくれるpresets</span>
+</span></span><span class="line"><span class="cl">npm i -D　@babel/preset-react @babel/preset-typescript　<span class="c1"># React, Typescript用</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Webpackを利用するのに必要なモジュール</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Webpackを使用するのに必要なモジュールなど</span>
 </span></span><span class="line"><span class="cl">npm i -D webpack webpack-cli babel-loader ts-loader
+</span></span><span class="line"><span class="cl">npm i -D webpack-dev-server html-webpack-plugin
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Reactで必要なモジュールを追加</span>
-</span></span><span class="line"><span class="cl">npm i -S react react-dom <span class="c1"># jsxコードを使用してReactを記述</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Reactを使用するのに必要なモジュールを追加</span>
+</span></span><span class="line"><span class="cl">npm i -S react react-dom <span class="c1"># jsxコードを使用してReactを記述する</span>
 </span></span><span class="line"><span class="cl">npm i -D typescript @types/react @types/react-dom
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># tsconfig.json 生成</span>
 </span></span><span class="line"><span class="cl">npx tsc init
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">npm i -D webpack-dev-server html-webpack-plugin
 </span></span></code></pre></div><h2 id="ファイルを作成編集">ファイルを作成・編集</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tree .
 </span></span><span class="line"><span class="cl">.
@@ -345,6 +347,9 @@ Webpackでビルドすることでnode_modulesの依存関係を解消し、1つ
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;app&#34;</span><span class="p">));</span>
 </span></span></code></pre></div><h3 id="babelrc">.babelrc</h3>
+<p>Babelの変換方法設定ファイル</p>
+<p>Plugins: Babelでどのようにコードを変換するかを定義したJSのプログラム<br>
+Presets：複数のプラグインを目的に応じてパッケージとして集約する仕組み</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
 </span></span><span class="line"><span class="cl">    &#34;presets&#34;: [
 </span></span><span class="line"><span class="cl">        &#34;@babel/preset-env&#34;,
@@ -352,9 +357,7 @@ Webpackでビルドすることでnode_modulesの依存関係を解消し、1つ
 </span></span><span class="line"><span class="cl">        &#34;@babel/preset-typescript&#34;
 </span></span><span class="line"><span class="cl">  ]
 </span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div><p>Plugins: Babelでどのようにコードを変換するかを定義したJSのプログラムで
-Presets：複数のプラグインを目的に応じてパッケージとして集約する仕組み</p>
-<h3 id="packagejson">package.json</h3>
+</span></span></code></pre></div><h3 id="packagejson">package.json</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-package.json" data-lang="package.json"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;react_test&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0.0&#34;</span><span class="p">,</span>
@@ -388,7 +391,7 @@ Presets：複数のプラグインを目的に応じてパッケージとして�
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="tsconfigjson">tsconfig.json</h3>
-<p>Typescriptのビルド設定</p>
+<p>Typescriptのビルド設定ファイル</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-tsconfig.json" data-lang="tsconfig.json"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&#34;compilerOptions&#34;</span><span class="p">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="s2">&#34;es5&#34;</span><span class="p">,</span> <span class="c1">// トランスコンパイル後のバージョンを指定
@@ -405,7 +408,7 @@ Presets：複数のプラグインを目的に応じてパッケージとして�
 </span></span><span class="line"><span class="cl">    <span class="nt">&#34;include&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;src&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span></code></pre></div><h3 id="webpackconfigjs">webpack.config.js</h3>
-<p>Webpackのバンドル設定</p>
+<p>Webpackのバンドル設定ファイル</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-webpack.config.js" data-lang="webpack.config.js"><span class="line"><span class="cl"><span class="c1">// 絶対パスを参照するためのモジュール
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
