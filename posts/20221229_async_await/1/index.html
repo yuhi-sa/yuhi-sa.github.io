@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数) - tomato blog</title>
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20221229_async_await\/1\/",
+          "name": "Java scriptの非同期処理(コールバック地獄 promise async関数)"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "JavaScriptの非同期処理(コールバック地獄\/Promise\/Async関数)",
+  "description" : "",
+  "inLanguage" : "ja",
+  "wordCount":  291 ,
+  "datePublished" : "2022-12-29T09:00:23",
+  "dateModified" : "2022-12-29T09:00:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "javascript" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20221229_async_await\/1\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20221229_async_await/1/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="tomato blog" />
+
+  <meta name="twitter:title" content="JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.109.0">
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'G-LN6QP6VVM3');
+</script>
+
+
+<script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">メニューを切り替え</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="privacy policy" href="/posts/privacy_policy">privacy policy</a>
+            </li>
+          
+        
+
+        
+          
+            <li>
+              
+                
+                  <a href="/en" lang="en">English</a>
+                
+              
+                
+              
+            </li>
+          
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>￼</p>
+<h1 id="javascriptで非同期処理が重要な理由">JavaScriptで非同期処理が重要な理由</h1>
+<h2 id="シングルスレッド">シングルスレッド</h2>
+<p>JavaScriptはシングルスレッドで動作する。そのため一度に実行できるタスクは1つだけとなる。
+JavaScriptは、レイアウト・再フロー・ガベージコレクションなどと同じスレッドで実行される。
+そのため、JavaScript関数がスレッドを占有すると、ページの反応が悪くなるという問題が発生する。
+この問題を非同期関数を用いて緩和する。</p>
+<h3 id="参考">参考</h3>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript">JavaScript|MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Glossary/Main_thread">Main thread (メインスレッド)|MDN</a></li>
+<li><a href="https://jsprimer.net/basic/async/">非同期処理:Promise/Async Function | jsprimer</a></li>
+</ul>
+<h2 id="非同期関数">非同期関数</h2>
+<p>非同期処理はコードを順番に処理するが、1つの非同期処理が終わるのを待たずに次の処理を行う。
+これにより複数の処理を並列に実行している。</p>
+<h3 id="イベントループ">イベントループ</h3>
+<p>JavaScriptエンジン(v8など)は、非同期関数をイベントループを用いて実行する。
+JavaScriptエンジンは、主に以下の3つによって構成されている。</p>
+<h3 id="javascriptエンジン">Javascriptエンジン</h3>
+<ul>
+<li>ヒープ領域：動的に確保と解放を繰り返せるメモリ領域</li>
+<li>コールスタック：LIFOで呼び出された関数を保存する領域。格納された関数は順次処理される。</li>
+</ul>
+<h3 id="webapis">WebAPIs</h3>
+<p>ブラウザに搭載されている各種API(DOM, Ajax, timerなど)</p>
+<h3 id="イベントキュータスクキュー">イベントキュー/タスクキュー</h3>
+<p>FIFOで、Web APIから受け取ったCallback関数を保存する</p>
+<p>イベントループは以下の流れで非同期処理を実現する。</p>
+<ol>
+<li>コールスタックとイベントキューを監視し、コールスタックが空になったら、イベントキューの作業を順番にコールスタックに移動させる。</li>
+<li>JavaScriptがメモリ上に展開され、コールスタックで実行される。</li>
+<li>Web APIsから提供されているAPIを呼び出すと、Web APIsの実行環境で処理が実行する。</li>
+<li>非同期関数の呼び出しの場合、Web APIsの実行環境内で、条件を満たすまで待機し、条件を満たすとイベントキューに格納される。</li>
+</ol>
+<h3 id="参考-1">参考</h3>
+<ul>
+<li><a href="https://zenn.dev/redpanda/articles/ef719c7e592327">非同期処理 (1): Javascript の動作の流れ (JS エンジン / Call Stack / Event Queue)|Zenn</a></li>
+<li><a href="https://qiita.com/hirokikondo86/items/226905890944603dba39">JavaScriptのイベントループを理解する|Qiita</a></li>
+<li><a href="https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/">JavaScriptがブラウザでどのように動くのか|mercari engineering</a></li>
+</ul>
+<h2 id="非同期関数の例">非同期関数の例</h2>
+<p>たとえば、処理を一時停止させる場合はsetTimeout関数を利用して実現する方法がある。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// setTimeout(&#39;コールバック関数&#39;, &#39;タイムアウト時間&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function callback(){
+</span></span><span class="line"><span class="cl">    console.log(&#39;test&#39;)
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>非同期処理が複数重なると、コールバック地獄になり、ネストが深く処理が追いづらくなる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">setTimeout(callback, 1)
+</span></span><span class="line"><span class="cl">setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">    console.log(1)
+</span></span><span class="line"><span class="cl">    setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">        console.log(2)
+</span></span><span class="line"><span class="cl">        setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">            console.log(3)
+</span></span><span class="line"><span class="cl">        }, 3)
+</span></span><span class="line"><span class="cl">    }, 2)
+</span></span><span class="line"><span class="cl">}, 1)
+</span></span></code></pre></div><p>この問題をPromiseを用いることで緩和する。</p>
+<h3 id="参考-2">参考</h3>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/setTimeout">setTimeout()-WebAPI|MDN</a></li>
+<li><a href="https://qiita.com/knaot0/items/af0a38cc916176cdd50f">【JS】setTimeoutを用いた、非同期処理入門|Qiita</a></li>
+<li><a href="https://techblog.yahoo.co.jp/programming/js_callback/">JavaScriptとコールバック地獄|Yahoo! JAPAN Tech Blog</a></li>
+<li><a href="https://www.tohoho-web.com/ex/promise.html">とほほのPromise入門</a></li>
+<li><a href="https://dev.classmethod.jp/articles/javascript-sleep-set-timeout-to-promise/">[JavaScript]sleep(setTimeout)をPromise化する|DevelopersIO</a></li>
+</ul>
+<h1 id="promiseオブジェクトes2015">Promiseオブジェクト[ES2015]</h1>
+<p>PromiseはES2015で導入された非同期処理の状態や結果を表現するビルトインオブジェクトである。
+非同期処理はPromiseのインスタンスを返し、そのPromiseインスタンスには状態変化をした際に呼び出されるコールバック関数を登録できる。</p>
+<h2 id="使い方">使い方</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// asyncPromiseTask関数は、Promiseインスタンスを返す
+</span></span><span class="line"><span class="cl">function asyncPromiseTask() {
+</span></span><span class="line"><span class="cl">    return new Promise((resolve, reject) =&gt; {
+</span></span><span class="line"><span class="cl">        // ここが非同期処理
+</span></span><span class="line"><span class="cl">        // 成功時はresolve関数を呼ぶ
+</span></span><span class="line"><span class="cl">        // 失敗時はrejectを関数呼ぶ
+</span></span><span class="line"><span class="cl">    });
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">// thenメソッドで、Promiseがresolve（成功）、reject（失敗）したときに呼ばれるコールバック関数を登録できる。
+</span></span><span class="line"><span class="cl">asyncPromiseTask().then(()=&gt; {
+</span></span><span class="line"><span class="cl">    // 成功したときの処理
+</span></span><span class="line"><span class="cl">}).catch(() =&gt; {
+</span></span><span class="line"><span class="cl">    // 失敗したときの処理
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><p>非同期関数では関数を実行してもすぐには結果がわからない。
+そのため、Promiseという非同期処理の状態をラップしたオブジェクトを返し、その結果が決まったら登録しておいたコールバック関数へ結果を渡すという仕組みとなっている。</p>
+<h3 id="引数の省略">引数の省略</h3>
+<p>Promiseのthenメソッドは成功と失敗のコールバック関数の2つを受け取るが、どちらの引数も省略できる。</p>
+<h4 id="成功のみのパターン">成功のみのパターン</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="o">`</span><span class="k">then</span><span class="o">`</span><span class="err">メソッドで成功時のコールバック関数だけを登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">asyncPromiseTask</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">&#34;成功時のコールバック&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h4 id="失敗のみのパターン">失敗のみのパターン</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="err">非推奨</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="k">then</span><span class="o">`</span><span class="err">メソッドで失敗時のコールバック関数だけを登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">errorPromise</span><span class="p">(</span><span class="s2">&#34;thenでエラーハンドリング&#34;</span><span class="p">).</span><span class="k">then</span><span class="p">(</span><span class="n">undefined</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">error</span><span class="p">.</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">推奨</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="n">catch</span><span class="o">`</span><span class="err">メソッドで失敗時のコールバック関数を登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">errorPromise</span><span class="p">(</span><span class="s2">&#34;catchでエラーハンドリング&#34;</span><span class="p">).</span><span class="nf">catch</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">error</span><span class="p">.</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="promiseの状態">Promiseの状態</h2>
+<p>Promiseインスタンスには、内部的に次の3つの状態が存在する。</p>
+<ul>
+<li>Fulfilled：成功したときの状態</li>
+<li>Rejected：失敗または例外が発生した状態</li>
+<li>Pending：FulfilledまたはRejectedではない状態</li>
+</ul>
+<p>一度でもFulfilledかRejectedとなったPromiseインスタンスは、それ以降別の状態には変化しない。
+そのため、以下のような挙動となる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">const promise = new Promise((resolve, reject) =&gt; {
+</span></span><span class="line"><span class="cl">    setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">	 	// 非同期でresolveする
+</span></span><span class="line"><span class="cl">        resolve();
+</span></span><span class="line"><span class="cl">        // すでにresolveされているため無視される
+</span></span><span class="line"><span class="cl">        reject(new Error(&#34;エラー&#34;));
+</span></span><span class="line"><span class="cl">		// 二度目以降のresolveやrejectは無視される
+</span></span><span class="line"><span class="cl">		resolve();
+</span></span><span class="line"><span class="cl">    }, 16);
+</span></span><span class="line"><span class="cl">});
+</span></span><span class="line"><span class="cl">promise.then(() =&gt; {
+</span></span><span class="line"><span class="cl">    console.log(&#34;Fulfilledとなった&#34;);
+</span></span><span class="line"><span class="cl">}, (error) =&gt; {
+</span></span><span class="line"><span class="cl">    // この行は呼び出されない
+</span></span><span class="line"><span class="cl">});
+</span></span></code></pre></div><h2 id="promiseチェーン">Promiseチェーン</h2>
+<p>複数の非同期処理を順番に扱いたい場合に利用するのがPromiseチェーンである。
+thenやcatchメソッドは常に新しいPromiseインスタンスを返すため、thenメソッドの返り値にさらにthenメソッドで処理を登録できる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="n">Promise</span><span class="err">インスタンスでメソッドチェーン</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Promise</span><span class="p">.</span><span class="nf">resolve</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">then</span><span class="err">メソッドは新しい</span><span class="o">`</span><span class="n">Promise</span><span class="o">`</span><span class="err">インスタンスを返す</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="promiseの問題点">Promiseの問題点</h2>
+<p>Promiseには以下のような問題点が存在する。</p>
+<ul>
+<li>非同期処理間の連携をするにはPromiseチェーンのように少し特殊な書き方や見た目となる。</li>
+<li>エラーハンドリングでは、catchメソッドやfinallyメソッドなどtry&hellip;catch構文とよく似た名前を使う。</li>
+<li>Promiseは構文ではなくただのオブジェクトであるため、メソッドチェーンとして実現しないといけない。</li>
+</ul>
+<p>この問題をAsync関数を利用することで緩和する。</p>
+<h2 id="参考-3">参考</h2>
+<ul>
+<li><a href="https://typescriptbook.jp/reference/promise-async-await">Promise/async/await|サバイバルTypeScript</a></li>
+<li><a href="https://typescript-jp.gitbook.io/deep-dive/future-javascript/promise">Promise|TypeScript Deep Dive 日本語版</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises">プロミスの使用|MDN</a></li>
+<li><a href="https://zenn.dev/mizchi/articles/understanding-promise-by-ts-eventloop">イベントループと TypeScript の型から理解する非同期処理|Zenn</a></li>
+</ul>
+<h1 id="async関数es2017">Async関数[ES2017]</h1>
+<p>Async関数は必ずPromiseインスタンスを返す関数である。関数の前にasyncをつけることで定義できる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">async function doAsync() {
+</span></span><span class="line"><span class="cl">    return &#34;値&#34;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 以下と同等の意味
+</span></span><span class="line"><span class="cl">function doAsync() {
+</span></span><span class="line"><span class="cl">    return Promise.resolve(&#34;値&#34;);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="await式">await式</h2>
+<p>Async関数内ではawait式というPromiseの非同期処理が完了する(FulfilledになるかRejectedになる)まで待つ構文が利用できる。
+await式を使うことで非同期処理を同期処理のように扱えるため、Promiseチェーンで実現していた処理の流れを読みやすく書ける。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">async function asyncMain() {
+</span></span><span class="line"><span class="cl">    // PromiseがFulfilledまたはRejectedとなるまで待つ
+</span></span><span class="line"><span class="cl">    await Promiseインスタンス;
+</span></span><span class="line"><span class="cl">    // Promiseインスタンスの状態が変わったら処理を再開する
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>await式がエラーをthrowするため、try catchが使えるようになる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">async function asyncMain() {
+</span></span><span class="line"><span class="cl">    try {
+</span></span><span class="line"><span class="cl">        const value = await Promise.reject(new Error(&#34;エラーメッセージ&#34;));
+</span></span><span class="line"><span class="cl">    } catch (error) {
+</span></span><span class="line"><span class="cl">        console.log(error.message);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h2 id="参考-4">参考</h2>
+<ul>
+<li><a href="https://typescriptbook.jp/reference/promise-async-await">Promise/async/await|サバイバルTypeScript</a></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/javascript/">javascript</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f&amp;text=JavaScript%e3%81%ae%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%28%e3%82%b3%e3%83%bc%e3%83%ab%e3%83%90%e3%83%83%e3%82%af%e5%9c%b0%e7%8d%84%2fPromise%2fAsync%e9%96%a2%e6%95%b0%29&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f&amp;title=JavaScript%e3%81%ae%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%28%e3%82%b3%e3%83%bc%e3%83%ab%e3%83%90%e3%83%83%e3%82%af%e5%9c%b0%e7%8d%84%2fPromise%2fAsync%e9%96%a2%e6%95%b0%29" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f&amp;title=JavaScript%e3%81%ae%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%28%e3%82%b3%e3%83%bc%e3%83%ab%e3%83%90%e3%83%83%e3%82%af%e5%9c%b0%e7%8d%84%2fPromise%2fAsync%e9%96%a2%e6%95%b0%29" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f&amp;title=JavaScript%e3%81%ae%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%28%e3%82%b3%e3%83%bc%e3%83%ab%e3%83%90%e3%83%83%e3%82%af%e5%9c%b0%e7%8d%84%2fPromise%2fAsync%e9%96%a2%e6%95%b0%29" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20221229_async_await%2f1%2f&amp;description=JavaScript%e3%81%ae%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86%28%e3%82%b3%e3%83%bc%e3%83%ab%e3%83%90%e3%83%83%e3%82%af%e5%9c%b0%e7%8d%84%2fPromise%2fAsync%e9%96%a2%e6%95%b0%29" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">seeAlso</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20221111_react/1/">webpackとbabelでReactを使える環境を作成する</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20221111_react/1/" data-toggle="tooltip" data-placement="top" title="webpackとbabelでReactを使える環境を作成する">&larr; 前ページ</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">tomato blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          起動力に<a href="https://gohugo.io">Hugo v0.109.0</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

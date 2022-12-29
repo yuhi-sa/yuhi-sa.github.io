@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/javascript/</link>
     <description>Recent content in javascript on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 11 Nov 2022 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Dec 2022 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title>
+      <link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link>
+      <pubDate>Thu, 29 Dec 2022 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20221229_async_await/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>webpackとbabelでReactを使える環境を作成する</title>
       <link>https://yuhi-sa.github.io/posts/20221111_react/1/</link>
