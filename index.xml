@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/</link>
     <description>Recent content on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 29 Dec 2022 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Dec 2022 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vimの使い方メモ</title>
+      <link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link>
+      <pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20221230_vim/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title>
       <link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link>
