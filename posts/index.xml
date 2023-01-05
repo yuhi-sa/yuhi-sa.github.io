@@ -5,7 +5,25 @@
     <link>https://yuhi-sa.github.io/posts/</link>
     <description>Recent content in Posts on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 30 Dec 2022 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Jan 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>シングルサインオン(SSO)</title>
+      <link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link>
+      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>チャレンジレスポンス方式</title>
+      <link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link>
+      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Vimの使い方メモ</title>
       <link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link>
