@@ -1,6 +1,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/en/posts/20220206_repa/1/</loc>
+  
+  <lastmod>2022-02-06T15:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</loc>
+  
+  <lastmod>2022-02-06T14:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</loc>
   
   <lastmod>2021-12-09T11:00:23+09:00</lastmod>
@@ -73,7 +89,23 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</loc>
+  <loc>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</loc>
+  
+  <lastmod>2020-12-20T15:17:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</loc>
+  
+  <lastmod>2020-10-15T15:17:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/en/posts/about/</loc>
   
   <lastmod>2020-08-16T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
@@ -81,7 +113,7 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/en/posts/about/</loc>
+  <loc>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</loc>
   
   <lastmod>2020-08-16T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
