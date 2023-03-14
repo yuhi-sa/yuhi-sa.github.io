@@ -280,7 +280,6 @@
 <p>$$z = \mu + \sigma \odot \epsilon$$</p>
 <p>$$\epsilon \sim \mathcal{N}(0,1) $$</p>
 <p>This makes $z$ a deterministic value with respect to $\mu$ and $\sigma$, making it differentiable.</p>
-<p><img src=".././repara.png" alt="conceptual diagram"></p>
 <h1 id="sampling-using-the-reparameterization-trick-in-pytorch">Sampling using the Reparameterization Trick in PyTorch</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m = Normal(*params)
 </span></span><span class="line"><span class="cl">z = m.rsample()
