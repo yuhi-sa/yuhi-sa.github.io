@@ -58,7 +58,7 @@
   "headline": "Euclidean Algorithm and Extended Euclidean Algorithm in Python",
   "description" : "",
   "inLanguage" : "en",
-  "wordCount":  309 ,
+  "wordCount":  320 ,
   "datePublished" : "2020-10-15T15:17:23",
   "dateModified" : "2020-10-15T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -278,11 +278,9 @@
 <p>Inputs: Integers $a$ and $b$.
 Output: GCD $d$.</p>
 <ol>
-<li>$a_0 = a$, $a_1 = b$</li>
-<li>$a_i=0$のとき，<br>
-$d=a_{i-1}$とし終了</li>
-<li>$a_{i-1}=a_iq_i+a_{i+1}$<br>
-　　として2に戻る</li>
+<li>Set $a_0=a$ and $a_1=b$.</li>
+<li>If $a_i=0$, set $d=a_{i-1}$ and terminate.</li>
+<li>Determine $a_{i+1}$ and $q_i$ from $a_{i-1}=a_iq_i+a_{i+1}$ and return to step 2.</li>
 </ol>
 <h2 id="python-code">Python code</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-euclid.py" data-lang="euclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
@@ -348,13 +346,15 @@ $</p>
 <h2 id="algorithm-1">Algorithm</h2>
 <p>Input: Integers $a$ and $b$
 Output: The greatest common divisor $d$ and integers $x$ and $y$ such that $ax+by=d$</p>
-<p>Set $a_0 =a$ and $a_1 =b$
-Set $x_0 =1$, $x_1 =0$, $y_0 =0$, and $y_1 =1$
-If $a_i=0$, set $d=a_{i−1}$, $x=x_{i−1}$, $y=y_{i−1}$, and terminate.
-Determine $a_{i+1}$ and $q_i$ from $a_{i−1} = a_iq_i + a_{i+1}$. Set
+<ol>
+<li>Set $a_0 =a$ and $a_1 =b$</li>
+<li>Set $x_0 =1$, $x_1 =0$, $y_0 =0$, and $y_1 =1$</li>
+<li>If $a_i=0$, set $d=a_{i−1}$, $x=x_{i−1}$, $y=y_{i−1}$, and terminate.</li>
+<li>Determine $a_{i+1}$ and $q_i$ from $a_{i−1} = a_iq_i + a_{i+1}$. Set
 $x_{i+1} = x_{i−1} − q_ix_i$
 $y_{i+1}=y_{i−1}−q_iy_i$
-Return to step 3.</p>
+Return to step 3.</li>
+</ol>
 <h2 id="python-code-1">Python code</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-exEuclid.py" data-lang="exEuclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exEuclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
