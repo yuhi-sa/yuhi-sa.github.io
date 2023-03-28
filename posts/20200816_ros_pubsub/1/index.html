@@ -58,7 +58,7 @@
   "headline": "[ROS]PublisherとSubscriberを1つのノードに書く方法",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  198 ,
+  "wordCount":  199 ,
   "datePublished" : "2020-08-16T15:17:23",
   "dateModified" : "2020-08-16T15:17:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
@@ -326,6 +326,7 @@
 </span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="n">listener</span><span class="p">()</span>
 </span></span></code></pre></div><h1 id="publisherとsubscriberのプログラム">PublisherとSubscriberのプログラム</h1>
+<p>PublisherとSubscriberを1つのノードで書くと以下のようになる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 </span></span><span class="line"><span class="cl">
