@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on tomato blog</title>
+    <link>https://yuhi-sa.github.io/posts/</link>
+    <description>Recent content in Posts on tomato blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 20 Apr 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AWS Summit Tokyo 2023に行った</title>
+      <link>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</link>
+      <pubDate>Thu, 20 Apr 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>メールにおける認証技術</title>
+      <link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link>
+      <pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>シングルサインオン(SSO)</title>
+      <link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link>
+      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>チャレンジレスポンス方式</title>
+      <link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link>
+      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vimの使い方メモ</title>
+      <link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link>
+      <pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20221230_vim/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title>
+      <link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link>
+      <pubDate>Thu, 29 Dec 2022 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20221229_async_await/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webpackとbabelでReactを使える環境を作成する</title>
+      <link>https://yuhi-sa.github.io/posts/20221111_react/1/</link>
+      <pubDate>Fri, 11 Nov 2022 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20221111_react/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesの認証情報(Context)</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/5/</link>
+      <pubDate>Sun, 04 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesのリソースカテゴリ</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/3/</link>
+      <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesの初期状態のNamespace</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/4/</link>
+      <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dockerファイルの命令文</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetesをローカル環境に構築する</title>
+      <link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link>
+      <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pythonを用いたjsonを返却する簡易mockserver</title>
+      <link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link>
+      <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>踏み台サーバー経由で多段ssh</title>
+      <link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link>
+      <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</title>
+      <link>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</link>
+      <pubDate>Sun, 20 Feb 2022 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>リパラメタライゼーショントリック(Reparameterization trick)</title>
+      <link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link>
+      <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>指数移動平均(Exponential Moving Averages)フィルタの周波数特性</title>
+      <link>https://yuhi-sa.github.io/posts/20220206_ema/1/</link>
+      <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20220206_ema/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linuxのログファイルと閲覧コマンド</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/6/</link>
+      <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLの表の結合</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/5/</link>
+      <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ガウス分布同士のクロスエントロピーの閉形式導出</title>
+      <link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link>
+      <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLの条件式</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/4-2/</link>
+      <pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/4-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLの関数</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/4/</link>
+      <pubDate>Wed, 08 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>公開鍵認証方式を用いたSSH通信の設定方法</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link>
+      <pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLによるDBの検索</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/3/</link>
+      <pubDate>Thu, 02 Dec 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ネットワークのトラブルシューティングで利用する代表的なコマンド</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/4/</link>
+      <pubDate>Tue, 30 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正規化</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/2/</link>
+      <pubDate>Fri, 26 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ネットワークの基礎</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/3/</link>
+      <pubDate>Mon, 22 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLの基本構文</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/1/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>スーパーユーザ</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/1/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ユーザアカウント</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/2/</link>
+      <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>オブジェクト指向</title>
+      <link>https://yuhi-sa.github.io/posts/20211112_java/1/</link>
+      <pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title>
+      <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
+      <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</link>
+      <pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>githubへのssh接続</title>
+      <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
+      <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raspberry PiでAirplayをする方法メモ(RPiPlay)</title>
+      <link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link>
+      <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>適応フィルタ</title>
+      <link>https://yuhi-sa.github.io/posts/20210730_filter/1/</link>
+      <pubDate>Fri, 30 Jul 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210730_filter/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>リーダブルコード読んだメモ</title>
+      <link>https://yuhi-sa.github.io/posts/20210713_readable/1/</link>
+      <pubDate>Tue, 13 Jul 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210713_readable/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitHub Actions の書き方</title>
+      <link>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</link>
+      <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pythonのmatplotで三次元動画を作成するプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
+      <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>モーメント</title>
+      <link>https://yuhi-sa.github.io/posts/20210527_moment/1/</link>
+      <pubDate>Thu, 27 May 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210527_moment/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MacのLaunchpadを初期化する方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</link>
+      <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyenvとAnacondaを用いたPython環境の設定</title>
+      <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pythonでprintの上書きをする方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>UbuntuでローカルDNSサーバーが指定できないときの編集方法</title>
+      <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link>
+      <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntuのsshの設定</title>
+      <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link>
+      <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>H無限大制御</title>
+      <link>https://yuhi-sa.github.io/posts/20210405_hinf/1/</link>
+      <pubDate>Mon, 05 Apr 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210405_hinf/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pythonによる2進数変換と論理演算(or,xor)</title>
+      <link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link>
+      <pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210329_bin/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>クロスエントロピー法(Cross Entropy Method)</title>
+      <link>https://yuhi-sa.github.io/posts/20210329_cem/1/</link>
+      <pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210329_cem/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNNを利用した強化学習の仲間たち</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/7/</link>
+      <pubDate>Mon, 22 Mar 2021 11:35:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Advantage Actor Critic(A2C)</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/6/</link>
+      <pubDate>Mon, 22 Mar 2021 11:30:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>方策勾配法</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/5/</link>
+      <pubDate>Mon, 22 Mar 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ニューラルネットを適応した強化学習</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/4/</link>
+      <pubDate>Mon, 22 Mar 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>モデルフリー強化学習</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/3/</link>
+      <pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>モデルベース強化学習</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/2/</link>
+      <pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>強化学習とは</title>
+      <link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link>
+      <pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>K-means法</title>
+      <link>https://yuhi-sa.github.io/posts/20210318_pid/2/</link>
+      <pubDate>Thu, 18 Mar 2021 16:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210318_pid/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PID制御</title>
+      <link>https://yuhi-sa.github.io/posts/20210318_pid/1/</link>
+      <pubDate>Thu, 18 Mar 2021 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210318_pid/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>変分オートエンコーダ(VAE)</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/13/</link>
+      <pubDate>Thu, 18 Mar 2021 12:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/13/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>マルコフ連鎖モンテカルロ法(MCMC)</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/12/</link>
+      <pubDate>Thu, 18 Mar 2021 11:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/12/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>変分ベイズ</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/11/</link>
+      <pubDate>Thu, 18 Mar 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/11/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EMアルゴリズム2(変分下界とKLダイバージェンス)</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/10/</link>
+      <pubDate>Wed, 17 Mar 2021 13:05:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/10/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EMアルゴリズム</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/9/</link>
+      <pubDate>Wed, 17 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>共役事前分布</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/8/</link>
+      <pubDate>Tue, 16 Mar 2021 16:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ラグランジュの未定数法</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/7/</link>
+      <pubDate>Tue, 16 Mar 2021 15:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>二項分布とその仲間たち</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/6/</link>
+      <pubDate>Tue, 16 Mar 2021 14:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ベイズ推定</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/5/</link>
+      <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正規分布における最尤推定</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/4/</link>
+      <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>確率の基礎</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/2/</link>
+      <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正規分布(ガウス分布)</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/3/</link>
+      <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>統計学と機械学習の用語</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/1/</link>
+      <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>numpyからpytorchの変換で，dtypeを消す</title>
+      <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
+      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link>
+      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</title>
+      <link>https://yuhi-sa.github.io/posts/20210204_hugo/1/</link>
+      <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210204_hugo/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link>
+      <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210125_ut/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link>
+      <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210109_nnga/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title>
+      <link>https://yuhi-sa.github.io/posts/20210108_bayes/1/</link>
+      <pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210108_bayes/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>情報理論(エントロピーから相互情報量, PRML1.6)</title>
+      <link>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</link>
+      <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>粒子群最適化(PSO)とTCPSOのMatlabプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link>
+      <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLの表の作成</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/7/</link>
+      <pubDate>Mon, 04 Jan 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLのデータ挿入，更新，削除</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_db/6/</link>
+      <pubDate>Fri, 01 Jan 2021 10:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20211121_db/6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
+      <link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link>
+      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>楕円曲線上のElGamal暗号のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link>
+      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>バイナリ法によるべき乗計算のPythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link>
+      <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20201220_binary/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</title>
+      <link>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</link>
+      <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>代表的なフィルタ</title>
+      <link>https://yuhi-sa.github.io/posts/20200901_filter/1/</link>
+      <pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20200901_filter/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>強化学習の全体像まとめ</title>
+      <link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link>
+      <pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>[ROS]PublisherとSubscriberを1つのノードに書く方法</title>
+      <link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://yuhi-sa.github.io/posts/about/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>いいなって思った言葉</title>
+      <link>https://yuhi-sa.github.io/posts/quotations/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/quotations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>プライバシーポリシー</title>
+      <link>https://yuhi-sa.github.io/posts/privacy_policy/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/privacy_policy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>やりたいこと</title>
+      <link>https://yuhi-sa.github.io/posts/todo/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/todo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</title>
+      <link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
