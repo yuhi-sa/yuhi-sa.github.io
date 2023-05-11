@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Kubernetesをローカル環境に構築する - tomato blog</title>
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20220831_k8s\/2\/",
+          "name": "Kubernetesをローカル環境に構築する"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "Kubernetesをローカル環境に構築する",
+  "description" : "",
+  "inLanguage" : "ja",
+  "wordCount":  258 ,
+  "datePublished" : "2022-08-31T10:00:23",
+  "dateModified" : "2022-08-31T10:00:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "k8s" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20220831_k8s\/2\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Kubernetesをローカル環境に構築する" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20220831_k8s/2/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="tomato blog" />
+
+  <meta name="twitter:title" content="Kubernetesをローカル環境に構築する" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.111.3">
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'G-LN6QP6VVM3');
+</script>
+
+
+<script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">メニューを切り替え</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="privacy policy" href="/posts/privacy_policy">privacy policy</a>
+            </li>
+          
+        
+
+        
+          
+            <li>
+              
+                
+                  <a href="/en" lang="en">English</a>
+                
+              
+                
+              
+            </li>
+          
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Kubernetesをローカル環境に構築する</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="kubernetesk8sとは">Kubernetes(k8s)とは</h1>
+<p>コンテナ化されたアプリケーションのデプロイ、スケーリングなどの管理を自動化するプラットフォーム。
+k8sでは、コンテナが起動するノードをk8sノードと呼び、それらを管理するノードk8sマスターと呼ぶ。ノードの集合体がk8sクラスターである。</p>
+<h1 id="minikube">Minikube</h1>
+<p>MinikubeはSIG-Cluster-Lifecycleで作られた簡単にローカルにk8sクラスターを構築・実行できるツールである。
+Minikubeではローカルの仮装マシン上にk8sをインストールするため、ハイパーバイザーが必要となる。</p>
+<p>ハイパーバイザーごとに応じたDriverを使用して操作することで、自動的にホストとなるコンテナや仮想マシンを作成し、
+その環境上にk8sをインストールする。</p>
+<p>macOSにおけるハイパーバイザーにはDocker/HyperKit driver/VirtualBox/Parallels/Vmware/Fusion/Podmanなどがある。</p>
+<p>現状、M1macではdockerしか対応してなさそう、、？</p>
+<ul>
+<li><a href="https://ytooyama.hatenadiary.jp/entry/2021/06/04/154320">M1 MacにおけるHyperkitとそれが必要なアプリケーションの利用について</a></li>
+</ul>
+<h2 id="minikubeのインストール">Minikubeのインストール</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ brew install <span class="nv">minikube</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.25.0
+</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:e10
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
+</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/manifests/1.26.1
+</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/blobs/sha256:ae9660e6a
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
+</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing dependencies <span class="k">for</span> minikube: kubernetes-cli
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing minikube dependency: kubernetes-cli
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Pouring kubernetes-cli--1.25.0.arm64_monterey.bottle.tar.gz
+</span></span><span class="line"><span class="cl">🍺  /opt/homebrew/Cellar/kubernetes-cli/1.25.0: <span class="m">228</span> files, 52.8MB
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing <span class="nv">minikube</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Pouring minikube--1.26.1.arm64_monterey.bottle.tar.gz
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Caveats
+</span></span><span class="line"><span class="cl">zsh completions have been installed to:
+</span></span><span class="line"><span class="cl">  /opt/homebrew/share/zsh/site-functions
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Summary
+</span></span><span class="line"><span class="cl">🍺  /opt/homebrew/Cellar/minikube/1.26.1: <span class="m">9</span> files, 70.6MB
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Running <span class="sb">`</span>brew cleanup minikube<span class="sb">`</span>...
+</span></span><span class="line"><span class="cl">Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+</span></span><span class="line"><span class="cl">Hide these hints with HOMEBREW_NO_ENV_HINTS <span class="o">(</span>see <span class="sb">`</span>man brew<span class="sb">`</span><span class="o">)</span>.
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; <span class="nv">Caveats</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; minikube
+</span></span><span class="line"><span class="cl">zsh completions have been installed to:
+</span></span><span class="line"><span class="cl">  /opt/homebrew/share/zsh/site-functions
+</span></span></code></pre></div><h2 id="minikubeを使用してk8s環境を構築する">Minikubeを使用してk8s環境を構築する</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube start
+</span></span><span class="line"><span class="cl">😄  Darwin 12.5.1 <span class="o">(</span>arm64<span class="o">)</span> 上の minikube v1.26.1
+</span></span><span class="line"><span class="cl">✨  docker ドライバーが自動的に選択されました
+</span></span><span class="line"><span class="cl">📌  root 権限を持つ Docker Desktop ドライバーを使用
+</span></span><span class="line"><span class="cl">👍  minikube クラスター中のコントロールプレーンの minikube ノードを起動しています
+</span></span><span class="line"><span class="cl">🚜  ベースイメージを取得しています...
+</span></span><span class="line"><span class="cl">💾  ロード済み Kubernetes v1.24.3 をダウンロードしています...
+</span></span><span class="line"><span class="cl">    &gt; preloaded-images-k8s-v18-v1...:  342.82 MiB / 342.82 MiB  100.00% 20.69 M
+</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase:  348.00 MiB / 348.00 MiB  100.00% 10.00 MiB 
+</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase:  <span class="m">0</span> B <span class="o">[</span>________________________<span class="o">]</span> ?% ? p/s 27s
+</span></span><span class="line"><span class="cl">🔥  docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>2200MB<span class="o">)</span> を作成しています...
+</span></span><span class="line"><span class="cl">🐳  Docker 20.10.17 で Kubernetes v1.24.3 を準備しています...
+</span></span><span class="line"><span class="cl">    ▪ 証明書と鍵を作成しています...
+</span></span><span class="line"><span class="cl">    ▪ コントロールプレーンを起動しています...
+</span></span><span class="line"><span class="cl">    ▪ RBAC のルールを設定中です...
+</span></span><span class="line"><span class="cl">🔎  Kubernetes コンポーネントを検証しています...
+</span></span><span class="line"><span class="cl">    ▪ gcr.io/k8s-minikube/storage-provisioner:v5 イメージを使用しています
+</span></span><span class="line"><span class="cl">🌟  有効なアドオン: storage-provisioner, default-storageclass
+</span></span><span class="line"><span class="cl">🏄  終了しました！kubectl がデフォルトで「minikube」クラスターと「default」ネームスペースを使用するよう設定されました
+</span></span></code></pre></div><h2 id="contextの切り替え">Contextの切り替え</h2>
+<p>複数のk8sクラスタを利用している場合はk8sのContextを切り替える必要がある。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl config use-context minikube
+</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;minikube&#34;</span>.
+</span></span></code></pre></div><h2 id="ノードの確認">ノードの確認</h2>
+<p>minikubeがk8sノードとして認識されている。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get nodes
+</span></span><span class="line"><span class="cl">NAME       STATUS   ROLES           AGE     VERSION
+</span></span><span class="line"><span class="cl">minikube   Ready    control-plane   4m41s   v1.24.3
+</span></span></code></pre></div><h2 id="minikubeクラスタの削除">minikubeクラスタの削除</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube delete
+</span></span><span class="line"><span class="cl">🔥  docker の「minikube」を削除しています...
+</span></span><span class="line"><span class="cl">🔥  コンテナー「minikube」を削除しています...
+</span></span><span class="line"><span class="cl">🔥  /Users/yuhi-sa/.minikube/machines/minikube を削除しています...
+</span></span><span class="line"><span class="cl">💀  クラスター「minikube」の全てのトレースを削除しました。
+</span></span></code></pre></div><h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/k8s/">k8s</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f&amp;text=Kubernetes%e3%82%92%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e7%92%b0%e5%a2%83%e3%81%ab%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f&amp;title=Kubernetes%e3%82%92%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e7%92%b0%e5%a2%83%e3%81%ab%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f&amp;title=Kubernetes%e3%82%92%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e7%92%b0%e5%a2%83%e3%81%ab%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f&amp;title=Kubernetes%e3%82%92%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e7%92%b0%e5%a2%83%e3%81%ab%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20220831_k8s%2f2%2f&amp;description=Kubernetes%e3%82%92%e3%83%ad%e3%83%bc%e3%82%ab%e3%83%ab%e7%92%b0%e5%a2%83%e3%81%ab%e6%a7%8b%e7%af%89%e3%81%99%e3%82%8b" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">seeAlso</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20220831_k8s/5/">Kubernetesの認証情報(Context)</a></li>
+                
+                    <li><a href="/posts/20220831_k8s/3/">Kubernetesのリソースカテゴリ</a></li>
+                
+                    <li><a href="/posts/20220831_k8s/4/">Kubernetesの初期状態のNamespace</a></li>
+                
+                    <li><a href="/posts/20220831_k8s/1/">dockerファイルの命令文</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/" data-toggle="tooltip" data-placement="top" title="pythonを用いたjsonを返却する簡易mockserver">&larr; 前ページ</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://yuhi-sa.github.io/posts/20220831_k8s/1/" data-toggle="tooltip" data-placement="top" title="dockerファイルの命令文">次ページ &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">tomato blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          起動力に<a href="https://gohugo.io">Hugo v0.111.3</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
