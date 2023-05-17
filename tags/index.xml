@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/</link>
     <description>Recent content in Tags on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 Apr 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 May 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cassandra</title>
+      <link>https://yuhi-sa.github.io/tags/cassandra/</link>
+      <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/tags/cassandra/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>AWS</title>
       <link>https://yuhi-sa.github.io/tags/aws/</link>
