@@ -5,7 +5,16 @@
     <link>https://yuhi-sa.github.io/tags/cassandra/</link>
     <description>Recent content in cassandra on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 16 May 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 May 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DS201の実施_ClusteringColumns</title>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</link>
+      <pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>DS201の実施_CQL</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link>
