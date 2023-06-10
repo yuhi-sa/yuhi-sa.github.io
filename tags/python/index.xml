@@ -5,6 +5,7 @@
     <link>https://yuhi-sa.github.io/tags/python/</link>
     <description>Recent content in python on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>pythonを用いたjsonを返却する簡易mockserver</title>

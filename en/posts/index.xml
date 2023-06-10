@@ -5,6 +5,7 @@
     <link>https://yuhi-sa.github.io/en/posts/</link>
     <description>Recent content in Posts on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Sun, 06 Feb 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/en/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reparameterization trick</title>

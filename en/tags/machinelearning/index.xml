@@ -5,6 +5,7 @@
     <link>https://yuhi-sa.github.io/en/tags/machinelearning/</link>
     <description>Recent content in MachineLearning on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Thu, 09 Dec 2021 11:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/en/tags/machinelearning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Derivation of closed-form expression for cross-entropy between Gaussian distributions</title>

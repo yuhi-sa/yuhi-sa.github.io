@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ja" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>DS201の実施_Node - tomato blog</title>
+  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/yuhi-sa.github.io\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/6\/",
+          "name": "Ds201の実施 node"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "yuhi-sa"
+  },
+  "headline": "DS201の実施_Node",
+  "description" : "",
+  "inLanguage" : "ja",
+  "wordCount":  2647 ,
+  "datePublished" : "2023-06-10T09:00:23",
+  "dateModified" : "2023-06-10T09:00:23",
+  "image" : "https:\/\/yuhi-sa.github.io\/",
+  "keywords" : [ "cassandra" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/6\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/yuhi-sa.github.io\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/yuhi-sa.github.io\/",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="DS201の実施_Node" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="tomato blog" />
+
+  <meta name="twitter:title" content="DS201の実施_Node" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.113.0">
+  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+<script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'G-LN6QP6VVM3');
+</script>
+
+
+<script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">メニューを切り替え</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/posts/about">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="privacy policy" href="/posts/privacy_policy">privacy policy</a>
+            </li>
+          
+        
+
+        
+          
+            <li>
+              
+                
+                  <a href="/en" lang="en">English</a>
+                
+              
+                
+              
+            </li>
+          
+        
+
+        
+      </ul>
+    </div>
+
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+<script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>DS201の実施_Node</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<p>nodetoolはApache Cassandraの管理ツールの一部で、Cassandraクラスターの実行時操作や監視をサポートする。</p>
+<h1 id="代表的なコマンド">代表的なコマンド</h1>
+<h2 id="helpコマンド">helpコマンド</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool help
+</span></span><span class="line"><span class="cl">usage: nodetool [(-pp | --print-port)] [(-p &lt;port&gt; | --port &lt;port&gt;)]
+</span></span><span class="line"><span class="cl">        [(-pwf &lt;passwordFilePath&gt; | --password-file &lt;passwordFilePath&gt;)]
+</span></span><span class="line"><span class="cl">        [(-pw &lt;password&gt; | --password &lt;password&gt;)] [(-h &lt;host&gt; | --host &lt;host&gt;)]
+</span></span><span class="line"><span class="cl">        [(-u &lt;username&gt; | --username &lt;username&gt;)] &lt;command&gt; [&lt;args&gt;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The most commonly used nodetool commands are:
+</span></span><span class="line"><span class="cl">    assassinate                         Forcefully remove a dead node without re-replicating any data.  Use as a last resort if you cannot removenode
+</span></span><span class="line"><span class="cl">    bootstrap                           Monitor/manage node&#39;s bootstrap process
+</span></span><span class="line"><span class="cl">    cleanup                             Triggers the immediate cleanup of keys no longer belonging to a node. By default, clean all keyspaces
+</span></span><span class="line"><span class="cl">    clearsnapshot                       Remove the snapshot with the given name from the given keyspaces
+</span></span><span class="line"><span class="cl">    clientstats                         Print information about connected clients
+</span></span><span class="line"><span class="cl">    compact                             Force a (major) compaction on one or more tables or user-defined compaction on given SSTables
+</span></span><span class="line"><span class="cl">    compactionhistory                   Print history of compaction
+</span></span><span class="line"><span class="cl">    compactionstats                     Print statistics on compactions
+</span></span><span class="line"><span class="cl">    datapaths                           Print all directories where data of tables are stored
+</span></span><span class="line"><span class="cl">    decommission                        Decommission the *node I am connecting to*
+</span></span><span class="line"><span class="cl">    describecluster                     Print the name, snitch, partitioner and schema version of a cluster
+</span></span><span class="line"><span class="cl">    describering                        Shows the token ranges info of a given keyspace
+</span></span><span class="line"><span class="cl">    disableauditlog                     Disable the audit log
+</span></span><span class="line"><span class="cl">    disableautocompaction               Disable autocompaction for the given keyspace and table
+</span></span><span class="line"><span class="cl">    disablebackup                       Disable incremental backup
+</span></span><span class="line"><span class="cl">    disablebinary                       Disable native transport (binary protocol)
+</span></span><span class="line"><span class="cl">    disablefullquerylog                 Disable the full query log
+</span></span><span class="line"><span class="cl">    disablegossip                       Disable gossip (effectively marking the node down)
+</span></span><span class="line"><span class="cl">    disablehandoff                      Disable storing hinted handoffs
+</span></span><span class="line"><span class="cl">    disablehintsfordc                   Disable hints for a data center
+</span></span><span class="line"><span class="cl">    disableoldprotocolversions          Disable old protocol versions
+</span></span><span class="line"><span class="cl">    drain                               Drain the node (stop accepting writes and flush all tables)
+</span></span><span class="line"><span class="cl">    enableauditlog                      Enable the audit log
+</span></span><span class="line"><span class="cl">    enableautocompaction                Enable autocompaction for the given keyspace and table
+</span></span><span class="line"><span class="cl">    enablebackup                        Enable incremental backup
+</span></span><span class="line"><span class="cl">    enablebinary                        Reenable native transport (binary protocol)
+</span></span><span class="line"><span class="cl">    enablefullquerylog                  Enable full query logging, defaults for the options are configured in cassandra.yaml
+</span></span><span class="line"><span class="cl">    enablegossip                        Reenable gossip
+</span></span><span class="line"><span class="cl">    enablehandoff                       Reenable future hints storing on the current node
+</span></span><span class="line"><span class="cl">    enablehintsfordc                    Enable hints for a data center that was previsouly disabled
+</span></span><span class="line"><span class="cl">    enableoldprotocolversions           Enable old protocol versions
+</span></span><span class="line"><span class="cl">    failuredetector                     Shows the failure detector information for the cluster
+</span></span><span class="line"><span class="cl">    flush                               Flush one or more tables
+</span></span><span class="line"><span class="cl">    garbagecollect                      Remove deleted data from one or more tables
+</span></span><span class="line"><span class="cl">    gcstats                             Print GC Statistics
+</span></span><span class="line"><span class="cl">    getauditlog                         Print configuration of audit log if enabled, otherwise the configuration reflected in cassandra.yaml
+</span></span><span class="line"><span class="cl">    getauthcacheconfig                  Get configuration of Auth cache
+</span></span><span class="line"><span class="cl">    getbatchlogreplaythrottle           Print batchlog replay throttle in KB/s. This is reduced proportionally to the number of nodes in the cluster.
+</span></span><span class="line"><span class="cl">    getcolumnindexsize                  Print the granularity of the collation index of rows within a partition in KiB
+</span></span><span class="line"><span class="cl">    getcompactionthreshold              Print min and max compaction thresholds for a given table
+</span></span><span class="line"><span class="cl">    getcompactionthroughput             Print the MiB/s throughput cap for compaction in the system as a rounded number
+</span></span><span class="line"><span class="cl">    getconcurrency                      Get maximum concurrency for processing stages
+</span></span><span class="line"><span class="cl">    getconcurrentcompactors             Get the number of concurrent compactors in the system.
+</span></span><span class="line"><span class="cl">    getconcurrentviewbuilders           Get the number of concurrent view builders in the system
+</span></span><span class="line"><span class="cl">    getdefaultrf                        Gets default keyspace replication factor.
+</span></span><span class="line"><span class="cl">    getendpoints                        Print the end points that owns the key
+</span></span><span class="line"><span class="cl">    getfullquerylog                     Print configuration of fql if enabled, otherwise the configuration reflected in cassandra.yaml
+</span></span><span class="line"><span class="cl">    getinterdcstreamthroughput          Print the throughput cap for inter-datacenter streaming and entire SSTable inter-datacenter streaming in the systemin rounded megabits. For precise number, please, use option -d
+</span></span><span class="line"><span class="cl">    getlogginglevels                    Get the runtime logging levels
+</span></span><span class="line"><span class="cl">    getmaxhintwindow                    Print the max hint window in ms
+</span></span><span class="line"><span class="cl">    getseeds                            Get the currently in use seed node IP list excluding the node IP
+</span></span><span class="line"><span class="cl">    getsnapshotthrottle                 Print the snapshot_links_per_second throttle for snapshot/clearsnapshot
+</span></span><span class="line"><span class="cl">    getsstables                         Print the sstable filenames that own the key
+</span></span><span class="line"><span class="cl">    getstreamthroughput                 Print the throughput cap for streaming and entire SSTable streaming in the system in rounded megabits. For precise number, please, use option -d
+</span></span><span class="line"><span class="cl">    gettimeout                          Print the timeout of the given type in ms
+</span></span><span class="line"><span class="cl">    gettraceprobability                 Print the current trace probability value
+</span></span><span class="line"><span class="cl">    gossipinfo                          Shows the gossip information for the cluster
+</span></span><span class="line"><span class="cl">    help                                Display help information
+</span></span><span class="line"><span class="cl">    import                              Import new SSTables to the system
+</span></span><span class="line"><span class="cl">    info                                Print node information (uptime, load, ...)
+</span></span><span class="line"><span class="cl">    invalidatecountercache              Invalidate the counter cache
+</span></span><span class="line"><span class="cl">    invalidatecredentialscache          Invalidate the credentials cache
+</span></span><span class="line"><span class="cl">    invalidatejmxpermissionscache       Invalidate the JMX permissions cache
+</span></span><span class="line"><span class="cl">    invalidatekeycache                  Invalidate the key cache
+</span></span><span class="line"><span class="cl">    invalidatenetworkpermissionscache   Invalidate the network permissions cache
+</span></span><span class="line"><span class="cl">    invalidatepermissionscache          Invalidate the permissions cache
+</span></span><span class="line"><span class="cl">    invalidaterolescache                Invalidate the roles cache
+</span></span><span class="line"><span class="cl">    invalidaterowcache                  Invalidate the row cache
+</span></span><span class="line"><span class="cl">    join                                Join the ring
+</span></span><span class="line"><span class="cl">    listpendinghints                    Print all pending hints that this node has
+</span></span><span class="line"><span class="cl">    listsnapshots                       Lists all the snapshots along with the size on disk and true size. True size is the total size of all SSTables which are not backed up to disk. Size on disk is total size of the snapshot on disk. Total TrueDiskSpaceUsed does not make any SSTable deduplication.
+</span></span><span class="line"><span class="cl">    move                                Move node on the token ring to a new token
+</span></span><span class="line"><span class="cl">    netstats                            Print network information on provided host (connecting node by default)
+</span></span><span class="line"><span class="cl">    pausehandoff                        Pause hints delivery process
+</span></span><span class="line"><span class="cl">    profileload                         Low footprint profiling of activity for a period of time
+</span></span><span class="line"><span class="cl">    proxyhistograms                     Print statistic histograms for network operations
+</span></span><span class="line"><span class="cl">    rangekeysample                      Shows the sampled keys held across all keyspaces
+</span></span><span class="line"><span class="cl">    rebuild                             Rebuild data by streaming from other nodes (similarly to bootstrap)
+</span></span><span class="line"><span class="cl">    rebuild_index                       A full rebuild of native secondary indexes for a given table
+</span></span><span class="line"><span class="cl">    recompress_sstables                 Rewrite sstables (for the requested tables) that have compression configuration different from the current
+</span></span><span class="line"><span class="cl">    refresh                             Load newly placed SSTables to the system without restart
+</span></span><span class="line"><span class="cl">    refreshsizeestimates                Refresh system.size_estimates
+</span></span><span class="line"><span class="cl">    reloadlocalschema                   Reload local node schema from system tables
+</span></span><span class="line"><span class="cl">    reloadseeds                         Reload the seed node list from the seed node provider
+</span></span><span class="line"><span class="cl">    reloadssl                           Signals Cassandra to reload SSL certificates
+</span></span><span class="line"><span class="cl">    reloadtriggers                      Reload trigger classes
+</span></span><span class="line"><span class="cl">    relocatesstables                    Relocates sstables to the correct disk
+</span></span><span class="line"><span class="cl">    removenode                          Show status of current node removal, force completion of pending removal or remove provided ID
+</span></span><span class="line"><span class="cl">    repair                              Repair one or more tables
+</span></span><span class="line"><span class="cl">    repair_admin                        list and fail incremental repair sessions
+</span></span><span class="line"><span class="cl">    replaybatchlog                      Kick off batchlog replay and wait for finish
+</span></span><span class="line"><span class="cl">    resetfullquerylog                   Stop the full query log and clean files in the configured full query log directory from cassandra.yaml as well as JMX
+</span></span><span class="line"><span class="cl">    resetlocalschema                    Reset node&#39;s local schema and resync
+</span></span><span class="line"><span class="cl">    resumehandoff                       Resume hints delivery process
+</span></span><span class="line"><span class="cl">    ring                                Print information about the token ring
+</span></span><span class="line"><span class="cl">    scrub                               Scrub (rebuild sstables for) one or more tables
+</span></span><span class="line"><span class="cl">    setauthcacheconfig                  Set configuration for Auth cache
+</span></span><span class="line"><span class="cl">    setbatchlogreplaythrottle           Set batchlog replay throttle in KB per second, or 0 to disable throttling. This will be reduced proportionally to the number of nodes in the cluster.
+</span></span><span class="line"><span class="cl">    setcachecapacity                    Set global key, row, and counter cache capacities (in MB units)
+</span></span><span class="line"><span class="cl">    setcachekeystosave                  Set number of keys saved by each cache for faster post-restart warmup. 0 to disable
+</span></span><span class="line"><span class="cl">    setcolumnindexsize                  Set the granularity of the collation index of rows within a partition in KiB
+</span></span><span class="line"><span class="cl">    setcompactionthreshold              Set min and max compaction thresholds for a given table
+</span></span><span class="line"><span class="cl">    setcompactionthroughput             Set the MiB/s throughput cap for compaction in the system, or 0 to disable throttling
+</span></span><span class="line"><span class="cl">    setconcurrency                      Set maximum concurrency for processing stage
+</span></span><span class="line"><span class="cl">    setconcurrentcompactors             Set number of concurrent compactors in the system.
+</span></span><span class="line"><span class="cl">    setconcurrentviewbuilders           Set the number of concurrent view builders in the system
+</span></span><span class="line"><span class="cl">    setdefaultrf                        Sets default keyspace replication factor.
+</span></span><span class="line"><span class="cl">    sethintedhandoffthrottlekb          Set hinted handoff throttle in KiB per second, per delivery thread.
+</span></span><span class="line"><span class="cl">    setinterdcstreamthroughput          Set the throughput cap for inter-datacenter streaming and entire SSTable inter-datacenter streaming in the system, or 0 to disable throttling
+</span></span><span class="line"><span class="cl">    setlogginglevel                     Set the log level threshold for a given component or class. Will reset to the initial configuration if called with no parameters.
+</span></span><span class="line"><span class="cl">    setmaxhintwindow                    Set the specified max hint window in ms
+</span></span><span class="line"><span class="cl">    setsnapshotthrottle                 Set the snapshot_links_per_second cap for snapshot and clearsnapshot throttling
+</span></span><span class="line"><span class="cl">    setstreamthroughput                 Set throughput cap for streaming and entire SSTable streaming in the system, or 0 to disable throttling
+</span></span><span class="line"><span class="cl">    settimeout                          Set the specified timeout in ms, or 0 to disable timeout
+</span></span><span class="line"><span class="cl">    settraceprobability                 Sets the probability for tracing any given request to value. 0 disables, 1 enables for all requests, 0 is the default
+</span></span><span class="line"><span class="cl">    sjk                                 Run commands of &#39;Swiss Java Knife&#39;. Run &#39;nodetool sjk --help&#39; for more information.
+</span></span><span class="line"><span class="cl">    snapshot                            Take a snapshot of specified keyspaces or a snapshot of the specified table
+</span></span><span class="line"><span class="cl">    status                              Print cluster information (state, load, IDs, ...)
+</span></span><span class="line"><span class="cl">    statusautocompaction                status of autocompaction of the given keyspace and table
+</span></span><span class="line"><span class="cl">    statusbackup                        Status of incremental backup
+</span></span><span class="line"><span class="cl">    statusbinary                        Status of native transport (binary protocol)
+</span></span><span class="line"><span class="cl">    statusgossip                        Status of gossip
+</span></span><span class="line"><span class="cl">    statushandoff                       Status of storing future hints on the current node
+</span></span><span class="line"><span class="cl">    stop                                Stop compaction
+</span></span><span class="line"><span class="cl">    stopdaemon                          Stop cassandra daemon
+</span></span><span class="line"><span class="cl">    tablehistograms                     Print statistic histograms for a given table
+</span></span><span class="line"><span class="cl">    tablestats                          Print statistics on tables
+</span></span><span class="line"><span class="cl">    toppartitions                       Sample and print the most active partitions
+</span></span><span class="line"><span class="cl">    tpstats                             Print usage statistics of thread pools
+</span></span><span class="line"><span class="cl">    truncatehints                       Truncate all hints on the local node, or truncate hints for the endpoint(s) specified.
+</span></span><span class="line"><span class="cl">    upgradesstables                     Rewrite sstables (for the requested tables) that are not on the current version (thus upgrading them to said current version)
+</span></span><span class="line"><span class="cl">    verify                              Verify (check data checksum for) one or more tables
+</span></span><span class="line"><span class="cl">    version                             Print cassandra version
+</span></span><span class="line"><span class="cl">    viewbuildstatus                     Show progress of a materialized view build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">See &#39;nodetool help &lt;command&gt;&#39; for more information on a specific command.
+</span></span></code></pre></div><h2 id="statusコマンド">statusコマンド</h2>
+<p>statusコマンドは、クラスタ全体の情報、特に各ノードの状態やそれぞれのノードに関する情報を表示する。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool status
+</span></span><span class="line"><span class="cl">Datacenter: datacenter1
+</span></span><span class="line"><span class="cl">=======================
+</span></span><span class="line"><span class="cl">Status=Up/Down
+</span></span><span class="line"><span class="cl">|/ State=Normal/Leaving/Joining/Moving
+</span></span><span class="line"><span class="cl">--  Address    Load        Tokens  Owns (effective)  Host ID                               Rack
+</span></span><span class="line"><span class="cl">UN  127.0.0.1  283.23 KiB  16      100.0%            349d6a93-038a-45a9-bd86-cc22ed3d8e0d  rack1
+</span></span></code></pre></div><ul>
+<li>Status: ノードの状態を示す。Upはノードが起動していることを意味し、Downはノードが停止していることを意味する。</li>
+<li>State: ノードの状態を示す。Normalは通常の状態を意味し、Leavingはノードがクラスタから離脱中であることを意味し、Joiningはノードがクラスタに参加中であることを意味し、Movingはノードがデータを移動中であることを意味する。</li>
+<li>Address: ノードのIPアドレス。</li>
+<li>Load: ノードが処理しているデータの負荷量。</li>
+<li>Tokens: ノードが保持しているトークンの数。</li>
+<li>Owns (effective): ノードが保持しているデータの割合（効果的な所有率）。</li>
+<li>Host ID: ノードのユニークな識別子。</li>
+<li>Rack: ノードが所属しているラックの情報。</li>
+</ul>
+<h2 id="infoコマンド">infoコマンド</h2>
+<p>infoコマンドは、接続されたノードに関する情報を表示する。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool info
+</span></span><span class="line"><span class="cl">ID                     : 349d6a93-038a-45a9-bd86-cc22ed3d8e0d
+</span></span><span class="line"><span class="cl">Gossip active          : true
+</span></span><span class="line"><span class="cl">Native Transport active: true
+</span></span><span class="line"><span class="cl">Load                   : 283.23 KiB
+</span></span><span class="line"><span class="cl">Generation No          : 1686104812
+</span></span><span class="line"><span class="cl">Uptime (seconds)       : 20868
+</span></span><span class="line"><span class="cl">Heap Memory (MB)       : 302.16 / 1996.81
+</span></span><span class="line"><span class="cl">Off Heap Memory (MB)   : 0.00
+</span></span><span class="line"><span class="cl">Data Center            : datacenter1
+</span></span><span class="line"><span class="cl">Rack                   : rack1
+</span></span><span class="line"><span class="cl">Exceptions             : 0
+</span></span><span class="line"><span class="cl">Key Cache              : entries 21, size 1.95 KiB, capacity 99 MiB, 98 hits, 121 requests, 0.810 recent hit rate, 14400 save period in seconds
+</span></span><span class="line"><span class="cl">Row Cache              : entries 0, size 0 bytes, capacity 0 bytes, 0 hits, 0 requests, NaN recent hit rate, 0 save period in seconds
+</span></span><span class="line"><span class="cl">Counter Cache          : entries 0, size 0 bytes, capacity 49 MiB, 0 hits, 0 requests, NaN recent hit rate, 7200 save period in seconds
+</span></span><span class="line"><span class="cl">Network Cache          : size 8 MiB, overflow size: 0 bytes, capacity 124 MiB
+</span></span><span class="line"><span class="cl">Percent Repaired       : 100.0%
+</span></span><span class="line"><span class="cl">Token                  : (invoke with -T/--tokens to see all 16 tokens)
+</span></span></code></pre></div><ul>
+<li>ID: ノードのユニークな識別子。</li>
+<li>Gossip active: Gossipプロトコルがアクティブであるかどうかを示す。</li>
+<li>Native Transport active: ネイティブトランスポートプロトコルがアクティブであるかどうかを示す。</li>
+<li>Load: ノードが処理しているデータの負荷量。</li>
+<li>Generation No: Cassandraの世代番号。</li>
+<li>Uptime (seconds): ノードが起動している時間（秒単位）。</li>
+<li>Heap Memory (MB): ヒープメモリの使用量と容量（メガバイト単位）。</li>
+<li>Off Heap Memory (MB): オフヒープメモリの使用量（メガバイト単位）。</li>
+<li>Data Center: データセンターの情報。</li>
+<li>Rack: ラックの情報。</li>
+<li>Exceptions: ノードで報告されたエラーの数。</li>
+<li>Key Cache: キャッシュの情報(エントリ数、サイズ、容量、ヒット数、リクエスト数、直近のヒット率、保存期間)。</li>
+<li>Row Cache: 行キャッシュの情報(エントリ数、サイズ、容量、ヒット数、リクエスト数、直近のヒット率、保存期間)。</li>
+<li>Counter Cache: カウンターキャッシュの情報(エントリ数、サイズ、容量、ヒット数、リクエスト数、直近のヒット率、保存期間)。</li>
+<li>Network Cache: ネットワークキャッシュの情報。サイズ、オーバーフローサイズ、容量。</li>
+<li>Percent Repaired: SSTableの修復が完了した割合。</li>
+<li>Token: ノードのトークン情報。</li>
+</ul>
+<h2 id="describeclusterコマンド">describeclusterコマンド</h2>
+<p>describeclusterコマンドは、クラスタ全体のノード間で共通の設定や各ノードが使用している現在のスキーマバージョンを表示する。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool describecluster
+</span></span><span class="line"><span class="cl">Cluster Information:
+</span></span><span class="line"><span class="cl">	Name: Test Cluster
+</span></span><span class="line"><span class="cl">	Snitch: org.apache.cassandra.locator.SimpleSnitch
+</span></span><span class="line"><span class="cl">	DynamicEndPointSnitch: enabled
+</span></span><span class="line"><span class="cl">	Partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+</span></span><span class="line"><span class="cl">	Schema versions:
+</span></span><span class="line"><span class="cl">		d99b9ce7-d0ce-32e5-85b5-8daef23def7c: [127.0.0.1]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Stats for all nodes:
+</span></span><span class="line"><span class="cl">	Live: 1
+</span></span><span class="line"><span class="cl">	Joining: 0
+</span></span><span class="line"><span class="cl">	Moving: 0
+</span></span><span class="line"><span class="cl">	Leaving: 0
+</span></span><span class="line"><span class="cl">	Unreachable: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data Centers:
+</span></span><span class="line"><span class="cl">	datacenter1 #Nodes: 1 #Down: 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Database versions:
+</span></span><span class="line"><span class="cl">	4.1.2: [127.0.0.1:7000]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Keyspaces:
+</span></span><span class="line"><span class="cl">	system_schema -&gt; Replication class: LocalStrategy {}
+</span></span><span class="line"><span class="cl">	system -&gt; Replication class: LocalStrategy {}
+</span></span><span class="line"><span class="cl">	killrvideo -&gt; Replication class: SimpleStrategy {replication_factor=1}
+</span></span><span class="line"><span class="cl">	system_auth -&gt; Replication class: SimpleStrategy {replication_factor=1}
+</span></span><span class="line"><span class="cl">	system_distributed -&gt; Replication class: SimpleStrategy {replication_factor=3}
+</span></span><span class="line"><span class="cl">	system_traces -&gt; Replication class: SimpleStrategy {replication_factor=2}
+</span></span></code></pre></div><ul>
+<li>Cluster Information: クラスタの情報(クラスタ名、スニッチの設定、動的エンドポイントスニッチの有効化、パーティショナの情報)が表示される。</li>
+<li>Schema versions: 各ノードが使用しているスキーマバージョンが表示される。</li>
+<li>Stats for all nodes: 全ノードの状態統計情報(。Live（稼働中）、Joining（参加中）、Moving（移動中）、Leaving（離脱中）、Unreachable（到達不能）)が表示される。</li>
+<li>Data Centers: データセンターの情報(データセンター名、ノード数、ダウンしているノード数)が表示される。</li>
+<li>Database versions: データベースのバージョン情報が表示される。</li>
+<li>Keyspaces: キースペースの情報(キースペース名とレプリケーション戦略)が表示される。</li>
+</ul>
+<h2 id="getlogginglevelsコマンド">getlogginglevelsコマンド</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool getlogginglevels
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Logger Name                                        Log Level
+</span></span><span class="line"><span class="cl">ROOT                                                    INFO
+</span></span><span class="line"><span class="cl">org.apache.cassandra                                   DEBUG
+</span></span></code></pre></div><p>以下のログレベルがある。</p>
+<ul>
+<li>TRACE: 最も詳細なログメッセージを表示。</li>
+<li>DEBUG: デバッグ情報を表示。</li>
+<li>INFO: 一般的な情報メッセージを表示。</li>
+<li>WARN: 警告メッセージを表示。</li>
+<li>ERROR: エラーメッセージを表示。</li>
+</ul>
+<p>ログレベルは以下のように変更できる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool setlogginglevel org.apache.cassandra TRACE
+</span></span></code></pre></div><h2 id="settraceprobabilityコマンド">settraceprobabilityコマンド</h2>
+<p>settraceprobabilityコマンドの実行結果の値は、クエリが保存される割合を表す小数値。この値は、0（0%）から1（100%）までの範囲。保存されたトレースは、system_tracesキースペースで確認することができる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool settraceprobability 0.1
+</span></span></code></pre></div><h2 id="drainコマンド">drainコマンド</h2>
+<p>drainコマンドは、ノード上での書き込みを停止し、すべてのデータをディスクにフラッシュするコマンド。
+通常、このコマンドは、Apache Cassandra™ノードを停止する前に実行される。ノードの停止前に実行することで、書き込みが完了し、データがディスクに保存される。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool drain
+</span></span></code></pre></div><h2 id="stopdaemonコマンド">stopdaemonコマンド</h2>
+<p>ノードの実行を停止するコマンド。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool stopdaemon
+</span></span></code></pre></div><h1 id="ストレステストを行いデータを確認する">ストレステストを行い、データを確認する</h1>
+<p><code>cassandra-stress write n=50000 no-warmup -rate threads=1</code>コマンドを使って、Cassandraクラスタに対する書き込みストレステストが行う。このテストでは、50,000の書き込み操作が1つのスレッドで実行され、&ldquo;keyspace1&quot;という名前のキースペースに対して行われる。
+nodetool flushコマンドで、メモリ内のデータをディスクに強制的に書き出す。
+nodetool statusコマンドで、クラスタの現在の状態を確認する。
+最後に、cqlshツールを用いて、キースペースとテーブルの情報を確認する。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cassandra-stress write n=50000 no-warmup -rate threads=1
+</span></span><span class="line"><span class="cl">******************** Stress Settings ********************
+</span></span><span class="line"><span class="cl">Command:
+</span></span><span class="line"><span class="cl">  Type: write
+</span></span><span class="line"><span class="cl">  Count: 50,000
+</span></span><span class="line"><span class="cl">  No Warmup: true
+</span></span><span class="line"><span class="cl">  Consistency Level: LOCAL_ONE
+</span></span><span class="line"><span class="cl">  Target Uncertainty: not applicable
+</span></span><span class="line"><span class="cl">  Key Size (bytes): 10
+</span></span><span class="line"><span class="cl">  Counter Increment Distibution: add=fixed(1)
+</span></span><span class="line"><span class="cl">Rate:
+</span></span><span class="line"><span class="cl">  Auto: false
+</span></span><span class="line"><span class="cl">  Thread Count: 1
+</span></span><span class="line"><span class="cl">  OpsPer Sec: 0
+</span></span><span class="line"><span class="cl">Population:
+</span></span><span class="line"><span class="cl">  Sequence: 1..50000
+</span></span><span class="line"><span class="cl">  Order: ARBITRARY
+</span></span><span class="line"><span class="cl">  Wrap: true
+</span></span><span class="line"><span class="cl">Insert:
+</span></span><span class="line"><span class="cl">  Revisits: Uniform:  min=1,max=1000000
+</span></span><span class="line"><span class="cl">  Visits: Fixed:  key=1
+</span></span><span class="line"><span class="cl">  Row Population Ratio: Ratio: divisor=1.000000;delegate=Fixed:  key=1
+</span></span><span class="line"><span class="cl">  Batch Type: not batching
+</span></span><span class="line"><span class="cl">Columns:
+</span></span><span class="line"><span class="cl">  Max Columns Per Key: 5
+</span></span><span class="line"><span class="cl">  Column Names: [C0, C1, C2, C3, C4]
+</span></span><span class="line"><span class="cl">  Comparator: AsciiType
+</span></span><span class="line"><span class="cl">  Timestamp: null
+</span></span><span class="line"><span class="cl">  Variable Column Count: false
+</span></span><span class="line"><span class="cl">  Slice: false
+</span></span><span class="line"><span class="cl">  Size Distribution: Fixed:  key=34
+</span></span><span class="line"><span class="cl">  Count Distribution: Fixed:  key=5
+</span></span><span class="line"><span class="cl">Errors:
+</span></span><span class="line"><span class="cl">  Ignore: false
+</span></span><span class="line"><span class="cl">  Tries: 10
+</span></span><span class="line"><span class="cl">Log:
+</span></span><span class="line"><span class="cl">  No Summary: false
+</span></span><span class="line"><span class="cl">  No Settings: false
+</span></span><span class="line"><span class="cl">  File: null
+</span></span><span class="line"><span class="cl">  Interval Millis: 1000
+</span></span><span class="line"><span class="cl">  Level: NORMAL
+</span></span><span class="line"><span class="cl">Mode:
+</span></span><span class="line"><span class="cl">  API: JAVA_DRIVER_NATIVE
+</span></span><span class="line"><span class="cl">  Connection Style: CQL_PREPARED
+</span></span><span class="line"><span class="cl">  CQL Version: CQL3
+</span></span><span class="line"><span class="cl">  Protocol Version: V5
+</span></span><span class="line"><span class="cl">  Username: null
+</span></span><span class="line"><span class="cl">  Password: null
+</span></span><span class="line"><span class="cl">  Auth Provide Class: null
+</span></span><span class="line"><span class="cl">  Max Pending Per Connection: 128
+</span></span><span class="line"><span class="cl">  Connections Per Host: 8
+</span></span><span class="line"><span class="cl">  Compression: NONE
+</span></span><span class="line"><span class="cl">Node:
+</span></span><span class="line"><span class="cl">  Nodes: [localhost]
+</span></span><span class="line"><span class="cl">  Is White List: false
+</span></span><span class="line"><span class="cl">  Datacenter: null
+</span></span><span class="line"><span class="cl">Schema:
+</span></span><span class="line"><span class="cl">  Keyspace: keyspace1
+</span></span><span class="line"><span class="cl">  Replication Strategy: org.apache.cassandra.locator.SimpleStrategy
+</span></span><span class="line"><span class="cl">  Replication Strategy Options: {replication_factor=1}
+</span></span><span class="line"><span class="cl">  Table Compression: null
+</span></span><span class="line"><span class="cl">  Table Compaction Strategy: null
+</span></span><span class="line"><span class="cl">  Table Compaction Strategy Options: {}
+</span></span><span class="line"><span class="cl">Transport:
+</span></span><span class="line"><span class="cl">  truststore=null; truststore-password=null; keystore=null; keystore-password=null; ssl-protocol=TLS; ssl-alg=null; ssl-ciphers=TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA;
+</span></span><span class="line"><span class="cl">Port:
+</span></span><span class="line"><span class="cl">  Native Port: 9042
+</span></span><span class="line"><span class="cl">  JMX Port: 7199
+</span></span><span class="line"><span class="cl">Graph:
+</span></span><span class="line"><span class="cl">  File: null
+</span></span><span class="line"><span class="cl">  Revision: unknown
+</span></span><span class="line"><span class="cl">  Title: null
+</span></span><span class="line"><span class="cl">  Operation: WRITE
+</span></span><span class="line"><span class="cl">TokenRange:
+</span></span><span class="line"><span class="cl">  Wrap: false
+</span></span><span class="line"><span class="cl">  Split Factor: 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Connected to cluster: Test Cluster, max pending requests per connection 128, max connections per host 8
+</span></span><span class="line"><span class="cl">Datacenter: datacenter1; Host: localhost/127.0.0.1:9042; Rack: rack1
+</span></span><span class="line"><span class="cl">Created keyspaces. Sleeping 1s for propagation.
+</span></span><span class="line"><span class="cl">Sleeping 2s...
+</span></span><span class="line"><span class="cl">Running WRITE with 1 threads for 50000 iteration
+</span></span><span class="line"><span class="cl">type                                               total ops,    op/s,    pk/s,   row/s,    mean,     med,     .95,     .99,    .999,     max,   time,   stderr, errors,  gc: #,  max ms,  sum ms,  sdv ms,      mb
+</span></span><span class="line"><span class="cl">WARN  12:14:41,099 Query &#39;com.datastax.driver.core.Statement$1@66c9a6b2;&#39; generated server side warning(s): `USE &lt;keyspace&gt;` with prepared statements is considered to be an anti-pattern due to ambiguity in non-qualified table names. Please consider removing instances of `Session#setKeyspace(&lt;keyspace&gt;)`, `Session#execute(&#34;USE &lt;keyspace&gt;&#34;)` and `cluster.newSession(&lt;keyspace&gt;)` from your code, and always use fully qualified table names (e.g. &lt;keyspace&gt;.&lt;table&gt;). Keyspace used: keyspace1, statement keyspace: keyspace1, statement id: e1d2f4aa887d02751110f92a52de4f20
+</span></span><span class="line"><span class="cl">total,                                                   898,     898,     898,     898,     0.9,     0.6,     2.3,     4.2,    12.0,    13.1,    1.0,  0.00000,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                  3415,    2517,    2517,    2517,     0.4,     0.2,     0.8,     1.9,    11.1,    39.0,    2.0,  0.34246,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                  6486,    3071,    3071,    3071,     0.3,     0.2,     0.7,     1.7,     7.8,    13.4,    3.0,  0.24613,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 11026,    4540,    4540,    4540,     0.2,     0.2,     0.4,     0.9,     2.7,    11.4,    4.0,  0.23408,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 16655,    5629,    5629,    5629,     0.2,     0.1,     0.2,     0.4,     1.6,    11.3,    5.0,  0.21763,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 23032,    6377,    6377,    6377,     0.1,     0.1,     0.2,     0.2,     1.0,    24.3,    6.0,  0.19918,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 28923,    5891,    5891,    5891,     0.2,     0.1,     0.2,     0.2,     0.5,    48.1,    7.0,  0.17292,      0,      1,      45,      45,       0,     384
+</span></span><span class="line"><span class="cl">total,                                                 35281,    6358,    6358,    6358,     0.1,     0.1,     0.2,     0.2,     1.3,    18.1,    8.0,  0.15331,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 41381,    6100,    6100,    6100,     0.2,     0.1,     0.2,     0.2,     0.4,    11.1,    9.0,  0.13604,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 47359,    5978,    5978,    5978,     0.2,     0.1,     0.2,     0.3,     0.4,     1.1,   10.0,  0.12182,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">total,                                                 50000,    6388,    6388,    6388,     0.1,     0.1,     0.2,     0.2,     0.3,     0.8,   10.4,  0.11100,      0,      0,       0,       0,       0,       0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Results:
+</span></span><span class="line"><span class="cl">Op rate                   :    4,801 op/s  [WRITE: 4,801 op/s]
+</span></span><span class="line"><span class="cl">Partition rate            :    4,801 pk/s  [WRITE: 4,801 pk/s]
+</span></span><span class="line"><span class="cl">Row rate                  :    4,801 row/s [WRITE: 4,801 row/s]
+</span></span><span class="line"><span class="cl">Latency mean              :    0.2 ms [WRITE: 0.2 ms]
+</span></span><span class="line"><span class="cl">Latency median            :    0.1 ms [WRITE: 0.1 ms]
+</span></span><span class="line"><span class="cl">Latency 95th percentile   :    0.3 ms [WRITE: 0.3 ms]
+</span></span><span class="line"><span class="cl">Latency 99th percentile   :    1.0 ms [WRITE: 1.0 ms]
+</span></span><span class="line"><span class="cl">Latency 99.9th percentile :    3.5 ms [WRITE: 3.5 ms]
+</span></span><span class="line"><span class="cl">Latency max               :   48.1 ms [WRITE: 48.1 ms]
+</span></span><span class="line"><span class="cl">Total partitions          :     50,000 [WRITE: 50,000]
+</span></span><span class="line"><span class="cl">Total errors              :          0 [WRITE: 0]
+</span></span><span class="line"><span class="cl">Total GC count            : 1
+</span></span><span class="line"><span class="cl">Total GC memory           : 383.747 MiB
+</span></span><span class="line"><span class="cl">Total GC time             :    0.0 seconds
+</span></span><span class="line"><span class="cl">Avg GC time               :   45.0 ms
+</span></span><span class="line"><span class="cl">StdDev GC time            :    0.0 ms
+</span></span><span class="line"><span class="cl">Total operation time      : 00:00:10
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">END
+</span></span><span class="line"><span class="cl">$ nodetool flush
+</span></span><span class="line"><span class="cl">$ nodetool status
+</span></span><span class="line"><span class="cl">Datacenter: datacenter1
+</span></span><span class="line"><span class="cl">=======================
+</span></span><span class="line"><span class="cl">Status=Up/Down
+</span></span><span class="line"><span class="cl">|/ State=Normal/Leaving/Joining/Moving
+</span></span><span class="line"><span class="cl">--  Address    Load       Tokens  Owns (effective)  Host ID                               Rack
+</span></span><span class="line"><span class="cl">UN  127.0.0.1  12.04 MiB  16      100.0%            349d6a93-038a-45a9-bd86-cc22ed3d8e0d  rack1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">➜  ~ cqlsh
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/cassandra/4.1.2/libexec/bin/cqlsh.py:473: DeprecationWarning: Legacy execution parameters will be removed in 4.0. Consider using execution profiles.
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/cassandra/4.1.2/libexec/bin/cqlsh.py:503: DeprecationWarning: Setting the consistency level at the session level will be removed in 4.0. Consider using execution profiles and setting the desired consitency level to the EXEC_PROFILE_DEFAULT profile.
+</span></span><span class="line"><span class="cl">Connected to Test Cluster at 127.0.0.1:9042
+</span></span><span class="line"><span class="cl">[cqlsh 6.1.0 | Cassandra 4.1.2 | CQL spec 3.4.6 | Native protocol v5]
+</span></span><span class="line"><span class="cl">Use HELP for help.
+</span></span><span class="line"><span class="cl">cqlsh&gt; DESCRIBE KEYSPACES;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">keyspace1   system_auth         system_traces
+</span></span><span class="line"><span class="cl">killrvideo  system_distributed  system_views
+</span></span><span class="line"><span class="cl">system      system_schema       system_virtual_schema
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cqlsh&gt; USE keyspace1;
+</span></span><span class="line"><span class="cl">cqlsh:keyspace1&gt; DESCRIBE TABLES;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">counter1  standard1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cqlsh:keyspace1&gt; SELECT *
+</span></span><span class="line"><span class="cl">             ... FROM standard1
+</span></span><span class="line"><span class="cl">             ... LIMIT 5;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> key                    | C0                                                                     | C1                                                                     | C2                                                                     | C3                                                                     | C4
+</span></span><span class="line"><span class="cl">------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------
+</span></span><span class="line"><span class="cl"> 0x35384d4d334f39355030 | 0x2b021ed2ca95d8d6d450774953900af7226f692a1951fbb58099d51b54b9975a0022 | 0x3411457464d3cd9c716cad05cfc4a8a9556db308ec450e80afac7cbb2ee7a2e1040f | 0xb0b01f5612908837eeaaab017ec6f2cc988989916c02038e813f2b2811e2e5ffde35 | 0x7e7e764b144db561aa6722b593fb872cb41126362eebeeb233ba0dd97b9c761807ab | 0xb601e0fbd8b342baaae29bd469a24c906d960d36e80c5ddf2253b91335453833eec0
+</span></span><span class="line"><span class="cl"> 0x314d324d31374b393431 | 0x1deda456d4ebf65ffe2cf623e8592d5621d9c83430add55fe2ac5cad67689ea54692 | 0x5f5b73a37e538de3bd766072e1032566bfa365c54d165745d8e81bb68fd6c1e0b70d | 0xa90f84cffb8601404d4be21c7d0f95da832b853852d112234803457ca87d59d96e4f | 0x612a8888062268cb811adbb591b4f9e7dceacad7c38c90af38d0e8501d76e26cab23 | 0xe50417a72c78b64e3ca433471b91b16651c25870fdc93b673552ce65da51480ddf6c
+</span></span><span class="line"><span class="cl"> 0x33344b50353133365030 | 0xd34820f1e930d9257e02158146c64ea6b052903710919294f196c174591318a00c1a | 0x6becf1098ae914e65c0325081a8a4418f9d65575a831db087102140b8b52db166ef0 | 0x34b89becc7ae1d391e814edc105e7f7e5efa495e2ad4850a753bc5236902f6380690 | 0x02e517fcc81da646fc7ba6f9f5dd88a4012e33e977d055a4ea50a7c25da9ba19f6ea | 0x5692948b8be2c35ed8af2e40135e26fddb7af2f425374cf835622e20a74cf3655e80
+</span></span><span class="line"><span class="cl"> 0x324d4f3031314c303330 | 0xc6d16d17a30611dc7646de3463be469dc56130a24345063854c356853a9966be1f01 | 0xbfdd8fd17ec738056feb9c176f64c5f0532b672dc398cd6d3470f05fc3aae437d990 | 0xc1cc57455dfa0cc0dd595accfa3751f6d5edac2e11b4e763ea88ca2b7f45ec77ab8d | 0x7998ea0ed12980933317b639d9b92ee20d0e6d66b1a531bd75c2c367aeeee47b73d4 | 0x9142cb1c0668c414c25eb264e52752f5e2cd86f3b15b3c5f5d8413f88fbcffbda7d2
+</span></span><span class="line"><span class="cl"> 0x30303138344f4e503530 | 0x37e76a8c71afc1adda7958aa1182c5c100f120d91ced0323f3cc5090319fda464bf3 | 0x1a3a594716dc09025772fcf56724177110faa26f24e66a38cae64be7a568a182b9c9 | 0xcae650315e85148d46c91c857bc8a87e767fdb6e0450bee503f556bc1999a1dfeab5 | 0x6b48adf2bc3f36e8a1adb1314f41f28f0fbb69d2551f0b0e650f6595097af61c99a1 | 0xf8f02decf64b8889cbd28a01080b368849f065889b5de4addd73dc78c4343872a5c0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(5 rows)
+</span></span><span class="line"><span class="cl">cqlsh:keyspace1&gt;
+</span></span></code></pre></div>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://yuhi-sa.github.io//tags/cassandra/">cassandra</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f&amp;text=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Node&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Node" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Node" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Node" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f6%2f&amp;description=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Node" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">seeAlso</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20230516_dse_cassandra/4/">DS201の実施_ClusteringColumns</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/5/">DS201の実施_Drivers</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/2/">DS201の実施_CQL</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/3/">DS201の実施_partitions</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/1/">ローカルmacへのCassandraインストール</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/" data-toggle="tooltip" data-placement="top" title="DS201の実施_ClusteringColumns">&larr; 前ページ</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              yuhi-sa
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2023
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://yuhi-sa.github.io/">tomato blog</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          起動力に<a href="https://gohugo.io">Hugo v0.113.0</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://yuhi-sa.github.io/js/main.js"></script>
+<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

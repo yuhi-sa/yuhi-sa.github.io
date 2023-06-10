@@ -5,6 +5,7 @@
     <link>https://yuhi-sa.github.io/tags/k8s/</link>
     <description>Recent content in k8s on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
     <lastBuildDate>Sun, 04 Sep 2022 10:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kubernetesの認証情報(Context)</title>
