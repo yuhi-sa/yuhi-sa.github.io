@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>DS201の実施_partitions - tomato blog</title>
+  <title>DS201の実施_Ring - tomato blog</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/",
-          "name": "Ds201の実施 partitions"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/7\/",
+          "name": "Ds201の実施 ring"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "DS201の実施_partitions",
+  "headline": "DS201の実施_Ring",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  138 ,
-  "datePublished" : "2023-05-16T09:00:23",
-  "dateModified" : "2023-05-16T09:00:23",
+  "wordCount":  216 ,
+  "datePublished" : "2023-06-10T09:00:23",
+  "dateModified" : "2023-06-10T09:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
   "keywords" : [ "cassandra" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/",
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/7\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="DS201の実施_partitions" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/" />
+<meta property="og:title" content="DS201の実施_Ring" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="tomato blog" />
 
-  <meta name="twitter:title" content="DS201の実施_partitions" />
+  <meta name="twitter:title" content="DS201の実施_Ring" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.113.0">
@@ -252,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>DS201の実施_partitions</h1>
+                <h1>DS201の実施_Ring</h1>
               
               
                 <hr class="small">
@@ -273,43 +273,55 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
-<p>パーティション（Partition）は、データを分割して格納するための概念。</p>
-<p>パーティションは、データの格納と検索の単位となる。Cassandraのテーブルは、1つまたは複数のパーティションで構成されており、各パーティションは一意のパーティションキーによって識別される。パーティションキーは、データを分割するための基準となる。パーティションキーの値に基づいてデータが物理的に分散される。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; DESCRIBE TABLE videos;
+<h1 id="ringとは">Ringとは</h1>
+<p>Cassandraのアーキテクチャは、複数のノードで形成されるクラスタを基盤としている。
+その中心にあるデータ構造はRingと呼ばれる。Ringとは、クラスタ内でデータがどのように各ノード間で分散されるかを管理する役割を担っている。</p>
+<p>Cassandraは全てのデータをパーティションに分割し、それぞれのパーティションに一意のトークンを割り当てる。これらのトークンは、Ringのデータ構造の中に配列される。Ringとは、全ての可能なトークンの値の範囲を視覚化したものといえる。</p>
+<p>各ノードは、Ring上の特定の範囲のトークンを所有している。その所有するトークン範囲に対応するデータの一部を格納することにより、どのデータがどのノードに存在するかが決定され、データがノード間で分散される。</p>
+<p>リングの構造は、ノードが追加または削除されたときにも、データの再分配を最小限に抑える役割も果たす。新たなノードが追加された際には、そのノードはリング上の特定の位置を占め、既存の隣接するノードからデータの一部を引き継ぐ。これにより、新規に追加されたノードが新たなデータの保存場所として機能する。</p>
+<p>Ringの構造は単一障害点を排除する役割も果たす。1つのノードが故障またはダウンしても、他のノードがその役割を引き継ぎ、システムは正常に動作し続ける。これは各ノードがデータの一部を保有し、それぞれが特定のトークン範囲を所有しているためである。</p>
+<p>Cassandraのリング構造は、データの一貫性と高可用性を保証するためのレプリケケーションとしても機能する。各パーティションのデータは、Ring上の複数のノードに複製される。通常、所有するトークンが隣接するノードに対して行われる。この複製プロセスにより、ノードが故障してもデータが失われることがなく、また必要なデータが常に読み出せる状態が保たれる。</p>
+<p>このように、Cassandraのリングは、データの配置、スケーラビリティ、耐障害性、および一貫性という、分散データベースの主要な課題を管理するための強力な仕組みである。</p>
+<h1 id="演習">演習</h1>
+<p>「datastax」と「cassandra」の2つのタグがそれぞれ1つのパーティションを形成している。
+cqlshクエリの結果である&quot;system.token(tag)&ldquo;の値は、各タグ（&ldquo;datastax&quot;および&quot;cassandra&rdquo;）に対応するトークンの値を示している。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT token(tag), tag
+</span></span><span class="line"><span class="cl">              ... FROM videos_by_tag;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">CREATE TABLE killrvideo.videos (
-</span></span><span class="line"><span class="cl">    video_id timeuuid PRIMARY KEY,
-</span></span><span class="line"><span class="cl">    added_date timestamp,
-</span></span><span class="line"><span class="cl">    title text
-</span></span><span class="line"><span class="cl">) WITH additional_write_policy = &#39;99p&#39;
-</span></span><span class="line"><span class="cl">    AND bloom_filter_fp_chance = 0.01
-</span></span><span class="line"><span class="cl">    AND caching = {&#39;keys&#39;: &#39;ALL&#39;, &#39;rows_per_partition&#39;: &#39;NONE&#39;}
-</span></span><span class="line"><span class="cl">    AND cdc = false
-</span></span><span class="line"><span class="cl">    AND comment = &#39;&#39;
-</span></span><span class="line"><span class="cl">    AND compaction = {&#39;class&#39;: &#39;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&#39;, &#39;max_threshold&#39;: &#39;32&#39;, &#39;min_threshold&#39;: &#39;4&#39;}
-</span></span><span class="line"><span class="cl">    AND compression = {&#39;chunk_length_in_kb&#39;: &#39;16&#39;, &#39;class&#39;: &#39;org.apache.cassandra.io.compress.LZ4Compressor&#39;}
-</span></span><span class="line"><span class="cl">    AND memtable = &#39;default&#39;
-</span></span><span class="line"><span class="cl">    AND crc_check_chance = 1.0
-</span></span><span class="line"><span class="cl">    AND default_time_to_live = 0
-</span></span><span class="line"><span class="cl">    AND extensions = {}
-</span></span><span class="line"><span class="cl">    AND gc_grace_seconds = 864000
-</span></span><span class="line"><span class="cl">    AND max_index_interval = 2048
-</span></span><span class="line"><span class="cl">    AND memtable_flush_period_in_ms = 0
-</span></span><span class="line"><span class="cl">    AND min_index_interval = 128
-</span></span><span class="line"><span class="cl">    AND read_repair = &#39;BLOCKING&#39;
-</span></span><span class="line"><span class="cl">    AND speculative_retry = &#39;99p&#39;;
-</span></span></code></pre></div><p>上記のテーブル定義では、&ldquo;videos&rdquo; テーブルの PRIMARY KEY 宣言が次のようになってる。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">video_id timeuuid PRIMARY KEY
-</span></span></code></pre></div><p>この宣言により、&ldquo;video_id&rdquo; 列がパーティションキーとなる。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT token(video_id), video_id FROM videos;
+</span></span><span class="line"><span class="cl"> system.token(tag)    | tag
+</span></span><span class="line"><span class="cl">----------------------+-----------
+</span></span><span class="line"><span class="cl"> -1651127669401031945 |  datastax
+</span></span><span class="line"><span class="cl"> -1651127669401031945 |  datastax
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span></code></pre></div><p><code>nodetool ring</code>の出力は、Cassandraクラスタ内のノードの情報を示している。各行は1つのノードを表し、そのノードが保持しているトークンの値が表示している。nodetool コマンドによって表示されるトークンは、ノードが担当するデータの範囲の開始トークンである。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool ring
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> system.token(video_id) | video_id
-</span></span><span class="line"><span class="cl">------------------------+--------------------------------------
-</span></span><span class="line"><span class="cl">   -7805440677194688247 | 245e8024-14bd-11e5-9743-8238356b7e32
+</span></span><span class="line"><span class="cl">Datacenter: datacenter1
+</span></span><span class="line"><span class="cl">==========
+</span></span><span class="line"><span class="cl">Address         Rack        Status State   Load            Owns                Token
+</span></span><span class="line"><span class="cl">                                                                               8495111347830785616
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -9107256078387604241
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -7666987848485021001
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -6595487232144988189
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -5577635827402561173
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -4759963894790210379
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -3684208013564630839
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -2948292320853737199
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -1868919513406135542
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             -625399507725543569
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             341964735352991929
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             1931969287866890567
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             3550992583563933864
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             4529138036080047940
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             6307772336903635068
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             7403814237138573357
+</span></span><span class="line"><span class="cl">127.0.0.1       rack1       Up     Normal  12.04 MiB       100.00%             8495111347830785616
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">(1 rows)
-</span></span></code></pre></div><p>クエリ結果の最初の列 &ldquo;system.token(video_id)&rdquo; は、&ldquo;video_id&rdquo; のトークン値を表している。
-トークン値は、Cassandra 内部で使用されるパーティションキーのハッシュ値で、どのノードにデータが配置されるかを決定するために使われる。</p>
+</span></span><span class="line"><span class="cl">  Warning: &#34;nodetool ring&#34; is used to output all the tokens of a node.
+</span></span><span class="line"><span class="cl">  To view status related info of a node use &#34;nodetool status&#34; instead.
+</span></span></code></pre></div>
 
         
           <div class="blog-tags">
@@ -329,42 +341,42 @@
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f&amp;text=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_partitions&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f&amp;text=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Ring&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_partitions" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Ring" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_partitions" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Ring" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_partitions" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Ring" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f3%2f&amp;description=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_partitions" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f7%2f&amp;description=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Ring" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -388,13 +400,13 @@
                 
                     <li><a href="/posts/20230516_dse_cassandra/6/">DS201の実施_Node</a></li>
                 
-                    <li><a href="/posts/20230516_dse_cassandra/7/">DS201の実施_Ring</a></li>
-                
                     <li><a href="/posts/20230516_dse_cassandra/4/">DS201の実施_ClusteringColumns</a></li>
                 
                     <li><a href="/posts/20230516_dse_cassandra/5/">DS201の実施_Drivers</a></li>
                 
                     <li><a href="/posts/20230516_dse_cassandra/2/">DS201の実施_CQL</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/3/">DS201の実施_partitions</a></li>
                 
               </ul>
 
@@ -406,12 +418,12 @@
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/" data-toggle="tooltip" data-placement="top" title="ローカルmacへのCassandraインストール">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/" data-toggle="tooltip" data-placement="top" title="DS201の実施_ClusteringColumns">&larr; 前ページ</a>
             </li>
           
           
             <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/" data-toggle="tooltip" data-placement="top" title="DS201の実施_CQL">次ページ &rarr;</a>
+              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/" data-toggle="tooltip" data-placement="top" title="DS201の実施_Node">次ページ &rarr;</a>
             </li>
           
         </ul>
