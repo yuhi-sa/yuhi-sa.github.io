@@ -1,6 +1,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20230618_iphone/1/</loc>
+  
+  <lastmod>2023-06-18T09:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</loc>
+  
+  <lastmod>2023-06-10T09:00:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</loc>
   
   <lastmod>2023-06-10T09:00:23+09:00</lastmod>
