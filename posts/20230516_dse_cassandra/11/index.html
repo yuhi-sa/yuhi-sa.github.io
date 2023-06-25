@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>ios17 Developer Betaにアップグレードしたiphone13をios16に戻す - tomato blog</title>
+  <title>DS201の実施_Replication - tomato blog</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230618_iphone\/1\/",
-          "name": "Ios17 developer betaにアップグレードしたiphone13をios16に戻す"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/11\/",
+          "name": "Ds201の実施 replication"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "ios17 Developer Betaにアップグレードしたiphone13をios16に戻す",
+  "headline": "DS201の実施_Replication",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  15 ,
-  "datePublished" : "2023-06-18T09:00:23",
-  "dateModified" : "2023-06-18T09:00:23",
+  "wordCount":  11 ,
+  "datePublished" : "2023-06-24T09:00:23",
+  "dateModified" : "2023-06-24T09:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "iphone" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20230618_iphone\/1\/",
+  "keywords" : [ "cassandra" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/11\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="ios17 Developer Betaにアップグレードしたiphone13をios16に戻す" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230618_iphone/1/" />
+<meta property="og:title" content="DS201の実施_Replication" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="tomato blog" />
 
-  <meta name="twitter:title" content="ios17 Developer Betaにアップグレードしたiphone13をios16に戻す" />
+  <meta name="twitter:title" content="DS201の実施_Replication" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.114.1">
@@ -252,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>ios17 Developer Betaにアップグレードしたiphone13をios16に戻す</h1>
+                <h1>DS201の実施_Replication</h1>
               
               
                 <hr class="small">
@@ -272,29 +272,14 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="ベータアップデートをオフにする">ベータアップデートをオフにする</h1>
-<p>設定&gt;一般&gt;ソフトウェアアップデートからベータアップデートをオフにする。</p>
-<h1 id="リカバリーモードにする">リカバリーモードにする</h1>
-<ul>
-<li>mac bookとケーブルで接続する。</li>
-<li>iphoneの音量↑ボタンを押した後、音量↓ボタンを押す。</li>
-<li>すぐに電源ボタンを長押しする。電源が切れappleのロゴが出るまで長押しする。</li>
-</ul>
-<p>iphoneはこのような画面。
-<img src=".././1.jpg" alt="iphoneの画面">
-macはこのような画面となる。
-<img src=".././2.jpg" alt="macの画面"></p>
-<h1 id="macから復元">macから復元</h1>
-<p>上記の画面になったら、mac上から復元を選択する。<br>
-これで、再インストールすることができる。</p>
-<h1 id="通常のiphoneの初期設定">通常のiphoneの初期設定</h1>
-<p>工場出荷時の状態となるため、通常の初期設定をiphoneで実施する。
-この時ios17時点でのバックアップから復元することはできないため、1から設定をし直す必要がある。</p>
+        <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<p>Cassandraは、データの冗長性と可用性を確保するためにReplication（複製）を行う。
+Replicationはデータを複数のノードに複製することで、障害が発生してもデータの喪失やサービスの停止を防ぐ。Replication Factor（RF）と呼ばれるパラメータを使用して、各データセットの複製数を指定することができる。RFの値はクラスタ全体または特定のキースペース（Keyspace）ごとに設定できる。</p>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/iphone/">iphone</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/cassandra/">cassandra</a>&nbsp;
             
           </div>
         
@@ -309,42 +294,42 @@ macはこのような画面となる。
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f&amp;text=ios17%20Developer%20Beta%e3%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%82%b0%e3%83%ac%e3%83%bc%e3%83%89%e3%81%97%e3%81%9fiphone13%e3%82%92ios16%e3%81%ab%e6%88%bb%e3%81%99&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f&amp;text=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Replication&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f&amp;title=ios17%20Developer%20Beta%e3%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%82%b0%e3%83%ac%e3%83%bc%e3%83%89%e3%81%97%e3%81%9fiphone13%e3%82%92ios16%e3%81%ab%e6%88%bb%e3%81%99" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Replication" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f&amp;title=ios17%20Developer%20Beta%e3%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%82%b0%e3%83%ac%e3%83%bc%e3%83%89%e3%81%97%e3%81%9fiphone13%e3%82%92ios16%e3%81%ab%e6%88%bb%e3%81%99" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Replication" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f&amp;title=ios17%20Developer%20Beta%e3%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%82%b0%e3%83%ac%e3%83%bc%e3%83%89%e3%81%97%e3%81%9fiphone13%e3%82%92ios16%e3%81%ab%e6%88%bb%e3%81%99" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f&amp;title=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Replication" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230618_iphone%2f1%2f&amp;description=ios17%20Developer%20Beta%e3%81%ab%e3%82%a2%e3%83%83%e3%83%97%e3%82%b0%e3%83%ac%e3%83%bc%e3%83%89%e3%81%97%e3%81%9fiphone13%e3%82%92ios16%e3%81%ab%e6%88%bb%e3%81%99" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20230516_dse_cassandra%2f11%2f&amp;description=DS201%e3%81%ae%e5%ae%9f%e6%96%bd_Replication" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -358,6 +343,25 @@ macはこのような画面となる。
 
         
           
+            
+          
+
+          
+                  <h4 class="see-also">seeAlso</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/20230516_dse_cassandra/10/">DS201の実施_Snitches</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/9/">DS201の実施_Gossip</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/6/">DS201の実施_Node</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/7/">DS201の実施_Ring</a></li>
+                
+                    <li><a href="/posts/20230516_dse_cassandra/8/">DS201の実施_VNode</a></li>
+                
+              </ul>
 
           
         
@@ -367,13 +371,9 @@ macはこのような画面となる。
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/" data-toggle="tooltip" data-placement="top" title="DS201の実施_Gossip">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/" data-toggle="tooltip" data-placement="top" title="DS201の実施_Snitches">&larr; 前ページ</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/" data-toggle="tooltip" data-placement="top" title="DS201の実施_Snitches">次ページ &rarr;</a>
-            </li>
           
         </ul>
       

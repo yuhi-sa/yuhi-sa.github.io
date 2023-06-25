@@ -6,22 +6,22 @@
     <description>Recent content in Tags on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 18 Jun 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jun 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cassandra</title>
+      <link>https://yuhi-sa.github.io/tags/cassandra/</link>
+      <pubDate>Sat, 24 Jun 2023 09:00:23 +0900</pubDate>
+      
+      <guid>https://yuhi-sa.github.io/tags/cassandra/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>iphone</title>
       <link>https://yuhi-sa.github.io/tags/iphone/</link>
       <pubDate>Sun, 18 Jun 2023 09:00:23 +0900</pubDate>
       
       <guid>https://yuhi-sa.github.io/tags/iphone/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cassandra</title>
-      <link>https://yuhi-sa.github.io/tags/cassandra/</link>
-      <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
-      
-      <guid>https://yuhi-sa.github.io/tags/cassandra/</guid>
       <description></description>
     </item>
     
