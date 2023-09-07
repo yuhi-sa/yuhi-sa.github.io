@@ -274,7 +274,7 @@
       <article role="main" class="blog-post">
         <h1 id="概要">概要</h1>
 <p>DH鍵交換は、1976年にWhitfield DiffieとMartin Hellmanによって発表されたプロトコルである。このプロトコルでは、通信を行う2者がそれぞれ公開鍵と秘密鍵を生成し、公開鍵だけを相手に送信する。そして、自分の秘密鍵と受信した相手の公開鍵を使用して共通鍵を生成する。</p>
-<p>このプロトコルを用いることにより、公開鍵暗号で利用する共通鍵を使い捨てすることができ、前方秘匿性を保持するために重要である。前方秘匿性とは、過去の通信から推測されることなく、将来の通信も安全に行えること。</p>
+<p>このプロトコルを用いることにより、共通鍵を使い捨てすることができ、前方秘匿性を保持するために重要である。前方秘匿性とは、過去の通信から推測されることなく、将来の通信も安全に行えること。</p>
 <h1 id="アルゴリズム">アルゴリズム</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dh.py" data-lang="dh.py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
 </span></span><span class="line"><span class="cl">
