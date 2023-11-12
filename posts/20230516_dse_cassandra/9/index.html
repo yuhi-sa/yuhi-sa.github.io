@@ -85,7 +85,7 @@
   <meta name="twitter:title" content="DS201の実施_Gossip" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.119.0">
+  <meta name="generator" content="Hugo 0.120.4">
   <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -283,24 +283,24 @@
 <li>ノードは、他のノードから受信した情報を受け入れ、自身の情報を更新。</li>
 </ol>
 <h1 id="演習">演習</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ nodetool gossipinfo
-</span></span><span class="line"><span class="cl">localhost/127.0.0.1
-</span></span><span class="line"><span class="cl">  generation:1686366680
-</span></span><span class="line"><span class="cl">  heartbeat:8156
-</span></span><span class="line"><span class="cl">  STATUS:19:NORMAL,-1868919513406135542
-</span></span><span class="line"><span class="cl">  LOAD:8135:1.2650205E7
-</span></span><span class="line"><span class="cl">  SCHEMA:223:8aec9840-06b7-356a-b5ed-07e43a42d65e
-</span></span><span class="line"><span class="cl">  DC:9:datacenter1
-</span></span><span class="line"><span class="cl">  RACK:11:rack1
-</span></span><span class="line"><span class="cl">  RELEASE_VERSION:6:4.1.2
-</span></span><span class="line"><span class="cl">  RPC_ADDRESS:5:127.0.0.1
-</span></span><span class="line"><span class="cl">  NET_VERSION:2:12
-</span></span><span class="line"><span class="cl">  HOST_ID:3:349d6a93-038a-45a9-bd86-cc22ed3d8e0d
-</span></span><span class="line"><span class="cl">  RPC_READY:21:true
-</span></span><span class="line"><span class="cl">  NATIVE_ADDRESS_AND_PORT:4:127.0.0.1:9042
-</span></span><span class="line"><span class="cl">  STATUS_WITH_PORT:18:NORMAL,-1868919513406135542
-</span></span><span class="line"><span class="cl">  SSTABLE_VERSIONS:7:big-nb
-</span></span><span class="line"><span class="cl">  TOKENS:17:&lt;hidden&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">gossipinfo</span>
+</span></span><span class="line"><span class="cl"><span class="n">localhost</span><span class="o">/</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">generation</span><span class="p">:</span><span class="mi">1686366680</span>
+</span></span><span class="line"><span class="cl">  <span class="n">heartbeat</span><span class="p">:</span><span class="mi">8156</span>
+</span></span><span class="line"><span class="cl">  <span class="n">STATUS</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LOAD</span><span class="p">:</span><span class="mi">8135</span><span class="p">:</span><span class="mf">1.2650205E7</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SCHEMA</span><span class="p">:</span><span class="mi">223</span><span class="p">:</span><span class="mi">8</span><span class="n">aec9840</span><span class="o">-</span><span class="mi">06</span><span class="n">b7</span><span class="o">-</span><span class="mi">356</span><span class="n">a</span><span class="o">-</span><span class="n">b5ed</span><span class="o">-</span><span class="mf">07e43</span><span class="n">a42d65e</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DC</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">datacenter1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RACK</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="n">rack1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RELEASE_VERSION</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mf">4.1</span><span class="o">.</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RPC_ADDRESS</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">NET_VERSION</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">12</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOST_ID</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">349</span><span class="n">d6a93</span><span class="o">-</span><span class="mi">038</span><span class="n">a</span><span class="o">-</span><span class="mi">45</span><span class="n">a9</span><span class="o">-</span><span class="n">bd86</span><span class="o">-</span><span class="n">cc22ed3d8e0d</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RPC_READY</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="bp">true</span>
+</span></span><span class="line"><span class="cl">  <span class="n">NATIVE_ADDRESS_AND_PORT</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9042</span>
+</span></span><span class="line"><span class="cl">  <span class="n">STATUS_WITH_PORT</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SSTABLE_VERSIONS</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">big</span><span class="o">-</span><span class="n">nb</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TOKENS</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="o">&lt;</span><span class="n">hidden</span><span class="o">&gt;</span>
 </span></span></code></pre></div><p>ノードの状態はキーバリューペアとして表される。
 2ノードある場合、ノード1で<code>nodetool gossipinfo</code>コマンドを実行しても、ノード1とノード2のGossip状態を確認することができる。</p>
 
@@ -448,7 +448,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.119.0</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          起動力に<a href="https://gohugo.io">Hugo v0.120.4</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

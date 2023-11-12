@@ -6,24 +6,21 @@
     <description>Recent content in 強化学習 on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title>
       <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>強化学習の全体像まとめ</title>
       <link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link>
       <pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

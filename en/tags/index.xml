@@ -6,78 +6,63 @@
     <description>Recent content in Tags on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 06 Feb 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Feb 2022 15:00:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Machine Learning</title>
       <link>https://yuhi-sa.github.io/en/tags/machine-learning/</link>
       <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/machine-learning/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Filtering</title>
       <link>https://yuhi-sa.github.io/en/tags/filtering/</link>
       <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/filtering/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MachineLearning</title>
       <link>https://yuhi-sa.github.io/en/tags/machinelearning/</link>
       <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/machinelearning/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>others</title>
       <link>https://yuhi-sa.github.io/en/tags/others/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/others/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>python</title>
       <link>https://yuhi-sa.github.io/en/tags/python/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>pytorch</title>
       <link>https://yuhi-sa.github.io/en/tags/pytorch/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/pytorch/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>algorithm</title>
       <link>https://yuhi-sa.github.io/en/tags/algorithm/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/algorithm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ROS</title>
       <link>https://yuhi-sa.github.io/en/tags/ros/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      
       <guid>https://yuhi-sa.github.io/en/tags/ros/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
