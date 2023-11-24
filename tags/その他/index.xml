@@ -6,8 +6,15 @@
     <description>Recent content in その他 on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 12 Sep 2021 10:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 24 Nov 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%81%9D%E3%81%AE%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mtailを用いてPrometheus形式のメトリクスを公開する</title>
+      <link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link>
+      <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</title>
       <link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</link>

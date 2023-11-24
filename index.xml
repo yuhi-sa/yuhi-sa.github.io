@@ -16,6 +16,13 @@
       <description></description>
     </item>
     <item>
+      <title>mtailを用いてPrometheus形式のメトリクスを公開する</title>
+      <link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link>
+      <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>DH鍵交換（Diffie-Hellman鍵交換）をpythonで確認</title>
       <link>https://yuhi-sa.github.io/posts/20230907_dh/1/</link>
       <pubDate>Wed, 06 Sep 2023 09:00:23 +0900</pubDate>
