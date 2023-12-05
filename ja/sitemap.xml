@@ -865,6 +865,14 @@
 </url>
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/todo/</loc>
+  
+  <lastmod>2020-08-16T15:17:23+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/about/</loc>
   
   <lastmod>2020-08-16T15:17:23+09:00</lastmod>
@@ -882,14 +890,6 @@
 
 <url>
   <loc>https://yuhi-sa.github.io/posts/privacy_policy/</loc>
-  
-  <lastmod>2020-08-16T15:17:23+09:00</lastmod>
-  <changefreq>weekly</changefreq>
-  
-</url>
-
-<url>
-  <loc>https://yuhi-sa.github.io/posts/todo/</loc>
   
   <lastmod>2020-08-16T15:17:23+09:00</lastmod>
   <changefreq>weekly</changefreq>
