@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>代表的なフィルタ - tomato blog</title>
+  <title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する - tomato blog</title>
   <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -43,8 +43,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20200901_filter\/1\/",
-          "name": "代表的なフィルタ"
+          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20231208_cz\/1\/",
+          "name": "Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する"
         }
     }]
 }
@@ -55,15 +55,15 @@
   "author": {
     "name" : "yuhi-sa"
   },
-  "headline": "代表的なフィルタ",
+  "headline": "Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する",
   "description" : "",
   "inLanguage" : "ja",
-  "wordCount":  167 ,
-  "datePublished" : "2020-09-01T15:17:23",
-  "dateModified" : "2020-09-01T15:17:23",
+  "wordCount":  114 ,
+  "datePublished" : "2023-12-08T09:00:23",
+  "dateModified" : "2023-12-08T09:00:23",
   "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "フィルタリング" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20200901_filter\/1\/",
+  "keywords" : [ "git" ],
+  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20231208_cz\/1\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/yuhi-sa.github.io\/",
@@ -77,12 +77,12 @@
 }
 </script>
 
-<meta property="og:title" content="代表的なフィルタ" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20200901_filter/1/" />
+<meta property="og:title" content="Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する" />
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20231208_cz/1/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="tomato blog" />
 
-  <meta name="twitter:title" content="代表的なフィルタ" />
+  <meta name="twitter:title" content="Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する" />
   <meta name="twitter:card" content="summary" />
   <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
   <meta name="generator" content="Hugo 0.121.0">
@@ -252,7 +252,7 @@
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>代表的なフィルタ</h1>
+                <h1>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</h1>
               
               
                 <hr class="small">
@@ -272,131 +272,44 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="フィルタfilter">フィルタ(Filter)</h1>
-<p>フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．</p>
-<h1 id="モデル">モデル</h1>
-<p>フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．</p>
-<p>$$
-x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1}
-$$
-$$
-z_t=h(x_t,r_t) \tag{2}
-$$
-ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．</p>
-<p>$$
-q\sim N(0,Q)
-$$
-$$
-r\sim N(0,R)
-$$</p>
-<h1 id="カルマンフィルタkalman-filter">カルマンフィルタ(Kalman Filter)</h1>
-<h2 id="目的">目的</h2>
-<p>時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．</p>
-<h2 id="方法">方法</h2>
-<p>状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．</p>
-<p>Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．</p>
-<p>Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する．
-$x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．</p>
-<p>$$
-x \sim	(\mu,\Sigma)
-$$</p>
-<blockquote>
-<p>Step1 予測ステップ</p>
-</blockquote>
-<p>事前状態推定値</p>
-<p>$$
-\hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3}
-$$</p>
-<p>事前誤差共分散行列</p>
-<p>$$
-\hat{\Sigma}=A\Sigma_{t-1}A^T+Q_{t-1} \tag{4}
-$$</p>
-<blockquote>
-<p>Step2 状態推定</p>
-</blockquote>
-<p>カルマンゲイン</p>
-<p>$$
-K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T+R_t})^{-1} \tag{5}
-$$
-状態推定値</p>
-<p>$$
-\mu_t=\hat{\mu_t}+K_t(z_t-H\hat{\mu_t}) \tag{6}
-$$
-事後誤差共分散行列</p>
-<p>$$
-\Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7}
-$$</p>
-<h1 id="拡張カルマンフィルタextended-kalman-filter">拡張カルマンフィルタ(Extended Kalman Filter)</h1>
-<h2 id="目的-1">目的</h2>
-<p>カルマンフィルターを非線形システムに拡張する．</p>
-<h2 id="方法-1">方法</h2>
-<p>事後確率密度関数をガウス分布と仮定して，非線形関数を最新の推定値の近傍で線形化する．まず，式1,2の非線形システム$f$および$h$を推定値近傍でテーラー展開し，高次項を無視して局所線形化システムを得る．</p>
-<blockquote>
-<p>テーラー展開(推定値を$\hat{x}_k$とする)</p>
-</blockquote>
-<p>$$
-f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{8}
-$$</p>
-<p>$$
-h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{9}
-$$</p>
-<p>以下，カルマンフィルタと同様</p>
-<h1 id="unscented-カルマンフィルタunscented-kalman-filter-ukf">Unscented カルマンフィルタ(Unscented Kalman Filter, UKF)</h1>
-<h2 id="目的-2">目的</h2>
-<p>前述のEKFは，非線形性が弱いシステムでは優れた性能を示すが，非線形性が強いシステムの推定においては<code>平均に関する不確実性</code>を考慮に入れていないため，フィルタ性能が十分ではないことが知られている．UKFではこの問題に対応する．</p>
-<h2 id="方法-2">方法</h2>
-<p>UKFは，シグマ点とよばれる代表点を平均値の回りで用いて，推定値の共分散を計算する．これにより真の平均と共分散により近い値を獲得する．</p>
-<blockquote>
-<p>シグマ点</p>
-</blockquote>
-<p>$$
-\chi^0=\mu \tag{13}
-$$</p>
-<p>$$
-\chi^i=\mu \pm(\sqrt{(n+\lambda)\Sigma})_i \tag{14}
-$$</p>
-<blockquote>
-<p>重みの計算</p>
-</blockquote>
-<p>$$
-w^0=\frac{\lambda}{\lambda+n} \tag{15}
-$$</p>
-<p>$$
-w^i=\frac{0.5}{\lambda+n} \tag{16}
-$$</p>
-<blockquote>
-<p>重み付き平均で、観測値とその共分散を推定</p>
-</blockquote>
-<p>$$
-\hat{X} = f(X_{t-1}, u_t) \tag{17}
-$$</p>
-<p>$$
-\hat{\mu_t}=\sum_iw^i\hat{\chi}_t^i \tag{18}
-$$</p>
-<p>$$
-\hat{\Sigma}_t=\sum_iw^i(\hat{\chi}-\hat{\mu_t}) (\hat{\chi}-\hat{\mu_t}) ^T+Q_t \tag{19}
-$$</p>
-<h1 id="モンテカルロ-unscented-カルマンフィルタmonte-carlo-unscented-kalman-filter-mcukf">モンテカルロ Unscented カルマンフィルタ(Monte Carlo Unscented Kalman Filter, MCUKF)</h1>
-<h2 id="目的-3">目的</h2>
-<p>UKFは，できるだけ少ないシグマ点で状態を表現することが望ましい．
-しかし，状態が高次元である場合，正しいスケーリングパラメータ$\lambda$を見つけることは困難である．MCUKFではその問題に対応する．</p>
-<h2 id="方法-3">方法</h2>
-<p>平均値と共分散を計算するためにUnscented transformを用いるのではなく，モンテカルロ法を用いる．実際には，式13-16のシグマ点とその重みを，一様に重み付けされたサンプルで置き換えることとなる．UKFアルゴリズムの残りの部分は変わらないが，分布を正確に表現するためには，より多くのサンプルが必要となる．</p>
-<h1 id="粒子フィルタparticle-filter-pf">粒子フィルタ(Particle Filter, PF)</h1>
-<h2 id="目的-4">目的</h2>
-<p>非線形非ガウス状態空間モデルにおいては，共役事前分布の性質は一般には成り立たず，事後確率分泌はもはや，パラメトリックな確率分布では表せない場合もあり得る．したがって，確率分布のパラメータを用いた厳密なフィルタの導出も一般には不可能である．
-PFでは，この問題に対応する．</p>
-<h2 id="方法-4">方法</h2>
-<p>PFでは，状態の確率分布に従う多数の粒子により，非ガウス分布である状態の確率分布を近似表現する．粒子の初期値$\chi$は重み$\pi$で初期化される．各ステップで．1ステップ前の粒子にプロセスモデルを適用し，プロセスノイズを加えることで新しい粒子を生成する．
-観測値$z_t$が与えられたとき，各粒子の重み$\chi^i_t$は尤度$p(z_t|\chi_t^i)$によってアップデートする．</p>
-<p>$$
-\chi:\pi_t^i=\pi_{t-1}^ip(z_t|\chi_t^i) \tag{20}
-$$</p>
+        <h1 id="commitizenとは">commitizenとは</h1>
+<p><a href="https://www.npmjs.com/package/commitizen">commitizen</a>は、Gitのコミットメッセージを効果的に統一するためのツールで、対話的なプロンプトを提供してコミットメッセージを作成できる。
+これにより、一貫性のあるメッセージを作成しやすくなる。</p>
+<h1 id="導入">導入</h1>
+<h2 id="commitizenのインストール">commitizenのインストール</h2>
+<p>最初に、以下のコマンドを使用してcommitizenをグローバルにインストールする。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ npm install -g commitizen
+</span></span></code></pre></div><p>これにより、commitizenがコマンドラインから利用可能になる。</p>
+<h2 id="cz-conventional-changelogのインストール">cz-conventional-changelogのインストール</h2>
+<p>commitizenを使用する際、どのような形式でコミットメッセージを記述するかを定義するツールが必要となる。
+今回は、<a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a>を使用する。cz-conventional-changelogは、<a href="https://www.conventionalcommits.org">Conventional Commits</a>と呼ばれるフォーマットに従ったコミットメッセージの記載が可能となる。</p>
+<p>以下のコマンドを実行して、これをインストールする。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ npm install -g cz-conventional-changelog
+</span></span></code></pre></div><p>設定ファイルに追加する</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ vim .czrc
+</span></span><span class="line"><span class="cl"><span class="o">{</span> <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;cz-conventional-changelog&#34;</span> <span class="o">}</span>
+</span></span></code></pre></div><p>これにより、cz-conventional-changelogが利用可能になる。</p>
+<h2 id="使用方法">使用方法</h2>
+<p>通常の<code>git commit</code>コマンドではなく、 <code>git cz</code>コマンドを使用してコミットメッセージを作成する。このコマンドを実行すると、対話型のプロンプトが表示され、コミットメッセージの各部分を選択して入力することができる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ git:<span class="o">(</span>main<span class="o">)</span> touch test.md
+</span></span><span class="line"><span class="cl">➜ git:<span class="o">(</span>main<span class="o">)</span> ✗ git add test.md
+</span></span><span class="line"><span class="cl">➜ git:<span class="o">(</span>main<span class="o">)</span> ✗ git cz
+</span></span><span class="line"><span class="cl">cz-cli@4.3.0, cz-conventional-changelog@3.3.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Select the <span class="nb">type</span> of change that you<span class="err">&#39;</span>re committing: <span class="o">(</span>Use arrow keys<span class="o">)</span>
+</span></span><span class="line"><span class="cl">❯ feat:     A new feature
+</span></span><span class="line"><span class="cl">  fix:      A bug fix
+</span></span><span class="line"><span class="cl">  docs:     Documentation only changes
+</span></span><span class="line"><span class="cl">  style:    Changes that <span class="k">do</span> not affect the meaning of the code <span class="o">(</span>white-space,
+</span></span><span class="line"><span class="cl">formatting, missing semi-colons, etc<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  refactor: A code change that neither fixes a bug nor adds a feature
+</span></span><span class="line"><span class="cl">  perf:     A code change that improves performance
+</span></span></code></pre></div>
 
         
           <div class="blog-tags">
             
-              <a href="https://yuhi-sa.github.io//tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/">フィルタリング</a>&nbsp;
+              <a href="https://yuhi-sa.github.io//tags/git/">git</a>&nbsp;
             
           </div>
         
@@ -411,42 +324,42 @@ $$</p>
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f&amp;text=%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f&amp;text=Git%e3%81%ae%e3%82%b3%e3%83%9f%e3%83%83%e3%83%88%e3%83%a1%e3%83%83%e3%82%bb%e3%83%bc%e3%82%b8%e3%82%92%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%ab%e7%b5%b1%e4%b8%80%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%abcommitizen%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f&amp;title=%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f&amp;title=Git%e3%81%ae%e3%82%b3%e3%83%9f%e3%83%83%e3%83%88%e3%83%a1%e3%83%83%e3%82%bb%e3%83%bc%e3%82%b8%e3%82%92%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%ab%e7%b5%b1%e4%b8%80%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%abcommitizen%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f&amp;title=%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f&amp;title=Git%e3%81%ae%e3%82%b3%e3%83%9f%e3%83%83%e3%83%88%e3%83%a1%e3%83%83%e3%82%bb%e3%83%bc%e3%82%b8%e3%82%92%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%ab%e7%b5%b1%e4%b8%80%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%abcommitizen%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f&amp;title=%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f&amp;title=Git%e3%81%ae%e3%82%b3%e3%83%9f%e3%83%83%e3%83%88%e3%83%a1%e3%83%83%e3%82%bb%e3%83%bc%e3%82%b8%e3%82%92%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%ab%e7%b5%b1%e4%b8%80%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%abcommitizen%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20200901_filter%2f1%2f&amp;description=%e4%bb%a3%e8%a1%a8%e7%9a%84%e3%81%aa%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20231208_cz%2f1%2f&amp;description=Git%e3%81%ae%e3%82%b3%e3%83%9f%e3%83%83%e3%83%88%e3%83%a1%e3%83%83%e3%82%bb%e3%83%bc%e3%82%b8%e3%82%92%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%ab%e7%b5%b1%e4%b8%80%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%abcommitizen%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -468,9 +381,7 @@ $$</p>
                   <ul>
                 
                 
-                    <li><a href="/posts/20220206_ema/1/">指数移動平均(Exponential Moving Averages)フィルタの周波数特性</a></li>
-                
-                    <li><a href="/posts/20210730_filter/1/">適応フィルタ</a></li>
+                    <li><a href="/posts/20231204_git/1/">Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</a></li>
                 
               </ul>
 
@@ -482,13 +393,9 @@ $$</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20200831_rl_map/1/" data-toggle="tooltip" data-placement="top" title="強化学習の全体像まとめ">&larr; 前ページ</a>
+              <a href="https://yuhi-sa.github.io/posts/20231204_git/1/" data-toggle="tooltip" data-placement="top" title="Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する">&larr; 前ページ</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20201015_euclidean/1/" data-toggle="tooltip" data-placement="top" title="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム">次ページ &rarr;</a>
-            </li>
           
         </ul>
       

@@ -6,8 +6,15 @@
     <description>Recent content in git on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 04 Dec 2023 09:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 08 Dec 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</title>
+      <link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link>
+      <pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title>
       <link>https://yuhi-sa.github.io/posts/20231204_git/1/</link>
