@@ -23,6 +23,13 @@
       <description></description>
     </item>
     <item>
+      <title>How to overwrite the print</title>
+      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1.en/</link>
+      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1.en/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>PyenvとAnacondaを用いたPython環境の設定</title>
       <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
