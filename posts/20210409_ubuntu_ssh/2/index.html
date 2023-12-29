@@ -1,278 +1,77 @@
 <!DOCTYPE html>
-<html lang="ja" itemscope itemtype="http://schema.org/WebPage">
-  <head>
-    
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <title>Ubuntuのsshの設定 - tomato blog</title>
-  <meta name="author" content="yuhi-sa"/><script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "tomato blog",
-    
-    "url": "https:\/\/yuhi-sa.github.io\/"
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Organization",
-  "name": "",
-  "url": "https:\/\/yuhi-sa.github.io\/"
-  
-  
-  
-  
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210409_ubuntu_ssh\/2\/",
-          "name": "Ubuntuのsshの設定"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "yuhi-sa"
-  },
-  "headline": "Ubuntuのsshの設定",
-  "description" : "",
-  "inLanguage" : "ja",
-  "wordCount":  34 ,
-  "datePublished" : "2021-04-09T10:00:23",
-  "dateModified" : "2021-04-09T10:00:23",
-  "image" : "https:\/\/yuhi-sa.github.io\/",
-  "keywords" : [ "linux" ],
-  "mainEntityOfPage" : "https:\/\/yuhi-sa.github.io\/posts\/20210409_ubuntu_ssh\/2\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/yuhi-sa.github.io\/",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/yuhi-sa.github.io\/",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
-
-<meta property="og:title" content="Ubuntuのsshの設定" />
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="tomato blog" />
-
-  <meta name="twitter:title" content="Ubuntuのsshの設定" />
-  <meta name="twitter:card" content="summary" />
-  <link href='https://yuhi-sa.github.io/img/icon.JPG' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.121.1">
-  <link rel="alternate" href="https://yuhi-sa.github.io/index.xml" type="application/rss+xml" title="tomato blog"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://yuhi-sa.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://yuhi-sa.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://yuhi-sa.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Ubuntuのsshの設定 | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.min.f0006a9d6f3625f7765522eece9b7cccee5b1dc15a581742039a67489209bcb4.css" integrity="sha256-8ABqnW82Jfd2VSLuzpt8zO5bHcFaWBdCA5pnSJIJvLQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css" integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin="anonymous">
 
 
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-<script>
-   window.dataLayer = window.dataLayer || [];
-   function gtag(){dataLayer.push(arguments);}
-   gtag('js', new Date());
-   gtag('config', 'G-LN6QP6VVM3');
-</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 
-<script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">メニューを切り替え</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-        
-          
-            <li>
-              <a title="Blog" href="/">Blog</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Tags" href="/tags">Tags</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="/posts/about">About</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="privacy policy" href="/posts/privacy_policy">privacy policy</a>
-            </li>
-          
-        
-
-        
-          
-            <li>
-              
-                
-                  <a href="/en" lang="en">English</a>
-                
-              
-                
-              
-            </li>
-          
-        
-
-        
-      </ul>
-    </div>
-
-    
-
-  </div>
-</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
-    
-
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-<div class="pswp__bg"></div>
-
-<div class="pswp__scroll-wrap">
-    
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-    </div>
-    
-    <div class="pswp__ui pswp__ui--hidden">
-    <div class="pswp__top-bar">
-      
-      <div class="pswp__counter"></div>
-      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-      <button class="pswp__button pswp__button--share" title="Share"></button>
-      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-      
-      
-      <div class="pswp__preloader">
-        <div class="pswp__preloader__icn">
-          <div class="pswp__preloader__cut">
-            <div class="pswp__preloader__donut"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-      <div class="pswp__share-tooltip"></div>
-    </div>
-    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-    </button>
-    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-    </button>
-    <div class="pswp__caption">
-      <div class="pswp__caption__center"></div>
-    </div>
-    </div>
-    </div>
-</div>
-<script>
-    MathJax = {
-        tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-    };
-</script>
 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
 
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
 
-  
-  
-  
 
+</head>
+<body>
+  <header>
+    <h1>tomato blog</h1>
 
-
-
-
-
-  
-
-  <header class="header-section ">
-    
-    <div class="intro-header no-img">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="posts-heading">
-              
-                <h1>Ubuntuのsshの設定</h1>
-              
-              
-                <hr class="small">
-              
-              
-              
-            </div>
-          </div>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="https://yuhi-sa.github.io/" class="navbar-brand" > Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="https://yuhi-sa.github.io/tags" class="navbar-brand" > Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/about" class="navbar-brand" > About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/privacy_policy" class="navbar-brand" > privacy policy </a>
+      </li>
+        </ul>
       </div>
-    </div>
+    </nav>
+  
+
   </header>
-
-
+  <main>
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <h1 id="sshの設定">sshの設定</h1>
+  <h1>Ubuntuのsshの設定</h1>
+
+  
+  
+  <time datetime="2021-04-09T10:00:23&#43;09:00">2021年4月9日</time>
+
+  <h1 id="sshの設定">sshの設定</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt-get install aptitude
 </span></span><span class="line"><span class="cl">$ sudo aptitude install ssh
 </span></span></code></pre></div><p>/etc/ssh/sshd_configを編集</p>
@@ -285,177 +84,19 @@
 </span></span></code></pre></div><p>となった場合</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -R ipアドレス
 </span></span></code></pre></div><p>で鍵情報を消す．</p>
-
-        
-          <div class="blog-tags">
-            
-              <a href="https://yuhi-sa.github.io//tags/linux/">linux</a>&nbsp;
-            
-          </div>
-        
-
-        
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
-
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f&amp;text=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a&amp;via=" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
   
-      
-      <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f&amp;title=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on StumbleUpon">
-          <i class="fab fa-stumbleupon"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fyuhi-sa.github.io%2fposts%2f20210409_ubuntu_ssh%2f2%2f&amp;description=Ubuntu%e3%81%aessh%e3%81%ae%e8%a8%ad%e5%ae%9a" target="_blank" title="Share on Pinterest">
-          <i class="fab fa-pinterest"></i>
-        </a>
-      </li>
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/linux/">linux</a></li>
     </ul>
   </div>
-  
-
-              </div>
-            </section>
-        
-
-        
-          
-            
-          
-
-          
-                  <h4 class="see-also">seeAlso</h4>
-                  <ul>
-                
-                
-                    <li><a href="/posts/20220716_ssh/1/">踏み台サーバー経由で多段ssh</a></li>
-                
-                    <li><a href="/posts/20211121_linux/6/">linuxのログファイルと閲覧コマンド</a></li>
-                
-                    <li><a href="/posts/20211121_linux/5/">公開鍵認証方式を用いたSSH通信の設定方法</a></li>
-                
-                    <li><a href="/posts/20211121_linux/4/">ネットワークのトラブルシューティングで利用する代表的なコマンド</a></li>
-                
-                    <li><a href="/posts/20211121_linux/3/">ネットワークの基礎</a></li>
-                
-              </ul>
-
-          
-        
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-            <li class="previous">
-              <a href="https://yuhi-sa.github.io/posts/20210405_hinf/1/" data-toggle="tooltip" data-placement="top" title="H無限大制御">&larr; 前ページ</a>
-            </li>
-          
-          
-            <li class="next">
-              <a href="https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/" data-toggle="tooltip" data-placement="top" title="UbuntuでローカルDNSサーバーが指定できないときの編集方法">次ページ &rarr;</a>
-            </li>
-          
-        </ul>
-      
 
 
-      
-        
-        
-      
+  </main>
+  <footer>
+    <p>Copyright 2023. All rights reserved.</p>
 
-    </div>
-  </div>
-</div>
-
-      
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-        </ul>
-        <p class="credits copyright text-muted">
-          
-            
-              yuhi-sa
-            
-          
-
-          &nbsp;&bull;&nbsp;&copy;
-          
-            2023
-          
-
-          
-            &nbsp;&bull;&nbsp;
-            <a href="https://yuhi-sa.github.io/">tomato blog</a>
-          
-        </p>
-        
-        <p class="credits theme-by text-muted">
-          起動力に<a href="https://gohugo.io">Hugo v0.121.1</a> &nbsp;&bull;&nbsp; テーマに<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>に基づいている<a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          
-        </p>
-      </div>
-    </div>
-  </div>
-</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-<script src="https://yuhi-sa.github.io/js/main.js"></script>
-<script src="https://yuhi-sa.github.io/js/highlight.min.js"></script>
-<script> hljs.initHighlightingOnLoad(); </script>
-<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://yuhi-sa.github.io/js/load-photoswipe.js"></script>
-
-
-
-
-
-
-
-
-
-    
-  </body>
+  </footer>
+</body>
 </html>
-
