@@ -1,10 +1,10 @@
 /* --- General blocks --- */
 header {
-  width: 95%;
+  width: 100%;
 }
 
 footer {
-  width: 95%;
+  width: 100%;
 }
 
 main {
@@ -20,7 +20,7 @@ body {
 
 .container {
   margin-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 img {
