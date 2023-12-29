@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pytorch on tomato blog</title>
-    <link>https://yuhi-sa.github.io/tags/pytorch/</link>
-    <description>Recent content in pytorch on tomato blog</description>
+    <title>pytorch on </title>
+    <link>/tags/pytorch/</link>
+    <description>Recent content in pytorch on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
+    <language>en</language>
     <lastBuildDate>Mon, 15 Feb 2021 13:00:23 +0900</lastBuildDate>
-    <atom:link href="https://yuhi-sa.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>numpyからpytorchの変換で，dtypeを消す</title>
-      <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
+      <title>Eliminate dtype in numpy to pytorch conversion</title>
+      <link>/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
+      <guid>/posts/20210215_pytorch_dtype/1/</guid>
       <description></description>
     </item>
   </channel>

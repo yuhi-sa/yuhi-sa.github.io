@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>群知能 on tomato blog</title>
-    <link>https://yuhi-sa.github.io/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/</link>
-    <description>Recent content in 群知能 on tomato blog</description>
+    <title>群知能 on </title>
+    <link>/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/</link>
+    <description>Recent content in 群知能 on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ja</language>
+    <language>en</language>
     <lastBuildDate>Sat, 09 Jan 2021 15:17:23 +0900</lastBuildDate>
-    <atom:link href="https://yuhi-sa.github.io/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</title>
-      <link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link>
+      <link>/posts/20210109_nnga/1/</link>
       <pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210109_nnga/1/</guid>
+      <guid>/posts/20210109_nnga/1/</guid>
       <description></description>
     </item>
     <item>
       <title>粒子群最適化(PSO)とTCPSOのMatlabプログラム</title>
-      <link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link>
+      <link>/posts/20210107_pso_tcpso/1/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid>
+      <guid>/posts/20210107_pso_tcpso/1/</guid>
       <description></description>
     </item>
   </channel>
