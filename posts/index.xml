@@ -282,24 +282,10 @@
       <description></description>
     </item>
     <item>
-      <title>Reparameterization trick</title>
-      <link>https://yuhi-sa.github.io/posts/20220206_repa/1.en/</link>
-      <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20220206_repa/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>リパラメタライゼーショントリック(Reparameterization trick)</title>
       <link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link>
       <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Frequency Characteristics of Exponential Moving Averages Filter</title>
-      <link>https://yuhi-sa.github.io/posts/20220206_ema/1.en/</link>
-      <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20220206_ema/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -321,13 +307,6 @@
       <link>https://yuhi-sa.github.io/posts/20211121_db/5/</link>
       <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/5/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Derivation of closed-form expression for cross-entropy between Gaussian distributions</title>
-      <link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1.en/</link>
-      <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -415,13 +394,6 @@
       <description></description>
     </item>
     <item>
-      <title>Code description of ROS package to make op3 acquire walking using reinforcement learning</title>
-      <link>https://yuhi-sa.github.io/posts/20211102_op3/1.en/</link>
-      <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20211102_op3/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title>
       <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
@@ -436,24 +408,10 @@
       <description></description>
     </item>
     <item>
-      <title>How to sync other calendars of google calendar to Apple stock devices</title>
-      <link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1.en/</link>
-      <pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>githubへのssh接続</title>
       <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
       <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>How to do Airplay on Raspberry Pi (RPiPlay)</title>
-      <link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1.en/</link>
-      <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -499,24 +457,10 @@
       <description></description>
     </item>
     <item>
-      <title>How to Initialize Launchpad on Mac</title>
-      <link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1.en/</link>
-      <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>MacのLaunchpadを初期化する方法</title>
       <link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</link>
       <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>How to overwrite the print</title>
-      <link>https://yuhi-sa.github.io/posts/20210514_py_print/1.en/</link>
-      <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -723,13 +667,6 @@
       <description></description>
     </item>
     <item>
-      <title>Eliminate dtype in numpy to pytorch conversion</title>
-      <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1.en/</link>
-      <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>numpyからpytorchの変換で，dtypeを消す</title>
       <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
@@ -748,13 +685,6 @@
       <link>https://yuhi-sa.github.io/posts/20210204_hugo/1/</link>
       <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210204_hugo/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>[Python]Unscented Transformation</title>
-      <link>https://yuhi-sa.github.io/posts/20210125_ut/1.en/</link>
-      <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210125_ut/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -807,13 +737,6 @@
       <description></description>
     </item>
     <item>
-      <title>[Python]ElGamal cryptography on elliptic curves</title>
-      <link>https://yuhi-sa.github.io/posts/20201223_elgamal/1.en/</link>
-      <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
       <link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
@@ -828,24 +751,10 @@
       <description></description>
     </item>
     <item>
-      <title>Python program for exponentiation calculation using binary method</title>
-      <link>https://yuhi-sa.github.io/posts/20201220_binary/1.en/</link>
-      <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20201220_binary/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>バイナリ法によるべき乗計算のPythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link>
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20201220_binary/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Euclidean Algorithm and Extended Euclidean Algorithm in Python</title>
-      <link>https://yuhi-sa.github.io/posts/20201015_euclidean/1.en/</link>
-      <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20201015_euclidean/1.en/</guid>
       <description></description>
     </item>
     <item>
@@ -885,30 +794,9 @@
     </item>
     <item>
       <title>About</title>
-      <link>https://yuhi-sa.github.io/posts/about.en/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/about.en/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>About</title>
       <link>https://yuhi-sa.github.io/posts/about/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/about/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>How to write Publisher and Subscriber in one Node with ROS</title>
-      <link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1.en/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1.en/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Privacy Policy</title>
-      <link>https://yuhi-sa.github.io/posts/privacy_policy.en/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/privacy_policy.en/</guid>
       <description></description>
     </item>
     <item>
