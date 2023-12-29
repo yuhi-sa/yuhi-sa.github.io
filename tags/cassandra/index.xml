@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>cassandra on </title>
-    <link>/tags/cassandra/</link>
-    <description>Recent content in cassandra on </description>
+    <title>cassandra on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/cassandra/</link>
+    <description>Recent content in cassandra on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>ja</language>
     <lastBuildDate>Thu, 29 Jun 2023 09:00:23 +0900</lastBuildDate>
-    <atom:link href="/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yuhi-sa.github.io/tags/cassandra/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DS201の実施_NodeSync</title>
-      <link>/posts/20230516_dse_cassandra/15/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</link>
       <pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/15/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_WritePathとReadPath</title>
-      <link>/posts/20230516_dse_cassandra/16/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</link>
       <pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/16/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Consistency</title>
-      <link>/posts/20230516_dse_cassandra/12/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/12/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Hinted handoff</title>
-      <link>/posts/20230516_dse_cassandra/13/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/13/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Read Repair</title>
-      <link>/posts/20230516_dse_cassandra/14/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/14/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Replication</title>
-      <link>/posts/20230516_dse_cassandra/11/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/11/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Snitches</title>
-      <link>/posts/20230516_dse_cassandra/10/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</link>
       <pubDate>Sat, 24 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/10/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Gossip</title>
-      <link>/posts/20230516_dse_cassandra/9/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/9/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Node</title>
-      <link>/posts/20230516_dse_cassandra/6/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/6/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Ring</title>
-      <link>/posts/20230516_dse_cassandra/7/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/7/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_VNode</title>
-      <link>/posts/20230516_dse_cassandra/8/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/8/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_ClusteringColumns</title>
-      <link>/posts/20230516_dse_cassandra/4/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</link>
       <pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/4/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Drivers</title>
-      <link>/posts/20230516_dse_cassandra/5/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</link>
       <pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/5/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_CQL</title>
-      <link>/posts/20230516_dse_cassandra/2/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/2/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_partitions</title>
-      <link>/posts/20230516_dse_cassandra/3/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/3/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</guid>
       <description></description>
     </item>
     <item>
       <title>ローカルmacへのCassandraインストール</title>
-      <link>/posts/20230516_dse_cassandra/1/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
-      <guid>/posts/20230516_dse_cassandra/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</guid>
       <description></description>
     </item>
     <item>
       <title>DS201の実施_Compaction</title>
-      <link>/posts/20230516_dse_cassandra/17/</link>
+      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/posts/20230516_dse_cassandra/17/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</guid>
       <description></description>
     </item>
   </channel>
