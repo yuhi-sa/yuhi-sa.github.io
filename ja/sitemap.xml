@@ -1,6 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20231231_hurikaeri/1/</loc>
+  
+  <lastmod>2023-12-31T10:00:00+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20231218_hugo/1/</loc>
   
   <lastmod>2023-12-18T09:00:23+09:00</lastmod>

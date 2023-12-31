@@ -6,8 +6,15 @@
     <description>Recent content in Posts on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 18 Dec 2023 09:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 31 Dec 2023 10:00:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023年の振り返り</title>
+      <link>https://yuhi-sa.github.io/posts/20231231_hurikaeri/1/</link>
+      <pubDate>Sun, 31 Dec 2023 10:00:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231231_hurikaeri/1/</guid>
+      <description></description>
+    </item>
     <item>
       <title>TypescriptとReactでHugoのテーマを自作する</title>
       <link>https://yuhi-sa.github.io/posts/20231218_hugo/1/</link>
