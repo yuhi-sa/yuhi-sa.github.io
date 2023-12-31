@@ -86,17 +86,12 @@
   </header>
   <main>
     
-  <h1>DS201の実施_Read Repair</h1>
-
-  
-  
-  <time datetime="2023-06-25T09:00:23&#43;09:00">2023年6月25日</time>
-
-  <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<h1>DS201の実施_Read Repair</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>Cassandraでは、データのレプリカが複数のノードに存在し、それらのレプリカ間でデータの整合性を維持する必要がある。Read Repairは、読み取り操作が行われる際に自動的に実行される。</p>
 <p>クライアントがデータを読み取るとき、Cassandraはレプリカセット(同じデータを保持する複数のノードのグループ)からデータを収集する。各レプリカは自身のタイムスタンプを持っており、最新のタイムスタンプを持つデータがクライアントに返さる。レプリカ間でデータのタイムスタンプが異なる場合、CassandraはRead Repairを使用して古いデータを更新することでデータの整合性を回復させる。</p>
 <p>read_repair_chanceにより、読み取り操作時に自動的にRead Repairを実行する確率を指定する。この値は0から1の範囲で設定され、0は実行しないことを意味し、1は必ず実行することを意味する。</p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>DS201の実施_partitions</h1>
-
-  
-  
-  <time datetime="2023-05-16T09:00:23&#43;09:00">2023年5月16日</time>
-
-  <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<h1>DS201の実施_partitions</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>パーティション（Partition）は、データを分割して格納するための概念。</p>
 <p>パーティションは、データの格納と検索の単位となる。Cassandraのテーブルは、1つまたは複数のパーティションで構成されており、各パーティションは一意のパーティションキーによって識別される。パーティションキーは、データを分割するための基準となる。パーティションキーの値に基づいてデータが物理的に分散される。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; DESCRIBE TABLE videos;
@@ -130,7 +125,7 @@
 </span></span><span class="line"><span class="cl">(1 rows)
 </span></span></code></pre></div><p>クエリ結果の最初の列 &ldquo;system.token(video_id)&rdquo; は、&ldquo;video_id&rdquo; のトークン値を表している。
 トークン値は、Cassandra 内部で使用されるパーティションキーのハッシュ値で、どのノードにデータが配置されるかを決定するために使われる。</p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>mtailを用いてPrometheus形式のメトリクスを公開する</h1>
-
-  
-  
-  <time datetime="2023-11-24T09:00:23&#43;09:00">2023年11月24日</time>
-
-  <h1 id="概要">概要</h1>
+<h1>mtailを用いてPrometheus形式のメトリクスを公開する</h1>
+<h1 id="概要">概要</h1>
 <p>mtail(<a href="https://github.com/google/mtail">https://github.com/google/mtail</a> )は、Googleが提供するログパースツールで、ログファイルから指定したパターンに一致する行を抽出し、それに基づいてメトリクスを生成して<code>/metrics</code>エンドポイントに<code>Prometheus</code>形式で公開することができるソフトウェアである。</p>
 <h1 id="mtailの使い方">mtailの使い方</h1>
 <p>mtailを利用するには、設定ファイルを定義し、ログファイルのパスとパターンを指定する必要がある。</p>
@@ -123,7 +118,7 @@
 <li><code>-progs /path/to/sample.mtail</code>: mtailが使用する設定ファイル（sample.mtail）のパスを指定している。</li>
 <li><code>-logs /path/to/logfile</code>: mtailが監視するログファイルのパスを指定している。mtailはこのログファイルを監視し、設定ファイルに定義されたパターンに一致する行を検出して対応するメトリクスを生成する。</li>
 </ul>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

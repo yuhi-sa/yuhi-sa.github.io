@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>App RouterとPages Routerでprom-clientの値を共有できない</h1>
-
-  
-  
-  <time datetime="2023-11-24T09:00:23&#43;09:00">2023年11月24日</time>
-
-  <p>t3-stackでログのメトリクス化のために、<code>prom-client</code>の<code>Counter</code>を<code>Logger</code>クラスで共有することを検討した。
+<h1>App RouterとPages Routerでprom-clientの値を共有できない</h1>
+<p>t3-stackでログのメトリクス化のために、<code>prom-client</code>の<code>Counter</code>を<code>Logger</code>クラスで共有することを検討した。
 しかし、<code>App Router</code>と<code>Pages Router</code>で共有することができなかった。
 具体的には<code>global</code>の<code>register</code>に<code>Counter</code>を登録しようとすると<code>Pages Router</code>ではビルドエラーになる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Logger.ts" data-lang="Logger.ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Counter</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;prom-client&#39;</span><span class="p">;</span>
@@ -161,7 +156,7 @@
 </span></span></code></pre></div><p><code>global</code>オブジェクトが、<code>App Router</code>と<code>Pages Router</code>に登録されているAPIルートの間で同じではなく不具合が起こるようである。
 以下で言及されている。現時点では解決もされていない。</p>
 <p><a href="https://github.com/vercel/next.js/discussions/49798">https://github.com/vercel/next.js/discussions/49798</a></p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

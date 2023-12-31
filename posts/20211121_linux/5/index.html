@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>公開鍵認証方式を用いたSSH通信の設定方法</h1>
-
-  
-  
-  <time datetime="2021-12-03T10:00:23&#43;09:00">2021年12月3日</time>
-
-  <h1 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h1>
+<h1>公開鍵認証方式を用いたSSH通信の設定方法</h1>
+<h1 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h1>
 <h2 id="etcsshsshd_configを編集">「/etc/ssh/sshd_config」を編集</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo vi /etc/ssh/sshd/sshd_config
 </span></span></code></pre></div><h2 id="公開鍵暗号方式の有効化とパスワード認証方式の無効化">公開鍵暗号方式の有効化とパスワード認証方式の無効化</h2>
@@ -152,7 +147,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh <span class="o">[</span>ユーザ名<span class="o">]</span>@IPアドレス
 </span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;/Users/[ユーザ名]/.ssh/id_rsa&#39;</span>: <span class="c1"># パスフレーズを入力 </span>
 </span></span></code></pre></div>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

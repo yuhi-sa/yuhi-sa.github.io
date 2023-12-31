@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</h1>
-
-  
-  
-  <time datetime="2023-12-04T09:00:23&#43;09:00">2023年12月4日</time>
-
-  <p>Gitフックは、特定のGitイベントが発生したときに実行されるスクリプトである。
+<h1>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</h1>
+<p>Gitフックは、特定のGitイベントが発生したときに実行されるスクリプトである。
 これを使用して、masterブランチへのpushを制限できる。</p>
 <p><code>.git/hooks</code>ディレクトリにスクリプトを作成する。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl"><span class="nb">cd</span> .git/hooks
@@ -111,7 +106,7 @@
 </span></span></code></pre></div><p>スクリプトに実行権限を与える。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">chmod +x pre-push
 </span></span></code></pre></div><p>これで、masterブランチへの直接のpushが拒否されるようになる。</p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

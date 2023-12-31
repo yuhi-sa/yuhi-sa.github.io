@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>DS201の実施_Compaction</h1>
-
-  
-  
-  <time datetime="0001-01-01T00:00:00&#43;00:00">1年1月1日</time>
-
-  <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習</p>
+<h1>DS201の実施_Compaction</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習</p>
 <h1 id="概要">概要</h1>
 <p>Compactionは、不要なデータを削除し、データの配置を最適化することで、データベースのパフォーマンスを向上させる。Compactionには、メジャーとマイナーコンパクションの2つの主要なタイプがある。</p>
 <h1 id="マイナーコンパクション">マイナーコンパクション</h1>
@@ -100,7 +95,7 @@
 <h1 id="メジャーコンパクション">メジャーコンパクション</h1>
 <p>メジャーコンパクションは、複数のSSTable間のマージを行う。複数のSSTableを1つの新しいSSTableに結合し、データの重複を削除し、不要なトゥームストーンを削除する。また、GC（ガベージコレクション）も実行する。GCは、Compactionプロセスが完了した後に、不要なデータとトゥームストーンを物理的に削除する役割を果たす。これにより、ディスクスペースが解放され、データベースのパフォーマンスが向上する。</p>
 <p>メジャーコンパクションは、データベースの大規模な再構築を必要とするため、システムの負荷が高くなる。したがって、Cassandraでは通常、バックグラウンドで自動的にメジャーコンパクションがスケジュールされる。メジャーコンパクションのスケジュールは、ディスクの使用状況やデータの更新頻度などを考慮して、自動的に調整される。</p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>

@@ -86,13 +86,8 @@
   </header>
   <main>
     
-  <h1>DS201の実施_NodeSync</h1>
-
-  
-  
-  <time datetime="2023-06-29T09:00:23&#43;09:00">2023年6月29日</time>
-
-  <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<h1>DS201の実施_NodeSync</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>NodeSyncは、データの整合性を保ちつつオーバーヘッドを最小限に抑える機能。</p>
 <p>NodeSyncは、以下の特徴を持つ：</p>
 <ul>
@@ -104,7 +99,7 @@
 <p>NodeSyncサービスは、デフォルトで各ノードで実行される。NodeSyncはテーブルごとに有効にすることができ、有効にされたテーブルのローカルデータ範囲を連続的に検証し、不整合が見つかった場合はリペアを実行する。データ範囲は小さなセグメントに分割され、優先度付けされる。</p>
 <p>セグメントは、テーブルの小さなローカルトークン範囲である。NodeSyncはセグメントを選択し、データ全体を読み取り、不整合をチェックし、必要に応じてリペアする。セグメントの検証状態は、system_distributed.nodesync_statusテーブルに保存される。</p>
 <p>セグメントの検証状態には、successful（正常終了）、full_in_sync（完全に同期済み）、full_repaired（完全にリペア済み）、unsuccessful（失敗）、partial_in_sync（一部の同期済み）、partial_repaired（一部がリペア済み）、uncompleted（未完了）、failed（エラー）などのステータスがある。</p>
-  
+
   <div>
     <div>Tags:</div>
     <ul>
