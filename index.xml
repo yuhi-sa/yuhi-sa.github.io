@@ -6,8 +6,22 @@
     <description>Recent content on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 31 Dec 2023 10:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jan 2024 10:10:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2024年目標</title>
+      <link>https://yuhi-sa.github.io/posts/todo/</link>
+      <pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/todo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>読む予定の本</title>
+      <link>https://yuhi-sa.github.io/posts/read/</link>
+      <pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/read/</guid>
+      <description></description>
+    </item>
     <item>
       <title>2023年の振り返り</title>
       <link>https://yuhi-sa.github.io/posts/20231231_hurikaeri/1/</link>
@@ -793,13 +807,6 @@
       <description></description>
     </item>
     <item>
-      <title>2024年目標</title>
-      <link>https://yuhi-sa.github.io/posts/todo/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/todo/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>About</title>
       <link>https://yuhi-sa.github.io/posts/about/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
@@ -818,13 +825,6 @@
       <link>https://yuhi-sa.github.io/posts/privacy_policy/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/privacy_policy/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>読む予定の本</title>
-      <link>https://yuhi-sa.github.io/posts/read/</link>
-      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/read/</guid>
       <description></description>
     </item>
     <item>
