@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>iphone on tomato blog</title>
+    <title>Iphone on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/iphone/</link>
-    <description>Recent content in iphone on tomato blog</description>
+    <description>Recent content in Iphone on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 18 Jun 2023 09:00:23 +0900</lastBuildDate>
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20230618_iphone/1/</link>
       <pubDate>Sun, 18 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230618_iphone/1/</guid>
-      <description></description>
+      <description>ベータアップデートをオフにする 設定&amp;gt;一般&amp;gt;ソフトウェアアップデートからベータアップデートをオフにする。&#xA;リカバリーモードにする mac bookとケーブルで接続する。 iphoneの音量↑ボタンを押した後、音量↓ボタンを押す。 すぐに電源ボタンを長押しする。電源が切れappleのロゴが出るまで長押しする。 iphoneはこのような画面。 macはこのような画面となる。 macから復元 上記の画面になったら、mac上から復元を選択する。&#xA;これで、再インストールすることができる。&#xA;通常のiphoneの初期設定 工場出荷時の状態となるため、通常の初期設定をiphoneで実施する。 この時ios17時点でのバックアップから復元することはできないため、1から設定をし直す必要がある。</description>
     </item>
   </channel>
 </rss>

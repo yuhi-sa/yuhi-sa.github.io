@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sql on tomato blog</title>
+    <title>Sql on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/sql/</link>
-    <description>Recent content in sql on tomato blog</description>
+    <description>Recent content in Sql on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 30 Dec 2021 10:00:23 +0900</lastBuildDate>
@@ -13,56 +13,56 @@
       <link>https://yuhi-sa.github.io/posts/20211121_db/5/</link>
       <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/5/</guid>
-      <description></description>
+      <description>内部結合 結合条件を満たす組み合わせのみ表示する結合&#xA;SELECT 列リスト FROM 表名1 JOIN 表名2 ON 表名1.列名 = 表名2.列名 JOINではなくNATURAL JOINを用いると自動的に同じ列名の値を結合キーとして比較できる．このときON句で結合条件を指定する必要はない．&#xA;外部結合 結合条件を満たさない組み合わせも表示する結合&#xA;左外部結合：左側の表を全て表示 SELECT 列リスト FROM 表名1 LEFT OUTER JOIN 表名2 ON 表名1.列名 = 表名2.列名 右外部結合：右側の表を全て表示 SELECT 列リスト FROM 表名1 RIGHT OUTER JOIN 表名2 ON 表名1.列名 = 表名2.列名 クロス結合 全ての組み合わせを表示する結合&#xA;SELECT 列リスト FROM 表名1 CROSS JOIN 表名2 </description>
     </item>
     <item>
       <title>SQLの条件式</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/4-2/</link>
       <pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/4-2/</guid>
-      <description></description>
+      <description>条件式 CASE：条件分岐 CASE WHEN 条件1 THEN 値 WHEN 条件2 THEN 値 … ELSE 値 END GROUP BY：特定の値をグループ化 GROUP BY 対象列 HAVING：グループ化した後のデータを条件分岐 HAVING 条件式 </description>
     </item>
     <item>
       <title>SQLの関数</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/4/</link>
       <pubDate>Wed, 08 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/4/</guid>
-      <description></description>
+      <description>文字列 文字列を大文字に変換 UPPER(文字列) 文字列を小文字に変換 LOWER(文字列) 開始位置から長さ分，文字列から抽出 SUBSTRING(文字列,開始位置,長さ) 対象文字列から検索文字列が最初に出現する位置を返却 INSTR(対象文字列，検索文字列) 文字列の長さを返却 LENGTH(文字列) 文字列1と文字列2を結合 CONCAT(文字列1, 文字列2) 文字数に達するまで文字列の右側に追加文字を追加 RPAD(文字列, 文字数, 追加文字) 文字列の先頭と末尾から文字Aを取り除く TRIM(文字A FROM 文字列) 文字列に含まれる文字Aを文字Bに変換 REPLACE(文字列, 文字A, 文字B) 時間 現在の日時を返却 NOW() 現在の日時を返却 CURDATE() 現在の時刻を返却 CURTIME() 日付Bから日付Aまでの日数 DATEDIFF(日付A, 日付B) 日付Aからn日後の日付を返却 DATE_ADD(日付A, INTERVAL n DAY) 日付Aの月の月末日付を返却 LAST_DAY(日付A) 数字 数値の小数点n以下を四捨五入 ROUND(数値, n) 数値の小数点n以下を切り捨て TRUNCATE(数値, n) 数値1を数値2で割った余りを返却 MOD(数値1, 数値2) </description>
     </item>
     <item>
       <title>SQLによるDBの検索</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/3/</link>
       <pubDate>Thu, 02 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/3/</guid>
-      <description></description>
+      <description>基本構文 SELECT：データの検索を行う． SELECT 列リスト FROM 表名; DESCRIBE：方の構造を確認 DESCRIBE 表名; DISTINCT：重複データの排除 SELECT DISTINCT 列リスト FROM 表名; WHERE：検索条件を指定 SELECT 列リスト FROM 表名 WHERE 検索条件; ORDER BY：行のソート SELECT 列リスト FROM 表名 WHERE 検索条件 ORDER BY 条件 [ASC|DESC]; ASC：昇順 DESC：降順 検索条件の演算子 BETWEEN：データの範囲を指定&#xA;SELECT 列リスト FROM 表名 WHERE 列名 BETWEEN A AND B; IN：データと等しいかどうかの指定&#xA;SELECT 列リスト FROM 表名 WHERE 列名 IN (A, B, C); LIKE：データの一部と等しいかどうか指定&#xA;SELECT 列リスト FROM 表名 WHERE 列名 LIKE &amp;#34;A%&amp;#34;; ワイルドカード&#xA;%：0文字以上の任意文字列 _：任意の1文字 ISNULL：NULL値のデータを指定</description>
     </item>
     <item>
       <title>正規化</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/2/</link>
       <pubDate>Fri, 26 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/2/</guid>
-      <description></description>
+      <description>正規化の目的 データの整合性の保持 データの冗長性の排除 データ操作の適正化 関数従属性について 完全関数従属性 主キーの全ての項目を使って値が決定する関係&#xA;部分関数従属性 主キーの一部の項目を使って値が決定する関係&#xA;推移関数従属性 主キー以外の項目に従属する関係&#xA;第一正規形 非正規形から，繰り返し部分を排除した形&#xA;更新方法 非正規表に主キーを設定 繰り返し部分を分離 分離した表に主キーを設定 第二正規形 第一正規形から，部分関数従属している項目を取り除いた形&#xA;更新方法 主キーが複合キーの表を探す 部分関数従属している項目を別の表として分離 元の表に分離した表の主キーを残す 第三正規形 第二正規形から，主キーに推移関数従属している項目を取り除いた形&#xA;更新方法 主キー以外の項目で，関数従属している項目を探す 主キー以外の項目で関数従属している項目を別の表として分離 元の表に分離した表の主キーを残す </description>
     </item>
     <item>
       <title>SQLの基本構文</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/1/</link>
       <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid>
-      <description></description>
+      <description>データ操作 SELECT：レコードの検索，検索結果の結合 INSERT：レコードの挿入 UPDATE：レコードの更新 DELETE：レコードの削除 データ定義 CREATE：オブジェクトの定義 ALTER：オブジェクトの変更 DROP：オブジェクトの削除 RENAME：オブジェクト名の変更 TRUNCATE：データの切り捨て データ制御 COMMIT：トランザクションの確定 ROLLBACK：トランザクションの取り消し SAVEPOINT：ロールバック地点の設定 GRANT：権限の付与 REVOKE：権限の剥奪 </description>
     </item>
     <item>
       <title>SQLの表の作成</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/7/</link>
       <pubDate>Mon, 04 Jan 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/7/</guid>
-      <description></description>
+      <description>表の作成 CREATE TABLE 表名 (列名 データ型 [DEFAULT値] 制約, ... 列名 データ型 [DEFAULT値]　制約,) データ型 文字型：CHAR(size),VARCHAR(size) 数値型：INT,INTEGER,BIGINT,FLOAT,DOUBLE 日付型：DATETIME 制約 NOT NULL：NULL値を禁止 UNIQUE：同一値の入力禁止 PRIMARY KEY：主キー制約 FOREIGN KEY：外部キー制約 コピー表の作成 副問合せを利用することにより，結果表をコピーして表を作成できる．&#xA;CREATE TABLE 表名[(列名,列名,...)] 副問合せ; ビュー表の作成 ビューは表または別のビューをもとにした仮装の表のことである．ビュー自体にはデータは格納されず，参照元の変更が反映される．&#xA;CREATE VIEW ビュー名[(列名,列名,...)] AS 副問合せ; 表の変更 属性の変更 ALTER TABLE 表名 MODIFY 列名 データ型; 列の追加 ALTER TABLE 表名 ADD 列名 データ型[DEFAULT 値]; 表名の変更 RENAME TABLE 旧表名 TO 新表名; 表の削除 DROP TABLE 表名; </description>
     </item>
     <item>
       <title>SQLのデータ挿入，更新，削除</title>
       <link>https://yuhi-sa.github.io/posts/20211121_db/6/</link>
       <pubDate>Fri, 01 Jan 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_db/6/</guid>
-      <description></description>
+      <description>データ挿入 INSERT INTO 表名 VALUES(値1,値2,...); データの更新 UPDATE 表名 SET 列名 = 式; (ex, a = 0.9*a;) データの削除 DELETE FROM 表名 </description>
     </item>
   </channel>
 </rss>

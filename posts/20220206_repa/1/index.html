@@ -99,7 +99,7 @@
 <p>$$z =  \mu + \sigma \odot \epsilon$$</p>
 <p>$$\epsilon \sim \mathcal{N}(0,1) $$</p>
 <p>これにより$z$は，$\mu$と$\sigma$に対して確定的な値となるため微分可能になる．</p>
-<p><img src=".././repara.png" alt="概念図"></p>
+<p><img alt="概念図" src=".././repara.png"></p>
 <h1 id="pytorchでのリパラメタライゼーショントリックを用いたサンプリング">Pytorchでのリパラメタライゼーショントリックを用いたサンプリング</h1>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m = Normal(*params)
 </span></span><span class="line"><span class="cl">z = m.rsample()

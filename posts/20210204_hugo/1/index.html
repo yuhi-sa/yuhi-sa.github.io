@@ -95,7 +95,7 @@
 <h1 id="hugoとは">Hugoとは</h1>
 <p>ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つが<a href="https://gohugo.io/">Hugo</a>である．</p>
 <p>Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される．
-<img src=".././fig1.png" alt="hugo-logo.png"></p>
+<img alt="hugo-logo.png" src=".././fig1.png"></p>
 <p>Hugoのメリットしては，</p>
 <ul>
 <li>ビルド，表示処理が早い</li>
@@ -134,7 +134,7 @@
 </span></span><span class="line"><span class="cl">git clone テーマフォルダ
 </span></span></code></pre></div><p>config.tomlに以下の行を追記する．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">theme = &#34;選んだテーマ名&#34;
-</span></span></code></pre></div><p><img src=".././fig2.png" alt="temple.png"></p>
+</span></span></code></pre></div><p><img alt="temple.png" src=".././fig2.png"></p>
 <h2 id="ブログ記事を作成する">ブログ記事を作成する</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd test
 </span></span><span class="line"><span class="cl">hugo new post/new-post.md
@@ -156,7 +156,7 @@
 <p>Githubの画面右上のプラスアイコン「+」をクリックし，「New repository」を選択する．
 フォルダ名は，「アカウント名.github.io」にする．
 公開URLは https://アカウント名.github.io となる．
-<img src=".././fig3.png" alt="github.png"></p>
+<img alt="github.png" src=".././fig3.png"></p>
 <p>参考：<a href="https://prog-8.com/docs/github-pages">自分で作ったWebページをインターネット上に公開しよう！</a></p>
 <h2 id="publicフォルダをここに上げる">publicフォルダをここに上げる．</h2>
 <p><!-- raw HTML omitted -->Github Pagesではフォルダ直下のhtmlファイルしか，公開してくれないため，hugoで作成したtestフォルダ内のpublicフォルダを「アカウント名.github.io」にアップロードする．<!-- raw HTML omitted -->

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>cassandra on tomato blog</title>
+    <title>Cassandra on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/cassandra/</link>
-    <description>Recent content in cassandra on tomato blog</description>
+    <description>Recent content in Cassandra on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 29 Jun 2023 09:00:23 +0900</lastBuildDate>
@@ -13,119 +13,119 @@
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</link>
       <pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;NodeSyncは、データの整合性を保ちつつオーバーヘッドを最小限に抑える機能。&#xA;NodeSyncは、以下の特徴を持つ：&#xA;すべてのレプリカ間でデータの同期を継続的に検証する。 常に実行されますが、クラスターのパフォーマンスにわずかな影響しか与えない。 完全に自動化されており、手動介入は必要ない。 アンチエントロピー・リペアの代替として機能する。 NodeSyncサービスは、デフォルトで各ノードで実行される。NodeSyncはテーブルごとに有効にすることができ、有効にされたテーブルのローカルデータ範囲を連続的に検証し、不整合が見つかった場合はリペアを実行する。データ範囲は小さなセグメントに分割され、優先度付けされる。&#xA;セグメントは、テーブルの小さなローカルトークン範囲である。NodeSyncはセグメントを選択し、データ全体を読み取り、不整合をチェックし、必要に応じてリペアする。セグメントの検証状態は、system_distributed.nodesync_statusテーブルに保存される。&#xA;セグメントの検証状態には、successful（正常終了）、full_in_sync（完全に同期済み）、full_repaired（完全にリペア済み）、unsuccessful（失敗）、partial_in_sync（一部の同期済み）、partial_repaired（一部がリペア済み）、uncompleted（未完了）、failed（エラー）などのステータスがある。</description>
     </item>
     <item>
       <title>DS201の実施_WritePathとReadPath</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</link>
       <pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習&#xA;WritePath CassandraのWritePath（データの書き込み操作が行われるプロセス）は以下の通りである。&#xA;Cassandraでは、データの変更はまずコミットログ（commit log）に書き込まれる。コミットログはHDDまたはSSD上に配置され、データの永続性を確保する。コミットログはデータベースの更新操作を追跡するためのログファイルとなる。Cassandraは書き込みリクエストを受け取るたびに、対応するデータの変更をコミットログに書き込みを実行する。 データがコミットログに書き込まれた後、CassandraはRAM（ランダムアクセスメモリ）内にメモリテーブル（memtable）を作成する。メモリテーブルはデータの追加や更新を高速に処理するために使用する。メモリテーブルはデータの一時的な格納場所であり、最新のデータのバージョンを保持する。データはRAM内に存在するため、ディスクアクセスに比べて高速な読み書きが可能である。ただし、メモリテーブルはシステムのメモリ容量によって制限されるため、一定の容量を超えるとディスクに書き出される。 メモリテーブル内のデータが一定の容量を超えると、Cassandraはメモリテーブルの内容をSSTable（Sorted String Table）と呼ばれるディスク上の構造に書き出します。SSTableはデータをソートされた状態で保存し、効率的な読み取り操作を可能としている。SSTableはディスク上の永続的なデータストレージである。 ReadPath CassandraのReadPath（データの読み取り操作が行われるプロセス）は以下の通りです。&#xA;データの読み取り操作が発生すると、Cassandraはまずメモリ内のキャッシュであるブルームフィルタ（Bloom Filter）を検索する。ブルームフィルタは、ディスク上のデータを検索する前にメモリ内で高速なフィルタリングを行うことで、ディスクアクセスを最小限に抑える。ブルームフィルタはデータの存在を確認するために使用され、データが存在しない場合はディスクアクセスを行わずに読み取り操作を終了する。 ブルームフィルタでデータの存在が確認された場合、Cassandraはデータを検索するためにディスク上のSSTableを使用する。複数のSSTableにまたがるデータを取得する場合、Cassandraはマージソート（Merge Sort）アルゴリズムを使用して複数のSSTableからデータを統合する。 データがディスクから読み込まれた後、Cassandraはキャッシュ（メモリ内のデータ）にデータをロードする。これにより、次回以降の読み取りでのディスクアクセスを回避し、高速なメモリアクセスでデータを実現する。 </description>
     </item>
     <item>
       <title>DS201の実施_Consistency</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Cassandraでは、RF数に応じてデータを複数のノードに分散して格納している。Consistencyレベルは、クライアントがデータの一貫性をどの程度要求するかを制御するために使用される。&#xA;ANY: 読み取りまたは書き込み操作は、少なくとも1つのレプリカに対して成功した場合に完了する。&#xA;ONE, TWO, THREE: ConsistencyレベルをONEに設定すると、読み取りまたは書き込み操作は、データのレプリカのうち少なくとも1つに対して成功した場合に完了する。TWOの場合は、2つのレプリカに対して、THREEの場合は3つのレプリカに対して成功する必要がある。&#xA;QUORUM 読み取りまたは書き込み操作は、データのレプリカの過半数に対して成功した場合に完了する。例えば、3つのレプリカがある場合、2つのレプリカに成功する必要がある。&#xA;LOCAL_ONE 読み取りまたは書き込み操作は、ローカルデータセンター内の任意のレプリカに対して成功した場合に完了する。&#xA;LOCAL_QUORUM 読み取りまたは書き込み操作は、ローカルデータセンター内のレプリカの過半数に対して成功した場合に完了する。&#xA;EACH_QUORUM 読み取りまたは書き込み操作は、各データセンター内のレプリカの過半数に対して成功した場合に完了する。&#xA;ALL 読み取りまたは書き込み操作は、データのすべてのレプリカに対して成功した場合に完了する。</description>
     </item>
     <item>
       <title>DS201の実施_Hinted handoff</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Hinted Handoffは、Cassandraデータベースクラスター内のノード間でデータのレプリケーションを行う際に使用される機能。ノードの障害や一時的なダウンタイムが発生した場合でも、データの耐障害性と可用性を確保するために使用される。&#xA;ノードがダウンしている場合やネットワーク接続が一時的に切断されている場合、データの書き込みや読み取りが影響を受ける可能性がある。Hinted Handoffは、ダウンしているノードのデータを一時的に別のノードに保存しておく仕組みである。例えば、データを書き込もうとしたノードがダウンしている場合、Hinted Handoffはそのデータのヒント（ヒント情報）を別のノードに保存します。そして、ダウンしていたノードが復旧した際に、ヒント情報を使用してデータをそのノードに渡すr。&#xA;ただし、Hinted Handoffは一時的な解決策であり、ノードが長期間ダウンしている場合やデータのヒント情報が大量に蓄積される場合には、適切な対策を講じる必要がある。また、Hinted Handoffはデフォルトで有効になっているが、必要に応じて設定を変更することもできる。</description>
     </item>
     <item>
       <title>DS201の実施_Read Repair</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Cassandraでは、データのレプリカが複数のノードに存在し、それらのレプリカ間でデータの整合性を維持する必要がある。Read Repairは、読み取り操作が行われる際に自動的に実行される。&#xA;クライアントがデータを読み取るとき、Cassandraはレプリカセット(同じデータを保持する複数のノードのグループ)からデータを収集する。各レプリカは自身のタイムスタンプを持っており、最新のタイムスタンプを持つデータがクライアントに返さる。レプリカ間でデータのタイムスタンプが異なる場合、CassandraはRead Repairを使用して古いデータを更新することでデータの整合性を回復させる。&#xA;read_repair_chanceにより、読み取り操作時に自動的にRead Repairを実行する確率を指定する。この値は0から1の範囲で設定され、0は実行しないことを意味し、1は必ず実行することを意味する。</description>
     </item>
     <item>
       <title>DS201の実施_Replication</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</link>
       <pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Cassandraは、データの冗長性と可用性を確保するためにReplication（複製）を行う。 Replicationはデータを複数のノードに複製することで、障害が発生してもデータの喪失やサービスの停止を防ぐ。Replication Factor（RF）と呼ばれるパラメータを使用して、各データセットの複製数を指定することができる。RFの値はクラスタ全体または特定のキースペース（Keyspace）ごとに設定できる。</description>
     </item>
     <item>
       <title>DS201の実施_Snitches</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</link>
       <pubDate>Sat, 24 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;snitchは、ノードの位置情報を管理し、データの配置とレプリケーションを制御するための機能。ネットワークトポロジーとデータセンター構成に基づいて、Cassandraクラスタ内のノードの物理的な配置を決定する。&#xA;snitchの主な役割は、データの一貫性と耐障害性を確保すること。データは複数のノードにレプリケートされるため、ノードの配置によってデータの可用性とパフォーマンスが大きく左右される。&#xA;以下のような種類が存在する。&#xA;SimpleSnitch RackInferringSnitch GossipingPropertyFileSnitch </description>
     </item>
     <item>
       <title>DS201の実施_Gossip</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Cassandraのノード間の通信とデータの同期は、Gossipプロトコルに基づいて行われる。&#xA;Gossipは、ネットワーク内のノード間で情報を分散させるためのプロトコル。ノードは定期的にお互いに通信し、各ノードが保持する情報を交換する。この情報には、ノードの状態やトポロジー、データの位置情報などが含まれる。&#xA;具体的な動作手順は以下の通り。&#xA;各ノードは、互いに定期的に「ゴシップ（情報交換）」メッセージを送信。 ノードは、受信したメッセージに含まれる情報を自身の状態と比較し、新しい情報があれば自身の情報を更新。 ノードは、自身の情報を他のノードに送信。すべての情報を送信するのではなく、変更された情報のみを送る。 ノードは、他のノードから受信した情報を受け入れ、自身の情報を更新。 演習 $ nodetool gossipinfo localhost/127.0.0.1 generation:1686366680 heartbeat:8156 STATUS:19:NORMAL,-1868919513406135542 LOAD:8135:1.2650205E7 SCHEMA:223:8aec9840-06b7-356a-b5ed-07e43a42d65e DC:9:datacenter1 RACK:11:rack1 RELEASE_VERSION:6:4.1.2 RPC_ADDRESS:5:127.0.0.1 NET_VERSION:2:12 HOST_ID:3:349d6a93-038a-45a9-bd86-cc22ed3d8e0d RPC_READY:21:true NATIVE_ADDRESS_AND_PORT:4:127.0.0.1:9042 STATUS_WITH_PORT:18:NORMAL,-1868919513406135542 SSTABLE_VERSIONS:7:big-nb TOKENS:17:&amp;lt;hidden&amp;gt; ノードの状態はキーバリューペアとして表される。 2ノードある場合、ノード1でnodetool gossipinfoコマンドを実行しても、ノード1とノード2のGossip状態を確認することができる。</description>
     </item>
     <item>
       <title>DS201の実施_Node</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;nodetoolはApache Cassandraの管理ツールの一部で、Cassandraクラスターの実行時操作や監視をサポートする。&#xA;代表的なコマンド helpコマンド $ nodetool help usage: nodetool [(-pp | --print-port)] [(-p &amp;lt;port&amp;gt; | --port &amp;lt;port&amp;gt;)] [(-pwf &amp;lt;passwordFilePath&amp;gt; | --password-file &amp;lt;passwordFilePath&amp;gt;)] [(-pw &amp;lt;password&amp;gt; | --password &amp;lt;password&amp;gt;)] [(-h &amp;lt;host&amp;gt; | --host &amp;lt;host&amp;gt;)] [(-u &amp;lt;username&amp;gt; | --username &amp;lt;username&amp;gt;)] &amp;lt;command&amp;gt; [&amp;lt;args&amp;gt;] The most commonly used nodetool commands are: assassinate Forcefully remove a dead node without re-replicating any data. Use as a last resort if you cannot removenode bootstrap Monitor/manage node&amp;#39;s bootstrap process cleanup Triggers the immediate cleanup of keys no longer belonging to a node.</description>
     </item>
     <item>
       <title>DS201の実施_Ring</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Ringとは Cassandraのアーキテクチャは、複数のノードで形成されるクラスタを基盤としている。 その中心にあるデータ構造はRingと呼ばれる。Ringとは、クラスタ内でデータがどのように各ノード間で分散されるかを管理する役割を担っている。&#xA;Cassandraは全てのデータをパーティションに分割し、それぞれのパーティションに一意のトークンを割り当てる。これらのトークンは、Ringのデータ構造の中に配列される。Ringとは、全ての可能なトークンの値の範囲を視覚化したものといえる。&#xA;各ノードは、Ring上の特定の範囲のトークンを所有している。その所有するトークン範囲に対応するデータの一部を格納することにより、どのデータがどのノードに存在するかが決定され、データがノード間で分散される。&#xA;リングの構造は、ノードが追加または削除されたときにも、データの再分配を最小限に抑える役割も果たす。新たなノードが追加された際には、そのノードはリング上の特定の位置を占め、既存の隣接するノードからデータの一部を引き継ぐ。これにより、新規に追加されたノードが新たなデータの保存場所として機能する。&#xA;Ringの構造は単一障害点を排除する役割も果たす。1つのノードが故障またはダウンしても、他のノードがその役割を引き継ぎ、システムは正常に動作し続ける。これは各ノードがデータの一部を保有し、それぞれが特定のトークン範囲を所有しているためである。&#xA;Cassandraのリング構造は、データの一貫性と高可用性を保証するためのレプリケケーションとしても機能する。各パーティションのデータは、Ring上の複数のノードに複製される。通常、所有するトークンが隣接するノードに対して行われる。この複製プロセスにより、ノードが故障してもデータが失われることがなく、また必要なデータが常に読み出せる状態が保たれる。&#xA;このように、Cassandraのリングは、データの配置、スケーラビリティ、耐障害性、および一貫性という、分散データベースの主要な課題を管理するための強力な仕組みである。&#xA;演習 「datastax」と「cassandra」の2つのタグがそれぞれ1つのパーティションを形成している。 cqlshクエリの結果である&amp;quot;system.token(tag)&amp;ldquo;の値は、各タグ（&amp;ldquo;datastax&amp;quot;および&amp;quot;cassandra&amp;rdquo;）に対応するトークンの値を示している。&#xA;cqlsh:killrvideo&amp;gt; SELECT token(tag), tag ... FROM videos_by_tag; system.token(tag) | tag ----------------------+----------- -1651127669401031945 | datastax -1651127669401031945 | datastax 356242581507269238 | cassandra 356242581507269238 | cassandra 356242581507269238 | cassandra nodetool ringの出力は、Cassandraクラスタ内のノードの情報を示している。各行は1つのノードを表し、そのノードが保持しているトークンの値が表示している。nodetool コマンドによって表示されるトークンは、ノードが担当するデータの範囲の開始トークンである。&#xA;$ nodetool ring Datacenter: datacenter1 ========== Address Rack Status State Load Owns Token 8495111347830785616 127.0.0.1 rack1 Up Normal 12.04 MiB 100.00% -9107256078387604241 127.</description>
     </item>
     <item>
       <title>DS201の実施_VNode</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</link>
       <pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;従来のCassandraの設計では、物理ノードがデータのパーティションを管理していた。しかし、物理ノードが故障した場合、そのノードが担当していたパーティションを別のノードに再分配する必要がある。この再分配は手間がかかり、時間とリソースを消費する。&#xA;そこで、CassandraではVNode（仮想ノード）が導入さた。VNodeは、パーティションを物理ノード間で均等に分散する仕組みである。VNodeでは、物理ノードごとに複数の仮想ノードが作成される。各仮想ノードは一意のトークン範囲を持ち、その範囲内のパーティションを担当する。つまり、データは仮想ノードに均等に分散されるため、物理ノードの追加や故障に対して柔軟に対応できる。&#xA;VNodeを使用することで、Cassandraクラスターのパフォーマンスと可用性が向上し、管理の負担が軽減される。</description>
     </item>
     <item>
       <title>DS201の実施_ClusteringColumns</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</link>
       <pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;クラスタリングカラムとは、主キーの一部であるが、パーティションキーではないカラムのこと。&#xA;クラスタリングカラムを指定してテーブル作成 CREATE TABLE videos_by_tag ( tag text, video_id uuid, added_date timestamp, title text, PRIMARY KEY ((tag), added_date, video_id) ) WITH CLUSTERING ORDER BY(added_date DESC); データを入れた後、中身を確認 cqlsh:killrvideo&amp;gt; SELECT * ... FROM videos_by_tag; tag | added_date | video_id | title -----------+---------------------------------+--------------------------------------+------------------------------ datastax | 2013-10-16 09:00:00.000000+0000 | 4845ed97-14bd-11e5-8a40-8338255b7e33 | DataStax Studio datastax | 2013-04-16 09:00:00.000000+0000 | 5645f8bd-14bd-11e5-af1a-8638355b8e3a | What is DataStax Enterprise? cassandra | 2014-01-29 09:00:00.</description>
     </item>
     <item>
       <title>DS201の実施_Drivers</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</link>
       <pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;Pythonドライバを使用してApache Cassandraに接続する。&#xA;from cassandra.cluster import Cluster cluster = Cluster(protocol_version = 3) session = cluster.connect(&amp;#39;killrvideo&amp;#39;) for val in session.execute(&amp;#34;SELECT * FROM videos_by_tag&amp;#34;): print(val) $ python test.py Row(tag=&amp;#39;datastax&amp;#39;, added_date=datetime.datetime(2013, 10, 16, 9, 0), video_id=UUID(&amp;#39;4845ed97-14bd-11e5-8a40-8338255b7e33&amp;#39;), title=&amp;#39;DataStax Studio&amp;#39;) Row(tag=&amp;#39;datastax&amp;#39;, added_date=datetime.datetime(2013, 4, 16, 9, 0), video_id=UUID(&amp;#39;5645f8bd-14bd-11e5-af1a-8638355b8e3a&amp;#39;), title=&amp;#39;What is DataStax Enterprise?&amp;#39;) Row(tag=&amp;#39;cassandra&amp;#39;, added_date=datetime.datetime(2014, 1, 29, 9, 0), video_id=UUID(&amp;#39;1645ea59-14bd-11e5-a993-8138354b7e31&amp;#39;), title=&amp;#39;Cassandra History&amp;#39;) Row(tag=&amp;#39;cassandra&amp;#39;, added_date=datetime.datetime(2013, 3, 17, 9, 0), video_id=UUID(&amp;#39;3452f7de-14bd-11e5-855e-8738355b7e3a&amp;#39;), title=&amp;#39;Cassandra Intro&amp;#39;) Row(tag=&amp;#39;cassandra&amp;#39;, added_date=datetime.</description>
     </item>
     <item>
       <title>DS201の実施_CQL</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;CQLshellを起動 $ cqlsh cqlsh: Cassandraのクエリ言語シェル。Cassandraクラスターに接続し、CQL（Cassandra Query Language）を使用してデータベース操作を行う。&#xA;keyspaceの作成 killrvideo という名前の keyspace を作成。&#xA;cqlsh&amp;gt;　CREATE KEYSPACE killrvideo WITH replication = { &amp;#39;class&amp;#39;:&amp;#39;SimpleStrategy&amp;#39;, &amp;#39;replication_factor&amp;#39;: 1 }; keyspace：Cassandraにおけるデータベースのトップレベルのコンテナ。データの論理的なグループ化を提供し、テーブルやデータの構造を定義する。 replication：キースペース内のデータの冗長複製を管理する方法を指定する。 keyspaceの選択 cqlsh&amp;gt;　USE killrvideo; tableの作成 cqlsh:killrvideo&amp;gt;　CREATE TABLE videos ( video_id TIMEUUID, added_date TIMESTAMP, title TEXT, PRIMARY KEY (video_id) ); cqlsh:killrvideo&amp;gt; INSERT INTO videos (video_id, added_date, title) cqlsh:killrvideo&amp;gt; VALUES (1645ea59-14bd-11e5-a993-8138354b7e31, &amp;#39;2014-01-29&amp;#39;, &amp;#39;Cassandra History&amp;#39;); データ確認 cqlsh:killrvideo&amp;gt; SELECT * FROM videos; video_id | added_date | title --------------------------------------+---------------------------------+------------------- 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-28 15:00:00.</description>
     </item>
     <item>
       <title>DS201の実施_partitions</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習記録。&#xA;パーティション（Partition）は、データを分割して格納するための概念。&#xA;パーティションは、データの格納と検索の単位となる。Cassandraのテーブルは、1つまたは複数のパーティションで構成されており、各パーティションは一意のパーティションキーによって識別される。パーティションキーは、データを分割するための基準となる。パーティションキーの値に基づいてデータが物理的に分散される。&#xA;cqlsh:killrvideo&amp;gt; DESCRIBE TABLE videos; CREATE TABLE killrvideo.videos ( video_id timeuuid PRIMARY KEY, added_date timestamp, title text ) WITH additional_write_policy = &amp;#39;99p&amp;#39; AND bloom_filter_fp_chance = 0.01 AND caching = {&amp;#39;keys&amp;#39;: &amp;#39;ALL&amp;#39;, &amp;#39;rows_per_partition&amp;#39;: &amp;#39;NONE&amp;#39;} AND cdc = false AND comment = &amp;#39;&amp;#39; AND compaction = {&amp;#39;class&amp;#39;: &amp;#39;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&amp;#39;, &amp;#39;max_threshold&amp;#39;: &amp;#39;32&amp;#39;, &amp;#39;min_threshold&amp;#39;: &amp;#39;4&amp;#39;} AND compression = {&amp;#39;chunk_length_in_kb&amp;#39;: &amp;#39;16&amp;#39;, &amp;#39;class&amp;#39;: &amp;#39;org.apache.cassandra.io.compress.LZ4Compressor&amp;#39;} AND memtable = &amp;#39;default&amp;#39; AND crc_check_chance = 1.</description>
     </item>
     <item>
       <title>ローカルmacへのCassandraインストール</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</guid>
-      <description></description>
+      <description>Cassandraインストール&#xA;$ brew install cassandra Cassandraサーバーを起動&#xA;$ brew services start cassandra CQLshellを起動&#xA;$ cqlsh </description>
     </item>
     <item>
       <title>DS201の実施_Compaction</title>
       <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</guid>
-      <description></description>
+      <description>DS201: Foundations of Apache Cassandra™ and DataStax Enterpriseの学習&#xA;概要 Compactionは、不要なデータを削除し、データの配置を最適化することで、データベースのパフォーマンスを向上させる。Compactionには、メジャーとマイナーコンパクションの2つの主要なタイプがある。&#xA;マイナーコンパクション マイナーコンパクションは、SSTable内のデータのみを対象とし、データの重複を削除し、1つのSSTableにまとめることで容量を削減する。マイナーコンパクションでは、トゥームストーン（削除マーカー）が処理され、不要なデータが完全に削除される。トゥームストーンは、Cassandraで削除操作が行われた場合に挿入されるマーカーである。データの削除は即座に行われず、トゥームストーンが挿入されてデータが「削除済み」とマークされる。Compactionプロセスでは、トゥームストーンのあるSSTableから削除マーカーを削除し、不要なデータを完全にクリーンアップする。&#xA;メジャーコンパクション メジャーコンパクションは、複数のSSTable間のマージを行う。複数のSSTableを1つの新しいSSTableに結合し、データの重複を削除し、不要なトゥームストーンを削除する。また、GC（ガベージコレクション）も実行する。GCは、Compactionプロセスが完了した後に、不要なデータとトゥームストーンを物理的に削除する役割を果たす。これにより、ディスクスペースが解放され、データベースのパフォーマンスが向上する。&#xA;メジャーコンパクションは、データベースの大規模な再構築を必要とするため、システムの負荷が高くなる。したがって、Cassandraでは通常、バックグラウンドで自動的にメジャーコンパクションがスケジュールされる。メジャーコンパクションのスケジュールは、ディスクの使用状況やデータの更新頻度などを考慮して、自動的に調整される。</description>
     </item>
   </channel>
 </rss>

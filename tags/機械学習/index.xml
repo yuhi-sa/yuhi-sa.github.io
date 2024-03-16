@@ -13,49 +13,49 @@
       <link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link>
       <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid>
-      <description></description>
+      <description>リパラメタライゼーショントリック(Reparameterization trick) 確率分布からサンプリングされた変数は確率変数となるため微分ができず， 逆誤差伝搬による計算を行うことができない． この問題を解決するため、Kingmaらが導入した手法がリパラメタライゼーショントリックである．&#xA;リパラメタライゼーショントリックでは特定の確率分布からのサンプリングをパラメータ非依存の乱数と その確率分布のパラメータに分割・合成することで同等のサンプリングを行う． 例えば，$z$が平均$\mu$，分散$\sigma$をパラメータとして持つ正規分布$\mathcal{N}$からサンプリングされるとする．&#xA;$$z \sim \mathcal{N}(\mu, \sigma^2)$$&#xA;ランダムノイズ$\epsilon$を用いて以下のように変換する．&#xA;$$z = \mu + \sigma \odot \epsilon$$&#xA;$$\epsilon \sim \mathcal{N}(0,1) $$&#xA;これにより$z$は，$\mu$と$\sigma$に対して確定的な値となるため微分可能になる．&#xA;Pytorchでのリパラメタライゼーショントリックを用いたサンプリング m = Normal(*params) z = m.rsample() リパラメタライゼーショントリックを用いたサンプリングができるできる確率分布は以下の値がTrueとなっている．&#xA;m.has_rsample 参考 D. P. Kingma and M. Welling, “Auto-encoding variational bayes”, 2013. ReNom, 変分オートエンコーダ </description>
     </item>
     <item>
       <title>ガウス分布同士のクロスエントロピーの閉形式導出</title>
       <link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link>
       <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid>
-      <description></description>
+      <description>準備 ガウス分布 $$ p(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi }}\exp{-\frac{(x-\mu)^2}{2\sigma^2}} $$ 期待値 $$\mathbb{E}[x]=\mu$$&#xA;分散 $$\mathbb{E}[x^2]=\mu^2+\sigma^2$$ $$\mathbb{V}[x]=\mathbb{E}[x^2]-(\mathbb{E}[x]^2)$$&#xA;導出 $$-\int_x p_1(x|\mu_1,\sigma_1)\log p_2(x|\mu_2,\sigma_2)dx$$&#xA;$$=-\mathbb{E}_{p1}[\log(\frac{1}{\sigma_2 \sqrt{2\pi}}\exp{-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2})]$$&#xA;$$=-\mathbb{E}_{p1}[-\log\sigma_2\sqrt{2\pi}-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2]$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2}\mathbb{E}_{p1}(x-\mu_2)^2$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \mathbb{E}[x^2]-2\mu_2\mathbb{E}[x]+\mathbb{E}[\mu_2^2])$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \sigma_1^2+\mu_1^2-2\mu_1\mu_2+\mu_2^2)$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{(\mu_1-\mu_2)^2+\sigma_1^2}{2\sigma_2^2}$$</description>
     </item>
     <item>
       <title>モーメント</title>
       <link>https://yuhi-sa.github.io/posts/20210527_moment/1/</link>
       <pubDate>Thu, 27 May 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210527_moment/1/</guid>
-      <description></description>
+      <description>モーメントとは，ある点を中心として運動を起こす能力の大きさを表す物理量である．&#xA;モーメントの求め方 関数$f(x)$のモーメント&#xA;$$\mu_n = \int_\infty^\infty x^nf(x)dx$$&#xA;関数$f(x)$の$c$周りのモーメント&#xA;$$\mu_n^c = \int_\infty^\infty (x-c)^nf(x)dx$$&#xA;意味(n&amp;lt;3) $$\mu_0 = 1$$&#xA;$n=1$の時，平均値となる．&#xA;$$\mu_1 = \mu$$&#xA;$n=2$の時，分散となる．&#xA;$$\mu_2 = \sigma^2$$&#xA;意味(n&amp;gt;=3) $n=3$を用いて歪度(わいど)$\gamma_1$が表される． 歪度は分布が正規分布からどれだけ歪んでいるかを表す統計量である． $$\gamma_1 = \mu_3/\sigma^3$$&#xA;$n=4$を用いて尖度$\gamma_2$が表される． 尖度は分布が正規分布からどれだけ尖っているかを表す統計量 $$\gamma_2=\mu_4/\sigma^4 -3$$</description>
     </item>
     <item>
       <title>クロスエントロピー法(Cross Entropy Method)</title>
       <link>https://yuhi-sa.github.io/posts/20210329_cem/1/</link>
       <pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210329_cem/1/</guid>
-      <description></description>
+      <description>クロスエントロピー法は，モンテカルロ法における重点サンプリング法の一種であり、最適化問題において確率分布の近似を行うアルゴリズムである。&#xA;モンテカルロサンプリング モンテカルロ法は，乱数を用いる数値計算法の総称である．&#xA;問題設定として，$X$を確率変数，$H$を目的の関数，$f$を$H$の$X$における確率密度関数とした場合，期待値&#xA;$$l=\int H(x)f(x)dx = E[H(X)]$$&#xA;を知りたいとする． モンテカルロサンプリングでは，以下のようにこれを近似する．&#xA;$$l_{MS}=\frac{1}{N}\sum_{i=1}^{N}(X_i)$$&#xA;重点サンプリング(Importance Sampling) 重点サンプリングでは，モンテカルロサンプリングより効率よくサンプリングを行うために，分散の小さい分布からサンプリングすることを考える．&#xA;重点サンプリングでは，$g(x)=0$のとき$H(x)f(x)=0$となる，確率密度関数$g$を用意して以下のように推定量の近似を行う．&#xA;$$l_{IS}=\frac{1}{N}\sum_{i=1}^NH(X_i)\frac{f(X_i)}{g(X_i)}=E[H(X)\frac{f(X)}{g(X)}]$$&#xA;クロスエントロピー法 クロスエントロピー法では，重点サンプリングでの$g$の最適分布$g^*$と近い分布を用いることを考える．&#xA;ここで，確率分布間の距離を測る指標としてクロスエントロピーを用いる．クロスエントロピー$D$は，以下の式で表される．&#xA;$$D(g,h)=\int \log \frac{g(x)}{h(x)}g(x)dx$$&#xA;$D(g^\ast,h)$を最小にする$h$を求めれば，$g^\ast$に近い分布，つまり分散の小さい分布が獲得可能である．&#xA;$$l_{CEM}=E[H(X)\frac{f(X;u)}{g(X;v)}]$$&#xA;$$v^{\ast}=arg min_v D[g^{\ast},g(x;v)]$$&#xA;参考文献 漆原 勉,&amp;ldquo;モンテカルロシミュレーションにおける重点サンプリング法に対する大偏差理論の適用について&amp;rdquo; クロスエントロピー法 - Cross-coupling reactionWikipedia site:nipponkaigi.net </description>
     </item>
     <item>
       <title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid>
-      <description></description>
+      <description>ニューラルネットワークClassを作成 import torch from torch.autograd import Variable import torch.nn as nn import torch.nn.functional as F import torch.optim as optim import numpy as np nn.Moduleを継承して，ニューラルネットワーク(NN)のニューロン数，optimizer，損失関数を決める． 損失関数によって求まるlossを小さくするようにoptimizerがNNのパラメータを最適化することによって学習を行う．&#xA;optimizerの種類：【前編】Pytorchの様々な最適化手法(torch.optim.Optimizer)の更新過程や性能を比較検証してみた！ 損失関数の種類：pytorch for python における損失関数 (誤差関数) class Model(nn.Module): def __init__(self, input_dim, output_dim): super(Model, self).__init__() # NNの入出力 self.fc1 = nn.Linear(input_dim, 100) self.fc2 = nn.Linear(100, 100) self.fc3 = nn.Linear(100, output_dim) # 学習率とパラメータの更新方法 self.optimizer = optim.SGD(self.parameters(), lr=0.01) # loss関数 self.criterion = nn.MSELoss() 活性化関数を定義&#xA;活性化関数の種類：活性化関数一覧 (2020) def forward(self, x): x = F.</description>
     </item>
     <item>
       <title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link>
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210125_ut/1/</guid>
-      <description></description>
+      <description>Unscented Transformation U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．&#xA;まず，この場合，モンテカロ的に&#xA;$$ \bar{y}\simeq\frac{1}{N}\sum_{i=1}^Nf(x_i) $$&#xA;$$ P_y \simeq \frac{1}{N}\sum_{i=1}^N(f(x_i)-\bar{y})(f(x_i)-\bar{y})^T $$&#xA;のように計算することが思いつくが，精度をよく計算するにはNを大きくする必要があり，実用上問題がある．&#xA;線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．&#xA;まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．&#xA;参考1：UKF （Unscented Kalman Filter）っ て何 ？&#xA;import matplotlib.pyplot as plt import numpy as np import random import math import scipy.linalg 入力には$X=(X_1,X_2)$を用いる．&#xA;平均ベクトルは，&#xA;$$ \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2) $$ 分散共分散ベクトルは，&#xA;$$ P_x = [ \begin{array}{cc} var[X_1] &amp;amp; cov[X_1,X_2] \ cov[X_2,X_1] &amp;amp; var[X_2] \end{array} ] = [ \begin{array}{cc} \sigma_1^2 &amp;amp; \sigma_1\sigma_2 \ \sigma_1\sigma_2 &amp;amp; \sigma_2^2 \end{array} ] $$&#xA;で表すことができる．&#xA;よって， $X_1,X_2$にそれぞれ平均0分散1，平均1分散2の標準正規分布を用いると考えると，</description>
     </item>
     <item>
       <title>情報理論(エントロピーから相互情報量, PRML1.6)</title>
       <link>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</link>
       <pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid>
-      <description></description>
+      <description>情報量の表し方 情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える． 情報量として用いる場合，以下の2点を満たしている必要がある．&#xA;$h(x,y)=h(x)+h(y)$ 2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる． $p(x,y)=p(x)p(y)$ 2つの無関係な事象は統計的に独立である． この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．&#xA;$$ h(x)=-log_2p(x) $$ 情報理論では一般的に底2が用いられる．&#xA;エントロピー ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．&#xA;$$ H[x]=-\sum_x p(x) \log_{2}p(x) $$&#xA;ビット数の下限 ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．&#xA;8個それぞれの確率が等確率であるとする． $$ H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット $$&#xA;8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする． $$ H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット $$&#xA;上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる． ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．&#xA;エントロピーの高低 少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．&#xA;最大のエントロピーを持つ確率分布 まず，エントロピーの二階微分二階微分を計算する．&#xA;$$ \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i} $$ $I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．&#xA;微分エントロピー $x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．&#xA;$$ \int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta $$ $x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．&#xA;$$ H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)= -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta $$ 第二項を無視して$\Delta\rightarrow 0$の極限を考える．&#xA;$$ \lim_{\Delta\rightarrow 0}{ -\sum_i p(x_i)\Delta\ln p(x_i) } = -\int p(x)\ln p(x)dx $$ 右辺が微分エントロピーとなる．</description>
     </item>
   </channel>
 </rss>

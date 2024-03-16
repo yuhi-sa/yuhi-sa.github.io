@@ -13,49 +13,49 @@
       <link>https://yuhi-sa.github.io/posts/20210319_rl/7/</link>
       <pubDate>Mon, 22 Mar 2021 11:35:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/7/</guid>
-      <description></description>
+      <description>Actor Critic系 Asynchronous Advantage Actor Critic(A3C) A3CはA2Cと同様に分散環境を使用するが，各環境のエージェントはそこで経験を収集するだけでなく学習も行う．これがAsynchronousな学習である．&#xA;Asynchronousな学習をしなくても十分な精度が出るためA2Cが生まれた．&#xA;Experience Replyでは，大きなバッファを用意して多様性を担保にしていたが，ぶんさん収集では別々の環境における経験を集めることで多様性を担保する．&#xA;Deep Deterministic Policy Gradient(DDPG) Experience Replyを用いたActor-Criticの手法．行動を行動確率の分布からサンプリングするのではなく，行動を直接出力する，また，学習に関してはAdvantageではなく，TD誤差を用いる．&#xA;Deterministic Policy Gradient(DPG) 行動が確率的ではなく，価値ベースのようにベストな行動が決定的に選択されるという前提をおいた手法である．&#xA;方策勾配系 Trust Region Policy Optimization(TRPO) 方策勾配系の手法は実験結果が安定しない場合がある．この点を改善する手法がいくつか提案されている． その一つが，更新前の方策から大きく離れないように制約をかける方法である．&#xA;$$\mathbb{E}[KL[\pi_{\theta_{old}}(･|s_t),\pi_\theta(･|s_t)]] \leq \delta$$&#xA;更新前の行動分布$\pi_{\theta_{old}}(･|s_t)$と更新後の行動分布$\pi_\theta(･|s_t)$の分布間の距離KLダイバージェンスが$\delta$以下になるように制約をかけ，制約の下でAdvantageが大きくなるように更新する．&#xA;Advantageには更新の前後の変化に応じて重み($\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}$)がかけられる．&#xA;$$\max_\theta \mathbb{E}[\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t]$$&#xA;TRPOにおける距離の制約は，目的関数の中に組み込むことが可能である．&#xA;$$r_t(\theta) = \mathbb{E}[\frac{\pi_\theta(･|s_t)}{\pi_{\theta_{old}}(･|s_t)}A_t - \beta KL[\pi_{\theta_{old}}(･|s_t),\pi_\theta(･|s_t)]]$$&#xA;Proximal Policy Optimization(PPO) TRPOの距離制約を含んだ目的関数$r_t(\theta)$において，更新前後の分布が前後完全に一致した場合1となる.&#xA;$r_t(\theta)$が1から大きく離れる場合，一定の上限値で制限する．以下の式では，$r_t(\theta)$を$1-\epsilon$から$1+\epsilon$の範囲に制限している．&#xA;$$clip(r_t(\theta),1-\epsilon,1+\epsilon)A_t$$&#xA;この制約を目的関数に組み込んだ手法がProximal Policy Optimization(PPO)である．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>Advantage Actor Critic(A2C)</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/6/</link>
       <pubDate>Mon, 22 Mar 2021 11:30:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/6/</guid>
-      <description></description>
+      <description>状態における行動価値$Q(s,a)$は，状態そのものへの依存度が大きい傾向がある．そこで状態の価値$V(s)$を差し引いたうえで行動を評価することを考える．&#xA;$$A(s,a)=Q(s,a)-V(s)$$&#xA;この$A(s,a)$をAdvantageと呼ぶ． Advantageを利用する場合の方策勾配は以下のようになる．&#xA;$$\nabla J(\theta) = E_{\pi_{\theta}}[\nabla \log \pi_{\theta(a|s)}A(s,a)]$$&#xA;$\pi_\theta(a|s)$をActor，Advantageの計算に必要な$V(s)$をCriticとしてActor Critic法を使用することができる． これをAdvantage Actor Critic(A2C)と呼ぶ．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>方策勾配法</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/5/</link>
       <pubDate>Mon, 22 Mar 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/5/</guid>
-      <description></description>
+      <description>方策もパラメータをもつ関数として表現可能である．状態を引数にとり，行動確率を出力する関数である．&#xA;方策の価値を期待値で計算する．方策に従い状態に遷移する確率$d^{\pi_\theta}(s)$・行動確率$\pi_\theta(a|s)$・行動価値$Q^{\pi_\theta}(s,a)$から計算を行う．&#xA;$$J(\theta) \propto \sum_s d^{\pi_\theta}(s)\sum_a\pi_\theta(a|s)Q^{\pi_\theta}(s,a)$$&#xA;期待値の最大化を考えてパラメータの調整を行う．勾配法で方策の期待値の最適化を行う手法を方策勾配法とよぶ．&#xA;$$\nabla J(\theta) \propto \sum_s d^{\pi_\theta}(s)\sum_a \nabla \pi_\theta(a|s)Q^{\pi_\theta}(s,a)$$&#xA;$$\nabla\pi_\theta(a|s)=\pi_\theta(a|s)\frac{\nabla \pi_\theta(a|s)}{\pi_\theta (a|s)}=\pi_\theta(a|s)\nabla \log \pi_\theta(a|s)$$&#xA;以上より，&#xA;$$\nabla J(\theta) \propto E_{\pi_{\theta}}[\nabla\log\pi_{\theta(a|s)}Q^{\pi_{\theta}}(s,a)]$$&#xA;勾配である$\nabla \log \pi_\theta(a|s)$が移動方向，$Q^{\pi_\theta}(s,a)$が大きさというふうに解釈できる．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>ニューラルネットを適応した強化学習</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/4/</link>
       <pubDate>Mon, 22 Mar 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/4/</guid>
-      <description></description>
+      <description>学習安定化のための方法 Experience Replay 行動履歴をプールしておき，そこからサンプリングすることで，さまざまなエピソードにおける，異なるタイムステップのデータを学習データとして使用する．これにより学習する経験の偏りを防ぎ，学習を安定化させる．&#xA;Fixed Target Q-Network 一定期間固定されたパラメーターから価値を算出する手法．遷移先の価値を本体のモデルで計算する場合，学習のたびにパラメーターが変わるため，値が毎回変わることとなる．これではTD誤差が安定しないため，一定期間パラメーターを固定する．&#xA;報酬のClipping 全ゲームを通じ成功は1，失敗は-1と報酬を統一する．&#xA;Deep Q-Network(DQN)とその改良 価値評価に深層学習を適応する方法をDeep Q-Network(DQN)とよぶ．単純にニューラルネットを使用するだけでは学習が安定しないため，前項のような安定化の工夫が必要となる．&#xA;DQNを発表したDeep Mindは，改良手法6つを組み込んだRainbowというモデルを発表している．&#xA;Double DQN 行動価値と行動選択のネットワークを分けることで価値の見積もり精度を上げる．&#xA;Prioritized Replay Experience Replyから単純にランダムサンプリングするのではなく，学習効果の高い(TD誤差が大きいもの)を優先してサンプリングを行い学習効率を上げる．&#xA;Dueling Network 状態価値と行動価値を分けて計算することにより価値の見積もり精度を上げる．&#xA;Multi-step Learning Q学習とMonteCarlo法の間をとる手法で，「nステップ分の報酬」と「nステップ先の状態の価値」から修正を行うことで，価値の見積もり精度を上げる．&#xA;Distributional RL 報酬を分布として扱い，価値の見積もり精度を上げる．&#xA;Noisy Nets Epsilon-Greedy法においてEpsilonの設定は非常にセンシティブである．Noisy Netsではどのくらいランダムに行動したほうがよいか自体をネットワークに学習することで探索効率を上げる．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>モデルフリー強化学習</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/3/</link>
       <pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/3/</guid>
-      <description></description>
+      <description>モデルフリーの強化学習では，モデル(遷移関数$T(s&amp;rsquo;|s,a)$・報酬関数$R(s,s&amp;rsquo;)$)が未知であることが前提で，エージェント自らが動くことで経験を蓄積し，その経験から学習を行う．&#xA;探索と活用のトレードオフ 無限に行動することが可能であれば十分な探索の後に経験をかつようすればよい．しかし，多くの場合行動回数に何かしらの制限がある． どれくらい調査の行動をして，どのくらい報酬目的の行動をするかを探索と活用のトレードオフとよぶ．トレードオフのバランスを取る手法として，Epsilon-Greedy法が一般的である．&#xA;Epsilon-Greedy法&#xA;Epsilonの確率で探索を行い，それ以外は活用目的の行動を行う． 計画の修正を実績で行うか，予測で行うか 計画の修正を実績に基づき行う場合と，予測により行う場合のトレードオフも存在する．&#xA;前者の手法としてモンテカルロ法，後者の手法としてTD法，両者の間をとる手法としてTD($\lambda$)法がある．&#xA;モンテカルロ法(時刻Tでエピソード修了) エピソードが修了した後に，獲得できた報酬の総和をもとに修正を行うシンプルな方法である．&#xA;$$V(s_t) \leftarrow V(s_t)+\alpha((r_{t+1}+\gamma r_{t+2} + \gamma^2 r_{t+3} + ,&amp;hellip;,\gamma^{T-1}r_T )-V(s_t))$$&#xA;1エピソードが終了する修正できない．&#xA;TD法 学習する経験は，見積もり$V(s)$と実際$r+V(s&amp;rsquo;)$の誤差である(TD誤差)．経験による修正は，以下のように価値の更新を行うこととなる．&#xA;$$V(s_t) \leftarrow V(s_t)+\alpha(r_{t+1}+\gamma V(s_{t+1})-V(s_t))$$&#xA;1stepごとに更新を行う手法がTD法となる． 修正期間を1より大きく，$T$より小さい値に設定する手法をMulti-step Learningとよぶ．&#xA;TD($\lambda$)法 各stepにおける実際の価値を係数$\lambda$を使い合算した結果から，誤差を計算する手法である．&#xA;1step：$G_t^1=r_{t+1}+\gamma V(s_{t+1})$ 2step：$G_t^2=r_{t+1}+\gamma r_{t+2}+\gamma^2 V(s_{t+2})$ $T$step：$G_t^T=r_{t+1}+\gamma r_{t+2}+,&amp;hellip;,+\gamma^{T-1}r_T$ $\lambda=1$でモンテカルロ法と等価なる．&#xA;価値ベースと方策ベース モデルベース強化学習と同様に経験を価値評価の更新に用いるか方策の更新に用いるかで2つに分かれる．行動価値を$Q$で表す．&#xA;価値ベース(Off-policy) Q-learning&#xA;$$Q(s_t) \leftarrow Q(s_t)+\alpha(r_{t+1}+\gamma \max_a Q(s_{t+1})-Q(s_t))$$ 方策ベース(On-policy) SARSA $$Q(s_t) \leftarrow Q(s_t)+\alpha(r_{t+1}+\gamma Q(s_{t+1})-Q(s_t))$$ Actor-Critic法 価値ベースと方策ベースを組み合わせた手法をActor-Critic法とよぶ．方策評価をActor，価値評価をCriticで相互に更新し学習を行う．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>モデルベース強化学習</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/2/</link>
       <pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/2/</guid>
-      <description></description>
+      <description>強化学習は，価値評価と方策の学習が必要であり，モデルを利用するかどうかで2種類に別れます．&#xA;モデルベース強化学習：モデル(遷移関数$T(s&amp;rsquo;|s,a)$・報酬関数$R(s,s&amp;rsquo;)$)をベースに行動を学習する手法(遷移関数・報酬関数が既知でなくても推定して利用可) モデルフリー強化学習：モデル(遷移関数・報酬関数)を使わない学習 以下は，モデルベースについてまとめる．&#xA;価値の定義 価値の定義には2つの問題がある．&#xA;将来の即時報酬$G_{t}$の値が判明している必要がある点&#xA;→価値を再帰的な式に変換する&#xA;$G_t=r_{t+1}+\gamma G_{t+1}$ それが必ず得られるとしている点&#xA;→即時報酬に確率をかける(期待値計算と同義)&#xA;$V_\pi(s_t)=E_\pi[r_{t+1}+\gamma V_\pi(s_{t+1})]$ ベルマン方程式 価値を再帰的かつ期待値で表現した式をベルマン方程式とよぶ． $$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&amp;rsquo;}T(s&amp;rsquo;|s,a)(R(s,s&amp;rsquo;)+\gamma V_\pi(s&amp;rsquo;))$$&#xA;学習 動的計画法の枠組みでの学習を考える．動的計画法では$V(s&amp;rsquo;)$に適当な値を設定しておき，複数回計算を繰り返すことで値の精度を上げる．&#xA;動的計画法による最適行動の獲得では，価値を直接行動決定に利用する価値ベース，価値を方策の評価に利用する方策ベースの2種類がある．&#xA;価値ベース エージェントは各状態の価値を算出し，値が最も高い状態に遷移するように行動する．&#xA;動的計画法により各状態の価値を算出する方法を価値反復法とよぶ． $$V_{t+1}(s)=\max_{a}{\sum_{s&amp;rsquo;}T(s&amp;rsquo;|s,a)(R(s)+\gamma V_t{s&amp;rsquo;})}$$&#xA;方策ベース エージェントは方策に基づき行動する．&#xA;方策は状態における行動確率を出力するが，この行動確率から価値の計算が可能になる． 方策により価値を計算し，価値を最大化するように方策を更新する．これを方策反復法とよぶ．&#xA;$$V_\pi(s)=\sum_a\pi(a|s)\sum_{s&amp;rsquo;}T(s&amp;rsquo;|s,a)(R(s,s&amp;rsquo;),\gamma V_\pi(s&amp;rsquo;))$$&#xA;モデルベースとモデルフリーの違い モデルベースの動的計画法において，エージェントは動かさないで環境の情報のみから方策を得ている．これが可能なのは，遷移関数と報酬関数が既知だからである． モデルフリーでは，実際にエージェントを動かしその経験から学習を行う．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
     <item>
       <title>強化学習とは</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link>
       <pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid>
-      <description></description>
+      <description>機械学習の用語整理 モデルとよばれるパラメータを持った数式のパラメータを，与えられたデータに応じて調整することを学習と呼ぶ．&#xA;モデルの一種としてニューラルネットワーク(NN)があり，多層にしたものがディープニューラルネットワーク(DNN)となる． モデルのパラメータを調整する手法として教師あり学習，教師なし学習，強化学習がある．&#xA;機械学習&#xA;「機械」= モデル ニューラルネットワーク ディープニューラルネットワーク 「学習」(方法) 教師あり学習 教師なし学習 強化学習 強化学習とは 強化学習では，データを与えられる教師あり学習，教師なし学習とは異なり環境が与えられる．&#xA;環境：行動と行動に応じた状態が定義されており，ある状態への到達に対し報酬が与えられる空間のこと 強化学習では，環境で報酬が得られるようにモデルのパラメータを調整する．環境の開始から終了までの期間を1エピソードとよび，1エピソードで得られる報酬を最大化することが学習の目的となる．&#xA;問題設定 マルコフ性(遷移先の状態は直前の状態とそこでの行動のみに依存する)に従うマルコフ決定過程(MDP)を考える． MDPの構成要素は，以下の4つである．&#xA;$s$：状態 $a$：行動 $T$：状態遷移確率&#xA;状態と行動を引数に遷移先と遷移確率を出力する関数 $R$：報酬関数&#xA;状態と遷移先を引数に報酬を出力する関数 ここで，ロボット(エージェント)は状態を受け取り行動を出力する関数とみなすことができる．この関数のことを方策$\pi$とよび，報酬をもとに方策を更新していくことで最適な方策を発見する．&#xA;参考 久保隆宏,&amp;quot;Pythonで学ぶ強化学習 入門から実践まで&amp;quot;</description>
     </item>
   </channel>
 </rss>

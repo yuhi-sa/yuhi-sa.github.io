@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>shell on tomato blog</title>
+    <title>Shell on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/shell/</link>
-    <description>Recent content in shell on tomato blog</description>
+    <description>Recent content in Shell on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Tue, 12 Dec 2023 09:00:23 +0900</lastBuildDate>
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20231213_shell/1/</link>
       <pubDate>Tue, 12 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231213_shell/1/</guid>
-      <description></description>
+      <description># 変換対象のExcelファイルが存在するディレクトリ input_dir=~/Desktop # 変換後のCSVファイルを保存するディレクトリ output_dir=~/Desktop/csv_output # 出力ディレクトリが存在しない場合は作成する mkdir -p &amp;#34;$output_dir&amp;#34; # ExcelファイルをCSVに変換する関数 convert_excel_to_csv() { input_file=&amp;#34;$1&amp;#34; output_file=&amp;#34;$output_dir/$(basename &amp;#34;${input_file%.*}&amp;#34;).csv&amp;#34; python3 -m xlsx2csv &amp;#34;$input_file&amp;#34; &amp;#34;$output_file&amp;#34; echo &amp;#34;変換完了: $output_file&amp;#34; } # ExcelファイルをCSVに変換するループ for excel_file in &amp;#34;$input_dir&amp;#34;/*.xlsx; do convert_excel_to_csv &amp;#34;$excel_file&amp;#34; done </description>
     </item>
   </channel>
 </rss>

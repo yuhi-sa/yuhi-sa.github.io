@@ -13,112 +13,112 @@
       <link>https://yuhi-sa.github.io/en/posts/20220206_repa/1/</link>
       <pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20220206_repa/1/</guid>
-      <description></description>
+      <description>Reparameterization trick When variables are sampled from a probability distribution, they become random variables, and differentiation cannot be performed, making it impossible to perform calculations using backpropagation. To solve this problem, Kingma et al. introduced the technique called the reparameterization trick.&#xA;The reparameterization trick performs the same sampling by partitioning and combining the random numbers that are independent of the parameters and the parameters of the probability distribution from which they are sampled.</description>
     </item>
     <item>
       <title>Frequency Characteristics of Exponential Moving Averages Filter</title>
       <link>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</link>
       <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</guid>
-      <description></description>
+      <description>Exponential Moving Averages (EMA) Exponential Moving Averages (EMA) is a popular method for smoothing time series data, where the input $x$ is smoothed over time with a smoothing factor $\beta$ to obtain $y$. The method assigns weights to the previous filtered value and the current observation using $\beta$, allowing recent data to be given greater importance while retaining some information from older data.&#xA;$$y_t=\beta y_{t-1}+(1-\beta)x_t$$&#xA;Gain and Phase Characteristics Taking the Laplace transform of the above equation, we get:</description>
     </item>
     <item>
       <title>Derivation of closed-form expression for cross-entropy between Gaussian distributions</title>
       <link>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</link>
       <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</guid>
-      <description></description>
+      <description>Preparation Gaussian distribution $$ p(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi }}\exp{-\frac{(x-\mu)^2}{2\sigma^2}} $$ Expected value $$\mathbb{E}[x]=\mu$$&#xA;Variance $$\mathbb{E}[x^2]=\mu^2+\sigma^2$$ $$\mathbb{V}[x]=\mathbb{E}[x^2]-(\mathbb{E}[x]^2)$$&#xA;Derivation $$-\int_x p_1(x|\mu_1,\sigma_1)\log p_2(x|\mu_2,\sigma_2)dx$$&#xA;$$=-\mathbb{E}_{p1}[\log(\frac{1}{\sigma_2 \sqrt{2\pi}}\exp{-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2})]$$&#xA;$$=-\mathbb{E}_{p1}[-\log\sigma_2\sqrt{2\pi}-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2]$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2}\mathbb{E}_{p1}(x-\mu_2)^2$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \mathbb{E}[x^2]-2\mu_2\mathbb{E}[x]+\mathbb{E}[\mu_2^2])$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \sigma_1^2+\mu_1^2-2\mu_1\mu_2+\mu_2^2)$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{(\mu_1-\mu_2)^2+\sigma_1^2}{2\sigma_2^2}$$</description>
     </item>
     <item>
       <title>Code description of ROS package to make op3 acquire walking using reinforcement learning</title>
       <link>https://yuhi-sa.github.io/en/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20211102_op3/1/</guid>
-      <description></description>
+      <description>Introduction ROS package for ROBOTIS OP3 to acquire walking using reinforcement learning&#xA;op3_walk Result Video op3_controller_demo Methods This package uses deep reinforcement learning (DQN).&#xA;The action value function is defined as a three-layer neural network (NN), and the Q-value is updated as follows&#xA;$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$&#xA;The neural network is updated by back propagation using the loss function L.&#xA;$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$</description>
     </item>
     <item>
       <title>How to sync other calendars of google calendar to Apple stock devices</title>
       <link>https://yuhi-sa.github.io/en/posts/20210912_google_cal_sync/1/</link>
       <pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210912_google_cal_sync/1/</guid>
-      <description></description>
+      <description>Check the box at the following link.&#xA;https://calendar.google.com/calendar/u/0/syncselect </description>
     </item>
     <item>
       <title>How to do Airplay on Raspberry Pi (RPiPlay)</title>
       <link>https://yuhi-sa.github.io/en/posts/20210805_rpiplay/1/</link>
       <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210805_rpiplay/1/</guid>
-      <description></description>
+      <description>Update Raspberrypi Update packages sudo apt-get update sudo apt-get upgrade Update OS sudo apt-get install rpi-update sudo rpi-update sudo reboot Setting up RPiPlay Use the following code.&#xA;https://github.com/FD-/RPiPlay Install the necessary packages sudo apt-get install cmake sudo apt-get install libavahi-compat-libdnssd-dev sudo apt-get install libssl-dev sudo apt-get install libplist-dev Environment PRETTY_NAME=&amp;#34;Raspbian GNU/Linux 10 (buster)&amp;#34; NAME=&amp;#34;Raspbian GNU/Linux&amp;#34; VERSION_ID=&amp;#34;10&amp;#34; VERSION=&amp;#34;10 (buster)&amp;#34; VERSION_CODENAME=buster ID=raspbian ID_LIKE=debian HOME_URL=&amp;#34;http://www.raspbian.org/&amp;#34; SUPPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianForums&amp;#34; BUG_REPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianBugs&amp;#34; Install RPiPlay git clone https://github.com/FD-/RPiPlay.git cd RPiPlay Build mkdir build cd build cmake .</description>
     </item>
     <item>
       <title>How to Initialize Launchpad on Mac</title>
       <link>https://yuhi-sa.github.io/en/posts/20210520_mac_tips/1/</link>
       <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210520_mac_tips/1/</guid>
-      <description></description>
+      <description>The following command will initialize everything&#xA;defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock </description>
     </item>
     <item>
       <title>How to overwrite the print</title>
       <link>https://yuhi-sa.github.io/en/posts/20210514_py_print/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210514_py_print/1/</guid>
-      <description></description>
+      <description>To overwrite one line print(&amp;#34;\r&amp;#34;+&amp;#34;overwrite one line！&amp;#34;,end=&amp;#34;&amp;#34;) To overwrite n lines print(&amp;#34;overwrite n lines！&amp;#34;+&amp;#34;\033[nA&amp;#34;) </description>
     </item>
     <item>
       <title>Eliminate dtype in numpy to pytorch conversion</title>
       <link>https://yuhi-sa.github.io/en/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210215_pytorch_dtype/1/</guid>
-      <description></description>
+      <description>x = np.random.rand(5) print(x) torch_x = torch.tensor(x) print(torch_x) [0.07875406 0.96178392 0.64953209 0.12122955 0.92958997] tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296], dtype=torch.float64) If the numpy array is converted directly to torch, the dtype remains.&#xA;torch_x = torch.tensor(x.astype(np.float32)) print(torch_x) tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296]) To get rid of the dtype, we need to convert the numpy type to float32 and then to torch.</description>
     </item>
     <item>
       <title>[Python]Unscented Transformation</title>
       <link>https://yuhi-sa.github.io/en/posts/20210125_ut/1/</link>
       <pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210125_ut/1/</guid>
-      <description></description>
+      <description>Unscented Transformation The U-transform is a method for estimating $\bar{y}$ and $P_y$ of a random variable $y$ transformed by a nonlinear transformation $y=f(x)$ of $x$ when the mean $\bar{x}$ and variance-covariance matrix $P_x$ of the random variable $x$ following a standard normal distribution are known.&#xA;First of all, it is possible to compute the following from the Monte Carlo point of view, but this requires a large value of N to achieve good accuracy, which poses a practical problem.</description>
     </item>
     <item>
       <title>[Python]ElGamal cryptography on elliptic curves</title>
       <link>https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/</guid>
-      <description></description>
+      <description>Key generation Generate an elliptic curve $E/F_p$ and a Baze point $G$ of rank $l$. ($p,l$ are prime numbers) Generate the secret key $x$ by random numbers and compute $Y=xG$ on $E$. Secret key $x$, open key $E,G,Y$&#xA;Encryption Let $m$ be the message to be sent.&#xA;Generate $r$ as a random number and compute $U=rG=(u_x,u_y)$. Using the public key $Y$,&#xA;compute $V = xU =(v_x,v_y)$ and $c=v_x\oplus m$.&#xA;The $\oplus$ is an exclusive or.</description>
     </item>
     <item>
       <title>Python program for exponentiation calculation using binary method</title>
       <link>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</link>
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</guid>
-      <description></description>
+      <description>Binary method To calculate $x=a^k$, it would require $k$ multiplications. However, to efficiently calculate it, we can calculate $a^{2^i}$ sequentially, which reduces the number of calculations to $log(k)$ times. This is called the binary method, which is used in exponentiation calculations such as for RSA decryption.&#xA;Example To calculate $5^{21}$, it can be expanded as follows:&#xA;$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$&#xA;By expanding it into binary and calculating from left to right, the calculation can be executed using the binary representation of $21$, which is $10101$ in binary.</description>
     </item>
     <item>
       <title>Euclidean Algorithm and Extended Euclidean Algorithm in Python</title>
       <link>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</link>
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</guid>
-      <description></description>
+      <description>Euclidean Algorithm The Euclidean algorithm is a method for finding the greatest common divisor (GCD) of two integers $a$ and $b$ $(a&amp;gt;b)$ by repeatedly dividing $a$ by the remainder $r$ of $a$ divided by $b$ using the division algorithm.&#xA;Algorithm Inputs: Integers $a$ and $b$. Output: GCD $d$.&#xA;Set $a_0=a$ and $a_1=b$. If $a_i=0$, set $d=a_{i-1}$ and terminate. Determine $a_{i+1}$ and $q_i$ from $a_{i-1}=a_iq_i+a_{i+1}$ and return to step 2. Python code def euclid(a,b): a_list = [] if a &amp;lt; b: a_list.</description>
     </item>
     <item>
       <title>About</title>
       <link>https://yuhi-sa.github.io/en/posts/about/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/about/</guid>
-      <description></description>
+      <description>I&amp;rsquo;m writing an article about what I&amp;rsquo;ve learned.&#xA;If there are any mistakes, please let me know.&#xA;Contact Google Form：forms.gle </description>
     </item>
     <item>
       <title>How to write Publisher and Subscriber in one Node with ROS</title>
       <link>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</guid>
-      <description></description>
+      <description>ROS(Robot Operating System) ROS is a middleware that provides libraries and tools to support the creation of robot applications. It enables easy communication between robots.&#xA;Pub &amp;amp; Sub communication In ROS, an executable that is connected to the ROS network is called a &amp;ldquo;Node&amp;rdquo;, and messages are exchanged between nodes using &amp;ldquo;Topics&amp;rdquo;. The node that publishes messages is called a &amp;ldquo;Publisher&amp;rdquo; and the node that receives messages is called a &amp;ldquo;Subscriber&amp;rdquo;.</description>
     </item>
     <item>
       <title>Privacy Policy</title>
       <link>https://yuhi-sa.github.io/en/posts/privacy_policy/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/privacy_policy/</guid>
-      <description></description>
+      <description>広告の配信について 当サイトは第三者配信の広告サービス「Google Adsense グーグルアドセンス」を利用しています． 広告配信事業者は，ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります．&#xA;Cookie（クッキー）を無効にする設定およびGoogleアドセンスに関する詳細は「広告 – ポリシーと規約 – Google」をご覧ください．&#xA;また，当サイトは，Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである，Amazonアソシエイト・プログラムの参加者です．&#xA;第三者がコンテンツおよび宣伝を提供し，訪問者から直接情報を収集し，訪問者のブラウザにCookie（クッキー）を設定したりこれを認識したりする場合があります．&#xA;アクセス解析ツールについて 当サイトでは，Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています．&#xA;このGoogleアナリティクスはトラフィックデータの収集のためにCookieを使用しています．このトラフィックデータは匿名で収集されており，個人を特定するものではありません.この機能はCookieを無効にすることで収集を拒否することが出来ますので，お使いのブラウザの設定をご確認ください．この規約に関して，詳しくはここをクリックしてください．&#xA;免責事項 当サイトで掲載している画像の著作権・肖像権等は各権利所者に帰属致します．権利を侵害する目的ではございません．記事の内容や掲載画像等に問題がございましたら，各権利所有者様本人が直接メールでご連絡下さい．確認後，対応させて頂きます．&#xA;当サイトからリンクやバナーなどによって他のサイトに移動された場合，移動先サイトで提供される情報，サービス等について一切の責任を負いません．&#xA;当サイトのコンテンツ・情報につきまして，可能な限り正確な情報を掲載するよう努めておりますが，誤情報が入り込んだり，情報が古くなっていることもございます．&#xA;当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください．</description>
     </item>
   </channel>
 </rss>

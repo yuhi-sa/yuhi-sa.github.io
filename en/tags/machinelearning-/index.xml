@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MachineLearning  on tomato blog</title>
+    <link>https://yuhi-sa.github.io/en/tags/machinelearning-/</link>
+    <description>Recent content in MachineLearning  on tomato blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 09 Dec 2021 11:00:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/en/tags/machinelearning-/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Derivation of closed-form expression for cross-entropy between Gaussian distributions</title>
+      <link>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</link>
+      <pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</guid>
+      <description>Preparation Gaussian distribution $$ p(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi }}\exp{-\frac{(x-\mu)^2}{2\sigma^2}} $$ Expected value $$\mathbb{E}[x]=\mu$$&#xA;Variance $$\mathbb{E}[x^2]=\mu^2+\sigma^2$$ $$\mathbb{V}[x]=\mathbb{E}[x^2]-(\mathbb{E}[x]^2)$$&#xA;Derivation $$-\int_x p_1(x|\mu_1,\sigma_1)\log p_2(x|\mu_2,\sigma_2)dx$$&#xA;$$=-\mathbb{E}_{p1}[\log(\frac{1}{\sigma_2 \sqrt{2\pi}}\exp{-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2})]$$&#xA;$$=-\mathbb{E}_{p1}[-\log\sigma_2\sqrt{2\pi}-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2]$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2}\mathbb{E}_{p1}(x-\mu_2)^2$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \mathbb{E}[x^2]-2\mu_2\mathbb{E}[x]+\mathbb{E}[\mu_2^2])$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{1}{2\sigma_2^2}( \sigma_1^2+\mu_1^2-2\mu_1\mu_2+\mu_2^2)$$&#xA;$$=\log\sigma_2\sqrt{2\pi}+\frac{(\mu_1-\mu_2)^2+\sigma_1^2}{2\sigma_2^2}$$</description>
+    </item>
+  </channel>
+</rss>

@@ -13,14 +13,14 @@
       <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
-      <description></description>
+      <description>はじめに ROBOTIS OP3にGazeboシミュレーション内で強化学習を用いて歩行獲得させるROSパッケージのコード説明の記事です．&#xA;op3_walk 結果の動画 op3_controller_demo 手法の説明 深層強化学習(DQN)を使用しています．&#xA;行動価値関数は，3層のニューラルネットワーク(NN)として定義しQ値を以下のように更新し，&#xA;$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$&#xA;損失関数$L$を用いて誤差逆伝播しニューラルネットを更新しています．&#xA;$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$&#xA;プログラムの説明 function.py and motion.py [function]にはエージェントの定義を書いています．&#xA;Agentクラスが，ニューラルネットの定義をしているBrainクラスを持っています．ReplayMemoryクラスに蓄積される行動と状態で，Brainは損失の計算と更新を行います．行動は離散化しており，[motion]で定義されている行動の中から，epsilon-greedy選択を行います．&#xA;こちらの書籍のコードを参考にしています．&#xA;Deep-Reinforcement-Learning-Book learning.py [learning]では，[function]で定義したAgentクラスを継承します．Agentに，[controller]からsubscribeした状態を入力，行動を計算し，publishします．こちらはニューラルネットワークの定義にpytorchを使っているため，python3系で実行する必要があります．&#xA;controller.py [controller]は．[learning]からpublishされた行動をsubscribeして，実際にop3を動かします．そして，状態をpublishします．こちらはop3のパッケージの関係で，python2系で実行する必要があります．&#xA;学習曲線 歩行距離の学習曲線 </description>
     </item>
     <item>
       <title>強化学習の全体像まとめ</title>
       <link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link>
       <pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid>
-      <description></description>
+      <description>強化学習の全体像 プランニング問題 環境が既知の場合の逐次的意思決定問題&#xA;価値反復法&#xA;ベルマン最適作用素を繰り返し用いて最適価値関数を求める． $$ (B_{\star}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s&amp;rsquo;|s,a)v(s&amp;rsquo;)} $$ $$ V^{\star}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s) $$&#xA;方策反復法&#xA;ベルマン期待作用素を繰り返し用いて最適方策を求める． $$ (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s&amp;rsquo;|s,a)v(s&amp;rsquo;)) $$ $$ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s) $$ $$ \pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s&amp;rsquo;}p_T(s&amp;rsquo;|s,a)V^\pi(s&amp;rsquo;)} $$&#xA;強化学習 環境が既知の場合の逐次的意思決定問題&#xA;報酬や次状態を観測することでデータを収集して，データから方策を学習する．&#xA;価値関数Vの推定 方策$\pi$を固定して価値関数の推定を行う．&#xA;オフライン&#xA;ベルマン作用素を直接求められないので，まず標本近似によって近似ベルマン作用素を求める．そして，近似ベルマン作用素を価値関数用いて更新する． $$ \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s) $$&#xA;オンライン TD法&#xA;TD誤差$\delta$を計算して価値関数を更新する． $$ \delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t) $$&#xA;$$ \hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta $$&#xA;TD($\lambda$)法&#xA;エリジビリティートレースを用いて1エピソード分の価値を一括更新する． 行動価値関数Qの推定 方策$\pi$を固定して行動価値関数の推定を行う．&#xA;Q学習法&#xA;価値ベース：maxを取っているため推定行動価値関数が方策に依存しない． $$ \delta_t=r_t+\gamma \max_{a&amp;rsquo;}\hat{Q}(s_{t+1},a&amp;rsquo;)-\hat{Q}(s_t,a_t)&#xA;$$&#xA;$$ \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t $$&#xA;SARSA&#xA;方策ベース $$ \delta_t=r_t+\gamma \hat{Q}(s_{t+1},a&amp;rsquo;)-\hat{Q}(s_t,a_t) $$&#xA;$$ \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t $$</description>
     </item>
   </channel>
 </rss>

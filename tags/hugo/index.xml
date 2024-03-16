@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on tomato blog</title>
+    <title>Hugo on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/hugo/</link>
-    <description>Recent content in hugo on tomato blog</description>
+    <description>Recent content in Hugo on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 18 Dec 2023 09:00:23 +0900</lastBuildDate>
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20231218_hugo/1/</link>
       <pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231218_hugo/1/</guid>
-      <description></description>
+      <description>TypescriptとReactを導入してHugoのthemeを作成してみたのでメモを残す。 hugo自体の設定をしたメモは、markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]に記載。&#xA;Hugoのテーマを初期化 hugo new themeコマンドでテーマの雛形を作ることができる。 以下は、具体的な例としてtomatohugoという名前のテーマを初期化するコマンド。&#xA;hugo new theme tomatohugo このコマンドを実行すると、tomatohugoディレクトリが作成され、その中に様々なファイルやディレクトリが生成される。&#xA;➜ tomatohugo git:(main) tree . . ├── LICENSE ├── README.md ├── archetypes │ └── default.md ├── assets │ ├── css │ │ └── main.css │ └── js │ └── main.js ├── content │ ├── _index.md │ └── posts │ ├── _index.md │ ├── post-1.md │ ├── post-2.md │ └── post-3 │ ├── bryce-canyon.jpg │ └── index.md ├── data ├── hugo.</description>
     </item>
   </channel>
 </rss>

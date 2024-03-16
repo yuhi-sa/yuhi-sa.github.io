@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>linux on tomato blog</title>
+    <title>Linux on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/linux/</link>
-    <description>Recent content in linux on tomato blog</description>
+    <description>Recent content in Linux on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate>
@@ -13,63 +13,63 @@
       <link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link>
       <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid>
-      <description></description>
+      <description>sshコマンド ssh -o ProxyCommand=&amp;#39;ssh 踏み台 nc %h %p&amp;#39; アクセス先 </description>
     </item>
     <item>
       <title>linuxのログファイルと閲覧コマンド</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/6/</link>
       <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/6/</guid>
-      <description></description>
+      <description>代表的なログ messageファイル /var/log/message Linuxシステム全体の情報の記録している．&#xA;secureファイル /var/log/secure/ 認証やセキュリティー関連の情報を記録している．&#xA;wtmpファイル /var/log/wtmp ログイン履歴の記録している．&#xA;lastコマンドで閲覧できる．&#xA;utmpファイル /var/run/utmp ログイン中のユーザーの情報を記録しれいる．&#xA;whoコマンドで閲覧できる．&#xA;lastlogファイル /var/log/lastlog 各ユーザーの最終ログイン日時を記録している．&#xA;lastlogコマンドで閲覧できる．</description>
     </item>
     <item>
       <title>公開鍵認証方式を用いたSSH通信の設定方法</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link>
       <pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid>
-      <description></description>
+      <description>1. 暗号化方式の変更[接続先PC] 「/etc/ssh/sshd_config」を編集 $ sudo vi /etc/ssh/sshd/sshd_config 公開鍵暗号方式の有効化とパスワード認証方式の無効化 + PubkeyAuthentication yes # 追記 - PasswordAuthentication yes + PasswordAuthentication no # 変更 リスタート $ sudo systemctl restart sshd 2. 秘密鍵と公開鍵を作成[接続元PC] 鍵の作成 $ ssh-keygen -t rsa Generating public/private rsa key pair. Enter file in which to save the key (/Users/yuhi-sa/.ssh/id_rsa): # 無記入でEnter Enter passphrase (empty for no passphrase): # パスフレーズを入力 Enter same passphrase again: # パスフレーズを入力 Your identification has been saved in 保存先ディレクトリ Your public key has been saved in 保存名 ファイル名を空白にした場合は「/.</description>
     </item>
     <item>
       <title>ネットワークのトラブルシューティングで利用する代表的なコマンド</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/4/</link>
       <pubDate>Tue, 30 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/4/</guid>
-      <description></description>
+      <description>トラブルシューティング 一般的に下位のレイヤから確認を行う．&#xA;物理的な確認 IPアドレスの設定確認 ネットワーク経路確認 開いているポートの確認 代表的なコマンド ping 宛先へのネットワークの疎通確認&#xA;$ ping [オプション] 宛先IP オプション&#xA;-c　送信回数：送信回数指定 -i　送信間隔：送信間隔指定 -n：名前解決を行わない telnet アプリケーション層での疎通確認&#xA;$ telnet [オプション] 宛先IP [ポート番号] オプション&#xA;-l ユーザ名：ユーザ名指定 traceroute 始点から終点までのホスト間の経路情報確認&#xA;$ traceroute [オプション] 宛先IP オプション&#xA;-i インタフェース名：インタフェース名指定 -T：TCPプロトコル利用 -I：ICMPプロトコル利用 -n：名前解決を行わない ip route ルーティングテーブルのエントリ情報の表示&#xA;$ ip route [サブコマンド] サブコマンド&#xA;show：ルーティングテーブルの情報表示 add ネットワーク：ルーティングテーブルにエントリ追加 del ネットワーク：ルーティングテーブルからエントリ削除 ss ネットワーク接続の統計情報の出力(socket statistics)&#xA;$ ss [オプション] オプション&#xA;-a：すべて表示 -l：Listenポートのみ表示 -n：名前解決を行わない -t：TCPを表示 -u：UDPを表示 tcpdump ネットワーク上を流れる通信パケットの閲覧&#xA;$ tcpdump [オプション] [条件] オプション</description>
     </item>
     <item>
       <title>ネットワークの基礎</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/3/</link>
       <pubDate>Mon, 22 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/3/</guid>
-      <description></description>
+      <description>TCP/IP TCP/IPはネットワークのプロトコルであり，４階層のプロトコルスタック(上からアプリケーション層，トランスポート層，インターネット層，ネットワークインターフェース層)で構成される． 中核となるプロトコルからTCP/IPと呼ばれる．&#xA;アプリケーション層 データを送受信する際の表現形式(文字コード，画像形式)の処理を実行&#xA;HTTP SMTP トランスポート層 通信するプログラム間でのデータ伝送確立の処理を実行&#xA;TCP UDP インターネット層 ネットワーク上のデータ送信先を検出，送信先までのルート計算処理を実行&#xA;IP ICMP ネットワークインタフェース層 インターネット層から受け取ったデータを電気信号に変換，ネットワーク媒体に送り出すための処理を実行&#xA;コネクション型とコネクションレス型 受信側がデータを受信したことを送信側に知らせる確認応答を行う通信をコネクション型，行わない通信をコネクションレス型とよぶ． 前者は，メールやWeb通信，後者は動画配信などに適している．&#xA;通信方式 ユニキャスト：1対1での通信 ブロードキャスト：同一ネットワーク内の全ホストに対してデータを送信 マルチキャスト：不特定多数のホストに対してデータを送信(同じIPアドレスが登録されたホストにデータを送信) エニーキャスト：不特定多数のホストに対してデータを送信(同じIPアドレスが登録されたホストのうち最も近いホストにデータを送信) グローバルアドレスとプライベートアドレス グローバルアドレスは，日本ネットワークインフォメーションセンター(JPNIC)から割り当てられるインターネットを使用するためのIPアドレスであり，一意の値が割り当てられる．プライベートアドレスは組織内のローカルネットワーク内でのみ使用可能なIPアドレス．&#xA;グローバルIPアドレスは国際機関IANA(Internet Assigned Numbers Authority)が管理している．IANAの配下に地域別の管理機関があり日本ではJPNIC(Japan Network Information Center)が日本国内のグローバルIPアドレスを管理している． JPNICはISP(プロバイダ)の要求に応じてIPアドレスを配布する．&#xA;ポート ネットワークアプリケーションを区別する際に使用される． 0から1023までは標準化されており，ウェルノウンポートまたは特権ポートとよぶ．代表的なポートは以下の通り．&#xA;20：FTP(データ転送) 21：FTP(制御情報) 22：SSH 25：SMTP 53：DNS 80：HTTP 110：POP3 143：IMAP 443：HTTPS </description>
     </item>
     <item>
       <title>スーパーユーザ</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/1/</link>
       <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/1/</guid>
-      <description></description>
+      <description>ユーザーアカウントの種類 スーパーユーザ：全ての管理権限を有しているユーザ 一般ユーザ：限られた権限のみ付与されたユーザ システムユーザ：特殊なアプリケーション実行時のみに使用されるユーザ コマンド su：現在のユーザから別のユーザに切り替え $ su - [ユーザ名] sudo：一般ユーザの権限では実行できないコマンドを，一般ユーザでも実行できるように許可を与える $ sudo [オプション] [コマンド] 権限の設定 「/etc/sudoers」ファイルにユーザごとみ実行可能なコマンドが記載されており，「visudo」で編集することができる．&#xA;$ sudo visudo </description>
     </item>
     <item>
       <title>ユーザアカウント</title>
       <link>https://yuhi-sa.github.io/posts/20211121_linux/2/</link>
       <pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211121_linux/2/</guid>
-      <description></description>
+      <description>ユーザアカウント情報 ユーザアカウント情報は「/etc/passwd」ファイルに保存されている．1行ごとに1ユーザの情報が：で区切られた7つのフィールドで構成されている．&#xA;[ユーザ名]:[パスワード]:[ユーザID]:[グループID]:[コメント]:[ホームディレクトリ]:[ログインシェル] ここでパスワードはxと表示され，シャドウパスワードが用いられている．シャドウパスワードは「etc/shadow」ファイルに保存されており，rootユーザのみ読み取り専用として開くことができる．&#xA;ユーザ情報の編集コマンド useradd：一般ユーザの追加 usermod：ユーザ情報の変更 userdel：ユーザの削除 passwd：パスワードの変更 グループアカウント情報 グループアカウント情報は「/etc/group」ファイルに保存されている．1行ごとに1グループの情報が：で区切られた4つのフィールドで構成されている．&#xA;[グループ名]:[パスワード]:[グループID]:[メンバー] グループ情報の編集コマンド groupadd：グループの追加 groupmod：グループの変更 groupdel：グループの削除 id：所属するグループの確認 </description>
     </item>
     <item>
       <title>UbuntuでローカルDNSサーバーが指定できないときの編集方法</title>
       <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link>
       <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid>
-      <description></description>
+      <description>/etc/resolv.conf を編集する．&#xA;# This file is managed by man:systemd-resolved(8). Do not edit. # # This is a dynamic resolv.conf file for connecting local clients to the # internal DNS stub resolver of systemd-resolved. This file lists all # configured search domains. # # Run &amp;#34;resolvectl status&amp;#34; to see details about the uplink DNS servers # currently in use. # # Third party programs must not access this file directly, but only through the # symlink at /etc/resolv.</description>
     </item>
     <item>
       <title>Ubuntuのsshの設定</title>
       <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link>
       <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid>
-      <description></description>
+      <description>sshの設定 $ sudo apt-get install aptitude $ sudo aptitude install ssh /etc/ssh/sshd_configを編集&#xA;PermitRootLogin no $ sudo /etc/init.d/ssh restart warningが発生した場合 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ となった場合&#xA;ssh-keygen -R ipアドレス で鍵情報を消す．</description>
     </item>
   </channel>
 </rss>

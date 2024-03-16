@@ -103,7 +103,7 @@ $$</p>
 <p>$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．</p>
 <p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p>
 <p>更新の概念図を以下に示す．
-<img src=".././fig1.png" alt="fig1.png"></p>
+<img alt="fig1.png" src=".././fig1.png"></p>
 <h2 id="アルゴリズム">アルゴリズム</h2>
 <p>PSOのアルゴリズムを以下に示す．</p>
 <ol>
@@ -125,11 +125,11 @@ $$</p>
 <p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p>
 <ul>
 <li>$t=0$のとき
-<img src=".././fig2.png" alt="pso1.png"></li>
+<img alt="pso1.png" src=".././fig2.png"></li>
 <li>$t=250$のとき
-<img src=".././fig3.png" alt="pso2.png"></li>
+<img alt="pso2.png" src=".././fig3.png"></li>
 <li>$t=500$のとき
-<img src=".././fig4.png" alt="pso3.png"></li>
+<img alt="pso3.png" src=".././fig4.png"></li>
 </ul>
 <p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p>
 <h1 id="tcpsotwo-swarm-cooperative-particle-swarm-optimization">TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h1>
@@ -154,11 +154,11 @@ $$
 <ul>
 <li>
 <p>スレーブ粒子群の更新の概念図
-<img src=".././fig5.png" alt="fig2.png"></p>
+<img alt="fig2.png" src=".././fig5.png"></p>
 </li>
 <li>
 <p>マスター粒子群の更新の概念図
-<img src=".././fig6.png" alt="fig3.png"></p>
+<img alt="fig3.png" src=".././fig6.png"></p>
 </li>
 </ul>
 <h2 id="アルゴリズム-1">アルゴリズム</h2>
@@ -181,11 +181,11 @@ $$
 <p>以下に，スレーブ粒子100個，マスター粒子100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．オレンジがスレーブ粒子群，ブルーがマスター粒子群である．</p>
 <ul>
 <li>$t=0$のとき
-<img src=".././fig7.png" alt="tcpso1.png"></li>
+<img alt="tcpso1.png" src=".././fig7.png"></li>
 <li>$t=250$のとき
-<img src=".././fig8.png" alt="tcpso2.png"></li>
+<img alt="tcpso2.png" src=".././fig8.png"></li>
 <li>$t=500$のとき
-<img src=".././fig9.png" alt="tcpso3.png"></li>
+<img alt="tcpso3.png" src=".././fig9.png"></li>
 </ul>
 <p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p>
 <h1 id="プログラム">プログラム</h1>

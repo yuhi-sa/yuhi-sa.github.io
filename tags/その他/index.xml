@@ -13,56 +13,56 @@
       <link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link>
       <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid>
-      <description></description>
+      <description>概要 mtail(https://github.com/google/mtail )は、Googleが提供するログパースツールで、ログファイルから指定したパターンに一致する行を抽出し、それに基づいてメトリクスを生成して/metricsエンドポイントにPrometheus形式で公開することができるソフトウェアである。&#xA;mtailの使い方 mtailを利用するには、設定ファイルを定義し、ログファイルのパスとパターンを指定する必要がある。&#xA;設定ファイル (例: sample.mtail) # メトリクスの初期化 counter errors_total # ログファイル内のマッチングするパターン /error/ { errors_total++ } counter errors_totalは、Prometheusで使用するメトリクスを定義している。counterはカウンタータイプのメトリクスで、ログファイル内で特定のエラーパターンが一致するたびに値が増加する。&#xA;/error/ {...}は、ログファイル内のエラーパターンを指定している。この例では、ログの各行が/error/という文字列を含む場合に、その行が一致すると見なされ、errors_totalカウンターが増加する。&#xA;Dockerで起動 FROM centos7:latest RUN yum install -y wget &amp;amp;&amp;amp; yum clean all WORKDIR /tmp RUN wget -O mtail.tar.gz https://github.com/google/mtail/releases/download/v3.0.0-rc52/mtail_3.0.0-rc52_linux_amd64.tar.gz &amp;amp;&amp;amp; \ tar xzvf mtail.tar.gz &amp;amp;&amp;amp; \ chmod +x mtail CMD [&amp;#34;/tmp/mtail&amp;#34;, &amp;#34;-progs&amp;#34;, &amp;#34;/path/to/sample.mtail&amp;#34;, &amp;#34;-logs&amp;#34;, &amp;#34;/path/to/logfile&amp;#34;] EXPOSE 3903 -progs /path/to/sample.mtail: mtailが使用する設定ファイル（sample.mtail）のパスを指定している。 -logs /path/to/logfile: mtailが監視するログファイルのパスを指定している。mtailはこのログファイルを監視し、設定ファイルに定義されたパターンに一致する行を検出して対応するメトリクスを生成する。 </description>
     </item>
     <item>
       <title>Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</title>
       <link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</link>
       <pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</guid>
-      <description></description>
+      <description>以下のリンクでチェックを入れる．&#xA;https://calendar.google.com/calendar/u/0/syncselect </description>
     </item>
     <item>
       <title>Raspberry PiでAirplayをする方法メモ(RPiPlay)</title>
       <link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link>
       <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</guid>
-      <description></description>
+      <description>Raspberrypiを更新 パッケージの更新 sudo apt-get update sudo apt-get upgrade OSのアップデート sudo apt-get install rpi-update sudo rpi-update sudo reboot RPiPlayの設定 以下のコードを使う．&#xA;https://github.com/FD-/RPiPlay 必要なパッケージのインストール sudo apt-get install cmake sudo apt-get install libavahi-compat-libdnssd-dev sudo apt-get install libssl-dev sudo apt-get install libplist-dev 他の人のやり方だと最後の行なかったけど，自分の環境だと必要だった，&#xA;環境 PRETTY_NAME=&amp;#34;Raspbian GNU/Linux 10 (buster)&amp;#34; NAME=&amp;#34;Raspbian GNU/Linux&amp;#34; VERSION_ID=&amp;#34;10&amp;#34; VERSION=&amp;#34;10 (buster)&amp;#34; VERSION_CODENAME=buster ID=raspbian ID_LIKE=debian HOME_URL=&amp;#34;http://www.raspbian.org/&amp;#34; SUPPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianForums&amp;#34; BUG_REPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianBugs&amp;#34; RPiPlayのインストール git clone https://github.com/FD-/RPiPlay.git cd RPiPlay ビルド mkdir build cd build cmake .. make buildディレクトリにrpiplayという実行ファイルが作られる．&#xA;起動 .</description>
     </item>
     <item>
       <title>リーダブルコード読んだメモ</title>
       <link>https://yuhi-sa.github.io/posts/20210713_readable/1/</link>
       <pubDate>Tue, 13 Jul 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210713_readable/1/</guid>
-      <description></description>
+      <description>名前に情報を詰め込む 汎用的な単語ではなく，明確な単語を使う．&#xA;単語 代替案 get fetch, download size Height, NumNodes, MemoryBytes stop kill, pause send deliver, dispatch, announce, distribute, route find search, extract, locate, recover start lainch, create, begin, open make create, set up, build, generate, compose, add, new 抽象的な名前ではなく，具体的な名前&#xA;tmpは生存期間が短く，一時的な保管が最も大切な変数のみに使う． イテレータは安易にi, j, kとするのではなく，club_i,member_i,user_iのように名付ける． より直接的で，明確な表現にする． ServerCanStart → CanListenOnPort 接尾辞，接頭辞で情報を追加する．&#xA;delay → delay_secs size → size_mb limit → max_kbp angle → degree_cw html → html_utf8 名前の長さを決める．&#xA;FormatString → FormatStr ConvertToString → ToString 名前のフォーマットで情報を伝える．</description>
     </item>
     <item>
       <title>MacのLaunchpadを初期化する方法</title>
       <link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</link>
       <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</guid>
-      <description></description>
+      <description>以下のコマンドですべて初期化される&#xA;defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock </description>
     </item>
     <item>
       <title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</title>
       <link>https://yuhi-sa.github.io/posts/20210204_hugo/1/</link>
       <pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210204_hugo/1/</guid>
-      <description></description>
+      <description>はじめに Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．&#xA;全体通して，参考にした記事たち 参考1：Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する&#xA;参考2：【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】&#xA;Hugoとは ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つがHugoである．&#xA;Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される． Hugoのメリットしては，&#xA;ビルド，表示処理が早い データベース不要で管理が簡単 ということがあげられる．&#xA;参考1：静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る&#xA;参考2：Hugoとは？静的サイトジェネレータについて解説&#xA;Hugoでサイトを作成 Hugoのインストール # Homebrew(macOS)の場合 brew install hugo その他の方法でのインストール方法は，Install Hugo&#xA;サイトの作成 hugo new site test # testは好きな名前 cd test hugo # このコマンドで生成 サーバーでプレビュー hugo server http://localhost:1313で確認できる&#xA;フォルダの中身の確認 . ├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル ├── config.toml # hugoの設定ファイル ├── content # 記事ファイルを置くファイル ├── data # サイトの全ページから参照したいデータを記述したファイル ├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル ├── public # 生成されるhtmlなどのコード(これを公開する) ├── static # サイト内の静的ファイルを置くファイル └── themes # テーマファイルを置く 参考1：HUGO のディレクトリ構成</description>
     </item>
     <item>
       <title>Pythonでslackに実験結果(テキストと画像)を送る</title>
       <link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</guid>
-      <description></description>
+      <description>テキストを送る slack側のAPIを設定 slackの「設定と管理」から「アプリを管理する」を開く． AppディレクトリIncoming Webhookを検索して追加する． チャンネルを選択して，「Incoming Webhookインテグレーションの追加」 「Webhook URL」をコピーする． botのアイコンと名前をここで変更できる． コード import slackweb slack = slackweb.Slack(url=&amp;#34;コピーした Webhook URL&amp;#34;) def notify(title, text, color): attachments = [{&amp;#34;title&amp;#34;: title, &amp;#34;text&amp;#34;: text, &amp;#34;color&amp;#34;: color, #good, warning, danger &amp;#34;footer&amp;#34;: &amp;#34;Send from Python&amp;#34;, }] slack.notify(text=None, attachments=attachments) notify(&amp;#34;テスト&amp;#34;,&amp;#34;おはよう&amp;#34;,&amp;#34;good&amp;#34;) notify(&amp;#34;テスト&amp;#34;,&amp;#34;こんにちは&amp;#34;,&amp;#34;warning&amp;#34;) notify(&amp;#34;テスト&amp;#34;,&amp;#34;こんばんは&amp;#34;,&amp;#34;danger&amp;#34;) attachmentsの構文は，以下を参考&#xA;Creating rich message layouts Slack API attachmentsチートシート 実行結果 画像を送る slack側のAPIを設定 上記の1から2と同様にして「Bots」を追加する． API トークンをコピーする． コード import requests import json def notifyImg(title, imageURL): files = {&amp;#39;file&amp;#39;: open(imageURL, &amp;#39;rb&amp;#39;)} param = { &amp;#39;token&amp;#39;: &amp;#34;コピーした APIトークン&amp;#34;, &amp;#39;channels&amp;#39;:&amp;#39;投稿したいチャンネル名&amp;#39;, &amp;#39;filename&amp;#39;:&amp;#34;filename&amp;#34;, &amp;#39;title&amp;#39;: title, } requests.</description>
     </item>
     <item>
       <title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</title>
       <link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</guid>
-      <description></description>
+      <description>はじめに GithubのREADMEに，自身のGitHubのリポジトリのコミット数や使用言語をグラフィカルに表示するSummary Cardsがある．自分は以下のものを使っていた．&#xA;GitHub Profile Summary Cards しかし，唐突に動きのあるものが欲しいと思ってつくってみた．&#xA;リポジトリ情報の取得 GitHubのAPIよりリポジトリの情報を取得することができる．&#xA;https://api.github.com/users/+ username + /repos 上記のAPIから以下のようなjson形式の情報を取得することができる．&#xA;[ { &amp;#34;id&amp;#34;: 312465317, &amp;#34;node_id&amp;#34;: &amp;#34;MDEwOlJlcG9zaXRvcnkzMTI0NjUzMTc=&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;1day&amp;#34;, &amp;#34;full_name&amp;#34;: &amp;#34;yuhi-sa/1day&amp;#34;, &amp;#34;private&amp;#34;: false, &amp;#34;owner&amp;#34;: { &amp;#34;login&amp;#34;: &amp;#34;yuhi-sa&amp;#34;, &amp;#34;id&amp;#34;: 62089243, &amp;#34;node_id&amp;#34;: &amp;#34;MDQ6VXNlcjYyMDg5MjQz&amp;#34;, &amp;#34;avatar_url&amp;#34;: &amp;#34;https://avatars.githubusercontent.com/u/62089243?v=4&amp;#34;, &amp;#34;gravatar_id&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa&amp;#34;, &amp;#34;html_url&amp;#34;: &amp;#34;https://github.com/yuhi-sa&amp;#34;, &amp;#34;followers_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/followers&amp;#34;, &amp;#34;following_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/following{/other_user}&amp;#34;, &amp;#34;gists_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/gists{/gist_id}&amp;#34;, &amp;#34;starred_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/starred{/owner}{/repo}&amp;#34;, &amp;#34;subscriptions_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/subscriptions&amp;#34;, &amp;#34;organizations_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/orgs&amp;#34;, &amp;#34;repos_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/repos&amp;#34;, &amp;#34;events_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/events{/privacy}&amp;#34;, &amp;#34;received_events_url&amp;#34;: &amp;#34;https://api.github.com/users/yuhi-sa/received_events&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;User&amp;#34;, &amp;#34;site_admin&amp;#34;: false }, ...リポジトリ数分続く ] ここから，リポジトリごとの言語とサイズを取得する．&#xA;こちらにGitHubで利用可能なAPIが記載されている． Cardの作成 pythonのmatplotlib.</description>
     </item>
   </channel>
 </rss>

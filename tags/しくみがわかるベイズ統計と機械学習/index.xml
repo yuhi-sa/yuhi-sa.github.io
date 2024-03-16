@@ -13,91 +13,91 @@
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/13/</link>
       <pubDate>Thu, 18 Mar 2021 12:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/13/</guid>
-      <description></description>
+      <description>EMアルゴリズムでは，完全データの分布$p(z|x,\theta)$と不完全データの分布$p(z|x,\hat{\theta})$の関数系は同じであった． VAEでは，2つの分布の関数系が異なってもよいという一般化を行う． そのため以下の表記では，&#xA;$p(z|x,\hat{\theta})$を認識モデル(エンコーダ)$q_\Phi(z|x)$ $p(z|x,\theta)$を生成モデル(デコーダ)$p_\theta(x|z)$ とする． また，潜在変数$z$は観測値$x$の持つ情報を別の形で表現しているため符号(コード)とよぶ．&#xA;オートエンコーダ(自己符号化器) オートエンコーダは，入力と出力が一致するようにパラメータの学習を行う装置である．VAEは変分下界を使って訓練を行うオートエンコーダである．&#xA;入力と同じ内容を出力する装置では中間的な層において符号化が行われており，これは情報圧縮をしていることに相当する．&#xA;VAEにおける変分下界 EMアルゴリズムで使用した変分下界を$\theta$と$\phi$を用いて書き直す． EMアルゴリズムによる混合ガウスモデルの学習では$z$はone-hotベクトルとしたが，VAEでは連続値である．よって$z$は多変量正規分布に従うモデルを用いる．&#xA;認識モデル VAEでは認識モデル$q_\Phi(z|x)$として以下のように定義される多変量正規分布を用いる．&#xA;$$q_\Phi(z|x)=\Pi_{j=1}^k\mathcal{N}(z_j|\mu_j(x),\sigma^2(x))$$&#xA;$\mu_j,\sigma_j^2$としてニューラルネットワークを使用するのが一般的である．&#xA;生成モデル 生成モデル$p_\theta(x|z)$としてどのような確率分布が使われるかは$x$がどのような変数であるかに依存する．$x$がone-hot表現であればマルチヌーイ分布が使える．$x$が連続値ベクトルの場合，以下のように分散を1とする多変量正規分布が使える．&#xA;$$p_\theta(x|z)=\Pi_{h=1}^m \mathcal{N}(x_h|\nu_h(z),1)$$&#xA;符号の事前分布 標準正規分布の積を使用することが多い．&#xA;$$p_\theta(z)=\Pi_{j=1}^k\mathcal{N}(z_j|0,1)$$&#xA;勾配降下法 VAEの学習は変分下界が増加していくように，パラメータ$\theta$と$\phi$を変えていくことで行われる． 具体的には$\mathcal{B}(\theta,\phi)$の$\theta$と$\phi$での微分，すなわち勾配を求め，勾配方向にパラメータを少しづつ変える．&#xA;事前分布を上記のように定義した場合は，事前分布に$\theta$を使わないため，$\mathcal{D}(q_\phi(z|x)||p_\theta(z))$は$\theta$を含まない．そのため$\theta$による勾配は不要である．$\phi$による勾配は合成関数の微分を使うと以下のように展開される．&#xA;$$\nabla_\phi \mathcal{D}(q_\phi(z|x)||p_\theta(z))=\sum_{j=1}^k (\frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\mu_j}\nabla_\theta \mu_j + \frac{d\mathcal{D}(q_\theta(z|x)||p_\theta(z))}{d\sigma_j^2}\nabla_\theta \sigma_j^2)$$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>マルコフ連鎖モンテカルロ法(MCMC)</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/12/</link>
       <pubDate>Thu, 18 Mar 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/12/</guid>
-      <description></description>
+      <description>マルコフ性とマルコフ連鎖 時刻$t$が1,2,3という離散的な値であり，それぞれにそれぞれに$x^{(1)},x^{(2)},x^{(3)}$という確率変数を持つ系列を考える．&#xA;マルコフ連鎖：$x^{(1)},x^{(2)},x^{(3)}$の確率変数を決めていくシステム マルコフ性：現在の状態は，直近の状態によってのみ決まる． 1次マルコフ性:$x^{(t)}$の状態は$x^{(t-1)}$のみによって決まる． $n$次マルコフ性：$x^{(t)}$の状態は$x^{(t-1)},&amp;hellip;,x^{(t-n)}$のみによって決まる． 遷移確率$p(x^{(t)}|x^{(t-1)})$：時刻$t-1$の状態から時刻$t$の状態に遷移する確率 定常分布$\pi$：遷移前の状態を$x$,遷移後の状態を$y$として以下の性質(定常性)が成り立つ分布． $\pi(y)=\sum_x p(y|x)\pi(x)$ マルコフ連鎖モンテカルロ法(MCMC) MCMCでは遷移確率$p(y|x)$を使って，標本の系列$x^{(1)},x^{(2)},&amp;hellip;$を作成する．MCMCで作成される標本のうち，最初の方は初期値への依存性が強ういため，$t$を十分に大きな数として$x^{(t)}$以降を使用する． MCMCで広く使われている方法が，メトロポリス・ヘイスティングス法である．&#xA;メトロポリス・ヘイスティング法 $t=1$と設定し，$x^{(1)}$を初期分布$p_1(x)$からサンプリング後，以下を繰り返す．&#xA;提案分布$q(\hat{y}|x^{(t)}$に従って標本候補$\hat{y}$を得る．&#xA;確率$\alpha(x^{(t)},\hat{y})$で標本候補$\hat{y}$を標本候補$\hat{y}$を$x^{(t+1)}$として採択する．&#xA;$$\alpha(x^{(t)},\hat{y})=\min(\frac{q(x^{(t)}|\hat{y})b(\hat{y})}{q(\hat{y}|x^{(t)})b(x^{(t)})},1)$$&#xA;$t=t+1$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>変分ベイズ</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/11/</link>
       <pubDate>Thu, 18 Mar 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/11/</guid>
-      <description></description>
+      <description>変分ベイズは，EMアルゴリズムと同様に変分下界を使いつつパラメータ分布も考えることでベイズ的な拡張も行う手法である． EMアルゴリズムではパラメータ$\theta$を引数とする変分下界$\mathcal{B}(\theta,\hat{\theta})$を考えたが変分ベイズでは変分下界の引数として近似分布qを考える．$\mathcal{B}(q)$を最大化する近似分布$q$を求めることが変分ベイズの目的となる．&#xA;変分：関数による汎関数の微分 汎関数：関数を引数とする関数 変分ベイズにおける変分下界 EMアルゴリズムにおける変分下界 $$\mathcal{B}(\theta,\hat{\theta})=\log p(x|\theta)-\mathcal{D}(p(z|\hat{\theta})||p(z|x,\theta))$$&#xA;変分ベイズにおける変分下界 $$\mathcal{B}(q)=\log p(x) - \mathcal{D}(q(w)||p(w|x))$$&#xA;変分ベイズではパラメータと潜在変数をまとめて$w$で表すため，変分下界の引数として$\theta,\hat{\theta}$を使うことができない．そこで近似分布$q$自体を引数とする． $x$は観測済みであるため，$p(x)$は定数である．変分下界を大きくするためには，近似分布$q(w)$を真の分布$p(w|x)$に近づけることでKLダイバージェンス$\mathcal{D}(q(w)||p(w|x))$を小さくする必要がある．&#xA;変分下界の式変形 変分ベイズにおける変分下界を式変形すると以下のようになる．&#xA;$$\mathcal{B}(q)=\int q(w)\log \frac{p(x,w)}{q(w)}dw$$&#xA;よって期待値の形で以下のように表すことができる．&#xA;$$\mathcal{B}(q)=E_{q(w)}[\log p(x,w)] - E_{q(w)}[\log q(w)]$$&#xA;以上より，2つの対数尤度の差の最小化問題として扱うことができる．&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>EMアルゴリズム2(変分下界とKLダイバージェンス)</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/10/</link>
       <pubDate>Wed, 17 Mar 2021 13:05:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/10/</guid>
-      <description></description>
+      <description>EステップとMステップを繰り返すだけで，EMアルゴリズムがうまく推定できる理由について理解するために，変分下界とKLダイバージェンスという概念を導入する．&#xA;変分下界 EMアルゴリズムにおける変分下界は以下のように定義される．&#xA;$$\mathcal{B}(\theta,\hat{\theta})=\int p(z|x,\hat{\theta}) \log \frac{p(x,z|\theta)}{p(z|x,\hat{\theta})}dz$$&#xA;変分下界の式を変形する&#xA;$$\mathcal{B}(\theta,\hat{\theta})=\log p(x|\theta)-(\int p(z|x,\hat{\theta}\log\frac{p(z|x,\hat{\theta})}{p(z|x,\theta)}dz)$$&#xA;これは第一項が，対数尤度，第二項がKLダイバージェンスを表している． これにより変分下界はQ関数とエントロピーの和となっていることがわかる．&#xA;$$\mathcal{B}(\theta,\hat{\theta})= Q(\theta,\hat{\theta})+H(p(z|x,\hat{\theta}))$$&#xA;KLダイバージェンス KLダイバージェンス$\mathcal{D}(q||p)$は，分布qと分布pの比の対数の期待値として定義され，分布どうしの距離を測るために使われる．&#xA;$$\mathcal{D}(q||p)=\mathbb{E}[\log\frac{q}{p}]\int q(x)\log \frac{q(x)}{p(x)}dx$$&#xA;2つの分布が類似しているほどKLダイバージェンスは小さくなり，完全に一致する場合0となる．また，Jensenの不等式より非負性が証明されている．&#xA;$\hat{\theta}$の更新 分布が一致し，KLダイバージェンスが0になるため変分下界$\mathcal{B}$が増加する． $\theta$の更新 Q関数を最大化することにより，変分下界$\mathcal{B}$も増加する．エントロピー$H$は$\theta$が含まれないため変化しない． 以上より，EMアルゴリズムによって変分下界が増加していく．変分下界とKLダイバージェンスの和である対数尤度は常に変分下界より大きいため，対数尤度も増加していく．よってEMアルゴリズムは対数尤度を増加させる．&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>EMアルゴリズム</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/9/</link>
       <pubDate>Wed, 17 Mar 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/9/</guid>
-      <description></description>
+      <description>あるフィットネスクラブにおける利用者の年齢分布のヒストグラムを考えると，筋トレを目的とした20代層とメタボ対策を目的とした50代層がおおきくなることが考えられる．&#xA;モデル化を考えた場合，このグラフの会員を2つのグループに分けそれぞれについて正規分布の最尤推定を行うことで2つの正規分布を得て，それらを重ね合わせて混合ガウスモデルを作成することを考える．&#xA;ここで，30代層は２つの山の裾野が重なる領域となるため扱いに困る．そこで，会員の目的は筋トレとメタボ対策の可能性が半分ずつとみなす．このように会員がどれだけの可能性で各潜在クラスjに所属するのかを負担率$r_{ij}$とよび，負担率をパラメータ推定の重みとしてかける．&#xA;負担率に基づく2つの正規分布のパラメータ推定と，2つの正規分布にもとづく負担率の計算を交互に行っていけば，次第に両者が良い値に近づくだろうというのがEMアルゴリズムの基本的な考え方となっている．&#xA;混合ガウスモデル 複数の正規分布が重なり合って作られる混合ガウスモデルを用いて潜在変数変数を含むモデルをどう定義するかをまとめる．&#xA;Q関数 $$p(x,z|\theta)=\Pi_{i=1}^np(x^{(i)},z^{(i)}|\theta)$$&#xA;観測変数xと潜在変数zの値を共に知ることができるという仮想的な状況におけるデータを完全データとよび，観測変数xの値のみしかわからない状況におけるデータを不完全データとよぶ． $p(x,z|\theta)$は完全データについて同時分布である． zは未知の値であるが，パラメータの推定量$\hat{\theta}$と観測値により決まる$p(z|x,\hat{\theta})$を使って完全データ$\log p(x,z|\theta)$の期待値を求めたものをQ関数と呼ぶ．&#xA;$$Q(\theta,\hat{\theta})=\mathbb{E}_{p(z|x,\hat{\theta})}[\log p(x,z|\theta)]=\int p(z|x,\hat{\theta})\log p(x,z|\theta)dz$$&#xA;Q関数は完全データの対数尤度の期待値であり，EMアルゴリズムではQ関数の最大化を考える&#xA;EMアルゴリズムによる混合ガウスモデルのパラメータ推定の更新式 参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>共役事前分布</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/8/</link>
       <pubDate>Tue, 16 Mar 2021 16:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/8/</guid>
-      <description></description>
+      <description>事後分布の式がシンプルになるように，以下の共役事前分布を用いることが標準的となっている．&#xA;ディリクレ分布 多項分布に対する共役事前分布はディリクレ分布$\mathcal{D}(\mu|\alpha)$である．&#xA;$$\mathcal{D}(\mu|\alpha)= \frac{\Gamma(\sum_{j=1}^{k}\alpha_j)}{\Pi_{j=1}^k\Gamma(\alpha_j)}\Pi_{j=1}^k\mu_j^{\alpha_j-1}$$&#xA;ここで，$\alpha$はディリクレ分布のパラメータであり，$\Gamma$は以下に示すガンマ関数である．&#xA;$$\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}dt$$&#xA;ベータ分布 二項分布の事前分布として使えるのがベータ分布である．&#xA;$$p(\mu|a,b)=\frac{1}{B(a,b)}\mu^{\alpha-1}(1-\mu)^{b-1}$$&#xA;ここで，$B(a,b)$は2次元の多項ベータ関数を表す．&#xA;$$B(a,b)=\int_0^1\mu^{a-1}(1-\mu)^{b-1}d\mu$$&#xA;ガンマ分布 観測値が正規分布$\mathcal{N}(x|\mu,\sigma^2)$に従うとする時，その平均パラメータ$\mu$に対してベイズ推定を行うための共役事前分布としては正規分布$\mathcal{N}(\mu|\Psi,\rho^2)$が使える． 分散$\sigma^2$に対してベイズ推定を行う場合を考える． $\sigma^2$の事前分布として正規分布$\mathcal{N}(\sigma^2|\phi,\eta^2)$を使うと，事後分布は事前分布と同じ関係式にならない．(理由は参考資料のp97) そこで，分散の逆数$\lambda=1/\sigma^2$を精度パラメータとよび，精度パラメータの共役事前分布として，ガンマ分布$\mathcal{G}(\lambda|\kappa,\xi)$を用いる．&#xA;$$\mathcal{G}(\lambda|\kappa,\xi)=\frac{\xi^\kappa}{\Gamma(\kappa)}\lambda^{\kappa-1}\exp(-\xi\lambda)$$&#xA;$\kappa$は形状パラメータ，$\xi$はレートパラメータと呼ばれる．&#xA;ガンマ分布の余談 $\kappa=1$のガンマ分布は指数分布と一致する．&#xA;$$\mathcal{G}(\lambda|1,\xi)=\frac{\xi}{\Gamma(1)}\exp(-\xi\lambda)=\xi\exp(-\xi\lambda)$$&#xA;$\xi=\frac{1}{2}$に設定し$\nu=2\kappa$で定義されるパラメータで表したものは$\chi^2$分布と呼ばれる．&#xA;$$\chi^2(\lambda|\nu)=\mathcal{G}(\lambda|\frac{\nu}{2},\frac{1}{2})$$&#xA;正規-ガンマ分布 正規分布$\mathcal{N}(\mu,\lambda^{-1})$のパラメーターについて平均$\mu$は正規分布，精度$\lambda$についてはガンマ分布が事前分布として使えることを述べた． 今回は，$\mu$と$\lambda$を同時に求めることを考える． $\mu$と$\lambda$の同時分布を正規-ガンマ分布$\mathcal{NG}$とよぶ．&#xA;$$\mathcal{NG}(\mu,\lambda|\psi,\beta,\kappa,\xi)=\mathcal{N}(\mu|\psi,(\beta \lambda)^{-1}\mathcal{G}(\lambda|\kappa,\xi)$$&#xA;一般的な確率分布のパラメータとその共益事前分布 参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>ラグランジュの未定数法</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/7/</link>
       <pubDate>Tue, 16 Mar 2021 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/7/</guid>
-      <description></description>
+      <description>制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．&#xA;２接線が重なる点を求めるには勾配を求めることが有効である． 勾配は勾配作用素$\nabla$を用いて以下のように定義される．&#xA;$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$&#xA;目的関数fを制約gのもとで解くことくを考えると．&#xA;$$\nabla f(\mu) = \lambda \nabla g(\mu)$$&#xA;が成り立ち，$\mu$が制約付き最適化の答えの候補となる． ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．&#xA;ラグランジュ関数を以下のように定義すると，&#xA;$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$&#xA;ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．&#xA;例1 $g(x,y)=2x+y+1=0$という制約条件を満たすx,yで$f(x,y)=x^2+y^2$を最小化するものを求める．&#xA;$$\nabla f(x,y) = (2x,2y)$$&#xA;$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$&#xA;よって，&#xA;$2x = 2\lambda$ $2y = \lambda$ さらに$g(x,y)=2x+y+1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．&#xA;多項分布の最尤推定 ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．&#xA;$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$&#xA;$$g=\sum_{j=1}^k\mu_j-1$$&#xA;ラグランジュの未定乗数法より&#xA;$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$&#xA;両辺を$\hat{\mu}_h$で微分すると&#xA;$$\frac{x_h}{\hat{\mu}_h}=\lambda$$&#xA;制約条件を用いて$\lambda$を求めると&#xA;$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$&#xA;したがって，&#xA;$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>二項分布とその仲間たち</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/6/</link>
       <pubDate>Tue, 16 Mar 2021 14:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/6/</guid>
-      <description></description>
+      <description>&#xA;ベルヌーイ分布 まず，離散変数のとりうる値が2種，すなわち0か1のいずれかの値をとる場合を考える． 1が現れる確率を$\mu$,0が現れる確率を$1-\mu$とする．$\mu$は0から1までをとる．このように定義される分布をベルヌーイ分布とよぶ．&#xA;$$p(x|\mu)=\mu^x(1-\mu)^{1-x}$$&#xA;このように確率変数を引数として，その値が確率であるような関数は確率質量関数とよばれる．&#xA;二項分布 ベルヌーイ分布の試行回数を増やすことを考える．&#xA;$$p(r|m,\mu)=\frac{m!}{r!(m-r)!}\mu^r(1-\mu)^{m-r}$$&#xA;多項分布 サイコロの確率を考える場合，取りうる値を1から6まで拡張する必要がある．ベルヌーイ分布や二項分布を一般化したものの多項分布とよぶ．&#xA;$$p(x|\mu)=p(x_1,x_2,&amp;hellip;,x_k|\mu_1,\mu_2,&amp;hellip;,\mu_k)=\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!} \Pi_{j=1}^k\mu_{j}^{x_j}$$&#xA;$m=1$の場合をマルチヌーイ分布とよぶ．&#xA;$$\mathcal{M}(x|\mu)=p(x|\mu)=\Pi_{j=1}^k\mu_j^{x_j}$$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>ベイズ推定</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/5/</link>
       <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/5/</guid>
-      <description></description>
+      <description>最尤推定に事前知識を加えることでより妥当な推定にすることを考える． 事前知識の事前分布$p(\theta)$と呼ぶ．&#xA;事前分布$p(\theta)$：パラメータ$\theta$がどのような値であるかについて，観測値がない状態での新念の分布&#xA;ベイズの定理 確率変数を$x$,パラメータを$\theta$として&#xA;$p(\theta|x)=\frac{p(\theta,x)}{p(x)}$ $p(x|\theta)=\frac{p(x,\theta)}{p(\theta)}$ の2式が成り立つことより $p(\theta|x)p(x)=p(\theta,x)=p(x,\theta)=p(x|\theta)p(\theta)$ が成り立ち，以下の式が求まる．&#xA;$$p(\theta|x)=\frac{p(x|\theta)p(\theta)}{p(x)}$$&#xA;これがベイズの定理である． ベイズの定理において&#xA;$p(\theta|x)$を事後分布 パラメータ$\theta$がどのような値であるかについて，観測値xの値を知った状態での新念の分布 $p(\theta)$を事前分布 $p(x|\theta)$を尤度 $p(x)$を規格化定数&#xA;$p(x)$は分子の総和が1となるように規格化するための定数であり，周辺化によって求める． $p(x)=\int p(x,\theta&amp;rsquo;)d\theta&amp;rsquo;=\int p(x|\theta&amp;rsquo;)P(\theta&amp;rsquo;)d\theta&amp;rsquo;$ とよぶ． MAP推定 事後確率$p(\theta|x)$を最大にする最尤推定量$\theta$を求める．&#xA;$$\hat{\theta}=arg\max_{\theta} p(\theta|x)=arg\max_{\theta}\frac{p(x|\theta)p(\theta)}{p(x)} $$&#xA;ベイズ推定 MAP推定では，事後分布$p(\theta|x)$を最も大きくする$\theta$の値が推定量$\hat{\theta}_{MAP}$として点推定される．しかし，これでは予測値の分布がわからない． そこで，ベイズ推定では$\theta$をひとつに求めるのではなく，事後分布$p(\theta|x)$を使って予測を行う．&#xA;たとえば，予測したいのが確率変数yの分布である場合，$p(\theta|x)$による期待値を計算する．&#xA;$$p(y|x) = \mathbb{E}_{p(\theta|x)}[p(y|\theta)]\int p(y|\theta)p(\theta|x)d\theta=\int p(y,\theta|x)d\theta$$&#xA;得られた分布$p(y|x)$に基づいて予測値をひとつに定めたい場合はyについての期待値を求めればいい．&#xA;$$\hat{y}=\mathbb{E}_{p(y|x)}[y]=\int yp(y|x)dy = \int y p(y|\theta)p(\theta|x)d\theta dy$$&#xA;このようにベイズ推定では，事前確率$p(\theta)$と尤度関数$p(x|\theta)$，ならびに観測値xに基づき事後確率$p(\theta|x)$を求める．&#xA;ベイズ更新 データが増えるたび，過去に推定した事後分布とベイズの定理を使って事後分布を更新していくことをベイズ更新と呼ぶ．&#xA;$$p(\theta|x^{(1)},x^{(2)},\alpha)= \frac{p(x^{(2)|\theta}p(\theta|x^{(1)},\alpha))}{p(x^{(2)}|\alpha)}$$&#xA;時刻tまでの観測値に基づく事後分布$p(\theta|x^{(1)},&amp;hellip;,x^{(t)},\alpha)$を事前分布として使い，観測値$x^{t+1}$も考慮した場合の事後分布$p(\theta|x^{(1)},&amp;hellip;,x^{t+1},\alpha)$が計算される．&#xA;ベイズ更新では，一度使用した観測値をふたたび使う必要がないため，記憶容量が少なくて済む．&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>正規分布における最尤推定</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/4/</link>
       <pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/4/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>正規分布(ガウス分布)</title>
-      <link>https://yuhi-sa.github.io/posts/20210317_bayes/3/</link>
-      <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/3/</guid>
-      <description></description>
+      <description>20世紀初頭に統計学者ロナウド・フィッシャーにより提案された統計的推定手法．&#xA;最尤推定 尤度とは，$x$を観測値,$\theta$をパラメータとしたときの条件付き確率$p(x|\theta)$である．このとき，$p(x|\theta)$はパラメータが$\theta$であるときの観測値$x$の確率分布である．&#xA;$$p(x|\theta)=\Pi_{i=1}^np(x^i|\theta)$$&#xA;この尤度関数$p(x|\theta)$を最大化する$\theta$を求める方法を最尤推定とよぶ．&#xA;正規分布における最尤推定 統計学や機械学習では指数分布の形をした確率分布を使うことが多いため，式変形の簡単化から対数尤度関数$\log p(x|\theta)$の最大化を行う場合が多い．&#xA;ここでは，観測値xが正規分布に従って生成されるモデルを考える．正規分布のもつパラメータは$\mu$と$\sigma$であり，これらが$\theta$に相当する．&#xA;$\mu$の推定 正規分布の対数尤度関数を式変形する&#xA;$$\log p(x|\mu,\sigma) = - \frac{\sum_{i=1}^n(x^i-\mu)^2}{2\sigma^2}-\frac{n}{2}\log \sigma^2-\frac{n}{2}\log2\pi$$&#xA;この右辺を最大化する$\mu$を求めたいので，$\mu$で微分する．&#xA;$$\frac{d \log p(x|\mu,\sigma)}{d\mu}=\frac{\sum_{i=1}^n(x^i-\mu)}{\sigma^2}$$&#xA;これが，0となる場合&#xA;$$\mu = \frac{1}{n}\sum_{i=1}^nx^i$$&#xA;観測値$x^i$の平均が正規分布における$\mu$の最尤推定値となる． これが，算術平均が幾何平均よりも広く使われている理由となっている．&#xA;算術平均：$n$個の標本の値を足し合わせ，$n$で割ること 幾何平均：$n$個の標本の値をかけ合わせ，それの$n$乗根を求めること $\sigma^2$の推定 $\sigma^2$で正規分布の対数尤度関数を微分する．&#xA;$$\frac{d \log p(x|\mu,\sigma)}{d\sigma^2}= \frac{\sum_{i=1}^n(x^i-\mu)^2}{2(\sigma^2)^2}-\frac{n}{2\sigma^2}$$&#xA;これが，0となる場合&#xA;$$\sigma^2 = \frac{1}{n}\sum_{i=1}^n(x^i-\mu)^2$$&#xA;$\mu$の推定値である標本平均を上式に代入して得られるのが標本分散となる．&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>確率の基礎</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/2/</link>
       <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/2/</guid>
-      <description></description>
+      <description>用語 命題：真か偽のいずれかになりうる文 確率分布：命題に対してそれが生じる確率を与える対応関係．&#xA;確率分布に命題を引数として与えると確率が出力される． 事象：確率分布の入力となる命題 確率変数：確率的に値が決まる変数 同時確率・周辺確率・条件付き確率 同時確率 ２つの出来事が共に生じる確率．&#xA;$$p(x,y) = p(y,x)$$&#xA;周辺確率 確率変数$x$とyの同時確率$p(x,y)$から，片方の変数を足し合わせることにより$p(x)$もしくは$p(y)$を求めることを周辺化とよび，周辺化によって求まる$p(x),p(y)$を周辺確率と呼ぶ．&#xA;$$\int p(x,y) dx = p(y)$$&#xA;条件付き確率 確率変数xが定まった上で，確率変数$y$が起こる確率$p(y|x)$．&#xA;$$p(y|x)=\frac{p(x,y)}{p(x)}$$&#xA;確率変数の独立性 ２つの確率変数が依存関係を持たないとき，独立と表現する．$x$と$y$が独立である場合，以下の式を満たす．&#xA;$$p(x,y)=p(x)p(y)$$&#xA;独立でない場合を従属と呼ぶ．&#xA;条件付き独立性 独立ではないが，ある条件が定まった後は独立となる．&#xA;$$p(x,y|z)=p(x|z)p(y|z)$$&#xA;連続変数の分布 たとえば時速のような連続値を確率変数として考える場合，1.00km/hである確率，1.01km/hである確率など無限になる可能性がある．無限の可能性のそれぞれに0より大きい確率を割り当てると総和が無限となってしまう．(確率の総和は1)&#xA;→累積確率関数，確率密度関数を用いる&#xA;累積確率関数 累積確率関数F(x)は「確率変数の値がx以下である確率」を表す．&#xA;確率密度関数 確率密度関数は累積確率関数の微分として定義される．&#xA;さまざまな確率分布 指数分布：0に近い値ほど起きやすく．大きくなるほど起こりにくい．部品がどのタイミングで故障するかなど時間の長さの分布は指数分布に従う．自然界では放射性物質の半減期が指数分布に従う．$\lambda$はパラメータ $$p(x|\lambda)= \lambda \exp (-\lambda x) $$&#xA;ラプラス分布：指数分布の形を保ったまま定義域を負の範囲にも拡大することを考えた場合，積分が発散してしまう．そこで絶対値を用いて作られた分布．($x^2$を用いて作られた分布が正規分布) $$p(x|\lambda)= \frac{\lambda}{2} \exp (-\lambda |x|) $$&#xA;期待値 確率変数xが確立分布$p(x)$に従い，$x$によって値が決まる関数$f(x)$を考える．このとき，期待値は以下のように表される．&#xA;$$\mathbb{E}[f(x)]=\int p(x)f(x)dx$$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
+    </item>
+    <item>
+      <title>正規分布(ガウス分布)</title>
+      <link>https://yuhi-sa.github.io/posts/20210317_bayes/3/</link>
+      <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20210317_bayes/3/</guid>
+      <description>連続変数の確率分布のうち，もっとも広く使われているものの一つである．正規分布が広く使われるのは，誤差が正規分布に従うことが多いためである．正規分布は，ガウスが星の位置を人間が観測した場合，実際の位置に対してどのようにばらつくかを調べる中で生まれた．&#xA;標準正規分布 もっとも基本的な正規分布．規格化(総和が1となるように調整する)のため$\sqrt{2 \pi}$で割っている．&#xA;$$p(x)=\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})$$&#xA;平行移動 標準正規分布は，0を中心としている分布であるが$\mu$を中心とした正規分布を作りたい場合，平行移動することを考える．&#xA;$$p(x|\mu)=\frac{1}{\sqrt{2\pi}}\exp(-\frac{(x-\mu)^2}{2})$$&#xA;スケーリング 標準正規分布を二階微分する． $$ \frac{d^2\mathcal{N}}{dx^2} = -\frac{1-x^2}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})$$ よって，変曲点は+1,-1となる．&#xA;変曲点が$\sigma$の分布を作る場合，以下のようになる．&#xA;$$ p(x|0,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{x^2}{2\sigma^2})$$&#xA;平行移動とスケーリングをまとめて一般の正規分布$\mathcal{N}(x|\mu,\sigma^2)$が作られる．&#xA;$$\mathcal{N}(x|\mu,\sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})$$&#xA;参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
     <item>
       <title>統計学と機械学習の用語</title>
       <link>https://yuhi-sa.github.io/posts/20210317_bayes/1/</link>
       <pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210317_bayes/1/</guid>
-      <description></description>
+      <description>統計用語 標本：データを構成する個々の例 観測値：標本が持つ値 パラメータ：観測値がどのような値になるのかの傾向を決めている値(データに依存せずに決まる部分をモデル) 検定：データについての仮説が正しいかどうかを明らかにする． 推定：まだ観測されていない値の予測 機械学習用語 学習・訓練：プログラムにルールを獲得させる タスク：機械学習の目標 教師あり学習 入力と入力に対する出力の正解例(教師信号)を多数与えて，識別モデルを学習させる．&#xA;代表的なタスクは，分類と回帰&#xA;分類：入力をあらかじめきめられた有限個のカテゴリに分類する． 回帰：実数値を出力とする． 教師なし学習 生成モデルを学習させる．「このようなルールで分類，回帰を行う」という識別モデルに対して，生成モデルでは，「観測されたデータはこのように生成される」というメカニズムを表現する．&#xA;代表的なタスクは，クラスタリングと次元削減&#xA;クラスタリング：データのグループ分け 次元削減：入力をよりシンプルな表現に変換 参考 手塚 太郎，&amp;quot;しくみがわかるベイズ統計と機械学習&amp;quot; </description>
     </item>
   </channel>
 </rss>

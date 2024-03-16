@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pytorch on tomato blog</title>
+    <title>Pytorch on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/pytorch/</link>
-    <description>Recent content in pytorch on tomato blog</description>
+    <description>Recent content in Pytorch on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 15 Feb 2021 13:00:23 +0900</lastBuildDate>
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/en/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210215_pytorch_dtype/1/</guid>
-      <description></description>
+      <description>x = np.random.rand(5) print(x) torch_x = torch.tensor(x) print(torch_x) [0.07875406 0.96178392 0.64953209 0.12122955 0.92958997] tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296], dtype=torch.float64) If the numpy array is converted directly to torch, the dtype remains.&#xA;torch_x = torch.tensor(x.astype(np.float32)) print(torch_x) tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296]) To get rid of the dtype, we need to convert the numpy type to float32 and then to torch.</description>
     </item>
   </channel>
 </rss>

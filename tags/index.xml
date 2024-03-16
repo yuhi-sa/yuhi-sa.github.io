@@ -9,28 +9,28 @@
     <lastBuildDate>Mon, 18 Dec 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>hugo</title>
+      <title>Hugo</title>
       <link>https://yuhi-sa.github.io/tags/hugo/</link>
       <pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
-      <title>shell</title>
+      <title>Shell</title>
       <link>https://yuhi-sa.github.io/tags/shell/</link>
       <pubDate>Tue, 12 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/shell/</guid>
       <description></description>
     </item>
     <item>
-      <title>git</title>
+      <title>Git</title>
       <link>https://yuhi-sa.github.io/tags/git/</link>
       <pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/git/</guid>
       <description></description>
     </item>
     <item>
-      <title>javascript</title>
+      <title>Javascript</title>
       <link>https://yuhi-sa.github.io/tags/javascript/</link>
       <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/javascript/</guid>
@@ -51,14 +51,14 @@
       <description></description>
     </item>
     <item>
-      <title>cassandra</title>
+      <title>Cassandra</title>
       <link>https://yuhi-sa.github.io/tags/cassandra/</link>
       <pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/cassandra/</guid>
       <description></description>
     </item>
     <item>
-      <title>iphone</title>
+      <title>Iphone</title>
       <link>https://yuhi-sa.github.io/tags/iphone/</link>
       <pubDate>Sun, 18 Jun 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/iphone/</guid>
@@ -79,28 +79,28 @@
       <description></description>
     </item>
     <item>
-      <title>vim</title>
+      <title>Vim</title>
       <link>https://yuhi-sa.github.io/tags/vim/</link>
       <pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/vim/</guid>
       <description></description>
     </item>
     <item>
-      <title>k8s</title>
+      <title>K8s</title>
       <link>https://yuhi-sa.github.io/tags/k8s/</link>
       <pubDate>Sun, 04 Sep 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/k8s/</guid>
       <description></description>
     </item>
     <item>
-      <title>linux</title>
+      <title>Linux</title>
       <link>https://yuhi-sa.github.io/tags/linux/</link>
       <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/linux/</guid>
       <description></description>
     </item>
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>https://yuhi-sa.github.io/tags/python/</link>
       <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/python/</guid>
@@ -121,14 +121,14 @@
       <description></description>
     </item>
     <item>
-      <title>sql</title>
+      <title>Sql</title>
       <link>https://yuhi-sa.github.io/tags/sql/</link>
       <pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/sql/</guid>
       <description></description>
     </item>
     <item>
-      <title>java</title>
+      <title>Java</title>
       <link>https://yuhi-sa.github.io/tags/java/</link>
       <pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/java/</guid>
@@ -170,7 +170,7 @@
       <description></description>
     </item>
     <item>
-      <title>pytorch</title>
+      <title>Pytorch</title>
       <link>https://yuhi-sa.github.io/tags/pytorch/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/pytorch/</guid>
@@ -191,7 +191,7 @@
       <description></description>
     </item>
     <item>
-      <title>ros</title>
+      <title>Ros</title>
       <link>https://yuhi-sa.github.io/tags/ros/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/ros/</guid>
