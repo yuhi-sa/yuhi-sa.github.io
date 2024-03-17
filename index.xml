@@ -6,8 +6,15 @@
     <description>Recent content on tomato blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 04 Jan 2024 10:10:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2024 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>直近やること</title>
+      <link>https://yuhi-sa.github.io/posts/20240316_todo/1/</link>
+      <pubDate>Sat, 16 Mar 2024 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240316_todo/1/</guid>
+      <description>読む 実践Next.js —— App Routerで進化するWebアプリ開発 見る ドメイン駆動設計 Go動画 作る 副業のバックエンド 本業の自分用アプリ </description>
+    </item>
     <item>
       <title>2024年目標</title>
       <link>https://yuhi-sa.github.io/posts/todo/</link>
