@@ -86,10 +86,11 @@
   </header>
   <main>
     
-<h1>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</h1>
-<h1 id="ユークリッドの互除法とは">ユークリッドの互除法とは</h1>
+
+<h1 id="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム">ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</h1>
+<h2 id="ユークリッドの互除法とは">ユークリッドの互除法とは</h2>
 <p>ユークリッドの互除法とは、2つの整数 $a$ と $b$ $(a&gt;b)$ が与えられたとき、$a$ を $b$ で割った余り $r$ とすることで、$a$ と $b$ の最大公約数を求める方法。除法の原理を利用し、割り算を繰り返すことによって最大公約数を求める。</p>
-<h2 id="ユークリッドの互除法のアルゴリズム">ユークリッドの互除法のアルゴリズム</h2>
+<h3 id="ユークリッドの互除法のアルゴリズム">ユークリッドの互除法のアルゴリズム</h3>
 <p>入力：整数$a,b$<br>
 出力：最大公約数 $d$</p>
 <ol>
@@ -99,7 +100,7 @@ $d=a_{i-1}$とし終了</li>
 <li>$a_{i-1}=a_iq_i+a_{i+1}$<br>
 　　として2に戻る</li>
 </ol>
-<h2 id="プログラム">プログラム</h2>
+<h3 id="プログラム">プログラム</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-euclid.py" data-lang="euclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span> 
@@ -113,7 +114,7 @@ $d=a_{i-1}$とし終了</li>
 </span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-</span></span></code></pre></div><h1 id="拡張ユークリッドの互除法とは">拡張ユークリッドの互除法とは</h1>
+</span></span></code></pre></div><h2 id="拡張ユークリッドの互除法とは">拡張ユークリッドの互除法とは</h2>
 <p>拡張ユークリッドの互除法とは、一次不定方程式 $ax+by=d$ の一つの解を求める方法。$a_0=a$、$a_1=b$ とおくと、以下のように求めることができる。</p>
 <p>$[\begin{array}{cc}
 a_{i-1} \
@@ -163,7 +164,7 @@ b
 \end{array}]
 $
 となる．</p>
-<h2 id="拡張ユークリッドの互除法のアルゴリズム">拡張ユークリッドの互除法のアルゴリズム</h2>
+<h3 id="拡張ユークリッドの互除法のアルゴリズム">拡張ユークリッドの互除法のアルゴリズム</h3>
 <p>入力：整数$a,b$<br>
 出力：最大公約数$d$ と $ax+by=d$となる整数$x, y$</p>
 <ol>
@@ -176,7 +177,7 @@ $x_{i+1} = x_{i−1} − q_ix_i$
 $y_i+1=y_i−1−q_iy_i$<br>
 として3に戻る．</li>
 </ol>
-<h2 id="プログラム-1">プログラム</h2>
+<h3 id="プログラム-1">プログラム</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-exEuclid.py" data-lang="exEuclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exEuclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span> 

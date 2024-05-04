@@ -86,13 +86,14 @@
   </header>
   <main>
     
-<h1>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</h1>
-<h1 id="はじめに">はじめに</h1>
+
+<h1 id="markdownで記事を作成して無料ブログをつくるgithub-pageshugo">markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</h1>
+<h2 id="はじめに">はじめに</h2>
 <p>Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．</p>
 <p>全体通して，参考にした記事たち
 参考1：<a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3">Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する</a><br>
 参考2：<a href="https://qiita.com/ryoma-tokushige/items/eba3e6cd415e9755af87">【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】</a></p>
-<h1 id="hugoとは">Hugoとは</h1>
+<h2 id="hugoとは">Hugoとは</h2>
 <p>ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つが<a href="https://gohugo.io/">Hugo</a>である．</p>
 <p>Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される．
 <img alt="hugo-logo.png" src=".././fig1.png"></p>
@@ -104,19 +105,19 @@
 <p>ということがあげられる．</p>
 <p>参考1：<a href="https://knowledge.sakura.ad.jp/22908/">静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る</a><br>
 参考2：<a href="https://programming-world.net/ssg/hugo/">Hugoとは？静的サイトジェネレータについて解説</a></p>
-<h1 id="hugoでサイトを作成">Hugoでサイトを作成</h1>
-<h2 id="hugoのインストール">Hugoのインストール</h2>
+<h2 id="hugoでサイトを作成">Hugoでサイトを作成</h2>
+<h3 id="hugoのインストール">Hugoのインストール</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Homebrew(macOS)の場合
 </span></span><span class="line"><span class="cl">brew install hugo
 </span></span></code></pre></div><p>その他の方法でのインストール方法は，<a href="https://gohugo.io/getting-started/installing/">Install Hugo</a></p>
-<h2 id="サイトの作成">サイトの作成</h2>
+<h3 id="サイトの作成">サイトの作成</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo new site test # testは好きな名前
 </span></span><span class="line"><span class="cl">cd test
 </span></span><span class="line"><span class="cl">hugo # このコマンドで生成
-</span></span></code></pre></div><h2 id="サーバーでプレビュー">サーバーでプレビュー</h2>
+</span></span></code></pre></div><h3 id="サーバーでプレビュー">サーバーでプレビュー</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server 
 </span></span></code></pre></div><p><a href="http://localhost:1313">http://localhost:1313</a>で確認できる</p>
-<h2 id="フォルダの中身の確認">フォルダの中身の確認</h2>
+<h3 id="フォルダの中身の確認">フォルダの中身の確認</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
 </span></span><span class="line"><span class="cl">├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル
 </span></span><span class="line"><span class="cl">├── config.toml # hugoの設定ファイル
@@ -128,14 +129,14 @@
 </span></span><span class="line"><span class="cl">└── themes # テーマファイルを置く
 </span></span></code></pre></div><p>参考1：<a href="https://blog.chick-p.work/hugo-site-directory/">HUGO のディレクトリ構成</a><br>
 参考2：<a href="https://gohugo.io/getting-started/directory-structure/">Directory Structure</a></p>
-<h2 id="テンプレートを利用する">テンプレートを利用する</h2>
+<h3 id="テンプレートを利用する">テンプレートを利用する</h3>
 <p><a href="https://themes.gohugo.io/">Hugo Themes</a>から好きなテーマを選択し，themesフォルダの中にcloneする．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd themes
 </span></span><span class="line"><span class="cl">git clone テーマフォルダ
 </span></span></code></pre></div><p>config.tomlに以下の行を追記する．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">theme = &#34;選んだテーマ名&#34;
 </span></span></code></pre></div><p><img alt="temple.png" src=".././fig2.png"></p>
-<h2 id="ブログ記事を作成する">ブログ記事を作成する</h2>
+<h3 id="ブログ記事を作成する">ブログ記事を作成する</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd test
 </span></span><span class="line"><span class="cl">hugo new post/new-post.md
 </span></span></code></pre></div><p>new-post.mdの中身</p>
@@ -151,25 +152,25 @@
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd test
 </span></span><span class="line"><span class="cl">hugo
-</span></span></code></pre></div><h1 id="github-pages">Github Pages</h1>
-<h2 id="githubにリポジトリを作成する">Githubにリポジトリを作成する</h2>
+</span></span></code></pre></div><h2 id="github-pages">Github Pages</h2>
+<h3 id="githubにリポジトリを作成する">Githubにリポジトリを作成する</h3>
 <p>Githubの画面右上のプラスアイコン「+」をクリックし，「New repository」を選択する．
 フォルダ名は，「アカウント名.github.io」にする．
 公開URLは https://アカウント名.github.io となる．
 <img alt="github.png" src=".././fig3.png"></p>
 <p>参考：<a href="https://prog-8.com/docs/github-pages">自分で作ったWebページをインターネット上に公開しよう！</a></p>
-<h2 id="publicフォルダをここに上げる">publicフォルダをここに上げる．</h2>
+<h3 id="publicフォルダをここに上げる">publicフォルダをここに上げる．</h3>
 <p><!-- raw HTML omitted -->Github Pagesではフォルダ直下のhtmlファイルしか，公開してくれないため，hugoで作成したtestフォルダ内のpublicフォルダを「アカウント名.github.io」にアップロードする．<!-- raw HTML omitted -->
 Githubへのアップロード方法は，<a href="https://qiita.com/under_chilchil/items/ec9d0050c1e3fb6576de">初心者用：GitHubにファイルをアップロードする方法（超基本）
 </a>を参考．
 testフォルダ自体は，別のリポジトリを作成してそちらで管理する.もしくは，branchで分ける．</p>
-<h1 id="その他">その他</h1>
-<h2 id="hugo-実行方法">hugo 実行方法</h2>
+<h2 id="その他">その他</h2>
+<h3 id="hugo-実行方法">hugo 実行方法</h3>
 <p>ローカルのサーバーで確認</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server
 </span></span></code></pre></div><p>ローカルのサーバーで確認(ドラフトも対象)</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server -D
-</span></span></code></pre></div><h2 id="latex-数式を使うための編集">latex 数式を使うための編集</h2>
+</span></span></code></pre></div><h3 id="latex-数式を使うための編集">latex 数式を使うための編集</h3>
 <p>/layouts/partials/add_mathjax.htmlを作成</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script&gt;
 </span></span><span class="line"><span class="cl">    MathJax = {
@@ -183,7 +184,7 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 </span></span></code></pre></div><p>/layouts/partials/site-header.htmlに追記</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{{ partial &#34;add_mathjax.html&#34; . }}
 </span></span></code></pre></div><p>参考：<a href="https://somei-tec.com/article/computer-science/framework/hugo/hugo_mathjax/">MathJaxを用いてHugoで数式を表現する</a></p>
-<h2 id="google-analytics">google Analytics</h2>
+<h3 id="google-analytics">google Analytics</h3>
 <p>config.tomlに以下の行を追加</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">googleAnalytics = &#34;測定ID&#34;
 </span></span></code></pre></div><p>Google Analyticsとの連携のための組み込みテンプレート({{ template &ldquo;_internal/google_analytics_async.html&rdquo; . }})が古いため変更を追加</p>
@@ -204,7 +205,7 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 </span></span><span class="line"><span class="cl">{{ end }}
 </span></span><span class="line"><span class="cl">{{ end }}
 </span></span></code></pre></div><p>参考：<a href="https://qiita.com/momotaro98/items/4de7934fd79cd6b34fce">Hugoで未だ対応していないgtag.jsを利用して Googleアナリティクスする</a></p>
-<h2 id="sitemapを作成">Sitemapを作成</h2>
+<h3 id="sitemapを作成">Sitemapを作成</h3>
 <p>layouts/sitemap.xmlを作成</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
 </span></span><span class="line"><span class="cl">{{ range .Data.Pages }}{{ if .IsPage }}
@@ -224,7 +225,7 @@ testフォルダ自体は，別のリポジトリを作成してそちらで管�
 </span></span></code></pre></div><p>url/sitemap.xmlで表示される．
 <a href="https://yuhi-sa.github.io/sitemap.xml">https://yuhi-sa.github.io/sitemap.xml</a></p>
 <p>参考：<a href="https://takaken.tokyo/dev/hugo/sitemaps/hugo-create-sitemaps/">XMLサイトマップの作り方</a></p>
-<h2 id="作成したサイト">作成したサイト</h2>
+<h3 id="作成したサイト">作成したサイト</h3>
 <ul>
 <li><a href="https://yuhi-sa.github.io/">とまとまとブログ</a></li>
 <li><a href="https://github.com/yuhi-sa/blog.com">Githubリポジトリ</a></li>

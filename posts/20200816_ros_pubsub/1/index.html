@@ -86,21 +86,22 @@
   </header>
   <main>
     
-<h1>[ROS]PublisherとSubscriberを1つのノードに書く方法</h1>
-<h1 id="rosrobot-operating-system">ROS(Robot Operating System)</h1>
+
+<h1 id="rospublisherとsubscriberを1つのノードに書く方法">[ROS]PublisherとSubscriberを1つのノードに書く方法</h1>
+<h2 id="rosrobot-operating-system">ROS(Robot Operating System)</h2>
 <p>ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．<br>
 これによりロボット同士の通信が簡易にできるようになります．</p>
-<h1 id="pub--sub通信">Pub &amp; Sub通信</h1>
+<h2 id="pub--sub通信">Pub &amp; Sub通信</h2>
 <p>ROSでは，ROSのネットワークにつながった実行可能なものを&quot;ノード&quot;とよび，ノード間で&quot;トピック&quot;とよばれるメッセージをやり取りします．<br>
 メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．<br>
 <img alt="PubSub通信" src=".././fig1.png"></p>
-<h1 id="実行環境">実行環境</h1>
+<h2 id="実行環境">実行環境</h2>
 <ul>
 <li>ROS kinetic</li>
 <li>Ubuntu 16.04 LTS</li>
 <li>Python 3.8.5</li>
 </ul>
-<h1 id="publisherのプログラム">Publisherのプログラム</h1>
+<h2 id="publisherのプログラム">Publisherのプログラム</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
 </span></span><span class="line"><span class="cl">
@@ -170,7 +171,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInitException</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">pass</span>
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">Writing a Simple Publisher and Subscriber (Python)</a></li>
 <li><a href="https://docs.odriverobotics.com/">ODrive Documentation</a></li>

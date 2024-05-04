@@ -86,14 +86,15 @@
   </header>
   <main>
     
-<h1>スーパーユーザ</h1>
-<h1 id="ユーザーアカウントの種類">ユーザーアカウントの種類</h1>
+
+<h1 id="スーパーユーザ">スーパーユーザ</h1>
+<h2 id="ユーザーアカウントの種類">ユーザーアカウントの種類</h2>
 <ul>
 <li>スーパーユーザ：全ての管理権限を有しているユーザ</li>
 <li>一般ユーザ：限られた権限のみ付与されたユーザ</li>
 <li>システムユーザ：特殊なアプリケーション実行時のみに使用されるユーザ</li>
 </ul>
-<h1 id="コマンド">コマンド</h1>
+<h2 id="コマンド">コマンド</h2>
 <ul>
 <li>su：現在のユーザから別のユーザに切り替え
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ su - <span class="o">[</span>ユーザ名<span class="o">]</span>
@@ -102,7 +103,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo <span class="o">[</span>オプション<span class="o">]</span> <span class="o">[</span>コマンド<span class="o">]</span>
 </span></span></code></pre></div></li>
 </ul>
-<h1 id="権限の設定">権限の設定</h1>
+<h2 id="権限の設定">権限の設定</h2>
 <p>「/etc/sudoers」ファイルにユーザごとみ実行可能なコマンドが記載されており，「visudo」で編集することができる．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo visudo
 </span></span></code></pre></div>

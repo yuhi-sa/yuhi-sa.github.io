@@ -86,13 +86,14 @@
   </header>
   <main>
     
-<h1>指数移動平均(Exponential Moving Averages)フィルタの周波数特性</h1>
-<h1 id="指数移動平均exponential-moving-averagesema">指数移動平均(Exponential Moving Averages;EMA)</h1>
+
+<h1 id="指数移動平均exponential-moving-averagesフィルタの周波数特性">指数移動平均(Exponential Moving Averages)フィルタの周波数特性</h1>
+<h2 id="指数移動平均exponential-moving-averagesema">指数移動平均(Exponential Moving Averages;EMA)</h2>
 <p>入力$x$に対して，平滑化率$\beta$に応じて時系列平滑化を行い$y$を得ることによって時系列データを平滑化する代表的な手法である．
 1ステップ前のフィルタリングされたの値と現在の観測値を$\beta$を用いて重み付けし足し合わせることで，
 最近のデータを重視するとともに古いデータを完全には切り捨てない仕組みとなっている．</p>
 <p>$$y_t=\beta y_{t-1}+(1-\beta)x_t$$</p>
-<h1 id="ゲイン特性と位相特性">ゲイン特性と位相特性</h1>
+<h2 id="ゲイン特性と位相特性">ゲイン特性と位相特性</h2>
 <p>上式をラプラス変換する．</p>
 <p>$$Y(s)=\beta e^{-s}Y(s)+(1-\beta)X(s)$$</p>
 <p>式変形し伝達関数を求める．</p>
@@ -108,7 +109,7 @@
 <p><img alt="位相特性" src=".././Phase.pdf"></p>
 <p>$\beta$が小さい場合，周波数帯域が狭く強い平滑化を行うことができるが位相遅れが大きくなる．
 一方で$\beta$が大きい場合，位相遅れは小さいが平滑化能力が低下することがわかる．</p>
-<h1 id="プログラム">プログラム</h1>
+<h2 id="プログラム">プログラム</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </span></span><span class="line"><span class="cl">
@@ -145,7 +146,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequency</span><span class="p">[</span><span class="n">beta_index</span><span class="p">],</span> <span class="n">phase</span><span class="p">[</span><span class="n">beta_index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;beta=&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">BETA</span><span class="p">[</span><span class="n">beta_index</span><span class="p">]))</span>
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://www.researchgate.net/publication/331807228_Simple_Exponential_Smoothing_and_Its_Control_Parameter_A_Reassessment">Simple Exponential Smoothing and Its Control Parameter: A Reassessment</a></li>
 </ul>

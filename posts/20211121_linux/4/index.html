@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>ネットワークのトラブルシューティングで利用する代表的なコマンド</h1>
-<h1 id="トラブルシューティング">トラブルシューティング</h1>
+
+<h1 id="ネットワークのトラブルシューティングで利用する代表的なコマンド">ネットワークのトラブルシューティングで利用する代表的なコマンド</h1>
+<h2 id="トラブルシューティング">トラブルシューティング</h2>
 <p>一般的に下位のレイヤから確認を行う．</p>
 <ol>
 <li>物理的な確認</li>
@@ -95,8 +96,8 @@
 <li>ネットワーク経路確認</li>
 <li>開いているポートの確認</li>
 </ol>
-<h1 id="代表的なコマンド">代表的なコマンド</h1>
-<h2 id="ping">ping</h2>
+<h2 id="代表的なコマンド">代表的なコマンド</h2>
+<h3 id="ping">ping</h3>
 <p>宛先へのネットワークの疎通確認</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ping <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
 </span></span></code></pre></div><p>オプション</p>
@@ -105,14 +106,14 @@
 <li>-i　送信間隔：送信間隔指定</li>
 <li>-n：名前解決を行わない</li>
 </ul>
-<h2 id="telnet">telnet</h2>
+<h3 id="telnet">telnet</h3>
 <p>アプリケーション層での疎通確認</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ telnet <span class="o">[</span>オプション<span class="o">]</span> 宛先IP <span class="o">[</span>ポート番号<span class="o">]</span>
 </span></span></code></pre></div><p>オプション</p>
 <ul>
 <li>-l ユーザ名：ユーザ名指定</li>
 </ul>
-<h2 id="traceroute">traceroute</h2>
+<h3 id="traceroute">traceroute</h3>
 <p>始点から終点までのホスト間の経路情報確認</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ traceroute <span class="o">[</span>オプション<span class="o">]</span> 宛先IP
 </span></span></code></pre></div><p>オプション</p>
@@ -122,7 +123,7 @@
 <li>-I：ICMPプロトコル利用</li>
 <li>-n：名前解決を行わない</li>
 </ul>
-<h2 id="ip-route">ip route</h2>
+<h3 id="ip-route">ip route</h3>
 <p>ルーティングテーブルのエントリ情報の表示</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ip route <span class="o">[</span>サブコマンド<span class="o">]</span>
 </span></span></code></pre></div><p>サブコマンド</p>
@@ -131,7 +132,7 @@
 <li>add ネットワーク：ルーティングテーブルにエントリ追加</li>
 <li>del ネットワーク：ルーティングテーブルからエントリ削除</li>
 </ul>
-<h2 id="ss">ss</h2>
+<h3 id="ss">ss</h3>
 <p>ネットワーク接続の統計情報の出力(socket statistics)</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ss <span class="o">[</span>オプション<span class="o">]</span>
 </span></span></code></pre></div><p>オプション</p>
@@ -142,7 +143,7 @@
 <li>-t：TCPを表示</li>
 <li>-u：UDPを表示</li>
 </ul>
-<h2 id="tcpdump">tcpdump</h2>
+<h3 id="tcpdump">tcpdump</h3>
 <p>ネットワーク上を流れる通信パケットの閲覧</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tcpdump <span class="o">[</span>オプション<span class="o">]</span> <span class="o">[</span>条件<span class="o">]</span>
 </span></span></code></pre></div><p>オプション</p>

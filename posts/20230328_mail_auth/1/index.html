@@ -86,25 +86,26 @@
   </header>
   <main>
     
-<h1>メールにおける認証技術</h1>
+
+<h1 id="メールにおける認証技術">メールにおける認証技術</h1>
 <p><img alt="メールにおける認証" src=".././mail_auth.jpg"></p>
-<h1 id="通信路の暗号化">通信路の暗号化</h1>
-<h2 id="smtpsimple-mail-transfer-protocol-over-tls">SMTP(Simple Mail Transfer Protocol) over TLS</h2>
+<h2 id="通信路の暗号化">通信路の暗号化</h2>
+<h3 id="smtpsimple-mail-transfer-protocol-over-tls">SMTP(Simple Mail Transfer Protocol) over TLS</h3>
 <p>SMTP (Simple Mail Transfer Protocol) over TLSを使用して、SMTP通信を暗号化する。TLSを使用することで、通信経路上の第三者による盗聴や改竄を防ぐことができる。ただし、終端（メールサーバー）で復号化されるため、メールサーバーにアクセスされる場合には注意が必要。</p>
-<h1 id="送信者メールサーバーが送信者を認証">送信者メールサーバーが送信者を認証</h1>
-<h2 id="smtp-auth">SMTP Auth</h2>
+<h2 id="送信者メールサーバーが送信者を認証">送信者メールサーバーが送信者を認証</h2>
+<h3 id="smtp-auth">SMTP Auth</h3>
 <p>SMTP Authではユーザー名とパスワードを使い、送信者の認証を行う。チャレンジレスポンス方式により、ユーザー名とパスワードを使って認証を行う。</p>
-<h1 id="受信側のメールサーバーが送信側のメールサーバーを認証">受信側のメールサーバーが送信側のメールサーバーを認証</h1>
-<h2 id="spfsender-policy-frameworkipアドレス方式">SPF(Sender Policy Framework)：IPアドレス方式</h2>
+<h2 id="受信側のメールサーバーが送信側のメールサーバーを認証">受信側のメールサーバーが送信側のメールサーバーを認証</h2>
+<h3 id="spfsender-policy-frameworkipアドレス方式">SPF(Sender Policy Framework)：IPアドレス方式</h3>
 <p>SPFは、送信者のDNSサーバーにSPFレコードを登録することで、受信側のメールサーバーが送信者を認証する。受信側のメールサーバーは、送信者のDNSサーバーに問い合わせてSPFレコードを取得し、IPアドレスを比較することで認証を行う。</p>
-<h2 id="dkimdomainkeys-identified-mainデジタル署名方式">DKIM(DomainKeys Identified Main)：デジタル署名方式</h2>
+<h3 id="dkimdomainkeys-identified-mainデジタル署名方式">DKIM(DomainKeys Identified Main)：デジタル署名方式</h3>
 <p>DKIMは、送信者のDNSサーバーに公開鍵を登録することで、受信側のメールサーバーが送信者を認証する仕組み。送信者はメールにデジタル署名を付与して送信し、受信側のメールサーバーは送信者のDNSサーバーに問い合わせて公開鍵を取得し、検証を行う。</p>
-<h1 id="受信者が送信者を認証">受信者が送信者を認証</h1>
-<h2 id="smimesecure--multipurpose-internet-mail-extensions">S/MIME(Secure / Multipurpose Internet Mail Extensions)</h2>
+<h2 id="受信者が送信者を認証">受信者が送信者を認証</h2>
+<h3 id="smimesecure--multipurpose-internet-mail-extensions">S/MIME(Secure / Multipurpose Internet Mail Extensions)</h3>
 <p>S/MIMEは、デジタル署名を用いてメールを暗号化する方法。送信者は、メールにデジタル署名を付与して送信し、受信者は、署名を検証して送信者を認証する。</p>
-<h2 id="pgppretty-good-privacy">PGP(Pretty Good Privacy)</h2>
+<h3 id="pgppretty-good-privacy">PGP(Pretty Good Privacy)</h3>
 <p>PGPは、公開鍵の交換を事前に当事者間で行い、メールにデジタル署名を付与して送信することで、送信者を認証する方法。</p>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://amzn.to/42Khntj">２０２３　情報処理安全確保支援士「専門知識＋午後問題」の重点対策</a></li>
 </ul>

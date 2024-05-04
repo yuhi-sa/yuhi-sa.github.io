@@ -86,22 +86,23 @@
   </header>
   <main>
     
-<h1>ユーザアカウント</h1>
-<h1 id="ユーザアカウント情報">ユーザアカウント情報</h1>
+
+<h1 id="ユーザアカウント">ユーザアカウント</h1>
+<h2 id="ユーザアカウント情報">ユーザアカウント情報</h2>
 <p>ユーザアカウント情報は「/etc/passwd」ファイルに保存されている．1行ごとに1ユーザの情報が：で区切られた7つのフィールドで構成されている．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>ユーザ名<span class="o">]</span>:<span class="o">[</span>パスワード<span class="o">]</span>:<span class="o">[</span>ユーザID<span class="o">]</span>:<span class="o">[</span>グループID<span class="o">]</span>:<span class="o">[</span>コメント<span class="o">]</span>:<span class="o">[</span>ホームディレクトリ<span class="o">]</span>:<span class="o">[</span>ログインシェル<span class="o">]</span>
 </span></span></code></pre></div><p>ここでパスワードはxと表示され，シャドウパスワードが用いられている．シャドウパスワードは「etc/shadow」ファイルに保存されており，rootユーザのみ読み取り専用として開くことができる．</p>
-<h2 id="ユーザ情報の編集コマンド">ユーザ情報の編集コマンド</h2>
+<h3 id="ユーザ情報の編集コマンド">ユーザ情報の編集コマンド</h3>
 <ul>
 <li>useradd：一般ユーザの追加</li>
 <li>usermod：ユーザ情報の変更</li>
 <li>userdel：ユーザの削除</li>
 <li>passwd：パスワードの変更</li>
 </ul>
-<h1 id="グループアカウント情報">グループアカウント情報</h1>
+<h2 id="グループアカウント情報">グループアカウント情報</h2>
 <p>グループアカウント情報は「/etc/group」ファイルに保存されている．1行ごとに1グループの情報が：で区切られた4つのフィールドで構成されている．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>グループ名<span class="o">]</span>:<span class="o">[</span>パスワード<span class="o">]</span>:<span class="o">[</span>グループID<span class="o">]</span>:<span class="o">[</span>メンバー<span class="o">]</span>
-</span></span></code></pre></div><h2 id="グループ情報の編集コマンド">グループ情報の編集コマンド</h2>
+</span></span></code></pre></div><h3 id="グループ情報の編集コマンド">グループ情報の編集コマンド</h3>
 <ul>
 <li>groupadd：グループの追加</li>
 <li>groupmod：グループの変更</li>

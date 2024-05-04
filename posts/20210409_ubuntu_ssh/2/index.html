@@ -86,14 +86,15 @@
   </header>
   <main>
     
-<h1>Ubuntuのsshの設定</h1>
-<h1 id="sshの設定">sshの設定</h1>
+
+<h1 id="ubuntuのsshの設定">Ubuntuのsshの設定</h1>
+<h2 id="sshの設定">sshの設定</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt-get install aptitude
 </span></span><span class="line"><span class="cl">$ sudo aptitude install ssh
 </span></span></code></pre></div><p>/etc/ssh/sshd_configを編集</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">PermitRootLogin no
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo /etc/init.d/ssh restart
-</span></span></code></pre></div><h1 id="warningが発生した場合">warningが発生した場合</h1>
+</span></span></code></pre></div><h2 id="warningが発生した場合">warningが発生した場合</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 </span></span><span class="line"><span class="cl">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
 </span></span><span class="line"><span class="cl">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

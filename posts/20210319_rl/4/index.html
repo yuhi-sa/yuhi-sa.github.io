@@ -86,30 +86,31 @@
   </header>
   <main>
     
-<h1>ニューラルネットを適応した強化学習</h1>
-<h1 id="学習安定化のための方法">学習安定化のための方法</h1>
-<h2 id="experience-replay">Experience Replay</h2>
+
+<h1 id="ニューラルネットを適応した強化学習">ニューラルネットを適応した強化学習</h1>
+<h2 id="学習安定化のための方法">学習安定化のための方法</h2>
+<h3 id="experience-replay">Experience Replay</h3>
 <p>行動履歴をプールしておき，そこからサンプリングすることで，さまざまなエピソードにおける，異なるタイムステップのデータを学習データとして使用する．これにより学習する経験の偏りを防ぎ，学習を安定化させる．</p>
-<h2 id="fixed-target-q-network">Fixed Target Q-Network</h2>
+<h3 id="fixed-target-q-network">Fixed Target Q-Network</h3>
 <p>一定期間固定されたパラメーターから価値を算出する手法．遷移先の価値を本体のモデルで計算する場合，学習のたびにパラメーターが変わるため，値が毎回変わることとなる．これではTD誤差が安定しないため，一定期間パラメーターを固定する．</p>
-<h2 id="報酬のclipping">報酬のClipping</h2>
+<h3 id="報酬のclipping">報酬のClipping</h3>
 <p>全ゲームを通じ成功は1，失敗は-1と報酬を統一する．</p>
-<h1 id="deep-q-networkdqnとその改良">Deep Q-Network(DQN)とその改良</h1>
+<h2 id="deep-q-networkdqnとその改良">Deep Q-Network(DQN)とその改良</h2>
 <p>価値評価に深層学習を適応する方法をDeep Q-Network(DQN)とよぶ．単純にニューラルネットを使用するだけでは学習が安定しないため，前項のような安定化の工夫が必要となる．<br>
 DQNを発表したDeep Mindは，改良手法6つを組み込んだRainbowというモデルを発表している．</p>
-<h2 id="double-dqn">Double DQN</h2>
+<h3 id="double-dqn">Double DQN</h3>
 <p>行動価値と行動選択のネットワークを分けることで<!-- raw HTML omitted -->価値の見積もり精度<!-- raw HTML omitted -->を上げる．</p>
-<h2 id="prioritized-replay">Prioritized Replay</h2>
+<h3 id="prioritized-replay">Prioritized Replay</h3>
 <p>Experience Replyから単純にランダムサンプリングするのではなく，学習効果の高い(TD誤差が大きいもの)を優先してサンプリングを行い<!-- raw HTML omitted -->学習効率<!-- raw HTML omitted -->を上げる．</p>
-<h2 id="dueling-network">Dueling Network</h2>
+<h3 id="dueling-network">Dueling Network</h3>
 <p>状態価値と行動価値を分けて計算することにより<!-- raw HTML omitted -->価値の見積もり精度<!-- raw HTML omitted -->を上げる．</p>
-<h2 id="multi-step-learning">Multi-step Learning</h2>
+<h3 id="multi-step-learning">Multi-step Learning</h3>
 <p>Q学習とMonteCarlo法の間をとる手法で，「nステップ分の報酬」と「nステップ先の状態の価値」から修正を行うことで，<!-- raw HTML omitted -->価値の見積もり精度<!-- raw HTML omitted -->を上げる．</p>
-<h2 id="distributional-rl">Distributional RL</h2>
+<h3 id="distributional-rl">Distributional RL</h3>
 <p>報酬を分布として扱い，<!-- raw HTML omitted -->価値の見積もり精度<!-- raw HTML omitted -->を上げる．</p>
-<h2 id="noisy-nets">Noisy Nets</h2>
+<h3 id="noisy-nets">Noisy Nets</h3>
 <p>Epsilon-Greedy法においてEpsilonの設定は非常にセンシティブである．Noisy Netsではどのくらいランダムに行動したほうがよいか自体をネットワークに学習することで<!-- raw HTML omitted -->探索効率<!-- raw HTML omitted -->を上げる．</p>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <p>久保隆宏,&quot;<a href="https://amzn.to/3tA1S4W">Pythonで学ぶ強化学習 入門から実践まで</a>&quot;</p>
 
   <div>

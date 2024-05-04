@@ -86,24 +86,25 @@
   </header>
   <main>
     
-<h1>How to do Airplay on Raspberry Pi (RPiPlay)</h1>
-<h1 id="update-raspberrypi">Update Raspberrypi</h1>
-<h2 id="update-packages">Update packages</h2>
+
+<h1 id="how-to-do-airplay-on-raspberry-pi-rpiplay">How to do Airplay on Raspberry Pi (RPiPlay)</h1>
+<h2 id="update-raspberrypi">Update Raspberrypi</h2>
+<h3 id="update-packages">Update packages</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
 </span></span><span class="line"><span class="cl">sudo apt-get upgrade
-</span></span></code></pre></div><h2 id="update-os">Update OS</h2>
+</span></span></code></pre></div><h3 id="update-os">Update OS</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install rpi-update
 </span></span><span class="line"><span class="cl">sudo rpi-update
 </span></span><span class="line"><span class="cl">sudo reboot
-</span></span></code></pre></div><h1 id="setting-up-rpiplay">Setting up RPiPlay</h1>
+</span></span></code></pre></div><h2 id="setting-up-rpiplay">Setting up RPiPlay</h2>
 <p>Use the following code.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://github.com/FD-/RPiPlay
-</span></span></code></pre></div><h2 id="install-the-necessary-packages">Install the necessary packages</h2>
+</span></span></code></pre></div><h3 id="install-the-necessary-packages">Install the necessary packages</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install cmake
 </span></span><span class="line"><span class="cl">sudo apt-get install libavahi-compat-libdnssd-dev
 </span></span><span class="line"><span class="cl">sudo apt-get install libssl-dev
 </span></span><span class="line"><span class="cl">sudo apt-get install libplist-dev
-</span></span></code></pre></div><h3 id="environment">Environment</h3>
+</span></span></code></pre></div><h4 id="environment">Environment</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux 10 (buster)&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">NAME</span><span class="o">=</span><span class="s2">&#34;Raspbian GNU/Linux&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&#34;10&#34;</span>
@@ -114,16 +115,16 @@
 </span></span><span class="line"><span class="cl"><span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianForums&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&#34;http://www.raspbian.org/RaspbianBugs&#34;</span>
-</span></span></code></pre></div><h2 id="install-rpiplay">Install RPiPlay</h2>
+</span></span></code></pre></div><h3 id="install-rpiplay">Install RPiPlay</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/FD-/RPiPlay.git
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> RPiPlay
-</span></span></code></pre></div><h2 id="build">Build</h2>
+</span></span></code></pre></div><h3 id="build">Build</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
 </span></span><span class="line"><span class="cl">cmake ..
 </span></span><span class="line"><span class="cl">make
 </span></span></code></pre></div><p>An executable file named rpiplay will be created in the build directory.</p>
-<h2 id="launch">Launch</h2>
+<h3 id="launch">Launch</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./rpiplay
 </span></span></code></pre></div><p>It can take the following as arguments at startup to configure detailed settings.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">-n name: Specify the network name of the AirPlay server.
@@ -145,10 +146,10 @@
 </span></span><span class="line"><span class="cl">-d: Enables debug logging. Will lead to choppy playback due to heavy console output.
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">-v/-h: Displays short <span class="nb">help</span> and version information.
-</span></span></code></pre></div><h1 id="run-on-raspberrypi-startup">Run on Raspberrypi startup</h1>
+</span></span></code></pre></div><h2 id="run-on-raspberrypi-startup">Run on Raspberrypi startup</h2>
 <p>Create a service file in the following directory.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/systemd/system/
-</span></span></code></pre></div><h3 id="rpiplayservice">rpiplay.service</h3>
+</span></span></code></pre></div><h4 id="rpiplayservice">rpiplay.service</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rpiplay.service" data-lang="rpiplay.service"><span class="line"><span class="cl"><span class="k">[Unit]</span>
 </span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">RPi Play</span>
 </span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
@@ -165,7 +166,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
 </span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</span></span></code></pre></div><h1 id="reference">Reference</h1>
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://github.com/FD-/RPiPlay">FD-/RPiPlay</a></li>
 <li><a href="https://www.nakamuland.com/?p=9842">ラズパイをAppleTV代わりにする。（9/24追記あり)</a></li>

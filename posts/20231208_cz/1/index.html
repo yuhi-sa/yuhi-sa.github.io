@@ -86,15 +86,16 @@
   </header>
   <main>
     
-<h1>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</h1>
-<h1 id="commitizenとは">commitizenとは</h1>
+
+<h1 id="gitのコミットメッセージを効果的に統一するためにcommitizenを利用する">Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</h1>
+<h2 id="commitizenとは">commitizenとは</h2>
 <p><a href="https://www.npmjs.com/package/commitizen">commitizen</a>は、Gitのコミットメッセージを効果的に統一するためのツールで、対話的なプロンプトを提供してコミットメッセージを作成できる。これにより、一貫性のあるメッセージを作成しやすくなる。</p>
-<h1 id="導入">導入</h1>
-<h2 id="commitizenのインストール">commitizenのインストール</h2>
+<h2 id="導入">導入</h2>
+<h3 id="commitizenのインストール">commitizenのインストール</h3>
 <p>最初に、以下のコマンドを使用してcommitizenをグローバルにインストールする。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ npm install -g commitizen
 </span></span></code></pre></div><p>これにより、commitizenがコマンドラインから利用可能になる。</p>
-<h2 id="cz-conventional-changelogのインストール">cz-conventional-changelogのインストール</h2>
+<h3 id="cz-conventional-changelogのインストール">cz-conventional-changelogのインストール</h3>
 <p>commitizenを使用する際、どのような形式でコミットメッセージを記述するかを定義するツールが必要となる。
 今回は、<a href="https://github.com/commitizen/cz-conventional-changelog">cz-conventional-changelog</a>を使用する。cz-conventional-changelogは、<a href="https://www.conventionalcommits.org">Conventional Commits</a>と呼ばれるフォーマットに従ったコミットメッセージの記載が可能となる。</p>
 <p>以下のコマンドを実行して、これをインストールする。</p>
@@ -103,7 +104,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ vim .czrc
 </span></span><span class="line"><span class="cl"><span class="o">{</span> <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;cz-conventional-changelog&#34;</span> <span class="o">}</span>
 </span></span></code></pre></div><p>これにより、cz-conventional-changelogが利用可能になる。</p>
-<h2 id="使用方法">使用方法</h2>
+<h3 id="使用方法">使用方法</h3>
 <p>通常の<code>git commit</code>コマンドではなく、 <code>git cz</code>コマンドを使用してコミットメッセージを作成する。このコマンドを実行すると、対話型のプロンプトが表示され、コミットメッセージの各部分を選択して入力することができる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">➜ git:<span class="o">(</span>main<span class="o">)</span> touch test.md
 </span></span><span class="line"><span class="cl">➜ git:<span class="o">(</span>main<span class="o">)</span> ✗ git add test.md

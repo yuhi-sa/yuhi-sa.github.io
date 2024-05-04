@@ -86,11 +86,12 @@
   </header>
   <main>
     
-<h1>DS201の実施_Node</h1>
+
+<h1 id="ds201の実施_node">DS201の実施_Node</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>nodetoolはApache Cassandraの管理ツールの一部で、Cassandraクラスターの実行時操作や監視をサポートする。</p>
-<h1 id="代表的なコマンド">代表的なコマンド</h1>
-<h2 id="helpコマンド">helpコマンド</h2>
+<h2 id="代表的なコマンド">代表的なコマンド</h2>
+<h3 id="helpコマンド">helpコマンド</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">help</span>
 </span></span><span class="line"><span class="cl"><span class="n">usage</span><span class="p">:</span> <span class="n">nodetool</span> <span class="p">[(</span><span class="o">-</span><span class="n">pp</span> <span class="o">|</span> <span class="o">--</span><span class="nb">print</span><span class="o">-</span><span class="n">port</span><span class="p">)]</span> <span class="p">[(</span><span class="o">-</span><span class="n">p</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">--</span><span class="n">port</span> <span class="o">&lt;</span><span class="n">port</span><span class="o">&gt;</span><span class="p">)]</span>
 </span></span><span class="line"><span class="cl">        <span class="p">[(</span><span class="o">-</span><span class="n">pwf</span> <span class="o">&lt;</span><span class="n">passwordFilePath</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">--</span><span class="n">password</span><span class="o">-</span><span class="n">file</span> <span class="o">&lt;</span><span class="n">passwordFilePath</span><span class="o">&gt;</span><span class="p">)]</span>
@@ -234,7 +235,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">viewbuildstatus</span>                     <span class="n">Show</span> <span class="n">progress</span> <span class="n">of</span> <span class="n">a</span> <span class="n">materialized</span> <span class="n">view</span> <span class="n">build</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">See</span> <span class="s1">&#39;nodetool help &lt;command&gt;&#39;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span> <span class="n">on</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">command</span><span class="o">.</span>
-</span></span></code></pre></div><h2 id="statusコマンド">statusコマンド</h2>
+</span></span></code></pre></div><h3 id="statusコマンド">statusコマンド</h3>
 <p>statusコマンドは、クラスタ全体の情報、特に各ノードの状態やそれぞれのノードに関する情報を表示する。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">status</span>
 </span></span><span class="line"><span class="cl"><span class="n">Datacenter</span><span class="p">:</span> <span class="n">datacenter1</span>
@@ -253,7 +254,7 @@
 <li>Host ID: ノードのユニークな識別子。</li>
 <li>Rack: ノードが所属しているラックの情報。</li>
 </ul>
-<h2 id="infoコマンド">infoコマンド</h2>
+<h3 id="infoコマンド">infoコマンド</h3>
 <p>infoコマンドは、接続されたノードに関する情報を表示する。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">info</span>
 </span></span><span class="line"><span class="cl"><span class="n">ID</span>                     <span class="p">:</span> <span class="mi">349</span><span class="n">d6a93</span><span class="o">-</span><span class="mi">038</span><span class="n">a</span><span class="o">-</span><span class="mi">45</span><span class="n">a9</span><span class="o">-</span><span class="n">bd86</span><span class="o">-</span><span class="n">cc22ed3d8e0d</span>
@@ -292,7 +293,7 @@
 <li>Percent Repaired: SSTableの修復が完了した割合。</li>
 <li>Token: ノードのトークン情報。</li>
 </ul>
-<h2 id="describeclusterコマンド">describeclusterコマンド</h2>
+<h3 id="describeclusterコマンド">describeclusterコマンド</h3>
 <p>describeclusterコマンドは、クラスタ全体のノード間で共通の設定や各ノードが使用している現在のスキーマバージョンを表示する。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">describecluster</span>
 </span></span><span class="line"><span class="cl"><span class="n">Cluster</span> <span class="n">Information</span><span class="p">:</span>
@@ -331,7 +332,7 @@
 <li>Database versions: データベースのバージョン情報が表示される。</li>
 <li>Keyspaces: キースペースの情報(キースペース名とレプリケーション戦略)が表示される。</li>
 </ul>
-<h2 id="getlogginglevelsコマンド">getlogginglevelsコマンド</h2>
+<h3 id="getlogginglevelsコマンド">getlogginglevelsコマンド</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">getlogginglevels</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Logger</span> <span class="n">Name</span>                                        <span class="n">Log</span> <span class="n">Level</span>
@@ -347,17 +348,17 @@
 </ul>
 <p>ログレベルは以下のように変更できる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">setlogginglevel</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">cassandra</span> <span class="n">TRACE</span>
-</span></span></code></pre></div><h2 id="settraceprobabilityコマンド">settraceprobabilityコマンド</h2>
+</span></span></code></pre></div><h3 id="settraceprobabilityコマンド">settraceprobabilityコマンド</h3>
 <p>settraceprobabilityコマンドの実行結果の値は、クエリが保存される割合を表す小数値。この値は、0（0%）から1（100%）までの範囲。保存されたトレースは、system_tracesキースペースで確認することができる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">settraceprobability</span> <span class="mf">0.1</span>
-</span></span></code></pre></div><h2 id="drainコマンド">drainコマンド</h2>
+</span></span></code></pre></div><h3 id="drainコマンド">drainコマンド</h3>
 <p>drainコマンドは、ノード上での書き込みを停止し、すべてのデータをディスクにフラッシュするコマンド。
 通常、このコマンドは、Apache Cassandra™ノードを停止する前に実行される。ノードの停止前に実行することで、書き込みが完了し、データがディスクに保存される。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">drain</span>
-</span></span></code></pre></div><h2 id="stopdaemonコマンド">stopdaemonコマンド</h2>
+</span></span></code></pre></div><h3 id="stopdaemonコマンド">stopdaemonコマンド</h3>
 <p>ノードの実行を停止するコマンド。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">stopdaemon</span>
-</span></span></code></pre></div><h1 id="ストレステストを行いデータを確認する">ストレステストを行い、データを確認する</h1>
+</span></span></code></pre></div><h2 id="ストレステストを行いデータを確認する">ストレステストを行い、データを確認する</h2>
 <p><code>cassandra-stress write n=50000 no-warmup -rate threads=1</code>コマンドを使って、Cassandraクラスタに対する書き込みストレステストが行う。このテストでは、50,000の書き込み操作が1つのスレッドで実行され、&ldquo;keyspace1&quot;という名前のキースペースに対して行われる。
 nodetool flushコマンドで、メモリ内のデータをディスクに強制的に書き出す。
 nodetool statusコマンドで、クラスタの現在の状態を確認する。

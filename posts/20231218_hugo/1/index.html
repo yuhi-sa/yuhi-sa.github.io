@@ -86,10 +86,11 @@
   </header>
   <main>
     
-<h1>TypescriptとReactでHugoのテーマを自作する</h1>
+
+<h1 id="typescriptとreactでhugoのテーマを自作する">TypescriptとReactでHugoのテーマを自作する</h1>
 <p>TypescriptとReactを導入してHugoのthemeを作成してみたのでメモを残す。
 hugo自体の設定をしたメモは、<a href="https://yuhi-sa.github.io/posts/20210204_hugo/1/">markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</a>に記載。</p>
-<h1 id="hugoのテーマを初期化">Hugoのテーマを初期化</h1>
+<h2 id="hugoのテーマを初期化">Hugoのテーマを初期化</h2>
 <p><code>hugo new theme</code>コマンドでテーマの雛形を作ることができる。
 以下は、具体的な例としてtomatohugoという名前のテーマを初期化するコマンド。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">hugo new theme tomatohugo
@@ -153,7 +154,7 @@ hugo自体の設定をしたメモは、<a href="https://yuhi-sa.github.io/posts
 <p>初期化が完了したら、hugo serverコマンドを使用してローカルサーバーを起動し、シンプルなテーマが正しく動作しているか確認できる。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">hugo server
 </span></span></code></pre></div><p>初期化したコミット：https://github.com/yuhi-sa/tomatohugo/commit/695eed912b903388faf16a1791b852697811d348</p>
-<h1 id="typescriptを導入">Typescriptを導入</h1>
+<h2 id="typescriptを導入">Typescriptを導入</h2>
 <p><code>npm init</code>コマンドを使用して<code>package.json</code>ファイルを初期化する。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">npm init -y
 </span></span></code></pre></div><p><code>typeScript</code>と<code>ts-loader</code>をインストールする。</p>
@@ -206,7 +207,7 @@ Webpackは、JavaScriptアプリケーションのためのモジュールバン
 </span></span><span class="line"><span class="cl">{{- with resources.Get &#34;js/bundle.js&#34; }}
 </span></span><span class="line"><span class="cl">{{- end }}
 </span></span></code></pre></div><p>Typescritpを導入したPR：https://github.com/yuhi-sa/tomatohugo/pull/1</p>
-<h1 id="reactを導入">Reactを導入</h1>
+<h2 id="reactを導入">Reactを導入</h2>
 <p>必要なライブラリをインストールする。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.bash" data-lang=".bash"><span class="line"><span class="cl">npm install --save react react-dom
 </span></span><span class="line"><span class="cl">npm install --save-dev @types/react @types/react-dom

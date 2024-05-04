@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>DS201の実施_Hinted handoff</h1>
+
+<h1 id="ds201の実施_hinted-handoff">DS201の実施_Hinted handoff</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>Hinted Handoffは、Cassandraデータベースクラスター内のノード間でデータのレプリケーションを行う際に使用される機能。ノードの障害や一時的なダウンタイムが発生した場合でも、データの耐障害性と可用性を確保するために使用される。</p>
 <p>ノードがダウンしている場合やネットワーク接続が一時的に切断されている場合、データの書き込みや読み取りが影響を受ける可能性がある。Hinted Handoffは、ダウンしているノードのデータを一時的に別のノードに保存しておく仕組みである。例えば、データを書き込もうとしたノードがダウンしている場合、Hinted Handoffはそのデータのヒント（ヒント情報）を別のノードに保存します。そして、ダウンしていたノードが復旧した際に、ヒント情報を使用してデータをそのノードに渡すr。</p>

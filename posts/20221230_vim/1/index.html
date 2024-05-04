@@ -86,15 +86,16 @@
   </header>
   <main>
     
-<h1>Vimの使い方メモ</h1>
-<h1 id="vimの基本操作">Vimの基本操作</h1>
-<h2 id="モード切り替え">モード切り替え</h2>
+
+<h1 id="vimの使い方メモ">Vimの使い方メモ</h1>
+<h2 id="vimの基本操作">Vimの基本操作</h2>
+<h3 id="モード切り替え">モード切り替え</h3>
 <ul>
 <li>i：インサートモード</li>
 <li>etc：ノーマルモード</li>
 <li>view：ビューモード</li>
 </ul>
-<h2 id="ノーマルモードでの移動">ノーマルモードでの移動</h2>
+<h3 id="ノーマルモードでの移動">ノーマルモードでの移動</h3>
 <ul>
 <li>k：↑に移動</li>
 <li>j：↓に移動</li>
@@ -104,14 +105,14 @@
 <li>}：段落ごとに下に移動</li>
 <li>gg：ファイルの先頭に移動</li>
 </ul>
-<h2 id="終了">終了</h2>
+<h3 id="終了">終了</h3>
 <ul>
 <li>:w：上書き保存</li>
 <li>:q：編集終了</li>
 <li>:q!：保存しないで終了</li>
 <li>:wq：保存して終了</li>
 </ul>
-<h2 id="ノーマルモードでの操作">ノーマルモードでの操作</h2>
+<h3 id="ノーマルモードでの操作">ノーマルモードでの操作</h3>
 <ul>
 <li>x：一文字削除</li>
 <li>dd：一行削除</li>
@@ -125,7 +126,7 @@
 <li>2yy：2行コピー</li>
 <li>.：Repeat</li>
 </ul>
-<h2 id="検索や置換">検索や置換</h2>
+<h3 id="検索や置換">検索や置換</h3>
 <ul>
 <li>/{検索内容}：検索</li>
 <li>n：次の検索結果に移動</li>
@@ -133,54 +134,54 @@
 <li>%s/{置換前}/{置換後}/g：一括置換</li>
 <li>%s/{置換前}/{置換後}/gc：一括置換</li>
 </ul>
-<h1 id="その他">その他</h1>
+<h2 id="その他">その他</h2>
 <ul>
 <li>o：下に空白を入れてインサートモード</li>
 <li>O：選択行に空白を入れてインsタートモード</li>
 <li>J：行の連結</li>
 </ul>
-<h1 id="vimのプラグイン">Vimのプラグイン</h1>
-<h2 id="vim-plug">Vim Plug</h2>
+<h2 id="vimのプラグイン">Vimのプラグイン</h2>
+<h3 id="vim-plug">Vim Plug</h3>
 <ul>
 <li>vimのプラグインマネージャー</li>
 <li><a href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a></li>
 </ul>
-<h2 id="vim-horizon">vim horizon</h2>
+<h3 id="vim-horizon">vim horizon</h3>
 <ul>
 <li>vimの色合いを変更するプラグイン</li>
 <li><a href="https://github.com/ntk148v/vim-horizon">https://github.com/ntk148v/vim-horizon</a></li>
 </ul>
-<h2 id="nerd-tree">Nerd tree</h2>
+<h3 id="nerd-tree">Nerd tree</h3>
 <ul>
 <li>ディレクトリツリーを表示するプラグイン</li>
 <li><a href="https://github.com/preservim/nerdtree">https://github.com/preservim/nerdtree</a></li>
 </ul>
-<h2 id="fzf">FZF</h2>
+<h3 id="fzf">FZF</h3>
 <ul>
 <li>ファイルの検索ができるプラグイン</li>
 <li><a href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></li>
 </ul>
-<h2 id="vim-fugitive">Vim-fugitive</h2>
+<h3 id="vim-fugitive">Vim-fugitive</h3>
 <ul>
 <li>Gitのコミット履歴が簡単に確認できるプラグイン</li>
 <li><a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a></li>
 </ul>
-<h2 id="vim-gitgutter">vim-gitgutter</h2>
+<h3 id="vim-gitgutter">vim-gitgutter</h3>
 <ul>
 <li>Gitの変更差分を表示できるプラグイン</li>
 <li><a href="https://github.com/airblade/vim-gitgutter">https://github.com/airblade/vim-gitgutter</a></li>
 </ul>
-<h2 id="vim-commentary">Vim-commentary</h2>
+<h3 id="vim-commentary">Vim-commentary</h3>
 <ul>
 <li>gccコマンドでコメントアウトできるプラグイン</li>
 <li><a href="https://github.com/tpope/vim-commentary">https://github.com/tpope/vim-commentary</a></li>
 </ul>
-<h2 id="coc-nvim">Coc-nvim</h2>
+<h3 id="coc-nvim">Coc-nvim</h3>
 <ul>
 <li>コードの補完ができるプラグイン</li>
 <li><a href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a></li>
 </ul>
-<h2 id="設定ファイル">設定ファイル</h2>
+<h3 id="設定ファイル">設定ファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.vimrc" data-lang=".vimrc"><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">shell</span><span class="p">=</span><span class="sr">/bin/</span><span class="nx">zsh</span>
 </span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">shiftwidth</span><span class="p">=</span><span class="m">4</span>
 </span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">tabstop</span><span class="p">=</span><span class="m">4</span>
@@ -209,7 +210,7 @@
 </span></span><span class="line"><span class="cl"><span class="c">
 </span></span></span><span class="line"><span class="cl"><span class="c">&#34; or this line</span>
 </span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nx">g</span>:<span class="nx">lightline</span> <span class="p">=</span> {<span class="s1">&#39;colorscheme&#39;</span> : <span class="s1">&#39;horizon&#39;</span>}
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://www.udemy.com/course/vim-tmux-zsh/">現役シリコンバレーエンジニアが教える NeoVim(VIM) + Tmux + Zsh 入門</a></li>
 </ul>

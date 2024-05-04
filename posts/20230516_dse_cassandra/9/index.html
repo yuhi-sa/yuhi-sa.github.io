@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>DS201の実施_Gossip</h1>
+
+<h1 id="ds201の実施_gossip">DS201の実施_Gossip</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>Cassandraのノード間の通信とデータの同期は、Gossipプロトコルに基づいて行われる。</p>
 <p>Gossipは、ネットワーク内のノード間で情報を分散させるためのプロトコル。ノードは定期的にお互いに通信し、各ノードが保持する情報を交換する。この情報には、ノードの状態やトポロジー、データの位置情報などが含まれる。</p>
@@ -97,7 +98,7 @@
 <li>ノードは、自身の情報を他のノードに送信。すべての情報を送信するのではなく、変更された情報のみを送る。</li>
 <li>ノードは、他のノードから受信した情報を受け入れ、自身の情報を更新。</li>
 </ol>
-<h1 id="演習">演習</h1>
+<h2 id="演習">演習</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">gossipinfo</span>
 </span></span><span class="line"><span class="cl"><span class="n">localhost</span><span class="o">/</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
 </span></span><span class="line"><span class="cl">  <span class="n">generation</span><span class="p">:</span><span class="mi">1686366680</span>

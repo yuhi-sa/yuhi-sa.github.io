@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Derivation of closed-form expression for cross-entropy between Gaussian distributions</h1>
-<h1 id="preparation">Preparation</h1>
+
+<h1 id="derivation-of-closed-form-expression-for-cross-entropy-between-gaussian-distributions">Derivation of closed-form expression for cross-entropy between Gaussian distributions</h1>
+<h2 id="preparation">Preparation</h2>
 <ul>
 <li>Gaussian distribution
 $$
@@ -101,7 +102,7 @@ $$</li>
 </ul>
 <p>$$\mathbb{E}[x^2]=\mu^2+\sigma^2$$
 $$\mathbb{V}[x]=\mathbb{E}[x^2]-(\mathbb{E}[x]^2)$$</p>
-<h1 id="derivation">Derivation</h1>
+<h2 id="derivation">Derivation</h2>
 <p>$$-\int_x p_1(x|\mu_1,\sigma_1)\log p_2(x|\mu_2,\sigma_2)dx$$</p>
 <p>$$=-\mathbb{E}_{p1}[\log(\frac{1}{\sigma_2 \sqrt{2\pi}}\exp{-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2})]$$</p>
 <p>$$=-\mathbb{E}_{p1}[-\log\sigma_2\sqrt{2\pi}-\frac{1}{2}(\frac{x-\mu_2}{\sigma_2})^2]$$</p>

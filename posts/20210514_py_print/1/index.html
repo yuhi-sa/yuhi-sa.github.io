@@ -86,10 +86,14 @@
   </header>
   <main>
     
-<h1>pythonでprintの上書きをする方法</h1>
-<h1 id="一行上書きする場合">一行上書きする場合</h1>
+
+<h1 id="pythonでprintの上書きをする方法">pythonでprintの上書きをする方法</h1>
+<h2 id="一行上書きする場合">一行上書きする場合</h2>
+<p>一行上書きする場合、<code>\r</code>（キャリッジリターン）を使います。これはカーソルを行の先頭に戻す制御文字です。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">print<span class="o">(</span><span class="s2">&#34;\r&#34;</span>+<span class="s2">&#34;一行上書きするよ！&#34;</span>,end<span class="o">=</span><span class="s2">&#34;&#34;</span><span class="o">)</span>
-</span></span></code></pre></div><h1 id="n行上書きする場合">n行上書きする場合</h1>
+</span></span></code></pre></div><p><code>end=&quot;&quot;</code>を使って改行を行わないようにします。</p>
+<h2 id="n行上書きする場合">n行上書きする場合</h2>
+<p>n行上書きする場合、特殊なエスケープシーケンス<code>\033[nA</code>を使用します。ここで、<code>n</code>は上書きする行数です</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">print<span class="o">(</span><span class="s2">&#34;n行上書きするよ！&#34;</span>+<span class="s2">&#34;\033[nA&#34;</span><span class="o">)</span>
 </span></span></code></pre></div>
 

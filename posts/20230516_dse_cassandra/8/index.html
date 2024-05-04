@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>DS201の実施_VNode</h1>
+
+<h1 id="ds201の実施_vnode">DS201の実施_VNode</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>従来のCassandraの設計では、物理ノードがデータのパーティションを管理していた。しかし、物理ノードが故障した場合、そのノードが担当していたパーティションを別のノードに再分配する必要がある。この再分配は手間がかかり、時間とリソースを消費する。</p>
 <p>そこで、CassandraではVNode（仮想ノード）が導入さた。VNodeは、パーティションを物理ノード間で均等に分散する仕組みである。VNodeでは、物理ノードごとに複数の仮想ノードが作成される。各仮想ノードは一意のトークン範囲を持ち、その範囲内のパーティションを担当する。つまり、データは仮想ノードに均等に分散されるため、物理ノードの追加や故障に対して柔軟に対応できる。</p>

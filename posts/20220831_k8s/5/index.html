@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Kubernetesの認証情報(Context)</h1>
-<h1 id="kubeconfig">kubeconfig</h1>
+
+<h1 id="kubernetesの認証情報context">Kubernetesの認証情報(Context)</h1>
+<h2 id="kubeconfig">kubeconfig</h2>
 <p>kubectlが、k8s Masterと通信する際には、接続先サーバのの認証情報を「~/.kube/confg」に記載する必要がある。</p>
 <p>kubeconfigで具体的な設定を行う部分は、clusters、users、contextsの三種類あり、配列型で設定する。
 clustersには接続先クラスタの情報を、usersには認証情報を定義する。contextsはclusterとuserのペアとnamespaceを指定したものを定義する。</p>
@@ -123,15 +124,15 @@ clustersには接続先クラスタの情報を、usersには認証情報を定�
 </span></span><span class="line"><span class="cl">  name: minikube
 </span></span><span class="line"><span class="cl">current-context: docker-desktop
 </span></span><span class="line"><span class="cl">preferences: {}
-</span></span></code></pre></div><h1 id="kubeconfigの操作">kubeconfigの操作</h1>
+</span></span></code></pre></div><h2 id="kubeconfigの操作">kubeconfigの操作</h2>
 <p>contextを切り替えることで複数の環境を複数の権限で扱えるようになる。</p>
-<h2 id="contextの一覧表示">contextの一覧表示</h2>
+<h3 id="contextの一覧表示">contextの一覧表示</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config get-contexts
-</span></span></code></pre></div><h2 id="contextの切り替え">contextの切り替え</h2>
+</span></span></code></pre></div><h3 id="contextの切り替え">contextの切り替え</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config use-context {コンテキスト名}
-</span></span></code></pre></div><h2 id="現在のcontextの表示">現在のcontextの表示</h2>
+</span></span></code></pre></div><h3 id="現在のcontextの表示">現在のcontextの表示</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config current-context
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
 </ul>

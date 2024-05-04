@@ -86,11 +86,12 @@
   </header>
   <main>
     
-<h1>Kubernetesをローカル環境に構築する</h1>
-<h1 id="kubernetesk8sとは">Kubernetes(k8s)とは</h1>
+
+<h1 id="kubernetesをローカル環境に構築する">Kubernetesをローカル環境に構築する</h1>
+<h2 id="kubernetesk8sとは">Kubernetes(k8s)とは</h2>
 <p>コンテナ化されたアプリケーションのデプロイ、スケーリングなどの管理を自動化するプラットフォーム。
 k8sでは、コンテナが起動するノードをk8sノードと呼び、それらを管理するノードk8sマスターと呼ぶ。ノードの集合体がk8sクラスターである。</p>
-<h1 id="minikube">Minikube</h1>
+<h2 id="minikube">Minikube</h2>
 <p>MinikubeはSIG-Cluster-Lifecycleで作られた簡単にローカルにk8sクラスターを構築・実行できるツールである。
 Minikubeではローカルの仮装マシン上にk8sをインストールするため、ハイパーバイザーが必要となる。</p>
 <p>ハイパーバイザーごとに応じたDriverを使用して操作することで、自動的にホストとなるコンテナや仮想マシンを作成し、
@@ -100,7 +101,7 @@ Minikubeではローカルの仮装マシン上にk8sをインストールする
 <ul>
 <li><a href="https://ytooyama.hatenadiary.jp/entry/2021/06/04/154320">M1 MacにおけるHyperkitとそれが必要なアプリケーションの利用について</a></li>
 </ul>
-<h2 id="minikubeのインストール">Minikubeのインストール</h2>
+<h3 id="minikubeのインストール">Minikubeのインストール</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ brew install <span class="nv">minikube</span>
 </span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.25.0
 </span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
@@ -130,7 +131,7 @@ Minikubeではローカルの仮装マシン上にk8sをインストールする
 </span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; minikube
 </span></span><span class="line"><span class="cl">zsh completions have been installed to:
 </span></span><span class="line"><span class="cl">  /opt/homebrew/share/zsh/site-functions
-</span></span></code></pre></div><h2 id="minikubeを使用してk8s環境を構築する">Minikubeを使用してk8s環境を構築する</h2>
+</span></span></code></pre></div><h3 id="minikubeを使用してk8s環境を構築する">Minikubeを使用してk8s環境を構築する</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube start
 </span></span><span class="line"><span class="cl">😄  Darwin 12.5.1 <span class="o">(</span>arm64<span class="o">)</span> 上の minikube v1.26.1
 </span></span><span class="line"><span class="cl">✨  docker ドライバーが自動的に選択されました
@@ -150,22 +151,22 @@ Minikubeではローカルの仮装マシン上にk8sをインストールする
 </span></span><span class="line"><span class="cl">    ▪ gcr.io/k8s-minikube/storage-provisioner:v5 イメージを使用しています
 </span></span><span class="line"><span class="cl">🌟  有効なアドオン: storage-provisioner, default-storageclass
 </span></span><span class="line"><span class="cl">🏄  終了しました！kubectl がデフォルトで「minikube」クラスターと「default」ネームスペースを使用するよう設定されました
-</span></span></code></pre></div><h2 id="contextの切り替え">Contextの切り替え</h2>
+</span></span></code></pre></div><h3 id="contextの切り替え">Contextの切り替え</h3>
 <p>複数のk8sクラスタを利用している場合はk8sのContextを切り替える必要がある。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl config use-context minikube
 </span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;minikube&#34;</span>.
-</span></span></code></pre></div><h2 id="ノードの確認">ノードの確認</h2>
+</span></span></code></pre></div><h3 id="ノードの確認">ノードの確認</h3>
 <p>minikubeがk8sノードとして認識されている。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get nodes
 </span></span><span class="line"><span class="cl">NAME       STATUS   ROLES           AGE     VERSION
 </span></span><span class="line"><span class="cl">minikube   Ready    control-plane   4m41s   v1.24.3
-</span></span></code></pre></div><h2 id="minikubeクラスタの削除">minikubeクラスタの削除</h2>
+</span></span></code></pre></div><h3 id="minikubeクラスタの削除">minikubeクラスタの削除</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube delete
 </span></span><span class="line"><span class="cl">🔥  docker の「minikube」を削除しています...
 </span></span><span class="line"><span class="cl">🔥  コンテナー「minikube」を削除しています...
 </span></span><span class="line"><span class="cl">🔥  /Users/yuhi-sa/.minikube/machines/minikube を削除しています...
 </span></span><span class="line"><span class="cl">💀  クラスター「minikube」の全てのトレースを削除しました。
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
 </ul>

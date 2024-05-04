@@ -86,23 +86,24 @@
   </header>
   <main>
     
-<h1>linuxのログファイルと閲覧コマンド</h1>
-<h1 id="代表的なログ">代表的なログ</h1>
-<h2 id="messageファイル">messageファイル</h2>
+
+<h1 id="linuxのログファイルと閲覧コマンド">linuxのログファイルと閲覧コマンド</h1>
+<h2 id="代表的なログ">代表的なログ</h2>
+<h3 id="messageファイル">messageファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">message</span>
 </span></span></code></pre></div><p>Linuxシステム全体の情報の記録している．</p>
-<h2 id="secureファイル">secureファイル</h2>
+<h3 id="secureファイル">secureファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">secure</span><span class="o">/</span> 
 </span></span></code></pre></div><p>認証やセキュリティー関連の情報を記録している．</p>
-<h2 id="wtmpファイル">wtmpファイル</h2>
+<h3 id="wtmpファイル">wtmpファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">wtmp</span> 
 </span></span></code></pre></div><p>ログイン履歴の記録している．<br>
 <strong>last</strong>コマンドで閲覧できる．</p>
-<h2 id="utmpファイル">utmpファイル</h2>
+<h3 id="utmpファイル">utmpファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">utmp</span>  
 </span></span></code></pre></div><p>ログイン中のユーザーの情報を記録しれいる．<br>
 <strong>who</strong>コマンドで閲覧できる．</p>
-<h2 id="lastlogファイル">lastlogファイル</h2>
+<h3 id="lastlogファイル">lastlogファイル</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">lastlog</span>  
 </span></span></code></pre></div><p>各ユーザーの最終ログイン日時を記録している．<br>
 <strong>lastlog</strong>コマンドで閲覧できる．</p>

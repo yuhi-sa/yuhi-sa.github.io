@@ -86,11 +86,12 @@
   </header>
   <main>
     
-<h1>粒子群最適化(PSO)とTCPSOのMatlabプログラム</h1>
-<h1 id="粒子群最適化psoparticle-swarm-optimization">粒子群最適化(PSO:Particle Swarm Optimization)</h1>
+
+<h1 id="粒子群最適化psoとtcpsoのmatlabプログラム">粒子群最適化(PSO)とTCPSOのMatlabプログラム</h1>
+<h2 id="粒子群最適化psoparticle-swarm-optimization">粒子群最適化(PSO:Particle Swarm Optimization)</h2>
 <p>PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．</p>
 <p>PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．</p>
-<h2 id="粒子の更新">粒子の更新</h2>
+<h3 id="粒子の更新">粒子の更新</h3>
 <p>粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．</p>
 <p>このとき，$n$は粒子数，$m$は次元数である．粒子$i$が各時刻まで探索した解のうち最良の位置情報ベクトルを$P_i(t)$として保持し，粒子群の中で最良の粒子の位置情報ベクトルを$P_G(t)$として群全体で共有する．</p>
 <p>以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p>
@@ -104,7 +105,7 @@ $$</p>
 <p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p>
 <p>更新の概念図を以下に示す．
 <img alt="fig1.png" src=".././fig1.png"></p>
-<h2 id="アルゴリズム">アルゴリズム</h2>
+<h3 id="アルゴリズム">アルゴリズム</h3>
 <p>PSOのアルゴリズムを以下に示す．</p>
 <ol>
 <li>粒子の初期生成
@@ -120,7 +121,7 @@ $$</p>
 <li>終了条件判定
 終了条件を満たすまで，Step2からStep6を繰り返す．</li>
 </ol>
-<h2 id="アルゴリズムの性質">アルゴリズムの性質</h2>
+<h3 id="アルゴリズムの性質">アルゴリズムの性質</h3>
 <p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p>
 <p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p>
 <ul>
@@ -132,9 +133,9 @@ $$</p>
 <img alt="pso3.png" src=".././fig4.png"></li>
 </ul>
 <p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p>
-<h1 id="tcpsotwo-swarm-cooperative-particle-swarm-optimization">TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h1>
+<h2 id="tcpsotwo-swarm-cooperative-particle-swarm-optimization">TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h2>
 <p>TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．</p>
-<h2 id="粒子の更新-1">粒子の更新</h2>
+<h3 id="粒子の更新-1">粒子の更新</h3>
 <p>スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p>
 <p>$$
 v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t))
@@ -161,7 +162,7 @@ $$
 <img alt="fig3.png" src=".././fig6.png"></p>
 </li>
 </ul>
-<h2 id="アルゴリズム-1">アルゴリズム</h2>
+<h3 id="アルゴリズム-1">アルゴリズム</h3>
 <p>TCPSOのアルゴリズムを以下に示す．</p>
 <ol>
 <li>粒子の初期生成
@@ -176,7 +177,7 @@ $$
 <li>終了条件
 終了条件を満たしていれば終了し，満たさなければStep2に戻る．</li>
 </ol>
-<h2 id="アルゴリズムの性質-1">アルゴリズムの性質</h2>
+<h3 id="アルゴリズムの性質-1">アルゴリズムの性質</h3>
 <p>TCPSOはスレーブ群の収束性から，単峰型の問題に対しては基本的なPSOよりも早く収束させることができる．また，マスター群は多様性を保持しており，単峰型の問題の局所解への対応も可能となる．しかし，高次元，広範囲の問題に対しては，局所解に収束してしまうため多様性の維持が困難になり，適切な探索を行うことが難しい．</p>
 <p>以下に，スレーブ粒子100個，マスター粒子100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．オレンジがスレーブ粒子群，ブルーがマスター粒子群である．</p>
 <ul>
@@ -188,8 +189,8 @@ $$
 <img alt="tcpso3.png" src=".././fig9.png"></li>
 </ul>
 <p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p>
-<h1 id="プログラム">プログラム</h1>
-<h2 id="pso">PSO</h2>
+<h2 id="プログラム">プログラム</h2>
+<h3 id="pso">PSO</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="c">%/////// &lt;PSOパラメータ定義&gt; /////////</span>
 </span></span><span class="line"><span class="cl"><span class="n">ns</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span>          <span class="c">% 粒子数</span>
 </span></span><span class="line"><span class="cl"><span class="n">c1s</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% 自身の最良位置に対する重み</span>

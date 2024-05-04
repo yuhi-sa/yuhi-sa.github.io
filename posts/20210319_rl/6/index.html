@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>Advantage Actor Critic(A2C)</h1>
+
+<h1 id="advantage-actor-critica2c">Advantage Actor Critic(A2C)</h1>
 <p>状態における行動価値$Q(s,a)$は，状態そのものへの依存度が大きい傾向がある．そこで状態の価値$V(s)$を差し引いたうえで行動を評価することを考える．</p>
 <p>$$A(s,a)=Q(s,a)-V(s)$$</p>
 <p>この$A(s,a)$をAdvantageと呼ぶ．
@@ -94,7 +95,7 @@ Advantageを利用する場合の方策勾配は以下のようになる．</p>
 <p>$$\nabla J(\theta) = E_{\pi_{\theta}}[\nabla \log \pi_{\theta(a|s)}A(s,a)]$$</p>
 <p>$\pi_\theta(a|s)$をActor，Advantageの計算に必要な$V(s)$をCriticとしてActor Critic法を使用することができる．
 これをAdvantage Actor Critic(A2C)と呼ぶ．</p>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <p>久保隆宏,&quot;<a href="https://amzn.to/3tA1S4W">Pythonで学ぶ強化学習 入門から実践まで</a>&quot;</p>
 
   <div>

@@ -86,12 +86,13 @@
   </header>
   <main>
     
-<h1>DS201の実施_CQL</h1>
+
+<h1 id="ds201の実施_cql">DS201の実施_CQL</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
-<h1 id="cqlshellを起動">CQLshellを起動</h1>
+<h2 id="cqlshellを起動">CQLshellを起動</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cqlsh
 </span></span></code></pre></div><p>cqlsh: Cassandraのクエリ言語シェル。Cassandraクラスターに接続し、CQL（Cassandra Query Language）を使用してデータベース操作を行う。</p>
-<h1 id="keyspaceの作成">keyspaceの作成</h1>
+<h2 id="keyspaceの作成">keyspaceの作成</h2>
 <p>killrvideo という名前の keyspace を作成。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh&gt;　CREATE KEYSPACE killrvideo
 </span></span><span class="line"><span class="cl">            WITH replication = {
@@ -102,9 +103,9 @@
 <li>keyspace：Cassandraにおけるデータベースのトップレベルのコンテナ。データの論理的なグループ化を提供し、テーブルやデータの構造を定義する。</li>
 <li>replication：キースペース内のデータの冗長複製を管理する方法を指定する。</li>
 </ul>
-<h1 id="keyspaceの選択">keyspaceの選択</h1>
+<h2 id="keyspaceの選択">keyspaceの選択</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh&gt;　USE killrvideo;
-</span></span></code></pre></div><h1 id="tableの作成">tableの作成</h1>
+</span></span></code></pre></div><h2 id="tableの作成">tableの作成</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt;　CREATE TABLE videos (
 </span></span><span class="line"><span class="cl">                        video_id TIMEUUID,
 </span></span><span class="line"><span class="cl">                        added_date TIMESTAMP,
@@ -114,13 +115,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">cqlsh:killrvideo&gt; INSERT INTO videos (video_id, added_date, title)
 </span></span><span class="line"><span class="cl">cqlsh:killrvideo&gt; VALUES (1645ea59-14bd-11e5-a993-8138354b7e31, &#39;2014-01-29&#39;, &#39;Cassandra History&#39;);
-</span></span></code></pre></div><h1 id="データ確認">データ確認</h1>
+</span></span></code></pre></div><h2 id="データ確認">データ確認</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT * FROM videos;
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  video_id                             | added_date                      | title
 </span></span><span class="line"><span class="cl">--------------------------------------+---------------------------------+-------------------
 </span></span><span class="line"><span class="cl"> 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-28 15:00:00.000000+0000 | Cassandra History
-</span></span></code></pre></div><h1 id="データの削除">データの削除</h1>
+</span></span></code></pre></div><h2 id="データの削除">データの削除</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; TRUNCATE videos;
 </span></span><span class="line"><span class="cl">cqlsh:killrvideo&gt;  SELECT *      FROM videos;
 </span></span><span class="line"><span class="cl">

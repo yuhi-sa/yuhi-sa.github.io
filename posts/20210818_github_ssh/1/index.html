@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>githubへのssh接続</h1>
-<h1 id="公開鍵秘密鍵の生成">公開鍵・秘密鍵の生成</h1>
+
+<h1 id="githubへのssh接続">githubへのssh接続</h1>
+<h2 id="公開鍵秘密鍵の生成">公開鍵・秘密鍵の生成</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen -t ed25519 -C <span class="s2">&#34;メールアドレス&#34;</span>
 </span></span><span class="line"><span class="cl">or
 </span></span><span class="line"><span class="cl">$ ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;メールアドレス&#34;</span>
@@ -100,19 +101,19 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ pbcopy &lt; ~/.ssh/id_ed25519.pub
 </span></span><span class="line"><span class="cl">or
 </span></span><span class="line"><span class="cl">$ pbcopy &lt; ~/.ssh/id_rsa.pub 
-</span></span></code></pre></div><h1 id="githubに公開鍵を登録する">githubに公開鍵を登録する．</h1>
+</span></span></code></pre></div><h2 id="githubに公開鍵を登録する">githubに公開鍵を登録する．</h2>
 <ol>
 <li>ユーザ設定のサイドバーでSSH and GPG keys（SSH及びGPGキー）を選択．</li>
 <li>[Add SSH key]を選択し，コピーした公開鍵を貼り付け．(Titleは利用しているPCを識別できる名前)</li>
 </ol>
-<h1 id="接続テスト">接続テスト</h1>
+<h2 id="接続テスト">接続テスト</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -T git@github.com
 </span></span></code></pre></div><p>以下が表示されればOK</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; Hi username! You<span class="err">&#39;</span>ve successfully authenticated, but GitHub does not provide shell access.
-</span></span></code></pre></div><h1 id="リモートリポジトリに接続">リモートリポジトリに接続</h1>
+</span></span></code></pre></div><h2 id="リモートリポジトリに接続">リモートリポジトリに接続</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="o">[</span>リポジトリ<span class="o">]</span>
 </span></span><span class="line"><span class="cl">git remote set-url origin git@github.com:<span class="o">[</span>ユーザID<span class="o">]</span>/<span class="o">[</span>リポジトリ<span class="o">]</span>.git
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://docs.github.com/ja/github/authenticating-to-github/connecting-to-github-with-ssh">GitHub に SSH で接続する</a></li>
 <li><a href="https://hacknote.jp/archives/56523/">GitHubに公開鍵認証方式でSSH接続する</a></li>

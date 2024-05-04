@@ -86,16 +86,17 @@
   </header>
   <main>
     
-<h1>DS201の実施_WritePathとReadPath</h1>
+
+<h1 id="ds201の実施_writepathとreadpath">DS201の実施_WritePathとReadPath</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習</p>
-<h1 id="writepath">WritePath</h1>
+<h2 id="writepath">WritePath</h2>
 <p>CassandraのWritePath（データの書き込み操作が行われるプロセス）は以下の通りである。</p>
 <ol>
 <li>Cassandraでは、データの変更はまずコミットログ（commit log）に書き込まれる。コミットログはHDDまたはSSD上に配置され、データの永続性を確保する。コミットログはデータベースの更新操作を追跡するためのログファイルとなる。Cassandraは書き込みリクエストを受け取るたびに、対応するデータの変更をコミットログに書き込みを実行する。</li>
 <li>データがコミットログに書き込まれた後、CassandraはRAM（ランダムアクセスメモリ）内にメモリテーブル（memtable）を作成する。メモリテーブルはデータの追加や更新を高速に処理するために使用する。メモリテーブルはデータの一時的な格納場所であり、最新のデータのバージョンを保持する。データはRAM内に存在するため、ディスクアクセスに比べて高速な読み書きが可能である。ただし、メモリテーブルはシステムのメモリ容量によって制限されるため、一定の容量を超えるとディスクに書き出される。</li>
 <li>メモリテーブル内のデータが一定の容量を超えると、Cassandraはメモリテーブルの内容をSSTable（Sorted String Table）と呼ばれるディスク上の構造に書き出します。SSTableはデータをソートされた状態で保存し、効率的な読み取り操作を可能としている。SSTableはディスク上の永続的なデータストレージである。</li>
 </ol>
-<h1 id="readpath">ReadPath</h1>
+<h2 id="readpath">ReadPath</h2>
 <p>CassandraのReadPath（データの読み取り操作が行われるプロセス）は以下の通りです。</p>
 <ol>
 <li>データの読み取り操作が発生すると、Cassandraはまずメモリ内のキャッシュであるブルームフィルタ（Bloom Filter）を検索する。ブルームフィルタは、ディスク上のデータを検索する前にメモリ内で高速なフィルタリングを行うことで、ディスクアクセスを最小限に抑える。ブルームフィルタはデータの存在を確認するために使用され、データが存在しない場合はディスクアクセスを行わずに読み取り操作を終了する。</li>

@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Kubernetesのリソースカテゴリ</h1>
-<h1 id="workloads-apisカテゴリ">Workloads APIsカテゴリ</h1>
+
+<h1 id="kubernetesのリソースカテゴリ">Kubernetesのリソースカテゴリ</h1>
+<h2 id="workloads-apisカテゴリ">Workloads APIsカテゴリ</h2>
 <p>コンテナの実行に関わるリソースで以下の8種類が存在する。</p>
 <ul>
 <li>Pod</li>
@@ -98,7 +99,7 @@
 <li>StatefulSet</li>
 <li>CronJob</li>
 </ul>
-<h1 id="service-apisカテゴリ">Service APIsカテゴリ</h1>
+<h2 id="service-apisカテゴリ">Service APIsカテゴリ</h2>
 <p>コンテナを外部公開するリソースで、利用者が直接利用するものとしてはServiceとIngressの2種類が存在する。</p>
 <ul>
 <li>Service
@@ -114,7 +115,7 @@
 </li>
 <li>Ingress</li>
 </ul>
-<h1 id="config--storage-apisカテゴリ">Config &amp; Storage APIsカテゴリ</h1>
+<h2 id="config--storage-apisカテゴリ">Config &amp; Storage APIsカテゴリ</h2>
 <p>設定、機密情報、永続化ボリュームに関するリソースでSecretとConfigMap、PersistentVolumeClaimが存在する。
 SecretとConfigMapはKey-Value形式でデータを持ち、ersistentVolumeClaimは永続ボリュームを要求する時に利用する。</p>
 <ul>
@@ -122,7 +123,7 @@ SecretとConfigMapはKey-Value形式でデータを持ち、ersistentVolumeClaim
 <li>ConfigMap</li>
 <li>PersistentVolumeClaim</li>
 </ul>
-<h1 id="cluster-apisカテゴリ">Cluster APIsカテゴリ</h1>
+<h2 id="cluster-apisカテゴリ">Cluster APIsカテゴリ</h2>
 <p>セキュリティやクォータに関するリソースで、クラス自体の振る舞いを定義する。</p>
 <ul>
 <li>Node</li>
@@ -136,7 +137,7 @@ SecretとConfigMapはKey-Value形式でデータを持ち、ersistentVolumeClaim
 <li>ClusterRoleBinding</li>
 <li>NetworkPolicy</li>
 </ul>
-<h1 id="metadata-apis-カテゴリ">Metadata APIs カテゴリ</h1>
+<h2 id="metadata-apis-カテゴリ">Metadata APIs カテゴリ</h2>
 <p>クラスタ内の他のリソースを操作するためのリソース。</p>
 <ul>
 <li>LimitRange</li>
@@ -144,7 +145,7 @@ SecretとConfigMapはKey-Value形式でデータを持ち、ersistentVolumeClaim
 <li>PodDisruptionBudget</li>
 <li>CustomResourceDefinition</li>
 </ul>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
 </ul>

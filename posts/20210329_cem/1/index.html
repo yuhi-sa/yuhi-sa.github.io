@@ -86,27 +86,28 @@
   </header>
   <main>
     
-<h1>クロスエントロピー法(Cross Entropy Method)</h1>
+
+<h1 id="クロスエントロピー法cross-entropy-method">クロスエントロピー法(Cross Entropy Method)</h1>
 <p>クロスエントロピー法は，モンテカルロ法における重点サンプリング法の一種であり、最適化問題において確率分布の近似を行うアルゴリズムである。</p>
-<h1 id="モンテカルロサンプリング">モンテカルロサンプリング</h1>
+<h2 id="モンテカルロサンプリング">モンテカルロサンプリング</h2>
 <p>モンテカルロ法は，乱数を用いる数値計算法の総称である．</p>
 <p>問題設定として，$X$を確率変数，$H$を目的の関数，$f$を$H$の$X$における確率密度関数とした場合，期待値</p>
 <p>$$l=\int H(x)f(x)dx = E[H(X)]$$</p>
 <p>を知りたいとする．
 モンテカルロサンプリングでは，以下のようにこれを近似する．</p>
 <p>$$l_{MS}=\frac{1}{N}\sum_{i=1}^{N}(X_i)$$</p>
-<h2 id="重点サンプリングimportance-sampling">重点サンプリング(Importance Sampling)</h2>
+<h3 id="重点サンプリングimportance-sampling">重点サンプリング(Importance Sampling)</h3>
 <p>重点サンプリングでは，モンテカルロサンプリングより効率よくサンプリングを行うために，分散の小さい分布からサンプリングすることを考える．</p>
 <p>重点サンプリングでは，$g(x)=0$のとき$H(x)f(x)=0$となる，確率密度関数$g$を用意して以下のように推定量の近似を行う．</p>
 <p>$$l_{IS}=\frac{1}{N}\sum_{i=1}^NH(X_i)\frac{f(X_i)}{g(X_i)}=E[H(X)\frac{f(X)}{g(X)}]$$</p>
-<h2 id="クロスエントロピー法">クロスエントロピー法</h2>
+<h3 id="クロスエントロピー法">クロスエントロピー法</h3>
 <p>クロスエントロピー法では，重点サンプリングでの$g$の最適分布$g^*$と近い分布を用いることを考える．</p>
 <p>ここで，確率分布間の距離を測る指標としてクロスエントロピーを用いる．クロスエントロピー$D$は，以下の式で表される．</p>
 <p>$$D(g,h)=\int \log \frac{g(x)}{h(x)}g(x)dx$$</p>
 <p>$D(g^\ast,h)$を最小にする$h$を求めれば，$g^\ast$に近い分布，つまり分散の小さい分布が獲得可能である．</p>
 <p>$$l_{CEM}=E[H(X)\frac{f(X;u)}{g(X;v)}]$$</p>
 <p>$$v^{\ast}=arg min_v D[g^{\ast},g(x;v)]$$</p>
-<h1 id="参考文献">参考文献</h1>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li><a href="https://sci-tech.ksc.kwansei.ac.jp/~chiyonobu/gseminar/urushihara.pdf">漆原 勉,&ldquo;モンテカルロシミュレーションにおける重点サンプリング法に対する大偏差理論の適用について&rdquo;</a></li>
 <li><a href="https://nipponkaigi.net/wiki/Cross-entropy_method">クロスエントロピー法 - Cross-coupling reactionWikipedia  site:nipponkaigi.net</a></li>

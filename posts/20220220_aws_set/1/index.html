@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</h1>
-<h1 id="awsのセットアップ">AWSのセットアップ</h1>
+
+<h1 id="pythonboto3を用いたaws利用のためセットアップメモs3の起動とaiサービスの利用">Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</h1>
+<h2 id="awsのセットアップ">AWSのセットアップ</h2>
 <ol start="0">
 <li>AWSに登録
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://aws.amazon.com/
@@ -102,7 +103,7 @@
 アクセスキーIDとシークレットアクセスキーをメモ
 シークレットアクセスキーはこの時しか表示されない</li>
 </ol>
-<h1 id="python環境のセットアップ">Python環境のセットアップ</h1>
+<h2 id="python環境のセットアップ">Python環境のセットアップ</h2>
 <ol>
 <li>
 <p>AWS CLIをインストール</p>
@@ -128,7 +129,7 @@
 </ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ aws configure get aws_access_key_id
 </span></span><span class="line"><span class="cl">$ aws configure get aws_secret_access_key
-</span></span></code></pre></div><h1 id="s3simple-storage-serviceの起動">S3(Simple Storage Service)の起動</h1>
+</span></span></code></pre></div><h2 id="s3simple-storage-serviceの起動">S3(Simple Storage Service)の起動</h2>
 <ol>
 <li>バケットの作成
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
@@ -145,7 +146,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">s3</span><span class="o">.</span><span class="n">delete_bucket</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucketName</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 </ol>
-<h1 id="aiサービスの利用">AIサービスの利用</h1>
+<h2 id="aiサービスの利用">AIサービスの利用</h2>
 <p>AWSが提供する一部のサービスを使ってみた．</p>
 <ol>
 <li>Translate<br>
@@ -187,7 +188,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">comprehend</span><span class="o">.</span><span class="n">detect_syntax</span><span class="p">(</span><span class="n">Text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">LanguageCode</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="p">)</span>
 </span></span></code></pre></div></li>
 </ol>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://amzn.to/3tcuenh">松浦健一郎・司ゆき,&ldquo;AWSでつくるAIプログラミング入門&rdquo;</a></li>
 <li><a href="https://tomomano.github.io/learn-aws-by-coding/">真野 智之, &ldquo;AWSによるクラウド入門&rdquo;</a></li>

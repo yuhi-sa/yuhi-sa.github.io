@@ -86,19 +86,20 @@
   </header>
   <main>
     
-<h1>公開鍵認証方式を用いたSSH通信の設定方法</h1>
-<h1 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h1>
-<h2 id="etcsshsshd_configを編集">「/etc/ssh/sshd_config」を編集</h2>
+
+<h1 id="公開鍵認証方式を用いたssh通信の設定方法">公開鍵認証方式を用いたSSH通信の設定方法</h1>
+<h2 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h2>
+<h3 id="etcsshsshd_configを編集">「/etc/ssh/sshd_config」を編集</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo vi /etc/ssh/sshd/sshd_config
-</span></span></code></pre></div><h2 id="公開鍵暗号方式の有効化とパスワード認証方式の無効化">公開鍵暗号方式の有効化とパスワード認証方式の無効化</h2>
+</span></span></code></pre></div><h3 id="公開鍵暗号方式の有効化とパスワード認証方式の無効化">公開鍵暗号方式の有効化とパスワード認証方式の無効化</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+ PubkeyAuthentication yes # 追記
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">- PasswordAuthentication yes
 </span></span><span class="line"><span class="cl">+ PasswordAuthentication no # 変更
-</span></span></code></pre></div><h2 id="リスタート">リスタート</h2>
+</span></span></code></pre></div><h3 id="リスタート">リスタート</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo systemctl restart sshd
-</span></span></code></pre></div><h1 id="2-秘密鍵と公開鍵を作成接続元pc">2. 秘密鍵と公開鍵を作成[接続<strong>元</strong>PC]</h1>
-<h2 id="鍵の作成">鍵の作成</h2>
+</span></span></code></pre></div><h2 id="2-秘密鍵と公開鍵を作成接続元pc">2. 秘密鍵と公開鍵を作成[接続<strong>元</strong>PC]</h2>
+<h3 id="鍵の作成">鍵の作成</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen -t rsa
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Generating public/private rsa key pair.
@@ -112,7 +113,7 @@
 </span></span><span class="line"><span class="cl">Your public key has been saved in 保存名
 </span></span></code></pre></div><p>ファイル名を空白にした場合は「/.ssh/」以下にファイルが作成される．
 id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
-<h3 id="ssh-keygenコマンド">ssh-keygenコマンド</h3>
+<h4 id="ssh-keygenコマンド">ssh-keygenコマンド</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen <span class="o">[</span>オプション<span class="o">]</span>
 </span></span></code></pre></div><ul>
 <li>オプション
@@ -125,7 +126,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 </ul>
 </li>
 </ul>
-<h1 id="3-sshディレクトリを作成接続先pc">3. 「/.ssh」ディレクトリを作成[接続先PC]</h1>
+<h2 id="3-sshディレクトリを作成接続先pc">3. 「/.ssh」ディレクトリを作成[接続先PC]</h2>
 <p>「/.ssh」ディレクトリを作成し，700の権限を与える．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo mkdir /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
 </span></span><span class="line"><span class="cl">$ sudo chown <span class="o">[</span>ユーザ名<span class="o">]</span>:users /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
@@ -133,7 +134,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 </span></span></code></pre></div><ul>
 <li>700権限：所有者以外は操作できない</li>
 </ul>
-<h1 id="4-公開鍵を登録接続先pc">4. 公開鍵を登録[接続先PC]</h1>
+<h2 id="4-公開鍵を登録接続先pc">4. 公開鍵を登録[接続先PC]</h2>
 <p>「/.ssh」ディレクトリに「authorized_key」ファイル作成．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo touch /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
 </span></span></code></pre></div><p>先ほど作成した公開鍵暗号を登録．</p>
@@ -143,7 +144,7 @@ id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
 </span></span></code></pre></div><ul>
 <li>600権限：所有者のみの読み書き可能</li>
 </ul>
-<h1 id="5-接続接続元pc">5. 接続[接続<strong>元</strong>PC]</h1>
+<h2 id="5-接続接続元pc">5. 接続[接続<strong>元</strong>PC]</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh <span class="o">[</span>ユーザ名<span class="o">]</span>@IPアドレス
 </span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;/Users/[ユーザ名]/.ssh/id_rsa&#39;</span>: <span class="c1"># パスフレーズを入力 </span>
 </span></span></code></pre></div>

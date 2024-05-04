@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>App RouterとPages Routerでprom-clientの値を共有できない</h1>
+
+<h1 id="app-routerとpages-routerでprom-clientの値を共有できない">App RouterとPages Routerでprom-clientの値を共有できない</h1>
 <p>t3-stackでログのメトリクス化のために、<code>prom-client</code>の<code>Counter</code>を<code>Logger</code>クラスで共有することを検討した。
 しかし、<code>App Router</code>と<code>Pages Router</code>で共有することができなかった。
 具体的には<code>global</code>の<code>register</code>に<code>Counter</code>を登録しようとすると<code>Pages Router</code>ではビルドエラーになる。</p>
@@ -155,7 +156,9 @@
 </span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">Logger</span><span class="p">;</span>
 </span></span></code></pre></div><p><code>global</code>オブジェクトが、<code>App Router</code>と<code>Pages Router</code>に登録されているAPIルートの間で同じではなく不具合が起こるようである。
 以下で言及されている。現時点では解決もされていない。</p>
-<p><a href="https://github.com/vercel/next.js/discussions/49798">https://github.com/vercel/next.js/discussions/49798</a></p>
+<ul>
+<li><a href="https://github.com/vercel/next.js/discussions/49798">https://github.com/vercel/next.js/discussions/49798</a></li>
+</ul>
 
   <div>
     <div>Tags:</div>

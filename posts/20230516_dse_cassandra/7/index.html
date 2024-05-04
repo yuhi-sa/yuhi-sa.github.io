@@ -86,9 +86,10 @@
   </header>
   <main>
     
-<h1>DS201の実施_Ring</h1>
+
+<h1 id="ds201の実施_ring">DS201の実施_Ring</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
-<h1 id="ringとは">Ringとは</h1>
+<h2 id="ringとは">Ringとは</h2>
 <p>Cassandraのアーキテクチャは、複数のノードで形成されるクラスタを基盤としている。
 その中心にあるデータ構造はRingと呼ばれる。Ringとは、クラスタ内でデータがどのように各ノード間で分散されるかを管理する役割を担っている。</p>
 <p>Cassandraは全てのデータをパーティションに分割し、それぞれのパーティションに一意のトークンを割り当てる。これらのトークンは、Ringのデータ構造の中に配列される。Ringとは、全ての可能なトークンの値の範囲を視覚化したものといえる。</p>
@@ -97,7 +98,7 @@
 <p>Ringの構造は単一障害点を排除する役割も果たす。1つのノードが故障またはダウンしても、他のノードがその役割を引き継ぎ、システムは正常に動作し続ける。これは各ノードがデータの一部を保有し、それぞれが特定のトークン範囲を所有しているためである。</p>
 <p>Cassandraのリング構造は、データの一貫性と高可用性を保証するためのレプリケケーションとしても機能する。各パーティションのデータは、Ring上の複数のノードに複製される。通常、所有するトークンが隣接するノードに対して行われる。この複製プロセスにより、ノードが故障してもデータが失われることがなく、また必要なデータが常に読み出せる状態が保たれる。</p>
 <p>このように、Cassandraのリングは、データの配置、スケーラビリティ、耐障害性、および一貫性という、分散データベースの主要な課題を管理するための強力な仕組みである。</p>
-<h1 id="演習">演習</h1>
+<h2 id="演習">演習</h2>
 <p>「datastax」と「cassandra」の2つのタグがそれぞれ1つのパーティションを形成している。
 cqlshクエリの結果である&quot;system.token(tag)&ldquo;の値は、各タグ（&ldquo;datastax&quot;および&quot;cassandra&rdquo;）に対応するトークンの値を示している。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT token(tag), tag

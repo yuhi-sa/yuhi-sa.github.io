@@ -86,10 +86,11 @@
   </header>
   <main>
     
-<h1>DS201の実施_ClusteringColumns</h1>
+
+<h1 id="ds201の実施_clusteringcolumns">DS201の実施_ClusteringColumns</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>クラスタリングカラムとは、主キーの一部であるが、パーティションキーではないカラムのこと。</p>
-<h2 id="クラスタリングカラムを指定してテーブル作成">クラスタリングカラムを指定してテーブル作成</h2>
+<h3 id="クラスタリングカラムを指定してテーブル作成">クラスタリングカラムを指定してテーブル作成</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CREATE TABLE videos_by_tag (
 </span></span><span class="line"><span class="cl">    tag text,
 </span></span><span class="line"><span class="cl">    video_id uuid,
@@ -97,7 +98,7 @@
 </span></span><span class="line"><span class="cl">    title text,
 </span></span><span class="line"><span class="cl">    PRIMARY KEY ((tag), added_date, video_id)
 </span></span><span class="line"><span class="cl">    ) WITH CLUSTERING ORDER BY(added_date DESC);
-</span></span></code></pre></div><h2 id="データを入れた後中身を確認">データを入れた後、中身を確認</h2>
+</span></span></code></pre></div><h3 id="データを入れた後中身を確認">データを入れた後、中身を確認</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT *
 </span></span><span class="line"><span class="cl">              ... FROM videos_by_tag;
 </span></span><span class="line"><span class="cl">

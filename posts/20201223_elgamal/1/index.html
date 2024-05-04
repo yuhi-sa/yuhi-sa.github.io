@@ -86,14 +86,15 @@
   </header>
   <main>
     
-<h1>楕円曲線上のElGamal暗号のpythonプログラム</h1>
-<h1 id="鍵生成">鍵生成</h1>
+
+<h1 id="楕円曲線上のelgamal暗号のpythonプログラム">楕円曲線上のElGamal暗号のpythonプログラム</h1>
+<h2 id="鍵生成">鍵生成</h2>
 <ol>
 <li>楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数)</li>
 <li>秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する．</li>
 </ol>
 <p>ここで，秘密鍵$x$，公開鍵$E,G,Y$</p>
-<h1 id="暗号化">暗号化</h1>
+<h2 id="暗号化">暗号化</h2>
 <p>$m$を送信したいメッセージとする．</p>
 <ol>
 <li>$r$を乱数で生成し，$U=rG=(u_x,u_y)$を計算．</li>
@@ -103,13 +104,13 @@ $c=v_x\oplus m$<br>
 を計算．$\oplus$は排他的論理和．</li>
 <li>$(U,c)$を暗号文として，送信．</li>
 </ol>
-<h1 id="復号化">復号化</h1>
+<h2 id="復号化">復号化</h2>
 <ol>
 <li>以下のように復号する．<br>
 $V=xU=(v_x,v_y)$,<br>
 $m=v_x\oplus c$</li>
 </ol>
-<h1 id="プログラム">プログラム</h1>
+<h2 id="プログラム">プログラム</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Random number</span>
 </span></span><span class="line"><span class="cl"><span class="n">r</span> <span class="o">=</span> <span class="mi">3</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># Secret Key</span>

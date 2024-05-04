@@ -86,22 +86,23 @@
   </header>
   <main>
     
-<h1>DS201の実施_Consistency</h1>
+
+<h1 id="ds201の実施_consistency">DS201の実施_Consistency</h1>
 <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
 <p>Cassandraでは、RF数に応じてデータを複数のノードに分散して格納している。Consistencyレベルは、クライアントがデータの一貫性をどの程度要求するかを制御するために使用される。</p>
-<h1 id="any">ANY:</h1>
+<h2 id="any">ANY:</h2>
 <p>読み取りまたは書き込み操作は、少なくとも1つのレプリカに対して成功した場合に完了する。</p>
-<h1 id="one-two-three">ONE, TWO, THREE:</h1>
+<h2 id="one-two-three">ONE, TWO, THREE:</h2>
 <p>ConsistencyレベルをONEに設定すると、読み取りまたは書き込み操作は、データのレプリカのうち少なくとも1つに対して成功した場合に完了する。TWOの場合は、2つのレプリカに対して、THREEの場合は3つのレプリカに対して成功する必要がある。</p>
-<h1 id="quorum">QUORUM</h1>
+<h2 id="quorum">QUORUM</h2>
 <p>読み取りまたは書き込み操作は、データのレプリカの過半数に対して成功した場合に完了する。例えば、3つのレプリカがある場合、2つのレプリカに成功する必要がある。</p>
-<h1 id="local_one">LOCAL_ONE</h1>
+<h2 id="local_one">LOCAL_ONE</h2>
 <p>読み取りまたは書き込み操作は、ローカルデータセンター内の任意のレプリカに対して成功した場合に完了する。</p>
-<h1 id="local_quorum">LOCAL_QUORUM</h1>
+<h2 id="local_quorum">LOCAL_QUORUM</h2>
 <p>読み取りまたは書き込み操作は、ローカルデータセンター内のレプリカの過半数に対して成功した場合に完了する。</p>
-<h1 id="each_quorum">EACH_QUORUM</h1>
+<h2 id="each_quorum">EACH_QUORUM</h2>
 <p>読み取りまたは書き込み操作は、各データセンター内のレプリカの過半数に対して成功した場合に完了する。</p>
-<h1 id="all">ALL</h1>
+<h2 id="all">ALL</h2>
 <p>読み取りまたは書き込み操作は、データのすべてのレプリカに対して成功した場合に完了する。</p>
 
   <div>

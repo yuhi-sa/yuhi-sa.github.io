@@ -86,15 +86,16 @@
   </header>
   <main>
     
-<h1>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</h1>
-<h1 id="はじめに">はじめに</h1>
+
+<h1 id="githubのプロフィールreadmeをデコる動くprofile-summaryを自作してみた">GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</h1>
+<h2 id="はじめに">はじめに</h2>
 <p>GithubのREADMEに，自身のGitHubのリポジトリのコミット数や使用言語をグラフィカルに表示するSummary Cardsがある．自分は以下のものを使っていた．</p>
 <ul>
 <li><a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">GitHub Profile Summary Cards</a></li>
 </ul>
 <p>しかし，唐突に動きのあるものが欲しいと思ってつくってみた．</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h1 id="リポジトリ情報の取得">リポジトリ情報の取得</h1>
+<h2 id="リポジトリ情報の取得">リポジトリ情報の取得</h2>
 <p>GitHubのAPIよりリポジトリの情報を取得することができる．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://api.github.com/users/+ username + /repos
 </span></span></code></pre></div><p>上記のAPIから以下のようなjson形式の情報を取得することができる．</p>
@@ -131,7 +132,7 @@
 <ul>
 <li><a href="https://docs.github.com/ja/rest/overview/endpoints-available-for-github-apps">こちら</a>にGitHubで利用可能なAPIが記載されている．</li>
 </ul>
-<h1 id="cardの作成">Cardの作成</h1>
+<h2 id="cardの作成">Cardの作成</h2>
 <p>pythonのmatplotlib.animationを用いて，角度をずらしながら円グラフをplotすることで開店する円グラフを作成した．</p>
 <ul>
 <li>
@@ -156,7 +157,7 @@
 <li><a href="https://github.com/yuhi-sa/github_cards/blob/master/src/repoLangs.py">使用言語の円グラフのコード</a></li>
 <li><a href="https://github.com/yuhi-sa/github_cards/blob/master/src/repoTops.py">リポジトリのサイズの円グラフのコード</a></li>
 </ul>
-<h1 id="github-actions">GitHub Actions</h1>
+<h2 id="github-actions">GitHub Actions</h2>
 <p>一日ごとに新しく自動生成されるようにGithub Actionのscheduleを利用した．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create Card</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -212,7 +213,7 @@
 </span></span></span></code></pre></div><ul>
 <li><a href="https://yuhi-sa.github.io/posts/20210630/2/">GitHub Actions の YAMLファイルの書き方</a></li>
 </ul>
-<h1 id="使い方">使い方</h1>
+<h2 id="使い方">使い方</h2>
 <ol>
 <li><a href="https://github.com/yuhi-sa/github_cards">このリポジトリ</a>をfork．</li>
 <li>username.txtを自身のuser名に書き換える．</li>

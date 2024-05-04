@@ -86,16 +86,17 @@
   </header>
   <main>
     
-<h1>バイナリ法によるべき乗計算のPythonプログラム</h1>
-<h1 id="バイナリ法">バイナリ法</h1>
+
+<h1 id="バイナリ法によるべき乗計算のpythonプログラム">バイナリ法によるべき乗計算のPythonプログラム</h1>
+<h2 id="バイナリ法">バイナリ法</h2>
 <p>$x=a^k$のとき、$k$回の2乗計算が必要になるが、効率よく計算するためには、$a^{2^i}$を順次求めることで、計算量を$log(k)$回に抑えることができる。これがバイナリ法である。RSA暗号の複合時のべき乗計算などで用いられる。</p>
-<h2 id="具体例">具体例</h2>
+<h3 id="具体例">具体例</h3>
 <p>$5^{21}$を計算する場合、以下のように展開する。</p>
 <p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
 <p>2進数に展開し、左から順に展開することにより計算を実行する。つまり、$21$の2進数表記である$10101$を使って以下のように計算する。</p>
 <p>$5^{21} = 5^{(10101)_2} = 5^{(12^4 + 02^3 + 12^2 + 02^1 + 1*2^0)_2} = 5^{16} * 5^{4} * 5^{1}$</p>
 <p>これにより、計算回数が大幅に削減される。</p>
-<h1 id="プログラム">プログラム</h1>
+<h2 id="プログラム">プログラム</h2>
 <p>以下は、Pythonでバイナリ法を用いたべき乗計算を行うプログラムである。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">binary_exponentiation</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="c1"># 2進数表記に変換</span>

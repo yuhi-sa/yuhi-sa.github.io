@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Pythonによる2進数変換と論理演算(or,xor)</h1>
-<h1 id="2進数変換">2進数変換</h1>
+
+<h1 id="pythonによる2進数変換と論理演算orxor">Pythonによる2進数変換と論理演算(or,xor)</h1>
+<h2 id="2進数変換">2進数変換</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">binNum1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">num1</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="n">binNum1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -102,7 +103,7 @@
 </span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">binNum2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">binNum1</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">            <span class="n">binNum1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> 
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">binNum1</span><span class="p">,</span> <span class="n">binNum2</span>
-</span></span></code></pre></div><h1 id="10進数変換">10進数変換</h1>
+</span></span></code></pre></div><h2 id="10進数変換">10進数変換</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">binNum</span><span class="p">(</span><span class="n">binNum</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Num</span> <span class="o">=</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">binNum</span><span class="p">)):</span>
@@ -110,7 +111,7 @@
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">binNum</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">binNum</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">            <span class="n">Num</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Num</span> 
-</span></span></code></pre></div><h1 id="or計算">or計算</h1>
+</span></span></code></pre></div><h2 id="or計算">or計算</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">orCal</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">binNum1</span><span class="p">,</span> <span class="n">binNum2</span> <span class="o">=</span> <span class="n">binBin</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">orValue</span> <span class="o">=</span> <span class="p">[]</span>
@@ -131,7 +132,7 @@
 </span></span><span class="line"><span class="cl">            <span class="n">xorValue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">binNum</span><span class="p">(</span><span class="n">xorValue</span><span class="p">)</span>
-</span></span></code></pre></div><h1 id="計算例">計算例</h1>
+</span></span></code></pre></div><h2 id="計算例">計算例</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># orを計算</span>
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">orCal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># xorを計算</span>

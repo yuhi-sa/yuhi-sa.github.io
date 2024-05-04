@@ -86,7 +86,7 @@
   </header>
   <main>
     
-<h1>リパラメタライゼーショントリック(Reparameterization trick)</h1>
+
 <h1 id="リパラメタライゼーショントリックreparameterization-trick">リパラメタライゼーショントリック(Reparameterization trick)</h1>
 <p>確率分布からサンプリングされた変数は確率変数となるため微分ができず，
 逆誤差伝搬による計算を行うことができない．
@@ -100,12 +100,12 @@
 <p>$$\epsilon \sim \mathcal{N}(0,1) $$</p>
 <p>これにより$z$は，$\mu$と$\sigma$に対して確定的な値となるため微分可能になる．</p>
 <p><img alt="概念図" src=".././repara.png"></p>
-<h1 id="pytorchでのリパラメタライゼーショントリックを用いたサンプリング">Pytorchでのリパラメタライゼーショントリックを用いたサンプリング</h1>
+<h2 id="pytorchでのリパラメタライゼーショントリックを用いたサンプリング">Pytorchでのリパラメタライゼーショントリックを用いたサンプリング</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m = Normal(*params)
 </span></span><span class="line"><span class="cl">z = m.rsample()
 </span></span></code></pre></div><p>リパラメタライゼーショントリックを用いたサンプリングができるできる確率分布は以下の値がTrueとなっている．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m.has_rsample
-</span></span></code></pre></div><h1 id="参考">参考</h1>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/1312.6114">D. P. Kingma and M. Welling, “Auto-encoding variational bayes”, 2013.</a></li>
 <li><a href="https://www.renom.jp/ja/notebooks/tutorial/generative-model/VAE/notebook.html">ReNom, 変分オートエンコーダ</a></li>

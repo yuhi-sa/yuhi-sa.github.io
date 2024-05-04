@@ -86,7 +86,7 @@
   </header>
   <main>
     
-<h1>Reparameterization trick</h1>
+
 <h1 id="reparameterization-trick">Reparameterization trick</h1>
 <p>When variables are sampled from a probability distribution, they become random variables, and differentiation cannot be performed, making it impossible to perform calculations using backpropagation. To solve this problem, Kingma et al. introduced the technique called the reparameterization trick.</p>
 <p>The reparameterization trick performs the same sampling by partitioning and combining the random numbers that are independent of the parameters and the parameters of the probability distribution from which they are sampled. For example, let $z$ be a variable sampled from a normal distribution $\mathcal{N}$ with mean $\mu$ and variance $\sigma$ as parameters:</p>
@@ -95,12 +95,12 @@
 <p>$$z = \mu + \sigma \odot \epsilon$$</p>
 <p>$$\epsilon \sim \mathcal{N}(0,1) $$</p>
 <p>This makes $z$ a deterministic value with respect to $\mu$ and $\sigma$, making it differentiable.</p>
-<h1 id="sampling-using-the-reparameterization-trick-in-pytorch">Sampling using the Reparameterization Trick in PyTorch</h1>
+<h2 id="sampling-using-the-reparameterization-trick-in-pytorch">Sampling using the Reparameterization Trick in PyTorch</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m = Normal(*params)
 </span></span><span class="line"><span class="cl">z = m.rsample()
 </span></span></code></pre></div><p>The probability distributions that can use sampling using the reparameterization trick are those that have the value True for:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">m.has_rsample
-</span></span></code></pre></div><h1 id="references">References</h1>
+</span></span></code></pre></div><h2 id="references">References</h2>
 <ul>
 <li><a href="https://arxiv.org/abs/1312.6114">D. P. Kingma and M. Welling, “Auto-encoding variational bayes”, 2013.</a></li>
 <li><a href="https://www.renom.jp/ja/notebooks/tutorial/generative-model/VAE/notebook.html">ReNom, 変分オートエンコーダ</a></li>

@@ -86,34 +86,35 @@
   </header>
   <main>
     
-<h1>SQLの表の作成</h1>
-<h1 id="表の作成">表の作成</h1>
+
+<h1 id="sqlの表の作成">SQLの表の作成</h1>
+<h2 id="表の作成">表の作成</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="err">列名</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="n">DEFAULT値</span><span class="p">]</span><span class="w"> </span><span class="err">制約</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">...</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">列名</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="n">DEFAULT値</span><span class="p">]</span><span class="w">　</span><span class="err">制約</span><span class="p">,)</span><span class="w">
-</span></span></span></code></pre></div><h2 id="データ型">データ型</h2>
+</span></span></span></code></pre></div><h3 id="データ型">データ型</h3>
 <ul>
 <li>文字型：CHAR(size),VARCHAR(size)</li>
 <li>数値型：INT,INTEGER,BIGINT,FLOAT,DOUBLE</li>
 <li>日付型：DATETIME</li>
 </ul>
-<h2 id="制約">制約</h2>
+<h3 id="制約">制約</h3>
 <ul>
 <li>NOT NULL：NULL値を禁止</li>
 <li>UNIQUE：同一値の入力禁止</li>
 <li>PRIMARY KEY：主キー制約</li>
 <li>FOREIGN KEY：外部キー制約</li>
 </ul>
-<h2 id="コピー表の作成">コピー表の作成</h2>
+<h3 id="コピー表の作成">コピー表の作成</h3>
 <p>副問合せを利用することにより，結果表をコピーして表を作成できる．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="p">[(</span><span class="err">列名</span><span class="p">,</span><span class="err">列名</span><span class="p">,...)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">副問合せ</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h2 id="ビュー表の作成">ビュー表の作成</h2>
+</span></span></span></code></pre></div><h3 id="ビュー表の作成">ビュー表の作成</h3>
 <p>ビューは表または別のビューをもとにした仮装の表のことである．ビュー自体にはデータは格納されず，参照元の変更が反映される．</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="err">ビュー名</span><span class="p">[(</span><span class="err">列名</span><span class="p">,</span><span class="err">列名</span><span class="p">,...)]</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w"> </span><span class="err">副問合せ</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h1 id="表の変更">表の変更</h1>
+</span></span></span></code></pre></div><h2 id="表の変更">表の変更</h2>
 <ul>
 <li>属性の変更
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w">

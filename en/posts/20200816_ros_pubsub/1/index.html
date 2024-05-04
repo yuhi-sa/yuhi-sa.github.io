@@ -86,18 +86,19 @@
   </header>
   <main>
     
-<h1>How to write Publisher and Subscriber in one Node with ROS</h1>
-<h1 id="rosrobot-operating-system">ROS(Robot Operating System)</h1>
+
+<h1 id="how-to-write-publisher-and-subscriber-in-one-node-with-ros">How to write Publisher and Subscriber in one Node with ROS</h1>
+<h2 id="rosrobot-operating-system">ROS(Robot Operating System)</h2>
 <p>ROS is a middleware that provides libraries and tools to support the creation of robot applications. It enables easy communication between robots.</p>
-<h1 id="pub--sub-communication">Pub &amp; Sub communication</h1>
+<h2 id="pub--sub-communication">Pub &amp; Sub communication</h2>
 <p>In ROS, an executable that is connected to the ROS network is called a &ldquo;Node&rdquo;, and messages are exchanged between nodes using &ldquo;Topics&rdquo;. The node that publishes messages is called a &ldquo;Publisher&rdquo; and the node that receives messages is called a &ldquo;Subscriber&rdquo;.</p>
-<h1 id="environment">Environment</h1>
+<h2 id="environment">Environment</h2>
 <ul>
 <li>ROS kinetic</li>
 <li>Ubuntu 16.04 LTS</li>
 <li>Python 3.8.5</li>
 </ul>
-<h1 id="publisher-program">Publisher Program</h1>
+<h2 id="publisher-program">Publisher Program</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># license removed for brevity</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
@@ -171,7 +172,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">controller</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInitException</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">pass</span>
-</span></span></code></pre></div><h1 id="reference">Reference</h1>
+</span></span></code></pre></div><h2 id="reference">Reference</h2>
 <ul>
 <li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">Writing a Simple Publisher and Subscriber (Python)</a></li>
 <li><a href="https://docs.odriverobotics.com/">ODrive Documentation</a></li>

@@ -86,15 +86,16 @@
   </header>
   <main>
     
-<h1>SQLの表の結合</h1>
-<h1 id="内部結合">内部結合</h1>
+
+<h1 id="sqlの表の結合">SQLの表の結合</h1>
+<h2 id="内部結合">内部結合</h2>
 <p>結合条件を満たす組み合わせのみ表示する結合</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">JOIN</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="p">.</span><span class="err">列名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="p">.</span><span class="err">列名</span><span class="w">
 </span></span></span></code></pre></div><p>JOINではなくNATURAL JOINを用いると自動的に同じ列名の値を結合キーとして比較できる．このときON句で結合条件を指定する必要はない．</p>
-<h1 id="外部結合">外部結合</h1>
+<h2 id="外部結合">外部結合</h2>
 <p>結合条件を満た<strong>さない</strong>組み合わせも表示する結合</p>
 <ul>
 <li>左外部結合：左側の表を全て表示
@@ -110,7 +111,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="p">.</span><span class="err">列名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="p">.</span><span class="err">列名</span><span class="w">
 </span></span></span></code></pre></div></li>
 </ul>
-<h1 id="クロス結合">クロス結合</h1>
+<h2 id="クロス結合">クロス結合</h2>
 <p>全ての組み合わせを表示する結合</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">

@@ -86,8 +86,9 @@
   </header>
   <main>
     
-<h1>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</h1>
-<h1 id="unscented-transformation">Unscented Transformation</h1>
+
+<h1 id="unscented-transformationアンセンテッド変換u変換のpythonプログラム">Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</h1>
+<h2 id="unscented-transformation">Unscented Transformation</h2>
 <p>U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．</p>
 <p>まず，この場合，モンテカロ的に</p>
 <p>$$
@@ -154,7 +155,7 @@ $$
 </span></span><span class="line"><span class="cl"><span class="c1"># Nonlinear transformation of x</span>
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-</span></span></code></pre></div><h1 id="シグマ点の計算">シグマ点の計算</h1>
+</span></span></code></pre></div><h2 id="シグマ点の計算">シグマ点の計算</h2>
 <p>$$
 \sigma_0 = \bar{x} \tag{1}
 $$</p>
@@ -171,8 +172,10 @@ $$</p>
 <p>ここで，$\alpha$と$\kappa$はハイパーパラメータである．</p>
 <p>$\alpha$:0-1のスカラー値として指定され，平均の状態値の周りのシグマポイントの広がりを決定する．通常、小さい正の数値をとる．シグマポイントの広がりは$\alpha$に比例し，値が小さいほどシグマポイントは平均の状態に近くなる．</p>
 <p>$\kappa$：通常は0に設定される．値が小さいほどシグマポイントは平均の状態に近くなり，広がりは$\kappa$の平方根に比例する．</p>
-<p>参考1：<a href="https://jp.mathworks.com/help/control/ref/ukf_block.html">Unscented Kalman Filter， MathWorks</a><br>
-参考2：<a href="https://myenigma.hatenablog.com/entry/20140614/1402731732">Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></p>
+<ul>
+<li>参考1：<a href="https://jp.mathworks.com/help/control/ref/ukf_block.html">Unscented Kalman Filter， MathWorks</a></li>
+<li>参考2：<a href="https://myenigma.hatenablog.com/entry/20140614/1402731732">Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></li>
+</ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Parameter</span>
 </span></span><span class="line"><span class="cl"><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
 </span></span><span class="line"><span class="cl"><span class="n">kappa</span> <span class="o">=</span> <span class="mi">0</span>
@@ -195,7 +198,7 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;selected sigma point&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">  <span class="nb">print</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
-</span></span></code></pre></div><h1 id="変換">変換</h1>
+</span></span></code></pre></div><h2 id="変換">変換</h2>
 <p>非線形変換により$y_{\sigma}$をもとめる．</p>
 <p>$$
 y_{\sigma}=f(\sigma) \tag{5}

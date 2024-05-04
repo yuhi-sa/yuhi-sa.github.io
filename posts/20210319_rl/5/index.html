@@ -86,7 +86,8 @@
   </header>
   <main>
     
-<h1>方策勾配法</h1>
+
+<h1 id="方策勾配法">方策勾配法</h1>
 <p>方策もパラメータをもつ関数として表現可能である．状態を引数にとり，行動確率を出力する関数である．</p>
 <p>方策の価値を期待値で計算する．方策に従い状態に遷移する確率$d^{\pi_\theta}(s)$・行動確率$\pi_\theta(a|s)$・行動価値$Q^{\pi_\theta}(s,a)$から計算を行う．</p>
 <p>$$J(\theta) \propto \sum_s d^{\pi_\theta}(s)\sum_a\pi_\theta(a|s)Q^{\pi_\theta}(s,a)$$</p>
@@ -96,7 +97,7 @@
 <p>以上より，</p>
 <p>$$\nabla J(\theta) \propto E_{\pi_{\theta}}[\nabla\log\pi_{\theta(a|s)}Q^{\pi_{\theta}}(s,a)]$$</p>
 <p>勾配である$\nabla \log \pi_\theta(a|s)$が移動方向，$Q^{\pi_\theta}(s,a)$が大きさというふうに解釈できる．</p>
-<h1 id="参考">参考</h1>
+<h2 id="参考">参考</h2>
 <p>久保隆宏,&quot;<a href="https://amzn.to/3tA1S4W">Pythonで学ぶ強化学習 入門から実践まで</a>&quot;</p>
 
   <div>

@@ -86,12 +86,13 @@
   </header>
   <main>
     
-<h1>mtailを用いてPrometheus形式のメトリクスを公開する</h1>
-<h1 id="概要">概要</h1>
+
+<h1 id="mtailを用いてprometheus形式のメトリクスを公開する">mtailを用いてPrometheus形式のメトリクスを公開する</h1>
+<h2 id="概要">概要</h2>
 <p>mtail(<a href="https://github.com/google/mtail">https://github.com/google/mtail</a> )は、Googleが提供するログパースツールで、ログファイルから指定したパターンに一致する行を抽出し、それに基づいてメトリクスを生成して<code>/metrics</code>エンドポイントに<code>Prometheus</code>形式で公開することができるソフトウェアである。</p>
-<h1 id="mtailの使い方">mtailの使い方</h1>
+<h2 id="mtailの使い方">mtailの使い方</h2>
 <p>mtailを利用するには、設定ファイルを定義し、ログファイルのパスとパターンを指定する必要がある。</p>
-<h2 id="設定ファイル-例-samplemtail">設定ファイル (例: sample.mtail)</h2>
+<h3 id="設定ファイル-例-samplemtail">設定ファイル (例: sample.mtail)</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># メトリクスの初期化
 </span></span><span class="line"><span class="cl">counter errors_total
 </span></span><span class="line"><span class="cl">
@@ -101,7 +102,7 @@
 </span></span><span class="line"><span class="cl">}
 </span></span></code></pre></div><p><code>counter errors_total</code>は、<code>Prometheus</code>で使用するメトリクスを定義している。<code>counter</code>はカウンタータイプのメトリクスで、ログファイル内で特定のエラーパターンが一致するたびに値が増加する。</p>
 <p><code>/error/ {...}</code>は、ログファイル内のエラーパターンを指定している。この例では、ログの各行が<code>/error/</code>という文字列を含む場合に、その行が一致すると見なされ、<code>errors_total</code>カウンターが増加する。</p>
-<h1 id="dockerで起動">Dockerで起動</h1>
+<h2 id="dockerで起動">Dockerで起動</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">FROM</span> <span class="n">centos7</span><span class="p">:</span><span class="n">latest</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">RUN</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">wget</span> <span class="o">&amp;&amp;</span> <span class="n">yum</span> <span class="n">clean</span> <span class="n">all</span>

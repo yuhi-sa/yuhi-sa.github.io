@@ -86,24 +86,25 @@
   </header>
   <main>
     
-<h1>Code description of ROS package to make op3 acquire walking using reinforcement learning</h1>
-<h1 id="introduction">Introduction</h1>
+
+<h1 id="code-description-of-ros-package-to-make-op3-acquire-walking-using-reinforcement-learning">Code description of ROS package to make op3 acquire walking using reinforcement learning</h1>
+<h2 id="introduction">Introduction</h2>
 <p>ROS package for ROBOTIS OP3 to acquire walking using reinforcement learning</p>
 <ul>
 <li><a href="https://github.com/yuhi-sa/op3_walk">op3_walk</a></li>
 </ul>
-<h1 id="result-video">Result Video</h1>
+<h2 id="result-video">Result Video</h2>
 <ul>
 <li><a href="https://github.com/yuhi-sa/op3_walk/blob/main/docs/op3_controller_demo.mp4">op3_controller_demo</a></li>
 </ul>
-<h1 id="methods">Methods</h1>
+<h2 id="methods">Methods</h2>
 <p>This package uses deep reinforcement learning (DQN).<br>
 The action value function is defined as a three-layer neural network (NN), and the Q-value is updated as follows</p>
 <p>$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$</p>
 <p>The neural network is updated by back propagation using the loss function L.</p>
 <p>$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$</p>
-<h1 id="program">Program</h1>
-<h2 id="functionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsfunctionpy-and-motionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsmotionpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/function.py">function.py</a> and <a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/motion.py">motion.py</a></h2>
+<h2 id="program">Program</h2>
+<h3 id="functionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsfunctionpy-and-motionpyhttpsgithubcomyuhi-saop3_walkblobmainscriptsmotionpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/function.py">function.py</a> and <a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/motion.py">motion.py</a></h3>
 <p>[function] contains the definition of the agent.<br>
 The Agent class has a Brain class that defines the neural network.<br>
 With the actions and states stored in the ReplayMemory class, Brain calculates and updates the loss.<br>
@@ -112,14 +113,14 @@ The actions are discretized, and epsilon-greedy selection is made among the acti
 <ul>
 <li><a href="https://github.com/YutaroOgawa/Deep-Reinforcement-Learning-Book">Deep-Reinforcement-Learning-Book</a></li>
 </ul>
-<h2 id="learningpyhttpsgithubcomyuhi-saop3_walkblobmainscriptslearningpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/learning.py">learning.py</a></h2>
+<h3 id="learningpyhttpsgithubcomyuhi-saop3_walkblobmainscriptslearningpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/learning.py">learning.py</a></h3>
 <p>Input the state subscribed from [controller] to the Agent, calculate the action, and publish it.  <br>
 This one uses pytorch to define the neural network, so it needs to be run in python3.</p>
-<h2 id="controllerpyhttpsgithubcomyuhi-saop3_walkblobmainscriptscontrollerpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/controller.py">controller.py</a></h2>
+<h3 id="controllerpyhttpsgithubcomyuhi-saop3_walkblobmainscriptscontrollerpy"><a href="https://github.com/yuhi-sa/op3_walk/blob/main/scripts/controller.py">controller.py</a></h3>
 <p>[controller]. It subscribes to actions published by [learning] and actually runs op3.
 Then publish the state. <br>
 Due to the op3 package, you will need to run this in python2.</p>
-<h1 id="learning-curve">Learning curve</h1>
+<h2 id="learning-curve">Learning curve</h2>
 <p>Learning curve for walking distance</p>
 <p><img alt="歩行距離" src="https://github.com/yuhi-sa/op3_walk/blob/main/docs/learning.png?raw=true"></p>
 

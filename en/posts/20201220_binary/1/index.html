@@ -86,16 +86,17 @@
   </header>
   <main>
     
-<h1>Python program for exponentiation calculation using binary method</h1>
-<h1 id="binary-method">Binary method</h1>
+
+<h1 id="python-program-for-exponentiation-calculation-using-binary-method">Python program for exponentiation calculation using binary method</h1>
+<h2 id="binary-method">Binary method</h2>
 <p>To calculate $x=a^k$, it would require $k$ multiplications. However, to efficiently calculate it, we can calculate $a^{2^i}$ sequentially, which reduces the number of calculations to $log(k)$ times. This is called the binary method, which is used in exponentiation calculations such as for RSA decryption.</p>
-<h2 id="example">Example</h2>
+<h3 id="example">Example</h3>
 <p>To calculate $5^{21}$, it can be expanded as follows:</p>
 <p>$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$</p>
 <p>By expanding it into binary and calculating from left to right, the calculation can be executed using the binary representation of $21$, which is $10101$ in binary.</p>
 <p>$5^{21} = 5^{(10101)_2} = 5^{(12^4 + 02^3 + 12^2 + 02^1 + 1*2^0)_2} = 5^{16} * 5^{4} * 5^{1}$</p>
 <p>This significantly reduces the number of calculations required.</p>
-<h1 id="program">Program</h1>
+<h2 id="program">Program</h2>
 <p>The following is a Python program that performs exponentiation calculation using the binary method.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-binary.py" data-lang="binary.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">binary_exponentiation</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="c1"># Convert to binary representation</span>
