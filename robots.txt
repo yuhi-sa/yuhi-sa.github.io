@@ -9,7 +9,15 @@
 </url>
 
 <url>
-  <loc>https://yuhi-sa.github.io/posts/202405004_spark_view/1/</loc>
+  <loc>https://yuhi-sa.github.io/posts/20240504_use_client/1/</loc>
+  
+  <lastmod>2024-05-03T10:10:00+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
+  <loc>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</loc>
   
   <lastmod>2024-05-03T10:10:00+09:00</lastmod>
   <changefreq>weekly</changefreq>

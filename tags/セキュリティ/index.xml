@@ -6,8 +6,22 @@
     <description>Recent content in セキュリティ on tomato blog</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 28 Mar 2023 09:00:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2024 10:10:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title>
+      <link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title>
+      <link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid>
+      <description>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する Next.js（App Router）の概要 Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&#xA;クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&#xA;「use client」の適切な使用 「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&#xA;実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&#xA;汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。 そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&#xA;つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&#xA;参考 吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.</description>
+    </item>
     <item>
       <title>メールにおける認証技術</title>
       <link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link>

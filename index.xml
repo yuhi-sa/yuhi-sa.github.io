@@ -16,10 +16,17 @@
       <description></description>
     </item>
     <item>
-      <title>Spark SQLを並列実行するとview表の名前空間は衝突するのか</title>
-      <link>https://yuhi-sa.github.io/posts/202405004_spark_view/1/</link>
+      <title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title>
+      <link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link>
       <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/202405004_spark_view/1/</guid>
+      <guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid>
+      <description>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する Next.js（App Router）の概要 Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&#xA;クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&#xA;「use client」の適切な使用 「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&#xA;実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&#xA;汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。 そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&#xA;つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&#xA;参考 吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.</description>
+    </item>
+    <item>
+      <title>Spark SQLを並列実行するとview表の名前空間は衝突するのか</title>
+      <link>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</guid>
       <description></description>
     </item>
     <item>
