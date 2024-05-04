@@ -4,7 +4,7 @@
     <title>Others on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/others/</link>
     <description>Recent content in Others on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/en/tags/others/index.xml" rel="self" type="application/rss+xml" />
@@ -13,28 +13,28 @@
       <link>https://yuhi-sa.github.io/en/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20211102_op3/1/</guid>
-      <description>Introduction ROS package for ROBOTIS OP3 to acquire walking using reinforcement learning&#xA;op3_walk Result Video op3_controller_demo Methods This package uses deep reinforcement learning (DQN).&#xA;The action value function is defined as a three-layer neural network (NN), and the Q-value is updated as follows&#xA;$Q(s_t,a_t) = Q(s_t,a_t) + \eta(R_{t+1)} + \gamma \max_a Q(s_{t+1},a) - Q(s_t,a_t)$&#xA;The neural network is updated by back propagation using the loss function L.&#xA;$ L = \mathbb{E}(R_{t+1} + \gamma \max Q(s_{t+1},a_t)- Q(s_t,a_t))$</description>
+      <description></description>
     </item>
     <item>
       <title>How to sync other calendars of google calendar to Apple stock devices</title>
       <link>https://yuhi-sa.github.io/en/posts/20210912_google_cal_sync/1/</link>
       <pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210912_google_cal_sync/1/</guid>
-      <description>Check the box at the following link.&#xA;https://calendar.google.com/calendar/u/0/syncselect </description>
+      <description></description>
     </item>
     <item>
       <title>How to do Airplay on Raspberry Pi (RPiPlay)</title>
       <link>https://yuhi-sa.github.io/en/posts/20210805_rpiplay/1/</link>
       <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210805_rpiplay/1/</guid>
-      <description>Update Raspberrypi Update packages sudo apt-get update sudo apt-get upgrade Update OS sudo apt-get install rpi-update sudo rpi-update sudo reboot Setting up RPiPlay Use the following code.&#xA;https://github.com/FD-/RPiPlay Install the necessary packages sudo apt-get install cmake sudo apt-get install libavahi-compat-libdnssd-dev sudo apt-get install libssl-dev sudo apt-get install libplist-dev Environment PRETTY_NAME=&amp;#34;Raspbian GNU/Linux 10 (buster)&amp;#34; NAME=&amp;#34;Raspbian GNU/Linux&amp;#34; VERSION_ID=&amp;#34;10&amp;#34; VERSION=&amp;#34;10 (buster)&amp;#34; VERSION_CODENAME=buster ID=raspbian ID_LIKE=debian HOME_URL=&amp;#34;http://www.raspbian.org/&amp;#34; SUPPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianForums&amp;#34; BUG_REPORT_URL=&amp;#34;http://www.raspbian.org/RaspbianBugs&amp;#34; Install RPiPlay git clone https://github.com/FD-/RPiPlay.git cd RPiPlay Build mkdir build cd build cmake .</description>
+      <description></description>
     </item>
     <item>
       <title>How to Initialize Launchpad on Mac</title>
       <link>https://yuhi-sa.github.io/en/posts/20210520_mac_tips/1/</link>
       <pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210520_mac_tips/1/</guid>
-      <description>The following command will initialize everything&#xA;defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock </description>
+      <description></description>
     </item>
   </channel>
 </rss>

@@ -4,7 +4,7 @@
     <title>アルゴリズム on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/</link>
     <description>Recent content in アルゴリズム on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 06 Sep 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/index.xml" rel="self" type="application/rss+xml" />
@@ -13,35 +13,35 @@
       <link>https://yuhi-sa.github.io/posts/20230907_dh/1/</link>
       <pubDate>Wed, 06 Sep 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230907_dh/1/</guid>
-      <description>概要 DH鍵交換は、1976年にWhitfield DiffieとMartin Hellmanによって発表されたプロトコルである。このプロトコルでは、通信を行う2者がそれぞれ公開鍵と秘密鍵を生成し、公開鍵だけを相手に送信する。そして、自分の秘密鍵と受信した相手の公開鍵を使用して共通鍵を生成する。&#xA;このプロトコルを用いることにより、共通鍵を使い捨てすることができ、前方秘匿性を保持するために重要である。前方秘匿性とは、過去の通信から推測されることなく、将来の通信も安全に行えること。&#xA;アルゴリズム import random # 共通のパラメータ g = 23 # 生成元 n = 5 # 素数 # アリスとボブがそれぞれ秘密の鍵を生成 p = 5 # 秘密の鍵のビット長 a = random.randint(1, (1 &amp;lt;&amp;lt; p)) # アリスの秘密の鍵 b = random.randint(1, (1 &amp;lt;&amp;lt; p)) # ボブの秘密の鍵 # アリスとボブが公開鍵を計算 A = (g ** a) % n B = (g ** b) % n # アリスとボブが共通の秘密鍵を計算 sA = (B ** a) % n sB = (A ** b) % n # 共通の秘密鍵を表示 print(&amp;#34;共通の秘密鍵 sA:&amp;#34;, sA) print(&amp;#34;共通の秘密鍵 sB:&amp;#34;, sB) 公開鍵Aを盗聴できたとして攻撃者がaを計算しようとすると、総当たりにはo(2^p)の計算量が必要。</description>
+      <description></description>
     </item>
     <item>
       <title>K-means法</title>
       <link>https://yuhi-sa.github.io/posts/20210318_pid/2/</link>
       <pubDate>Thu, 18 Mar 2021 16:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210318_pid/2/</guid>
-      <description>$K$-means法は非階層型クラスタリングの一種である．非階層クラスタリングとは、与えられたデータを決められたクラスタ数で分割し，各クラスタが互いに似た性質を持つ分割方法を探索する手法である．階層クラスタリングと異なり、階層的な構造を持たず、サンプル数が大きいビッグデータを分析するときに適している。&#xA;$K$-means法は与えられたデータとクラスタの中心との距離を測定して使ってデータを$K$個のクラスタに分割する手法である．$c_j$をクラスタ$C_j$の重心点，すなわち，クラスタ$C_j$内の粒子の平均$c_j=\sum_{x∈C_j}\frac{x}{|C_j|}$とし，以下の評価関数を最小化するように$K$個のクラスタに分割する．&#xA;$$c_i=\sum_{i=1}^K\sum_{x∈C_i}(x-c_j)^2$$&#xA;ランダムにデータ$X(x_i,x_2,&amp;hellip;,x_n)$を$K$個のクラスタに割り振る クラスタの重心点$c_j(j=1,2,&amp;hellip;,K)$を計算する データ$X(x_i,x_2,&amp;hellip;,x_n)$最も近いクラスタの重心点$c_j(j=1,2,&amp;hellip;,K)$にクラスタを割り当て直す． クラスタの重心点が移動しなくなるまで，もしくは既定回数になるまでStep2とStep3を繰り返す． </description>
+      <description></description>
     </item>
     <item>
       <title>楕円曲線上のElGamal暗号のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid>
-      <description>鍵生成 楕円曲線$E/F_p$と位数$l$のベーズポイント$G$を生成する．($p,l$は素数) 秘密鍵$x$を乱数にて生成し，$E$上で$Y=xG$を計算する． ここで，秘密鍵$x$，公開鍵$E,G,Y$&#xA;暗号化 $m$を送信したいメッセージとする．&#xA;$r$を乱数で生成し，$U=rG=(u_x,u_y)$を計算． 公開鍵$Y$を用いて，&#xA;$V = xU =(v_x,v_y)$&#xA;$c=v_x\oplus m$&#xA;を計算．$\oplus$は排他的論理和． $(U,c)$を暗号文として，送信． 復号化 以下のように復号する．&#xA;$V=xU=(v_x,v_y)$,&#xA;$m=v_x\oplus c$ プログラム # Random number r = 3 # Secret Key key = 3 # Base point g = [2,2] # Digits l = 5 # y^2 = x^3 + ax +b a = 0 b = 1 def Mod(x,y): if x &amp;lt; 0: x = x+y return x%y def invMod(x,y): count = 1 while True: tmp = x*count if tmp%y == 1: return count count += 1 def Ellipse(p,r): for _ in range(r): s = Mod(Mod((3*p[0]*p[0]+a),l)*invMod((2*p[1]),l),l) x = Mod(s*s-p[0]-p[0],l) y = Mod(s*(p[0]-x)-p[1],l) return [x,y] def encrypt(G,Y, m): U =Ellipse(G,r) V =Ellipse(Y,r) # XOR c = V[1] ^ m return U,c def decrypt(U, c, key): V = Ellipse(U,key) m = V[1] ^ c return m def main(): # Public Key Y = g Y = Ellipse(Y, key) print(&amp;#34;公開鍵：&amp;#34;,[a,b], g,Y) # Pingwen message = 4 print(&amp;#34;平文：&amp;#34;, message) # Encryption U,c = encrypt(g, Y, message) print(&amp;#34;暗号文：&amp;#34;,U,c) # Decryption decrypt_message = decrypt(U, c, key) print(&amp;#34;復号化メッセージ&amp;#34;, decrypt_message) if __name__ == &amp;#34;__main__&amp;#34;: main() </description>
+      <description></description>
     </item>
     <item>
       <title>バイナリ法によるべき乗計算のPythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link>
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20201220_binary/1/</guid>
-      <description>バイナリ法 $x=a^k$のとき、$k$回の2乗計算が必要になるが、効率よく計算するためには、$a^{2^i}$を順次求めることで、計算量を$log(k)$回に抑えることができる。これがバイナリ法である。RSA暗号の複合時のべき乗計算などで用いられる。&#xA;具体例 $5^{21}$を計算する場合、以下のように展開する。&#xA;$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$&#xA;2進数に展開し、左から順に展開することにより計算を実行する。つまり、$21$の2進数表記である$10101$を使って以下のように計算する。&#xA;$5^{21} = 5^{(10101)_2} = 5^{(12^4 + 02^3 + 12^2 + 02^1 + 1*2^0)_2} = 5^{16} * 5^{4} * 5^{1}$&#xA;これにより、計算回数が大幅に削減される。&#xA;プログラム 以下は、Pythonでバイナリ法を用いたべき乗計算を行うプログラムである。&#xA;def binary_exponentiation(k: int, g: int, p: int) -&amp;gt; int: # 2進数表記に変換 k_binary = [] while k != 0: k_binary.append(k % 2) k = k // 2 if k == 1: k_binary.append(k) k = 0 # バイナリ法によるべき乗計算 y = 1 for i in reversed(range(len(k_binary))): if k_binary[i] == 1: y = (y * y % p) * g % p else: y = (y * y % p) return y このプログラムでは、入力としてべき乗の指数$k$、底$g$、法$p$を受け取り、バイナリ法を用いてべき乗計算を行い、計算結果を返す。</description>
+      <description></description>
     </item>
     <item>
       <title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</link>
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</guid>
-      <description>ユークリッドの互除法とは ユークリッドの互除法とは、2つの整数 $a$ と $b$ $(a&amp;gt;b)$ が与えられたとき、$a$ を $b$ で割った余り $r$ とすることで、$a$ と $b$ の最大公約数を求める方法。除法の原理を利用し、割り算を繰り返すことによって最大公約数を求める。&#xA;ユークリッドの互除法のアルゴリズム 入力：整数$a,b$&#xA;出力：最大公約数 $d$&#xA;$a_0 = a$, $a_1 = b$ $a_i=0$のとき，&#xA;$d=a_{i-1}$とし終了 $a_{i-1}=a_iq_i+a_{i+1}$&#xA;として2に戻る プログラム def euclid(a,b): a_list = [] if a &amp;lt; b: a_list.append(b) a_list.append(a) if a &amp;gt;= b: a_list.append(a) a_list.append(b) i = 0 while(a_list[-1]!=0): a_list.append(a_list[i]%a_list[i+1]) i +=1 return a_list[-2] 拡張ユークリッドの互除法とは 拡張ユークリッドの互除法とは、一次不定方程式 $ax+by=d$ の一つの解を求める方法。$a_0=a$、$a_1=b$ とおくと、以下のように求めることができる。&#xA;$[\begin{array}{cc} a_{i-1} \ a_i \end{array}]= [\begin{array}{cc} a_iq_i+a_{i+1} \ a_i \end{array}]$ とすると， $[\begin{array}{cc} a_{i-1} \ a_i \end{array}]= [\begin{array}{cc} q_i &amp;amp; 1 \ 1 &amp;amp; 0 \end{array}] [\begin{array}{cc} a_i \ a_{i+1} \end{array}] $ とかける． $[\begin{array}{cc} q_i &amp;amp; 1 \ 1 &amp;amp; 0 \end{array}]$ の逆行列を，$L_i$とする． $[\begin{array}{cc} a_i \ a_{i+1} \end{array}]=L_i [\begin{array}{cc} a_{i-1} \ a_i \end{array}] $ これを繰り返すと， $[\begin{array}{cc} d \ 0 \end{array}]=L_i,\dots,L_2 [\begin{array}{cc} a \ b \end{array}] $ となる．</description>
+      <description></description>
     </item>
   </channel>
 </rss>

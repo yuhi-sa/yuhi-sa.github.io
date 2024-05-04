@@ -4,7 +4,7 @@
     <title>Pytorch on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/pytorch/</link>
     <description>Recent content in Pytorch on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 15 Feb 2021 13:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link>
       <pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid>
-      <description>x = np.random.rand(5) print(x) torch_x = torch.tensor(x) print(torch_x) [0.07875406 0.96178392 0.64953209 0.12122955 0.92958997] tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296], dtype=torch.float64) numpyの配列を，そのままtorchに変換するとdtypeが残る．&#xA;torch_x = torch.tensor(x.astype(np.float32)) print(torch_x) tensor([0.0788, 0.9618, 0.6495, 0.1212, 0.9296]) 消すためには，numpyの型をfloat32にしてからtorchに変換する必要がある．</description>
+      <description></description>
     </item>
   </channel>
 </rss>

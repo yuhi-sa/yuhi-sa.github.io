@@ -4,7 +4,7 @@
     <title>Java on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/java/</link>
     <description>Recent content in Java on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 12 Nov 2021 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20211112_java/1/</link>
       <pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid>
-      <description>オブジェクトの構成要素 フィールド：オブジェクトがもつデータ メソット：オブジェクトがする処理 フィールドとメソットを合わせてメンバと呼ぶ&#xA;インスタンス化 オブジェクトの雛形を「クラス」，実際に使われる部品を「インスタンス」とよび，クラスをもとにインスタンスを作ることをインスタンス化とよぶ．&#xA;カプセル化 メンバに対するアクセス権を設定することにより，オブジェクトを安全で簡単に利用する方法．以下の二つの作業により実装．&#xA;データの隠蔽：フィールドへの直接悪説を禁止する フィールド操作用のメソッドの公開 継承 既存のクラスを利用して新しいクラスを定義すること．&#xA;ポリモフィズム 同一のクラスを継承しているサブクラスのメソッドの動作は同じとなるが，ポリモフィズムを用いると同じメソットの呼び出しに対し，インスタンスごとに異なった処理を実行できる．&#xA;UML(Unified Modeling Language) システム開発のさまざまな場面で使用する図を標準化した規格&#xA;クラス図 シーケンス図 ユースケース図 アクティビティ図 コンポーネント図 </description>
+      <description></description>
     </item>
   </channel>
 </rss>

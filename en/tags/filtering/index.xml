@@ -4,7 +4,7 @@
     <title>Filtering on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/filtering/</link>
     <description>Recent content in Filtering on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 06 Feb 2022 14:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/en/tags/filtering/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</link>
       <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</guid>
-      <description>Exponential Moving Averages (EMA) Exponential Moving Averages (EMA) is a popular method for smoothing time series data, where the input $x$ is smoothed over time with a smoothing factor $\beta$ to obtain $y$. The method assigns weights to the previous filtered value and the current observation using $\beta$, allowing recent data to be given greater importance while retaining some information from older data.&#xA;$$y_t=\beta y_{t-1}+(1-\beta)x_t$$&#xA;Gain and Phase Characteristics Taking the Laplace transform of the above equation, we get:</description>
+      <description></description>
     </item>
   </channel>
 </rss>

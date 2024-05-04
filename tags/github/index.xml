@@ -4,7 +4,7 @@
     <title>Github on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/github/</link>
     <description>Recent content in Github on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Wed, 18 Aug 2021 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
       <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
-      <description>公開鍵・秘密鍵の生成 $ ssh-keygen -t ed25519 -C &amp;#34;メールアドレス&amp;#34; or $ ssh-keygen -t rsa -b 4096 -C &amp;#34;メールアドレス&amp;#34; Enterを押す．&#xA;&amp;gt; Enter a file in which to save the key (/Users/you/.ssh/id_ed25519): [Press enter] パスワードを設定&#xA;&amp;gt; Enter passphrase (empty for no passphrase): [Type a passphrase] &amp;gt; Enter same passphrase again: [Type passphrase again] 公開鍵をコピー&#xA;$ pbcopy &amp;lt; ~/.ssh/id_ed25519.pub or $ pbcopy &amp;lt; ~/.ssh/id_rsa.pub githubに公開鍵を登録する． ユーザ設定のサイドバーでSSH and GPG keys（SSH及びGPGキー）を選択． [Add SSH key]を選択し，コピーした公開鍵を貼り付け．(Titleは利用しているPCを識別できる名前) 接続テスト ssh -T git@github.</description>
+      <description></description>
     </item>
     <item>
       <title>GitHub Actions の書き方</title>
       <link>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</guid>
-      <description>GitHub Actions CI / CDで自動化することによりGitHubから直接コードをビルド、テスト、デプロイなどをすることができる機能である．&#xA;リポジトリ直下に以下のディレクトリを作成し，YAMLファイルで自動化内容を記入することで実行できる．&#xA;.github/workflows/{自由な名前}.yml YAMLファイルの構成 以下の形式で，YAMLファイルを作成する．&#xA;name: {このワークフローの名前} on: # pushされた時に実行(blanchも指定できる) push: branches: [ master ] # pullリクエストされた時に実行(blanchも指定できる) pull_request: branches: [ master ] # 時間指定 # https://docs.github.com/ja/actions/reference/events-that-trigger-workflows schedule: - cron: &amp;#39;45 10 * * *&amp;#39; jobs: build: # 実行環境を指定(macやwindowsも指定可) runs-on: ubuntu-latest steps: - uses: actions/checkout@v2 # 実行するコマンド - name: {操作名} run: | {コマンド} </description>
+      <description></description>
     </item>
   </channel>
 </rss>

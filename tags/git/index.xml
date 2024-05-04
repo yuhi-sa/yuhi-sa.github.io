@@ -4,7 +4,7 @@
     <title>Git on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/git/</link>
     <description>Recent content in Git on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 08 Dec 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link>
       <pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid>
-      <description>commitizenとは commitizenは、Gitのコミットメッセージを効果的に統一するためのツールで、対話的なプロンプトを提供してコミットメッセージを作成できる。これにより、一貫性のあるメッセージを作成しやすくなる。&#xA;導入 commitizenのインストール 最初に、以下のコマンドを使用してcommitizenをグローバルにインストールする。&#xA;➜ npm install -g commitizen これにより、commitizenがコマンドラインから利用可能になる。&#xA;cz-conventional-changelogのインストール commitizenを使用する際、どのような形式でコミットメッセージを記述するかを定義するツールが必要となる。 今回は、cz-conventional-changelogを使用する。cz-conventional-changelogは、Conventional Commitsと呼ばれるフォーマットに従ったコミットメッセージの記載が可能となる。&#xA;以下のコマンドを実行して、これをインストールする。&#xA;➜ npm install -g cz-conventional-changelog 設定ファイルに追加する。&#xA;➜ vim .czrc { &amp;#34;path&amp;#34;: &amp;#34;cz-conventional-changelog&amp;#34; } これにより、cz-conventional-changelogが利用可能になる。&#xA;使用方法 通常のgit commitコマンドではなく、 git czコマンドを使用してコミットメッセージを作成する。このコマンドを実行すると、対話型のプロンプトが表示され、コミットメッセージの各部分を選択して入力することができる。&#xA;➜ git:(main) touch test.md ➜ git:(main) ✗ git add test.md ➜ git:(main) ✗ git cz cz-cli@4.3.0, cz-conventional-changelog@3.3.0 ? Select the type of change that you&amp;#39;re committing: (Use arrow keys) ❯ feat: A new feature fix: A bug fix docs: Documentation only changes style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) refactor: A code change that neither fixes a bug nor adds a feature perf: A code change that improves performance </description>
+      <description></description>
     </item>
     <item>
       <title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title>
       <link>https://yuhi-sa.github.io/posts/20231204_git/1/</link>
       <pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid>
-      <description>Gitフックは、特定のGitイベントが発生したときに実行されるスクリプトである。 これを使用して、masterブランチへのpushを制限できる。&#xA;.git/hooksディレクトリにスクリプトを作成する。&#xA;cd .git/hooks vim pre-push 以下の内容を追加する。&#xA;#!/bin/bash current_branch=$(git symbolic-ref HEAD --short) if [ &amp;#34;$current_branch&amp;#34; = &amp;#34;main&amp;#34; ]; then echo &amp;#34;Error: Direct push to main branch is not allowed.&amp;#34; exit 1 fi exit 0 スクリプトに実行権限を与える。&#xA;chmod +x pre-push これで、masterブランチへの直接のpushが拒否されるようになる。</description>
+      <description></description>
     </item>
   </channel>
 </rss>

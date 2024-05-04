@@ -4,7 +4,7 @@
     <title>Python on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/python/</link>
     <description>Recent content in Python on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 16 Apr 2021 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/en/tags/python/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/en/posts/20210514_py_print/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20210514_py_print/1/</guid>
-      <description>To overwrite one line print(&amp;#34;\r&amp;#34;+&amp;#34;overwrite one line！&amp;#34;,end=&amp;#34;&amp;#34;) To overwrite n lines print(&amp;#34;overwrite n lines！&amp;#34;+&amp;#34;\033[nA&amp;#34;) </description>
+      <description></description>
     </item>
   </channel>
 </rss>

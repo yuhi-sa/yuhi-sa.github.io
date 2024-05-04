@@ -4,7 +4,7 @@
     <title>フィルタリング on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/</link>
     <description>Recent content in フィルタリング on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 06 Feb 2022 14:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,21 @@
       <link>https://yuhi-sa.github.io/posts/20220206_ema/1/</link>
       <pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220206_ema/1/</guid>
-      <description>指数移動平均(Exponential Moving Averages;EMA) 入力$x$に対して，平滑化率$\beta$に応じて時系列平滑化を行い$y$を得ることによって時系列データを平滑化する代表的な手法である． 1ステップ前のフィルタリングされたの値と現在の観測値を$\beta$を用いて重み付けし足し合わせることで， 最近のデータを重視するとともに古いデータを完全には切り捨てない仕組みとなっている．&#xA;$$y_t=\beta y_{t-1}+(1-\beta)x_t$$&#xA;ゲイン特性と位相特性 上式をラプラス変換する．&#xA;$$Y(s)=\beta e^{-s}Y(s)+(1-\beta)X(s)$$&#xA;式変形し伝達関数を求める．&#xA;$$G(s)=\frac{Y(s)}{X(s)}=\frac{\beta}{1+(1-\beta)e^{-s}}$$&#xA;$s=jw$とする．&#xA;$$G(jw)= \frac{\beta}{1+(1-\beta)e^{-jw}}$$&#xA;ゲイン特性と位相特性は以下の様になる．&#xA;$$|G(jw)| = \frac{\beta}{\sqrt{1-2(1-\beta) \cos w+(1-\beta)^2}}$$&#xA;$$\angle G(jw) = \tan^{-1} (\frac{-\sin w}{\cos w-(1-\beta)})$$&#xA;$\beta$が小さい場合，周波数帯域が狭く強い平滑化を行うことができるが位相遅れが大きくなる． 一方で$\beta$が大きい場合，位相遅れは小さいが平滑化能力が低下することがわかる．&#xA;プログラム import math import matplotlib.pyplot as plt BETA = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] LENGE = 300 frequency = [[] for _ in range(len(BETA))] gain = [[] for _ in range(len(BETA))] phase = [[] for _ in range(len(BETA))] def get_gain(beta, w): return beta / math.</description>
+      <description></description>
     </item>
     <item>
       <title>適応フィルタ</title>
       <link>https://yuhi-sa.github.io/posts/20210730_filter/1/</link>
       <pubDate>Fri, 30 Jul 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210730_filter/1/</guid>
-      <description>デジタルフィルタ 信号をあるサンプリング周期でサンプリングした時系列信号$x_0,x_1,&amp;hellip;,x_N$に対する処理をデジタルフィルタとよぶ．代表的なデジタルフィルタに線形フィルタがある．&#xA;線形フィルタ FIR(有限インパルス応答)フィルタ $$y_k=w_0x_k+w_1x_{k-1}+&amp;hellip;+w_Nx_{k-N}$$ $w$がフィルタ係数&#xA;IIR(無限インパルス応答)フィルタ $$y_k=w_0x_k+w_1x_{k-1}+&amp;hellip;+w_Nx_{k-N}-v_1y_{k-1}-&amp;hellip;-v_My_{k-M}$$&#xA;$w,v$がフィルタ係数&#xA;適応フィルタ デジタルフィルタを学習によって構成する手法に適応フィルタがある．適応フィルタでは，FIRフィルタとIIRフィルタに対して同じ考え方でフィルタ設計を行うことができる．&#xA;適応フィルタの入出力 入力：$x_k=x(kT,k=0,1,2,&amp;hellip;)$&#xA;出力：$y_k= w_0 x_k + w_1 x_{k-1}+\dots+w_{N-1}x_{k-N+1}$&#xA;誤差：$e_k = d_k-y_k$&#xA;フィルタ設計 目標値$d_k$に対して適応フィルタの出力$y_k$をできるだけ近づけるように，係数を決定することが，フィルタ設計である． $$W = [W_0,w_1,&amp;hellip;,w_{N-1}]^t$$&#xA;$$X_k = [x_k,x_{k-1},&amp;hellip;,x_{k-N+1}]^t$$&#xA;とおくとフィルタ誤差は以下のように表すことができる．&#xA;$$e_k=d_k-W^tX_k=d_k-X_k^tW$$&#xA;誤差の二乗規範$J_k$を最小化することを考える．($E$は期待値)&#xA;$$J_k \triangleq \frac{1}{2} E [e_k^2]$$&#xA;$$J_k =\frac{1}{2}(E[d_k^2]+W^tE[X_kX_k^t]W-2E[d_kX_k^t]W) =\frac{1}{2}(E[d_k^2]+W^tRW-2R_{dX}W)$$&#xA;$J_k$を$W_k$で微分した値を0とおく．&#xA;$$\frac{\delta J_k}{\delta W_k} = RW -R_{dX}=0$$&#xA;$J_k$を最小にする$W_k$を$W^o$とおく．&#xA;$$EW^o=R_{dX}$$&#xA;この関係式をWiener-Hopf方程式と呼び，$R$が逆行列を有する場合には以下のように最適値を求めることができる．&#xA;$$W^o = R^{-1}R_{dX}$$&#xA;フィルタ係数の逐次計算 逆行列の計算を行わないでWiener-Hopf法的式を満たす$W^o$を求める場合には，勾配を用いて逐次計算を行う．&#xA;$$\delta W= -\eta \frac{\delta J}{\delta W}=-\eta(RW(old)-R_{dX})$$&#xA;ここで$\eta$は学習率&#xA;参考 大松 繁, &amp;ldquo;信号処理ーデジタルフィルタ&amp;rdquo;</description>
+      <description></description>
     </item>
     <item>
       <title>代表的なフィルタ</title>
       <link>https://yuhi-sa.github.io/posts/20200901_filter/1/</link>
       <pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20200901_filter/1/</guid>
-      <description>フィルタ(Filter) フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．&#xA;モデル フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．&#xA;$$ x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1} $$ $$ z_t=h(x_t,r_t) \tag{2} $$ ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．&#xA;$$ q\sim N(0,Q) $$ $$ r\sim N(0,R) $$&#xA;カルマンフィルタ(Kalman Filter) 目的 時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．&#xA;方法 状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．&#xA;Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．&#xA;Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する． $x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．&#xA;$$ x \sim&#x9;(\mu,\Sigma) $$&#xA;Step1 予測ステップ&#xA;事前状態推定値&#xA;$$ \hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3} $$&#xA;事前誤差共分散行列&#xA;$$ \hat{\Sigma}=A\Sigma_{t-1}A^T+Q_{t-1} \tag{4} $$&#xA;Step2 状態推定&#xA;カルマンゲイン&#xA;$$ K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T+R_t})^{-1} \tag{5} $$ 状態推定値&#xA;$$ \mu_t=\hat{\mu_t}+K_t(z_t-H\hat{\mu_t}) \tag{6} $$ 事後誤差共分散行列&#xA;$$ \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7} $$&#xA;拡張カルマンフィルタ(Extended Kalman Filter) 目的 カルマンフィルターを非線形システムに拡張する．</description>
+      <description></description>
     </item>
   </channel>
 </rss>

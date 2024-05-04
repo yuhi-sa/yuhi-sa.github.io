@@ -4,7 +4,7 @@
     <title>ROS on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/ros/</link>
     <description>Recent content in ROS on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sun, 16 Aug 2020 15:17:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/en/tags/ros/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</guid>
-      <description>ROS(Robot Operating System) ROS is a middleware that provides libraries and tools to support the creation of robot applications. It enables easy communication between robots.&#xA;Pub &amp;amp; Sub communication In ROS, an executable that is connected to the ROS network is called a &amp;ldquo;Node&amp;rdquo;, and messages are exchanged between nodes using &amp;ldquo;Topics&amp;rdquo;. The node that publishes messages is called a &amp;ldquo;Publisher&amp;rdquo; and the node that receives messages is called a &amp;ldquo;Subscriber&amp;rdquo;.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

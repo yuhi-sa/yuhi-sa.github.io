@@ -4,7 +4,7 @@
     <title>Javascript on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 24 Nov 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,21 @@
       <link>https://yuhi-sa.github.io/posts/20231124_t3/1/</link>
       <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231124_t3/1/</guid>
-      <description>t3-stackでログのメトリクス化のために、prom-clientのCounterをLoggerクラスで共有することを検討した。 しかし、App RouterとPages Routerで共有することができなかった。 具体的にはglobalのregisterにCounterを登録しようとするとPages Routerではビルドエラーになる。&#xA;import { Counter } from &amp;#39;prom-client&amp;#39;; class Logger { private static instance: Logger; private errorCounter: Counter&amp;lt;string&amp;gt;; private warnCounter: Counter&amp;lt;string&amp;gt;; private constructor() { this.errorCounter = new Counter({ name: &amp;#39;errors_total&amp;#39;, }); this.warnCounter = new Counter({ name: &amp;#39;warnings_total&amp;#39;, }); } public static getInstance(): Logger { if (!Logger.instance) { Logger.instance = new Logger(); } return Logger.instance; } } 回避方法としてregisterをLoggerクラスに持たせることができるが、App RouterとPages Routerで別々のinstanceを使用することとなる。そのため、やはりメトリクスを共有できない。&#xA;import { Counter, register } from &amp;#39;prom-client&amp;#39;; class Logger { private static instance: Logger; private errorCounter: Counter&amp;lt;string&amp;gt;; private warnCounter: Counter&amp;lt;string&amp;gt;; private registerInstance: typeof register; private constructor() { this.</description>
+      <description></description>
     </item>
     <item>
       <title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title>
       <link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link>
       <pubDate>Thu, 29 Dec 2022 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20221229_async_await/1/</guid>
-      <description>JavaScriptで非同期処理が重要な理由 シングルスレッド JavaScriptはシングルスレッドで動作する。そのため一度に実行できるタスクは1つだけとなる。 JavaScriptは、レイアウト・再フロー・ガベージコレクションなどと同じスレッドで実行される。&#xA;そのため、JavaScript関数がスレッドを占有すると、ページの反応が悪くなるという問題が発生する。 この問題を非同期関数を用いて緩和する。&#xA;参考 JavaScript | MDN Main thread (メインスレッド) | MDN 非同期処理:Promise/Async Function | jsprimer 非同期関数 非同期処理はコードを順番に処理するが、1つの非同期処理が終わるのを待たずに次の処理を行う。 これにより複数の処理を並列に実行している。&#xA;イベントループ JavaScriptエンジン(v8など)は、非同期関数をイベントループを用いて実行する。 JavaScriptエンジンは、主に以下の3つによって構成されている。&#xA;Javascriptエンジン ヒープ領域：動的に確保と解放を繰り返せるメモリ領域 コールスタック：LIFOで呼び出された関数を保存する領域。格納された関数は順次処理される。 WebAPIs ブラウザに搭載されている各種API(DOM, Ajax, timerなど)&#xA;イベントキュー/タスクキュー FIFOで、Web APIから受け取ったCallback関数を保存する&#xA;イベントループは以下の流れで非同期処理を実現する。&#xA;コールスタックとイベントキューを監視し、コールスタックが空になったら、イベントキューの作業を順番にコールスタックに移動させる。 JavaScriptがメモリ上に展開され、コールスタックで実行される。 Web APIsから提供されているAPIを呼び出すと、Web APIsの実行環境で処理が実行する。 非同期関数の呼び出しの場合、Web APIsの実行環境内で、条件を満たすまで待機し、条件を満たすとイベントキューに格納される。 参考 非同期処理 (1):Javascriptの動作の流れ (JS エンジン/Call Stack/Event Queue) | Zenn JavaScriptのイベントループを理解する | Qiita JavaScriptがブラウザでどのように動くのか | mercari engineering 非同期関数の例 たとえば、処理を一時停止させる場合はsetTimeout関数を利用して実現する方法がある。&#xA;// setTimeout(&amp;#39;コールバック関数&amp;#39;, &amp;#39;タイムアウト時間&amp;#39;) function callback(){ console.log(&amp;#39;test&amp;#39;) } 非同期処理が複数重なると、コールバック地獄になり、ネストが深く処理が追いづらくなる。&#xA;setTimeout(callback, 1) setTimeout(() =&amp;gt; { console.</description>
+      <description></description>
     </item>
     <item>
       <title>webpackとbabelでReactを使える環境を作成する</title>
       <link>https://yuhi-sa.github.io/posts/20221111_react/1/</link>
       <pubDate>Fri, 11 Nov 2022 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20221111_react/1/</guid>
-      <description>webpack JavaScriptのモジュールバンドラー。&#xA;Webpackでビルドすることでnode_modulesの依存関係を解消し、1つのJSファイルにまとめることができる。&#xA;JSのモジュールとbabelとwebpackとは何かまとめてみる（初心者向け） Babel JavaScriptのトランスコンパイラー。&#xA;元々はES6のコードをES5に変換するため「6to5」という名前で作成された。&#xA;新記法で書かれたコードを、それらの機能をサポートしていないブラウザでも動く古記法のコードに変換することができる。&#xA;Babelとは ES6からES5への変換ツール「6to5」が名称を「Babel」に変更 環境構築 以下の記事を参考に作成した。&#xA;React 環境構築　Webpack + Babelなぜ必要？ WebpackとBabelでReact.js 構築　設定 webpack + babel + TypeScript + React メモ 必要なモジュールのインストール mkdir react_test cd react_test # プロジェクトの初期化 npm init -y # Babelを使用するのに必要なモジュール npm i -D @babel/core # Babel本体 npm i -D @babel/preset-env # 必要なプラグインを自動で選択して変換処理しれくれるpresets npm i -D　@babel/preset-react @babel/preset-typescript　# React, Typescript用 # Webpackを使用するのに必要なモジュールなど npm i -D webpack webpack-cli babel-loader ts-loader npm i -D webpack-dev-server html-webpack-plugin # Reactを使用するのに必要なモジュールを追加 npm i -S react react-dom # jsxコードを使用してReactを記述する npm i -D typescript @types/react @types/react-dom # tsconfig.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

@@ -4,7 +4,7 @@
     <title>Ros on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/ros/</link>
     <description>Recent content in Ros on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 16 Aug 2020 15:17:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link>
       <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid>
-      <description>ROS(Robot Operating System) ロボット・アプリケーション作成を支援するライブラリとツールを提供しているミドルウェアです．&#xA;これによりロボット同士の通信が簡易にできるようになります．&#xA;Pub &amp;amp; Sub通信 ROSでは，ROSのネットワークにつながった実行可能なものを&amp;quot;ノード&amp;quot;とよび，ノード間で&amp;quot;トピック&amp;quot;とよばれるメッセージをやり取りします．&#xA;メッセージを配信するノードをPublisher(配信者)，メッセージを受信するノードをSubscriber(購読者)と呼びます．&#xA;実行環境 ROS kinetic Ubuntu 16.04 LTS Python 3.8.5 Publisherのプログラム import rospy from std_msgs.msg import String def talker(): # Publisher(&amp;#39;Topic Name&amp;#39;, Type, Size) pub = rospy.Publisher(&amp;#39;chatter&amp;#39;, String, queue_size=10) # Init Nonde rospy.init_node(&amp;#39;talker&amp;#39;, anonymous=True) # Roop Period rate = rospy.Rate(10) # 10hz while not rospy.is_shutdown(): hello_str = &amp;#34;hello world %s&amp;#34; % rospy.get_time() rospy.loginfo(hello_str) # Publish Data pub.publish(hello_str) rate.sleep() if __name__ == &amp;#39;__main__&amp;#39;: try: talker() except rospy.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

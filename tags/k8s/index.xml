@@ -4,7 +4,7 @@
     <title>K8s on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/k8s/</link>
     <description>Recent content in K8s on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 04 Sep 2022 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
@@ -13,35 +13,35 @@
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/5/</link>
       <pubDate>Sun, 04 Sep 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/5/</guid>
-      <description>kubeconfig kubectlが、k8s Masterと通信する際には、接続先サーバのの認証情報を「~/.kube/confg」に記載する必要がある。&#xA;kubeconfigで具体的な設定を行う部分は、clusters、users、contextsの三種類あり、配列型で設定する。 clustersには接続先クラスタの情報を、usersには認証情報を定義する。contextsはclusterとuserのペアとnamespaceを指定したものを定義する。&#xA;apiVersion: v1 kind: Config clusters: # 接続先クラスタ情報 - cluster: certificate-authority: /Users/USER/.minikube/ca.crt extensions: - extension: last-update: Thu, 01 Sep 2022 09:39:29 JST provider: minikube.sigs.k8s.io version: v1.26.1 name: cluster_info server: https://127.0.0.1:55537 name: minikube users: # 認証情報 - name: minikube user: client-certificate: /Users/USER/.minikube/profiles/minikube/client.crt client-key: /Users/USER/.minikube/profiles/minikube/client.key contexts:　＃接続先と認証情報の組み合わせ - context: cluster: minikube extensions: - extension: last-update: Thu, 01 Sep 2022 09:39:29 JST provider: minikube.sigs.k8s.io version: v1.26.1 name: context_info namespace: default user: minikube name: minikube current-context: docker-desktop preferences: {} kubeconfigの操作 contextを切り替えることで複数の環境を複数の権限で扱えるようになる。</description>
+      <description></description>
     </item>
     <item>
       <title>Kubernetesのリソースカテゴリ</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/3/</link>
       <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/3/</guid>
-      <description>Workloads APIsカテゴリ コンテナの実行に関わるリソースで以下の8種類が存在する。&#xA;Pod ReplicationController ReplocaSet Deployment DaemonSet StatefulSet CronJob Service APIsカテゴリ コンテナを外部公開するリソースで、利用者が直接利用するものとしてはServiceとIngressの2種類が存在する。&#xA;Service ClusterIP ExternalIP NodePort LoadBalancer Headless ExternalName None-Selector Ingress Config &amp;amp; Storage APIsカテゴリ 設定、機密情報、永続化ボリュームに関するリソースでSecretとConfigMap、PersistentVolumeClaimが存在する。 SecretとConfigMapはKey-Value形式でデータを持ち、ersistentVolumeClaimは永続ボリュームを要求する時に利用する。&#xA;Secret ConfigMap PersistentVolumeClaim Cluster APIsカテゴリ セキュリティやクォータに関するリソースで、クラス自体の振る舞いを定義する。&#xA;Node Namespace PersistentVolume ResourceQuota ServiceAccount Role ClusterRole RoleBinding ClusterRoleBinding NetworkPolicy Metadata APIs カテゴリ クラスタ内の他のリソースを操作するためのリソース。&#xA;LimitRange HorizontalPodAutoscaler PodDisruptionBudget CustomResourceDefinition 参考 青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ </description>
+      <description></description>
     </item>
     <item>
       <title>Kubernetesの初期状態のNamespace</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/4/</link>
       <pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/4/</guid>
-      <description>kubernetes(k8s)では初期状態で以下の4つのNameSpaceが作成される。&#xA;kube-system k8sクラスタのコンポーネントやアドオンがデプロイされるNameSpace&#xA;Dashboardやアドオンなど&#xA;kube-public 全ユーザが利用できるConfigMapなどを配置するNameSpace&#xA;kube-node-lease ノードのハードビート情報が保存されるNameSpace&#xA;default デフォルトのNamespace&#xA;参考 青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ </description>
+      <description></description>
     </item>
     <item>
       <title>dockerファイルの命令文</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
       <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid>
-      <description>FROM ベースイメージを指定&#xA;LABEL コンテナイメージのメタデータを指定&#xA;USER コマンドの実行ユーザーを指定&#xA;WORKDIR コマンドを実行する作業ディレクトリを指定&#xA;EXPOSE コンテナ起動時に公開するポートを指定&#xA;COPY ローカルにあるファイルをコンテナにコピーして配置&#xA;RUN ビルド時にコンテナ上でコマンドを実行する命令&#xA;ENTRYPOINT コンテナ起動時に実行するデフォルトコマンド&#xA;CMD コンテナ起動時に実行するデフォルトコマンドの引数 →「$ENTRYPOINT $CMD」という形で実行される&#xA;参考 青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ </description>
+      <description></description>
     </item>
     <item>
       <title>Kubernetesをローカル環境に構築する</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link>
       <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid>
-      <description>Kubernetes(k8s)とは コンテナ化されたアプリケーションのデプロイ、スケーリングなどの管理を自動化するプラットフォーム。 k8sでは、コンテナが起動するノードをk8sノードと呼び、それらを管理するノードk8sマスターと呼ぶ。ノードの集合体がk8sクラスターである。&#xA;Minikube MinikubeはSIG-Cluster-Lifecycleで作られた簡単にローカルにk8sクラスターを構築・実行できるツールである。 Minikubeではローカルの仮装マシン上にk8sをインストールするため、ハイパーバイザーが必要となる。&#xA;ハイパーバイザーごとに応じたDriverを使用して操作することで、自動的にホストとなるコンテナや仮想マシンを作成し、 その環境上にk8sをインストールする。&#xA;macOSにおけるハイパーバイザーにはDocker/HyperKit driver/VirtualBox/Parallels/Vmware/Fusion/Podmanなどがある。&#xA;現状、M1macではdockerしか対応してなさそう、、？&#xA;M1 MacにおけるHyperkitとそれが必要なアプリケーションの利用について Minikubeのインストール $ brew install minikube ==&amp;gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.25.0 ######################################################################## 100.0% ==&amp;gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:e10 ==&amp;gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh ######################################################################## 100.0% ==&amp;gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/manifests/1.26.1 ######################################################################## 100.0% ==&amp;gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/blobs/sha256:ae9660e6a ==&amp;gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh ######################################################################## 100.0% ==&amp;gt; Installing dependencies for minikube: kubernetes-cli ==&amp;gt; Installing minikube dependency: kubernetes-cli ==&amp;gt; Pouring kubernetes-cli--1.25.0.arm64_monterey.bottle.tar.gz 🍺 /opt/homebrew/Cellar/kubernetes-cli/1.25.0: 228 files, 52.8MB ==&amp;gt; Installing minikube ==&amp;gt; Pouring minikube--1.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

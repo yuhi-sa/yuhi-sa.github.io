@@ -4,7 +4,7 @@
     <title>Vim on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/vim/</link>
     <description>Recent content in Vim on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 30 Dec 2022 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link>
       <pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20221230_vim/1/</guid>
-      <description>Vimの基本操作 モード切り替え i：インサートモード etc：ノーマルモード view：ビューモード ノーマルモードでの移動 k：↑に移動 j：↓に移動 h：←に移動 l：→に移動 {：段落ごとに上に移動 }：段落ごとに下に移動 gg：ファイルの先頭に移動 終了 :w：上書き保存 :q：編集終了 :q!：保存しないで終了 :wq：保存して終了 ノーマルモードでの操作 x：一文字削除 dd：一行削除 dw：単語削除 2 dd：二行削除 u：undo control+r：undo redo yy：一行コピー p：下にペースト P：現在行にペースト 2yy：2行コピー .：Repeat 検索や置換 /{検索内容}：検索 n：次の検索結果に移動 N：前の検索結果に移動 %s/{置換前}/{置換後}/g：一括置換 %s/{置換前}/{置換後}/gc：一括置換 その他 o：下に空白を入れてインサートモード O：選択行に空白を入れてインsタートモード J：行の連結 Vimのプラグイン Vim Plug vimのプラグインマネージャー https://github.com/junegunn/vim-plug vim horizon vimの色合いを変更するプラグイン https://github.com/ntk148v/vim-horizon Nerd tree ディレクトリツリーを表示するプラグイン https://github.com/preservim/nerdtree FZF ファイルの検索ができるプラグイン https://github.com/junegunn/fzf Vim-fugitive Gitのコミット履歴が簡単に確認できるプラグイン https://github.com/tpope/vim-fugitive vim-gitgutter Gitの変更差分を表示できるプラグイン https://github.com/airblade/vim-gitgutter Vim-commentary gccコマンドでコメントアウトできるプラグイン https://github.com/tpope/vim-commentary Coc-nvim コードの補完ができるプラグイン https://github.com/neoclide/coc.nvim 設定ファイル set shell=/bin/zsh set shiftwidth=4 set tabstop=4 set expandtab set textwidth=0 set autoindent set hlsearch set clipboard=unnamed syntax on call plug#begin() Plug &amp;#39;ntk148v/vim-horizon&amp;#39; Plug &amp;#39;preservim/nerdtree&amp;#39; Plug &amp;#39;junegunn/fzf&amp;#39;, { &amp;#39;do&amp;#39;: { -&amp;gt; fzf#install() } } Plug &amp;#39;neoclide/coc.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

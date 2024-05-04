@@ -4,7 +4,7 @@
     <title>Algorithm on tomato blog</title>
     <link>https://yuhi-sa.github.io/en/tags/algorithm/</link>
     <description>Recent content in Algorithm on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 23 Dec 2020 15:17:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/en/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
@@ -13,21 +13,21 @@
       <link>https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/</link>
       <pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/</guid>
-      <description>Key generation Generate an elliptic curve $E/F_p$ and a Baze point $G$ of rank $l$. ($p,l$ are prime numbers) Generate the secret key $x$ by random numbers and compute $Y=xG$ on $E$. Secret key $x$, open key $E,G,Y$&#xA;Encryption Let $m$ be the message to be sent.&#xA;Generate $r$ as a random number and compute $U=rG=(u_x,u_y)$. Using the public key $Y$,&#xA;compute $V = xU =(v_x,v_y)$ and $c=v_x\oplus m$.&#xA;The $\oplus$ is an exclusive or.</description>
+      <description></description>
     </item>
     <item>
       <title>Python program for exponentiation calculation using binary method</title>
       <link>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</link>
       <pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</guid>
-      <description>Binary method To calculate $x=a^k$, it would require $k$ multiplications. However, to efficiently calculate it, we can calculate $a^{2^i}$ sequentially, which reduces the number of calculations to $log(k)$ times. This is called the binary method, which is used in exponentiation calculations such as for RSA decryption.&#xA;Example To calculate $5^{21}$, it can be expanded as follows:&#xA;$5^{21}=5^{2^4}*5^{2^2}*5^{2^0}$&#xA;By expanding it into binary and calculating from left to right, the calculation can be executed using the binary representation of $21$, which is $10101$ in binary.</description>
+      <description></description>
     </item>
     <item>
       <title>Euclidean Algorithm and Extended Euclidean Algorithm in Python</title>
       <link>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</link>
       <pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</guid>
-      <description>Euclidean Algorithm The Euclidean algorithm is a method for finding the greatest common divisor (GCD) of two integers $a$ and $b$ $(a&amp;gt;b)$ by repeatedly dividing $a$ by the remainder $r$ of $a$ divided by $b$ using the division algorithm.&#xA;Algorithm Inputs: Integers $a$ and $b$. Output: GCD $d$.&#xA;Set $a_0=a$ and $a_1=b$. If $a_i=0$, set $d=a_{i-1}$ and terminate. Determine $a_{i+1}$ and $q_i$ from $a_{i-1}=a_iq_i+a_{i+1}$ and return to step 2. Python code def euclid(a,b): a_list = [] if a &amp;lt; b: a_list.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

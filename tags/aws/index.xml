@@ -4,7 +4,7 @@
     <title>AWS on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/aws/</link>
     <description>Recent content in AWS on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Thu, 20 Apr 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</link>
       <pubDate>Thu, 20 Apr 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</guid>
-      <description>概要 以下のイベントに参加してきた。&#xA;10:30に行ったら、わりとスムーズに中に入れた。10:00までに行くと特典があってTwitterで見てた感じ、混んでたよう。&#xA;イベント名：AWS Summit Tokyo 日付：2023年4月20日、21日 場所：幕張メッセ 入り口 受講票を印刷して持ってきてくださいと言われていて、なぜ印刷なんだろうと思っていたが、名札に入れるためのようだった。(忘れてもその場で印刷してもらえる。) ここにのっているQRコード読み込んでセミナーとかの管理をしてた。&#xA;基調講演 ブース わりと1対1で話が聞けて勉強になった。&#xA;セミナー トランシーバーで話を聞くセミナー初めてだった。予約では満員になっていたセミナーでも当日入場で普通に入れた。&#xA;グッズ ブースを巡ってたら色々もらえた。&#xA;野村総合研究所&#xA;クラウドストライク&#xA;AWS&#xA;PagerDuty&#xA;Dynatrace&#xA;denode&#xA;vmware&#xA;beepplus</description>
+      <description></description>
     </item>
     <item>
       <title>Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</title>
       <link>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</link>
       <pubDate>Sun, 20 Feb 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</guid>
-      <description>AWSのセットアップ AWSに登録 https://aws.amazon.com/ IAMユーザーコンソールを開く グループを作成 # サンプル グループ名：admin ポリシー：AdoministratorAccess ユーザーの追加&#xA;アクセスキーIDとシークレットアクセスキーをメモ シークレットアクセスキーはこの時しか表示されない Python環境のセットアップ AWS CLIをインストール&#xA;$ pip install awscli アクセスキーを設定&#xA;$ aws configure 設定事項&#xA;AWS Access Key ID [****************]: [アクセスキーID] AWS Secret Access Key [************]: [アクセスキーID] Default region name [ap-northeast-1]: ap-northeast-1 Default output format [json]: json Boto3をインストール&#xA;$ pip install boto3 その他&#xA;以下のコマンドでアクセスキーIDとアクセスキーIDを確認できる&#xA;$ aws configure get aws_access_key_id $ aws configure get aws_secret_access_key S3(Simple Storage Service)の起動 バケットの作成 import boto3 import random s3 = boto3.</description>
+      <description></description>
     </item>
   </channel>
 </rss>

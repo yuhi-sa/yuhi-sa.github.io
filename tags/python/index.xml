@@ -4,7 +4,7 @@
     <title>Python on tomato blog</title>
     <link>https://yuhi-sa.github.io/tags/python/</link>
     <description>Recent content in Python on tomato blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
@@ -13,35 +13,35 @@
       <link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link>
       <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid>
-      <description>WSGI (Web Server Gateway Interface) を用いてWeb サーバを起動する from wsgiref.simple_server import make_server import json PORT = 8081 SETTING = [{&amp;#34;PATH&amp;#34;:&amp;#34;/api/1&amp;#34;,&amp;#34;VALUE&amp;#34;: {&amp;#34;items&amp;#34;:[ {&amp;#34;item1&amp;#34;:&amp;#34;test1&amp;#34;}, {&amp;#34;item2&amp;#34;:&amp;#34;test2&amp;#34;} ]}}, {&amp;#34;PATH&amp;#34;:&amp;#34;/api/2&amp;#34;,&amp;#34;VALUE&amp;#34;: {&amp;#34;items2&amp;#34;:[ {&amp;#34;itemA&amp;#34;:&amp;#34;test1&amp;#34;}, {&amp;#34;itemB&amp;#34;:&amp;#34;test2&amp;#34;} ]}} ] def app(environ, start_response): path = environ[&amp;#34;PATH_INFO&amp;#34;] for setting in SETTING: if path.startswith(setting[&amp;#34;PATH&amp;#34;]): status = &amp;#39;200 OK&amp;#39; headers = [ (&amp;#39;Content-type&amp;#39;, &amp;#39;application/json; charset=utf-8&amp;#39;), (&amp;#39;Access-Control-Allow-Origin&amp;#39;, &amp;#39;*&amp;#39;), ] start_response(status, headers) return [json.dumps( setting[&amp;#34;VALUE&amp;#34;] ).encode(&amp;#34;utf-8&amp;#34;)] if __name__ == &amp;#34;__main__&amp;#34;: httpd = make_server(&amp;#39;&amp;#39;, PORT, app) httpd.serve_forever() 参考 標準ライブラリの範囲でpythonでweb APIのmock serverが欲しくなった場合 wsgiref &amp;mdash; WSGI ユーティリティとリファレンス実装 </description>
+      <description></description>
     </item>
     <item>
       <title>Pythonのmatplotで三次元動画を作成するプログラム</title>
       <link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid>
-      <description>import numpy as np import matplotlib.pyplot as plt import seaborn as sns import math import matplotlib.animation as animation from mpl_toolkits.mplot3d import Axes3D def makeAnimetion(data): print(&amp;#34;make Flame&amp;#34;) fig = plt.figure() ax = fig.add_subplot(111, projection=&amp;#39;3d&amp;#39;) # label ax.set_xlabel(&amp;#39;time&amp;#39;) ax.set_ylabel(&amp;#39;x&amp;#39;) ax.set_zlabel(&amp;#39;y&amp;#39;) # dimention ax.set_ylim(-3,3) ax.set_zlim(-3,3) ims = [] for i in range(len(data)): bar = str(round(i*100/len(data))) + &amp;#34;%&amp;#34; print(&amp;#34;\r&amp;#34;+bar,end=&amp;#34;&amp;#34;) X,Y,Z = data[i] im = ax.plot(X,Y,Z, marker=&amp;#34;o&amp;#34;,color = &amp;#34;red&amp;#34;, linestyle=&amp;#39;None&amp;#39;) ims.append(im) print(&amp;#34;&amp;#34;) print(&amp;#34;make Animation&amp;#34;) ani = animation.</description>
+      <description></description>
     </item>
     <item>
       <title>PyenvとAnacondaを用いたPython環境の設定</title>
       <link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid>
-      <description>1. Homebrewのインストール Homebrewとは macOSオペレーティングシステム上のパッケージ管理システム．&#xA;インストール方法&#xA;ターミナルを開く 下記スクリプトをターミナルで実行 $ /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&amp;#34; インストールが進み，[Installation Success]と表示されたらインストール完了． 使い方&#xA;brew update: 更新&#xA;brew upgrade: 更新を実行&#xA;brew list: インストール済みのパッケージを見る&#xA;brew install [パッケージ名]: インストール&#xA;brew uninstall [パッケージ名]: アンインストール&#xA;brew info [パッケージ名]: 情報を見る&#xA;2. pyenvのインストール pyenvとは Pythonの複数のバージョンを使い分けるコマンドラインツール． インストール方法 Homebrewでpyenvをインストールする． brew install pyenv pathを通す $ echo &amp;#39;export PYENV_ROOT=&amp;#34;$HOME/.pyenv&amp;#34;&amp;#39; &amp;gt;&amp;gt; ~/.bash_profile $ echo &amp;#39;export PATH=&amp;#34;$PYENV_ROOT/bin:$PATH&amp;#34;&amp;#39; &amp;gt;&amp;gt; ~/.bash_profile $ echo &amp;#39;eval &amp;#34;$(pyenv init -)&amp;#34;&amp;#39; &amp;gt;&amp;gt; ~/.bash_profile パスを通す：実行ファイルの場所を教えること． echo： 「echo 文字 &amp;raquo; テキストファイル」で，テキストファイルに文字を追記するコマンド． bash_profile：ターミナル実行時に自動的に読まれるスクリプトが記述されている環境設定ファイル． 3.</description>
+      <description></description>
     </item>
     <item>
       <title>pythonでprintの上書きをする方法</title>
       <link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link>
       <pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid>
-      <description>一行上書きする場合 print(&amp;#34;\r&amp;#34;+&amp;#34;一行上書きするよ！&amp;#34;,end=&amp;#34;&amp;#34;) n行上書きする場合 print(&amp;#34;n行上書きするよ！&amp;#34;+&amp;#34;\033[nA&amp;#34;) </description>
+      <description></description>
     </item>
     <item>
       <title>Pythonによる2進数変換と論理演算(or,xor)</title>
       <link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link>
       <pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210329_bin/1/</guid>
-      <description>2進数変換 def binBin(num1,num2): binNum1 = list(bin(num1)) binNum1.pop(0) binNum1.pop(0) binNum2 = list(bin(num2)) binNum2.pop(0) binNum2.pop(0) while(len(binNum1) != len(binNum2)): if len(binNum1) &amp;lt; len(binNum2): binNum1.insert(0,0) elif len(binNum2) &amp;lt; len(binNum1): binNum1.insert(0,0) return binNum1, binNum2 10進数変換 def binNum(binNum): Num = 0 for i in range(len(binNum)): if int(binNum[len(binNum)-i-1]) == 1: Num += pow(2,i) return Num or計算 def orCal(num1,num2): binNum1, binNum2 = binBin(num1,num2) orValue = [] for i in range(len(binNum1)): if int(binNum1[i]) == 1 or int(binNum2[i]) == 1: orValue.</description>
+      <description></description>
     </item>
   </channel>
 </rss>
