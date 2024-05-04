@@ -16,6 +16,13 @@
       <description></description>
     </item>
     <item>
+      <title>Spark SQLを並列実行するとview表の名前空間は衝突するのか</title>
+      <link>https://yuhi-sa.github.io/posts/202405004_spark_view/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/202405004_spark_view/1/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>2024年目標</title>
       <link>https://yuhi-sa.github.io/posts/todo/</link>
       <pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate>
