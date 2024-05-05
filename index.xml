@@ -6,8 +6,15 @@
     <description>Recent content on tomato blog</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 03 May 2024 10:10:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Typescriptにおいてnever型を使ってswitch文の網羅性を保証する</title>
+      <link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link>
+      <pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid>
+      <description>Typescriptにおいてnever型を使ってswitch文の網羅性を保証する union型に対してswich文を使う場合は、網羅性の保証が重要となります。&#xA;網羅性の保証方法として、default句にnever型を代入する方法があります。&#xA;never型は「値を持たない」を意味するTypeScriptの特別な型です。&#xA;詳しくはhttps://typescriptbook.jp/reference/statements/never&#xA;簡単に言い換えると「あり得ない」ことを表す型です。&#xA;こちらがサンプル実装となります。&#xA;type Sample = &amp;#34;A&amp;#34; | &amp;#34;B; function testFunc(sample: Sample): void { switch (sample) { case &amp;#34;A&amp;#34;: console.log(sample); break; case &amp;#34;B&amp;#34;: console.log(sample); break; default: // 網羅性をチェック const _: never = sample; } } このコードがビルドに成功するということはTypeScriptの型検査器によって「このdefault節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。 (たとえば、 case “B”:のコードを消すとエラーになります。)&#xA;この方法を取ることにより、Union型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。 将来Union型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。&#xA;参考 Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社. </description>
+    </item>
     <item>
       <title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title>
       <link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link>
