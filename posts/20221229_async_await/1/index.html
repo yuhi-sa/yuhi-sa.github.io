@@ -1,97 +1,336 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数) | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=javascriptの非同期処理コールバック地獄promiseasync関数>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</h1><h2 id=javascriptで非同期処理が重要な理由>JavaScriptで非同期処理が重要な理由</h2><h3 id=シングルスレッド>シングルスレッド</h3><p>JavaScriptはシングルスレッドで動作する。そのため一度に実行できるタスクは1つだけとなる。
-JavaScriptは、レイアウト・再フロー・ガベージコレクションなどと同じスレッドで実行される。</p><p>そのため、JavaScript関数がスレッドを占有すると、ページの反応が悪くなるという問題が発生する。
-この問題を非同期関数を用いて緩和する。</p><h4 id=参考>参考</h4><ul><li><a href=https://developer.mozilla.org/ja/docs/Web/JavaScript>JavaScript | MDN</a></li><li><a href=https://developer.mozilla.org/ja/docs/Glossary/Main_thread>Main thread (メインスレッド) | MDN</a></li><li><a href=https://jsprimer.net/basic/async/>非同期処理:Promise/Async Function | jsprimer</a></li></ul><h3 id=非同期関数>非同期関数</h3><p>非同期処理はコードを順番に処理するが、1つの非同期処理が終わるのを待たずに次の処理を行う。
-これにより複数の処理を並列に実行している。</p><h4 id=イベントループ>イベントループ</h4><p>JavaScriptエンジン(v8など)は、非同期関数をイベントループを用いて実行する。
-JavaScriptエンジンは、主に以下の3つによって構成されている。</p><h4 id=javascriptエンジン>Javascriptエンジン</h4><ul><li>ヒープ領域：動的に確保と解放を繰り返せるメモリ領域</li><li>コールスタック：LIFOで呼び出された関数を保存する領域。格納された関数は順次処理される。</li></ul><h4 id=webapis>WebAPIs</h4><p>ブラウザに搭載されている各種API(DOM, Ajax, timerなど)</p><h4 id=イベントキュータスクキュー>イベントキュー/タスクキュー</h4><p>FIFOで、Web APIから受け取ったCallback関数を保存する</p><p>イベントループは以下の流れで非同期処理を実現する。</p><ol><li>コールスタックとイベントキューを監視し、コールスタックが空になったら、イベントキューの作業を順番にコールスタックに移動させる。</li><li>JavaScriptがメモリ上に展開され、コールスタックで実行される。</li><li>Web APIsから提供されているAPIを呼び出すと、Web APIsの実行環境で処理が実行する。</li><li>非同期関数の呼び出しの場合、Web APIsの実行環境内で、条件を満たすまで待機し、条件を満たすとイベントキューに格納される。</li></ol><h4 id=参考-1>参考</h4><ul><li><a href=https://zenn.dev/redpanda/articles/ef719c7e592327>非同期処理 (1):Javascriptの動作の流れ (JS エンジン/Call Stack/Event Queue) | Zenn</a></li><li><a href=https://qiita.com/hirokikondo86/items/226905890944603dba39>JavaScriptのイベントループを理解する | Qiita</a></li><li><a href=https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/>JavaScriptがブラウザでどのように動くのか | mercari engineering</a></li></ul><h3 id=非同期関数の例>非同期関数の例</h3><p>たとえば、処理を一時停止させる場合はsetTimeout関数を利用して実現する方法がある。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// setTimeout(&#39;コールバック関数&#39;, &#39;タイムアウト時間&#39;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>function callback(){
-</span></span><span class=line><span class=cl>    console.log(&#39;test&#39;)
-</span></span><span class=line><span class=cl>}
-</span></span></code></pre></div><p>非同期処理が複数重なると、コールバック地獄になり、ネストが深く処理が追いづらくなる。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>setTimeout(callback, 1)
-</span></span><span class=line><span class=cl>setTimeout(() =&gt; {
-</span></span><span class=line><span class=cl>    console.log(1)
-</span></span><span class=line><span class=cl>    setTimeout(() =&gt; {
-</span></span><span class=line><span class=cl>        console.log(2)
-</span></span><span class=line><span class=cl>        setTimeout(() =&gt; {
-</span></span><span class=line><span class=cl>            console.log(3)
-</span></span><span class=line><span class=cl>        }, 3)
-</span></span><span class=line><span class=cl>    }, 2)
-</span></span><span class=line><span class=cl>}, 1)
-</span></span></code></pre></div><p>この問題をPromiseを用いることで緩和する。</p><h4 id=参考-2>参考</h4><ul><li><a href=https://developer.mozilla.org/ja/docs/Web/API/setTimeout>setTimeout()-WebAPI | MDN</a></li><li><a href=https://qiita.com/knaot0/items/af0a38cc916176cdd50f>【JS】setTimeoutを用いた、非同期処理入門 | Qiita</a></li><li><a href=https://techblog.yahoo.co.jp/programming/js_callback/>JavaScriptとコールバック地獄 | Yahoo! JAPAN Tech Blog</a></li><li><a href=https://www.tohoho-web.com/ex/promise.html>とほほのPromise入門</a></li><li><a href=https://dev.classmethod.jp/articles/javascript-sleep-set-timeout-to-promise/>[JavaScript]sleep(setTimeout)をPromise化する | DevelopersIO</a></li></ul><h2 id=promiseオブジェクトes2015>Promiseオブジェクト[ES2015]</h2><p>PromiseはES2015で導入された非同期処理の状態や結果を表現するビルトインオブジェクトである。
-非同期処理はPromiseのインスタンスを返し、そのPromiseインスタンスには状態変化をした際に呼び出されるコールバック関数を登録できる。</p><h3 id=使い方>使い方</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// asyncPromiseTask関数は、Promiseインスタンスを返す
-</span></span><span class=line><span class=cl>function asyncPromiseTask() {
-</span></span><span class=line><span class=cl>    return new Promise((resolve, reject) =&gt; {
-</span></span><span class=line><span class=cl>        // ここが非同期処理
-</span></span><span class=line><span class=cl>        // 成功時はresolve関数を呼ぶ
-</span></span><span class=line><span class=cl>        // 失敗時はrejectを関数呼ぶ
-</span></span><span class=line><span class=cl>    });
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>// thenメソッドで、Promiseがresolve（成功）、reject（失敗）したときに呼ばれるコールバック関数を登録できる。
-</span></span><span class=line><span class=cl>asyncPromiseTask().then(()=&gt; {
-</span></span><span class=line><span class=cl>    // 成功したときの処理
-</span></span><span class=line><span class=cl>}).catch(() =&gt; {
-</span></span><span class=line><span class=cl>    // 失敗したときの処理
-</span></span><span class=line><span class=cl>});
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数) | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="javascriptの非同期処理コールバック地獄promiseasync関数">JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</h1>
+<h2 id="javascriptで非同期処理が重要な理由">JavaScriptで非同期処理が重要な理由</h2>
+<h3 id="シングルスレッド">シングルスレッド</h3>
+<p>JavaScriptはシングルスレッドで動作する。そのため一度に実行できるタスクは1つだけとなる。
+JavaScriptは、レイアウト・再フロー・ガベージコレクションなどと同じスレッドで実行される。</p>
+<p>そのため、JavaScript関数がスレッドを占有すると、ページの反応が悪くなるという問題が発生する。
+この問題を非同期関数を用いて緩和する。</p>
+<h4 id="参考">参考</h4>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript">JavaScript | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Glossary/Main_thread">Main thread (メインスレッド) | MDN</a></li>
+<li><a href="https://jsprimer.net/basic/async/">非同期処理:Promise/Async Function | jsprimer</a></li>
+</ul>
+<h3 id="非同期関数">非同期関数</h3>
+<p>非同期処理はコードを順番に処理するが、1つの非同期処理が終わるのを待たずに次の処理を行う。
+これにより複数の処理を並列に実行している。</p>
+<h4 id="イベントループ">イベントループ</h4>
+<p>JavaScriptエンジン(v8など)は、非同期関数をイベントループを用いて実行する。
+JavaScriptエンジンは、主に以下の3つによって構成されている。</p>
+<h4 id="javascriptエンジン">Javascriptエンジン</h4>
+<ul>
+<li>ヒープ領域：動的に確保と解放を繰り返せるメモリ領域</li>
+<li>コールスタック：LIFOで呼び出された関数を保存する領域。格納された関数は順次処理される。</li>
+</ul>
+<h4 id="webapis">WebAPIs</h4>
+<p>ブラウザに搭載されている各種API(DOM, Ajax, timerなど)</p>
+<h4 id="イベントキュータスクキュー">イベントキュー/タスクキュー</h4>
+<p>FIFOで、Web APIから受け取ったCallback関数を保存する</p>
+<p>イベントループは以下の流れで非同期処理を実現する。</p>
+<ol>
+<li>コールスタックとイベントキューを監視し、コールスタックが空になったら、イベントキューの作業を順番にコールスタックに移動させる。</li>
+<li>JavaScriptがメモリ上に展開され、コールスタックで実行される。</li>
+<li>Web APIsから提供されているAPIを呼び出すと、Web APIsの実行環境で処理が実行する。</li>
+<li>非同期関数の呼び出しの場合、Web APIsの実行環境内で、条件を満たすまで待機し、条件を満たすとイベントキューに格納される。</li>
+</ol>
+<h4 id="参考-1">参考</h4>
+<ul>
+<li><a href="https://zenn.dev/redpanda/articles/ef719c7e592327">非同期処理 (1):Javascriptの動作の流れ (JS エンジン/Call Stack/Event Queue) | Zenn</a></li>
+<li><a href="https://qiita.com/hirokikondo86/items/226905890944603dba39">JavaScriptのイベントループを理解する | Qiita</a></li>
+<li><a href="https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/">JavaScriptがブラウザでどのように動くのか | mercari engineering</a></li>
+</ul>
+<h3 id="非同期関数の例">非同期関数の例</h3>
+<p>たとえば、処理を一時停止させる場合はsetTimeout関数を利用して実現する方法がある。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// setTimeout(&#39;コールバック関数&#39;, &#39;タイムアウト時間&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">function callback(){
+</span></span><span class="line"><span class="cl">    console.log(&#39;test&#39;)
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>非同期処理が複数重なると、コールバック地獄になり、ネストが深く処理が追いづらくなる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">setTimeout(callback, 1)
+</span></span><span class="line"><span class="cl">setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">    console.log(1)
+</span></span><span class="line"><span class="cl">    setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">        console.log(2)
+</span></span><span class="line"><span class="cl">        setTimeout(() =&gt; {
+</span></span><span class="line"><span class="cl">            console.log(3)
+</span></span><span class="line"><span class="cl">        }, 3)
+</span></span><span class="line"><span class="cl">    }, 2)
+</span></span><span class="line"><span class="cl">}, 1)
+</span></span></code></pre></div><p>この問題をPromiseを用いることで緩和する。</p>
+<h4 id="参考-2">参考</h4>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/setTimeout">setTimeout()-WebAPI | MDN</a></li>
+<li><a href="https://qiita.com/knaot0/items/af0a38cc916176cdd50f">【JS】setTimeoutを用いた、非同期処理入門 | Qiita</a></li>
+<li><a href="https://techblog.yahoo.co.jp/programming/js_callback/">JavaScriptとコールバック地獄 | Yahoo! JAPAN Tech Blog</a></li>
+<li><a href="https://www.tohoho-web.com/ex/promise.html">とほほのPromise入門</a></li>
+<li><a href="https://dev.classmethod.jp/articles/javascript-sleep-set-timeout-to-promise/">[JavaScript]sleep(setTimeout)をPromise化する | DevelopersIO</a></li>
+</ul>
+<h2 id="promiseオブジェクトes2015">Promiseオブジェクト[ES2015]</h2>
+<p>PromiseはES2015で導入された非同期処理の状態や結果を表現するビルトインオブジェクトである。
+非同期処理はPromiseのインスタンスを返し、そのPromiseインスタンスには状態変化をした際に呼び出されるコールバック関数を登録できる。</p>
+<h3 id="使い方">使い方</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// asyncPromiseTask関数は、Promiseインスタンスを返す
+</span></span><span class="line"><span class="cl">function asyncPromiseTask() {
+</span></span><span class="line"><span class="cl">    return new Promise((resolve, reject) =&gt; {
+</span></span><span class="line"><span class="cl">        // ここが非同期処理
+</span></span><span class="line"><span class="cl">        // 成功時はresolve関数を呼ぶ
+</span></span><span class="line"><span class="cl">        // 失敗時はrejectを関数呼ぶ
+</span></span><span class="line"><span class="cl">    });
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">// thenメソッドで、Promiseがresolve（成功）、reject（失敗）したときに呼ばれるコールバック関数を登録できる。
+</span></span><span class="line"><span class="cl">asyncPromiseTask().then(()=&gt; {
+</span></span><span class="line"><span class="cl">    // 成功したときの処理
+</span></span><span class="line"><span class="cl">}).catch(() =&gt; {
+</span></span><span class="line"><span class="cl">    // 失敗したときの処理
+</span></span><span class="line"><span class="cl">});
 </span></span></code></pre></div><p>非同期関数では関数を実行してもすぐには結果がわからない。
-そのため、Promiseという非同期処理の状態をラップしたオブジェクトを返し、その結果が決まったら登録しておいたコールバック関数へ結果を渡すという仕組みとなっている。</p><h4 id=引数の省略>引数の省略</h4><p>Promiseのthenメソッドは成功と失敗のコールバック関数の2つを受け取るが、どちらの引数も省略できる。</p><h5 id=成功のみのパターン>成功のみのパターン</h5><div class=highlight><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=o>//</span><span class=w> </span><span class=o>`</span><span class=k>then</span><span class=o>`</span><span class=err>メソッドで成功時のコールバック関数だけを登録</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nf>asyncPromiseTask</span><span class=p>().</span><span class=k>then</span><span class=p>(()</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=err>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>console</span><span class=p>.</span><span class=nf>log</span><span class=p>(</span><span class=s2>&#34;成功時のコールバック&#34;</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=err>}</span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></div><h5 id=失敗のみのパターン>失敗のみのパターン</h5><div class=highlight><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=o>//</span><span class=w> </span><span class=err>非推奨</span><span class=p>:</span><span class=w> </span><span class=o>`</span><span class=k>then</span><span class=o>`</span><span class=err>メソッドで失敗時のコールバック関数だけを登録</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nf>errorPromise</span><span class=p>(</span><span class=s2>&#34;thenでエラーハンドリング&#34;</span><span class=p>).</span><span class=k>then</span><span class=p>(</span><span class=n>undefined</span><span class=p>,</span><span class=w> </span><span class=p>(</span><span class=n>error</span><span class=p>)</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=err>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>console</span><span class=p>.</span><span class=nf>log</span><span class=p>(</span><span class=n>error</span><span class=p>.</span><span class=n>message</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=err>}</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=o>//</span><span class=w> </span><span class=err>推奨</span><span class=p>:</span><span class=w> </span><span class=o>`</span><span class=n>catch</span><span class=o>`</span><span class=err>メソッドで失敗時のコールバック関数を登録</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nf>errorPromise</span><span class=p>(</span><span class=s2>&#34;catchでエラーハンドリング&#34;</span><span class=p>).</span><span class=nf>catch</span><span class=p>(</span><span class=n>error</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=err>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>console</span><span class=p>.</span><span class=nf>log</span><span class=p>(</span><span class=n>error</span><span class=p>.</span><span class=n>message</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=err>}</span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></div><h3 id=promiseの状態>Promiseの状態</h3><p>Promiseインスタンスには、内部的に次の3つの状態が存在する。</p><ul><li>Fulfilled：成功したときの状態</li><li>Rejected：失敗または例外が発生した状態</li><li>Pending：FulfilledまたはRejectedではない状態</li></ul><p>一度でもFulfilledかRejectedとなったPromiseインスタンスは、それ以降別の状態には変化しない。
-そのため、以下のような挙動となる。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=k>const</span> <span class=n>promise</span> <span class=o>=</span> <span class=n>new</span> <span class=n>Promise</span><span class=p>((</span><span class=n>resolve</span><span class=p>,</span> <span class=n>reject</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>setTimeout</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>	 	<span class=o>//</span> <span class=err>非同期で</span><span class=n>resolveする</span>
-</span></span><span class=line><span class=cl>        <span class=n>resolve</span><span class=p>();</span>
-</span></span><span class=line><span class=cl>        <span class=o>//</span> <span class=err>すでに</span><span class=n>resolveされているため無視される</span>
-</span></span><span class=line><span class=cl>        <span class=n>reject</span><span class=p>(</span><span class=n>new</span> <span class=n>Error</span><span class=p>(</span><span class=s2>&#34;エラー&#34;</span><span class=p>));</span>
-</span></span><span class=line><span class=cl>		<span class=o>//</span> <span class=err>二度目以降の</span><span class=n>resolveやrejectは無視される</span>
-</span></span><span class=line><span class=cl>		<span class=n>resolve</span><span class=p>();</span>
-</span></span><span class=line><span class=cl>    <span class=p>},</span> <span class=mi>16</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=p>});</span>
-</span></span><span class=line><span class=cl><span class=n>promise</span><span class=o>.</span><span class=n>then</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=s2>&#34;Fulfilledとなった&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=p>},</span> <span class=p>(</span><span class=n>error</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=o>//</span> <span class=err>この行は呼び出されない</span>
-</span></span><span class=line><span class=cl><span class=p>});</span>
-</span></span></code></pre></div><h3 id=promiseチェーン>Promiseチェーン</h3><p>複数の非同期処理を順番に扱いたい場合に利用するのがPromiseチェーンである。
-thenやcatchメソッドは常に新しいPromiseインスタンスを返すため、thenメソッドの返り値にさらにthenメソッドで処理を登録できる。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=o>//</span><span class=w> </span><span class=n>Promiseインスタンスでメソッドチェーン</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=n>Promise</span><span class=p>.</span><span class=nf>resolve</span><span class=p>()</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=o>//</span><span class=w> </span><span class=n>thenメソッドは新しい</span><span class=o>`</span><span class=n>Promise</span><span class=o>`</span><span class=err>インスタンスを返す</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>.</span><span class=k>then</span><span class=p>(()</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=err>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>console</span><span class=p>.</span><span class=nf>log</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=err>}</span><span class=p>)</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>.</span><span class=k>then</span><span class=p>(()</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=err>{</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=n>console</span><span class=p>.</span><span class=nf>log</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=err>}</span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></div><h3 id=promiseの問題点>Promiseの問題点</h3><p>Promiseには以下のような問題点が存在する。</p><ul><li>非同期処理間の連携をするにはPromiseチェーンのように少し特殊な書き方や見た目となる。</li><li>エラーハンドリングでは、catchメソッドやfinallyメソッドなどtry&mldr;catch構文とよく似た名前を使う。</li><li>Promiseは構文ではなくただのオブジェクトであるため、メソッドチェーンとして実現しないといけない。</li></ul><p>この問題をAsync関数を利用することで緩和する。</p><h3 id=参考-3>参考</h3><ul><li><a href=https://typescriptbook.jp/reference/promise-async-await>Promise/async/await|サバイバルTypeScript</a></li><li><a href=https://typescript-jp.gitbook.io/deep-dive/future-javascript/promise>Promise|TypeScript Deep Dive 日本語版</a></li><li><a href=https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises>プロミスの使用 | MDN</a></li><li><a href=https://zenn.dev/mizchi/articles/understanding-promise-by-ts-eventloop>イベントループとTypeScriptの型から理解する非同期処理 | Zenn</a></li></ul><h2 id=async関数es2017>Async関数[ES2017]</h2><p>Async関数は必ずPromiseインスタンスを返す関数である。関数の前にasyncをつけることで定義できる。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>async function doAsync() {
-</span></span><span class=line><span class=cl>    return &#34;値&#34;;
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>// 以下と同等の意味
-</span></span><span class=line><span class=cl>function doAsync() {
-</span></span><span class=line><span class=cl>    return Promise.resolve(&#34;値&#34;);
-</span></span><span class=line><span class=cl>}
-</span></span></code></pre></div><h3 id=await式>await式</h3><p>Async関数内ではawait式というPromiseの非同期処理が完了する(FulfilledになるかRejectedになる)まで待つ構文が利用できる。
-await式を使うことで非同期処理を同期処理のように扱えるため、Promiseチェーンで実現していた処理の流れを読みやすく書ける。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>async function asyncMain() {
-</span></span><span class=line><span class=cl>    // PromiseがFulfilledまたはRejectedとなるまで待つ
-</span></span><span class=line><span class=cl>    await Promiseインスタンス;
-</span></span><span class=line><span class=cl>    // Promiseインスタンスの状態が変わったら処理を再開する
-</span></span><span class=line><span class=cl>}
-</span></span></code></pre></div><p>await式がエラーをthrowするため、try catchが使えるようになる。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>async</span> <span class=n>function</span> <span class=n>asyncMain</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>try</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>const</span> <span class=n>value</span> <span class=o>=</span> <span class=n>await</span> <span class=n>Promise</span><span class=o>.</span><span class=n>reject</span><span class=p>(</span><span class=n>new</span> <span class=n>Error</span><span class=p>(</span><span class=s2>&#34;エラーメッセージ&#34;</span><span class=p>));</span>
-</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=n>catch</span> <span class=p>(</span><span class=n>error</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=n>console</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>error</span><span class=o>.</span><span class=n>message</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div><h3 id=参考-4>参考</h3><ul><li><a href=https://typescriptbook.jp/reference/promise-async-await>Promise/async/await | サバイバルTypeScript</a></li></ul><div><div>Tags:</div><ul><li><a href=/tags/javascript/>Javascript</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+そのため、Promiseという非同期処理の状態をラップしたオブジェクトを返し、その結果が決まったら登録しておいたコールバック関数へ結果を渡すという仕組みとなっている。</p>
+<h4 id="引数の省略">引数の省略</h4>
+<p>Promiseのthenメソッドは成功と失敗のコールバック関数の2つを受け取るが、どちらの引数も省略できる。</p>
+<h5 id="成功のみのパターン">成功のみのパターン</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="o">`</span><span class="k">then</span><span class="o">`</span><span class="err">メソッドで成功時のコールバック関数だけを登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">asyncPromiseTask</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">&#34;成功時のコールバック&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h5 id="失敗のみのパターン">失敗のみのパターン</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="err">非推奨</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="k">then</span><span class="o">`</span><span class="err">メソッドで失敗時のコールバック関数だけを登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">errorPromise</span><span class="p">(</span><span class="s2">&#34;thenでエラーハンドリング&#34;</span><span class="p">).</span><span class="k">then</span><span class="p">(</span><span class="n">undefined</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">error</span><span class="p">.</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">//</span><span class="w"> </span><span class="err">推奨</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="n">catch</span><span class="o">`</span><span class="err">メソッドで失敗時のコールバック関数を登録</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">errorPromise</span><span class="p">(</span><span class="s2">&#34;catchでエラーハンドリング&#34;</span><span class="p">).</span><span class="nf">catch</span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">error</span><span class="p">.</span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h3 id="promiseの状態">Promiseの状態</h3>
+<p>Promiseインスタンスには、内部的に次の3つの状態が存在する。</p>
+<ul>
+<li>Fulfilled：成功したときの状態</li>
+<li>Rejected：失敗または例外が発生した状態</li>
+<li>Pending：FulfilledまたはRejectedではない状態</li>
+</ul>
+<p>一度でもFulfilledかRejectedとなったPromiseインスタンスは、それ以降別の状態には変化しない。
+そのため、以下のような挙動となる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="n">promise</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Promise</span><span class="p">((</span><span class="n">resolve</span><span class="p">,</span> <span class="n">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	 	<span class="o">//</span> <span class="err">非同期で</span><span class="n">resolveする</span>
+</span></span><span class="line"><span class="cl">        <span class="n">resolve</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="err">すでに</span><span class="n">resolveされているため無視される</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reject</span><span class="p">(</span><span class="n">new</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&#34;エラー&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="o">//</span> <span class="err">二度目以降の</span><span class="n">resolveやrejectは無視される</span>
+</span></span><span class="line"><span class="cl">		<span class="n">resolve</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">promise</span><span class="o">.</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&#34;Fulfilledとなった&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">この行は呼び出されない</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="promiseチェーン">Promiseチェーン</h3>
+<p>複数の非同期処理を順番に扱いたい場合に利用するのがPromiseチェーンである。
+thenやcatchメソッドは常に新しいPromiseインスタンスを返すため、thenメソッドの返り値にさらにthenメソッドで処理を登録できる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="o">//</span><span class="w"> </span><span class="n">Promiseインスタンスでメソッドチェーン</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Promise</span><span class="p">.</span><span class="nf">resolve</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">thenメソッドは新しい</span><span class="o">`</span><span class="n">Promise</span><span class="o">`</span><span class="err">インスタンスを返す</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">}</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="k">then</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h3 id="promiseの問題点">Promiseの問題点</h3>
+<p>Promiseには以下のような問題点が存在する。</p>
+<ul>
+<li>非同期処理間の連携をするにはPromiseチェーンのように少し特殊な書き方や見た目となる。</li>
+<li>エラーハンドリングでは、catchメソッドやfinallyメソッドなどtry&hellip;catch構文とよく似た名前を使う。</li>
+<li>Promiseは構文ではなくただのオブジェクトであるため、メソッドチェーンとして実現しないといけない。</li>
+</ul>
+<p>この問題をAsync関数を利用することで緩和する。</p>
+<h3 id="参考-3">参考</h3>
+<ul>
+<li><a href="https://typescriptbook.jp/reference/promise-async-await">Promise/async/await|サバイバルTypeScript</a></li>
+<li><a href="https://typescript-jp.gitbook.io/deep-dive/future-javascript/promise">Promise|TypeScript Deep Dive 日本語版</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises">プロミスの使用 | MDN</a></li>
+<li><a href="https://zenn.dev/mizchi/articles/understanding-promise-by-ts-eventloop">イベントループとTypeScriptの型から理解する非同期処理 | Zenn</a></li>
+</ul>
+<h2 id="async関数es2017">Async関数[ES2017]</h2>
+<p>Async関数は必ずPromiseインスタンスを返す関数である。関数の前にasyncをつけることで定義できる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">async function doAsync() {
+</span></span><span class="line"><span class="cl">    return &#34;値&#34;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 以下と同等の意味
+</span></span><span class="line"><span class="cl">function doAsync() {
+</span></span><span class="line"><span class="cl">    return Promise.resolve(&#34;値&#34;);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><h3 id="await式">await式</h3>
+<p>Async関数内ではawait式というPromiseの非同期処理が完了する(FulfilledになるかRejectedになる)まで待つ構文が利用できる。
+await式を使うことで非同期処理を同期処理のように扱えるため、Promiseチェーンで実現していた処理の流れを読みやすく書ける。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">async function asyncMain() {
+</span></span><span class="line"><span class="cl">    // PromiseがFulfilledまたはRejectedとなるまで待つ
+</span></span><span class="line"><span class="cl">    await Promiseインスタンス;
+</span></span><span class="line"><span class="cl">    // Promiseインスタンスの状態が変わったら処理を再開する
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>await式がエラーをthrowするため、try catchが使えるようになる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">async</span> <span class="n">function</span> <span class="n">asyncMain</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">value</span> <span class="o">=</span> <span class="n">await</span> <span class="n">Promise</span><span class="o">.</span><span class="n">reject</span><span class="p">(</span><span class="n">new</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&#34;エラーメッセージ&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="参考-4">参考</h3>
+<ul>
+<li><a href="https://typescriptbook.jp/reference/promise-async-await">Promise/async/await | サバイバルTypeScript</a></li>
+</ul>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/javascript/">Javascript</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

@@ -1,266 +1,440 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=遺伝的アルゴリズムgaを用いたニューラルネットワーク学習のpythonプログラム>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</h1><h2 id=はじめに>はじめに</h2><p>$$
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="遺伝的アルゴリズムgaを用いたニューラルネットワーク学習のpythonプログラム">遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</h1>
+<h2 id="はじめに">はじめに</h2>
+<p>$$
 f(x,y)=\frac{(\frac{\sin x^2}{cos y}+x^2-5y+30)}{80}
 $$
-の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる．</p><h2 id=遺伝的アルゴリズムgagenetic-algorithms>遺伝的アルゴリズム(GA:Genetic Algorithms)</h2><p>GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．</p><h3 id=gaのアルゴリズム>GAのアルゴリズム</h3><p>GAのアルゴリズムを以下に示す．</p><ol><li>個体の初期生成：
-初期の個体をランダムに生成する．</li><li>適合度(評価値)の算出
-各個体の適合度(評価値)決定する．</li><li>再生
-各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される．</li><li>交叉
-Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す．</li><li>突然変異
-突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える．</li><li>終了条件判定
-終了条件を満たせば終了，そうでなければStep2に戻る．</li></ol><h3 id=gaアルゴリズムの性質>GAアルゴリズムの性質</h3><p>GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．</p><h2 id=プログラム>プログラム</h2><p>遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った．</p><h3 id=パラメータなどを設定>パラメータなどを設定</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 世代</span>
-</span></span><span class=line><span class=cl><span class=n>GEN</span> <span class=o>=</span> <span class=mi>100</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># NNの個数</span>
-</span></span><span class=line><span class=cl><span class=n>In</span> <span class=o>=</span> <span class=mi>2</span>
-</span></span><span class=line><span class=cl><span class=n>Hidden</span> <span class=o>=</span> <span class=mi>2</span>
-</span></span><span class=line><span class=cl><span class=n>Out</span> <span class=o>=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># NNの個体数</span>
-</span></span><span class=line><span class=cl><span class=n>Number</span> <span class=o>=</span> <span class=mi>1000</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 教師信号の数</span>
-</span></span><span class=line><span class=cl><span class=n>Num</span> <span class=o>=</span> <span class=mi>1000</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 交叉確率</span>
-</span></span><span class=line><span class=cl><span class=n>kousa</span> <span class=o>=</span> <span class=mf>0.8</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 突然変異確率</span>
-</span></span><span class=line><span class=cl><span class=n>change</span> <span class=o>=</span> <span class=mf>0.05</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 学習する関数</span>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>kansu</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span><span class=p>((</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>(</span><span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span><span class=o>*</span><span class=n>math</span><span class=o>.</span><span class=n>sin</span><span class=p>(</span><span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span><span class=o>/</span><span class=n>math</span><span class=o>.</span><span class=n>cos</span><span class=p>(</span><span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>]))</span><span class=o>+</span><span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>*</span><span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>-</span><span class=mi>5</span><span class=o>*</span><span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>+</span><span class=mi>30</span><span class=p>)</span><span class=o>/</span><span class=mi>80</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># シグモイド関数</span>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>sigmoid</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>1</span><span class=o>/</span><span class=p>(</span><span class=mi>1</span><span class=o>+</span><span class=n>np</span><span class=o>.</span><span class=n>exp</span><span class=p>(</span><span class=o>-</span><span class=n>x</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># プロット</span>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>plot</span><span class=p>(</span><span class=n>data</span><span class=p>,</span><span class=n>name</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>fig</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>fig</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>fig</span><span class=o>.</span><span class=n>savefig</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>name</span><span class=p>)</span><span class=o>+</span><span class=s1>&#39;.pdf&#39;</span><span class=p>)</span>
-</span></span></code></pre></div><h3 id=教師信号作成>教師信号作成</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Kyoshi</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>input</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>Num</span><span class=p>,</span> <span class=n>In</span><span class=p>)</span><span class=o>*</span><span class=mi>10</span><span class=o>-</span><span class=mi>5</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>output</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>Num</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>make_teacher</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Num</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>output</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>=</span><span class=n>kansu</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>input</span><span class=p>[</span><span class=n>count</span><span class=p>])</span>
-</span></span></code></pre></div><h3 id=ニューラルネットnnを作成>ニューラルネット(NN)を作成</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>NN</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>u</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>In</span><span class=p>,</span> <span class=n>Hidden</span><span class=p>)</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span> <span class=c1>#入力層-隠れ層の重み</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>v</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>Hidden</span><span class=p>,</span> <span class=n>Out</span><span class=p>)</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span> <span class=c1>#隠れ層-出力層の重み</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>bias_h</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>Hidden</span><span class=p>)</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span> <span class=c1>#隠れ層のバイアス</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>Out</span><span class=p>)</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span> <span class=c1>#出力層のバイアス</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>Output</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1>#出力</span>
-</span></span><span class=line><span class=cl>        <span class=c1>## GA用</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>gosa</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1>#教師データとの誤差</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>F</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1>#適合度</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 入力が与えられたときの出力を計算</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>calOutput</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span> <span class=c1># xは入力</span>
-</span></span><span class=line><span class=cl>        <span class=n>hidden_node</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>Hidden</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Hidden</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>In</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                <span class=n>hidden_node</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=o>+=</span><span class=bp>self</span><span class=o>.</span><span class=n>u</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>]</span><span class=o>*</span><span class=n>x</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>                <span class=n>hidden_node</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=o>-=</span><span class=bp>self</span><span class=o>.</span><span class=n>bias_h</span><span class=p>[</span><span class=n>j</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>Output</span><span class=o>+=</span><span class=n>sigmoid</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>v</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=o>*</span><span class=n>hidden_node</span><span class=p>[</span><span class=n>j</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>Output</span><span class=o>-=</span><span class=bp>self</span><span class=o>.</span><span class=n>bias_o</span>
-</span></span></code></pre></div><h3 id=gaを用いてnnを最適化する>GAを用いてNNを最適化する</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>NNGA</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>nn</span> <span class=o>=</span> <span class=p>[</span><span class=n>NN</span><span class=p>()]</span><span class=o>*</span><span class=n>Number</span>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>aveE</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1>#全体誤差平均</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 誤差と適合度計算</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>error</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span><span class=n>y</span><span class=p>):</span> <span class=c1>#xが教師入力，yが教師出力</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>aveE</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#入力を入れて各NNに出力させる</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>calOutput</span><span class=p>(</span><span class=n>x</span><span class=p>[</span><span class=n>count</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>            <span class=c1># 誤差を計算</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span> <span class=o>=</span> <span class=nb>abs</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>Output</span> <span class=o>-</span> <span class=n>y</span><span class=p>[</span><span class=n>count</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#################################</span>
-</span></span><span class=line><span class=cl>            <span class=c1># for i in range(Num):</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#     # 入力を入れて各NNに出力させる</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#     self.nn[count].calOutput(x[i])</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#     # 誤差を計算</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#     self.nn[count].gosa = abs(self.nn[count].Output - y[i])/Num</span>
-</span></span><span class=line><span class=cl>            <span class=c1>#################################</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>aveE</span> <span class=o>+=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span><span class=o>/</span><span class=n>Num</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=c1># 適合度計算</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span><span class=o>=</span> <span class=mi>1</span><span class=o>/</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 遺伝的アルゴリズム(GA)</span>
-</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>GA</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=c1># 個体数/2 回行う</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>Number</span><span class=o>/</span><span class=mi>2</span><span class=p>)):</span>
-</span></span><span class=line><span class=cl>            
-</span></span><span class=line><span class=cl>            <span class=n>F_sum</span><span class=o>=</span><span class=mi>0</span> <span class=c1>#各個体の適合度の合計</span>
-</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                <span class=n>F_sum</span><span class=o>+=</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span> 
-</span></span><span class=line><span class=cl>           
-</span></span><span class=line><span class=cl>            <span class=c1># 選択</span>
-</span></span><span class=line><span class=cl>            <span class=n>p</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>]</span> <span class=c1>#選択されるインデックスを記録する</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># ルーレット選択</span>
-</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                <span class=n>F_temp</span><span class=o>=</span><span class=mi>0</span>
-</span></span><span class=line><span class=cl>                <span class=n>j</span> <span class=o>=</span> <span class=o>-</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>                <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                    <span class=n>j</span> <span class=o>+=</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>                    <span class=n>F_temp</span><span class=o>+=</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span>
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>F_temp</span> <span class=o>&gt;</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span><span class=o>*</span><span class=n>F_sum</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=k>break</span>    
-</span></span><span class=line><span class=cl>                <span class=n>p</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=n>j</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># 子ども候補を作成</span>
-</span></span><span class=line><span class=cl>            <span class=n>child</span> <span class=o>=</span> <span class=p>[</span><span class=n>NN</span><span class=p>()]</span><span class=o>*</span><span class=mi>2</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># 一様交叉</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>kousa</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>u</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>u</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>u</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>u</span>                 
-</span></span><span class=line><span class=cl>                    <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>u</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>u</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>u</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>u</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>v</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>v</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>v</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>v</span>
-</span></span><span class=line><span class=cl>                    <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>v</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>v</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>v</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>v</span>                
-</span></span><span class=line><span class=cl>                            
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias_h</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_h</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>bias_h</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_h</span>
-</span></span><span class=line><span class=cl>                    <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias_h</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_h</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>bias_h</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_h</span>                  
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=mf>0.5</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_o</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_o</span>   
-</span></span><span class=line><span class=cl>                    <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_o</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>bias_o</span>           
-</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span>
-</span></span><span class=line><span class=cl>                <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1>#親の平均適合度を受け継ぐ</span>
-</span></span><span class=line><span class=cl>            <span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>F</span> <span class=o>=</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>F</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>F</span><span class=p>)</span><span class=o>/</span><span class=mi>2</span>
-</span></span><span class=line><span class=cl>            <span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>F</span> <span class=o>=</span> <span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span><span class=o>.</span><span class=n>F</span><span class=o>+</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span><span class=o>.</span><span class=n>F</span><span class=p>)</span><span class=o>/</span><span class=mi>2</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># 突然変異</span>
-</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Hidden</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>In</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                        <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>change</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                            <span class=n>child</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>u</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>                    
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>change</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>bias_h</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>change</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                        <span class=n>child</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>v</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>change</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                    <span class=n>child</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>bias_o</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>random</span><span class=p>()</span><span class=o>*</span><span class=mi>2</span><span class=o>-</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>     
-</span></span><span class=line><span class=cl>            <span class=c1>#個体群に子どもを追加</span>
-</span></span><span class=line><span class=cl>            <span class=n>rm1</span><span class=o>=</span><span class=mi>0</span>
-</span></span><span class=line><span class=cl>            <span class=n>rm2</span><span class=o>=</span><span class=mi>0</span>
-</span></span><span class=line><span class=cl>            <span class=n>min_F</span><span class=o>=</span><span class=mi>100000</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># 最小適合度の個体と入れ替え</span>
-</span></span><span class=line><span class=cl>            <span class=n>rm1</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>argmin</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>rm1</span><span class=p>]</span><span class=o>=</span><span class=n>child</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>            <span class=c1># 2番目に低い適合度の個体と入れ替え</span>
-</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>count</span><span class=o>==</span><span class=n>rm1</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                    <span class=k>pass</span>
-</span></span><span class=line><span class=cl>                <span class=k>elif</span> <span class=n>min_F</span> <span class=o>&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                    <span class=n>min_F</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>F</span>
-</span></span><span class=line><span class=cl>                    <span class=n>rm2</span> <span class=o>=</span> <span class=n>count</span>
-</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>rm2</span><span class=p>]</span><span class=o>=</span><span class=n>child</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
-</span></span></code></pre></div><h3 id=main関数>main関数</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>    <span class=c1># 世代数のカウント</span>
-</span></span><span class=line><span class=cl>    <span class=n>generation</span><span class=o>=</span><span class=mi>0</span>
-</span></span><span class=line><span class=cl>    <span class=c1># 初期の個体を生成する</span>
-</span></span><span class=line><span class=cl>    <span class=n>nnga</span> <span class=o>=</span> <span class=n>NNGA</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>   
-</span></span><span class=line><span class=cl>    <span class=c1># 教師信号の入出力を決定</span>
-</span></span><span class=line><span class=cl>    <span class=n>teacher</span> <span class=o>=</span> <span class=n>Kyoshi</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>teacher</span><span class=o>.</span><span class=n>make_teacher</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># テストデータ</span>
-</span></span><span class=line><span class=cl>    <span class=n>testTeacher</span> <span class=o>=</span> <span class=n>Kyoshi</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>testTeacher</span><span class=o>.</span><span class=n>make_teacher</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=c1># 適合度計算</span>
-</span></span><span class=line><span class=cl>    <span class=n>nnga</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=n>teacher</span><span class=o>.</span><span class=n>input</span><span class=p>,</span> <span class=n>teacher</span><span class=o>.</span><span class=n>output</span><span class=p>)</span>
-</span></span><span class=line><span class=cl> 
-</span></span><span class=line><span class=cl>    <span class=c1># 記録用関数</span>
-</span></span><span class=line><span class=cl>    <span class=n>kiroku</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>    <span class=n>eliteKiroku</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>    <span class=n>minEKiroku</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 学習開始</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span><span class=p>(</span><span class=kc>True</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=n>generation</span> <span class=o>+=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>        <span class=c1># GAによる最適化</span>
-</span></span><span class=line><span class=cl>        <span class=n>nnga</span><span class=o>.</span><span class=n>GA</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>        <span class=c1># 適合度を計算</span>
-</span></span><span class=line><span class=cl>        <span class=n>nnga</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=n>teacher</span><span class=o>.</span><span class=n>input</span><span class=p>,</span><span class=n>teacher</span><span class=o>.</span><span class=n>output</span><span class=p>)</span>      
-</span></span><span class=line><span class=cl>        <span class=c1># 最小誤差のエリートを見つける</span>
-</span></span><span class=line><span class=cl>        <span class=n>min_E</span> <span class=o>=</span> <span class=mi>100000</span>
-</span></span><span class=line><span class=cl>        <span class=n>elite</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>count</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Number</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>min_E</span> <span class=o>&gt;</span> <span class=n>nnga</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>min_E</span> <span class=o>=</span> <span class=n>nnga</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>count</span><span class=p>]</span><span class=o>.</span><span class=n>gosa</span>
-</span></span><span class=line><span class=cl>                <span class=n>elite</span> <span class=o>=</span> <span class=n>count</span>
-</span></span><span class=line><span class=cl>        <span class=c1># エリートをテストデータで確認</span>
-</span></span><span class=line><span class=cl>        <span class=n>sumE</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>Num</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>            <span class=n>nnga</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>elite</span><span class=p>]</span><span class=o>.</span><span class=n>calOutput</span><span class=p>(</span><span class=n>testTeacher</span><span class=o>.</span><span class=n>input</span><span class=p>[</span><span class=n>i</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>            <span class=n>sumE</span> <span class=o>+=</span> <span class=nb>abs</span><span class=p>(</span><span class=n>nnga</span><span class=o>.</span><span class=n>nn</span><span class=p>[</span><span class=n>elite</span><span class=p>]</span><span class=o>.</span><span class=n>Output</span> <span class=o>-</span> <span class=n>testTeacher</span><span class=o>.</span><span class=n>output</span><span class=p>[</span><span class=n>i</span><span class=p>])</span><span class=o>/</span><span class=n>Num</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=c1># 教師データをシャッフル</span>
-</span></span><span class=line><span class=cl>        <span class=c1># np.random.shuffle(teacher.input)</span>
-</span></span><span class=line><span class=cl>        <span class=c1># teacher.make_teacher()</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=c1># 記録</span>
-</span></span><span class=line><span class=cl>        <span class=n>kiroku</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>nnga</span><span class=o>.</span><span class=n>aveE</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>eliteKiroku</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>sumE</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>minEKiroku</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>min_E</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;世代:&#34;</span><span class=p>,</span><span class=n>generation</span><span class=p>,</span><span class=s2>&#34;平均&#34;</span><span class=p>,</span><span class=n>nnga</span><span class=o>.</span><span class=n>aveE</span><span class=p>,</span> <span class=s2>&#34;エリート&#34;</span><span class=p>,</span><span class=n>min_E</span><span class=p>,</span><span class=s2>&#34;テスト&#34;</span><span class=p>,</span> <span class=n>sumE</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=c1># if min_E &lt; 0.06:</span>
-</span></span><span class=line><span class=cl>        <span class=c1>#     break</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>generation</span><span class=o>==</span><span class=n>GEN</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=k>break</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># plot</span>
-</span></span><span class=line><span class=cl>    <span class=n>plot</span><span class=p>(</span><span class=n>kiroku</span><span class=p>,</span><span class=s2>&#34;平均誤差&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plot</span><span class=p>(</span><span class=n>minEKiroku</span><span class=p>,</span><span class=s2>&#34;エリート個体の誤差&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plot</span><span class=p>(</span><span class=n>eliteKiroku</span><span class=p>,</span><span class=s2>&#34;エリート個体の誤差(テストデータ)&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
-</span></span></code></pre></div><h2 id=実験結果>実験結果</h2><p>各世代のエリート個体とテストデータの誤差の平均が以下のグラフとなった．横軸が世代数，縦軸が誤差．
-<img alt=学習結果 src=.././fig1.png></p><div><div>Tags:</div><ul><li><a href=/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/>群知能</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+の関数を遺伝的アルゴリズムを用いてニューラルネットワークを学習させる．</p>
+<h2 id="遺伝的アルゴリズムgagenetic-algorithms">遺伝的アルゴリズム(GA:Genetic Algorithms)</h2>
+<p>GAはHollandによって開発された，生物の進化のメカニズムを模倣した最適解探索のプログラムである．有性生殖をする生物の進化の課程の中で，環境に適応できる個体ほど次世代に自分の遺伝子を残すことができ，2個体の交叉により子をつくる，また稀に突然変異がおこるという特徴に着目をしている．決定的な優れた厳密解法が発見されておらず，全探索が不可能と考えられるほど広大な解空間をもつ問題に有効とされており，様々な最適化問題に応用可能であり，今後もさらなる発展が期待される．</p>
+<h3 id="gaのアルゴリズム">GAのアルゴリズム</h3>
+<p>GAのアルゴリズムを以下に示す．</p>
+<ol>
+<li>個体の初期生成：
+初期の個体をランダムに生成する．</li>
+<li>適合度(評価値)の算出
+各個体の適合度(評価値)決定する．</li>
+<li>再生
+各個体の適合度に依存した個体の再生を行う．適合度の高い個体は増殖し，低い個体は淘汰される．</li>
+<li>交叉
+Step3で選択された個体群からランダムに選択された個体のペアから，新しい個体を生成する．これを既定回数繰り返す．</li>
+<li>突然変異
+突然変異確率に基づいて，各個体の遺伝子の一部をランダムに書き換える．</li>
+<li>終了条件判定
+終了条件を満たせば終了，そうでなければStep2に戻る．</li>
+</ol>
+<h3 id="gaアルゴリズムの性質">GAアルゴリズムの性質</h3>
+<p>GAでは再生により評価値の高い粒子を重点的に探索すると同時に，交叉と突然変異により広範囲に解を探索するため，これらの遺伝的操作が有効に動作すれば良好な解が発見されることが期待される．しかし，遺伝的操作により，最良解の情報を失い，局所解に陥ってしまうことがあり最適解をうまく発見できない場合がしばしばある．特に，制御パラメータの解空間は多数の局所解が存在しているため，交叉の操作は不向きであるといえる．また，GAは決定変数が離散な値であることを前提とした解探索手法であるが，制御パラメータの最適化のための解情報は連続値であることから解の探索に最適ではないことも考えられる．</p>
+<h2 id="プログラム">プログラム</h2>
+<p>遺伝子はニューラルネットワークの重みと閾値から構成されるものとして，1つのニューラルネットワークが1つの個体に対応するように設計を行い，上記のGAの手法を用いて更新を行った．</p>
+<h3 id="パラメータなどを設定">パラメータなどを設定</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 世代</span>
+</span></span><span class="line"><span class="cl"><span class="n">GEN</span> <span class="o">=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># NNの個数</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hidden</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># NNの個体数</span>
+</span></span><span class="line"><span class="cl"><span class="n">Number</span> <span class="o">=</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 教師信号の数</span>
+</span></span><span class="line"><span class="cl"><span class="n">Num</span> <span class="o">=</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 交叉確率</span>
+</span></span><span class="line"><span class="cl"><span class="n">kousa</span> <span class="o">=</span> <span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 突然変異確率</span>
+</span></span><span class="line"><span class="cl"><span class="n">change</span> <span class="o">=</span> <span class="mf">0.05</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 学習する関数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">kansu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">30</span><span class="p">)</span><span class="o">/</span><span class="mi">80</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># シグモイド関数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># プロット</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.pdf&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="教師信号作成">教師信号作成</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Kyoshi</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Num</span><span class="p">,</span> <span class="n">In</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">make_teacher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">=</span><span class="n">kansu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+</span></span></code></pre></div><h3 id="ニューラルネットnnを作成">ニューラルネット(NN)を作成</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NN</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">In</span><span class="p">,</span> <span class="n">Hidden</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#入力層-隠れ層の重み</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Hidden</span><span class="p">,</span> <span class="n">Out</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#隠れ層-出力層の重み</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">bias_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Hidden</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#隠れ層のバイアス</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Out</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="c1">#出力層のバイアス</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">Output</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#出力</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">## GA用</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">gosa</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#教師データとの誤差</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#適合度</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 入力が与えられたときの出力を計算</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">calOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c1"># xは入力</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hidden_node</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Hidden</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Hidden</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">In</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">hidden_node</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">hidden_node</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-=</span><span class="bp">self</span><span class="o">.</span><span class="n">bias_h</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="bp">self</span><span class="o">.</span><span class="n">Output</span><span class="o">+=</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">hidden_node</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">Output</span><span class="o">-=</span><span class="bp">self</span><span class="o">.</span><span class="n">bias_o</span>
+</span></span></code></pre></div><h3 id="gaを用いてnnを最適化する">GAを用いてNNを最適化する</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NNGA</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">nn</span> <span class="o">=</span> <span class="p">[</span><span class="n">NN</span><span class="p">()]</span><span class="o">*</span><span class="n">Number</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">aveE</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#全体誤差平均</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 誤差と適合度計算</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span> <span class="c1">#xが教師入力，yが教師出力</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">aveE</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#入力を入れて各NNに出力させる</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">calOutput</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 誤差を計算</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">Output</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">count</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#################################</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># for i in range(Num):</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#     # 入力を入れて各NNに出力させる</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#     self.nn[count].calOutput(x[i])</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#     # 誤差を計算</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#     self.nn[count].gosa = abs(self.nn[count].Output - y[i])/Num</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#################################</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">aveE</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span><span class="o">/</span><span class="n">Num</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 適合度計算</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span><span class="o">=</span> <span class="mi">1</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 遺伝的アルゴリズム(GA)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">GA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 個体数/2 回行う</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Number</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="n">F_sum</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#各個体の適合度の合計</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">F_sum</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span> 
+</span></span><span class="line"><span class="cl">           
+</span></span><span class="line"><span class="cl">            <span class="c1"># 選択</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#選択されるインデックスを記録する</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># ルーレット選択</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">F_temp</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">j</span> <span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">F_temp</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">F_temp</span> <span class="o">&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="n">F_sum</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">break</span>    
+</span></span><span class="line"><span class="cl">                <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 子ども候補を作成</span>
+</span></span><span class="line"><span class="cl">            <span class="n">child</span> <span class="o">=</span> <span class="p">[</span><span class="n">NN</span><span class="p">()]</span><span class="o">*</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 一様交叉</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">kousa</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">u</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">u</span>                 
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">u</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">u</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">v</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">v</span>                
+</span></span><span class="line"><span class="cl">                            
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_h</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_h</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_h</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_h</span>                  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_o</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_o</span>   
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_o</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">bias_o</span>           
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">#親の平均適合度を受け継ぐ</span>
+</span></span><span class="line"><span class="cl">            <span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">F</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">F</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">            <span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">F</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">F</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 突然変異</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Hidden</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">In</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">change</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">child</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">change</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">bias_h</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">change</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">child</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">change</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">child</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">bias_o</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">     
+</span></span><span class="line"><span class="cl">            <span class="c1">#個体群に子どもを追加</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rm1</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rm2</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="n">min_F</span><span class="o">=</span><span class="mi">100000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 最小適合度の個体と入れ替え</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rm1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">rm1</span><span class="p">]</span><span class="o">=</span><span class="n">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 2番目に低い適合度の個体と入れ替え</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">count</span><span class="o">==</span><span class="n">rm1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">                <span class="k">elif</span> <span class="n">min_F</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">min_F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">F</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">rm2</span> <span class="o">=</span> <span class="n">count</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">rm2</span><span class="p">]</span><span class="o">=</span><span class="n">child</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></div><h3 id="main関数">main関数</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 世代数のカウント</span>
+</span></span><span class="line"><span class="cl">    <span class="n">generation</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 初期の個体を生成する</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nnga</span> <span class="o">=</span> <span class="n">NNGA</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">    <span class="c1"># 教師信号の入出力を決定</span>
+</span></span><span class="line"><span class="cl">    <span class="n">teacher</span> <span class="o">=</span> <span class="n">Kyoshi</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">teacher</span><span class="o">.</span><span class="n">make_teacher</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># テストデータ</span>
+</span></span><span class="line"><span class="cl">    <span class="n">testTeacher</span> <span class="o">=</span> <span class="n">Kyoshi</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">testTeacher</span><span class="o">.</span><span class="n">make_teacher</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 適合度計算</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nnga</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">teacher</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">teacher</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="c1"># 記録用関数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kiroku</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eliteKiroku</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minEKiroku</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 学習開始</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">generation</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># GAによる最適化</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nnga</span><span class="o">.</span><span class="n">GA</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 適合度を計算</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nnga</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">teacher</span><span class="o">.</span><span class="n">input</span><span class="p">,</span><span class="n">teacher</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>      
+</span></span><span class="line"><span class="cl">        <span class="c1"># 最小誤差のエリートを見つける</span>
+</span></span><span class="line"><span class="cl">        <span class="n">min_E</span> <span class="o">=</span> <span class="mi">100000</span>
+</span></span><span class="line"><span class="cl">        <span class="n">elite</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">min_E</span> <span class="o">&gt;</span> <span class="n">nnga</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">min_E</span> <span class="o">=</span> <span class="n">nnga</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">gosa</span>
+</span></span><span class="line"><span class="cl">                <span class="n">elite</span> <span class="o">=</span> <span class="n">count</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># エリートをテストデータで確認</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sumE</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nnga</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">elite</span><span class="p">]</span><span class="o">.</span><span class="n">calOutput</span><span class="p">(</span><span class="n">testTeacher</span><span class="o">.</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sumE</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nnga</span><span class="o">.</span><span class="n">nn</span><span class="p">[</span><span class="n">elite</span><span class="p">]</span><span class="o">.</span><span class="n">Output</span> <span class="o">-</span> <span class="n">testTeacher</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">Num</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 教師データをシャッフル</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># np.random.shuffle(teacher.input)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># teacher.make_teacher()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 記録</span>
+</span></span><span class="line"><span class="cl">        <span class="n">kiroku</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nnga</span><span class="o">.</span><span class="n">aveE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eliteKiroku</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sumE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">minEKiroku</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_E</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;世代:&#34;</span><span class="p">,</span><span class="n">generation</span><span class="p">,</span><span class="s2">&#34;平均&#34;</span><span class="p">,</span><span class="n">nnga</span><span class="o">.</span><span class="n">aveE</span><span class="p">,</span> <span class="s2">&#34;エリート&#34;</span><span class="p">,</span><span class="n">min_E</span><span class="p">,</span><span class="s2">&#34;テスト&#34;</span><span class="p">,</span> <span class="n">sumE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># if min_E &lt; 0.06:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#     break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">generation</span><span class="o">==</span><span class="n">GEN</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># plot</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot</span><span class="p">(</span><span class="n">kiroku</span><span class="p">,</span><span class="s2">&#34;平均誤差&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot</span><span class="p">(</span><span class="n">minEKiroku</span><span class="p">,</span><span class="s2">&#34;エリート個体の誤差&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot</span><span class="p">(</span><span class="n">eliteKiroku</span><span class="p">,</span><span class="s2">&#34;エリート個体の誤差(テストデータ)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="実験結果">実験結果</h2>
+<p>各世代のエリート個体とテストデータの誤差の平均が以下のグラフとなった．横軸が世代数，縦軸が誤差．
+<img style="max-width: 50%; height: auto;" alt="学習結果" src=".././fig1.png"></p>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/">群知能</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

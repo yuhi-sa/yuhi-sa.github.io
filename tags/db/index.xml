@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DB on tomato blog</title><link>https://yuhi-sa.github.io/tags/db/</link><description>Recent content in DB on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/db/index.xml" rel="self" type="application/rss+xml"/><item><title>トランザクションの分離レベル(`isolation`)と防げる不整合</title><link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link><pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid><description>トランザクションの分離レベル(isolation)と防げる不整合 DBのトランザクション処理で問題となる不整合 Dirty Read トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。
-これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。
-Non-repeatable Read トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。
-これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。
-Phantom Read トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。
-これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。
-トランザクションの分離レベル 以下の分離レベルが存在する。
-Read Uncommitted 防げる不整合:なし Read Committed 防げる不整合:Dirty Read 他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　Repeatable Read 防げる不整合:Dirty Read, Non-repeatable Read トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。
-これにより、同じトランザクション内でのデータの再読み取りが一貫する。
-Snapshot 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。
-これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。
-Serializable 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read 最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。
-これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。
-参考 https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html https://www.prisma.io/docs/orm/prisma-client/queries/transactions</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DB on tomato blog</title>
+    <link>http://localhost:1313/tags/db/</link>
+    <description>Recent content in DB on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/db/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>トランザクションの分離レベル(`isolation`)と防げる不整合</title>
+      <link>http://localhost:1313/posts/20240518_db_transaction/1/</link>
+      <pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20240518_db_transaction/1/</guid>
+      <description>トランザクションの分離レベル(isolation)と防げる不整合 DBのトランザクション処理で問題となる不整合 Dirty Read トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。&#xA;これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。&#xA;Non-repeatable Read トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。&#xA;これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。&#xA;Phantom Read トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。&#xA;これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。&#xA;トランザクションの分離レベル 以下の分離レベルが存在する。&#xA;Read Uncommitted 防げる不整合:なし Read Committed 防げる不整合:Dirty Read 他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　Repeatable Read 防げる不整合:Dirty Read, Non-repeatable Read トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。&#xA;これにより、同じトランザクション内でのデータの再読み取りが一貫する。&#xA;Snapshot 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。&#xA;これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。&#xA;Serializable 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read 最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。&#xA;これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。&#xA;参考 https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html https://www.prisma.io/docs/orm/prisma-client/queries/transactions </description>
+    </item>
+  </channel>
+</rss>

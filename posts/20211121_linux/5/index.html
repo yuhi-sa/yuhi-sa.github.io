@@ -1,30 +1,212 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>公開鍵認証方式を用いたSSH通信の設定方法 | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=公開鍵認証方式を用いたssh通信の設定方法>公開鍵認証方式を用いたSSH通信の設定方法</h1><h2 id=1-暗号化方式の変更接続先pc>1. 暗号化方式の変更[接続先PC]</h2><h3 id=etcsshsshd_configを編集>「/etc/ssh/sshd_config」を編集</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo vi /etc/ssh/sshd/sshd_config
-</span></span></code></pre></div><h3 id=公開鍵暗号方式の有効化とパスワード認証方式の無効化>公開鍵暗号方式の有効化とパスワード認証方式の無効化</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>+ PubkeyAuthentication yes # 追記
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>- PasswordAuthentication yes
-</span></span><span class=line><span class=cl>+ PasswordAuthentication no # 変更
-</span></span></code></pre></div><h3 id=リスタート>リスタート</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo systemctl restart sshd
-</span></span></code></pre></div><h2 id=2-秘密鍵と公開鍵を作成接続元pc>2. 秘密鍵と公開鍵を作成[接続<strong>元</strong>PC]</h2><h3 id=鍵の作成>鍵の作成</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ ssh-keygen -t rsa
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Generating public/private rsa key pair.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Enter file in which to save the key <span class=o>(</span>/Users/yuhi-sa/.ssh/id_rsa<span class=o>)</span>: <span class=c1># 無記入でEnter</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Enter passphrase <span class=o>(</span>empty <span class=k>for</span> no passphrase<span class=o>)</span>: <span class=c1># パスフレーズを入力 </span>
-</span></span><span class=line><span class=cl>Enter same passphrase again: <span class=c1># パスフレーズを入力 </span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Your identification has been saved in 保存先ディレクトリ
-</span></span><span class=line><span class=cl>Your public key has been saved in 保存名
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>公開鍵認証方式を用いたSSH通信の設定方法 | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="公開鍵認証方式を用いたssh通信の設定方法">公開鍵認証方式を用いたSSH通信の設定方法</h1>
+<h2 id="1-暗号化方式の変更接続先pc">1. 暗号化方式の変更[接続先PC]</h2>
+<h3 id="etcsshsshd_configを編集">「/etc/ssh/sshd_config」を編集</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo vi /etc/ssh/sshd/sshd_config
+</span></span></code></pre></div><h3 id="公開鍵暗号方式の有効化とパスワード認証方式の無効化">公開鍵暗号方式の有効化とパスワード認証方式の無効化</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+ PubkeyAuthentication yes # 追記
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">- PasswordAuthentication yes
+</span></span><span class="line"><span class="cl">+ PasswordAuthentication no # 変更
+</span></span></code></pre></div><h3 id="リスタート">リスタート</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo systemctl restart sshd
+</span></span></code></pre></div><h2 id="2-秘密鍵と公開鍵を作成接続元pc">2. 秘密鍵と公開鍵を作成[接続<strong>元</strong>PC]</h2>
+<h3 id="鍵の作成">鍵の作成</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen -t rsa
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Generating public/private rsa key pair.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Enter file in which to save the key <span class="o">(</span>/Users/yuhi-sa/.ssh/id_rsa<span class="o">)</span>: <span class="c1"># 無記入でEnter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="o">(</span>empty <span class="k">for</span> no passphrase<span class="o">)</span>: <span class="c1"># パスフレーズを入力 </span>
+</span></span><span class="line"><span class="cl">Enter same passphrase again: <span class="c1"># パスフレーズを入力 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Your identification has been saved in 保存先ディレクトリ
+</span></span><span class="line"><span class="cl">Your public key has been saved in 保存名
 </span></span></code></pre></div><p>ファイル名を空白にした場合は「/.ssh/」以下にファイルが作成される．
-id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p><h4 id=ssh-keygenコマンド>ssh-keygenコマンド</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ ssh-keygen <span class=o>[</span>オプション<span class=o>]</span>
-</span></span></code></pre></div><ul><li>オプション<ul><li>-t dsa：DSA暗号指定</li><li>-t rsa1：RSA暗号指定(ver1)</li><li>-t rsa：RSA暗号指定(ver2)</li><li>-p：パスフレーズ変更</li><li>-f ファイル名：鍵ファイル指定</li></ul></li></ul><h2 id=3-sshディレクトリを作成接続先pc>3. 「/.ssh」ディレクトリを作成[接続先PC]</h2><p>「/.ssh」ディレクトリを作成し，700の権限を与える．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo mkdir /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh
-</span></span><span class=line><span class=cl>$ sudo chown <span class=o>[</span>ユーザ名<span class=o>]</span>:users /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh
-</span></span><span class=line><span class=cl>$ sudo chmod <span class=m>700</span> /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh
-</span></span></code></pre></div><ul><li>700権限：所有者以外は操作できない</li></ul><h2 id=4-公開鍵を登録接続先pc>4. 公開鍵を登録[接続先PC]</h2><p>「/.ssh」ディレクトリに「authorized_key」ファイル作成．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo touch /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh/autorized_keys
-</span></span></code></pre></div><p>先ほど作成した公開鍵暗号を登録．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo vi /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh/autorized_keys
-</span></span></code></pre></div><p>600の権限を与える．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ sudo chmod <span class=m>600</span> /home/<span class=o>[</span>ユーザ名<span class=o>]</span>/.ssh/autorized_keys
-</span></span></code></pre></div><ul><li>600権限：所有者のみの読み書き可能</li></ul><h2 id=5-接続接続元pc>5. 接続[接続<strong>元</strong>PC]</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ ssh <span class=o>[</span>ユーザ名<span class=o>]</span>@IPアドレス
-</span></span><span class=line><span class=cl>Enter passphrase <span class=k>for</span> key <span class=s1>&#39;/Users/[ユーザ名]/.ssh/id_rsa&#39;</span>: <span class=c1># パスフレーズを入力 </span>
-</span></span></code></pre></div><div><div>Tags:</div><ul><li><a href=/tags/linux/>Linux</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>公開鍵認証方式を用いたSSH通信の設定方法</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+id_rsa.pubが公開鍵，id_rsaが秘密鍵となる．</p>
+<h4 id="ssh-keygenコマンド">ssh-keygenコマンド</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh-keygen <span class="o">[</span>オプション<span class="o">]</span>
+</span></span></code></pre></div><ul>
+<li>オプション
+<ul>
+<li>-t dsa：DSA暗号指定</li>
+<li>-t rsa1：RSA暗号指定(ver1)</li>
+<li>-t rsa：RSA暗号指定(ver2)</li>
+<li>-p：パスフレーズ変更</li>
+<li>-f ファイル名：鍵ファイル指定</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-sshディレクトリを作成接続先pc">3. 「/.ssh」ディレクトリを作成[接続先PC]</h2>
+<p>「/.ssh」ディレクトリを作成し，700の権限を与える．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo mkdir /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+</span></span><span class="line"><span class="cl">$ sudo chown <span class="o">[</span>ユーザ名<span class="o">]</span>:users /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+</span></span><span class="line"><span class="cl">$ sudo chmod <span class="m">700</span> /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh
+</span></span></code></pre></div><ul>
+<li>700権限：所有者以外は操作できない</li>
+</ul>
+<h2 id="4-公開鍵を登録接続先pc">4. 公開鍵を登録[接続先PC]</h2>
+<p>「/.ssh」ディレクトリに「authorized_key」ファイル作成．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo touch /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</span></span></code></pre></div><p>先ほど作成した公開鍵暗号を登録．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo vi /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</span></span></code></pre></div><p>600の権限を与える．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo chmod <span class="m">600</span> /home/<span class="o">[</span>ユーザ名<span class="o">]</span>/.ssh/autorized_keys
+</span></span></code></pre></div><ul>
+<li>600権限：所有者のみの読み書き可能</li>
+</ul>
+<h2 id="5-接続接続元pc">5. 接続[接続<strong>元</strong>PC]</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ssh <span class="o">[</span>ユーザ名<span class="o">]</span>@IPアドレス
+</span></span><span class="line"><span class="cl">Enter passphrase <span class="k">for</span> key <span class="s1">&#39;/Users/[ユーザ名]/.ssh/id_rsa&#39;</span>: <span class="c1"># パスフレーズを入力 </span>
+</span></span></code></pre></div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/linux/">Linux</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">公開鍵認証方式を用いたSSH通信の設定方法</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

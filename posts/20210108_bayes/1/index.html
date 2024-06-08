@@ -1,78 +1,296 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定) | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=pythonベイズ推定に基づく線形回帰最小二乗推定最尤推定map推定ベイズ推定>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</h1><p>#≈ 背景
-回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．</p><p>観測されたデータ$D={(x_i,y_i);i=1,2,&mldr;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．</p><p>$$
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定) | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="pythonベイズ推定に基づく線形回帰最小二乗推定最尤推定map推定ベイズ推定">[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</h1>
+<p>#≈ 背景
+回帰問題の目的は，$N$個の観測値と対応する目標値からなる訓練データ集合が与えられたとき，新しい観測値に対する目標値の値を予測することである．今回扱う線形回帰モデルは，多項式は調節可能なパラメータの線形結合という特徴を利用した最も単純なモデルである．固定された基底関数の入力変数に関して非線型な関数の固定された集合結合をとることにより，有用な関数のクラスが得られる．</p>
+<p>観測されたデータ$D={(x_i,y_i);i=1,2,&hellip;,n}$に対して，基底関数の線形結合に基づく回帰関数モデルを以下のように定義する．ここで$\Phi$を$x$の基底関数，$\epsilon$を誤差項とする．</p>
+<p>$$
 y_i= \Phi w+ \epsilon
-$$</p><h2 id=ベイズ線形回帰について>ベイズ線形回帰について</h2><h3 id=最小二乗推定>最小二乗推定</h3><p>最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．</p><p>$$
+$$</p>
+<h2 id="ベイズ線形回帰について">ベイズ線形回帰について</h2>
+<h3 id="最小二乗推定">最小二乗推定</h3>
+<p>最小二乗推定は，回帰モデルによる予測誤差の二乗和$S(w)$を最小化する$\hat{w}$を求める手法である．$S(w)$を$w$で偏微分し，$\hat{w}$を求める．</p>
+<p>$$
 S(w)=\epsilon^{T}\epsilon=(y-\Phi w)^T(y-\Phi w)
-$$</p><p>$$
+$$</p>
+<p>$$
 \frac{dS(w)}{dw}=-\Phi^{T}y+\Phi^T\Phi w
 $$
-$\frac{dS(w)}{dw}=0$のときを考えると，</p><p>$$
+$\frac{dS(w)}{dw}=0$のときを考えると，</p>
+<p>$$
 \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y
 $$
-従って，最小二乗推定による予測モデルは以下のようになる．</p><p>$$
+従って，最小二乗推定による予測モデルは以下のようになる．</p>
+<p>$$
 \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y
-$$</p><h3 id=最尤推定>最尤推定</h3><p>最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．</p><p>$$
+$$</p>
+<h3 id="最尤推定">最尤推定</h3>
+<p>最尤推定は，尤度$P(y,w)$を最大化する$\hat{w}$を求める手法である．誤差項に正規分布を仮定したモデルを考える．このとき観測値$y$は平均$\Phi w$，分散行列$\sigma^2I_n$のn次元正規分布に従う．よって尤度は，以下のように与えられる．</p>
+<p>$$
 y= \Phi w+ \epsilon,\epsilon \sim \mathcal{N}(0,\sigma^2I_n)
 $$
 $$
 P(y\mid w,\sigma^2)=\mathcal{N}(\Phi w,\sigma^2I_n)
 =\frac{1}{(2\pi\sigma^2)^{\frac{n}{2}}}exp{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)}
-$$</p><p>$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．</p><p>$$
+$$</p>
+<p>$P(y\mid w)$の対数を$w$で偏微分し，$\hat{w}$を求める．</p>
+<p>$$
 \log P(y\mid w) = -\frac{n}{2}\log(2\pi\sigma^2)-\frac{(y-\Phi w)^T(y-\Phi w)}{2\sigma^2}
-$$</p><p>$$
+$$</p>
+<p>$$
 \frac{1}{P(y\mid w)}\frac{P(y\mid w)}{dw}=-(\Phi^{T}y+\Phi^{T}\Phi w)
 $$
-$\frac{dP(y\mid w)}{dw}=0$のときを考えると．</p><p>$$
+$\frac{dP(y\mid w)}{dw}=0$のときを考えると．</p>
+<p>$$
 \hat{w}=(\Phi^T\Phi)^{-1}\Phi^{T}y
-$$</p><p>従って，最尤推定による予測モデルは以下のようになる．</p><p>$$
+$$</p>
+<p>従って，最尤推定による予測モデルは以下のようになる．</p>
+<p>$$
 \hat{y}=\Phi\hat{w}=\Phi(\Phi^T\Phi)^{-1}y
 $$
-これは，最小二乗法によって求められる予測モデルと同じである．</p><h3 id=map推定>MAP推定</h3><p>最小二乗法，最尤推定に基づく方法では，モデルパラメータの数が多く，観測データの数が小さい時に過学習を起こしやすいという問題点がある．過学習が生じると，汎化性能が期待できないため，過学習を防ぐことが重要となる．MAP推定は，$w$を確率変数として扱う．
-$w$の事前分布と観測データの尤度関数を以下のように導入する．$\alpha$,$\beta$はハイパーパラメータとする．</p><p>$$
+これは，最小二乗法によって求められる予測モデルと同じである．</p>
+<h3 id="map推定">MAP推定</h3>
+<p>最小二乗法，最尤推定に基づく方法では，モデルパラメータの数が多く，観測データの数が小さい時に過学習を起こしやすいという問題点がある．過学習が生じると，汎化性能が期待できないため，過学習を防ぐことが重要となる．MAP推定は，$w$を確率変数として扱う．
+$w$の事前分布と観測データの尤度関数を以下のように導入する．$\alpha$,$\beta$はハイパーパラメータとする．</p>
+<p>$$
 P(w;\alpha)=\mathcal{N}(w\mid0,\alpha^{-1}I_n)
-$$</p><p>$$
+$$</p>
+<p>$$
 P(y \mid w;\beta)=\mathcal{N}(\Phi w,\beta^{-1}I_n)
 $$
 MAP推定では，$w$の事後分布$P(w \mid y)$を最大化する$\hat{w}$を求める手法である．
-ベイズの定理より，</p><p>$$
+ベイズの定理より，</p>
+<p>$$
 P(w \mid y)=\frac{P(y \mid w)P(w)}{P(y)}
-$$</p><p>ここで．$P(y|w)$は尤度を，$P(w)$は事前確率を表す．</p><p>$$
+$$</p>
+<p>ここで．$P(y|w)$は尤度を，$P(w)$は事前確率を表す．</p>
+<p>$$
 P(w \mid y)=\frac{\frac{1}{ (2\pi)^{n}(\alpha\beta)^{-\frac{n}{2}} }
-exp{-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w) - \frac{1}{2\alpha^2} w^{T}w
+exp{-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w)    -     \frac{1}{2\alpha^2} w^{T}w
 }
 }{P(y)}
-$$</p><p>$P(w \mid y)$を最大化する$\hat{w}$は，$Z=-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w) - \frac{1}{2\alpha^2} w^{T}w $を最大化する$\hat{w}$に等しい．</p><p>$$
+$$</p>
+<p>$P(w \mid y)$を最大化する$\hat{w}$は，$Z=-\frac{1}{2\beta^2} (y-\Phi w)^T(y-\Phi w)    -     \frac{1}{2\alpha^2} w^{T}w $を最大化する$\hat{w}$に等しい．</p>
+<p>$$
 \frac{dZ}{dw}=-\frac{1}{2\beta^{-1}}(-\Phi^T+\Phi^T\Phi w)- \frac{1}{2 \alpha^{-1}}w^{T}w
-$$</p><p>$\frac{dZ}{dw}=0$のときを考えると，</p><p>$$
+$$</p>
+<p>$\frac{dZ}{dw}=0$のときを考えると，</p>
+<p>$$
 \hat{w}=(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
 $$
-従って，MAP推定による予測モデルは以下のようになる．</p><p>$$
+従って，MAP推定による予測モデルは以下のようになる．</p>
+<p>$$
 \hat{y}=\Phi\hat{w}=\Phi(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
-$$</p><h3 id=ベイズ推定>ベイズ推定</h3><p>最小二乗法，最尤推定，MAP推定では，パラメータの推定値を一つの解として求めた．しかし，これではデータの予測にパラメータの不確かさを考慮することができない．事後分布をそのまま確率分布として取り扱うことで，パラメータ推定の不確かさを加味した予測分布を求める．MAP推定では，$P(w \mid y)$の最大化を考えたため，$P(D)$については無視できたが，ベイズ推定では考える必要がある．同時確率$P(y,w)$から一方の確率変数を取り除き，周辺確率$P(y)$を求める．</p><p>$$
+$$</p>
+<h3 id="ベイズ推定">ベイズ推定</h3>
+<p>最小二乗法，最尤推定，MAP推定では，パラメータの推定値を一つの解として求めた．しかし，これではデータの予測にパラメータの不確かさを考慮することができない．事後分布をそのまま確率分布として取り扱うことで，パラメータ推定の不確かさを加味した予測分布を求める．MAP推定では，$P(w \mid y)$の最大化を考えたため，$P(D)$については無視できたが，ベイズ推定では考える必要がある．同時確率$P(y,w)$から一方の確率変数を取り除き，周辺確率$P(y)$を求める．</p>
+<p>$$
 P(y)=\int P(y\mid w)P(w)dw
-$$</p><p>$$
+$$</p>
+<p>$$
 P(w \mid y) = \frac{P(y \mid w)P(w)}{\int P(y\mid w)P(w)dw}
-$$</p><p>ここで，ガウス分布に対するベイズの定理より，</p><p>$$
+$$</p>
+<p>ここで，ガウス分布に対するベイズの定理より，</p>
+<p>$$
 P(w \mid y) = \mathcal{N}(\mu_N,\Sigma_N)
 $$
-参考文献1のP90ガウス分布の周辺分布と条件付き分布を用いて計算すると</p><p>$$
+参考文献1のP90ガウス分布の周辺分布と条件付き分布を用いて計算すると</p>
+<p>$$
 \mu_N=(\frac{\alpha}{\beta}I_n+\Phi^{T}\Phi)^{-1}\Phi^{T}y
-$$</p><p>$$
+$$</p>
+<p>$$
 \Sigma_{N}=(\alpha I_n + \beta \Phi^{T}\Phi)^{-1}
 $$
-従って，以上よりベイズ推定による予測モデルは以下のようになる．</p><p>$$
+従って，以上よりベイズ推定による予測モデルは以下のようになる．</p>
+<p>$$
 \hat{y}=\Phi\hat{w}=\Phi(-\frac{\alpha}{\beta}I_n+\Phi^T\Phi)^{-1}\Phi^{T}y
-$$</p><p>$$
+$$</p>
+<p>$$
 \Sigma_{N}=(\alpha I_n + \beta \Phi^{T}\Phi)^{-1}
-$$</p><h2 id=実験>実験</h2><p>$D={(x.train_i,y.train_i);i=1,2,&mldr;,15}$の訓練データに対して，最小二乗推定，最尤推定，MAP推定，ベイズ推定を用いて予測モデルを作成した．それぞれのモデルで$D={(x.test_i,y.test_i);i=1,2,&mldr;,100}$のテストデータに対して予測分布を確認した．</p><p>基底関数は以下のものを用いる．</p><p>$$
-f_j(x)=x^{j},j=0,1,&mldr;9
-$$</p><p>ハイパーパラメータ$\alpha=10,\beta=10$とする．</p><ul><li>最小二乗推定
-<img alt=1.png src=.././fig1.png></li><li>MAP推定
-<img alt=3.png src=.././fig2.png></li><li>ベイズ推定
-<img alt=4.png src=.././fig3.png></li></ul><p>決定係数$R^2$により点推定の評価を行う．決定係数とは回帰によって導いたモデルの当てはまりの良さを表現する値で、モデルによって予測した値が実際の値とどの程度一致しているかを表現する評価指標である．決定係数$R^2$は実際のデータを$(x_i,y_i)$、回帰式から推定されたデータを$(x_i,\bar{y_i})$として$R^2=1-\frac{\sum_{i=1}^n{(y_i-\hat{y_i})^2}}{\sum_{i=1}^n(y_i-\bar{y})^2}$で求められる．0から1の範囲で1に近づくほど良い値である．
-<img alt=fig8.png src=.././fig4.png></p><p>尤度関数の分散$\beta$の値を変更する．</p><ul><li>$\beta=50$のときのベイズ推定
-<img alt=50.png src=.././fig5.png></li><li>$\beta=100$のときのベイズ推定
-<img alt=100.png src=.././fig6.png></li><li>$\beta=1000$のときのベイズ推定
-<img alt=1000.png src=.././fig7.png></li></ul><h2 id=まとめ>まとめ</h2><ul><li>回帰問題に対して，最小二乗法，最尤推定，MAP推定，ベイズ推定を適応して計算した．訓練データが存在しない部分の予測精度が下がることがわかった．</li><li>点推定である最小二乗法，最尤推定，MAP推定については，今回の場合においてはMAP推定の方がより外れ値が減少し，すぐれたモデルを作成できることがわかる．</li><li>ベイズ推定，MAP推定においては，尤度関数の分散を小さくするほど，誤差が小さくなるが，分散を小さくしすぎると過学習を起こして汎化性能が下がることがわかった．</li></ul><h2 id=参考文献>参考文献</h2><ul><li>C.M.ビショップ，"<a href=https://amzn.to/3eFIjDW>パターン認識と機械学習上ベイズ理論による統計的予測</a>"，シュプリンガー・ジャパン</li><li>須山 敦志，"<a href=https://amzn.to/3vrePQ1>ベイズ推論による機械学習入門</a>", 株式会社講談社サイエンティフィク</li></ul><div><div>Tags:</div><ul><li><a href=/tags/%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88/>ベイズ統計</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+$$</p>
+<h2 id="実験">実験</h2>
+<p>$D={(x.train_i,y.train_i);i=1,2,&hellip;,15}$の訓練データに対して，最小二乗推定，最尤推定，MAP推定，ベイズ推定を用いて予測モデルを作成した．それぞれのモデルで$D={(x.test_i,y.test_i);i=1,2,&hellip;,100}$のテストデータに対して予測分布を確認した．</p>
+<p>基底関数は以下のものを用いる．</p>
+<p>$$
+f_j(x)=x^{j},j=0,1,&hellip;9
+$$</p>
+<p>ハイパーパラメータ$\alpha=10,\beta=10$とする．</p>
+<ul>
+<li>最小二乗推定
+<img style="max-width: 50%; height: auto;" alt="1.png" src=".././fig1.png"></li>
+<li>MAP推定
+<img style="max-width: 50%; height: auto;" alt="3.png" src=".././fig2.png"></li>
+<li>ベイズ推定
+<img style="max-width: 50%; height: auto;" alt="4.png" src=".././fig3.png"></li>
+</ul>
+<p>決定係数$R^2$により点推定の評価を行う．決定係数とは回帰によって導いたモデルの当てはまりの良さを表現する値で、モデルによって予測した値が実際の値とどの程度一致しているかを表現する評価指標である．決定係数$R^2$は実際のデータを$(x_i,y_i)$、回帰式から推定されたデータを$(x_i,\bar{y_i})$として$R^2=1-\frac{\sum_{i=1}^n{(y_i-\hat{y_i})^2}}{\sum_{i=1}^n(y_i-\bar{y})^2}$で求められる．0から1の範囲で1に近づくほど良い値である．
+<img style="max-width: 50%; height: auto;" alt="fig8.png" src=".././fig4.png"></p>
+<p>尤度関数の分散$\beta$の値を変更する．</p>
+<ul>
+<li>$\beta=50$のときのベイズ推定
+<img style="max-width: 50%; height: auto;" alt="50.png" src=".././fig5.png"></li>
+<li>$\beta=100$のときのベイズ推定
+<img style="max-width: 50%; height: auto;" alt="100.png" src=".././fig6.png"></li>
+<li>$\beta=1000$のときのベイズ推定
+<img style="max-width: 50%; height: auto;" alt="1000.png" src=".././fig7.png"></li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<ul>
+<li>回帰問題に対して，最小二乗法，最尤推定，MAP推定，ベイズ推定を適応して計算した．訓練データが存在しない部分の予測精度が下がることがわかった．</li>
+<li>点推定である最小二乗法，最尤推定，MAP推定については，今回の場合においてはMAP推定の方がより外れ値が減少し，すぐれたモデルを作成できることがわかる．</li>
+<li>ベイズ推定，MAP推定においては，尤度関数の分散を小さくするほど，誤差が小さくなるが，分散を小さくしすぎると過学習を起こして汎化性能が下がることがわかった．</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>C.M.ビショップ，&quot;<a href="https://amzn.to/3eFIjDW">パターン認識と機械学習上ベイズ理論による統計的予測</a>&quot;，シュプリンガー・ジャパン</li>
+<li>須山 敦志，&quot;<a href="https://amzn.to/3vrePQ1">ベイズ推論による機械学習入門</a>&quot;, 株式会社講談社サイエンティフィク</li>
+</ul>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88/">ベイズ統計</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

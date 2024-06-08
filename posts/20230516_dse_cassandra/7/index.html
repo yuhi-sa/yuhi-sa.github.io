@@ -1,40 +1,202 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>DS201の実施_Ring | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=ds201の実施_ring>DS201の実施_Ring</h1><p><a href=https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm>DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p><h2 id=ringとは>Ringとは</h2><p>Cassandraのアーキテクチャは、複数のノードで形成されるクラスタを基盤としている。
-その中心にあるデータ構造はRingと呼ばれる。Ringとは、クラスタ内でデータがどのように各ノード間で分散されるかを管理する役割を担っている。</p><p>Cassandraは全てのデータをパーティションに分割し、それぞれのパーティションに一意のトークンを割り当てる。これらのトークンは、Ringのデータ構造の中に配列される。Ringとは、全ての可能なトークンの値の範囲を視覚化したものといえる。</p><p>各ノードは、Ring上の特定の範囲のトークンを所有している。その所有するトークン範囲に対応するデータの一部を格納することにより、どのデータがどのノードに存在するかが決定され、データがノード間で分散される。</p><p>リングの構造は、ノードが追加または削除されたときにも、データの再分配を最小限に抑える役割も果たす。新たなノードが追加された際には、そのノードはリング上の特定の位置を占め、既存の隣接するノードからデータの一部を引き継ぐ。これにより、新規に追加されたノードが新たなデータの保存場所として機能する。</p><p>Ringの構造は単一障害点を排除する役割も果たす。1つのノードが故障またはダウンしても、他のノードがその役割を引き継ぎ、システムは正常に動作し続ける。これは各ノードがデータの一部を保有し、それぞれが特定のトークン範囲を所有しているためである。</p><p>Cassandraのリング構造は、データの一貫性と高可用性を保証するためのレプリケケーションとしても機能する。各パーティションのデータは、Ring上の複数のノードに複製される。通常、所有するトークンが隣接するノードに対して行われる。この複製プロセスにより、ノードが故障してもデータが失われることがなく、また必要なデータが常に読み出せる状態が保たれる。</p><p>このように、Cassandraのリングは、データの配置、スケーラビリティ、耐障害性、および一貫性という、分散データベースの主要な課題を管理するための強力な仕組みである。</p><h2 id=演習>演習</h2><p>「datastax」と「cassandra」の2つのタグがそれぞれ1つのパーティションを形成している。
-cqlshクエリの結果である"system.token(tag)&ldquo;の値は、各タグ（&ldquo;datastax"および"cassandra&rdquo;）に対応するトークンの値を示している。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cqlsh:killrvideo&gt; SELECT token(tag), tag
-</span></span><span class=line><span class=cl>              ... FROM videos_by_tag;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl> system.token(tag)    | tag
-</span></span><span class=line><span class=cl>----------------------+-----------
-</span></span><span class=line><span class=cl> -1651127669401031945 |  datastax
-</span></span><span class=line><span class=cl> -1651127669401031945 |  datastax
-</span></span><span class=line><span class=cl>   356242581507269238 | cassandra
-</span></span><span class=line><span class=cl>   356242581507269238 | cassandra
-</span></span><span class=line><span class=cl>   356242581507269238 | cassandra
-</span></span></code></pre></div><p><code>nodetool ring</code>の出力は、Cassandraクラスタ内のノードの情報を示している。各行は1つのノードを表し、そのノードが保持しているトークンの値が表示している。nodetool コマンドによって表示されるトークンは、ノードが担当するデータの範囲の開始トークンである。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>$</span> <span class=n>nodetool</span> <span class=n>ring</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>Datacenter</span><span class=p>:</span> <span class=n>datacenter1</span>
-</span></span><span class=line><span class=cl><span class=o>==========</span>
-</span></span><span class=line><span class=cl><span class=n>Address</span>         <span class=n>Rack</span>        <span class=n>Status</span> <span class=n>State</span>   <span class=n>Load</span>            <span class=n>Owns</span>                <span class=n>Token</span>
-</span></span><span class=line><span class=cl>                                                                               <span class=mi>8495111347830785616</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>9107256078387604241</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>7666987848485021001</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>6595487232144988189</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>5577635827402561173</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>4759963894790210379</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>3684208013564630839</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>2948292320853737199</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>1868919513406135542</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=o>-</span><span class=mi>625399507725543569</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>341964735352991929</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>1931969287866890567</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>3550992583563933864</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>4529138036080047940</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>6307772336903635068</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>7403814237138573357</span>
-</span></span><span class=line><span class=cl><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>       <span class=n>rack1</span>       <span class=n>Up</span>     <span class=n>Normal</span>  <span class=mf>12.04</span> <span class=n>MiB</span>       <span class=mf>100.00</span><span class=o>%</span>             <span class=mi>8495111347830785616</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>  <span class=n>Warning</span><span class=p>:</span> <span class=s2>&#34;nodetool ring&#34;</span> <span class=n>is</span> <span class=n>used</span> <span class=n>to</span> <span class=n>output</span> <span class=n>all</span> <span class=n>the</span> <span class=n>tokens</span> <span class=n>of</span> <span class=n>a</span> <span class=n>node</span><span class=o>.</span>
-</span></span><span class=line><span class=cl>  <span class=n>To</span> <span class=n>view</span> <span class=n>status</span> <span class=n>related</span> <span class=n>info</span> <span class=n>of</span> <span class=n>a</span> <span class=n>node</span> <span class=n>use</span> <span class=s2>&#34;nodetool status&#34;</span> <span class=n>instead</span><span class=o>.</span>
-</span></span></code></pre></div><div><div>Tags:</div><ul><li><a href=/tags/cassandra/>Cassandra</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>DS201の実施_Ring</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>DS201の実施_Ring | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="ds201の実施_ring">DS201の実施_Ring</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
+<h2 id="ringとは">Ringとは</h2>
+<p>Cassandraのアーキテクチャは、複数のノードで形成されるクラスタを基盤としている。
+その中心にあるデータ構造はRingと呼ばれる。Ringとは、クラスタ内でデータがどのように各ノード間で分散されるかを管理する役割を担っている。</p>
+<p>Cassandraは全てのデータをパーティションに分割し、それぞれのパーティションに一意のトークンを割り当てる。これらのトークンは、Ringのデータ構造の中に配列される。Ringとは、全ての可能なトークンの値の範囲を視覚化したものといえる。</p>
+<p>各ノードは、Ring上の特定の範囲のトークンを所有している。その所有するトークン範囲に対応するデータの一部を格納することにより、どのデータがどのノードに存在するかが決定され、データがノード間で分散される。</p>
+<p>リングの構造は、ノードが追加または削除されたときにも、データの再分配を最小限に抑える役割も果たす。新たなノードが追加された際には、そのノードはリング上の特定の位置を占め、既存の隣接するノードからデータの一部を引き継ぐ。これにより、新規に追加されたノードが新たなデータの保存場所として機能する。</p>
+<p>Ringの構造は単一障害点を排除する役割も果たす。1つのノードが故障またはダウンしても、他のノードがその役割を引き継ぎ、システムは正常に動作し続ける。これは各ノードがデータの一部を保有し、それぞれが特定のトークン範囲を所有しているためである。</p>
+<p>Cassandraのリング構造は、データの一貫性と高可用性を保証するためのレプリケケーションとしても機能する。各パーティションのデータは、Ring上の複数のノードに複製される。通常、所有するトークンが隣接するノードに対して行われる。この複製プロセスにより、ノードが故障してもデータが失われることがなく、また必要なデータが常に読み出せる状態が保たれる。</p>
+<p>このように、Cassandraのリングは、データの配置、スケーラビリティ、耐障害性、および一貫性という、分散データベースの主要な課題を管理するための強力な仕組みである。</p>
+<h2 id="演習">演習</h2>
+<p>「datastax」と「cassandra」の2つのタグがそれぞれ1つのパーティションを形成している。
+cqlshクエリの結果である&quot;system.token(tag)&ldquo;の値は、各タグ（&ldquo;datastax&quot;および&quot;cassandra&rdquo;）に対応するトークンの値を示している。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cqlsh:killrvideo&gt; SELECT token(tag), tag
+</span></span><span class="line"><span class="cl">              ... FROM videos_by_tag;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> system.token(tag)    | tag
+</span></span><span class="line"><span class="cl">----------------------+-----------
+</span></span><span class="line"><span class="cl"> -1651127669401031945 |  datastax
+</span></span><span class="line"><span class="cl"> -1651127669401031945 |  datastax
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span><span class="line"><span class="cl">   356242581507269238 | cassandra
+</span></span></code></pre></div><p><code>nodetool ring</code>の出力は、Cassandraクラスタ内のノードの情報を示している。各行は1つのノードを表し、そのノードが保持しているトークンの値が表示している。nodetool コマンドによって表示されるトークンは、ノードが担当するデータの範囲の開始トークンである。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">ring</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Datacenter</span><span class="p">:</span> <span class="n">datacenter1</span>
+</span></span><span class="line"><span class="cl"><span class="o">==========</span>
+</span></span><span class="line"><span class="cl"><span class="n">Address</span>         <span class="n">Rack</span>        <span class="n">Status</span> <span class="n">State</span>   <span class="n">Load</span>            <span class="n">Owns</span>                <span class="n">Token</span>
+</span></span><span class="line"><span class="cl">                                                                               <span class="mi">8495111347830785616</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">9107256078387604241</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">7666987848485021001</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">6595487232144988189</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">5577635827402561173</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">4759963894790210379</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">3684208013564630839</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">2948292320853737199</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">1868919513406135542</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="o">-</span><span class="mi">625399507725543569</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">341964735352991929</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">1931969287866890567</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">3550992583563933864</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">4529138036080047940</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">6307772336903635068</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">7403814237138573357</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>       <span class="n">rack1</span>       <span class="n">Up</span>     <span class="n">Normal</span>  <span class="mf">12.04</span> <span class="n">MiB</span>       <span class="mf">100.00</span><span class="o">%</span>             <span class="mi">8495111347830785616</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Warning</span><span class="p">:</span> <span class="s2">&#34;nodetool ring&#34;</span> <span class="n">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">output</span> <span class="n">all</span> <span class="n">the</span> <span class="n">tokens</span> <span class="n">of</span> <span class="n">a</span> <span class="n">node</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">To</span> <span class="n">view</span> <span class="n">status</span> <span class="n">related</span> <span class="n">info</span> <span class="n">of</span> <span class="n">a</span> <span class="n">node</span> <span class="n">use</span> <span class="s2">&#34;nodetool status&#34;</span> <span class="n">instead</span><span class="o">.</span>
+</span></span></code></pre></div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/cassandra/">Cassandra</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">DS201の実施_Ring</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

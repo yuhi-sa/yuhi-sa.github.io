@@ -1,6 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DDD on tomato blog</title><link>https://yuhi-sa.github.io/tags/ddd/</link><description>Recent content in DDD on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 06 Jun 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/ddd/index.xml" rel="self" type="application/rss+xml"/><item><title>`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</title><link>https://yuhi-sa.github.io/posts/20240606_ddd/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240606_ddd/1/</guid><description>DDD(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要 DDD(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。
-不変条件とは 不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（immutable）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(invariant)です。 例えば、銀行口座の残高が負にならないことなどで。
-集約と不変条件 集約は、この不変条件を保つように設計されるべきである。TypeScriptを使う場合、zodのrefineを使用して不変条件をチェックすることができる。
-import { z } from &amp;#39;zod&amp;#39;; // BankAccountのスキーマを定義 const BankAccountSchema = z.object({ id: z.string(), balance: z.number(), }).refine(data =&amp;gt; data.balance &amp;gt;= 0, { message: &amp;#34;Balance must be non-negative&amp;#34;, }); // BankAccount型を定義 type BankAccount = z.infer&amp;lt;typeof BankAccountSchema&amp;gt;; トランザクションと不変条件 不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。
-リポジトリの役割 集約の永続化と取得を管理するのがリポジトリ。zodのスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。
-class BankAccountRepository { private storage: Map&amp;lt;string, BankAccount&amp;gt; = new Map(); save(account: BankAccount): void { // zodのスキーマでバリデーション BankAccountSchema.parse(account); this.storage.set(account.id, account); } findById(id: string): BankAccount | undefined { return this.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DDD on tomato blog</title>
+    <link>http://localhost:1313/tags/ddd/</link>
+    <description>Recent content in DDD on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 06 Jun 2024 09:10:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ddd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</title>
+      <link>http://localhost:1313/posts/20240606_ddd/1/</link>
+      <pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20240606_ddd/1/</guid>
+      <description>DDD(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要 DDD(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。&#xA;不変条件とは 不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（immutable）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(invariant)です。 例えば、銀行口座の残高が負にならないことなどで。&#xA;集約と不変条件 集約は、この不変条件を保つように設計されるべきである。TypeScriptを使う場合、zodのrefineを使用して不変条件をチェックすることができる。&#xA;import { z } from &amp;#39;zod&amp;#39;; // BankAccountのスキーマを定義 const BankAccountSchema = z.object({ id: z.string(), balance: z.number(), }).refine(data =&amp;gt; data.balance &amp;gt;= 0, { message: &amp;#34;Balance must be non-negative&amp;#34;, }); // BankAccount型を定義 type BankAccount = z.infer&amp;lt;typeof BankAccountSchema&amp;gt;; トランザクションと不変条件 不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。&#xA;リポジトリの役割 集約の永続化と取得を管理するのがリポジトリ。zodのスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。&#xA;class BankAccountRepository { private storage: Map&amp;lt;string, BankAccount&amp;gt; = new Map(); save(account: BankAccount): void { // zodのスキーマでバリデーション BankAccountSchema.parse(account); this.storage.set(account.id, account); } findById(id: string): BankAccount | undefined { return this.</description>
+    </item>
+  </channel>
+</rss>

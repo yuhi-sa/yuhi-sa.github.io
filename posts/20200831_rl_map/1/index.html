@@ -1,11 +1,113 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>強化学習の全体像まとめ | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=強化学習の全体像まとめ>強化学習の全体像まとめ</h1><h2 id=強化学習の全体像>強化学習の全体像</h2><p><img alt=RLmap src=.././fig1.jpeg></p><h2 id=プランニング問題>プランニング問題</h2><p>環境が<code>既知</code>の場合の逐次的意思決定問題</p><ul><li>価値反復法<br>ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li></ul><p>$$
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>強化学習の全体像まとめ | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="強化学習の全体像まとめ">強化学習の全体像まとめ</h1>
+<h2 id="強化学習の全体像">強化学習の全体像</h2>
+<p><img style="max-width: 50%; height: auto;" alt="RLmap" src=".././fig1.jpeg"></p>
+<h2 id="プランニング問題">プランニング問題</h2>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題</p>
+<ul>
+<li>価値反復法<br>
+ベルマン<code>最適</code>作用素を繰り返し用いて最適価値関数を求める．</li>
+</ul>
+<p>$$
 (B_{\star}v)(s)=\max_a{\pi(a|s)(g(s,a)+\gamma \sum p_T(s&rsquo;|s,a)v(s&rsquo;)}
 $$
 $$
 V^{\star}=\lim_{k\rightarrow \infty}(B_{*}^kV)(s)
-$$</p><ul><li>方策反復法<br>ベルマン<code>期待</code>作用素を繰り返し用いて最適方策を求める．</li></ul><p>$$
+$$</p>
+<ul>
+<li>方策反復法<br>
+ベルマン<code>期待</code>作用素を繰り返し用いて最適方策を求める．</li>
+</ul>
+<p>$$
 (B_{\pi}v)(s)=\sum_a\pi(a|s)(g(s,a)+\gamma \sum p_T(s&rsquo;|s,a)v(s&rsquo;))
 $$
 $$
@@ -13,56 +115,275 @@ V^{\pi}=\lim_{k\rightarrow \infty}(B_{\pi}^kV)(s)
 $$
 $$
 \pi(s)=\arg\max_a{g(s,a)+\gamma \sum_{s&rsquo;}p_T(s&rsquo;|s,a)V^\pi(s&rsquo;)}
-$$</p><h2 id=強化学習>強化学習</h2><p>環境が<code>既知</code>の場合の逐次的意思決定問題<br>報酬や次状態を観測することでデータを収集して，データから方策を学習する．</p><h3 id=価値関数vの推定>価値関数Vの推定</h3><p>方策$\pi$を固定して価値関数の推定を行う．</p><ul><li>オフライン<br>ベルマン作用素を直接求められないので，まず標本近似によって<code>近似</code>ベルマン作用素を求める．そして，<code>近似</code>ベルマン作用素を価値関数用いて更新する．</li></ul><p>$$
+$$</p>
+<h2 id="強化学習">強化学習</h2>
+<p>環境が<code>既知</code>の場合の逐次的意思決定問題<br>
+報酬や次状態を観測することでデータを収集して，データから方策を学習する．</p>
+<h3 id="価値関数vの推定">価値関数Vの推定</h3>
+<p>方策$\pi$を固定して価値関数の推定を行う．</p>
+<ul>
+<li>オフライン<br>
+ベルマン作用素を直接求められないので，まず標本近似によって<code>近似</code>ベルマン作用素を求める．そして，<code>近似</code>ベルマン作用素を価値関数用いて更新する．</li>
+</ul>
+<p>$$
 \hat{V}(s)=\hat{B}(\hat{V},h_T^\pi)(s)
-$$</p><ul><li>オンライン</li></ul><blockquote><ul><li>TD法<br>TD誤差$\delta$を計算して価値関数を更新する．</li></ul></blockquote><p>$$
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>TD法<br>
+TD誤差$\delta$を計算して価値関数を更新する．</li>
+</ul>
+</blockquote>
+<p>$$
 \delta=r_t+\gamma \hat{V}(s_{t+1})-\hat{V}(s_t)
-$$</p><p>$$
+$$</p>
+<p>$$
 \hat{V}(s_t)=\hat{V}(s_t)+\alpha_t\delta
-$$</p><blockquote><ul><li>TD($\lambda$)法<br>エリジビリティートレースを用いて1エピソード分の価値を一括更新する．</li></ul></blockquote><h3 id=行動価値関数qの推定>行動価値関数Qの推定</h3><p>方策$\pi$を固定して行動価値関数の推定を行う．</p><blockquote><ul><li>Q学習法<br>価値ベース：maxを取っているため推定行動価値関数が方策に依存しない．</li></ul></blockquote><p>$$
-\delta_t=r_t+\gamma \max_{a&rsquo;}\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)<br>$$</p><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>TD($\lambda$)法<br>
+エリジビリティートレースを用いて1エピソード分の価値を一括更新する．</li>
+</ul>
+</blockquote>
+<h3 id="行動価値関数qの推定">行動価値関数Qの推定</h3>
+<p>方策$\pi$を固定して行動価値関数の推定を行う．</p>
+<blockquote>
+<ul>
+<li>Q学習法<br>
+価値ベース：maxを取っているため推定行動価値関数が方策に依存しない．</li>
+</ul>
+</blockquote>
+<p>$$
+\delta_t=r_t+\gamma \max_{a&rsquo;}\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)<br>
+$$</p>
+<p>$$
 \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
-$$</p><blockquote><ul><li>SARSA<br>方策ベース</li></ul></blockquote><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>SARSA<br>
+方策ベース</li>
+</ul>
+</blockquote>
+<p>$$
 \delta_t=r_t+\gamma \hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
-$$</p><p>$$
+$$</p>
+<p>$$
 \hat{Q}(s_t,a_t)=\hat{Q}(s_t,a_t)+\alpha_t\delta_t
-$$</p><h4 id=アクタークリティック法>アクタークリティック法</h4><p>アクターは行動を決定し，クリティックは環境から情報を集めることで状態の価値を推定し，これに基づき行動を評価を行う．</p><ul><li>クリティック</li></ul><p>$$
+$$</p>
+<h4 id="アクタークリティック法">アクタークリティック法</h4>
+<p>アクターは行動を決定し，クリティックは環境から情報を集めることで状態の価値を推定し，これに基づき行動を評価を行う．</p>
+<ul>
+<li>クリティック</li>
+</ul>
+<p>$$
 \delta_t=r_t+\gamma\hat{V}(s_{t+1})-\hat{V}(s_t)
-$$</p><p>$$
+$$</p>
+<p>$$
 \hat{V}(s_{t}=\hat{V}(s_t)+\alpha\delta_t
-$$</p><ul><li>アクター</li></ul><p>$$
+$$</p>
+<ul>
+<li>アクター</li>
+</ul>
+<p>$$
 q(s_t,a_t)=q(s_t,a_t)+\alpha\delta_t
-$$</p><p>*$q$は効用関数(価値観数は効用関数により得られる)</p><h3 id=関数近似>関数近似</h3><p>状態数が膨大であったり，状態空間が連続の場合，計算量が多くなりすぎるため関数近似を行う．</p><h4 id=価値関数近似>価値関数近似</h4><p>パラメータ$w$で規定される関数近似器を用いる．</p><ul><li>オフライン<br>適合価値反復法では収束性を担保できない．安定化の1つのアプローチとして関数近似の自由度を上げる方法がある．代表例として，<code>ニューラル適合Q反復</code>，<code>深層Qネットワーク</code>がある．</li></ul><blockquote><ul><li>適合価値反復法(価値関数$V$)<br>各経験の目的値を算出し，誤差最小化により$w$を求める．</li></ul></blockquote><p>$$
+$$</p>
+<p>*$q$は効用関数(価値観数は効用関数により得られる)</p>
+<h3 id="関数近似">関数近似</h3>
+<p>状態数が膨大であったり，状態空間が連続の場合，計算量が多くなりすぎるため関数近似を行う．</p>
+<h4 id="価値関数近似">価値関数近似</h4>
+<p>パラメータ$w$で規定される関数近似器を用いる．</p>
+<ul>
+<li>オフライン<br>
+適合価値反復法では収束性を担保できない．安定化の1つのアプローチとして関数近似の自由度を上げる方法がある．代表例として，<code>ニューラル適合Q反復</code>，<code>深層Qネットワーク</code>がある．</li>
+</ul>
+<blockquote>
+<ul>
+<li>適合価値反復法(価値関数$V$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
 V_n^{target}=\hat{B}(\hat{V}_w)(s_n)=r_n+\gamma \hat{V}_w(s&rsquo;_n)
-$$</p><p>$$
+$$</p>
+<p>$$
 Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s&rsquo;_n)
-$$</p><p>$$
+$$</p>
+<p>$$
 w=\arg\min_w\frac{1}{N}\sum_1^N(V_n^{target}-\hat{V}_w(s_n))^2
-$$</p><blockquote><ul><li>適合Q反復法(行動価値関数$Q$)<br>各経験の目的値を算出し，誤差最小化により$w$を求める．</li></ul></blockquote><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>適合Q反復法(行動価値関数$Q$)<br>
+各経験の目的値を算出し，誤差最小化により$w$を求める．</li>
+</ul>
+</blockquote>
+<p>$$
 Q_n^{target}=\hat{B}(\hat{Q}_w)(s_n)=r_n+\gamma \max_a\hat{Q}_w(s&rsquo;_n)
-$$</p><p>$$
+$$</p>
+<p>$$
 w=\arg\min_w\frac{1}{N}\sum_1^N(Q_n^{target}-\hat{Q}_w(s_n))^2
-$$</p><ul><li>オンライン</li></ul><blockquote><ul><li>近似TD法<br>　TD誤差を再定義</li></ul></blockquote><p>$$ \delta = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$$</p><p>$\hat{V}_w$の $w$ に関する偏微分ベクトル</p><p>$$\nabla_w\hat{V}_{w_t}(s)$$</p><p>を用いて</p><p>$$
+$$</p>
+<ul>
+<li>オンライン</li>
+</ul>
+<blockquote>
+<ul>
+<li>近似TD法<br>
+　TD誤差を再定義</li>
+</ul>
+</blockquote>
+<p>$$ \delta = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$$</p>
+<p>$\hat{V}_w$の $w$ に関する偏微分ベクトル</p>
+<p>$$\nabla_w\hat{V}_{w_t}(s)$$</p>
+<p>を用いて</p>
+<p>$$
 w_{t+1}=w_t+\alpha\delta_t\nabla_w\hat{V}_{w_t}(s_t)
-$$</p><blockquote><ul><li>近似Q学習法</li></ul></blockquote><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>近似Q学習法</li>
+</ul>
+</blockquote>
+<p>$$
 \delta_t=r_t+\gamma\max_{a&rsquo;}\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
-$$</p><blockquote><ul><li>近似SARSA法</li></ul></blockquote><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>近似SARSA法</li>
+</ul>
+</blockquote>
+<p>$$
 \delta_t=r_t+\gamma\hat{Q}(s_{t+1},a&rsquo;)-\hat{Q}(s_t,a_t)
-$$</p><h4 id=方策近似>方策近似</h4><blockquote><ul><li>方策勾配法<br>目的関数</li></ul></blockquote><p>$$
+$$</p>
+<h4 id="方策近似">方策近似</h4>
+<blockquote>
+<ul>
+<li>方策勾配法<br>
+目的関数</li>
+</ul>
+</blockquote>
+<p>$$
 f_0=\sum_sp_{s_0}(s)V^{\pi_\theta}(s)
-$$</p><p>$$
+$$</p>
+<p>$$
 f_\infty=\lim_{T \rightarrow \infty}\mathbb{E}[\frac{1}{T}\sum_{t=0}^{T-1}g(S_t,A_t)=\sum_{s}\sum_{a}p_{\infty}^{\pi_\theta}(a|s)g(s,a)
-$$</p><p>確率的勾配法に従い
+$$</p>
+<p>確率的勾配法に従い
 $$
 \theta=\theta+\alpha_tG_t^\theta
-$$</p><blockquote><ul><li>モンテカルロ方策勾配法</li></ul></blockquote><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>モンテカルロ方策勾配法</li>
+</ul>
+</blockquote>
+<p>$$
 c_t=\sum_{k=t}^{T-1}r_k
-$$</p><p>$$
+$$</p>
+<p>$$
 \theta=\theta+\alpha_n\frac{1}{T}\sum_{t=0}^{T-1}(c_t-b(s_t))\nabla_\theta \log\pi_\theta(s_t,a_t)
-$$</p><blockquote><ul><li>アクタークリティック方策勾配法</li></ul></blockquote><blockquote><blockquote><ul><li>クリティックの更新<br>推定平均報酬$f$の更新</li></ul></blockquote></blockquote><p>$$f_t=f_{t-1}+\alpha_t(r_t-f_{t-1})$$</p><p>TD誤差の計算</p><p>$$
+$$</p>
+<blockquote>
+<ul>
+<li>アクタークリティック方策勾配法</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>クリティックの更新<br>
+推定平均報酬$f$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$f_t=f_{t-1}+\alpha_t(r_t-f_{t-1})$$</p>
+<p>TD誤差の計算</p>
+<p>$$
 \delta_t=r_t - f_t + \hat{Q}w_{t}(s_{t+1},a_{t+1})-\hat{Q}_{w_t}(s_t,a_t)
-$$</p><p>エリジビリティ・トレースと関数近似器パラメータの更新</p><p>$$
+$$</p>
+<p>エリジビリティ・トレースと関数近似器パラメータの更新</p>
+<p>$$
 z_t=\lambda z_{t-1}+\nabla_w\hat{Q}_{w_t}(s_t,a_t)
-$$</p><p>$$
+$$</p>
+<p>$$
 w_{t+1}=w_t+\alpha_t\delta_tz_t
-$$</p><blockquote><blockquote><ul><li>アクターの更新<br>方策パラメータ$\theta$の更新</li></ul></blockquote></blockquote><p>$$\theta_{t+1} = \theta + \alpha_t \hat{Q} (s_t,a_t) \nabla_\theta \log \pi_\theta(a_t|s_t)$$</p><h2 id=参考文献>参考文献</h2><ul><li>森村 哲郎, &ldquo;<a href=https://amzn.to/3eH8hHd>MLP機械学習プロフェッショナルシリーズ 強化学習</a>&rdquo;</li></ul><div><div>Tags:</div><ul><li><a href=/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/>強化学習</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>強化学習の全体像まとめ</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+$$</p>
+<blockquote>
+<blockquote>
+<ul>
+<li>アクターの更新<br>
+方策パラメータ$\theta$の更新</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>$$\theta_{t+1} = \theta + \alpha_t \hat{Q} (s_t,a_t) \nabla_\theta \log \pi_\theta(a_t|s_t)$$</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>森村 哲郎, &ldquo;<a href="https://amzn.to/3eH8hHd">MLP機械学習プロフェッショナルシリーズ 強化学習</a>&rdquo;</li>
+</ul>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/">強化学習</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">強化学習の全体像まとめ</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>

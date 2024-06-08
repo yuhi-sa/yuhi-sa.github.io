@@ -1,39 +1,200 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>Kubernetesの認証情報(Context) | tomato blog</title>
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=kubernetesの認証情報context>Kubernetesの認証情報(Context)</h1><h2 id=kubeconfig>kubeconfig</h2><p>kubectlが、k8s Masterと通信する際には、接続先サーバのの認証情報を「~/.kube/confg」に記載する必要がある。</p><p>kubeconfigで具体的な設定を行う部分は、clusters、users、contextsの三種類あり、配列型で設定する。
-clustersには接続先クラスタの情報を、usersには認証情報を定義する。contextsはclusterとuserのペアとnamespaceを指定したものを定義する。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>apiVersion: v1
-</span></span><span class=line><span class=cl>kind: Config
-</span></span><span class=line><span class=cl>clusters: # 接続先クラスタ情報
-</span></span><span class=line><span class=cl>- cluster:
-</span></span><span class=line><span class=cl>    certificate-authority: /Users/USER/.minikube/ca.crt
-</span></span><span class=line><span class=cl>    extensions:
-</span></span><span class=line><span class=cl>    - extension:
-</span></span><span class=line><span class=cl>        last-update: Thu, 01 Sep 2022 09:39:29 JST
-</span></span><span class=line><span class=cl>        provider: minikube.sigs.k8s.io
-</span></span><span class=line><span class=cl>        version: v1.26.1
-</span></span><span class=line><span class=cl>      name: cluster_info
-</span></span><span class=line><span class=cl>    server: https://127.0.0.1:55537
-</span></span><span class=line><span class=cl>  name: minikube
-</span></span><span class=line><span class=cl>users: # 認証情報
-</span></span><span class=line><span class=cl>- name: minikube
-</span></span><span class=line><span class=cl>  user:
-</span></span><span class=line><span class=cl>    client-certificate: /Users/USER/.minikube/profiles/minikube/client.crt
-</span></span><span class=line><span class=cl>    client-key: /Users/USER/.minikube/profiles/minikube/client.key
-</span></span><span class=line><span class=cl>contexts:　＃接続先と認証情報の組み合わせ
-</span></span><span class=line><span class=cl>- context:
-</span></span><span class=line><span class=cl>    cluster: minikube
-</span></span><span class=line><span class=cl>    extensions:
-</span></span><span class=line><span class=cl>    - extension:
-</span></span><span class=line><span class=cl>        last-update: Thu, 01 Sep 2022 09:39:29 JST
-</span></span><span class=line><span class=cl>        provider: minikube.sigs.k8s.io
-</span></span><span class=line><span class=cl>        version: v1.26.1
-</span></span><span class=line><span class=cl>      name: context_info
-</span></span><span class=line><span class=cl>    namespace: default
-</span></span><span class=line><span class=cl>    user: minikube
-</span></span><span class=line><span class=cl>  name: minikube
-</span></span><span class=line><span class=cl>current-context: docker-desktop
-</span></span><span class=line><span class=cl>preferences: {}
-</span></span></code></pre></div><h2 id=kubeconfigの操作>kubeconfigの操作</h2><p>contextを切り替えることで複数の環境を複数の権限で扱えるようになる。</p><h3 id=contextの一覧表示>contextの一覧表示</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ kubectl config get-contexts
-</span></span></code></pre></div><h3 id=contextの切り替え>contextの切り替え</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ kubectl config use-context {コンテキスト名}
-</span></span></code></pre></div><h3 id=現在のcontextの表示>現在のcontextの表示</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ kubectl config current-context
-</span></span></code></pre></div><h2 id=参考>参考</h2><ul><li><a href=https://amzn.to/3KwZjKm>青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li></ul><div><div>Tags:</div><ul><li><a href=/tags/k8s/>K8s</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>Kubernetesの認証情報(Context)</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Kubernetesの認証情報(Context) | tomato blog</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+<body>
+  <header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+      </li>
+      <li class="nav-item">
+        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+      </li>
+        </ul>
+      </div>
+    </nav>
+
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+
+
+<h1 id="kubernetesの認証情報context">Kubernetesの認証情報(Context)</h1>
+<h2 id="kubeconfig">kubeconfig</h2>
+<p>kubectlが、k8s Masterと通信する際には、接続先サーバのの認証情報を「~/.kube/confg」に記載する必要がある。</p>
+<p>kubeconfigで具体的な設定を行う部分は、clusters、users、contextsの三種類あり、配列型で設定する。
+clustersには接続先クラスタの情報を、usersには認証情報を定義する。contextsはclusterとuserのペアとnamespaceを指定したものを定義する。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Config
+</span></span><span class="line"><span class="cl">clusters: # 接続先クラスタ情報
+</span></span><span class="line"><span class="cl">- cluster:
+</span></span><span class="line"><span class="cl">    certificate-authority: /Users/USER/.minikube/ca.crt
+</span></span><span class="line"><span class="cl">    extensions:
+</span></span><span class="line"><span class="cl">    - extension:
+</span></span><span class="line"><span class="cl">        last-update: Thu, 01 Sep 2022 09:39:29 JST
+</span></span><span class="line"><span class="cl">        provider: minikube.sigs.k8s.io
+</span></span><span class="line"><span class="cl">        version: v1.26.1
+</span></span><span class="line"><span class="cl">      name: cluster_info
+</span></span><span class="line"><span class="cl">    server: https://127.0.0.1:55537
+</span></span><span class="line"><span class="cl">  name: minikube
+</span></span><span class="line"><span class="cl">users: # 認証情報
+</span></span><span class="line"><span class="cl">- name: minikube
+</span></span><span class="line"><span class="cl">  user:
+</span></span><span class="line"><span class="cl">    client-certificate: /Users/USER/.minikube/profiles/minikube/client.crt
+</span></span><span class="line"><span class="cl">    client-key: /Users/USER/.minikube/profiles/minikube/client.key
+</span></span><span class="line"><span class="cl">contexts:　＃接続先と認証情報の組み合わせ
+</span></span><span class="line"><span class="cl">- context:
+</span></span><span class="line"><span class="cl">    cluster: minikube
+</span></span><span class="line"><span class="cl">    extensions:
+</span></span><span class="line"><span class="cl">    - extension:
+</span></span><span class="line"><span class="cl">        last-update: Thu, 01 Sep 2022 09:39:29 JST
+</span></span><span class="line"><span class="cl">        provider: minikube.sigs.k8s.io
+</span></span><span class="line"><span class="cl">        version: v1.26.1
+</span></span><span class="line"><span class="cl">      name: context_info
+</span></span><span class="line"><span class="cl">    namespace: default
+</span></span><span class="line"><span class="cl">    user: minikube
+</span></span><span class="line"><span class="cl">  name: minikube
+</span></span><span class="line"><span class="cl">current-context: docker-desktop
+</span></span><span class="line"><span class="cl">preferences: {}
+</span></span></code></pre></div><h2 id="kubeconfigの操作">kubeconfigの操作</h2>
+<p>contextを切り替えることで複数の環境を複数の権限で扱えるようになる。</p>
+<h3 id="contextの一覧表示">contextの一覧表示</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config get-contexts
+</span></span></code></pre></div><h3 id="contextの切り替え">contextの切り替え</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config use-context {コンテキスト名}
+</span></span></code></pre></div><h3 id="現在のcontextの表示">現在のcontextの表示</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ kubectl config current-context
+</span></span></code></pre></div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
+</ul>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/k8s/">K8s</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">Kubernetesの認証情報(Context)</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
+
+  </footer>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+</html>
