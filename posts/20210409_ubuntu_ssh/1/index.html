@@ -1,127 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>UbuntuでローカルDNSサーバーが指定できないときの編集方法 | tomato blog</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css" integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css" integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-
-</head>
-<body>
-  <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/" class="nav-link"> Blog </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/tags" class="nav-link"> Tags </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/about" class="nav-link"> About </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-      </li>
-        </ul>
-      </div>
-    </nav>
-
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-
-<h1 id="ubuntuでローカルdnsサーバーが指定できないときの編集方法">UbuntuでローカルDNSサーバーが指定できないときの編集方法</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/resolv.conf
-</span></span></code></pre></div><p>を編集する．</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># This file is managed by man:systemd-resolved(8). Do not edit.</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># This is a dynamic resolv.conf file for connecting local clients to the</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># internal DNS stub resolver of systemd-resolved. This file lists all</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># configured search domains.</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Run &#34;resolvectl status&#34; to see details about the uplink DNS servers</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># currently in use.</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Third party programs must not access this file directly, but only through the</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># replace this symlink by a static file or a different symlink.</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># See man:systemd-resolved.service(8) for details about the supported modes of</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># operation for /etc/resolv.conf.</span>
-</span></span><span class="line"><span class="cl">nameserver ここを書き換える
-</span></span><span class="line"><span class="cl">options edns0 trust-ad
-</span></span><span class="line"><span class="cl">search 
-</span></span></code></pre></div>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/linux/">Linux</a></li>
-    </ul>
-  </div>
-
-
-  </main>
-  <footer>
-    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
-
-  </footer>
-</body>
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>UbuntuでローカルDNSサーバーが指定できないときの編集方法 | tomato blog</title>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=ubuntuでローカルdnsサーバーが指定できないときの編集方法>UbuntuでローカルDNSサーバーが指定できないときの編集方法</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/etc/resolv.conf
+</span></span></code></pre></div><p>を編集する．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># This file is managed by man:systemd-resolved(8). Do not edit.</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># This is a dynamic resolv.conf file for connecting local clients to the</span>
+</span></span><span class=line><span class=cl><span class=c1># internal DNS stub resolver of systemd-resolved. This file lists all</span>
+</span></span><span class=line><span class=cl><span class=c1># configured search domains.</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># Run &#34;resolvectl status&#34; to see details about the uplink DNS servers</span>
+</span></span><span class=line><span class=cl><span class=c1># currently in use.</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># Third party programs must not access this file directly, but only through the</span>
+</span></span><span class=line><span class=cl><span class=c1># symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,</span>
+</span></span><span class=line><span class=cl><span class=c1># replace this symlink by a static file or a different symlink.</span>
+</span></span><span class=line><span class=cl><span class=c1>#</span>
+</span></span><span class=line><span class=cl><span class=c1># See man:systemd-resolved.service(8) for details about the supported modes of</span>
+</span></span><span class=line><span class=cl><span class=c1># operation for /etc/resolv.conf.</span>
+</span></span><span class=line><span class=cl>nameserver ここを書き換える
+</span></span><span class=line><span class=cl>options edns0 trust-ad
+</span></span><span class=line><span class=cl>search 
+</span></span></code></pre></div><div><div>Tags:</div><ul><li><a href=/tags/linux/>Linux</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>UbuntuでローカルDNSサーバーが指定できないときの編集方法</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>

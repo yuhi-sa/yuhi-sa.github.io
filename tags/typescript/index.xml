@@ -1,26 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>TypeScript on tomato blog</title>
-    <link>https://yuhi-sa.github.io/tags/typescript/</link>
-    <description>Recent content in TypeScript on tomato blog</description>
-    <generator>Hugo</generator>
-    <language>ja</language>
-    <lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate>
-    <atom:link href="https://yuhi-sa.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title>
-      <link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link>
-      <pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid>
-      <description>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する union型に対してswich文を使う場合は、網羅性の保証が重要となります。&#xA;網羅性の保証方法として、default句にnever型を代入する方法があります。&#xA;never型は「値を持たない」を意味するTypeScriptの特別な型です。&#xA;詳しくはhttps://typescriptbook.jp/reference/statements/never&#xA;簡単に言い換えると「あり得ない」ことを表す型です。&#xA;こちらがサンプル実装となります。&#xA;type Sample = &amp;#34;A&amp;#34; | &amp;#34;B; function testFunc(sample: Sample): void { switch (sample) { case &amp;#34;A&amp;#34;: console.log(sample); break; case &amp;#34;B&amp;#34;: console.log(sample); break; default: // 網羅性をチェック const _: never = sample; } } このコードがビルドに成功するということはTypeScriptの型検査器によって「このdefault節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。 (たとえば、 case “B”:のコードを消すとエラーになります。)&#xA;この方法を取ることにより、Union型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。 将来Union型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。&#xA;参考 Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社. </description>
-    </item>
-    <item>
-      <title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title>
-      <link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link>
-      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid>
-      <description>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する Next.js（App Router）の概要 Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&#xA;クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&#xA;「use client」の適切な使用 「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&#xA;実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&#xA;汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。 そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&#xA;つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&#xA;参考 吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on tomato blog</title><link>https://yuhi-sa.github.io/tags/typescript/</link><description>Recent content in TypeScript on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title><link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link><pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid><description>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する union型に対してswich文を使う場合は、網羅性の保証が重要となります。
+網羅性の保証方法として、default句にnever型を代入する方法があります。
+never型は「値を持たない」を意味するTypeScriptの特別な型です。
+詳しくはhttps://typescriptbook.jp/reference/statements/never
+簡単に言い換えると「あり得ない」ことを表す型です。
+こちらがサンプル実装となります。
+type Sample = &amp;#34;A&amp;#34; | &amp;#34;B; function testFunc(sample: Sample): void { switch (sample) { case &amp;#34;A&amp;#34;: console.log(sample); break; case &amp;#34;B&amp;#34;: console.log(sample); break; default: // 網羅性をチェック const _: never = sample; } } このコードがビルドに成功するということはTypeScriptの型検査器によって「このdefault節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。 (たとえば、 case “B”:のコードを消すとエラーになります。)
+この方法を取ることにより、Union型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。 将来Union型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。
+参考 Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.</description></item><item><title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title><link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid><description>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する Next.js（App Router）の概要 Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。
+クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。
+「use client」の適切な使用 「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。
+実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。
+汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。 そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。
+つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。
+参考 吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.</description></item></channel></rss>

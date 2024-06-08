@@ -1,143 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>粒子群最適化(PSO)とTCPSOのMatlabプログラム | tomato blog</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css" integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css" integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin="anonymous">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-
-</head>
-<body>
-  <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/" class="nav-link"> Blog </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/tags" class="nav-link"> Tags </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/about" class="nav-link"> About </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="https://yuhi-sa.github.io/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-      </li>
-        </ul>
-      </div>
-    </nav>
-
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-
-<h1 id="粒子群最適化psoとtcpsoのmatlabプログラム">粒子群最適化(PSO)とTCPSOのMatlabプログラム</h1>
-<h2 id="粒子群最適化psoparticle-swarm-optimization">粒子群最適化(PSO:Particle Swarm Optimization)</h2>
-<p>PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．</p>
-<p>PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．</p>
-<h3 id="粒子の更新">粒子の更新</h3>
-<p>粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．</p>
-<p>このとき，$n$は粒子数，$m$は次元数である．粒子$i$が各時刻まで探索した解のうち最良の位置情報ベクトルを$P_i(t)$として保持し，粒子群の中で最良の粒子の位置情報ベクトルを$P_G(t)$として群全体で共有する．</p>
-<p>以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p>
-<p>$$
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>粒子群最適化(PSO)とTCPSOのMatlabプログラム | tomato blog</title>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=粒子群最適化psoとtcpsoのmatlabプログラム>粒子群最適化(PSO)とTCPSOのMatlabプログラム</h1><h2 id=粒子群最適化psoparticle-swarm-optimization>粒子群最適化(PSO:Particle Swarm Optimization)</h2><p>PSOは，Kennedy and Eberhartによって開発された，魚や鳥などにみられる群行動の餌の在り処の情報が群全体に伝達され，他の個体の行動に合わせて速度を調整しながらすべての個体が一斉に行動しているという点に着目して提案された最適解探索のアルゴリズムである．</p><p>PSOでは，位置情報と速度情報を持った粒子(個体)が最適解を求めて探索空間を探索する．各粒子は自分自身の過去の情報と周りの粒子の過去の情報を互いに共有しながら解を探索する．粒子の更新が単純な概念から容易に実装でき，さらに多様な改良が可能である．</p><h3 id=粒子の更新>粒子の更新</h3><p>粒子$i,i=1,2,…,n$は時刻$t$における位置情報ベクトル$x_i(t)=(x_i1,x_i2,…,x_m)$と速度ベクトル$v_i (t)=(v_i1,v_i2,…,v_m)$の情報を持っている．</p><p>このとき，$n$は粒子数，$m$は次元数である．粒子$i$が各時刻まで探索した解のうち最良の位置情報ベクトルを$P_i(t)$として保持し，粒子群の中で最良の粒子の位置情報ベクトルを$P_G(t)$として群全体で共有する．</p><p>以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p><p>$$
 v_i(t+1)=w{v}_i(t)+C_1r_1(P_i(t)-m{x}_i(t))+C_2r_2(P_G(t)-x_i(t))
-$$</p>
-<p>$$
+$$</p><p>$$
 x_i(t+1)=x_i(t)+{v}_i(t+1)
-$$</p>
-<p>$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．</p>
-<p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p>
-<p>更新の概念図を以下に示す．
-<img alt="fig1.png" src=".././fig1.png"></p>
-<h3 id="アルゴリズム">アルゴリズム</h3>
-<p>PSOのアルゴリズムを以下に示す．</p>
-<ol>
-<li>粒子の初期生成
-初期の粒子の位置情報ベクトル$x_i$と速度ベクトル$v_i$を乱数に基づいて生成する．</li>
-<li>評価値の算出
-各粒子の位置から評価値を決定する．</li>
-<li>探索開始($t=0$)から現在までの各粒子$i$の最良位置
-情報$P_G (t)$の更新，各粒子ごとに，現在までの最良の評価値を記録する．</li>
-<li>群全体の最良位置情報$P_G (t)$の更新
-全粒子の中から，最良の評価値を記憶する．</li>
-<li>各粒子の速度を計算</li>
-<li>各粒子の位置を計算</li>
-<li>終了条件判定
-終了条件を満たすまで，Step2からStep6を繰り返す．</li>
-</ol>
-<h3 id="アルゴリズムの性質">アルゴリズムの性質</h3>
-<p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p>
-<p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p>
-<ul>
-<li>$t=0$のとき
-<img alt="pso1.png" src=".././fig2.png"></li>
-<li>$t=250$のとき
-<img alt="pso2.png" src=".././fig3.png"></li>
-<li>$t=500$のとき
-<img alt="pso3.png" src=".././fig4.png"></li>
-</ul>
-<p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p>
-<h2 id="tcpsotwo-swarm-cooperative-particle-swarm-optimization">TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h2>
-<p>TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．</p>
-<h3 id="粒子の更新-1">粒子の更新</h3>
-<p>スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p>
-<p>$$
+$$</p><p>$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．</p><p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p><p>更新の概念図を以下に示す．
+<img alt=fig1.png src=.././fig1.png></p><h3 id=アルゴリズム>アルゴリズム</h3><p>PSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
+初期の粒子の位置情報ベクトル$x_i$と速度ベクトル$v_i$を乱数に基づいて生成する．</li><li>評価値の算出
+各粒子の位置から評価値を決定する．</li><li>探索開始($t=0$)から現在までの各粒子$i$の最良位置
+情報$P_G (t)$の更新，各粒子ごとに，現在までの最良の評価値を記録する．</li><li>群全体の最良位置情報$P_G (t)$の更新
+全粒子の中から，最良の評価値を記憶する．</li><li>各粒子の速度を計算</li><li>各粒子の位置を計算</li><li>終了条件判定
+終了条件を満たすまで，Step2からStep6を繰り返す．</li></ol><h3 id=アルゴリズムの性質>アルゴリズムの性質</h3><p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p><p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p><ul><li>$t=0$のとき
+<img alt=pso1.png src=.././fig2.png></li><li>$t=250$のとき
+<img alt=pso2.png src=.././fig3.png></li><li>$t=500$のとき
+<img alt=pso3.png src=.././fig4.png></li></ul><p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p><h2 id=tcpsotwo-swarm-cooperative-particle-swarm-optimization>TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h2><p>TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．</p><h3 id=粒子の更新-1>粒子の更新</h3><p>スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p><p>$$
 v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t))
 $$
 $$
@@ -151,250 +27,202 @@ $$
 x_i^M(t+1)=x_i^M(t)+v_i^M(t+1)
 $$
 マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている．
-スレーブ粒子とマスター粒子の更新の概念を以下に示す．</p>
-<ul>
-<li>
-<p>スレーブ粒子群の更新の概念図
-<img alt="fig2.png" src=".././fig5.png"></p>
-</li>
-<li>
-<p>マスター粒子群の更新の概念図
-<img alt="fig3.png" src=".././fig6.png"></p>
-</li>
-</ul>
-<h3 id="アルゴリズム-1">アルゴリズム</h3>
-<p>TCPSOのアルゴリズムを以下に示す．</p>
-<ol>
-<li>粒子の初期生成
-スレーブ粒子群，マスター粒子群それぞれの初期の粒子の位置情報ベクトル $x_i^S,x_i^M$と速度ベクトル$v_i^S,v_i^M$を事前に決めた範囲よりランダムに生成する．</li>
-<li>評価値の算出
-各スレーブ粒子と各マスター粒子の位置から評価値を決定する．</li>
-<li>探索開始($t=0$)から現在までの各粒子の最良位置情報$P_i^S(t),P_i^M (t)$の更新，各粒子ごとに，現在までの最良の評価値を記憶する．</li>
-<li>最良位置情報の更新
-スレーブ群全体での最良位置情報$P_G^S (t)$と，全体での最良位置情報$P_G (t)$の更新を記憶する．</li>
-<li>各スレーブ群の粒子の速度を計算</li>
-<li>各マスター群の粒子の速度，位置を計算</li>
-<li>終了条件
-終了条件を満たしていれば終了し，満たさなければStep2に戻る．</li>
-</ol>
-<h3 id="アルゴリズムの性質-1">アルゴリズムの性質</h3>
-<p>TCPSOはスレーブ群の収束性から，単峰型の問題に対しては基本的なPSOよりも早く収束させることができる．また，マスター群は多様性を保持しており，単峰型の問題の局所解への対応も可能となる．しかし，高次元，広範囲の問題に対しては，局所解に収束してしまうため多様性の維持が困難になり，適切な探索を行うことが難しい．</p>
-<p>以下に，スレーブ粒子100個，マスター粒子100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．オレンジがスレーブ粒子群，ブルーがマスター粒子群である．</p>
-<ul>
-<li>$t=0$のとき
-<img alt="tcpso1.png" src=".././fig7.png"></li>
-<li>$t=250$のとき
-<img alt="tcpso2.png" src=".././fig8.png"></li>
-<li>$t=500$のとき
-<img alt="tcpso3.png" src=".././fig9.png"></li>
-</ul>
-<p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p>
-<h2 id="プログラム">プログラム</h2>
-<h3 id="pso">PSO</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="c">%/////// &lt;PSOパラメータ定義&gt; /////////</span>
-</span></span><span class="line"><span class="cl"><span class="n">ns</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span>          <span class="c">% 粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1s</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% 自身の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl"><span class="n">c2s</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% 全体の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl"><span class="n">maxT</span><span class="p">=</span><span class="mi">500</span><span class="p">;</span>     <span class="c">% 繰り返し回数</span>
-</span></span><span class="line"><span class="cl"><span class="n">D</span><span class="p">=</span><span class="mi">2</span><span class="p">;</span>             <span class="c">% 次元</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP1] 初期粒子群の発生 ********************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl"><span class="n">ps</span> <span class="p">=</span> <span class="mf">0.5</span><span class="o">-</span><span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  <span class="c">%初期粒子群発生 </span>
-</span></span><span class="line"><span class="cl"><span class="n">ps</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_v</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  
-</span></span><span class="line"><span class="cl"><span class="n">ps_best</span> <span class="p">=</span> <span class="n">ps</span><span class="p">;</span> <span class="c">%ローカルベスト   </span>
-</span></span><span class="line"><span class="cl"><span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c">%グローバルベスト</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">f0</span> <span class="p">=</span> <span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">ps</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">count</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">maxT</span>
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP2] 評価値計算 **************************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">t</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">               
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP3] 各粒子の最良位置の更新 ***************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">ps_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">               <span class="n">ps_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>            
-</span></span><span class="line"><span class="cl">           
-</span></span><span class="line"><span class="cl"> <span class="c">%****************　[STEP4] 全体の最良位置の更新 ***************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">                <span class="n">P_S_G</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">                        
-</span></span><span class="line"><span class="cl"> <span class="c">%****************　[STEP5] 各粒子の速度，位置を計算 ***************************     </span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="c">%パラメータ更新              </span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r1</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r2</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ps_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">c1s</span><span class="o">*</span><span class="n">r1</span><span class="o">*</span><span class="p">(</span><span class="n">ps_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">))</span> <span class="o">+</span> <span class="n">c2s</span><span class="o">*</span><span class="n">r2</span><span class="o">*</span><span class="p">(</span><span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">));</span> <span class="c">%速度更新</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">ps</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">ps_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span> <span class="c">%位置更新</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="c">%250更新ごとに図を表示</span>
-</span></span><span class="line"><span class="cl">        <span class="n">f1</span> <span class="p">=</span> <span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">ps</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">               
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><h2 id="tcpso">TCPSO</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="c">%/////// &lt;TCPSOパラメータ定義&gt; /////////</span>
-</span></span><span class="line"><span class="cl"><span class="n">ns</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span>          <span class="c">% スレーブ粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">nm</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span>          <span class="c">% マスター粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">w</span><span class="p">=</span><span class="mf">0.05</span><span class="p">;</span>          <span class="c">%　慣性項</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1s</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% スレーブ群の最良位置に対する重み </span>
-</span></span><span class="line"><span class="cl"><span class="n">c2s</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% 全体の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1m</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% マスター群の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl"><span class="n">c2m</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% スレーブ群の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl"><span class="n">c3m</span><span class="p">=</span><span class="mi">1</span><span class="p">;</span>           <span class="c">% 全体の最良位置に対する重み</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">maxT</span><span class="p">=</span><span class="mi">500</span><span class="p">;</span>     <span class="c">% 繰り返し回数</span>
-</span></span><span class="line"><span class="cl"><span class="n">D</span><span class="p">=</span><span class="mi">2</span><span class="p">;</span>             <span class="c">% 次元</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP1] 初期粒子群の発生 ********************************</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="c">%スレーブ粒子</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp</span> <span class="p">=</span> <span class="mf">0.5</span><span class="o">-</span><span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  <span class="c">%初期粒子群発生 </span>
-</span></span><span class="line"><span class="cl"><span class="n">sp</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp_v</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  
-</span></span><span class="line"><span class="cl"><span class="n">sp_best</span> <span class="p">=</span> <span class="n">sp</span><span class="p">;</span> <span class="c">%ローカルベスト   </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">%マスター粒子</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp</span> <span class="p">=</span> <span class="mf">0.5</span><span class="o">-</span><span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  <span class="c">%初期粒子群発生 </span>
-</span></span><span class="line"><span class="cl"><span class="n">mp</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp_v</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>  
-</span></span><span class="line"><span class="cl"><span class="n">mp_best</span> <span class="p">=</span> <span class="n">mp</span><span class="p">;</span> <span class="c">%ローカルベスト   </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c">%スレーブ粒子群全体のグローバルベスト</span>
-</span></span><span class="line"><span class="cl"><span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c">%粒子群全体のグローバルベスト</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">f0</span> <span class="p">=</span> <span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">sp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">hold</span> <span class="n">on</span>
-</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="n">mp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">mp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">hold</span> <span class="n">off</span>
-</span></span><span class="line"><span class="cl"><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">count</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">maxT</span>
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP2] 評価値計算 **************************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">t</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">sp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">sp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">t</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">mp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">mp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>    
-</span></span><span class="line"><span class="cl">               
-</span></span><span class="line"><span class="cl"><span class="c">%****************　[STEP3] 各粒子の最良位置の更新 ***************************</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">sp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">               <span class="n">sp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span> 
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">               <span class="n">mp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>   
-</span></span><span class="line"><span class="cl">           
-</span></span><span class="line"><span class="cl"> <span class="c">%****************　[STEP4] 全体の最良位置の更新 ***************************</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span> <span class="c">%スレーブ群全体</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">                <span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">nm</span> <span class="c">%全体の最良位置</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">                <span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">end</span>
-</span></span><span class="line"><span class="cl">         <span class="k">end</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">            <span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>        
-</span></span><span class="line"><span class="cl">                 
-</span></span><span class="line"><span class="cl"> <span class="c">%****************　[STEP5] 各粒子の速度，位置を計算 ***************************     </span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="c">%パラメータ更新</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">nm</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r1</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r2</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r3</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mp_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">w</span><span class="o">*</span><span class="n">mp_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">c1m</span><span class="o">*</span><span class="n">r1</span><span class="o">*</span><span class="p">(</span><span class="n">mp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">))</span> <span class="o">+</span> <span class="n">c2m</span><span class="o">*</span><span class="n">r2</span><span class="o">*</span><span class="p">(</span><span class="n">P_S_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">))</span> <span class="o">+</span> <span class="n">c3m</span><span class="o">*</span><span class="n">r3</span><span class="o">*</span><span class="p">(</span><span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">-</span> <span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">));</span> <span class="c">%速度更新</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">mp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">mp_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span> <span class="c">%位置更新</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nb">j</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">D</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r1</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">r2</span> <span class="p">=</span> <span class="nb">rand</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sp_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">c1s</span><span class="o">*</span><span class="n">r1</span><span class="o">*</span><span class="p">(</span><span class="n">sp_best</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">))</span> <span class="o">+</span> <span class="n">c2s</span><span class="o">*</span><span class="n">r2</span><span class="o">*</span><span class="p">(</span><span class="n">P_G</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="o">-</span><span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">));</span> <span class="c">%速度更新</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="p">=</span> <span class="n">sp</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span> <span class="o">+</span> <span class="n">sp_v</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span> <span class="c">%位置更新</span>
-</span></span><span class="line"><span class="cl">        <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">mod</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="mi">250</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="c">%250更新ごとに図を表示</span>
-</span></span><span class="line"><span class="cl">        <span class="n">f1</span> <span class="p">=</span> <span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">sp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">on</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">mp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span><span class="n">mp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="s">&#39;o&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">off</span>
-</span></span><span class="line"><span class="cl">        <span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">       
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/">群知能</a></li>
-    </ul>
-  </div>
-
-
-  </main>
-  <footer>
-    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
-
-  </footer>
-</body>
-</html>
+スレーブ粒子とマスター粒子の更新の概念を以下に示す．</p><ul><li><p>スレーブ粒子群の更新の概念図
+<img alt=fig2.png src=.././fig5.png></p></li><li><p>マスター粒子群の更新の概念図
+<img alt=fig3.png src=.././fig6.png></p></li></ul><h3 id=アルゴリズム-1>アルゴリズム</h3><p>TCPSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
+スレーブ粒子群，マスター粒子群それぞれの初期の粒子の位置情報ベクトル $x_i^S,x_i^M$と速度ベクトル$v_i^S,v_i^M$を事前に決めた範囲よりランダムに生成する．</li><li>評価値の算出
+各スレーブ粒子と各マスター粒子の位置から評価値を決定する．</li><li>探索開始($t=0$)から現在までの各粒子の最良位置情報$P_i^S(t),P_i^M (t)$の更新，各粒子ごとに，現在までの最良の評価値を記憶する．</li><li>最良位置情報の更新
+スレーブ群全体での最良位置情報$P_G^S (t)$と，全体での最良位置情報$P_G (t)$の更新を記憶する．</li><li>各スレーブ群の粒子の速度を計算</li><li>各マスター群の粒子の速度，位置を計算</li><li>終了条件
+終了条件を満たしていれば終了し，満たさなければStep2に戻る．</li></ol><h3 id=アルゴリズムの性質-1>アルゴリズムの性質</h3><p>TCPSOはスレーブ群の収束性から，単峰型の問題に対しては基本的なPSOよりも早く収束させることができる．また，マスター群は多様性を保持しており，単峰型の問題の局所解への対応も可能となる．しかし，高次元，広範囲の問題に対しては，局所解に収束してしまうため多様性の維持が困難になり，適切な探索を行うことが難しい．</p><p>以下に，スレーブ粒子100個，マスター粒子100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．オレンジがスレーブ粒子群，ブルーがマスター粒子群である．</p><ul><li>$t=0$のとき
+<img alt=tcpso1.png src=.././fig7.png></li><li>$t=250$のとき
+<img alt=tcpso2.png src=.././fig8.png></li><li>$t=500$のとき
+<img alt=tcpso3.png src=.././fig9.png></li></ul><p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p><h2 id=プログラム>プログラム</h2><h3 id=pso>PSO</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>%/////// &lt;PSOパラメータ定義&gt; /////////</span>
+</span></span><span class=line><span class=cl><span class=n>ns</span><span class=p>=</span><span class=mi>300</span><span class=p>;</span>          <span class=c>% 粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>c1s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 自身の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl><span class=n>c2s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 全体の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl><span class=n>maxT</span><span class=p>=</span><span class=mi>500</span><span class=p>;</span>     <span class=c>% 繰り返し回数</span>
+</span></span><span class=line><span class=cl><span class=n>D</span><span class=p>=</span><span class=mi>2</span><span class=p>;</span>             <span class=c>% 次元</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP1] 初期粒子群の発生 ********************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl><span class=n>ps</span> <span class=p>=</span> <span class=mf>0.5</span><span class=o>-</span><span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  <span class=c>%初期粒子群発生 </span>
+</span></span><span class=line><span class=cl><span class=n>ps</span><span class=p>(:,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>ps_v</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=n>ps_best</span> <span class=p>=</span> <span class=n>ps</span><span class=p>;</span> <span class=c>%ローカルベスト   </span>
+</span></span><span class=line><span class=cl><span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span> <span class=c>%グローバルベスト</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>f0</span> <span class=p>=</span> <span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>plot</span><span class=p>(</span><span class=n>ps</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>ps</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>count</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>maxT</span>
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP2] 評価値計算 **************************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>t</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span>
+</span></span><span class=line><span class=cl>        <span class=n>ps</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>1</span><span class=o>/</span><span class=nb>abs</span><span class=p>(</span><span class=n>ps</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>1</span><span class=p>))</span><span class=o>+</span><span class=nb>abs</span><span class=p>(</span><span class=n>ps</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>2</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>               
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP3] 各粒子の最良位置の更新 ***************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span> 
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>ps_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>               <span class=n>ps_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>            
+</span></span><span class=line><span class=cl>           
+</span></span><span class=line><span class=cl> <span class=c>%****************　[STEP4] 全体の最良位置の更新 ***************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span> 
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=n>P_S_G</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span> 
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>                        
+</span></span><span class=line><span class=cl> <span class=c>%****************　[STEP5] 各粒子の速度，位置を計算 ***************************     </span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=c>%パラメータ更新              </span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span>
+</span></span><span class=line><span class=cl>            <span class=n>r1</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>r2</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>ps_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>c1s</span><span class=o>*</span><span class=n>r1</span><span class=o>*</span><span class=p>(</span><span class=n>ps_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>))</span> <span class=o>+</span> <span class=n>c2s</span><span class=o>*</span><span class=n>r2</span><span class=o>*</span><span class=p>(</span><span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>));</span> <span class=c>%速度更新</span>
+</span></span><span class=line><span class=cl>            <span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>ps</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=o>+</span> <span class=n>ps_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span> <span class=c>%位置更新</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nb>mod</span><span class=p>(</span><span class=n>count</span><span class=p>,</span><span class=mi>250</span><span class=p>)</span><span class=o>==</span><span class=mi>0</span><span class=p>)</span> <span class=c>%250更新ごとに図を表示</span>
+</span></span><span class=line><span class=cl>        <span class=n>f1</span> <span class=p>=</span> <span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>ps</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>ps</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>               
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></div><h2 id=tcpso>TCPSO</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>%/////// &lt;TCPSOパラメータ定義&gt; /////////</span>
+</span></span><span class=line><span class=cl><span class=n>ns</span><span class=p>=</span><span class=mi>300</span><span class=p>;</span>          <span class=c>% スレーブ粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>nm</span><span class=p>=</span><span class=mi>300</span><span class=p>;</span>          <span class=c>% マスター粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>w</span><span class=p>=</span><span class=mf>0.05</span><span class=p>;</span>          <span class=c>%　慣性項</span>
+</span></span><span class=line><span class=cl><span class=n>c1s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% スレーブ群の最良位置に対する重み </span>
+</span></span><span class=line><span class=cl><span class=n>c2s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 全体の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl><span class=n>c1m</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% マスター群の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl><span class=n>c2m</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% スレーブ群の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl><span class=n>c3m</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 全体の最良位置に対する重み</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>maxT</span><span class=p>=</span><span class=mi>500</span><span class=p>;</span>     <span class=c>% 繰り返し回数</span>
+</span></span><span class=line><span class=cl><span class=n>D</span><span class=p>=</span><span class=mi>2</span><span class=p>;</span>             <span class=c>% 次元</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP1] 初期粒子群の発生 ********************************</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c>%スレーブ粒子</span>
+</span></span><span class=line><span class=cl><span class=n>sp</span> <span class=p>=</span> <span class=mf>0.5</span><span class=o>-</span><span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  <span class=c>%初期粒子群発生 </span>
+</span></span><span class=line><span class=cl><span class=n>sp</span><span class=p>(:,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>sp_v</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=n>sp_best</span> <span class=p>=</span> <span class=n>sp</span><span class=p>;</span> <span class=c>%ローカルベスト   </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>%マスター粒子</span>
+</span></span><span class=line><span class=cl><span class=n>mp</span> <span class=p>=</span> <span class=mf>0.5</span><span class=o>-</span><span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  <span class=c>%初期粒子群発生 </span>
+</span></span><span class=line><span class=cl><span class=n>mp</span><span class=p>(:,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>mp_v</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span><span class=mi>2</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=n>mp_best</span> <span class=p>=</span> <span class=n>mp</span><span class=p>;</span> <span class=c>%ローカルベスト   </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span> <span class=c>%スレーブ粒子群全体のグローバルベスト</span>
+</span></span><span class=line><span class=cl><span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span> <span class=p>=</span> <span class=mi>0</span><span class=p>;</span> <span class=c>%粒子群全体のグローバルベスト</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>f0</span> <span class=p>=</span> <span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>plot</span><span class=p>(</span><span class=n>sp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>sp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>hold</span> <span class=n>on</span>
+</span></span><span class=line><span class=cl><span class=n>plot</span><span class=p>(</span><span class=n>mp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>mp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>hold</span> <span class=n>off</span>
+</span></span><span class=line><span class=cl><span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>count</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>maxT</span>
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP2] 評価値計算 **************************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>t</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span>
+</span></span><span class=line><span class=cl>        <span class=n>sp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>1</span><span class=o>/</span><span class=nb>abs</span><span class=p>(</span><span class=n>sp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>1</span><span class=p>))</span><span class=o>+</span><span class=nb>abs</span><span class=p>(</span><span class=n>sp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>2</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>t</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span>
+</span></span><span class=line><span class=cl>        <span class=n>mp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=p>=</span> <span class=mi>1</span><span class=o>/</span><span class=nb>abs</span><span class=p>(</span><span class=n>mp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>1</span><span class=p>))</span><span class=o>+</span><span class=nb>abs</span><span class=p>(</span><span class=n>mp</span><span class=p>(</span><span class=n>t</span><span class=p>,</span><span class=mi>2</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>    
+</span></span><span class=line><span class=cl>               
+</span></span><span class=line><span class=cl><span class=c>%****************　[STEP3] 各粒子の最良位置の更新 ***************************</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span> 
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>sp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>               <span class=n>sp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span> 
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span> 
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>mp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>               <span class=n>mp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>   
+</span></span><span class=line><span class=cl>           
+</span></span><span class=line><span class=cl> <span class=c>%****************　[STEP4] 全体の最良位置の更新 ***************************</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span> <span class=c>%スレーブ群全体</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span> 
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>nm</span> <span class=c>%全体の最良位置</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>end</span>
+</span></span><span class=line><span class=cl>         <span class=k>end</span> 
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span> <span class=o>&gt;</span> <span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>        
+</span></span><span class=line><span class=cl>                 
+</span></span><span class=line><span class=cl> <span class=c>%****************　[STEP5] 各粒子の速度，位置を計算 ***************************     </span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>    <span class=c>%パラメータ更新</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>nm</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span>
+</span></span><span class=line><span class=cl>            <span class=n>r1</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>r2</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>r3</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>mp_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>w</span><span class=o>*</span><span class=n>mp_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=o>+</span> <span class=n>c1m</span><span class=o>*</span><span class=n>r1</span><span class=o>*</span><span class=p>(</span><span class=n>mp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>))</span> <span class=o>+</span> <span class=n>c2m</span><span class=o>*</span><span class=n>r2</span><span class=o>*</span><span class=p>(</span><span class=n>P_S_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>))</span> <span class=o>+</span> <span class=n>c3m</span><span class=o>*</span><span class=n>r3</span><span class=o>*</span><span class=p>(</span><span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=o>-</span> <span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>));</span> <span class=c>%速度更新</span>
+</span></span><span class=line><span class=cl>            <span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>mp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=o>+</span> <span class=n>mp_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span> <span class=c>%位置更新</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nb>i</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>ns</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nb>j</span><span class=p>=</span><span class=mi>1</span><span class=p>:</span><span class=n>D</span>
+</span></span><span class=line><span class=cl>            <span class=n>r1</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>r2</span> <span class=p>=</span> <span class=nb>rand</span><span class=o>/</span><span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>sp_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>c1s</span><span class=o>*</span><span class=n>r1</span><span class=o>*</span><span class=p>(</span><span class=n>sp_best</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>))</span> <span class=o>+</span> <span class=n>c2s</span><span class=o>*</span><span class=n>r2</span><span class=o>*</span><span class=p>(</span><span class=n>P_G</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span><span class=o>-</span><span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>));</span> <span class=c>%速度更新</span>
+</span></span><span class=line><span class=cl>            <span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=p>=</span> <span class=n>sp</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>)</span> <span class=o>+</span> <span class=n>sp_v</span><span class=p>(</span><span class=nb>i</span><span class=p>,</span><span class=nb>j</span><span class=p>);</span> <span class=c>%位置更新</span>
+</span></span><span class=line><span class=cl>        <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nb>mod</span><span class=p>(</span><span class=n>count</span><span class=p>,</span><span class=mi>250</span><span class=p>)</span><span class=o>==</span><span class=mi>0</span><span class=p>)</span> <span class=c>%250更新ごとに図を表示</span>
+</span></span><span class=line><span class=cl>        <span class=n>f1</span> <span class=p>=</span> <span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>sp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>sp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>on</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>mp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span><span class=n>mp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span><span class=s>&#39;o&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>off</span>
+</span></span><span class=line><span class=cl>        <span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>       
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></div><div><div>Tags:</div><ul><li><a href=/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/>群知能</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>粒子群最適化(PSO)とTCPSOのMatlabプログラム</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer></body></html>
