@@ -4,12 +4,12 @@
 v_i(t+1)=w{v}_i(t)+C_1r_1(P_i(t)-m{x}_i(t))+C_2r_2(P_G(t)-x_i(t))
 $$</p><p>$$
 x_i(t+1)=x_i(t)+{v}_i(t+1)
-$$</p><p>$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．</p><p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p><p>更新の概念図を以下に示す．</p><p><img style=max-width:50%;height:auto alt=fig1.png src=.././fig1.png></p><h3 id=アルゴリズム>アルゴリズム</h3><p>PSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
+$$</p><p>$w$は慣性項に対する重み，$C_1$は自身の最良位置に対する重み，$C_2$は全体の最良位置に対する重みである．</p><p>また，$r_1,r_2∈[0,1]$は各次元ごとに毎期生成される一様分布に従ってランダムに決定される実数値である．</p><p>更新の概念図を以下に示す．</p><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=fig1.png src=.././fig1.png></p><h3 id=アルゴリズム>アルゴリズム</h3><p>PSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
 初期の粒子の位置情報ベクトル$x_i$と速度ベクトル$v_i$を乱数に基づいて生成する．</li><li>評価値の算出
 各粒子の位置から評価値を決定する．</li><li>探索開始($t=0$)から現在までの各粒子$i$の最良位置
 情報$P_G (t)$の更新，各粒子ごとに，現在までの最良の評価値を記録する．</li><li>群全体の最良位置情報$P_G (t)$の更新
 全粒子の中から，最良の評価値を記憶する．</li><li>各粒子の速度を計算</li><li>各粒子の位置を計算</li><li>終了条件判定
-終了条件を満たすまで，Step2からStep6を繰り返す．</li></ol><h3 id=アルゴリズムの性質>アルゴリズムの性質</h3><p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p><p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p><ul><li>$t=0$のとき</li></ul><p><img style=max-width:50%;height:auto alt=pso1.png src=.././fig2.png></p><ul><li>$t=250$のとき</li></ul><p><img style=max-width:50%;height:auto alt=pso2.png src=.././fig3.png></p><ul><li>$t=500$のとき</li></ul><p><img style=max-width:50%;height:auto alt=pso3.png src=.././fig4.png></p><p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p><h2 id=tcpsotwo-swarm-cooperative-particle-swarm-optimization>TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h2><p>TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．</p><h3 id=粒子の更新-1>粒子の更新</h3><p>スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p><p>$$
+終了条件を満たすまで，Step2からStep6を繰り返す．</li></ol><h3 id=アルゴリズムの性質>アルゴリズムの性質</h3><p>単純な算術演算により構成され，パラメータ$w，C_1，C_2$への依存性が高いことや，各粒子が群全体の最良位置情報$P_G (t)$の位置に集中してしまうことで局所解に陥り，十分な探索ができないといった問題が存在する．収束速度と多様性の維持のバランスが難しい．</p><p>以下に，粒子数100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．</p><ul><li>$t=0$のとき</li></ul><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=pso1.png src=.././fig2.png></p><ul><li>$t=250$のとき</li></ul><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=pso2.png src=.././fig3.png></p><ul><li>$t=500$のとき</li></ul><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=pso3.png src=.././fig4.png></p><p>収束は早いが，局所解に陥っていることがわかる．また，慣性項の影響で集中的に探索することが難しくなっている．</p><h2 id=tcpsotwo-swarm-cooperative-particle-swarm-optimization>TCPSO(Two-swarm Cooperative Particle Swarm Optimization)</h2><p>TCPSOでは大域的な探索を行うマスター粒子群と集中的な探索を行うスレーブ粒子群を用いることで，PSOの収束速度と多様性の問題を改善する．2つの粒子群がお互いに情報を共有しながら各粒子が位置と速度の更新を行う．性質の異なる粒子群を用いることで大域探索と集中探索を行うことが可能になり，効率的な解探索が可能になる．</p><h3 id=粒子の更新-1>粒子の更新</h3><p>スレーブ粒子を添字$S$，マスター粒子を添字$M$で表す．以下に位置情報ベクトルと速度ベクトルの更新式を示す．</p><p>$$
 v_i^S(t+1)=C_1^Sr_1(P_i^S(t)-x_i^S(t))+C_2^Sr_2(P_G(t)-x_i^S(t))
 $$
 $$
@@ -24,15 +24,15 @@ x_i^M(t+1)=x_i^M(t)+v_i^M(t+1)
 $$
 マスター粒子の速度の更新には，スレーブ粒子群の全体の最良位置$P_G^S (t)$が追加されており，スレーブ群の情報を更新することで多様性を保持しながら大域的な探索をすることが可能になっている．
 スレーブ粒子とマスター粒子の更新の概念を以下に示す．</p><ul><li><p>スレーブ粒子群の更新の概念図
-<img style=max-width:50%;height:auto alt=fig2.png src=.././fig5.png></p></li><li><p>マスター粒子群の更新の概念図
-<img style=max-width:50%;height:auto alt=fig3.png src=.././fig6.png></p></li></ul><h3 id=アルゴリズム-1>アルゴリズム</h3><p>TCPSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
+<img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=fig2.png src=.././fig5.png></p></li><li><p>マスター粒子群の更新の概念図
+<img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=fig3.png src=.././fig6.png></p></li></ul><h3 id=アルゴリズム-1>アルゴリズム</h3><p>TCPSOのアルゴリズムを以下に示す．</p><ol><li>粒子の初期生成
 スレーブ粒子群，マスター粒子群それぞれの初期の粒子の位置情報ベクトル $x_i^S,x_i^M$と速度ベクトル$v_i^S,v_i^M$を事前に決めた範囲よりランダムに生成する．</li><li>評価値の算出
 各スレーブ粒子と各マスター粒子の位置から評価値を決定する．</li><li>探索開始($t=0$)から現在までの各粒子の最良位置情報$P_i^S(t),P_i^M (t)$の更新，各粒子ごとに，現在までの最良の評価値を記憶する．</li><li>最良位置情報の更新
 スレーブ群全体での最良位置情報$P_G^S (t)$と，全体での最良位置情報$P_G (t)$の更新を記憶する．</li><li>各スレーブ群の粒子の速度を計算</li><li>各マスター群の粒子の速度，位置を計算</li><li>終了条件
 終了条件を満たしていれば終了し，満たさなければStep2に戻る．</li></ol><h3 id=アルゴリズムの性質-1>アルゴリズムの性質</h3><p>TCPSOはスレーブ群の収束性から，単峰型の問題に対しては基本的なPSOよりも早く収束させることができる．また，マスター群は多様性を保持しており，単峰型の問題の局所解への対応も可能となる．しかし，高次元，広範囲の問題に対しては，局所解に収束してしまうため多様性の維持が困難になり，適切な探索を行うことが難しい．</p><p>以下に，スレーブ粒子100個，マスター粒子100個をランダムに生成し，$(x,y)=(0,0)$からの距離の逆数を評価値としてPSOを行った例を示す．オレンジがスレーブ粒子群，ブルーがマスター粒子群である．</p><ul><li>$t=0$のとき
-<img style=max-width:50%;height:auto alt=tcpso1.png src=.././fig7.png></li><li>$t=250$のとき
-<img style=max-width:50%;height:auto alt=tcpso2.png src=.././fig8.png></li><li>$t=500$のとき
-<img style=max-width:50%;height:auto alt=tcpso3.png src=.././fig9.png></li></ul><p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p><h2 id=プログラム>プログラム</h2><h3 id=pso>PSO</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>%/////// &lt;PSOパラメータ定義&gt; /////////</span>
+<img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=tcpso1.png src=.././fig7.png></li><li>$t=250$のとき
+<img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=tcpso2.png src=.././fig8.png></li><li>$t=500$のとき
+<img style="max-width:50%;height:auto;display:block;margin:0 auto" alt=tcpso3.png src=.././fig9.png></li></ul><p>スレーブ粒子群は，慣性項がないため収束が早くより集中的な探索ができるようになっていることがわかる．収束速度と多様性が確保されている．高次元で複雑非線形な問題に対しても，マスター粒子群が局所解を回避，逸脱し，多様な探索をし続けることが重要となる．</p><h2 id=プログラム>プログラム</h2><h3 id=pso>PSO</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>%/////// &lt;PSOパラメータ定義&gt; /////////</span>
 </span></span><span class=line><span class=cl><span class=n>ns</span><span class=p>=</span><span class=mi>300</span><span class=p>;</span>          <span class=c>% 粒子数</span>
 </span></span><span class=line><span class=cl><span class=n>c1s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 自身の最良位置に対する重み</span>
 </span></span><span class=line><span class=cl><span class=n>c2s</span><span class=p>=</span><span class=mi>1</span><span class=p>;</span>           <span class=c>% 全体の最良位置に対する重み</span>
