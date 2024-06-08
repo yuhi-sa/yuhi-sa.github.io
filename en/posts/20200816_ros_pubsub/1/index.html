@@ -1,244 +1,74 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>How to write Publisher and Subscriber in one Node with ROS | tomato blog</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-
-</head>
-<body>
-  <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-      </li>
-        </ul>
-      </div>
-    </nav>
-
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-
-
-<h1 id="how-to-write-publisher-and-subscriber-in-one-node-with-ros">How to write Publisher and Subscriber in one Node with ROS</h1>
-<h2 id="rosrobot-operating-system">ROS(Robot Operating System)</h2>
-<p>ROS is a middleware that provides libraries and tools to support the creation of robot applications. It enables easy communication between robots.</p>
-<h2 id="pub--sub-communication">Pub &amp; Sub communication</h2>
-<p>In ROS, an executable that is connected to the ROS network is called a &ldquo;Node&rdquo;, and messages are exchanged between nodes using &ldquo;Topics&rdquo;. The node that publishes messages is called a &ldquo;Publisher&rdquo; and the node that receives messages is called a &ldquo;Subscriber&rdquo;.</p>
-<h2 id="environment">Environment</h2>
-<ul>
-<li>ROS kinetic</li>
-<li>Ubuntu 16.04 LTS</li>
-<li>Python 3.8.5</li>
-</ul>
-<h2 id="publisher-program">Publisher Program</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:talker.py" data-lang="python:talker.py"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># license removed for brevity</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">talker</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Publisher(&#39;Topic Name&#39;, Type, Size)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;chatter&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Init Nonde</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Roop Period</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 10hz</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># Publish Data</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">       <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">         <span class="n">talker</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">     <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInterruptException</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">         <span class="k">pass</span>
-</span></span></code></pre></div><h1 id="subscriber-program">Subscriber Program</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:listener.py" data-lang="python:listener.py"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">     
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">listener</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Init Nonde</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Subscriber(&#39;Topic Name&#39;, Type, Callback function)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">listener</span><span class="p">()</span>
-</span></span></code></pre></div><h1 id="publisher-and-subscriber-program">Publisher and Subscriber Program</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:controller.py" data-lang="python:controller.py"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># coding: utf-8</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rospy</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_caller_id</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34;I heard </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">controller</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Init Node</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">anonymous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Subscriber</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s1">&#39;listener&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Publisher</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pub</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s1">&#39;talker&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Roop Period</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rate</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Rate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hello_str</span> <span class="o">=</span> <span class="s2">&#34;hello world </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># Publish Data</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">hello_str</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">controller</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSInitException</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
-</span></span></code></pre></div><h2 id="reference">Reference</h2>
-<ul>
-<li><a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29">Writing a Simple Publisher and Subscriber (Python)</a></li>
-<li><a href="https://docs.odriverobotics.com/">ODrive Documentation</a></li>
-<li><a href="https://github.com/neomanic/odrive_ros">neomanic/odrive_ros</a></li>
-<li><a href="https://raspimouse-sim-tutorial.gitbook.io/project/">Raspberry Pi Mouse Simulator&rsquo;s Tutorial</a></li>
-<li><a href="https://tkrel.com/9301">ROS Melodic Moreniaを使ってPub/Subでサーボモータを動かす</a></li>
-</ul>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/en/tags/ros/">ROS</a></li>
-    </ul>
-  </div>
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/en/">Home</a></li>
-      
-        
-        
-        <li class="breadcrumb-item active" aria-current="page">How to write Publisher and Subscriber in one Node with ROS</li>
-      
-    </ol>
-  </nav>
-  
-
-  </main>
-  <footer>
-    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
-
-  </footer>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-</body>
-</html>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="How to write Publisher and Subscriber in one Node with ROS | tomato blog"><title>How to write Publisher and Subscriber in one Node with ROS | tomato blog</title>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=how-to-write-publisher-and-subscriber-in-one-node-with-ros>How to write Publisher and Subscriber in one Node with ROS</h1><h2 id=rosrobot-operating-system>ROS(Robot Operating System)</h2><p>ROS is a middleware that provides libraries and tools to support the creation of robot applications. It enables easy communication between robots.</p><h2 id=pub--sub-communication>Pub & Sub communication</h2><p>In ROS, an executable that is connected to the ROS network is called a &ldquo;Node&rdquo;, and messages are exchanged between nodes using &ldquo;Topics&rdquo;. The node that publishes messages is called a &ldquo;Publisher&rdquo; and the node that receives messages is called a &ldquo;Subscriber&rdquo;.</p><h2 id=environment>Environment</h2><ul><li>ROS kinetic</li><li>Ubuntu 16.04 LTS</li><li>Python 3.8.5</li></ul><h2 id=publisher-program>Publisher Program</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:talker.py data-lang=python:talker.py><span class=line><span class=cl><span class=ch>#!/usr/bin/env python</span>
+</span></span><span class=line><span class=cl><span class=c1># license removed for brevity</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>rospy</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>std_msgs.msg</span> <span class=kn>import</span> <span class=n>String</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>talker</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Publisher(&#39;Topic Name&#39;, Type, Size)</span>
+</span></span><span class=line><span class=cl>    <span class=n>pub</span> <span class=o>=</span> <span class=n>rospy</span><span class=o>.</span><span class=n>Publisher</span><span class=p>(</span><span class=s1>&#39;chatter&#39;</span><span class=p>,</span> <span class=n>String</span><span class=p>,</span> <span class=n>queue_size</span><span class=o>=</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Init Nonde</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>init_node</span><span class=p>(</span><span class=s1>&#39;talker&#39;</span><span class=p>,</span> <span class=n>anonymous</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Roop Period</span>
+</span></span><span class=line><span class=cl>    <span class=n>rate</span> <span class=o>=</span> <span class=n>rospy</span><span class=o>.</span><span class=n>Rate</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span> <span class=c1># 10hz</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=ow>not</span> <span class=n>rospy</span><span class=o>.</span><span class=n>is_shutdown</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>hello_str</span> <span class=o>=</span> <span class=s2>&#34;hello world </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=n>rospy</span><span class=o>.</span><span class=n>get_time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>rospy</span><span class=o>.</span><span class=n>loginfo</span><span class=p>(</span><span class=n>hello_str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Publish Data</span>
+</span></span><span class=line><span class=cl>        <span class=n>pub</span><span class=o>.</span><span class=n>publish</span><span class=p>(</span><span class=n>hello_str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>rate</span><span class=o>.</span><span class=n>sleep</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>       <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=n>talker</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>     <span class=k>except</span> <span class=n>rospy</span><span class=o>.</span><span class=n>ROSInterruptException</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>         <span class=k>pass</span>
+</span></span></code></pre></div><h1 id=subscriber-program>Subscriber Program</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:listener.py data-lang=python:listener.py><span class=line><span class=cl><span class=ch>#!/usr/bin/env python</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>rospy</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>std_msgs.msg</span> <span class=kn>import</span> <span class=n>String</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>callback</span><span class=p>(</span><span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>loginfo</span><span class=p>(</span><span class=n>rospy</span><span class=o>.</span><span class=n>get_caller_id</span><span class=p>()</span> <span class=o>+</span> <span class=s2>&#34;I heard </span><span class=si>%s</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>.</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>     
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>listener</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Init Nonde</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>init_node</span><span class=p>(</span><span class=s1>&#39;listener&#39;</span><span class=p>,</span> <span class=n>anonymous</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Subscriber(&#39;Topic Name&#39;, Type, Callback function)</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>Subscriber</span><span class=p>(</span><span class=s2>&#34;chatter&#34;</span><span class=p>,</span> <span class=n>String</span><span class=p>,</span> <span class=n>callback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>spin</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>listener</span><span class=p>()</span>
+</span></span></code></pre></div><h1 id=publisher-and-subscriber-program>Publisher and Subscriber Program</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:controller.py data-lang=python:controller.py><span class=line><span class=cl><span class=ch>#!/usr/bin/env python</span>
+</span></span><span class=line><span class=cl><span class=c1># coding: utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>rospy</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>std_msgs.msg</span> <span class=kn>import</span> <span class=n>String</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>callback</span><span class=p>(</span><span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>loginfo</span><span class=p>(</span><span class=n>rospy</span><span class=o>.</span><span class=n>get_caller_id</span><span class=p>()</span> <span class=o>+</span> <span class=s2>&#34;I heard </span><span class=si>%s</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>.</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>controller</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Init Node</span>
+</span></span><span class=line><span class=cl>    <span class=n>rospy</span><span class=o>.</span><span class=n>init_node</span><span class=p>(</span><span class=s1>&#39;controller&#39;</span><span class=p>,</span> <span class=n>anonymous</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Subscriber</span>
+</span></span><span class=line><span class=cl>    <span class=n>sub</span> <span class=o>=</span> <span class=n>rospy</span><span class=o>.</span><span class=n>Subscriber</span><span class=p>(</span><span class=s1>&#39;listener&#39;</span><span class=p>,</span> <span class=n>String</span><span class=p>,</span> <span class=n>callback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Publisher</span>
+</span></span><span class=line><span class=cl>    <span class=n>pub</span> <span class=o>=</span> <span class=n>rospy</span><span class=o>.</span><span class=n>Publisher</span><span class=p>(</span><span class=s1>&#39;talker&#39;</span><span class=p>,</span> <span class=n>String</span><span class=p>,</span> <span class=n>queue_size</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Roop Period</span>
+</span></span><span class=line><span class=cl>    <span class=n>rate</span> <span class=o>=</span> <span class=n>rospy</span><span class=o>.</span><span class=n>Rate</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=ow>not</span> <span class=n>rospy</span><span class=o>.</span><span class=n>is_shutdown</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=n>hello_str</span> <span class=o>=</span> <span class=s2>&#34;hello world </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=n>rospy</span><span class=o>.</span><span class=n>get_time</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>rospy</span><span class=o>.</span><span class=n>loginfo</span><span class=p>(</span><span class=n>hello_str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Publish Data</span>
+</span></span><span class=line><span class=cl>        <span class=n>pub</span><span class=o>.</span><span class=n>publish</span><span class=p>(</span><span class=n>hello_str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>rate</span><span class=o>.</span><span class=n>sleep</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>controller</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=n>rospy</span><span class=o>.</span><span class=n>ROSInitException</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span></code></pre></div><h2 id=reference>Reference</h2><ul><li><a href=http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29>Writing a Simple Publisher and Subscriber (Python)</a></li><li><a href=https://docs.odriverobotics.com/>ODrive Documentation</a></li><li><a href=https://github.com/neomanic/odrive_ros>neomanic/odrive_ros</a></li><li><a href=https://raspimouse-sim-tutorial.gitbook.io/project/>Raspberry Pi Mouse Simulator&rsquo;s Tutorial</a></li><li><a href=https://tkrel.com/9301>ROS Melodic Moreniaを使ってPub/Subでサーボモータを動かす</a></li></ul><div><div>Tags:</div><ul><li><a href=/en/tags/ros/>ROS</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/en/>Home</a></li><li class="breadcrumb-item active" aria-current=page>How to write Publisher and Subscriber in one Node with ROS</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>

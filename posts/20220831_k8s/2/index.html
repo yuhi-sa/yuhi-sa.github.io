@@ -1,234 +1,64 @@
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Kubernetesをローカル環境に構築する | tomato blog</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-
-</head>
-<body>
-  <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-      </li>
-        </ul>
-      </div>
-    </nav>
-
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-
-
-<h1 id="kubernetesをローカル環境に構築する">Kubernetesをローカル環境に構築する</h1>
-<h2 id="kubernetesk8sとは">Kubernetes(k8s)とは</h2>
-<p>コンテナ化されたアプリケーションのデプロイ、スケーリングなどの管理を自動化するプラットフォーム。
-k8sでは、コンテナが起動するノードをk8sノードと呼び、それらを管理するノードk8sマスターと呼ぶ。ノードの集合体がk8sクラスターである。</p>
-<h2 id="minikube">Minikube</h2>
-<p>MinikubeはSIG-Cluster-Lifecycleで作られた簡単にローカルにk8sクラスターを構築・実行できるツールである。
-Minikubeではローカルの仮装マシン上にk8sをインストールするため、ハイパーバイザーが必要となる。</p>
-<p>ハイパーバイザーごとに応じたDriverを使用して操作することで、自動的にホストとなるコンテナや仮想マシンを作成し、
-その環境上にk8sをインストールする。</p>
-<p>macOSにおけるハイパーバイザーにはDocker/HyperKit driver/VirtualBox/Parallels/Vmware/Fusion/Podmanなどがある。</p>
-<p>現状、M1macではdockerしか対応してなさそう、、？</p>
-<ul>
-<li><a href="https://ytooyama.hatenadiary.jp/entry/2021/06/04/154320">M1 MacにおけるHyperkitとそれが必要なアプリケーションの利用について</a></li>
-</ul>
-<h3 id="minikubeのインストール">Minikubeのインストール</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ brew install <span class="nv">minikube</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.25.0
-</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:e10
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
-</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/manifests/1.26.1
-</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/blobs/sha256:ae9660e6a
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
-</span></span><span class="line"><span class="cl"><span class="c1">######################################################################## 100.0%</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing dependencies <span class="k">for</span> minikube: kubernetes-cli
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing minikube dependency: kubernetes-cli
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Pouring kubernetes-cli--1.25.0.arm64_monterey.bottle.tar.gz
-</span></span><span class="line"><span class="cl">🍺  /opt/homebrew/Cellar/kubernetes-cli/1.25.0: <span class="m">228</span> files, 52.8MB
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Installing <span class="nv">minikube</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Pouring minikube--1.26.1.arm64_monterey.bottle.tar.gz
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Caveats
-</span></span><span class="line"><span class="cl">zsh completions have been installed to:
-</span></span><span class="line"><span class="cl">  /opt/homebrew/share/zsh/site-functions
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Summary
-</span></span><span class="line"><span class="cl">🍺  /opt/homebrew/Cellar/minikube/1.26.1: <span class="m">9</span> files, 70.6MB
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Running <span class="sb">`</span>brew cleanup minikube<span class="sb">`</span>...
-</span></span><span class="line"><span class="cl">Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
-</span></span><span class="line"><span class="cl">Hide these hints with HOMEBREW_NO_ENV_HINTS <span class="o">(</span>see <span class="sb">`</span>man brew<span class="sb">`</span><span class="o">)</span>.
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; <span class="nv">Caveats</span>
-</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; minikube
-</span></span><span class="line"><span class="cl">zsh completions have been installed to:
-</span></span><span class="line"><span class="cl">  /opt/homebrew/share/zsh/site-functions
-</span></span></code></pre></div><h3 id="minikubeを使用してk8s環境を構築する">Minikubeを使用してk8s環境を構築する</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube start
-</span></span><span class="line"><span class="cl">😄  Darwin 12.5.1 <span class="o">(</span>arm64<span class="o">)</span> 上の minikube v1.26.1
-</span></span><span class="line"><span class="cl">✨  docker ドライバーが自動的に選択されました
-</span></span><span class="line"><span class="cl">📌  root 権限を持つ Docker Desktop ドライバーを使用
-</span></span><span class="line"><span class="cl">👍  minikube クラスター中のコントロールプレーンの minikube ノードを起動しています
-</span></span><span class="line"><span class="cl">🚜  ベースイメージを取得しています...
-</span></span><span class="line"><span class="cl">💾  ロード済み Kubernetes v1.24.3 をダウンロードしています...
-</span></span><span class="line"><span class="cl">    &gt; preloaded-images-k8s-v18-v1...:  342.82 MiB / 342.82 MiB  100.00% 20.69 M
-</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase:  348.00 MiB / 348.00 MiB  100.00% 10.00 MiB 
-</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase:  <span class="m">0</span> B <span class="o">[</span>________________________<span class="o">]</span> ?% ? p/s 27s
-</span></span><span class="line"><span class="cl">🔥  docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>2200MB<span class="o">)</span> を作成しています...
-</span></span><span class="line"><span class="cl">🐳  Docker 20.10.17 で Kubernetes v1.24.3 を準備しています...
-</span></span><span class="line"><span class="cl">    ▪ 証明書と鍵を作成しています...
-</span></span><span class="line"><span class="cl">    ▪ コントロールプレーンを起動しています...
-</span></span><span class="line"><span class="cl">    ▪ RBAC のルールを設定中です...
-</span></span><span class="line"><span class="cl">🔎  Kubernetes コンポーネントを検証しています...
-</span></span><span class="line"><span class="cl">    ▪ gcr.io/k8s-minikube/storage-provisioner:v5 イメージを使用しています
-</span></span><span class="line"><span class="cl">🌟  有効なアドオン: storage-provisioner, default-storageclass
-</span></span><span class="line"><span class="cl">🏄  終了しました！kubectl がデフォルトで「minikube」クラスターと「default」ネームスペースを使用するよう設定されました
-</span></span></code></pre></div><h3 id="contextの切り替え">Contextの切り替え</h3>
-<p>複数のk8sクラスタを利用している場合はk8sのContextを切り替える必要がある。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl config use-context minikube
-</span></span><span class="line"><span class="cl">Switched to context <span class="s2">&#34;minikube&#34;</span>.
-</span></span></code></pre></div><h3 id="ノードの確認">ノードの確認</h3>
-<p>minikubeがk8sノードとして認識されている。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ kubectl get nodes
-</span></span><span class="line"><span class="cl">NAME       STATUS   ROLES           AGE     VERSION
-</span></span><span class="line"><span class="cl">minikube   Ready    control-plane   4m41s   v1.24.3
-</span></span></code></pre></div><h3 id="minikubeクラスタの削除">minikubeクラスタの削除</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ minikube delete
-</span></span><span class="line"><span class="cl">🔥  docker の「minikube」を削除しています...
-</span></span><span class="line"><span class="cl">🔥  コンテナー「minikube」を削除しています...
-</span></span><span class="line"><span class="cl">🔥  /Users/yuhi-sa/.minikube/machines/minikube を削除しています...
-</span></span><span class="line"><span class="cl">💀  クラスター「minikube」の全てのトレースを削除しました。
-</span></span></code></pre></div><h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://amzn.to/3KwZjKm">青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li>
-</ul>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/k8s/">K8s</a></li>
-    </ul>
-  </div>
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      
-        
-        
-        <li class="breadcrumb-item active" aria-current="page">Kubernetesをローカル環境に構築する</li>
-      
-    </ol>
-  </nav>
-  
-
-  </main>
-  <footer>
-    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
-
-  </footer>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-</body>
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="Kubernetesをローカル環境に構築する | tomato blog"><title>Kubernetesをローカル環境に構築する | tomato blog</title>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=kubernetesをローカル環境に構築する>Kubernetesをローカル環境に構築する</h1><h2 id=kubernetesk8sとは>Kubernetes(k8s)とは</h2><p>コンテナ化されたアプリケーションのデプロイ、スケーリングなどの管理を自動化するプラットフォーム。
+k8sでは、コンテナが起動するノードをk8sノードと呼び、それらを管理するノードk8sマスターと呼ぶ。ノードの集合体がk8sクラスターである。</p><h2 id=minikube>Minikube</h2><p>MinikubeはSIG-Cluster-Lifecycleで作られた簡単にローカルにk8sクラスターを構築・実行できるツールである。
+Minikubeではローカルの仮装マシン上にk8sをインストールするため、ハイパーバイザーが必要となる。</p><p>ハイパーバイザーごとに応じたDriverを使用して操作することで、自動的にホストとなるコンテナや仮想マシンを作成し、
+その環境上にk8sをインストールする。</p><p>macOSにおけるハイパーバイザーにはDocker/HyperKit driver/VirtualBox/Parallels/Vmware/Fusion/Podmanなどがある。</p><p>現状、M1macではdockerしか対応してなさそう、、？</p><ul><li><a href=https://ytooyama.hatenadiary.jp/entry/2021/06/04/154320>M1 MacにおけるHyperkitとそれが必要なアプリケーションの利用について</a></li></ul><h3 id=minikubeのインストール>Minikubeのインストール</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ brew install <span class=nv>minikube</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/manifests/1.25.0
+</span></span><span class=line><span class=cl><span class=c1>######################################################################## 100.0%</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/kubernetes-cli/blobs/sha256:e10
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
+</span></span><span class=line><span class=cl><span class=c1>######################################################################## 100.0%</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/manifests/1.26.1
+</span></span><span class=line><span class=cl><span class=c1>######################################################################## 100.0%</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading https://ghcr.io/v2/homebrew/core/minikube/blobs/sha256:ae9660e6a
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sh
+</span></span><span class=line><span class=cl><span class=c1>######################################################################## 100.0%</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Installing dependencies <span class=k>for</span> minikube: kubernetes-cli
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Installing minikube dependency: kubernetes-cli
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Pouring kubernetes-cli--1.25.0.arm64_monterey.bottle.tar.gz
+</span></span><span class=line><span class=cl>🍺  /opt/homebrew/Cellar/kubernetes-cli/1.25.0: <span class=m>228</span> files, 52.8MB
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Installing <span class=nv>minikube</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Pouring minikube--1.26.1.arm64_monterey.bottle.tar.gz
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Caveats
+</span></span><span class=line><span class=cl>zsh completions have been installed to:
+</span></span><span class=line><span class=cl>  /opt/homebrew/share/zsh/site-functions
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Summary
+</span></span><span class=line><span class=cl>🍺  /opt/homebrew/Cellar/minikube/1.26.1: <span class=m>9</span> files, 70.6MB
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Running <span class=sb>`</span>brew cleanup minikube<span class=sb>`</span>...
+</span></span><span class=line><span class=cl>Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+</span></span><span class=line><span class=cl>Hide these hints with HOMEBREW_NO_ENV_HINTS <span class=o>(</span>see <span class=sb>`</span>man brew<span class=sb>`</span><span class=o>)</span>.
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; <span class=nv>Caveats</span>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; minikube
+</span></span><span class=line><span class=cl>zsh completions have been installed to:
+</span></span><span class=line><span class=cl>  /opt/homebrew/share/zsh/site-functions
+</span></span></code></pre></div><h3 id=minikubeを使用してk8s環境を構築する>Minikubeを使用してk8s環境を構築する</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ minikube start
+</span></span><span class=line><span class=cl>😄  Darwin 12.5.1 <span class=o>(</span>arm64<span class=o>)</span> 上の minikube v1.26.1
+</span></span><span class=line><span class=cl>✨  docker ドライバーが自動的に選択されました
+</span></span><span class=line><span class=cl>📌  root 権限を持つ Docker Desktop ドライバーを使用
+</span></span><span class=line><span class=cl>👍  minikube クラスター中のコントロールプレーンの minikube ノードを起動しています
+</span></span><span class=line><span class=cl>🚜  ベースイメージを取得しています...
+</span></span><span class=line><span class=cl>💾  ロード済み Kubernetes v1.24.3 をダウンロードしています...
+</span></span><span class=line><span class=cl>    &gt; preloaded-images-k8s-v18-v1...:  342.82 MiB / 342.82 MiB  100.00% 20.69 M
+</span></span><span class=line><span class=cl>    &gt; gcr.io/k8s-minikube/kicbase:  348.00 MiB / 348.00 MiB  100.00% 10.00 MiB 
+</span></span><span class=line><span class=cl>    &gt; gcr.io/k8s-minikube/kicbase:  <span class=m>0</span> B <span class=o>[</span>________________________<span class=o>]</span> ?% ? p/s 27s
+</span></span><span class=line><span class=cl>🔥  docker container <span class=o>(</span><span class=nv>CPUs</span><span class=o>=</span>2, <span class=nv>Memory</span><span class=o>=</span>2200MB<span class=o>)</span> を作成しています...
+</span></span><span class=line><span class=cl>🐳  Docker 20.10.17 で Kubernetes v1.24.3 を準備しています...
+</span></span><span class=line><span class=cl>    ▪ 証明書と鍵を作成しています...
+</span></span><span class=line><span class=cl>    ▪ コントロールプレーンを起動しています...
+</span></span><span class=line><span class=cl>    ▪ RBAC のルールを設定中です...
+</span></span><span class=line><span class=cl>🔎  Kubernetes コンポーネントを検証しています...
+</span></span><span class=line><span class=cl>    ▪ gcr.io/k8s-minikube/storage-provisioner:v5 イメージを使用しています
+</span></span><span class=line><span class=cl>🌟  有効なアドオン: storage-provisioner, default-storageclass
+</span></span><span class=line><span class=cl>🏄  終了しました！kubectl がデフォルトで「minikube」クラスターと「default」ネームスペースを使用するよう設定されました
+</span></span></code></pre></div><h3 id=contextの切り替え>Contextの切り替え</h3><p>複数のk8sクラスタを利用している場合はk8sのContextを切り替える必要がある。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ kubectl config use-context minikube
+</span></span><span class=line><span class=cl>Switched to context <span class=s2>&#34;minikube&#34;</span>.
+</span></span></code></pre></div><h3 id=ノードの確認>ノードの確認</h3><p>minikubeがk8sノードとして認識されている。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ kubectl get nodes
+</span></span><span class=line><span class=cl>NAME       STATUS   ROLES           AGE     VERSION
+</span></span><span class=line><span class=cl>minikube   Ready    control-plane   4m41s   v1.24.3
+</span></span></code></pre></div><h3 id=minikubeクラスタの削除>minikubeクラスタの削除</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ minikube delete
+</span></span><span class=line><span class=cl>🔥  docker の「minikube」を削除しています...
+</span></span><span class=line><span class=cl>🔥  コンテナー「minikube」を削除しています...
+</span></span><span class=line><span class=cl>🔥  /Users/yuhi-sa/.minikube/machines/minikube を削除しています...
+</span></span><span class=line><span class=cl>💀  クラスター「minikube」の全てのトレースを削除しました。
+</span></span></code></pre></div><h2 id=参考>参考</h2><ul><li><a href=https://amzn.to/3KwZjKm>青山真也,Kubernetes完全ガイド 第2版 impress top gearシリーズ</a></li></ul><div><div>Tags:</div><ul><li><a href=/tags/k8s/>K8s</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>Kubernetesをローカル環境に構築する</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>

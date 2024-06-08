@@ -1,183 +1,22 @@
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>DS201の実施_Gossip | tomato blog</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-
-</head>
-<body>
-  <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
-      </li>
-      <li class="nav-item">
-        <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-      </li>
-        </ul>
-      </div>
-    </nav>
-
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-
-
-<h1 id="ds201の実施_gossip">DS201の実施_Gossip</h1>
-<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p>
-<p>Cassandraのノード間の通信とデータの同期は、Gossipプロトコルに基づいて行われる。</p>
-<p>Gossipは、ネットワーク内のノード間で情報を分散させるためのプロトコル。ノードは定期的にお互いに通信し、各ノードが保持する情報を交換する。この情報には、ノードの状態やトポロジー、データの位置情報などが含まれる。</p>
-<p>具体的な動作手順は以下の通り。</p>
-<ol>
-<li>各ノードは、互いに定期的に「ゴシップ（情報交換）」メッセージを送信。</li>
-<li>ノードは、受信したメッセージに含まれる情報を自身の状態と比較し、新しい情報があれば自身の情報を更新。</li>
-<li>ノードは、自身の情報を他のノードに送信。すべての情報を送信するのではなく、変更された情報のみを送る。</li>
-<li>ノードは、他のノードから受信した情報を受け入れ、自身の情報を更新。</li>
-</ol>
-<h2 id="演習">演習</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">gossipinfo</span>
-</span></span><span class="line"><span class="cl"><span class="n">localhost</span><span class="o">/</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
-</span></span><span class="line"><span class="cl">  <span class="n">generation</span><span class="p">:</span><span class="mi">1686366680</span>
-</span></span><span class="line"><span class="cl">  <span class="n">heartbeat</span><span class="p">:</span><span class="mi">8156</span>
-</span></span><span class="line"><span class="cl">  <span class="n">STATUS</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
-</span></span><span class="line"><span class="cl">  <span class="n">LOAD</span><span class="p">:</span><span class="mi">8135</span><span class="p">:</span><span class="mf">1.2650205E7</span>
-</span></span><span class="line"><span class="cl">  <span class="n">SCHEMA</span><span class="p">:</span><span class="mi">223</span><span class="p">:</span><span class="mi">8</span><span class="n">aec9840</span><span class="o">-</span><span class="mi">06</span><span class="n">b7</span><span class="o">-</span><span class="mi">356</span><span class="n">a</span><span class="o">-</span><span class="n">b5ed</span><span class="o">-</span><span class="mf">07e43</span><span class="n">a42d65e</span>
-</span></span><span class="line"><span class="cl">  <span class="n">DC</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">datacenter1</span>
-</span></span><span class="line"><span class="cl">  <span class="n">RACK</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="n">rack1</span>
-</span></span><span class="line"><span class="cl">  <span class="n">RELEASE_VERSION</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mf">4.1</span><span class="o">.</span><span class="mi">2</span>
-</span></span><span class="line"><span class="cl">  <span class="n">RPC_ADDRESS</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
-</span></span><span class="line"><span class="cl">  <span class="n">NET_VERSION</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">12</span>
-</span></span><span class="line"><span class="cl">  <span class="n">HOST_ID</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">349</span><span class="n">d6a93</span><span class="o">-</span><span class="mi">038</span><span class="n">a</span><span class="o">-</span><span class="mi">45</span><span class="n">a9</span><span class="o">-</span><span class="n">bd86</span><span class="o">-</span><span class="n">cc22ed3d8e0d</span>
-</span></span><span class="line"><span class="cl">  <span class="n">RPC_READY</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="bp">true</span>
-</span></span><span class="line"><span class="cl">  <span class="n">NATIVE_ADDRESS_AND_PORT</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9042</span>
-</span></span><span class="line"><span class="cl">  <span class="n">STATUS_WITH_PORT</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
-</span></span><span class="line"><span class="cl">  <span class="n">SSTABLE_VERSIONS</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">big</span><span class="o">-</span><span class="n">nb</span>
-</span></span><span class="line"><span class="cl">  <span class="n">TOKENS</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="o">&lt;</span><span class="n">hidden</span><span class="o">&gt;</span>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="DS201の実施_Gossip | tomato blog"><title>DS201の実施_Gossip | tomato blog</title>
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-toggle=collapse data-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><h1 id=ds201の実施_gossip>DS201の実施_Gossip</h1><p><a href=https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm>DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a>の学習記録。</p><p>Cassandraのノード間の通信とデータの同期は、Gossipプロトコルに基づいて行われる。</p><p>Gossipは、ネットワーク内のノード間で情報を分散させるためのプロトコル。ノードは定期的にお互いに通信し、各ノードが保持する情報を交換する。この情報には、ノードの状態やトポロジー、データの位置情報などが含まれる。</p><p>具体的な動作手順は以下の通り。</p><ol><li>各ノードは、互いに定期的に「ゴシップ（情報交換）」メッセージを送信。</li><li>ノードは、受信したメッセージに含まれる情報を自身の状態と比較し、新しい情報があれば自身の情報を更新。</li><li>ノードは、自身の情報を他のノードに送信。すべての情報を送信するのではなく、変更された情報のみを送る。</li><li>ノードは、他のノードから受信した情報を受け入れ、自身の情報を更新。</li></ol><h2 id=演習>演習</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>$</span> <span class=n>nodetool</span> <span class=n>gossipinfo</span>
+</span></span><span class=line><span class=cl><span class=n>localhost</span><span class=o>/</span><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>
+</span></span><span class=line><span class=cl>  <span class=n>generation</span><span class=p>:</span><span class=mi>1686366680</span>
+</span></span><span class=line><span class=cl>  <span class=n>heartbeat</span><span class=p>:</span><span class=mi>8156</span>
+</span></span><span class=line><span class=cl>  <span class=n>STATUS</span><span class=p>:</span><span class=mi>19</span><span class=p>:</span><span class=n>NORMAL</span><span class=p>,</span><span class=o>-</span><span class=mi>1868919513406135542</span>
+</span></span><span class=line><span class=cl>  <span class=n>LOAD</span><span class=p>:</span><span class=mi>8135</span><span class=p>:</span><span class=mf>1.2650205E7</span>
+</span></span><span class=line><span class=cl>  <span class=n>SCHEMA</span><span class=p>:</span><span class=mi>223</span><span class=p>:</span><span class=mi>8</span><span class=n>aec9840</span><span class=o>-</span><span class=mi>06</span><span class=n>b7</span><span class=o>-</span><span class=mi>356</span><span class=n>a</span><span class=o>-</span><span class=n>b5ed</span><span class=o>-</span><span class=mf>07e43</span><span class=n>a42d65e</span>
+</span></span><span class=line><span class=cl>  <span class=n>DC</span><span class=p>:</span><span class=mi>9</span><span class=p>:</span><span class=n>datacenter1</span>
+</span></span><span class=line><span class=cl>  <span class=n>RACK</span><span class=p>:</span><span class=mi>11</span><span class=p>:</span><span class=n>rack1</span>
+</span></span><span class=line><span class=cl>  <span class=n>RELEASE_VERSION</span><span class=p>:</span><span class=mi>6</span><span class=p>:</span><span class=mf>4.1</span><span class=o>.</span><span class=mi>2</span>
+</span></span><span class=line><span class=cl>  <span class=n>RPC_ADDRESS</span><span class=p>:</span><span class=mi>5</span><span class=p>:</span><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span>
+</span></span><span class=line><span class=cl>  <span class=n>NET_VERSION</span><span class=p>:</span><span class=mi>2</span><span class=p>:</span><span class=mi>12</span>
+</span></span><span class=line><span class=cl>  <span class=n>HOST_ID</span><span class=p>:</span><span class=mi>3</span><span class=p>:</span><span class=mi>349</span><span class=n>d6a93</span><span class=o>-</span><span class=mi>038</span><span class=n>a</span><span class=o>-</span><span class=mi>45</span><span class=n>a9</span><span class=o>-</span><span class=n>bd86</span><span class=o>-</span><span class=n>cc22ed3d8e0d</span>
+</span></span><span class=line><span class=cl>  <span class=n>RPC_READY</span><span class=p>:</span><span class=mi>21</span><span class=p>:</span><span class=bp>true</span>
+</span></span><span class=line><span class=cl>  <span class=n>NATIVE_ADDRESS_AND_PORT</span><span class=p>:</span><span class=mi>4</span><span class=p>:</span><span class=mf>127.0</span><span class=o>.</span><span class=mf>0.1</span><span class=p>:</span><span class=mi>9042</span>
+</span></span><span class=line><span class=cl>  <span class=n>STATUS_WITH_PORT</span><span class=p>:</span><span class=mi>18</span><span class=p>:</span><span class=n>NORMAL</span><span class=p>,</span><span class=o>-</span><span class=mi>1868919513406135542</span>
+</span></span><span class=line><span class=cl>  <span class=n>SSTABLE_VERSIONS</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span><span class=n>big</span><span class=o>-</span><span class=n>nb</span>
+</span></span><span class=line><span class=cl>  <span class=n>TOKENS</span><span class=p>:</span><span class=mi>17</span><span class=p>:</span><span class=o>&lt;</span><span class=n>hidden</span><span class=o>&gt;</span>
 </span></span></code></pre></div><p>ノードの状態はキーバリューペアとして表される。
-2ノードある場合、ノード1で<code>nodetool gossipinfo</code>コマンドを実行しても、ノード1とノード2のGossip状態を確認することができる。</p>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/cassandra/">Cassandra</a></li>
-    </ul>
-  </div>
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      
-        
-        
-        <li class="breadcrumb-item active" aria-current="page">DS201の実施_Gossip</li>
-      
-    </ol>
-  </nav>
-  
-
-  </main>
-  <footer>
-    <p style="text-align: center;">Copyright 2024. All rights reserved.</p>
-
-  </footer>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-
-</body>
-</html>
+2ノードある場合、ノード1で<code>nodetool gossipinfo</code>コマンドを実行しても、ノード1とノード2のGossip状態を確認することができる。</p><div><div>Tags:</div><ul><li><a href=/tags/cassandra/>Cassandra</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>DS201の実施_Gossip</li></ol></nav></main><footer><p style=text-align:center>Copyright 2024. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css integrity=sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM crossorigin=anonymous rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css><script src=https://code.jquery.com/jquery-3.2.1.slim.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js></script><script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>
