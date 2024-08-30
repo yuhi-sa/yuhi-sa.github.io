@@ -993,6 +993,11 @@
 </url>
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20240829/1/</loc>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</loc>
   
 </url>
