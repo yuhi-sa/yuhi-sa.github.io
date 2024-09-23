@@ -1,9 +1,346 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>セキュリティ on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link><description>Recent content in セキュリティ on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 29 Aug 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>OSINT（Open Source Intelligence）とは 面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版. を読んだ感想メモ
-概要 OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。
-OSINTの歴史 OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。
-現在のOSINT 現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。
-ウェブサイトやニュース記事: 一般公開されている情報源。 ソーシャルメディア（SNS）: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。 GitHubなどのコード共有サイト: ソースコードやプロジェクトの進捗状況が公開されている。 脆弱性データベース: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。 ゼロデイ攻撃に関する情報: 未知の脆弱性を狙った攻撃についての公開情報。 OSINTの調査方法 データソースの見つけ方 OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。
-OSINT Framework: 様々なOSINTツールや情報源へのリンク集。 MITRE ATT&amp;amp;CK: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。 Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security: サイバーキルチェーンとデータソースのマッピングに関する論文。 便利ツール 以下のツールは、OSINT調査を支援するために広く利用されています。
-Shodan: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 Shodan Censys: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 Censys Have I Been Pwned: メールアドレスの漏洩をチェック。 Have I Been Pwned VirusTotal: ファイルやURLをスキャンしてマルウェアの有無を確認。 VirusTotal Aguse: Webサイトのレピュテーションを調べる。 Aguse Exploit Database: 公開されているエクスプロイト情報のデータベース。 Exploit-DB SecurityTrails: ドメインやIPアドレスの利用履歴を確認。 SecurityTrails その他の重要リソース 脆弱性情報収集 NVD: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 NVD JVN iPedia: 日本の脆弱性データベース。 JVN iPedia Vulmon: グローバルな脆弱性情報を提供。 Vulmon SSL/TLSの強度確認 SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 SSL Labs その他の調査ツール Anymail Finder: メールアドレスの漏洩状況を確認。 Anymail Finder MaxMind: IPアドレスの地理的情報を調査。 MaxMind Wigle: WifiネットワークのSSID情報を収集。 Wigle BuiltWith: ウェブサイトで使用されている技術を確認。 BuiltWith Phishtank: フィッシングサイトを報告・検証するためのリソース。 Phishtank 諸外国のOSINT活動事例 中国のAPT1に関するレポート (Mandiant) Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。</description></item><item><title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/2/</link><pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/2/</guid><description>主要セキュリティモデルの比較 セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。
-Biba完全性モデル 策定者: ケネス・J・ビバ（Kenneth J. Biba） 策定年: 1977年 策定国: アメリカ合衆国 特徴: データの完全性を保護することを目的としたセキュリティモデル。 主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。 主に商業環境でのデータの完全性維持に利用される。 違い: 完全性に特化しており、機密性や可用性は対象外。 軍事用途よりも商業用途に向いている。 Clark-Wilsonモデル 策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson） 策定年: 1987年 策定国: アメリカ合衆国 特徴: 商業的なトランザクションのセキュリティを確保するためのモデル。 3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。 分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。 違い: トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。 商業環境に特に適している。 Brewer-Nashモデル（中国のウォールモデル） 策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash） 策定年: 1989年 策定国: イギリス 特徴: 利益相反を防止することを目的としたモデル。 ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。 主に金融や法律などの分野で利用される。 違い: 利益相反の管理に特化しており、他のセキュリティ属性は対象外。 ダイナミックなアクセス制御を提供。 Bell-LaPadulaモデル 策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula） 策定年: 1973年 策定国: アメリカ合衆国 特徴: 機密性を保護するためのセキュリティモデル。 主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。 主に軍事や政府機関で利用される。 違い: 機密性に特化しており、完全性や可用性は対象外。 軍事用途や機密情報の管理に向いている。</description></item><item><title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/1/</guid><description>セキュリティガバナンスにおける主要フレームワークの比較 セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。
-NIST (National Institute of Standards and Technology) 策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST） 特徴: 主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。 特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。 NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。 違い: 政府主導であり、特にアメリカ国内での適用が多い。 実践的で技術的なガイドラインが豊富。 ITIL (Information Technology Infrastructure Library) 策定団体: AXELOS（英国政府と民間企業の合弁企業） 特徴: ITサービスマネジメントのベストプラクティスを提供。 セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。 サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。 違い: ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。 プロセスと役割の明確な定義が特徴。 ISO/IEC 27000シリーズ 策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC） 特徴: 情報セキュリティ管理のための国際標準。 ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。 ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。 グローバルに認知され、広く適用される。 違い: 国際標準として広く受け入れられており、認証制度が存在する。 組織全体の情報セキュリティ管理に焦点を当てている。 COSO (Committee of Sponsoring Organizations of the Treadway Commission) 策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会） 特徴: リスク管理と内部統制のフレームワークを提供。 COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。 会計と財務報告の視点からもリスク管理を強調。 違い: 主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。 財務報告の信頼性確保にも関連。 COBIT (Control Objectives for Information and Related Technologies) 策定団体: ISACA（Information Systems Audit and Control Association） 特徴: ITガバナンスと管理のためのフレームワーク。 COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。 ビジネスとITの整合性を重視。 違い: ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。 フレームワーク全体がIT管理とガバナンスに焦点を当てている。</description></item><item><title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title><link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid><description/></item><item><title>メールにおける認証技術</title><link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link><pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid><description/></item><item><title>シングルサインオン(SSO)</title><link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid><description/></item><item><title>チャレンジレスポンス方式</title><link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>セキュリティ on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link><description>Recent content in セキュリティ on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 29 Aug 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>&lt;h1 id="osintopen-source-intelligenceとは">OSINT（Open Source Intelligence）とは&lt;/h1>
+&lt;p>&lt;a href="https://amzn.to/4cJOO2P">面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.&lt;/a> を読んだ感想メモ&lt;/p>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。&lt;/p>
+&lt;h2 id="osintの歴史">OSINTの歴史&lt;/h2>
+&lt;p>OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。&lt;/p>
+&lt;h2 id="現在のosint">現在のOSINT&lt;/h2>
+&lt;p>現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ウェブサイトやニュース記事&lt;/strong>: 一般公開されている情報源。&lt;/li>
+&lt;li>&lt;strong>ソーシャルメディア（SNS）&lt;/strong>: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。&lt;/li>
+&lt;li>&lt;strong>GitHubなどのコード共有サイト&lt;/strong>: ソースコードやプロジェクトの進捗状況が公開されている。&lt;/li>
+&lt;li>&lt;strong>脆弱性データベース&lt;/strong>: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。&lt;/li>
+&lt;li>&lt;strong>ゼロデイ攻撃に関する情報&lt;/strong>: 未知の脆弱性を狙った攻撃についての公開情報。&lt;/li>
+&lt;/ul>
+&lt;h2 id="osintの調査方法">OSINTの調査方法&lt;/h2>
+&lt;h3 id="データソースの見つけ方">データソースの見つけ方&lt;/h3>
+&lt;p>OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://osintframework.com">OSINT Framework&lt;/a>: 様々なOSINTツールや情報源へのリンク集。&lt;/li>
+&lt;li>&lt;a href="https://attack.mitre.org">MITRE ATT&amp;amp;CK&lt;/a>: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。&lt;/li>
+&lt;li>&lt;a href="https://www.researchgate.net/publication/361323824_Mapping_Tools_for_Open_Source_Intelligence_with_Cyber_Kill_Chain_for_Adversarial_Aware_Security">Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security&lt;/a>: サイバーキルチェーンとデータソースのマッピングに関する論文。&lt;/li>
+&lt;/ul>
+&lt;h3 id="便利ツール">便利ツール&lt;/h3>
+&lt;p>以下のツールは、OSINT調査を支援するために広く利用されています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Shodan&lt;/strong>: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 &lt;a href="https://www.shodan.io/dashboard">Shodan&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Censys&lt;/strong>: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 &lt;a href="https://search.censys.io">Censys&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Have I Been Pwned&lt;/strong>: メールアドレスの漏洩をチェック。 &lt;a href="https://haveibeenpwned.com">Have I Been Pwned&lt;/a>&lt;/li>
+&lt;li>&lt;strong>VirusTotal&lt;/strong>: ファイルやURLをスキャンしてマルウェアの有無を確認。 &lt;a href="https://www.virustotal.com/gui/home/upload">VirusTotal&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Aguse&lt;/strong>: Webサイトのレピュテーションを調べる。 &lt;a href="https://www.aguse.jp">Aguse&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Exploit Database&lt;/strong>: 公開されているエクスプロイト情報のデータベース。 &lt;a href="https://www.exploit-db.com">Exploit-DB&lt;/a>&lt;/li>
+&lt;li>&lt;strong>SecurityTrails&lt;/strong>: ドメインやIPアドレスの利用履歴を確認。 &lt;a href="https://securitytrails.com">SecurityTrails&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="その他の重要リソース">その他の重要リソース&lt;/h2>
+&lt;h3 id="脆弱性情報収集">脆弱性情報収集&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>NVD&lt;/strong>: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 &lt;a href="https://nvd.nist.gov/vuln/search">NVD&lt;/a>&lt;/li>
+&lt;li>&lt;strong>JVN iPedia&lt;/strong>: 日本の脆弱性データベース。 &lt;a href="https://jvndb.jvn.jp/">JVN iPedia&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Vulmon&lt;/strong>: グローバルな脆弱性情報を提供。 &lt;a href="https://vulmon.com">Vulmon&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="ssltlsの強度確認">SSL/TLSの強度確認&lt;/h3>
+&lt;ul>
+&lt;li>SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 &lt;a href="https://www.ssllabs.com/ssltest/">SSL Labs&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="その他の調査ツール">その他の調査ツール&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Anymail Finder&lt;/strong>: メールアドレスの漏洩状況を確認。 &lt;a href="https://anymailfinder.com/">Anymail Finder&lt;/a>&lt;/li>
+&lt;li>&lt;strong>MaxMind&lt;/strong>: IPアドレスの地理的情報を調査。 &lt;a href="https://www.maxmind.com/en/geoip-web-services-demo">MaxMind&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Wigle&lt;/strong>: WifiネットワークのSSID情報を収集。 &lt;a href="https://wigle.net">Wigle&lt;/a>&lt;/li>
+&lt;li>&lt;strong>BuiltWith&lt;/strong>: ウェブサイトで使用されている技術を確認。 &lt;a href="https://builtwith.com">BuiltWith&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Phishtank&lt;/strong>: フィッシングサイトを報告・検証するためのリソース。 &lt;a href="https://phishtank.org">Phishtank&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="諸外国のosint活動事例">諸外国のOSINT活動事例&lt;/h2>
+&lt;h3 id="中国のapt1に関するレポート-mandiant">中国のAPT1に関するレポート (Mandiant)&lt;/h3>
+&lt;p>Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。&lt;/p></description></item><item><title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/2/</link><pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/2/</guid><description>&lt;h1 id="主要セキュリティモデルの比較">主要セキュリティモデルの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。&lt;/p>
+&lt;h2 id="biba完全性モデル">Biba完全性モデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: ケネス・J・ビバ（Kenneth J. Biba）&lt;/li>
+&lt;li>策定年: 1977年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>データの完全性を保護することを目的としたセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に商業環境でのデータの完全性維持に利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>完全性に特化しており、機密性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途よりも商業用途に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="clark-wilsonモデル">Clark-Wilsonモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson）&lt;/li>
+&lt;li>策定年: 1987年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業的なトランザクションのセキュリティを確保するためのモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業環境に特に適している。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="brewer-nashモデル中国のウォールモデル">Brewer-Nashモデル（中国のウォールモデル）&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash）&lt;/li>
+&lt;li>策定年: 1989年&lt;/li>
+&lt;li>策定国: イギリス&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反を防止することを目的としたモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に金融や法律などの分野で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反の管理に特化しており、他のセキュリティ属性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ダイナミックなアクセス制御を提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="bell-lapadulaモデル">Bell-LaPadulaモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula）&lt;/li>
+&lt;li>策定年: 1973年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性を保護するためのセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。
+主に軍事や政府機関で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性に特化しており、完全性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途や機密情報の管理に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/1/</guid><description>&lt;h1 id="セキュリティガバナンスにおける主要フレームワークの比較">セキュリティガバナンスにおける主要フレームワークの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。&lt;/p>
+&lt;h2 id="nist-national-institute-of-standards-and-technology">NIST (National Institute of Standards and Technology)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>政府主導であり、特にアメリカ国内での適用が多い。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>実践的で技術的なガイドラインが豊富。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="itil-information-technology-infrastructure-library">ITIL (Information Technology Infrastructure Library)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: AXELOS（英国政府と民間企業の合弁企業）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメントのベストプラクティスを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>プロセスと役割の明確な定義が特徴。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="isoiec-27000シリーズ">ISO/IEC 27000シリーズ&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>情報セキュリティ管理のための国際標準。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>グローバルに認知され、広く適用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>国際標準として広く受け入れられており、認証制度が存在する。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>組織全体の情報セキュリティ管理に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="coso-committee-of-sponsoring-organizations-of-the-treadway-commission">COSO (Committee of Sponsoring Organizations of the Treadway Commission)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>リスク管理と内部統制のフレームワークを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>会計と財務報告の視点からもリスク管理を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>財務報告の信頼性確保にも関連。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="cobit-control-objectives-for-information-and-related-technologies">COBIT (Control Objectives for Information and Related Technologies)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: ISACA（Information Systems Audit and Control Association）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスと管理のためのフレームワーク。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ビジネスとITの整合性を重視。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>フレームワーク全体がIT管理とガバナンスに焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title><link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid><description/></item><item><title>メールにおける認証技術</title><link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link><pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid><description/></item><item><title>シングルサインオン(SSO)</title><link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid><description/></item><item><title>チャレンジレスポンス方式</title><link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid><description/></item></channel></rss>

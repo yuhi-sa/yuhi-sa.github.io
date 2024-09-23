@@ -1,41 +1,483 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tomato blog</title><link>https://yuhi-sa.github.io/posts/</link><description>Recent content in Posts on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 29 Aug 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>OSINT（Open Source Intelligence）とは 面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版. を読んだ感想メモ
-概要 OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。
-OSINTの歴史 OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。
-現在のOSINT 現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。
-ウェブサイトやニュース記事: 一般公開されている情報源。 ソーシャルメディア（SNS）: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。 GitHubなどのコード共有サイト: ソースコードやプロジェクトの進捗状況が公開されている。 脆弱性データベース: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。 ゼロデイ攻撃に関する情報: 未知の脆弱性を狙った攻撃についての公開情報。 OSINTの調査方法 データソースの見つけ方 OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。
-OSINT Framework: 様々なOSINTツールや情報源へのリンク集。 MITRE ATT&amp;amp;CK: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。 Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security: サイバーキルチェーンとデータソースのマッピングに関する論文。 便利ツール 以下のツールは、OSINT調査を支援するために広く利用されています。
-Shodan: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 Shodan Censys: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 Censys Have I Been Pwned: メールアドレスの漏洩をチェック。 Have I Been Pwned VirusTotal: ファイルやURLをスキャンしてマルウェアの有無を確認。 VirusTotal Aguse: Webサイトのレピュテーションを調べる。 Aguse Exploit Database: 公開されているエクスプロイト情報のデータベース。 Exploit-DB SecurityTrails: ドメインやIPアドレスの利用履歴を確認。 SecurityTrails その他の重要リソース 脆弱性情報収集 NVD: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 NVD JVN iPedia: 日本の脆弱性データベース。 JVN iPedia Vulmon: グローバルな脆弱性情報を提供。 Vulmon SSL/TLSの強度確認 SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 SSL Labs その他の調査ツール Anymail Finder: メールアドレスの漏洩状況を確認。 Anymail Finder MaxMind: IPアドレスの地理的情報を調査。 MaxMind Wigle: WifiネットワークのSSID情報を収集。 Wigle BuiltWith: ウェブサイトで使用されている技術を確認。 BuiltWith Phishtank: フィッシングサイトを報告・検証するためのリソース。 Phishtank 諸外国のOSINT活動事例 中国のAPT1に関するレポート (Mandiant) Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。</description></item><item><title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/2/</link><pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/2/</guid><description>主要セキュリティモデルの比較 セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。
-Biba完全性モデル 策定者: ケネス・J・ビバ（Kenneth J. Biba） 策定年: 1977年 策定国: アメリカ合衆国 特徴: データの完全性を保護することを目的としたセキュリティモデル。 主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。 主に商業環境でのデータの完全性維持に利用される。 違い: 完全性に特化しており、機密性や可用性は対象外。 軍事用途よりも商業用途に向いている。 Clark-Wilsonモデル 策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson） 策定年: 1987年 策定国: アメリカ合衆国 特徴: 商業的なトランザクションのセキュリティを確保するためのモデル。 3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。 分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。 違い: トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。 商業環境に特に適している。 Brewer-Nashモデル（中国のウォールモデル） 策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash） 策定年: 1989年 策定国: イギリス 特徴: 利益相反を防止することを目的としたモデル。 ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。 主に金融や法律などの分野で利用される。 違い: 利益相反の管理に特化しており、他のセキュリティ属性は対象外。 ダイナミックなアクセス制御を提供。 Bell-LaPadulaモデル 策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula） 策定年: 1973年 策定国: アメリカ合衆国 特徴: 機密性を保護するためのセキュリティモデル。 主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。 主に軍事や政府機関で利用される。 違い: 機密性に特化しており、完全性や可用性は対象外。 軍事用途や機密情報の管理に向いている。</description></item><item><title>`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</title><link>https://yuhi-sa.github.io/posts/20240606_ddd/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240606_ddd/1/</guid><description>DDD(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要 DDD(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。
-不変条件とは 不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（immutable）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(invariant)です。 例えば、銀行口座の残高が負にならないことなどで。
-集約と不変条件 集約は、この不変条件を保つように設計されるべきである。TypeScriptを使う場合、zodのrefineを使用して不変条件をチェックすることができる。
-import { z } from &amp;#39;zod&amp;#39;; // BankAccountのスキーマを定義 const BankAccountSchema = z.object({ id: z.string(), balance: z.number(), }).refine(data =&amp;gt; data.balance &amp;gt;= 0, { message: &amp;#34;Balance must be non-negative&amp;#34;, }); // BankAccount型を定義 type BankAccount = z.infer&amp;lt;typeof BankAccountSchema&amp;gt;; トランザクションと不変条件 不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。
-リポジトリの役割 集約の永続化と取得を管理するのがリポジトリ。zodのスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。
-class BankAccountRepository { private storage: Map&amp;lt;string, BankAccount&amp;gt; = new Map(); save(account: BankAccount): void { // zodのスキーマでバリデーション BankAccountSchema.parse(account); this.storage.set(account.id, account); } findById(id: string): BankAccount | undefined { return this.</description></item><item><title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/1/</guid><description>セキュリティガバナンスにおける主要フレームワークの比較 セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。
-NIST (National Institute of Standards and Technology) 策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST） 特徴: 主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。 特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。 NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。 違い: 政府主導であり、特にアメリカ国内での適用が多い。 実践的で技術的なガイドラインが豊富。 ITIL (Information Technology Infrastructure Library) 策定団体: AXELOS（英国政府と民間企業の合弁企業） 特徴: ITサービスマネジメントのベストプラクティスを提供。 セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。 サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。 違い: ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。 プロセスと役割の明確な定義が特徴。 ISO/IEC 27000シリーズ 策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC） 特徴: 情報セキュリティ管理のための国際標準。 ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。 ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。 グローバルに認知され、広く適用される。 違い: 国際標準として広く受け入れられており、認証制度が存在する。 組織全体の情報セキュリティ管理に焦点を当てている。 COSO (Committee of Sponsoring Organizations of the Treadway Commission) 策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会） 特徴: リスク管理と内部統制のフレームワークを提供。 COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。 会計と財務報告の視点からもリスク管理を強調。 違い: 主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。 財務報告の信頼性確保にも関連。 COBIT (Control Objectives for Information and Related Technologies) 策定団体: ISACA（Information Systems Audit and Control Association） 特徴: ITガバナンスと管理のためのフレームワーク。 COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。 ビジネスとITの整合性を重視。 違い: ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。 フレームワーク全体がIT管理とガバナンスに焦点を当てている。</description></item><item><title>トランザクションの分離レベル(`isolation`)と防げる不整合</title><link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link><pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid><description>トランザクションの分離レベル(isolation)と防げる不整合 DBのトランザクション処理で問題となる不整合 Dirty Read トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。
-これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。
-Non-repeatable Read トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。
-これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。
-Phantom Read トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。
-これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。
-トランザクションの分離レベル 以下の分離レベルが存在する。
-Read Uncommitted 防げる不整合:なし Read Committed 防げる不整合:Dirty Read 他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　Repeatable Read 防げる不整合:Dirty Read, Non-repeatable Read トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。
-これにより、同じトランザクション内でのデータの再読み取りが一貫する。
-Snapshot 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。
-これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。
-Serializable 防げる不整合:Dirty Read, Non-repeatable Read, Phantom Read 最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。
-これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。
-参考 https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html https://www.prisma.io/docs/orm/prisma-client/queries/transactions</description></item><item><title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title><link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link><pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid><description>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する union型に対してswich文を使う場合は、網羅性の保証が重要となります。
-網羅性の保証方法として、default句にnever型を代入する方法があります。
-never型は「値を持たない」を意味するTypeScriptの特別な型です。
-詳しくはhttps://typescriptbook.jp/reference/statements/never
-簡単に言い換えると「あり得ない」ことを表す型です。
-こちらがサンプル実装となります。
-type Sample = &amp;#34;A&amp;#34; | &amp;#34;B; function testFunc(sample: Sample): void { switch (sample) { case &amp;#34;A&amp;#34;: console.log(sample); break; case &amp;#34;B&amp;#34;: console.log(sample); break; default: // 網羅性をチェック const _: never = sample; } } このコードがビルドに成功するということはTypeScriptの型検査器によって「このdefault節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。 (たとえば、 case “B”:のコードを消すとエラーになります。)
-この方法を取ることにより、Union型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。 将来Union型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。
-参考 Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.</description></item><item><title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title><link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid><description/></item><item><title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title><link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid><description>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する Next.js（App Router）の概要 Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。
-クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。
-「use client」の適切な使用 「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。
-実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。
-汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。 そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。
-つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。
-参考 吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.</description></item><item><title>Spark SQLを並列実行するとview表の名前空間は衝突するのか</title><link>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</guid><description/></item><item><title>2024年目標</title><link>https://yuhi-sa.github.io/posts/todo/</link><pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/todo/</guid><description/></item><item><title>読む予定の本</title><link>https://yuhi-sa.github.io/posts/read/</link><pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/read/</guid><description/></item><item><title>TypescriptとReactでHugoのテーマを自作する</title><link>https://yuhi-sa.github.io/posts/20231218_hugo/1/</link><pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231218_hugo/1/</guid><description/></item><item><title>エクセルファイルをCSVファイルに変換するshellスクリプト</title><link>https://yuhi-sa.github.io/posts/20231213_shell/1/</link><pubDate>Tue, 12 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231213_shell/1/</guid><description/></item><item><title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</title><link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link><pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid><description/></item><item><title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title><link>https://yuhi-sa.github.io/posts/20231204_git/1/</link><pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid><description/></item><item><title>App RouterとPages Routerでprom-clientの値を共有できない</title><link>https://yuhi-sa.github.io/posts/20231124_t3/1/</link><pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231124_t3/1/</guid><description/></item><item><title>mtailを用いてPrometheus形式のメトリクスを公開する</title><link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link><pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid><description/></item><item><title>DH鍵交換（Diffie-Hellman鍵交換）をpythonで確認</title><link>https://yuhi-sa.github.io/posts/20230907_dh/1/</link><pubDate>Wed, 06 Sep 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230907_dh/1/</guid><description/></item><item><title>DS201の実施_NodeSync</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</link><pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</guid><description/></item><item><title>DS201の実施_WritePathとReadPath</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</link><pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</guid><description/></item><item><title>DS201の実施_Consistency</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</guid><description/></item><item><title>DS201の実施_Hinted handoff</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</guid><description/></item><item><title>DS201の実施_Read Repair</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</guid><description/></item><item><title>DS201の実施_Replication</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</guid><description/></item><item><title>DS201の実施_Snitches</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</link><pubDate>Sat, 24 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</guid><description/></item><item><title>ios17 Developer Betaにアップグレードしたiphone13をios16に戻す</title><link>https://yuhi-sa.github.io/posts/20230618_iphone/1/</link><pubDate>Sun, 18 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230618_iphone/1/</guid><description/></item><item><title>DS201の実施_Gossip</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</guid><description/></item><item><title>DS201の実施_Node</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</guid><description/></item><item><title>DS201の実施_Ring</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</guid><description/></item><item><title>DS201の実施_VNode</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</guid><description/></item><item><title>DS201の実施_ClusteringColumns</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</link><pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</guid><description/></item><item><title>DS201の実施_Drivers</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</link><pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</guid><description/></item><item><title>DS201の実施_CQL</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</guid><description/></item><item><title>DS201の実施_partitions</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</guid><description/></item><item><title>ローカルmacへのCassandraインストール</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</guid><description/></item><item><title>AWS Summit Tokyo 2023に行った</title><link>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</link><pubDate>Thu, 20 Apr 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</guid><description/></item><item><title>メールにおける認証技術</title><link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link><pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid><description/></item><item><title>シングルサインオン(SSO)</title><link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid><description/></item><item><title>チャレンジレスポンス方式</title><link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid><description/></item><item><title>Vimの使い方メモ</title><link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link><pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221230_vim/1/</guid><description/></item><item><title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title><link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link><pubDate>Thu, 29 Dec 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221229_async_await/1/</guid><description/></item><item><title>webpackとbabelでReactを使える環境を作成する</title><link>https://yuhi-sa.github.io/posts/20221111_react/1/</link><pubDate>Fri, 11 Nov 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221111_react/1/</guid><description/></item><item><title>Kubernetesの認証情報(Context)</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/5/</link><pubDate>Sun, 04 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/5/</guid><description/></item><item><title>Kubernetesのリソースカテゴリ</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/3/</link><pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/3/</guid><description/></item><item><title>Kubernetesの初期状態のNamespace</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/4/</link><pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/4/</guid><description/></item><item><title>dockerファイルの命令文</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link><pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid><description/></item><item><title>Kubernetesをローカル環境に構築する</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link><pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid><description/></item><item><title>pythonを用いたjsonを返却する簡易mockserver</title><link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid><description/></item><item><title>踏み台サーバー経由で多段sshをする方法</title><link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid><description/></item><item><title>Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</title><link>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</link><pubDate>Sun, 20 Feb 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</guid><description/></item><item><title>リパラメタライゼーショントリック(Reparameterization trick)</title><link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link><pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid><description/></item><item><title>指数移動平均(Exponential Moving Averages)フィルタの周波数特性</title><link>https://yuhi-sa.github.io/posts/20220206_ema/1/</link><pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220206_ema/1/</guid><description/></item><item><title>linuxのログファイルと閲覧コマンド</title><link>https://yuhi-sa.github.io/posts/20211121_linux/6/</link><pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/6/</guid><description/></item><item><title>SQLの表の結合</title><link>https://yuhi-sa.github.io/posts/20211121_db/5/</link><pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/5/</guid><description/></item><item><title>ガウス分布同士のクロスエントロピーの閉形式導出</title><link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link><pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid><description/></item><item><title>SQLの条件式</title><link>https://yuhi-sa.github.io/posts/20211121_db/4-2/</link><pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/4-2/</guid><description/></item><item><title>SQLの関数</title><link>https://yuhi-sa.github.io/posts/20211121_db/4/</link><pubDate>Wed, 08 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/4/</guid><description/></item><item><title>公開鍵認証方式を用いたSSH通信の設定方法</title><link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link><pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid><description/></item><item><title>SQLによるDBの検索</title><link>https://yuhi-sa.github.io/posts/20211121_db/3/</link><pubDate>Thu, 02 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/3/</guid><description/></item><item><title>ネットワークのトラブルシューティングで利用する代表的なコマンド</title><link>https://yuhi-sa.github.io/posts/20211121_linux/4/</link><pubDate>Tue, 30 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/4/</guid><description/></item><item><title>正規化</title><link>https://yuhi-sa.github.io/posts/20211121_db/2/</link><pubDate>Fri, 26 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/2/</guid><description/></item><item><title>ネットワークの基礎</title><link>https://yuhi-sa.github.io/posts/20211121_linux/3/</link><pubDate>Mon, 22 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/3/</guid><description/></item><item><title>SQLの基本構文</title><link>https://yuhi-sa.github.io/posts/20211121_db/1/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid><description/></item><item><title>スーパーユーザ</title><link>https://yuhi-sa.github.io/posts/20211121_linux/1/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/1/</guid><description/></item><item><title>ユーザアカウント</title><link>https://yuhi-sa.github.io/posts/20211121_linux/2/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/2/</guid><description/></item><item><title>オブジェクト指向</title><link>https://yuhi-sa.github.io/posts/20211112_java/1/</link><pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid><description/></item><item><title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title><link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link><pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid><description/></item><item><title>Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</title><link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</link><pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</guid><description/></item><item><title>githubへのssh接続</title><link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link><pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid><description/></item><item><title>Raspberry PiでAirplayをする方法メモ(RPiPlay)</title><link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link><pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</guid><description/></item><item><title>適応フィルタ</title><link>https://yuhi-sa.github.io/posts/20210730_filter/1/</link><pubDate>Fri, 30 Jul 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210730_filter/1/</guid><description/></item><item><title>リーダブルコード読んだメモ</title><link>https://yuhi-sa.github.io/posts/20210713_readable/1/</link><pubDate>Tue, 13 Jul 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210713_readable/1/</guid><description/></item><item><title>GitHub Actions の書き方</title><link>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</link><pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</guid><description/></item><item><title>Pythonのmatplotで三次元動画(gif画像)を作成するプログラム</title><link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link><pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid><description/></item><item><title>モーメント</title><link>https://yuhi-sa.github.io/posts/20210527_moment/1/</link><pubDate>Thu, 27 May 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210527_moment/1/</guid><description/></item><item><title>MacのLaunchpadを初期化する方法</title><link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</link><pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</guid><description/></item><item><title>PyenvとAnacondaを用いたPython環境の設定</title><link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link><pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid><description/></item><item><title>pythonでprintの上書きをする方法</title><link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link><pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid><description/></item><item><title>UbuntuでローカルDNSサーバーが指定できないときの編集方法</title><link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link><pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid><description/></item><item><title>Ubuntuのsshの設定</title><link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link><pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid><description/></item><item><title>H無限大制御</title><link>https://yuhi-sa.github.io/posts/20210405_hinf/1/</link><pubDate>Mon, 05 Apr 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210405_hinf/1/</guid><description/></item><item><title>Pythonによる2進数変換と論理演算(or,xor)</title><link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link><pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210329_bin/1/</guid><description/></item><item><title>クロスエントロピー法(Cross Entropy Method)</title><link>https://yuhi-sa.github.io/posts/20210329_cem/1/</link><pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210329_cem/1/</guid><description/></item><item><title>DNNを利用した強化学習の仲間たち</title><link>https://yuhi-sa.github.io/posts/20210319_rl/7/</link><pubDate>Mon, 22 Mar 2021 11:35:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/7/</guid><description/></item><item><title>Advantage Actor Critic(A2C)</title><link>https://yuhi-sa.github.io/posts/20210319_rl/6/</link><pubDate>Mon, 22 Mar 2021 11:30:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/6/</guid><description/></item><item><title>方策勾配法</title><link>https://yuhi-sa.github.io/posts/20210319_rl/5/</link><pubDate>Mon, 22 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/5/</guid><description/></item><item><title>ニューラルネットを適応した強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/4/</link><pubDate>Mon, 22 Mar 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/4/</guid><description/></item><item><title>モデルフリー強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/3/</link><pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/3/</guid><description/></item><item><title>モデルベース強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/2/</link><pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/2/</guid><description/></item><item><title>強化学習とは</title><link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link><pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid><description/></item><item><title>K-means法</title><link>https://yuhi-sa.github.io/posts/20210318_pid/2/</link><pubDate>Thu, 18 Mar 2021 16:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210318_pid/2/</guid><description/></item><item><title>PID制御</title><link>https://yuhi-sa.github.io/posts/20210318_pid/1/</link><pubDate>Thu, 18 Mar 2021 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210318_pid/1/</guid><description/></item><item><title>変分オートエンコーダ(VAE)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/13/</link><pubDate>Thu, 18 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/13/</guid><description/></item><item><title>マルコフ連鎖モンテカルロ法(MCMC)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/12/</link><pubDate>Thu, 18 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/12/</guid><description/></item><item><title>変分ベイズ</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/11/</link><pubDate>Thu, 18 Mar 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/11/</guid><description/></item><item><title>EMアルゴリズム2(変分下界とKLダイバージェンス)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/10/</link><pubDate>Wed, 17 Mar 2021 13:05:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/10/</guid><description/></item><item><title>EMアルゴリズム</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/9/</link><pubDate>Wed, 17 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/9/</guid><description/></item><item><title>共役事前分布</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/8/</link><pubDate>Tue, 16 Mar 2021 16:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/8/</guid><description/></item><item><title>ラグランジュの未定数法</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/7/</link><pubDate>Tue, 16 Mar 2021 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/7/</guid><description/></item><item><title>二項分布とその仲間たち</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/6/</link><pubDate>Tue, 16 Mar 2021 14:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/6/</guid><description/></item><item><title>ベイズ推定</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/5/</link><pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/5/</guid><description/></item><item><title>正規分布における最尤推定</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/4/</link><pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/4/</guid><description/></item><item><title>確率の基礎</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/2/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/2/</guid><description/></item><item><title>正規分布(ガウス分布)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/3/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/3/</guid><description/></item><item><title>統計学と機械学習の用語</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/1/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/1/</guid><description/></item><item><title>numpyからpytorchの変換で，dtypeを消す</title><link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link><pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid><description/></item><item><title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link><pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid><description/></item><item><title>markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</title><link>https://yuhi-sa.github.io/posts/20210204_hugo/1/</link><pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210204_hugo/1/</guid><description/></item><item><title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link><pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210125_ut/1/</guid><description/></item><item><title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link><pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210109_nnga/1/</guid><description/></item><item><title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title><link>https://yuhi-sa.github.io/posts/20210108_bayes/1/</link><pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210108_bayes/1/</guid><description/></item><item><title>情報理論(エントロピーから相互情報量, PRML1.6)</title><link>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</link><pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid><description/></item><item><title>粒子群最適化(PSO)とTCPSOのMatlabプログラム</title><link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link><pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid><description/></item><item><title>SQLの表の作成</title><link>https://yuhi-sa.github.io/posts/20211121_db/7/</link><pubDate>Mon, 04 Jan 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/7/</guid><description/></item><item><title>SQLのデータ挿入，更新，削除</title><link>https://yuhi-sa.github.io/posts/20211121_db/6/</link><pubDate>Fri, 01 Jan 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/6/</guid><description/></item><item><title>Pythonでslackに実験結果(テキストと画像)を送る</title><link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link><pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</guid><description/></item><item><title>楕円曲線上のElGamal暗号のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link><pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid><description/></item><item><title>バイナリ法によるべき乗計算のPythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link><pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201220_binary/1/</guid><description/></item><item><title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</link><pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</guid><description/></item><item><title>代表的なフィルタ</title><link>https://yuhi-sa.github.io/posts/20200901_filter/1/</link><pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200901_filter/1/</guid><description/></item><item><title>強化学習の全体像まとめ</title><link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link><pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid><description/></item><item><title>[ROS]PublisherとSubscriberを1つのノードに書く方法</title><link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid><description/></item><item><title>About</title><link>https://yuhi-sa.github.io/posts/about/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/about/</guid><description/></item><item><title>いいなって思った言葉</title><link>https://yuhi-sa.github.io/posts/quotations/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/quotations/</guid><description/></item><item><title>プライバシーポリシー</title><link>https://yuhi-sa.github.io/posts/privacy_policy/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/privacy_policy/</guid><description/></item><item><title>DS201の実施_Compaction</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</guid><description/></item><item><title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</title><link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tomato blog</title><link>https://yuhi-sa.github.io/posts/</link><description>Recent content in Posts on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 29 Aug 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>&lt;h1 id="osintopen-source-intelligenceとは">OSINT（Open Source Intelligence）とは&lt;/h1>
+&lt;p>&lt;a href="https://amzn.to/4cJOO2P">面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.&lt;/a> を読んだ感想メモ&lt;/p>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。&lt;/p>
+&lt;h2 id="osintの歴史">OSINTの歴史&lt;/h2>
+&lt;p>OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。&lt;/p>
+&lt;h2 id="現在のosint">現在のOSINT&lt;/h2>
+&lt;p>現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ウェブサイトやニュース記事&lt;/strong>: 一般公開されている情報源。&lt;/li>
+&lt;li>&lt;strong>ソーシャルメディア（SNS）&lt;/strong>: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。&lt;/li>
+&lt;li>&lt;strong>GitHubなどのコード共有サイト&lt;/strong>: ソースコードやプロジェクトの進捗状況が公開されている。&lt;/li>
+&lt;li>&lt;strong>脆弱性データベース&lt;/strong>: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。&lt;/li>
+&lt;li>&lt;strong>ゼロデイ攻撃に関する情報&lt;/strong>: 未知の脆弱性を狙った攻撃についての公開情報。&lt;/li>
+&lt;/ul>
+&lt;h2 id="osintの調査方法">OSINTの調査方法&lt;/h2>
+&lt;h3 id="データソースの見つけ方">データソースの見つけ方&lt;/h3>
+&lt;p>OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://osintframework.com">OSINT Framework&lt;/a>: 様々なOSINTツールや情報源へのリンク集。&lt;/li>
+&lt;li>&lt;a href="https://attack.mitre.org">MITRE ATT&amp;amp;CK&lt;/a>: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。&lt;/li>
+&lt;li>&lt;a href="https://www.researchgate.net/publication/361323824_Mapping_Tools_for_Open_Source_Intelligence_with_Cyber_Kill_Chain_for_Adversarial_Aware_Security">Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security&lt;/a>: サイバーキルチェーンとデータソースのマッピングに関する論文。&lt;/li>
+&lt;/ul>
+&lt;h3 id="便利ツール">便利ツール&lt;/h3>
+&lt;p>以下のツールは、OSINT調査を支援するために広く利用されています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Shodan&lt;/strong>: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 &lt;a href="https://www.shodan.io/dashboard">Shodan&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Censys&lt;/strong>: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 &lt;a href="https://search.censys.io">Censys&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Have I Been Pwned&lt;/strong>: メールアドレスの漏洩をチェック。 &lt;a href="https://haveibeenpwned.com">Have I Been Pwned&lt;/a>&lt;/li>
+&lt;li>&lt;strong>VirusTotal&lt;/strong>: ファイルやURLをスキャンしてマルウェアの有無を確認。 &lt;a href="https://www.virustotal.com/gui/home/upload">VirusTotal&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Aguse&lt;/strong>: Webサイトのレピュテーションを調べる。 &lt;a href="https://www.aguse.jp">Aguse&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Exploit Database&lt;/strong>: 公開されているエクスプロイト情報のデータベース。 &lt;a href="https://www.exploit-db.com">Exploit-DB&lt;/a>&lt;/li>
+&lt;li>&lt;strong>SecurityTrails&lt;/strong>: ドメインやIPアドレスの利用履歴を確認。 &lt;a href="https://securitytrails.com">SecurityTrails&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="その他の重要リソース">その他の重要リソース&lt;/h2>
+&lt;h3 id="脆弱性情報収集">脆弱性情報収集&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>NVD&lt;/strong>: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 &lt;a href="https://nvd.nist.gov/vuln/search">NVD&lt;/a>&lt;/li>
+&lt;li>&lt;strong>JVN iPedia&lt;/strong>: 日本の脆弱性データベース。 &lt;a href="https://jvndb.jvn.jp/">JVN iPedia&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Vulmon&lt;/strong>: グローバルな脆弱性情報を提供。 &lt;a href="https://vulmon.com">Vulmon&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="ssltlsの強度確認">SSL/TLSの強度確認&lt;/h3>
+&lt;ul>
+&lt;li>SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 &lt;a href="https://www.ssllabs.com/ssltest/">SSL Labs&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="その他の調査ツール">その他の調査ツール&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Anymail Finder&lt;/strong>: メールアドレスの漏洩状況を確認。 &lt;a href="https://anymailfinder.com/">Anymail Finder&lt;/a>&lt;/li>
+&lt;li>&lt;strong>MaxMind&lt;/strong>: IPアドレスの地理的情報を調査。 &lt;a href="https://www.maxmind.com/en/geoip-web-services-demo">MaxMind&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Wigle&lt;/strong>: WifiネットワークのSSID情報を収集。 &lt;a href="https://wigle.net">Wigle&lt;/a>&lt;/li>
+&lt;li>&lt;strong>BuiltWith&lt;/strong>: ウェブサイトで使用されている技術を確認。 &lt;a href="https://builtwith.com">BuiltWith&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Phishtank&lt;/strong>: フィッシングサイトを報告・検証するためのリソース。 &lt;a href="https://phishtank.org">Phishtank&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="諸外国のosint活動事例">諸外国のOSINT活動事例&lt;/h2>
+&lt;h3 id="中国のapt1に関するレポート-mandiant">中国のAPT1に関するレポート (Mandiant)&lt;/h3>
+&lt;p>Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。&lt;/p></description></item><item><title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/2/</link><pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/2/</guid><description>&lt;h1 id="主要セキュリティモデルの比較">主要セキュリティモデルの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。&lt;/p>
+&lt;h2 id="biba完全性モデル">Biba完全性モデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: ケネス・J・ビバ（Kenneth J. Biba）&lt;/li>
+&lt;li>策定年: 1977年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>データの完全性を保護することを目的としたセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に商業環境でのデータの完全性維持に利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>完全性に特化しており、機密性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途よりも商業用途に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="clark-wilsonモデル">Clark-Wilsonモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson）&lt;/li>
+&lt;li>策定年: 1987年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業的なトランザクションのセキュリティを確保するためのモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業環境に特に適している。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="brewer-nashモデル中国のウォールモデル">Brewer-Nashモデル（中国のウォールモデル）&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash）&lt;/li>
+&lt;li>策定年: 1989年&lt;/li>
+&lt;li>策定国: イギリス&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反を防止することを目的としたモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に金融や法律などの分野で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反の管理に特化しており、他のセキュリティ属性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ダイナミックなアクセス制御を提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="bell-lapadulaモデル">Bell-LaPadulaモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula）&lt;/li>
+&lt;li>策定年: 1973年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性を保護するためのセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。
+主に軍事や政府機関で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性に特化しており、完全性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途や機密情報の管理に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</title><link>https://yuhi-sa.github.io/posts/20240606_ddd/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240606_ddd/1/</guid><description>&lt;h1 id="dddドメイン駆動設計の集約においてトランザクションよりも不変条件の方が重要">&lt;code>DDD&lt;/code>(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要&lt;/h1>
+&lt;p>&lt;code>DDD&lt;/code>(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。&lt;/p>
+&lt;h2 id="不変条件とは">不変条件とは&lt;/h2>
+&lt;p>不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（&lt;code>immutable&lt;/code>）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(&lt;code>invariant&lt;/code>)です。
+例えば、銀行口座の残高が負にならないことなどで。&lt;/p>
+&lt;h2 id="集約と不変条件">集約と不変条件&lt;/h2>
+&lt;p>集約は、この不変条件を保つように設計されるべきである。&lt;code>TypeScript&lt;/code>を使う場合、&lt;code>zod&lt;/code>の&lt;code>refine&lt;/code>を使用して不変条件をチェックすることができる。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-.ts" data-lang=".ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">z&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="kr">from&lt;/span> &lt;span class="s1">&amp;#39;zod&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// BankAccountのスキーマを定義
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">BankAccountSchema&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">z&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kt">object&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">id&lt;/span>: &lt;span class="kt">z.string&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">balance&lt;/span>: &lt;span class="kt">z.number&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}).&lt;/span>&lt;span class="nx">refine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">data&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">balance&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">message&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;Balance must be non-negative&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// BankAccount型を定義
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">type&lt;/span> &lt;span class="nx">BankAccount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">z&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">infer&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">typeof&lt;/span> &lt;span class="na">BankAccountSchema&lt;/span>&lt;span class="p">&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="トランザクションと不変条件">トランザクションと不変条件&lt;/h2>
+&lt;p>不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。&lt;/p>
+&lt;h2 id="リポジトリの役割">リポジトリの役割&lt;/h2>
+&lt;p>集約の永続化と取得を管理するのがリポジトリ。&lt;code>zod&lt;/code>のスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-.ts" data-lang=".ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">class&lt;/span> &lt;span class="nx">BankAccountRepository&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">private&lt;/span> &lt;span class="nx">storage&lt;/span>: &lt;span class="kt">Map&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">BankAccount&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Map&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">account&lt;/span>: &lt;span class="kt">BankAccount&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// zodのスキーマでバリデーション
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">BankAccountSchema&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">account&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">storage&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">account&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">account&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">findById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>: &lt;span class="kt">string&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">BankAccount&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="kc">undefined&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">storage&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用例">使用例&lt;/h2>
+&lt;p>リポジトリを使って銀行口座を管理する具体例。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-.ts" data-lang=".ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">repository&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">BankAccountRepository&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">account&lt;/span>: &lt;span class="kt">BankAccount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;123&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">balance&lt;/span>: &lt;span class="kt">100&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">repository&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">account&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">const&lt;/span> &lt;span class="nx">retrievedAccount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">repository&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">findById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;123&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">retrievedAccount&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// { id: &amp;#34;123&amp;#34;, balance: 100 }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 不変条件を破る例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kr">const&lt;/span> &lt;span class="nx">invalidAccount&lt;/span>: &lt;span class="kt">BankAccount&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">id&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s2">&amp;#34;456&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">balance&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">50&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">repository&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">invalidAccount&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">error&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">errors&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="nx">message&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// &amp;#34;Balance must be non-negative&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>不変条件を定義し、永続化を集約単位でのみ行うことでオブジェクトのライフサイクルの間、常に不変条件が保たれるようにすることが&lt;code>DDD&lt;/code>において重要である。&lt;/p></description></item><item><title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/1/</guid><description>&lt;h1 id="セキュリティガバナンスにおける主要フレームワークの比較">セキュリティガバナンスにおける主要フレームワークの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。&lt;/p>
+&lt;h2 id="nist-national-institute-of-standards-and-technology">NIST (National Institute of Standards and Technology)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>政府主導であり、特にアメリカ国内での適用が多い。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>実践的で技術的なガイドラインが豊富。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="itil-information-technology-infrastructure-library">ITIL (Information Technology Infrastructure Library)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: AXELOS（英国政府と民間企業の合弁企業）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメントのベストプラクティスを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>プロセスと役割の明確な定義が特徴。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="isoiec-27000シリーズ">ISO/IEC 27000シリーズ&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>情報セキュリティ管理のための国際標準。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>グローバルに認知され、広く適用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>国際標準として広く受け入れられており、認証制度が存在する。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>組織全体の情報セキュリティ管理に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="coso-committee-of-sponsoring-organizations-of-the-treadway-commission">COSO (Committee of Sponsoring Organizations of the Treadway Commission)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>リスク管理と内部統制のフレームワークを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>会計と財務報告の視点からもリスク管理を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>財務報告の信頼性確保にも関連。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="cobit-control-objectives-for-information-and-related-technologies">COBIT (Control Objectives for Information and Related Technologies)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: ISACA（Information Systems Audit and Control Association）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスと管理のためのフレームワーク。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ビジネスとITの整合性を重視。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>フレームワーク全体がIT管理とガバナンスに焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>トランザクションの分離レベル(`isolation`)と防げる不整合</title><link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link><pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid><description>&lt;h1 id="トランザクションの分離レベルisolationと防げる不整合">トランザクションの分離レベル(&lt;code>isolation&lt;/code>)と防げる不整合&lt;/h1>
+&lt;h2 id="dbのトランザクション処理で問題となる不整合">&lt;code>DB&lt;/code>のトランザクション処理で問題となる不整合&lt;/h2>
+&lt;h3 id="dirty-read">&lt;code>Dirty Read&lt;/code>&lt;/h3>
+&lt;p>トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。&lt;br>
+これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。&lt;/p>
+&lt;h3 id="non-repeatable-read">&lt;code>Non-repeatable Read&lt;/code>&lt;/h3>
+&lt;p>トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。&lt;br>
+これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。&lt;/p>
+&lt;h3 id="phantom-read">&lt;code>Phantom Read&lt;/code>&lt;/h3>
+&lt;p>トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。&lt;br>
+これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。&lt;/p>
+&lt;h2 id="トランザクションの分離レベル">トランザクションの分離レベル&lt;/h2>
+&lt;p>以下の分離レベルが存在する。&lt;/p>
+&lt;h3 id="read-uncommitted">&lt;code>Read Uncommitted&lt;/code>&lt;/h3>
+&lt;ul>
+&lt;li>防げる不整合:なし&lt;/li>
+&lt;/ul>
+&lt;h3 id="read-committed">&lt;code>Read Committed&lt;/code>&lt;/h3>
+&lt;ul>
+&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>
+他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　&lt;/li>
+&lt;/ul>
+&lt;h3 id="repeatable-read">&lt;code>Repeatable Read&lt;/code>&lt;/h3>
+&lt;ul>
+&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。&lt;br>
+これにより、同じトランザクション内でのデータの再読み取りが一貫する。&lt;/p>
+&lt;h3 id="snapshot">&lt;code>Snapshot&lt;/code>&lt;/h3>
+&lt;ul>
+&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>, &lt;code>Phantom Read&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。&lt;br>
+これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。&lt;/p>
+&lt;h3 id="serializable">&lt;code>Serializable&lt;/code>&lt;/h3>
+&lt;ul>
+&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>, &lt;code>Phantom Read&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。&lt;br>
+これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html">https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions">https://www.prisma.io/docs/orm/prisma-client/queries/transactions&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title><link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link><pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid><description>&lt;h1 id="typescriptにおいてnever型を使ってswitch文の網羅性を保証する">&lt;code>TypeScript&lt;/code>において&lt;code>never&lt;/code>型を使って&lt;code>switch&lt;/code>文の網羅性を保証する&lt;/h1>
+&lt;p>&lt;code>union&lt;/code>型に対してswich文を使う場合は、網羅性の保証が重要となります。&lt;br>
+網羅性の保証方法として、&lt;code>default&lt;/code>句に&lt;code>never&lt;/code>型を代入する方法があります。&lt;/p>
+&lt;p>&lt;code>never&lt;/code>型は「値を持たない」を意味するTypeScriptの特別な型です。&lt;br>
+詳しくはhttps://typescriptbook.jp/reference/statements/never&lt;br>
+簡単に言い換えると「あり得ない」ことを表す型です。&lt;/p>
+&lt;p>こちらがサンプル実装となります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sample.ts" data-lang="sample.ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Sample&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;A&amp;#34;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s2">&amp;#34;B;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> function testFunc(sample: Sample): void {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> switch (sample) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> case &amp;#34;&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="s2">&amp;#34;:
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> console.log(sample);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> break;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> case &amp;#34;&lt;/span>&lt;span class="nx">B&lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sample&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 網羅性をチェック
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">_&lt;/span>: &lt;span class="kt">never&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">sample&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードがビルドに成功するということは&lt;code>TypeScript&lt;/code>の型検査器によって「この&lt;code>default&lt;/code>節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。
+(たとえば、&lt;code> case “B”:&lt;/code>のコードを消すとエラーになります。)&lt;/p>
+&lt;p>この方法を取ることにより、&lt;code>Union&lt;/code>型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。
+将来&lt;code>Union&lt;/code>型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://amzn.to/3ygRaHO">Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title><link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid><description/></item><item><title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title><link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid><description>&lt;h1 id="nextjsapp-routerにおいてuse-clientはクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する">Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する&lt;/h1>
+&lt;h2 id="nextjsapp-routerの概要">Next.js（App Router）の概要&lt;/h2>
+&lt;p>Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&lt;br>
+クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&lt;/p>
+&lt;h2 id="use-clientの適切な使用">「use client」の適切な使用&lt;/h2>
+&lt;p>「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&lt;br>
+実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&lt;/p>
+&lt;p>汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。
+そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&lt;/p>
+&lt;p>つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;p>&lt;a href="https://amzn.to/4dmLbl1">吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.&lt;/a>&lt;/p></description></item><item><title>Spark SQLを並列実行するとview表の名前空間は衝突するのか</title><link>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</guid><description/></item><item><title>2024年目標</title><link>https://yuhi-sa.github.io/posts/todo/</link><pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/todo/</guid><description/></item><item><title>読む予定の本</title><link>https://yuhi-sa.github.io/posts/read/</link><pubDate>Thu, 04 Jan 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/read/</guid><description/></item><item><title>TypescriptとReactでHugoのテーマを自作する</title><link>https://yuhi-sa.github.io/posts/20231218_hugo/1/</link><pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231218_hugo/1/</guid><description/></item><item><title>エクセルファイルをCSVファイルに変換するshellスクリプト</title><link>https://yuhi-sa.github.io/posts/20231213_shell/1/</link><pubDate>Tue, 12 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231213_shell/1/</guid><description/></item><item><title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</title><link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link><pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid><description/></item><item><title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title><link>https://yuhi-sa.github.io/posts/20231204_git/1/</link><pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid><description/></item><item><title>App RouterとPages Routerでprom-clientの値を共有できない</title><link>https://yuhi-sa.github.io/posts/20231124_t3/1/</link><pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231124_t3/1/</guid><description/></item><item><title>mtailを用いてPrometheus形式のメトリクスを公開する</title><link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link><pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid><description/></item><item><title>DH鍵交換（Diffie-Hellman鍵交換）をpythonで確認</title><link>https://yuhi-sa.github.io/posts/20230907_dh/1/</link><pubDate>Wed, 06 Sep 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230907_dh/1/</guid><description/></item><item><title>DS201の実施_NodeSync</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</link><pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/15/</guid><description/></item><item><title>DS201の実施_WritePathとReadPath</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</link><pubDate>Thu, 29 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/16/</guid><description/></item><item><title>DS201の実施_Consistency</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/12/</guid><description/></item><item><title>DS201の実施_Hinted handoff</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/13/</guid><description/></item><item><title>DS201の実施_Read Repair</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/14/</guid><description/></item><item><title>DS201の実施_Replication</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</link><pubDate>Sun, 25 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/11/</guid><description/></item><item><title>DS201の実施_Snitches</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</link><pubDate>Sat, 24 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/10/</guid><description/></item><item><title>ios17 Developer Betaにアップグレードしたiphone13をios16に戻す</title><link>https://yuhi-sa.github.io/posts/20230618_iphone/1/</link><pubDate>Sun, 18 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230618_iphone/1/</guid><description/></item><item><title>DS201の実施_Gossip</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/</guid><description/></item><item><title>DS201の実施_Node</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/6/</guid><description/></item><item><title>DS201の実施_Ring</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/7/</guid><description/></item><item><title>DS201の実施_VNode</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</link><pubDate>Sat, 10 Jun 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/</guid><description/></item><item><title>DS201の実施_ClusteringColumns</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</link><pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/4/</guid><description/></item><item><title>DS201の実施_Drivers</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</link><pubDate>Sat, 20 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/5/</guid><description/></item><item><title>DS201の実施_CQL</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</guid><description/></item><item><title>DS201の実施_partitions</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/</guid><description/></item><item><title>ローカルmacへのCassandraインストール</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</link><pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/1/</guid><description/></item><item><title>AWS Summit Tokyo 2023に行った</title><link>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</link><pubDate>Thu, 20 Apr 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230420_aws_summit/1/</guid><description/></item><item><title>メールにおける認証技術</title><link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link><pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid><description/></item><item><title>シングルサインオン(SSO)</title><link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid><description/></item><item><title>チャレンジレスポンス方式</title><link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid><description/></item><item><title>Vimの使い方メモ</title><link>https://yuhi-sa.github.io/posts/20221230_vim/1/</link><pubDate>Fri, 30 Dec 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221230_vim/1/</guid><description/></item><item><title>JavaScriptの非同期処理(コールバック地獄/Promise/Async関数)</title><link>https://yuhi-sa.github.io/posts/20221229_async_await/1/</link><pubDate>Thu, 29 Dec 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221229_async_await/1/</guid><description/></item><item><title>webpackとbabelでReactを使える環境を作成する</title><link>https://yuhi-sa.github.io/posts/20221111_react/1/</link><pubDate>Fri, 11 Nov 2022 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20221111_react/1/</guid><description/></item><item><title>Kubernetesの認証情報(Context)</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/5/</link><pubDate>Sun, 04 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/5/</guid><description/></item><item><title>Kubernetesのリソースカテゴリ</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/3/</link><pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/3/</guid><description/></item><item><title>Kubernetesの初期状態のNamespace</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/4/</link><pubDate>Thu, 01 Sep 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/4/</guid><description/></item><item><title>dockerファイルの命令文</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link><pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid><description/></item><item><title>Kubernetesをローカル環境に構築する</title><link>https://yuhi-sa.github.io/posts/20220831_k8s/2/</link><pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220831_k8s/2/</guid><description/></item><item><title>pythonを用いたjsonを返却する簡易mockserver</title><link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid><description/></item><item><title>踏み台サーバー経由で多段sshをする方法</title><link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid><description/></item><item><title>Python(boto3)を用いたAWS利用のためセットアップメモ(S3の起動とAIサービスの利用)</title><link>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</link><pubDate>Sun, 20 Feb 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220220_aws_set/1/</guid><description/></item><item><title>リパラメタライゼーショントリック(Reparameterization trick)</title><link>https://yuhi-sa.github.io/posts/20220206_repa/1/</link><pubDate>Sun, 06 Feb 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220206_repa/1/</guid><description/></item><item><title>指数移動平均(Exponential Moving Averages)フィルタの周波数特性</title><link>https://yuhi-sa.github.io/posts/20220206_ema/1/</link><pubDate>Sun, 06 Feb 2022 14:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220206_ema/1/</guid><description/></item><item><title>linuxのログファイルと閲覧コマンド</title><link>https://yuhi-sa.github.io/posts/20211121_linux/6/</link><pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/6/</guid><description/></item><item><title>SQLの表の結合</title><link>https://yuhi-sa.github.io/posts/20211121_db/5/</link><pubDate>Thu, 30 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/5/</guid><description/></item><item><title>ガウス分布同士のクロスエントロピーの閉形式導出</title><link>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</link><pubDate>Thu, 09 Dec 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211209_nd_ce/1/</guid><description/></item><item><title>SQLの条件式</title><link>https://yuhi-sa.github.io/posts/20211121_db/4-2/</link><pubDate>Thu, 09 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/4-2/</guid><description/></item><item><title>SQLの関数</title><link>https://yuhi-sa.github.io/posts/20211121_db/4/</link><pubDate>Wed, 08 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/4/</guid><description/></item><item><title>公開鍵認証方式を用いたSSH通信の設定方法</title><link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link><pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid><description/></item><item><title>SQLによるDBの検索</title><link>https://yuhi-sa.github.io/posts/20211121_db/3/</link><pubDate>Thu, 02 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/3/</guid><description/></item><item><title>ネットワークのトラブルシューティングで利用する代表的なコマンド</title><link>https://yuhi-sa.github.io/posts/20211121_linux/4/</link><pubDate>Tue, 30 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/4/</guid><description/></item><item><title>正規化</title><link>https://yuhi-sa.github.io/posts/20211121_db/2/</link><pubDate>Fri, 26 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/2/</guid><description/></item><item><title>ネットワークの基礎</title><link>https://yuhi-sa.github.io/posts/20211121_linux/3/</link><pubDate>Mon, 22 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/3/</guid><description/></item><item><title>SQLの基本構文</title><link>https://yuhi-sa.github.io/posts/20211121_db/1/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/1/</guid><description/></item><item><title>スーパーユーザ</title><link>https://yuhi-sa.github.io/posts/20211121_linux/1/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/1/</guid><description/></item><item><title>ユーザアカウント</title><link>https://yuhi-sa.github.io/posts/20211121_linux/2/</link><pubDate>Sun, 21 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/2/</guid><description/></item><item><title>オブジェクト指向</title><link>https://yuhi-sa.github.io/posts/20211112_java/1/</link><pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid><description/></item><item><title>強化学習を用いてop3に歩行獲得させるROSパッケージのコード説明</title><link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link><pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid><description/></item><item><title>Apple純正デバイスへのgoogleカレンダーの他のカレンダー同期をする方法</title><link>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</link><pubDate>Sun, 12 Sep 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/</guid><description/></item><item><title>githubへのssh接続</title><link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link><pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid><description/></item><item><title>Raspberry PiでAirplayをする方法メモ(RPiPlay)</title><link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link><pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</guid><description/></item><item><title>適応フィルタ</title><link>https://yuhi-sa.github.io/posts/20210730_filter/1/</link><pubDate>Fri, 30 Jul 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210730_filter/1/</guid><description/></item><item><title>リーダブルコード読んだメモ</title><link>https://yuhi-sa.github.io/posts/20210713_readable/1/</link><pubDate>Tue, 13 Jul 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210713_readable/1/</guid><description/></item><item><title>GitHub Actions の書き方</title><link>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</link><pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/</guid><description/></item><item><title>Pythonのmatplotで三次元動画(gif画像)を作成するプログラム</title><link>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</link><pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210630_py_plot/1/</guid><description/></item><item><title>モーメント</title><link>https://yuhi-sa.github.io/posts/20210527_moment/1/</link><pubDate>Thu, 27 May 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210527_moment/1/</guid><description/></item><item><title>MacのLaunchpadを初期化する方法</title><link>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</link><pubDate>Tue, 20 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210520_mac_tips/1/</guid><description/></item><item><title>PyenvとAnacondaを用いたPython環境の設定</title><link>https://yuhi-sa.github.io/posts/20210416_py_env/1/</link><pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210416_py_env/1/</guid><description/></item><item><title>pythonでprintの上書きをする方法</title><link>https://yuhi-sa.github.io/posts/20210514_py_print/1/</link><pubDate>Fri, 16 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210514_py_print/1/</guid><description/></item><item><title>UbuntuでローカルDNSサーバーが指定できないときの編集方法</title><link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link><pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid><description/></item><item><title>Ubuntuのsshの設定</title><link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link><pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid><description/></item><item><title>H無限大制御</title><link>https://yuhi-sa.github.io/posts/20210405_hinf/1/</link><pubDate>Mon, 05 Apr 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210405_hinf/1/</guid><description/></item><item><title>Pythonによる2進数変換と論理演算(or,xor)</title><link>https://yuhi-sa.github.io/posts/20210329_bin/1/</link><pubDate>Mon, 29 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210329_bin/1/</guid><description/></item><item><title>クロスエントロピー法(Cross Entropy Method)</title><link>https://yuhi-sa.github.io/posts/20210329_cem/1/</link><pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210329_cem/1/</guid><description/></item><item><title>DNNを利用した強化学習の仲間たち</title><link>https://yuhi-sa.github.io/posts/20210319_rl/7/</link><pubDate>Mon, 22 Mar 2021 11:35:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/7/</guid><description/></item><item><title>Advantage Actor Critic(A2C)</title><link>https://yuhi-sa.github.io/posts/20210319_rl/6/</link><pubDate>Mon, 22 Mar 2021 11:30:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/6/</guid><description/></item><item><title>方策勾配法</title><link>https://yuhi-sa.github.io/posts/20210319_rl/5/</link><pubDate>Mon, 22 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/5/</guid><description/></item><item><title>ニューラルネットを適応した強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/4/</link><pubDate>Mon, 22 Mar 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/4/</guid><description/></item><item><title>モデルフリー強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/3/</link><pubDate>Fri, 19 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/3/</guid><description/></item><item><title>モデルベース強化学習</title><link>https://yuhi-sa.github.io/posts/20210319_rl/2/</link><pubDate>Thu, 18 Mar 2021 19:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/2/</guid><description/></item><item><title>強化学習とは</title><link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link><pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid><description/></item><item><title>K-means法</title><link>https://yuhi-sa.github.io/posts/20210318_pid/2/</link><pubDate>Thu, 18 Mar 2021 16:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210318_pid/2/</guid><description/></item><item><title>PID制御</title><link>https://yuhi-sa.github.io/posts/20210318_pid/1/</link><pubDate>Thu, 18 Mar 2021 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210318_pid/1/</guid><description/></item><item><title>変分オートエンコーダ(VAE)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/13/</link><pubDate>Thu, 18 Mar 2021 12:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/13/</guid><description/></item><item><title>マルコフ連鎖モンテカルロ法(MCMC)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/12/</link><pubDate>Thu, 18 Mar 2021 11:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/12/</guid><description/></item><item><title>変分ベイズ</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/11/</link><pubDate>Thu, 18 Mar 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/11/</guid><description/></item><item><title>EMアルゴリズム2(変分下界とKLダイバージェンス)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/10/</link><pubDate>Wed, 17 Mar 2021 13:05:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/10/</guid><description/></item><item><title>EMアルゴリズム</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/9/</link><pubDate>Wed, 17 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/9/</guid><description/></item><item><title>共役事前分布</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/8/</link><pubDate>Tue, 16 Mar 2021 16:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/8/</guid><description/></item><item><title>ラグランジュの未定数法</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/7/</link><pubDate>Tue, 16 Mar 2021 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/7/</guid><description/></item><item><title>二項分布とその仲間たち</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/6/</link><pubDate>Tue, 16 Mar 2021 14:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/6/</guid><description/></item><item><title>ベイズ推定</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/5/</link><pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/5/</guid><description/></item><item><title>正規分布における最尤推定</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/4/</link><pubDate>Tue, 16 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/4/</guid><description/></item><item><title>確率の基礎</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/2/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/2/</guid><description/></item><item><title>正規分布(ガウス分布)</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/3/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/3/</guid><description/></item><item><title>統計学と機械学習の用語</title><link>https://yuhi-sa.github.io/posts/20210317_bayes/1/</link><pubDate>Mon, 15 Mar 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210317_bayes/1/</guid><description/></item><item><title>numpyからpytorchの変換で，dtypeを消す</title><link>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</link><pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/</guid><description/></item><item><title>ニューラルネットワークを用いた教師あり学習のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210215_nn/1/</link><pubDate>Mon, 15 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210215_nn/1/</guid><description/></item><item><title>markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</title><link>https://yuhi-sa.github.io/posts/20210204_hugo/1/</link><pubDate>Thu, 04 Feb 2021 13:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210204_hugo/1/</guid><description/></item><item><title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210125_ut/1/</link><pubDate>Mon, 25 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210125_ut/1/</guid><description/></item><item><title>遺伝的アルゴリズム(GA)を用いたニューラルネットワーク学習のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20210109_nnga/1/</link><pubDate>Sat, 09 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210109_nnga/1/</guid><description/></item><item><title>[Python]ベイズ推定に基づく線形回帰(最小二乗推定，最尤推定，MAP推定，ベイズ推定)</title><link>https://yuhi-sa.github.io/posts/20210108_bayes/1/</link><pubDate>Fri, 08 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210108_bayes/1/</guid><description/></item><item><title>情報理論(エントロピーから相互情報量, PRML1.6)</title><link>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</link><pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210107_prml_ent/1/</guid><description/></item><item><title>粒子群最適化(PSO)とTCPSOのMatlabプログラム</title><link>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</link><pubDate>Thu, 07 Jan 2021 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/</guid><description/></item><item><title>SQLの表の作成</title><link>https://yuhi-sa.github.io/posts/20211121_db/7/</link><pubDate>Mon, 04 Jan 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/7/</guid><description/></item><item><title>SQLのデータ挿入，更新，削除</title><link>https://yuhi-sa.github.io/posts/20211121_db/6/</link><pubDate>Fri, 01 Jan 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_db/6/</guid><description/></item><item><title>Pythonでslackに実験結果(テキストと画像)を送る</title><link>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</link><pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201223_slack_api/1/</guid><description/></item><item><title>楕円曲線上のElGamal暗号のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</link><pubDate>Wed, 23 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201223_elgamal/1/</guid><description/></item><item><title>バイナリ法によるべき乗計算のPythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201220_binary/1/</link><pubDate>Sun, 20 Dec 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201220_binary/1/</guid><description/></item><item><title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</title><link>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</link><pubDate>Thu, 15 Oct 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20201015_euclidean/1/</guid><description/></item><item><title>代表的なフィルタ</title><link>https://yuhi-sa.github.io/posts/20200901_filter/1/</link><pubDate>Tue, 01 Sep 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200901_filter/1/</guid><description/></item><item><title>強化学習の全体像まとめ</title><link>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</link><pubDate>Mon, 31 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200831_rl_map/1/</guid><description/></item><item><title>[ROS]PublisherとSubscriberを1つのノードに書く方法</title><link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid><description/></item><item><title>About</title><link>https://yuhi-sa.github.io/posts/about/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/about/</guid><description/></item><item><title>いいなって思った言葉</title><link>https://yuhi-sa.github.io/posts/quotations/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/quotations/</guid><description/></item><item><title>プライバシーポリシー</title><link>https://yuhi-sa.github.io/posts/privacy_policy/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/privacy_policy/</guid><description/></item><item><title>DS201の実施_Compaction</title><link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/</guid><description/></item><item><title>GithubのプロフィールREADMEをデコる，動くprofile summaryを自作してみた</title><link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</guid><description/></item></channel></rss>
