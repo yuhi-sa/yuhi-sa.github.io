@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>セキュリティ on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link><description>Recent content in セキュリティ on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 29 Aug 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>&lt;h1 id="osintopen-source-intelligenceとは">OSINT（Open Source Intelligence）とは&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>セキュリティ on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link><description>Recent content in セキュリティ on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 09 Nov 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
+&lt;h2 id="きっかけ">きっかけ&lt;/h2>
+&lt;p>昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br>
+もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br>
+ということで、まずは知識をつけねばと思い、手近なところでIPAが実施する&lt;a href="https://www.ipa.go.jp/shiken/kubun/sc.html">情報処理安全確保支援士&lt;/a>を取ってみました。&lt;br>
+こちらは運良く合格した部分もありもう少し学習したいなと考えていました。&lt;br>
+そんな時、セキュリティ業界では&lt;a href="https://japan.isc2.org/cissp_about.html">CISSP(Certified Information Systems Security Professional)&lt;/a>という資格があると聞き、受験してみようと思いました。(名前もかっこいいし。。。。x2)&lt;/p>
+&lt;h3 id="補足">補足&lt;/h3>
+&lt;p>CISSPの認定を受けるためには、試験に合格することと5年間の実務経験が必要になります。&lt;br>
+私には実務経験が足りないため、現在はAssociate会員というステータスにあります。したがって、正確にはCISSPを取得したわけではなく、CISSPの試験に合格しただけということになります。&lt;/p>
+&lt;h2 id="学習期間と教材">学習期間と教材&lt;/h2>
+&lt;ul>
+&lt;li>学習期間：2024年6月初ー9月末&lt;/li>
+&lt;li>教材選び：身近に資格保持者がいなかったため、社内のセキュリティ担当の方にアドバイスいただきました。&lt;/li>
+&lt;/ul>
+&lt;h3 id="本">本&lt;/h3>
+&lt;ul>
+&lt;li>新版 CISSP CBK公式ガイドブック&lt;/li>
+&lt;li>CISSP公式問題集&lt;/li>
+&lt;li>Eleventh Hour CISSP®: Study Guide&lt;/li>
+&lt;li>Official Practice Tests（英語版の公式問題集）&lt;/li>
+&lt;li>CISSP Exam Cram (English Edition)&lt;/li>
+&lt;li>CISSP Study Guide (English Edition)&lt;/li>
+&lt;/ul>
+&lt;h3 id="記事系">記事系&lt;/h3>
+&lt;ul>
+&lt;li>CISSP 勉強ノート
+&lt;ul>
+&lt;li>&lt;a href="https://tex2e.github.io/blog/security/cissp-notes">https://tex2e.github.io/blog/security/cissp-notes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>その他、社内記事&lt;/li>
+&lt;/ul>
+&lt;h3 id="動画">動画&lt;/h3>
+&lt;ul>
+&lt;li>Udemyの講座
+&lt;ul>
+&lt;li>【日本語】初心者から学べるCISSP講座：CISSP Domain1 ビデオ学習　2024年度版&lt;/li>
+&lt;li>&amp;hellip;..&lt;/li>
+&lt;li>【日本語】初心者から学べるCISSP講座：CISSP Domain7 ビデオ学習　2024年度版&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="やったこと">やったこと&lt;/h2>
+&lt;ol>
+&lt;li>記事で全体像を把握。&lt;/li>
+&lt;li>Udemyの講座を2周。&lt;/li>
+&lt;li>CISSP CBK公式ガイドを1周＋付属問題3周。&lt;/li>
+&lt;li>CISSP公式問題集を4周。&lt;/li>
+&lt;/ol>
+&lt;h3 id="その他">その他&lt;/h3>
+&lt;p>この期間に以下の本を新しく読んだり、読み直したりしました。(趣味も兼ねて読んでいたので試験に直接関係しないのも多いです。)&lt;/p>
+&lt;ul>
+&lt;li>長嶋仁. &lt;a href="https://amzn.to/3ZYa7v4">セキュリティ技術の教科書　第2版 教科書シリーズ&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>光成 滋生. &lt;a href="https://amzn.to/3ZRY4PK">図解即戦力　暗号と認証のしくみと理論がこれ1冊でしっかりわかる教科書&lt;/a>. 株式会社技術評論社. Kindle 版. &lt;/li>
+&lt;li>アンドリュー・スチュワート; 小林啓倫. &lt;a href="https://amzn.to/3U3N4uN">情報セキュリティの敗北史. 株式会社白揚社&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>ダニエル・J・ソロブ; ウッドロウ・ハーツォグ; 小向太郎. &lt;a href="https://amzn.to/4eVW7G7">データセキュリティ法の迷走. 株式会社勁草書房&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>セキュリティ集団スプラウト. &lt;a href="https://amzn.to/3U1aIbu">闇ウェブ (文春新書)&lt;/a> . 文藝春秋. Kindle 版. &lt;/li>
+&lt;li>小谷賢. &lt;a href="https://amzn.to/3YgLsjU">インテリジェンス　――国家・組織は情報をいかに扱うべきか&lt;/a> (ちくま学芸文庫). 筑摩書房. Kindle 版. &lt;/li>
+&lt;li>中島明日香. &lt;a href="https://amzn.to/4eB4Bme">サイバー攻撃　ネット世界の裏側で起きていること&lt;/a> (ブルーバックス). 講談社. Kindle 版. &lt;/li>
+&lt;li>谷脇 康彦. &lt;a href="https://amzn.to/4eB6mjw">サイバーセキュリティ&lt;/a> (岩波新書) . 株式会社 岩波書店. Kindle 版. &lt;/li>
+&lt;li>面 和毅; 中村 行宏. &lt;a href="https://amzn.to/47WK4Gt">サイバー攻撃から企業システムを守る！　OSINT実践ガイド&lt;/a> . 日経BP. Kindle 版. &lt;/li>
+&lt;li>足立照嘉. &lt;a href="https://amzn.to/3Njgl0J">サイバー犯罪入門 国もマネーも乗っ取られる衝撃の現実&lt;/a> (幻冬舎新書) . 株式会社 幻冬舎. Kindle 版. 
+以下の音声コンテンツを聞くようになりました。&lt;/li>
+&lt;li>&lt;a href="https://www.tsujileaks.com/">podcast - #セキュリティのアレ&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="おかね">おかね&lt;/h2>
+&lt;p>思ったより金がかかった。(自費)&lt;/p></description></item><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>&lt;h1 id="osintopen-source-intelligenceとは">OSINT（Open Source Intelligence）とは&lt;/h1>
 &lt;p>&lt;a href="https://amzn.to/4cJOO2P">面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.&lt;/a> を読んだ感想メモ&lt;/p>
 &lt;h2 id="概要">概要&lt;/h2>
 &lt;p>OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。&lt;/p>
