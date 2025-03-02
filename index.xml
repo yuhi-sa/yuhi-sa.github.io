@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tomato blog</title><link>https://yuhi-sa.github.io/</link><description>Recent content on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 09 Nov 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tomato blog</title><link>https://yuhi-sa.github.io/</link><description>Recent content on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 02 Mar 2025 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>【AWS】JAWS DAYS 2025に参加してきた</title><link>https://yuhi-sa.github.io/posts/20250301_aws/1/</link><pubDate>Sun, 02 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250301_aws/1/</guid><description>&lt;h1 id="aws-jaws-days-2025に参加してきた">【AWS】 JAWS DAYS 2025に参加してきた&lt;/h1>
+&lt;h2 id="イベント概要">イベント概要&lt;/h2>
+&lt;div class="image-row">
+ &lt;img src=".././1.jpeg" alt="イベント概要" width="60%" />
+&lt;/div>
+&lt;ul>
+&lt;li>&lt;strong>開催日時&lt;/strong>： 2025年3月1日(土)&lt;/li>
+&lt;li>&lt;strong>場所&lt;/strong>： 池袋サンシャインシティ 展示ホールA&lt;/li>
+&lt;li>&lt;strong>住所&lt;/strong>： 〒170-8630 東京都豊島区東池袋3-1&lt;/li>
+&lt;li>&lt;strong>主催&lt;/strong>： JAWS-UG（AWS User Group – Japan）&lt;/li>
+&lt;li>&lt;strong>公式サイト&lt;/strong>： &lt;a href="https://jawsdays2025.jaws-ug.jp">JAWS DAYS 2025&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>JAWS DAYSは、JAWS-UG（AWS User Group – Japan）が主催し、アマゾン ウェブ サービス ジャパン合同会社の後援のもと開催される、日本最大規模のAWSユーザーコミュニティイベントです。&lt;br>
+AWSに関する最新技術や導入事例を学べるセッションが多数用意されており、エンジニア・アーキテクト・ビジネス担当者など幅広い層が参加しました。&lt;/p>
+&lt;p>私は普段の業務ではAWSを直接使っていませんが、副業での活用やクラウド技術の学習の一環として参加しました。本記事では、イベントの雰囲気や印象に残ったセッションについてまとめます。&lt;/p>
+&lt;h2 id="会場の雰囲気">会場の雰囲気&lt;/h2>
+&lt;p>会場は6つのトラックに分かれており、かなり広いスペースが確保されていました。&lt;/p>
+&lt;div class="image-row">
+ &lt;img src=".././2.png" alt="フロアマップ" width="50%" />
+&lt;/div>
+&lt;p>また、サポーターブースやノベルティ配布エリアも大盛況で、AWS関連の企業やサービスに関する情報収集の場としても有意義でした。&lt;/p>
+&lt;div class="image-row">
+ &lt;img src=".././3.jpeg" alt="フロアの様子2" width="50%" />
+ &lt;img src=".././4.jpeg" alt="フロアの様子3" width="50%" />
+&lt;/div>
+&lt;div class="image-row">
+ &lt;img src=".././5.jpeg" alt="フロアの様子4" width="50%" />
+&lt;/div>
+&lt;style>
+.image-row {
+ display: flex;
+ justify-content: space-between;
+ margin-bottom: 20px;
+}
+&lt;/style>
+&lt;h2 id="システムアーキテクト道場に参加">「システムアーキテクト道場」に参加&lt;/h2>
+&lt;p>今回最も興味深かったのが「システムアーキテクト道場」です。&lt;/p>
+&lt;p>&lt;a href="https://jawsdays2025.jaws-ug.jp/sessions/D-6">セッション詳細&lt;/a>&lt;/p>
+&lt;h3 id="概要">概要&lt;/h3>
+&lt;p>このセッションは事前申し込み制で、参加者がチームを組み、講師から出された課題に対してAWSを活用したシステムアーキテクチャを設計するハンズオン形式のイベントです。&lt;br>
+今回の課題は &lt;strong>「架空の水族館のオンプレミスシステムをAWSへ移行する」&lt;/strong> というものでした。&lt;/p>
+&lt;details>
+&lt;summary>課題の詳細（クリックで展開）&lt;/summary>
+&lt;h4 id="背景">背景&lt;/h4>
+&lt;ul>
+&lt;li>旧システムはオンプレ環境で、ハードウェア保守期限が2025年10月末で切れる。&lt;/li>
+&lt;li>スパイクアクセスによるサイト停止が頻発し、復旧に数時間かかる。&lt;/li>
+&lt;li>設計書の納品を求めなかったため、保守・機能追加が不可能。&lt;/li>
+&lt;li>モバイル対応は別ページを作成する方式で、更新コストが高い。&lt;/li>
+&lt;li>コスト削減が急務（餌代・電気代・ガス代の高騰）。&lt;/li>
+&lt;/ul>
+&lt;h4 id="ビジネス要件">ビジネス要件&lt;/h4>
+&lt;ol>
+&lt;li>
+&lt;p>入場予約システム&lt;/p>
+&lt;ul>
+&lt;li>15分間隔の予約スロットで、最終入場は閉館1時間前。&lt;/li>
+&lt;li>予約は1ヶ月前の0時から受付開始。&lt;/li>
+&lt;li>QRコードによる非接触入場（会員：マイページ、非会員：メール）。&lt;/li>
+&lt;li>スパイク対策と混雑緩和のため、リアルタイム混雑状況表示＆空き時間帯のレコメンド。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>リピーター向け施策&lt;/p></description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
 &lt;h2 id="きっかけ">きっかけ&lt;/h2>
 &lt;p>昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br>
 もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br>
@@ -279,7 +342,7 @@
 &lt;h2 id="リポジトリの役割">リポジトリの役割&lt;/h2>
 &lt;p>集約の永続化と取得を管理するのがリポジトリ。&lt;code>zod&lt;/code>のスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-.ts" data-lang=".ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">class&lt;/span> &lt;span class="nx">BankAccountRepository&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">private&lt;/span> &lt;span class="nx">storage&lt;/span>: &lt;span class="kt">Map&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="err">,&lt;/span> &lt;span class="na">BankAccount&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Map&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">private&lt;/span> &lt;span class="nx">storage&lt;/span>: &lt;span class="kt">Map&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="na">BankAccount&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Map&lt;/span>&lt;span class="p">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">save&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">account&lt;/span>: &lt;span class="kt">BankAccount&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// zodのスキーマでバリデーション

@@ -69,7 +69,7 @@
 </span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
 </span></span></span><span class=line><span class=cl><span class=sd>        python -m pip install --upgrade pip
 </span></span></span><span class=line><span class=cl><span class=sd>        pip install flake8 pytest
-</span></span></span><span class=line><span class=cl><span class=sd>        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=sd>        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Remove Old Date</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
@@ -79,11 +79,11 @@
 </span></span></span><span class=line><span class=cl><span class=sd>        git config user.email &#34;&lt;git-user-e-mail&gt;&#34;
 </span></span></span><span class=line><span class=cl><span class=sd>        git add *
 </span></span></span><span class=line><span class=cl><span class=sd>        git commit -m &#34;Update&#34;
-</span></span></span><span class=line><span class=cl><span class=sd>        git push origin master</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=sd>        git push origin master</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Update Card</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>        bash start.bash</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=sd>        bash start.bash</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Card Published</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
@@ -91,7 +91,7 @@
 </span></span></span><span class=line><span class=cl><span class=sd>        git config user.email &#34;&lt;git-user-e-mail&gt;&#34;
 </span></span></span><span class=line><span class=cl><span class=sd>        git add *
 </span></span></span><span class=line><span class=cl><span class=sd>        git commit -m &#34;Update&#34;
-</span></span></span><span class=line><span class=cl><span class=sd>        git push origin master</span><span class=w>        
+</span></span></span><span class=line><span class=cl><span class=sd>        git push origin master</span><span class=w>
 </span></span></span></code></pre></div><ul><li><a href=https://yuhi-sa.github.io/posts/20210630/2/>GitHub Actions の YAMLファイルの書き方</a></li></ul><h2 id=使い方>使い方</h2><ol><li><a href=https://github.com/yuhi-sa/github_cards>このリポジトリ</a>をfork．</li><li>username.txtを自身のuser名に書き換える．</li><li>GitHub Actionsを起動(Run workflow)
 (24時間ごとに自動で更新されます)</li><li>{username}を変更して以下のリンクをREADMEに追記してください．</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Repos per Language(使用言語の円グラフのコード)</span>
 </span></span><span class=line><span class=cl>!<span class=o>[</span>Repos per Language<span class=o>](</span>https://github.com/<span class=o>{</span>username<span class=o>}</span>/github_cards/blob/master/cards/lang.gif?raw<span class=o>=</span><span class=nb>true</span><span class=o>)</span>
