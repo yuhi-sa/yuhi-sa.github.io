@@ -9,6 +9,14 @@
 </url>
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20250313_aws/1/</loc>
+  
+  <lastmod>2025-03-02T09:10:00+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20240608_cissp/3/</loc>
   
   <lastmod>2024-11-09T09:10:00+09:00</lastmod>

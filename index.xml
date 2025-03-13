@@ -61,7 +61,40 @@ AWSに関する最新技術や導入事例を学べるセッションが多数�
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>リピーター向け施策&lt;/p></description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
+&lt;p>リピーター向け施策&lt;/p></description></item><item><title>AWS JumpStart 2025の1日目に参加した時のメモ</title><link>https://yuhi-sa.github.io/posts/20250313_aws/1/</link><pubDate>Sun, 02 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250313_aws/1/</guid><description>&lt;h1 id="aws-jumpstart-2025の1日目に参加した時のメモ">AWS JumpStart 2025の1日目に参加した時のメモ&lt;/h1>
+&lt;h2 id="イベント概要">イベント概要&lt;/h2>
+&lt;ul>
+&lt;li>日時: 2025年3月13日(木) - 3月14日(金)&lt;/li>
+&lt;li>公式リンク: &lt;a href="https://aws.amazon.com/jp/blogs/news/aws-jumpstart-2025/">https://aws.amazon.com/jp/blogs/news/aws-jumpstart-2025/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="1日目午前">1日目午前&lt;/h2>
+&lt;h3 id="プロトタイプフェーズ100人以下のシステムの場合">プロトタイプフェーズ(100人以下)のシステムの場合&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">graph TD
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> User -- Request--&amp;gt; Route53
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Route53 -- DNS Resolution --&amp;gt; ElasticIP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> subgraph VPC [AWS VPC]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ElasticIP --&amp;gt; EC2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> EC2 --&amp;gt;| RDS
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RDS --&amp;gt;| EC2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> EC2 --&amp;gt; ElasticIP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>主要コンポーネント:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Route 53&lt;/strong>: AWSのDNSサービス。ドメイン名をIPアドレスに変換する役割を担います。&lt;/li>
+&lt;li>&lt;strong>Elastic IP&lt;/strong>: 固定IPアドレスを提供するサービス。EC2インスタンスが再起動しても同じIPアドレスを維持できます。&lt;/li>
+&lt;li>&lt;strong>EC2&lt;/strong>: 仮想サーバーインスタンスを提供するサービス。アプリケーションを実行します。&lt;/li>
+&lt;li>&lt;strong>RDS&lt;/strong>: リレーショナルデータベースサービス。データの永続化を担当します。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>このフェーズの特徴:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>シンプルな構成で迅速に開発・デプロイが可能&lt;/li>
+&lt;li>少ないリソースで運用可能&lt;/li>
+&lt;li>単一障害点が存在するため、高可用性は限定的&lt;/li>
+&lt;li>水平スケーリングの仕組みがない&lt;/li>
+&lt;/ul>
+&lt;h2 id="vpcについて">VPCについて&lt;/h2>
+&lt;h3 id="vpcとは">VPCとは&lt;/h3>
+&lt;p>VPC (Virtual Private Cloud) は、AWS上で独自の仮想ネットワークを作成するサービスです。オンプレミスのネットワーク環境と同様の制御が可能で、セキュリティやネットワークの設定を細かく管理できます。&lt;/p></description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
 &lt;h2 id="きっかけ">きっかけ&lt;/h2>
 &lt;p>昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br>
 もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br>
