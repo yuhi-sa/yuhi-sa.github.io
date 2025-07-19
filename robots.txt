@@ -1,6 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
+  <loc>https://yuhi-sa.github.io/posts/20250719_-hackfes2025/1/</loc>
+  
+  <lastmod>2025-07-19T09:10:00+09:00</lastmod>
+  <changefreq>weekly</changefreq>
+  
+</url>
+
+<url>
   <loc>https://yuhi-sa.github.io/posts/20250313_aws/1/</loc>
   
   <lastmod>2025-03-13T09:10:00+09:00</lastmod>
