@@ -1,4 +1,43 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tomato blog</title><link>https://yuhi-sa.github.io/</link><description>Recent content on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 13 Mar 2025 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>AWS JumpStart 2025の1日目に参加した時のメモ</title><link>https://yuhi-sa.github.io/posts/20250313_aws/1/</link><pubDate>Thu, 13 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250313_aws/1/</guid><description>&lt;h1 id="aws-jumpstart-2025の1日目に参加した時のメモ">AWS JumpStart 2025の1日目に参加した時のメモ&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tomato blog</title><link>https://yuhi-sa.github.io/</link><description>Recent content on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 19 Jul 2025 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackfes2025参加メモ</title><link>https://yuhi-sa.github.io/posts/20250719_-hackfes2025/1/</link><pubDate>Sat, 19 Jul 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250719_-hackfes2025/1/</guid><description>&lt;h1 id="hackfes2025参加メモ">Hackfes2025参加メモ&lt;/h1>
+&lt;h2 id="イベント概要">イベント概要&lt;/h2>
+&lt;ul>
+&lt;li>日時: 2025年7月19日(土)&lt;/li>
+&lt;li>&lt;a href="https://hackfes2025.hacker.or.jp">https://hackfes2025.hacker.or.jp&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="webアプリケーションspa脆弱性診断入門徳丸-浩">「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩&lt;/h2>
+&lt;p>10:10 - 11:40&lt;/p>
+&lt;p>Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。
+対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。&lt;/p>
+&lt;h3 id="corscross-origin-resource-sharingの認可不備">CORS（Cross-Origin Resource Sharing）の認可不備&lt;/h3>
+&lt;p>ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORS（Cross-Origin Resource Sharing）によって処理される。&lt;/p>
+&lt;p>プリフライトリクエスト&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OPTIONS /api/v1/login HTTP/1.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host: api.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept: */*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Request-Method: POST
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Request-Headers: content-type
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Origin: http://spa.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Mode: cors
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Site: cross-site
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Dest: empty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Referer: http://spa.example.jp/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept-Encoding: gzip, deflate, br
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept-Language: ja,en-US;q=0.9,en;q=0.8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Priority: u=1, i
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Connection: keep-alive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>レスポンス&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">HTTP/1.1 204 No Content
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">X-Powered-By: Express
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Origin: http://spa.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Vary: Origin, Access-Control-Request-Headers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Credentials: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Headers: content-type
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Max-Age: 300
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Content-Length: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Date: Sat, 19 Jul 2025 01:31:57 GMT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきでないオリジンに対してもレスポンスが返ってくることがわかる。&lt;/p></description></item><item><title>AWS JumpStart 2025の1日目に参加した時のメモ</title><link>https://yuhi-sa.github.io/posts/20250313_aws/1/</link><pubDate>Thu, 13 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250313_aws/1/</guid><description>&lt;h1 id="aws-jumpstart-2025の1日目に参加した時のメモ">AWS JumpStart 2025の1日目に参加した時のメモ&lt;/h1>
 &lt;h2 id="イベント概要">イベント概要&lt;/h2>
 &lt;ul>
 &lt;li>日時: 2025年3月13日(木) - 3月14日(金)&lt;/li>
