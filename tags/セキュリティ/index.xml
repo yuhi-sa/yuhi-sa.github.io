@@ -1,75 +1,452 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>セキュリティ on tomato blog</title>
-    <link>http://localhost:1313/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link>
-    <description>Recent content in セキュリティ on tomato blog</description>
-    <generator>Hugo</generator>
-    <language>ja</language>
-    <lastBuildDate>Sat, 19 Jul 2025 09:10:00 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hackfes2025参加メモ</title>
-      <link>http://localhost:1313/posts/20250719_hackfes2025/1/</link>
-      <pubDate>Sat, 19 Jul 2025 09:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20250719_hackfes2025/1/</guid>
-      <description>&lt;h1 id=&#34;hackfes2025参加メモ&#34;&gt;Hackfes2025参加メモ&lt;/h1&gt;&#xA;&lt;h2 id=&#34;イベント概要&#34;&gt;イベント概要&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;日時: 2025年7月19日(土)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://hackfes2025.hacker.or.jp&#34;&gt;https://hackfes2025.hacker.or.jp&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;webアプリケーションspa脆弱性診断入門徳丸-浩&#34;&gt;「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩&lt;/h2&gt;&#xA;&lt;p&gt;10:10 - 11:40&lt;/p&gt;&#xA;&lt;p&gt;Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。&#xA;対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。&lt;/p&gt;&#xA;&lt;h3 id=&#34;corscross-origin-resource-sharingの認可不備&#34;&gt;CORS（Cross-Origin Resource Sharing）の認可不備&lt;/h3&gt;&#xA;&lt;p&gt;ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORS（Cross-Origin Resource Sharing）によって処理される。&lt;/p&gt;&#xA;&lt;p&gt;プリフライトリクエスト&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;OPTIONS /api/v1/login HTTP/1.1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Host: api.example.jp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept: */*&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Request-Method: POST&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Request-Headers: content-type&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Origin: http://spa.example.jp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Sec-Fetch-Mode: cors&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Sec-Fetch-Site: cross-site&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Sec-Fetch-Dest: empty&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Referer: http://spa.example.jp/&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept-Encoding: gzip, deflate, br&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Accept-Language: ja,en-US;q=0.9,en;q=0.8&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Priority: u=1, i&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Connection: keep-alive&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;レスポンス&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HTTP/1.1 204 No Content&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;X-Powered-By: Express&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Allow-Origin: http://spa.example.jp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Vary: Origin, Access-Control-Request-Headers&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Allow-Credentials: true&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Allow-Headers: content-type&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Access-Control-Max-Age: 300&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Content-Length: 0&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Date: Sat, 19 Jul 2025 01:31:57 GMT&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきでないオリジンに対してもレスポンスが返ってくることがわかる。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>自費で18万円かけてCISSP試験に挑戦してみた話</title>
-      <link>http://localhost:1313/posts/20240608_cissp/3/</link>
-      <pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20240608_cissp/3/</guid>
-      <description>&lt;h1 id=&#34;自費で18万円かけてcissp試験に挑戦してみた話&#34;&gt;自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1&gt;&#xA;&lt;h2 id=&#34;きっかけ&#34;&gt;きっかけ&lt;/h2&gt;&#xA;&lt;p&gt;昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br&gt;&#xA;もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br&gt;&#xA;ということで、まずは知識をつけねばと思い、手近なところでIPAが実施する&lt;a href=&#34;https://www.ipa.go.jp/shiken/kubun/sc.html&#34;&gt;情報処理安全確保支援士&lt;/a&gt;を取ってみました。&lt;br&gt;&#xA;こちらは運良く合格した部分もありもう少し学習したいなと考えていました。&lt;br&gt;&#xA;そんな時、セキュリティ業界では&lt;a href=&#34;https://japan.isc2.org/cissp_about.html&#34;&gt;CISSP(Certified Information Systems Security Professional)&lt;/a&gt;という資格があると聞き、受験してみようと思いました。(名前もかっこいいし。。。。x2)&lt;/p&gt;&#xA;&lt;h3 id=&#34;補足&#34;&gt;補足&lt;/h3&gt;&#xA;&lt;p&gt;CISSPの認定を受けるためには、試験に合格することと5年間の実務経験が必要になります。&lt;br&gt;&#xA;私には実務経験が足りないため、現在はAssociate会員というステータスにあります。したがって、正確にはCISSPを取得したわけではなく、CISSPの試験に合格しただけということになります。&lt;/p&gt;&#xA;&lt;h2 id=&#34;学習期間と教材&#34;&gt;学習期間と教材&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;学習期間：2024年6月初ー9月末&lt;/li&gt;&#xA;&lt;li&gt;教材選び：身近に資格保持者がいなかったため、社内のセキュリティ担当の方にアドバイスいただきました。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;本&#34;&gt;本&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;新版 CISSP CBK公式ガイドブック&lt;/li&gt;&#xA;&lt;li&gt;CISSP公式問題集&lt;/li&gt;&#xA;&lt;li&gt;Eleventh Hour CISSP®: Study Guide&lt;/li&gt;&#xA;&lt;li&gt;Official Practice Tests（英語版の公式問題集）&lt;/li&gt;&#xA;&lt;li&gt;CISSP Exam Cram (English Edition)&lt;/li&gt;&#xA;&lt;li&gt;CISSP Study Guide (English Edition)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;記事系&#34;&gt;記事系&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;CISSP 勉強ノート&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://tex2e.github.io/blog/security/cissp-notes&#34;&gt;https://tex2e.github.io/blog/security/cissp-notes&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;その他、社内記事&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;動画&#34;&gt;動画&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Udemyの講座&#xA;&lt;ul&gt;&#xA;&lt;li&gt;【日本語】初心者から学べるCISSP講座：CISSP Domain1 ビデオ学習　2024年度版&lt;/li&gt;&#xA;&lt;li&gt;&amp;hellip;..&lt;/li&gt;&#xA;&lt;li&gt;【日本語】初心者から学べるCISSP講座：CISSP Domain7 ビデオ学習　2024年度版&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;やったこと&#34;&gt;やったこと&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;記事で全体像を把握。&lt;/li&gt;&#xA;&lt;li&gt;Udemyの講座を2周。&lt;/li&gt;&#xA;&lt;li&gt;CISSP CBK公式ガイドを1周＋付属問題3周。&lt;/li&gt;&#xA;&lt;li&gt;CISSP公式問題集を4周。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;その他&#34;&gt;その他&lt;/h3&gt;&#xA;&lt;p&gt;この期間に以下の本を新しく読んだり、読み直したりしました。(趣味も兼ねて読んでいたので試験に直接関係しないのも多いです。)&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;長嶋仁. &lt;a href=&#34;https://amzn.to/3ZYa7v4&#34;&gt;セキュリティ技術の教科書　第2版 教科書シリーズ&lt;/a&gt;. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;光成 滋生. &lt;a href=&#34;https://amzn.to/3ZRY4PK&#34;&gt;図解即戦力　暗号と認証のしくみと理論がこれ1冊でしっかりわかる教科書&lt;/a&gt;. 株式会社技術評論社. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;アンドリュー・スチュワート; 小林啓倫. &lt;a href=&#34;https://amzn.to/3U3N4uN&#34;&gt;情報セキュリティの敗北史. 株式会社白揚社&lt;/a&gt;. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;ダニエル・J・ソロブ; ウッドロウ・ハーツォグ; 小向太郎. &lt;a href=&#34;https://amzn.to/4eVW7G7&#34;&gt;データセキュリティ法の迷走. 株式会社勁草書房&lt;/a&gt;. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;セキュリティ集団スプラウト. &lt;a href=&#34;https://amzn.to/3U1aIbu&#34;&gt;闇ウェブ (文春新書)&lt;/a&gt; . 文藝春秋. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;小谷賢. &lt;a href=&#34;https://amzn.to/3YgLsjU&#34;&gt;インテリジェンス　――国家・組織は情報をいかに扱うべきか&lt;/a&gt; (ちくま学芸文庫). 筑摩書房. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;中島明日香. &lt;a href=&#34;https://amzn.to/4eB4Bme&#34;&gt;サイバー攻撃　ネット世界の裏側で起きていること&lt;/a&gt; (ブルーバックス). 講談社. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;谷脇 康彦. &lt;a href=&#34;https://amzn.to/4eB6mjw&#34;&gt;サイバーセキュリティ&lt;/a&gt; (岩波新書) . 株式会社 岩波書店. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;面 和毅; 中村 行宏. &lt;a href=&#34;https://amzn.to/47WK4Gt&#34;&gt;サイバー攻撃から企業システムを守る！　OSINT実践ガイド&lt;/a&gt; . 日経BP. Kindle 版. &lt;/li&gt;&#xA;&lt;li&gt;足立照嘉. &lt;a href=&#34;https://amzn.to/3Njgl0J&#34;&gt;サイバー犯罪入門 国もマネーも乗っ取られる衝撃の現実&lt;/a&gt; (幻冬舎新書) . 株式会社 幻冬舎. Kindle 版. &#xA;以下の音声コンテンツを聞くようになりました。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.tsujileaks.com/&#34;&gt;podcast - #セキュリティのアレ&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;おかね&#34;&gt;おかね&lt;/h2&gt;&#xA;&lt;p&gt;思ったより金がかかった。(自費)&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>OSINT実践ガイドを読んだメモ</title>
-      <link>http://localhost:1313/posts/20240829/1/</link>
-      <pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20240829/1/</guid>
-      <description>&lt;h1 id=&#34;osintopen-source-intelligenceとは&#34;&gt;OSINT（Open Source Intelligence）とは&lt;/h1&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://amzn.to/4cJOO2P&#34;&gt;面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.&lt;/a&gt; を読んだ感想メモ&lt;/p&gt;&#xA;&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;&#xA;&lt;p&gt;OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。&lt;/p&gt;&#xA;&lt;h2 id=&#34;osintの歴史&#34;&gt;OSINTの歴史&lt;/h2&gt;&#xA;&lt;p&gt;OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。&lt;/p&gt;&#xA;&lt;h2 id=&#34;現在のosint&#34;&gt;現在のOSINT&lt;/h2&gt;&#xA;&lt;p&gt;現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;ウェブサイトやニュース記事&lt;/strong&gt;: 一般公開されている情報源。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ソーシャルメディア（SNS）&lt;/strong&gt;: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHubなどのコード共有サイト&lt;/strong&gt;: ソースコードやプロジェクトの進捗状況が公開されている。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;脆弱性データベース&lt;/strong&gt;: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ゼロデイ攻撃に関する情報&lt;/strong&gt;: 未知の脆弱性を狙った攻撃についての公開情報。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;osintの調査方法&#34;&gt;OSINTの調査方法&lt;/h2&gt;&#xA;&lt;h3 id=&#34;データソースの見つけ方&#34;&gt;データソースの見つけ方&lt;/h3&gt;&#xA;&lt;p&gt;OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://osintframework.com&#34;&gt;OSINT Framework&lt;/a&gt;: 様々なOSINTツールや情報源へのリンク集。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://attack.mitre.org&#34;&gt;MITRE ATT&amp;amp;CK&lt;/a&gt;: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.researchgate.net/publication/361323824_Mapping_Tools_for_Open_Source_Intelligence_with_Cyber_Kill_Chain_for_Adversarial_Aware_Security&#34;&gt;Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security&lt;/a&gt;: サイバーキルチェーンとデータソースのマッピングに関する論文。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;便利ツール&#34;&gt;便利ツール&lt;/h3&gt;&#xA;&lt;p&gt;以下のツールは、OSINT調査を支援するために広く利用されています。&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Shodan&lt;/strong&gt;: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 &lt;a href=&#34;https://www.shodan.io/dashboard&#34;&gt;Shodan&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Censys&lt;/strong&gt;: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 &lt;a href=&#34;https://search.censys.io&#34;&gt;Censys&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Have I Been Pwned&lt;/strong&gt;: メールアドレスの漏洩をチェック。 &lt;a href=&#34;https://haveibeenpwned.com&#34;&gt;Have I Been Pwned&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;VirusTotal&lt;/strong&gt;: ファイルやURLをスキャンしてマルウェアの有無を確認。 &lt;a href=&#34;https://www.virustotal.com/gui/home/upload&#34;&gt;VirusTotal&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Aguse&lt;/strong&gt;: Webサイトのレピュテーションを調べる。 &lt;a href=&#34;https://www.aguse.jp&#34;&gt;Aguse&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Exploit Database&lt;/strong&gt;: 公開されているエクスプロイト情報のデータベース。 &lt;a href=&#34;https://www.exploit-db.com&#34;&gt;Exploit-DB&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;SecurityTrails&lt;/strong&gt;: ドメインやIPアドレスの利用履歴を確認。 &lt;a href=&#34;https://securitytrails.com&#34;&gt;SecurityTrails&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;その他の重要リソース&#34;&gt;その他の重要リソース&lt;/h2&gt;&#xA;&lt;h3 id=&#34;脆弱性情報収集&#34;&gt;脆弱性情報収集&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;NVD&lt;/strong&gt;: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 &lt;a href=&#34;https://nvd.nist.gov/vuln/search&#34;&gt;NVD&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;JVN iPedia&lt;/strong&gt;: 日本の脆弱性データベース。 &lt;a href=&#34;https://jvndb.jvn.jp/&#34;&gt;JVN iPedia&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Vulmon&lt;/strong&gt;: グローバルな脆弱性情報を提供。 &lt;a href=&#34;https://vulmon.com&#34;&gt;Vulmon&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;ssltlsの強度確認&#34;&gt;SSL/TLSの強度確認&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 &lt;a href=&#34;https://www.ssllabs.com/ssltest/&#34;&gt;SSL Labs&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;その他の調査ツール&#34;&gt;その他の調査ツール&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Anymail Finder&lt;/strong&gt;: メールアドレスの漏洩状況を確認。 &lt;a href=&#34;https://anymailfinder.com/&#34;&gt;Anymail Finder&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;MaxMind&lt;/strong&gt;: IPアドレスの地理的情報を調査。 &lt;a href=&#34;https://www.maxmind.com/en/geoip-web-services-demo&#34;&gt;MaxMind&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Wigle&lt;/strong&gt;: WifiネットワークのSSID情報を収集。 &lt;a href=&#34;https://wigle.net&#34;&gt;Wigle&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;BuiltWith&lt;/strong&gt;: ウェブサイトで使用されている技術を確認。 &lt;a href=&#34;https://builtwith.com&#34;&gt;BuiltWith&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Phishtank&lt;/strong&gt;: フィッシングサイトを報告・検証するためのリソース。 &lt;a href=&#34;https://phishtank.org&#34;&gt;Phishtank&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;諸外国のosint活動事例&#34;&gt;諸外国のOSINT活動事例&lt;/h2&gt;&#xA;&lt;h3 id=&#34;中国のapt1に関するレポート-mandiant&#34;&gt;中国のAPT1に関するレポート (Mandiant)&lt;/h3&gt;&#xA;&lt;p&gt;Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title>
-      <link>http://localhost:1313/posts/20240608_cissp/2/</link>
-      <pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20240608_cissp/2/</guid>
-      <description>&lt;h1 id=&#34;主要セキュリティモデルの比較&#34;&gt;主要セキュリティモデルの比較&lt;/h1&gt;&#xA;&lt;p&gt;セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。&lt;/p&gt;&#xA;&lt;h2 id=&#34;biba完全性モデル&#34;&gt;Biba完全性モデル&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定者: ケネス・J・ビバ（Kenneth J. Biba）&lt;/li&gt;&#xA;&lt;li&gt;策定年: 1977年&lt;/li&gt;&#xA;&lt;li&gt;策定国: アメリカ合衆国&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;データの完全性を保護することを目的としたセキュリティモデル。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主に商業環境でのデータの完全性維持に利用される。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;完全性に特化しており、機密性や可用性は対象外。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;軍事用途よりも商業用途に向いている。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;clark-wilsonモデル&#34;&gt;Clark-Wilsonモデル&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson）&lt;/li&gt;&#xA;&lt;li&gt;策定年: 1987年&lt;/li&gt;&#xA;&lt;li&gt;策定国: アメリカ合衆国&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;商業的なトランザクションのセキュリティを確保するためのモデル。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;商業環境に特に適している。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;brewer-nashモデル中国のウォールモデル&#34;&gt;Brewer-Nashモデル（中国のウォールモデル）&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash）&lt;/li&gt;&#xA;&lt;li&gt;策定年: 1989年&lt;/li&gt;&#xA;&lt;li&gt;策定国: イギリス&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;利益相反を防止することを目的としたモデル。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主に金融や法律などの分野で利用される。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;利益相反の管理に特化しており、他のセキュリティ属性は対象外。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ダイナミックなアクセス制御を提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;bell-lapadulaモデル&#34;&gt;Bell-LaPadulaモデル&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula）&lt;/li&gt;&#xA;&lt;li&gt;策定年: 1973年&lt;/li&gt;&#xA;&lt;li&gt;策定国: アメリカ合衆国&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;機密性を保護するためのセキュリティモデル。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。&#xA;主に軍事や政府機関で利用される。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;機密性に特化しており、完全性や可用性は対象外。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;軍事用途や機密情報の管理に向いている。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title>
-      <link>http://localhost:1313/posts/20240608_cissp/1/</link>
-      <pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20240608_cissp/1/</guid>
-      <description>&lt;h1 id=&#34;セキュリティガバナンスにおける主要フレームワークの比較&#34;&gt;セキュリティガバナンスにおける主要フレームワークの比較&lt;/h1&gt;&#xA;&lt;p&gt;セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。&lt;/p&gt;&#xA;&lt;h2 id=&#34;nist-national-institute-of-standards-and-technology&#34;&gt;NIST (National Institute of Standards and Technology)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST）&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;政府主導であり、特にアメリカ国内での適用が多い。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;実践的で技術的なガイドラインが豊富。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;itil-information-technology-infrastructure-library&#34;&gt;ITIL (Information Technology Infrastructure Library)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定団体: AXELOS（英国政府と民間企業の合弁企業）&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ITサービスマネジメントのベストプラクティスを提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;プロセスと役割の明確な定義が特徴。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;isoiec-27000シリーズ&#34;&gt;ISO/IEC 27000シリーズ&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC）&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;情報セキュリティ管理のための国際標準。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;グローバルに認知され、広く適用される。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;国際標準として広く受け入れられており、認証制度が存在する。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;組織全体の情報セキュリティ管理に焦点を当てている。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;coso-committee-of-sponsoring-organizations-of-the-treadway-commission&#34;&gt;COSO (Committee of Sponsoring Organizations of the Treadway Commission)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会）&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;リスク管理と内部統制のフレームワークを提供。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;会計と財務報告の視点からもリスク管理を強調。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;財務報告の信頼性確保にも関連。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;cobit-control-objectives-for-information-and-related-technologies&#34;&gt;COBIT (Control Objectives for Information and Related Technologies)&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;策定団体: ISACA（Information Systems Audit and Control Association）&lt;/li&gt;&#xA;&lt;li&gt;特徴:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ITガバナンスと管理のためのフレームワーク。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ビジネスとITの整合性を重視。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;違い:&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;フレームワーク全体がIT管理とガバナンスに焦点を当てている。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title>
-      <link>http://localhost:1313/posts/20240503_riss/1/</link>
-      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20240503_riss/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>メールにおける認証技術</title>
-      <link>http://localhost:1313/posts/20230328_mail_auth/1/</link>
-      <pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20230328_mail_auth/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>シングルサインオン(SSO)</title>
-      <link>http://localhost:1313/posts/20230105_sec/2/</link>
-      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20230105_sec/2/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>チャレンジレスポンス方式</title>
-      <link>http://localhost:1313/posts/20230105_sec/1/</link>
-      <pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate>
-      <guid>http://localhost:1313/posts/20230105_sec/1/</guid>
-      <description></description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>セキュリティ on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link><description>Recent content in セキュリティ on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 19 Jul 2025 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackfes2025参加メモ</title><link>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</link><pubDate>Sat, 19 Jul 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</guid><description>&lt;h1 id="hackfes2025参加メモ">Hackfes2025参加メモ&lt;/h1>
+&lt;h2 id="イベント概要">イベント概要&lt;/h2>
+&lt;ul>
+&lt;li>日時: 2025年7月19日(土)&lt;/li>
+&lt;li>&lt;a href="https://hackfes2025.hacker.or.jp">https://hackfes2025.hacker.or.jp&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="webアプリケーションspa脆弱性診断入門徳丸-浩">「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩&lt;/h2>
+&lt;p>10:10 - 11:40&lt;/p>
+&lt;p>Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。
+対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。&lt;/p>
+&lt;h3 id="corscross-origin-resource-sharingの認可不備">CORS（Cross-Origin Resource Sharing）の認可不備&lt;/h3>
+&lt;p>ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORS（Cross-Origin Resource Sharing）によって処理される。&lt;/p>
+&lt;p>プリフライトリクエスト&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">OPTIONS /api/v1/login HTTP/1.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host: api.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept: */*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Request-Method: POST
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Request-Headers: content-type
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Origin: http://spa.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Mode: cors
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Site: cross-site
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Sec-Fetch-Dest: empty
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Referer: http://spa.example.jp/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept-Encoding: gzip, deflate, br
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accept-Language: ja,en-US;q=0.9,en;q=0.8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Priority: u=1, i
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Connection: keep-alive
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>レスポンス&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">HTTP/1.1 204 No Content
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">X-Powered-By: Express
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Origin: http://spa.example.jp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Vary: Origin, Access-Control-Request-Headers
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Credentials: true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Allow-Headers: content-type
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Access-Control-Max-Age: 300
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Content-Length: 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Date: Sat, 19 Jul 2025 01:31:57 GMT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきでないオリジンに対してもレスポンスが返ってくることがわかる。&lt;/p></description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h1 id="自費で18万円かけてcissp試験に挑戦してみた話">自費で18万円かけてCISSP試験に挑戦してみた話&lt;/h1>
+&lt;h2 id="きっかけ">きっかけ&lt;/h2>
+&lt;p>昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br>
+もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br>
+ということで、まずは知識をつけねばと思い、手近なところでIPAが実施する&lt;a href="https://www.ipa.go.jp/shiken/kubun/sc.html">情報処理安全確保支援士&lt;/a>を取ってみました。&lt;br>
+こちらは運良く合格した部分もありもう少し学習したいなと考えていました。&lt;br>
+そんな時、セキュリティ業界では&lt;a href="https://japan.isc2.org/cissp_about.html">CISSP(Certified Information Systems Security Professional)&lt;/a>という資格があると聞き、受験してみようと思いました。(名前もかっこいいし。。。。x2)&lt;/p>
+&lt;h3 id="補足">補足&lt;/h3>
+&lt;p>CISSPの認定を受けるためには、試験に合格することと5年間の実務経験が必要になります。&lt;br>
+私には実務経験が足りないため、現在はAssociate会員というステータスにあります。したがって、正確にはCISSPを取得したわけではなく、CISSPの試験に合格しただけということになります。&lt;/p>
+&lt;h2 id="学習期間と教材">学習期間と教材&lt;/h2>
+&lt;ul>
+&lt;li>学習期間：2024年6月初ー9月末&lt;/li>
+&lt;li>教材選び：身近に資格保持者がいなかったため、社内のセキュリティ担当の方にアドバイスいただきました。&lt;/li>
+&lt;/ul>
+&lt;h3 id="本">本&lt;/h3>
+&lt;ul>
+&lt;li>新版 CISSP CBK公式ガイドブック&lt;/li>
+&lt;li>CISSP公式問題集&lt;/li>
+&lt;li>Eleventh Hour CISSP®: Study Guide&lt;/li>
+&lt;li>Official Practice Tests（英語版の公式問題集）&lt;/li>
+&lt;li>CISSP Exam Cram (English Edition)&lt;/li>
+&lt;li>CISSP Study Guide (English Edition)&lt;/li>
+&lt;/ul>
+&lt;h3 id="記事系">記事系&lt;/h3>
+&lt;ul>
+&lt;li>CISSP 勉強ノート
+&lt;ul>
+&lt;li>&lt;a href="https://tex2e.github.io/blog/security/cissp-notes">https://tex2e.github.io/blog/security/cissp-notes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>その他、社内記事&lt;/li>
+&lt;/ul>
+&lt;h3 id="動画">動画&lt;/h3>
+&lt;ul>
+&lt;li>Udemyの講座
+&lt;ul>
+&lt;li>【日本語】初心者から学べるCISSP講座：CISSP Domain1 ビデオ学習　2024年度版&lt;/li>
+&lt;li>&amp;hellip;..&lt;/li>
+&lt;li>【日本語】初心者から学べるCISSP講座：CISSP Domain7 ビデオ学習　2024年度版&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="やったこと">やったこと&lt;/h2>
+&lt;ol>
+&lt;li>記事で全体像を把握。&lt;/li>
+&lt;li>Udemyの講座を2周。&lt;/li>
+&lt;li>CISSP CBK公式ガイドを1周＋付属問題3周。&lt;/li>
+&lt;li>CISSP公式問題集を4周。&lt;/li>
+&lt;/ol>
+&lt;h3 id="その他">その他&lt;/h3>
+&lt;p>この期間に以下の本を新しく読んだり、読み直したりしました。(趣味も兼ねて読んでいたので試験に直接関係しないのも多いです。)&lt;/p>
+&lt;ul>
+&lt;li>長嶋仁. &lt;a href="https://amzn.to/3ZYa7v4">セキュリティ技術の教科書　第2版 教科書シリーズ&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>光成 滋生. &lt;a href="https://amzn.to/3ZRY4PK">図解即戦力　暗号と認証のしくみと理論がこれ1冊でしっかりわかる教科書&lt;/a>. 株式会社技術評論社. Kindle 版. &lt;/li>
+&lt;li>アンドリュー・スチュワート; 小林啓倫. &lt;a href="https://amzn.to/3U3N4uN">情報セキュリティの敗北史. 株式会社白揚社&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>ダニエル・J・ソロブ; ウッドロウ・ハーツォグ; 小向太郎. &lt;a href="https://amzn.to/4eVW7G7">データセキュリティ法の迷走. 株式会社勁草書房&lt;/a>. Kindle 版. &lt;/li>
+&lt;li>セキュリティ集団スプラウト. &lt;a href="https://amzn.to/3U1aIbu">闇ウェブ (文春新書)&lt;/a> . 文藝春秋. Kindle 版. &lt;/li>
+&lt;li>小谷賢. &lt;a href="https://amzn.to/3YgLsjU">インテリジェンス　――国家・組織は情報をいかに扱うべきか&lt;/a> (ちくま学芸文庫). 筑摩書房. Kindle 版. &lt;/li>
+&lt;li>中島明日香. &lt;a href="https://amzn.to/4eB4Bme">サイバー攻撃　ネット世界の裏側で起きていること&lt;/a> (ブルーバックス). 講談社. Kindle 版. &lt;/li>
+&lt;li>谷脇 康彦. &lt;a href="https://amzn.to/4eB6mjw">サイバーセキュリティ&lt;/a> (岩波新書) . 株式会社 岩波書店. Kindle 版. &lt;/li>
+&lt;li>面 和毅; 中村 行宏. &lt;a href="https://amzn.to/47WK4Gt">サイバー攻撃から企業システムを守る！　OSINT実践ガイド&lt;/a> . 日経BP. Kindle 版. &lt;/li>
+&lt;li>足立照嘉. &lt;a href="https://amzn.to/3Njgl0J">サイバー犯罪入門 国もマネーも乗っ取られる衝撃の現実&lt;/a> (幻冬舎新書) . 株式会社 幻冬舎. Kindle 版. 
+以下の音声コンテンツを聞くようになりました。&lt;/li>
+&lt;li>&lt;a href="https://www.tsujileaks.com/">podcast - #セキュリティのアレ&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="おかね">おかね&lt;/h2>
+&lt;p>思ったより金がかかった。(自費)&lt;/p></description></item><item><title>OSINT実践ガイドを読んだメモ</title><link>https://yuhi-sa.github.io/posts/20240829/1/</link><pubDate>Thu, 29 Aug 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240829/1/</guid><description>&lt;h1 id="osintopen-source-intelligenceとは">OSINT（Open Source Intelligence）とは&lt;/h1>
+&lt;p>&lt;a href="https://amzn.to/4cJOO2P">面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.&lt;/a> を読んだ感想メモ&lt;/p>
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。&lt;/p>
+&lt;h2 id="osintの歴史">OSINTの歴史&lt;/h2>
+&lt;p>OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦下の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。&lt;/p>
+&lt;h2 id="現在のosint">現在のOSINT&lt;/h2>
+&lt;p>現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ウェブサイトやニュース記事&lt;/strong>: 一般公開されている情報源。&lt;/li>
+&lt;li>&lt;strong>ソーシャルメディア（SNS）&lt;/strong>: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。&lt;/li>
+&lt;li>&lt;strong>GitHubなどのコード共有サイト&lt;/strong>: ソースコードやプロジェクトの進捗状況が公開されている。&lt;/li>
+&lt;li>&lt;strong>脆弱性データベース&lt;/strong>: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。&lt;/li>
+&lt;li>&lt;strong>ゼロデイ攻撃に関する情報&lt;/strong>: 未知の脆弱性を狙った攻撃についての公開情報。&lt;/li>
+&lt;/ul>
+&lt;h2 id="osintの調査方法">OSINTの調査方法&lt;/h2>
+&lt;h3 id="データソースの見つけ方">データソースの見つけ方&lt;/h3>
+&lt;p>OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://osintframework.com">OSINT Framework&lt;/a>: 様々なOSINTツールや情報源へのリンク集。&lt;/li>
+&lt;li>&lt;a href="https://attack.mitre.org">MITRE ATT&amp;amp;CK&lt;/a>: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。&lt;/li>
+&lt;li>&lt;a href="https://www.researchgate.net/publication/361323824_Mapping_Tools_for_Open_Source_Intelligence_with_Cyber_Kill_Chain_for_Adversarial_Aware_Security">Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security&lt;/a>: サイバーキルチェーンとデータソースのマッピングに関する論文。&lt;/li>
+&lt;/ul>
+&lt;h3 id="便利ツール">便利ツール&lt;/h3>
+&lt;p>以下のツールは、OSINT調査を支援するために広く利用されています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Shodan&lt;/strong>: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 &lt;a href="https://www.shodan.io/dashboard">Shodan&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Censys&lt;/strong>: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 &lt;a href="https://search.censys.io">Censys&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Have I Been Pwned&lt;/strong>: メールアドレスの漏洩をチェック。 &lt;a href="https://haveibeenpwned.com">Have I Been Pwned&lt;/a>&lt;/li>
+&lt;li>&lt;strong>VirusTotal&lt;/strong>: ファイルやURLをスキャンしてマルウェアの有無を確認。 &lt;a href="https://www.virustotal.com/gui/home/upload">VirusTotal&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Aguse&lt;/strong>: Webサイトのレピュテーションを調べる。 &lt;a href="https://www.aguse.jp">Aguse&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Exploit Database&lt;/strong>: 公開されているエクスプロイト情報のデータベース。 &lt;a href="https://www.exploit-db.com">Exploit-DB&lt;/a>&lt;/li>
+&lt;li>&lt;strong>SecurityTrails&lt;/strong>: ドメインやIPアドレスの利用履歴を確認。 &lt;a href="https://securitytrails.com">SecurityTrails&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="その他の重要リソース">その他の重要リソース&lt;/h2>
+&lt;h3 id="脆弱性情報収集">脆弱性情報収集&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>NVD&lt;/strong>: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 &lt;a href="https://nvd.nist.gov/vuln/search">NVD&lt;/a>&lt;/li>
+&lt;li>&lt;strong>JVN iPedia&lt;/strong>: 日本の脆弱性データベース。 &lt;a href="https://jvndb.jvn.jp/">JVN iPedia&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Vulmon&lt;/strong>: グローバルな脆弱性情報を提供。 &lt;a href="https://vulmon.com">Vulmon&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="ssltlsの強度確認">SSL/TLSの強度確認&lt;/h3>
+&lt;ul>
+&lt;li>SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 &lt;a href="https://www.ssllabs.com/ssltest/">SSL Labs&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="その他の調査ツール">その他の調査ツール&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Anymail Finder&lt;/strong>: メールアドレスの漏洩状況を確認。 &lt;a href="https://anymailfinder.com/">Anymail Finder&lt;/a>&lt;/li>
+&lt;li>&lt;strong>MaxMind&lt;/strong>: IPアドレスの地理的情報を調査。 &lt;a href="https://www.maxmind.com/en/geoip-web-services-demo">MaxMind&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Wigle&lt;/strong>: WifiネットワークのSSID情報を収集。 &lt;a href="https://wigle.net">Wigle&lt;/a>&lt;/li>
+&lt;li>&lt;strong>BuiltWith&lt;/strong>: ウェブサイトで使用されている技術を確認。 &lt;a href="https://builtwith.com">BuiltWith&lt;/a>&lt;/li>
+&lt;li>&lt;strong>Phishtank&lt;/strong>: フィッシングサイトを報告・検証するためのリソース。 &lt;a href="https://phishtank.org">Phishtank&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="諸外国のosint活動事例">諸外国のOSINT活動事例&lt;/h2>
+&lt;h3 id="中国のapt1に関するレポート-mandiant">中国のAPT1に関するレポート (Mandiant)&lt;/h3>
+&lt;p>Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。&lt;/p></description></item><item><title>主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/2/</link><pubDate>Sun, 16 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/2/</guid><description>&lt;h1 id="主要セキュリティモデルの比較">主要セキュリティモデルの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。&lt;/p>
+&lt;h2 id="biba完全性モデル">Biba完全性モデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: ケネス・J・ビバ（Kenneth J. Biba）&lt;/li>
+&lt;li>策定年: 1977年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>データの完全性を保護することを目的としたセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に商業環境でのデータの完全性維持に利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>完全性に特化しており、機密性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途よりも商業用途に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="clark-wilsonモデル">Clark-Wilsonモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson）&lt;/li>
+&lt;li>策定年: 1987年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業的なトランザクションのセキュリティを確保するためのモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>商業環境に特に適している。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="brewer-nashモデル中国のウォールモデル">Brewer-Nashモデル（中国のウォールモデル）&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash）&lt;/li>
+&lt;li>策定年: 1989年&lt;/li>
+&lt;li>策定国: イギリス&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反を防止することを目的としたモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に金融や法律などの分野で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>利益相反の管理に特化しており、他のセキュリティ属性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ダイナミックなアクセス制御を提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="bell-lapadulaモデル">Bell-LaPadulaモデル&lt;/h2>
+&lt;ul>
+&lt;li>策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula）&lt;/li>
+&lt;li>策定年: 1973年&lt;/li>
+&lt;li>策定国: アメリカ合衆国&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性を保護するためのセキュリティモデル。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。
+主に軍事や政府機関で利用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>機密性に特化しており、完全性や可用性は対象外。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>軍事用途や機密情報の管理に向いている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>CISSP：セキュリティガバナンスにおける主要フレームワークの比較</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/1/</link><pubDate>Thu, 06 Jun 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/1/</guid><description>&lt;h1 id="セキュリティガバナンスにおける主要フレームワークの比較">セキュリティガバナンスにおける主要フレームワークの比較&lt;/h1>
+&lt;p>セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。&lt;/p>
+&lt;h2 id="nist-national-institute-of-standards-and-technology">NIST (National Institute of Standards and Technology)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>政府主導であり、特にアメリカ国内での適用が多い。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>実践的で技術的なガイドラインが豊富。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="itil-information-technology-infrastructure-library">ITIL (Information Technology Infrastructure Library)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: AXELOS（英国政府と民間企業の合弁企業）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメントのベストプラクティスを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>プロセスと役割の明確な定義が特徴。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="isoiec-27000シリーズ">ISO/IEC 27000シリーズ&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>情報セキュリティ管理のための国際標準。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>グローバルに認知され、広く適用される。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>国際標準として広く受け入れられており、認証制度が存在する。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>組織全体の情報セキュリティ管理に焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="coso-committee-of-sponsoring-organizations-of-the-treadway-commission">COSO (Committee of Sponsoring Organizations of the Treadway Commission)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>リスク管理と内部統制のフレームワークを提供。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>会計と財務報告の視点からもリスク管理を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>財務報告の信頼性確保にも関連。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="cobit-control-objectives-for-information-and-related-technologies">COBIT (Control Objectives for Information and Related Technologies)&lt;/h2>
+&lt;ul>
+&lt;li>策定団体: ISACA（Information Systems Audit and Control Association）&lt;/li>
+&lt;li>特徴:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスと管理のためのフレームワーク。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ビジネスとITの整合性を重視。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>違い:&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;ul>
+&lt;li>フレームワーク全体がIT管理とガバナンスに焦点を当てている。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>【体験談アリ】情報処理安全確保支援士（登録セキスペ）の勉強方法は？教材から登録方法までの実録を紹介</title><link>https://yuhi-sa.github.io/posts/20240503_riss/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240503_riss/1/</guid><description/></item><item><title>メールにおける認証技術</title><link>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</link><pubDate>Tue, 28 Mar 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230328_mail_auth/1/</guid><description/></item><item><title>シングルサインオン(SSO)</title><link>https://yuhi-sa.github.io/posts/20230105_sec/2/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/2/</guid><description/></item><item><title>チャレンジレスポンス方式</title><link>https://yuhi-sa.github.io/posts/20230105_sec/1/</link><pubDate>Tue, 03 Jan 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20230105_sec/1/</guid><description/></item></channel></rss>
