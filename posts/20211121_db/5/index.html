@@ -1,17 +1,183 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="SQLの表の結合 | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_db/5/"><meta name=twitter:card content="summary_large_image"><title>SQLの表の結合 | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></head><body><header><div class=container><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=sqlの表の結合>SQLの表の結合</h1><h2 id=内部結合>内部結合</h2><p>結合条件を満たす組み合わせのみ表示する結合</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>JOIN</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ON</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=p>.</span><span class=err>列名</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=p>.</span><span class=err>列名</span><span class=w>
-</span></span></span></code></pre></div><p>JOINではなくNATURAL JOINを用いると自動的に同じ列名の値を結合キーとして比較できる．このときON句で結合条件を指定する必要はない．</p><h2 id=外部結合>外部結合</h2><p>結合条件を満た<strong>さない</strong>組み合わせも表示する結合</p><ul><li>左外部結合：左側の表を全て表示<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>LEFT</span><span class=w> </span><span class=k>OUTER</span><span class=w> </span><span class=k>JOIN</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ON</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=p>.</span><span class=err>列名</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=p>.</span><span class=err>列名</span><span class=w>
-</span></span></span></code></pre></div></li><li>右外部結合：右側の表を全て表示<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>RIGHT</span><span class=w> </span><span class=k>OUTER</span><span class=w> </span><span class=k>JOIN</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ON</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=p>.</span><span class=err>列名</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=p>.</span><span class=err>列名</span><span class=w>
-</span></span></span></code></pre></div></li></ul><h2 id=クロス結合>クロス結合</h2><p>全ての組み合わせを表示する結合</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=mi>1</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CROSS</span><span class=w> </span><span class=k>JOIN</span><span class=w> </span><span class=err>表名</span><span class=mi>2</span><span class=w>
-</span></span></span></code></pre></div></div><div><div>Tags:</div><ul><li><a href=/tags/sql/>Sql</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>SQLの表の結合</li></ol></nav></main><footer><div class=container style=text-align:center><p>Copyright © 2025. All rights reserved.</p></div></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="SQLの表の結合 | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20211121_db/5/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>SQLの表の結合 | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="sqlの表の結合">SQLの表の結合</h1>
+<h2 id="内部結合">内部結合</h2>
+<p>結合条件を満たす組み合わせのみ表示する結合</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">JOIN</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="p">.</span><span class="err">列名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="p">.</span><span class="err">列名</span><span class="w">
+</span></span></span></code></pre></div><p>JOINではなくNATURAL JOINを用いると自動的に同じ列名の値を結合キーとして比較できる．このときON句で結合条件を指定する必要はない．</p>
+<h2 id="外部結合">外部結合</h2>
+<p>結合条件を満た<strong>さない</strong>組み合わせも表示する結合</p>
+<ul>
+<li>左外部結合：左側の表を全て表示
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="p">.</span><span class="err">列名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="p">.</span><span class="err">列名</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>右外部結合：右側の表を全て表示
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RIGHT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="p">.</span><span class="err">列名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="p">.</span><span class="err">列名</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ul>
+<h2 id="クロス結合">クロス結合</h2>
+<p>全ての組み合わせを表示する結合</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表名</span><span class="mi">2</span><span class="w">
+</span></span></span></code></pre></div>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/sql/">Sql</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">SQLの表の結合</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+</body>
+
+</html>

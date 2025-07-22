@@ -1,3 +1,199 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="トランザクションの分離レベル(`isolation`)と防げる不整合 | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/"><meta name=twitter:card content="summary_large_image"><title>トランザクションの分離レベル(`isolation`)と防げる不整合 | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></head><body><header><div class=container><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=トランザクションの分離レベルisolationと防げる不整合>トランザクションの分離レベル(<code>isolation</code>)と防げる不整合</h1><h2 id=dbのトランザクション処理で問題となる不整合><code>DB</code>のトランザクション処理で問題となる不整合</h2><h3 id=dirty-read><code>Dirty Read</code></h3><p>トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。<br>これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。</p><h3 id=non-repeatable-read><code>Non-repeatable Read</code></h3><p>トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。<br>これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。</p><h3 id=phantom-read><code>Phantom Read</code></h3><p>トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。<br>これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。</p><h2 id=トランザクションの分離レベル>トランザクションの分離レベル</h2><p>以下の分離レベルが存在する。</p><h3 id=read-uncommitted><code>Read Uncommitted</code></h3><ul><li>防げる不整合:なし</li></ul><h3 id=read-committed><code>Read Committed</code></h3><ul><li>防げる不整合:<code>Dirty Read</code>
-他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　</li></ul><h3 id=repeatable-read><code>Repeatable Read</code></h3><ul><li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code></li></ul><p>トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。<br>これにより、同じトランザクション内でのデータの再読み取りが一貫する。</p><h3 id=snapshot><code>Snapshot</code></h3><ul><li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li></ul><p>トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。<br>これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。</p><h3 id=serializable><code>Serializable</code></h3><ul><li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li></ul><p>最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。<br>これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。</p><h2 id=参考>参考</h2><ul><li><a href=https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html>https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html</a></li><li><a href=https://www.prisma.io/docs/orm/prisma-client/queries/transactions>https://www.prisma.io/docs/orm/prisma-client/queries/transactions</a></li></ul></div><div><div>Tags:</div><ul><li><a href=/tags/db/>DB</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>トランザクションの分離レベル(`isolation`)と防げる不整合</li></ol></nav></main><footer><div class=container style=text-align:center><p>Copyright © 2025. All rights reserved.</p></div></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="トランザクションの分離レベル(`isolation`)と防げる不整合 | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20240518_db_transaction/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>トランザクションの分離レベル(`isolation`)と防げる不整合 | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="トランザクションの分離レベルisolationと防げる不整合">トランザクションの分離レベル(<code>isolation</code>)と防げる不整合</h1>
+<h2 id="dbのトランザクション処理で問題となる不整合"><code>DB</code>のトランザクション処理で問題となる不整合</h2>
+<h3 id="dirty-read"><code>Dirty Read</code></h3>
+<p>トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。<br>
+これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。</p>
+<h3 id="non-repeatable-read"><code>Non-repeatable Read</code></h3>
+<p>トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。<br>
+これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。</p>
+<h3 id="phantom-read"><code>Phantom Read</code></h3>
+<p>トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。<br>
+これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。</p>
+<h2 id="トランザクションの分離レベル">トランザクションの分離レベル</h2>
+<p>以下の分離レベルが存在する。</p>
+<h3 id="read-uncommitted"><code>Read Uncommitted</code></h3>
+<ul>
+<li>防げる不整合:なし</li>
+</ul>
+<h3 id="read-committed"><code>Read Committed</code></h3>
+<ul>
+<li>防げる不整合:<code>Dirty Read</code>
+他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　</li>
+</ul>
+<h3 id="repeatable-read"><code>Repeatable Read</code></h3>
+<ul>
+<li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code></li>
+</ul>
+<p>トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。<br>
+これにより、同じトランザクション内でのデータの再読み取りが一貫する。</p>
+<h3 id="snapshot"><code>Snapshot</code></h3>
+<ul>
+<li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li>
+</ul>
+<p>トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。<br>
+これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。</p>
+<h3 id="serializable"><code>Serializable</code></h3>
+<ul>
+<li>防げる不整合:<code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li>
+</ul>
+<p>最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。<br>
+これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html">https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html</a></li>
+<li><a href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions">https://www.prisma.io/docs/orm/prisma-client/queries/transactions</a></li>
+</ul>
+
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/db/">DB</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">トランザクションの分離レベル(`isolation`)と防げる不整合</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+</body>
+
+</html>

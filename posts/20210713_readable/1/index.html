@@ -1,15 +1,274 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="リーダブルコード読んだメモ | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210713_readable/1/"><meta name=twitter:card content="summary_large_image"><title>リーダブルコード読んだメモ | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></head><body><header><div class=container><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=リーダブルコード読んだメモ>リーダブルコード読んだメモ</h1><h2 id=名前に情報を詰め込む>名前に情報を詰め込む</h2><ul><li><p>汎用的な単語ではなく，明確な単語を使う．</p><table><thead><tr><th>単語</th><th>代替案</th></tr></thead><tbody><tr><td>get</td><td>fetch, download</td></tr><tr><td>size</td><td>Height, NumNodes, MemoryBytes</td></tr><tr><td>stop</td><td>kill, pause</td></tr><tr><td>send</td><td>deliver, dispatch, announce, distribute, route</td></tr><tr><td>find</td><td>search, extract, locate, recover</td></tr><tr><td>start</td><td>lainch, create, begin, open</td></tr><tr><td>make</td><td>create, set up, build, generate, compose, add, new</td></tr></tbody></table></li><li><p>抽象的な名前ではなく，具体的な名前</p><ul><li>tmpは生存期間が短く，一時的な保管が最も大切な変数のみに使う．</li><li>イテレータは安易にi, j, kとするのではなく，club_i,member_i,user_iのように名付ける．</li><li>より直接的で，明確な表現にする．<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ServerCanStart → CanListenOnPort
-</span></span></code></pre></div></li></ul></li><li><p>接尾辞，接頭辞で情報を追加する．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>delay → delay_secs
-</span></span><span class=line><span class=cl>size → size_mb
-</span></span><span class=line><span class=cl>limit → max_kbp
-</span></span><span class=line><span class=cl>angle → degree_cw
-</span></span><span class=line><span class=cl>html → html_utf8
-</span></span></code></pre></div></li><li><p>名前の長さを決める．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>FormatString → FormatStr
-</span></span><span class=line><span class=cl>ConvertToString → ToString
-</span></span></code></pre></div></li><li><p>名前のフォーマットで情報を伝える．</p><ul><li>大文字やアンダースコアなどに意味を含める．</li></ul></li></ul><h2 id=誤解されない名前を使う>誤解されない名前を使う</h2><ul><li>多義語に気をつける．<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>filter → select, exclude
-</span></span><span class=line><span class=cl>clip → remove, truncate
-</span></span></code></pre></div></li><li>限界値を含めるときは，<strong>min</strong>と<strong>max</strong>を使う．</li><li>範囲を指定するときは，<strong>first</strong>と<strong>last</strong>を使う．</li><li>包含/排他的範囲には，<strong>begin</strong>と<strong>end</strong>を使う．</li><li>ブール値の頭には，<strong>is・has・can・shoud</strong>をつける．</li><li>ユーザの期待に合わせる<ul><li>get：軽量アクセサであるという認識がある．<ul><li>大量のデータの場合はcomputeなどを使う．</li></ul></li><li>size：計算量は$O(1)$にする．</li></ul></li></ul><h2 id=美しさ>美しさ</h2><ul><li>読み手がなれているパターンと一貫性のあるレイアウトを使う．</li><li>似ているコードは似ているように見せる．</li><li>関連するコードはまとめてブロックにする．</li><li>一貫性のある改行</li><li>縦の線を揃える．<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>details  = request.POST.get(&#39;detail&#39;)
-</span></span><span class=line><span class=cl>location = request.POST.get(&#39;location&#39;)
-</span></span><span class=line><span class=cl>phone    = request.POST.get(&#39;phone&#39;)
-</span></span></code></pre></div></li><li>意味のある並びにする．</li><li>宣言をブロックにまとめる．</li></ul><h2 id=コメント>コメント</h2><ul><li>コードからすぐわかることをコメントに書かない．</li><li>定数にコメントをつける．</li><li>代名詞の使用を避ける．</li><li>関数の動作は正確に説明する．</li><li>よくわからない引数にはインラインコメント</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Dustin Boswell，"<a href=https://amzn.to/3kjMmZc>リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック (Theory in practice) </a>"，オライリージャパン</li></ul></div><div><div>Tags:</div><ul><li><a href=/tags/%E3%81%9D%E3%81%AE%E4%BB%96/>その他</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>リーダブルコード読んだメモ</li></ol></nav></main><footer><div class=container style=text-align:center><p>Copyright © 2025. All rights reserved.</p></div></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="リーダブルコード読んだメモ | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20210713_readable/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>リーダブルコード読んだメモ | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="リーダブルコード読んだメモ">リーダブルコード読んだメモ</h1>
+<h2 id="名前に情報を詰め込む">名前に情報を詰め込む</h2>
+<ul>
+<li>
+<p>汎用的な単語ではなく，明確な単語を使う．</p>
+<table>
+  <thead>
+      <tr>
+          <th>単語</th>
+          <th>代替案</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>get</td>
+          <td>fetch, download</td>
+      </tr>
+      <tr>
+          <td>size</td>
+          <td>Height, NumNodes, MemoryBytes</td>
+      </tr>
+      <tr>
+          <td>stop</td>
+          <td>kill, pause</td>
+      </tr>
+      <tr>
+          <td>send</td>
+          <td>deliver, dispatch, announce, distribute, route</td>
+      </tr>
+      <tr>
+          <td>find</td>
+          <td>search, extract, locate, recover</td>
+      </tr>
+      <tr>
+          <td>start</td>
+          <td>lainch, create, begin, open</td>
+      </tr>
+      <tr>
+          <td>make</td>
+          <td>create, set up, build, generate, compose, add, new</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>抽象的な名前ではなく，具体的な名前</p>
+<ul>
+<li>tmpは生存期間が短く，一時的な保管が最も大切な変数のみに使う．</li>
+<li>イテレータは安易にi, j, kとするのではなく，club_i,member_i,user_iのように名付ける．</li>
+<li>より直接的で，明確な表現にする．
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ServerCanStart → CanListenOnPort
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>接尾辞，接頭辞で情報を追加する．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">delay → delay_secs
+</span></span><span class="line"><span class="cl">size → size_mb
+</span></span><span class="line"><span class="cl">limit → max_kbp
+</span></span><span class="line"><span class="cl">angle → degree_cw
+</span></span><span class="line"><span class="cl">html → html_utf8
+</span></span></code></pre></div></li>
+<li>
+<p>名前の長さを決める．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FormatString → FormatStr
+</span></span><span class="line"><span class="cl">ConvertToString → ToString
+</span></span></code></pre></div></li>
+<li>
+<p>名前のフォーマットで情報を伝える．</p>
+<ul>
+<li>大文字やアンダースコアなどに意味を含める．</li>
+</ul>
+</li>
+</ul>
+<h2 id="誤解されない名前を使う">誤解されない名前を使う</h2>
+<ul>
+<li>多義語に気をつける．
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">filter → select, exclude
+</span></span><span class="line"><span class="cl">clip → remove, truncate
+</span></span></code></pre></div></li>
+<li>限界値を含めるときは，<strong>min</strong>と<strong>max</strong>を使う．</li>
+<li>範囲を指定するときは，<strong>first</strong>と<strong>last</strong>を使う．</li>
+<li>包含/排他的範囲には，<strong>begin</strong>と<strong>end</strong>を使う．</li>
+<li>ブール値の頭には，<strong>is・has・can・shoud</strong>をつける．</li>
+<li>ユーザの期待に合わせる
+<ul>
+<li>get：軽量アクセサであるという認識がある．
+<ul>
+<li>大量のデータの場合はcomputeなどを使う．</li>
+</ul>
+</li>
+<li>size：計算量は$O(1)$にする．</li>
+</ul>
+</li>
+</ul>
+<h2 id="美しさ">美しさ</h2>
+<ul>
+<li>読み手がなれているパターンと一貫性のあるレイアウトを使う．</li>
+<li>似ているコードは似ているように見せる．</li>
+<li>関連するコードはまとめてブロックにする．</li>
+<li>一貫性のある改行</li>
+<li>縦の線を揃える．
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">details  = request.POST.get(&#39;detail&#39;)
+</span></span><span class="line"><span class="cl">location = request.POST.get(&#39;location&#39;)
+</span></span><span class="line"><span class="cl">phone    = request.POST.get(&#39;phone&#39;)
+</span></span></code></pre></div></li>
+<li>意味のある並びにする．</li>
+<li>宣言をブロックにまとめる．</li>
+</ul>
+<h2 id="コメント">コメント</h2>
+<ul>
+<li>コードからすぐわかることをコメントに書かない．</li>
+<li>定数にコメントをつける．</li>
+<li>代名詞の使用を避ける．</li>
+<li>関数の動作は正確に説明する．</li>
+<li>よくわからない引数にはインラインコメント</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>Dustin Boswell，&quot;<a href="https://amzn.to/3kjMmZc">リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック (Theory in practice) </a>&quot;，オライリージャパン</li>
+</ul>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">リーダブルコード読んだメモ</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+</body>
+
+</html>

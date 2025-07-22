@@ -1,61 +1,278 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="情報理論(エントロピーから相互情報量, PRML1.6) | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210107_prml_ent/1/"><meta name=twitter:card content="summary_large_image"><title>情報理論(エントロピーから相互情報量, PRML1.6) | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></head><body><header><div class=container><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav></div><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=情報理論エントロピーから相互情報量-prml16>情報理論(エントロピーから相互情報量, PRML1.6)</h1><h2 id=情報量の表し方>情報量の表し方</h2><p>情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える．
-情報量として用いる場合，以下の2点を満たしている必要がある．</p><ul><li>$h(x,y)=h(x)+h(y)$
-2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる．</li><li>$p(x,y)=p(x)p(y)$
-2つの無関係な事象は統計的に独立である．</li></ul><p>この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．</p><p>$$
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="情報理論(エントロピーから相互情報量, PRML1.6) | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20210107_prml_ent/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>情報理論(エントロピーから相互情報量, PRML1.6) | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="情報理論エントロピーから相互情報量-prml16">情報理論(エントロピーから相互情報量, PRML1.6)</h1>
+<h2 id="情報量の表し方">情報量の表し方</h2>
+<p>情報量を測る尺度は確率分布$p(x)$に依存しており，確率$p(x)$の単調な関数$h(x)$で表されるものを考える．
+情報量として用いる場合，以下の2点を満たしている必要がある．</p>
+<ul>
+<li>$h(x,y)=h(x)+h(y)$
+2つの事象$x,y$が無関係なら，両方を観測したときの情報が，それぞれを別々に観測した情報の和となる．</li>
+<li>$p(x,y)=p(x)p(y)$
+2つの無関係な事象は統計的に独立である．</li>
+</ul>
+<p>この2つの関係から，対数を用いる．$p(x)$は1以下となるためマイナス記号を加え情報が0以上であることを保証する．</p>
+<p>$$
 h(x)=-log_2p(x)
 $$
-情報理論では一般的に底2が用いられる．</p><h2 id=エントロピー>エントロピー</h2><p>ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．</p><p>$$
+情報理論では一般的に底2が用いられる．</p>
+<h2 id="エントロピー">エントロピー</h2>
+<p>ある送信者が確率変数を受信者に送りたいと考えた時，送られる情報の平均量は，分布$p(x)$の期待値を撮ったものとなり，これを確率変数$x$のエントロピーと呼ぶ．</p>
+<p>$$
 H[x]=-\sum_x p(x) \log_{2}p(x)
-$$</p><h3 id=ビット数の下限>ビット数の下限</h3><p>ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．</p><ol><li>8個それぞれの確率が等確率であるとする．</li></ol><p>$$
+$$</p>
+<h3 id="ビット数の下限">ビット数の下限</h3>
+<p>ある確率変数$x$が8個の{$a,b,c,d,e,f,g,h$}を送信する場合を考える．</p>
+<ol>
+<li>8個それぞれの確率が等確率であるとする．</li>
+</ol>
+<p>$$
 H[x]= -8*\frac{1}{8}\log_{2}\frac{1}{8}=3ビット
-$$</p><ol><li>8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．</li></ol><p>$$
+$$</p>
+<ol>
+<li>8個それぞれの確率が{$\frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{16},\frac{1}{64},\frac{1}{64},\frac{1}{64},\frac{1}{64},$}で与えられるとする．</li>
+</ol>
+<p>$$
 H[x]=-\frac{1}{2}\log_2\frac{1}{2}-\frac{1}{4}\log_2\frac{1}{4}-\frac{1}{8}\log_2\frac{1}{8}-\frac{1}{16}\log_2\frac{1}{16}-\frac{4}{64}\log_2\frac{1}{64}=2ビット
-$$</p><p>上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる．
-ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．</p><h3 id=エントロピーの高低>エントロピーの高低</h3><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" src=.././fig1.png alt=fig1.png></p><p>少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．</p><h3 id=最大のエントロピーを持つ確率分布>最大のエントロピーを持つ確率分布</h3><p>まず，エントロピーの二階微分二階微分を計算する．</p><p>$$
+$$</p>
+<p>上記の例2のように非一様な場合は，よく起きる事象に短い符号を使い，あまり起きない事象に長い符号を割り当てることにより効率よく通信を行うことができる．
+ノイズなし符号化定理では，確率変数の状態を送るために必要なビット数の下限がエントロピーであることを主張している．</p>
+<h3 id="エントロピーの高低">エントロピーの高低</h3>
+<p><img style="max-width: 50%; height: auto; display: block; margin: 0 auto;" src=".././fig1.png" alt="fig1.png"></p>
+<p>少ない値で鋭いピークを持つようば分布でエントロピーは低く，薄く広がってる分布はエントロピーが高い．</p>
+<h3 id="最大のエントロピーを持つ確率分布">最大のエントロピーを持つ確率分布</h3>
+<p>まず，エントロピーの二階微分二階微分を計算する．</p>
+<p>$$
 \frac{\delta H[x]}{\delta p(x_i)\delta p(x_j)}=-I_{ij}\frac{1}{p_i}
 $$
-$I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．</p><h4 id=微分エントロピー>微分エントロピー</h4><p>$x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．</p><p>$$
+$I$は単位行列である．二階微分が負であるため上に凸なグラフとなり．停留点が最大値であることがわかる．</p>
+<h4 id="微分エントロピー">微分エントロピー</h4>
+<p>$x$を等間隔の区間$\Delta$にわけることを考えると，平均値の定理より，以下の式を満たす$x_i$が存在する．</p>
+<p>$$
 \int_{i\Delta}^{(i+1)\Delta}p(x)dx = p(x_i)\Delta
 $$
-$x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．</p><p>$$
+$x_i$の値を観測する確率は，$p(x_i)\Delta$となる．よって離散分布のエントロピーは，以下のようになる．</p>
+<p>$$
 H_{\Delta}=-\sum_ip(x_i)\Delta\ln(p(x_i)\Delta)=
 -\sum_i p(x_i)\Delta\ln p(x_i)- \ln \Delta
 $$
-第二項を無視して$\Delta\rightarrow 0$の極限を考える．</p><p>$$
+第二項を無視して$\Delta\rightarrow 0$の極限を考える．</p>
+<p>$$
 \lim_{\Delta\rightarrow 0}{
 -\sum_i p(x_i)\Delta\ln p(x_i)
 }
 = -\int p(x)\ln p(x)dx
 $$
-右辺が微分エントロピーとなる．</p><h4 id=微分エントロピーの最大化>微分エントロピーの最大化</h4><p>微分エントロピーは</p><p>$$
+右辺が微分エントロピーとなる．</p>
+<h4 id="微分エントロピーの最大化">微分エントロピーの最大化</h4>
+<p>微分エントロピーは</p>
+<p>$$
 H[x]= - \int p(x)\ln p(x)dx
 $$
 で与えられる．
-微分エントロピーを以下の3つの制約のもとで最大化する．</p><ul><li>$\int_{-\infty}^{\infty}p(x)dx = 1$</li><li>$\int_{-\infty}^{\infty}xp(x)dx = \mu$</li><li>$\int_{-\infty}^{\infty}(x-\mu)^2p(x)dx = \sigma^2$</li></ul><p>ラグランジュの未定乗数法を用いて解くと最終的に以下の結果となる．(計算省略)</p><p>$$
+微分エントロピーを以下の3つの制約のもとで最大化する．</p>
+<ul>
+<li>$\int_{-\infty}^{\infty}p(x)dx = 1$</li>
+<li>$\int_{-\infty}^{\infty}xp(x)dx = \mu$</li>
+<li>$\int_{-\infty}^{\infty}(x-\mu)^2p(x)dx = \sigma^2$</li>
+</ul>
+<p>ラグランジュの未定乗数法を用いて解くと最終的に以下の結果となる．(計算省略)</p>
+<p>$$
 p(x)=\frac{1}{2\pi\sigma^2}\exp{-\frac{(x-\mu)^2}{2\sigma^2}}
 $$
-<font color=Red>つまり，微分エントロピーを最大にする分布はガウス分布となる．</font>
-ガウス分布の微分エントロピーを計算すると，以下のようになる．</p><p>$$
+<font color="Red">つまり，微分エントロピーを最大にする分布はガウス分布となる．</font>
+ガウス分布の微分エントロピーを計算すると，以下のようになる．</p>
+<p>$$
 H[x]=\frac{1}{2}{1 + \ln(2\pi\sigma^2)}
 $$
-エントロピーは分散$\sigma^2$が増えるごとに大きくなることがわかる．</p><h3 id=同時分布のエントロピー>同時分布のエントロピー</h3><p>同時分布$p(x,y)$を考える．$x$の値が既知であるとすれば，対応する$y$の値を特定するのに付加的な情報は，$p(y|x)$である．よって，$y$を特定するための付加的な情報量の平均は，以下のようにかける．</p><p>$$
+エントロピーは分散$\sigma^2$が増えるごとに大きくなることがわかる．</p>
+<h3 id="同時分布のエントロピー">同時分布のエントロピー</h3>
+<p>同時分布$p(x,y)$を考える．$x$の値が既知であるとすれば，対応する$y$の値を特定するのに付加的な情報は，$p(y|x)$である．よって，$y$を特定するための付加的な情報量の平均は，以下のようにかける．</p>
+<p>$$
 H[y|x]=-\int\int p(y,x)\ln p(y|x)dydx
 $$
-これを，$x$に対する$y$の条件付きエントロピーと呼ぶ，</p><p>確率の乗法定理を使うと，条件付きエントロピーは以下の関係を満たすことがわかる．</p><p>$$
+これを，$x$に対する$y$の条件付きエントロピーと呼ぶ，</p>
+<p>確率の乗法定理を使うと，条件付きエントロピーは以下の関係を満たすことがわかる．</p>
+<p>$$
 H[x,y]=H[y|x]+H[x]
 $$
-つまり，<font color=Red>$x$と$y$を記述するのに必要な乗法は，$x$だけを記述するするための情報量と$x$が与えられた下で$y$を記述するために必要な付加的な付加的な情報量情報量との和で与えられる．</font></p><h2 id=相対エントロピー>相対エントロピー</h2><p>ある未知の分布$p(x)$があり，これを近似的に$q(x)$でモデル化したっとする．真の分布$p(x)$の代わりに$q(x)$を使うことで，$x$の値を特定するのに追加で必要となる情報量は，条件付き条件付きエントロピーの概念を用いて以下のように表すことができる．</p><p>$$
+つまり，<font color="Red">$x$と$y$を記述するのに必要な乗法は，$x$だけを記述するするための情報量と$x$が与えられた下で$y$を記述するために必要な付加的な付加的な情報量情報量との和で与えられる．</font></p>
+<h2 id="相対エントロピー">相対エントロピー</h2>
+<p>ある未知の分布$p(x)$があり，これを近似的に$q(x)$でモデル化したっとする．真の分布$p(x)$の代わりに$q(x)$を使うことで，$x$の値を特定するのに追加で必要となる情報量は，条件付き条件付きエントロピーの概念を用いて以下のように表すことができる．</p>
+<p>$$
 KL(p||q)=-\int p(x)\ln q(x)dx-(-\int p(x)\ln p(x)dx) \
 = -\int p(x) \ln {\frac{q(x)}{p(x)}}
 $$
 これは，分布$p(x)$と$q(x)$の間の相対エントロピーあるいは，カルバックライブラー(KL)ダイバージェンスと呼ばれる．
-イェンセンの不等式をKLダイバージェンスに適応することで，KLダイバージェンスは，<font color=Red>$KL(p||q)>= 0$を満たし，かつ等式が成り立つのは$p(x)=q(x)$のときのみである</font>ことが示されている．
-よって，<font color=Red>KLダイバージェンスは2つの分布間の距離を表す尺度として解釈できる．</font></p><h3 id=klダイバージェンス最小化と尤度の最大化>KLダイバージェンス最小化と尤度の最大化</h3><p>データが未知の分布$p(x)$から生成され，それをモデル化することを考える．パラメータ$\theta$をもつ分布$q(x|\theta)$を使って近似をおこなう．</p><p>このとき，$p(x)$と$q(x|\theta)$のKLダイバージェンスを$\theta$について最小化する．しかし，$p(x)$を知らないため，これを直接行うことはできない．</p><p>そこで，p(x)に関する期待値を，訓練用のサンプルデータ$x_n$を用いて近似する．</p><p>$$
+イェンセンの不等式をKLダイバージェンスに適応することで，KLダイバージェンスは，<font color="Red">$KL(p||q)&gt;= 0$を満たし，かつ等式が成り立つのは$p(x)=q(x)$のときのみである</font>ことが示されている．
+よって，<font color="Red">KLダイバージェンスは2つの分布間の距離を表す尺度として解釈できる．</font></p>
+<h3 id="klダイバージェンス最小化と尤度の最大化">KLダイバージェンス最小化と尤度の最大化</h3>
+<p>データが未知の分布$p(x)$から生成され，それをモデル化することを考える．パラメータ$\theta$をもつ分布$q(x|\theta)$を使って近似をおこなう．</p>
+<p>このとき，$p(x)$と$q(x|\theta)$のKLダイバージェンスを$\theta$について最小化する．しかし，$p(x)$を知らないため，これを直接行うことはできない．</p>
+<p>そこで，p(x)に関する期待値を，訓練用のサンプルデータ$x_n$を用いて近似する．</p>
+<p>$$
 KL(p||q) \simeq \frac{1}{N} \sum_{n=1}^N{- \ln q(x_n|\theta)+\ln p(x_n) }
-$$</p><p>右辺の第一項は，訓練集合を使って評価した分布$q(x|\theta)$の下での$\theta$の負の対数尤度であり，第二項は$\theta$と独立である．
-つまり，<font color=Red>KLダイバージェンスの最小化は，尤度の最大化</font>となる．</p><h3 id=相互情報量>相互情報量</h3><p>2つの変数集合$x$と$y$の同時分布$p(x,y)$について考える．変数が独立出ない場合において，変数が独立に近いかどうかを知るために，同時分布$p(x,y)$と周辺分布の積$p(x)p(y)$の間のKLダイバージェンスを考えることができる．</p><p>$$
+$$</p>
+<p>右辺の第一項は，訓練集合を使って評価した分布$q(x|\theta)$の下での$\theta$の負の対数尤度であり，第二項は$\theta$と独立である．
+つまり，<font color="Red">KLダイバージェンスの最小化は，尤度の最大化</font>となる．</p>
+<h3 id="相互情報量">相互情報量</h3>
+<p>2つの変数集合$x$と$y$の同時分布$p(x,y)$について考える．変数が独立出ない場合において，変数が独立に近いかどうかを知るために，同時分布$p(x,y)$と周辺分布の積$p(x)p(y)$の間のKLダイバージェンスを考えることができる．</p>
+<p>$$
 I[x,y]\equiv
 KL(p(x,y)||p(x)p(y)) \
 = -\int \int p(x,y)\ln (\frac{p(x)p(y)}{p(x,y)})dxdy
-$$</p><h2 id=参考>参考</h2><ul><li><a href=https://amzn.to/3eFIjDW>パターン認識と機械学習 上</a></li></ul></div><div><div>Tags:</div><ul><li><a href=/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/>機械学習</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>情報理論(エントロピーから相互情報量, PRML1.6)</li></ol></nav></main><footer><div class=container style=text-align:center><p>Copyright © 2025. All rights reserved.</p></div></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.7cf228d6c8edab5ac9a07e03b817d738ec7699dc155098ce393df96eded84884.css integrity="sha256-fPIo1sjtq1rJoH4DuBfXOOx2mdwVUJjOOT35bt7YSIQ=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["(",")"]]}}</script><script src=/js/copy-code.js></script></body></html>
+$$</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://amzn.to/3eFIjDW">パターン認識と機械学習 上</a></li>
+</ul>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">情報理論(エントロピーから相互情報量, PRML1.6)</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\(', '\)']]
+    }
+  };
+</script>
+
+
+<script src="/js/copy-code.js"></script>
+</body>
+
+</html>
