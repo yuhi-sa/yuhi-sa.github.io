@@ -1,40 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript on tomato blog</title><link>https://yuhi-sa.github.io/tags/typescript/</link><description>Recent content in TypeScript on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml"/><item><title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title><link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link><pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid><description>&lt;h1 id="typescriptにおいてnever型を使ってswitch文の網羅性を保証する">&lt;code>TypeScript&lt;/code>において&lt;code>never&lt;/code>型を使って&lt;code>switch&lt;/code>文の網羅性を保証する&lt;/h1>
-&lt;p>&lt;code>union&lt;/code>型に対してswich文を使う場合は、網羅性の保証が重要となります。&lt;br>
-網羅性の保証方法として、&lt;code>default&lt;/code>句に&lt;code>never&lt;/code>型を代入する方法があります。&lt;/p>
-&lt;p>&lt;code>never&lt;/code>型は「値を持たない」を意味するTypeScriptの特別な型です。&lt;br>
-詳しくはhttps://typescriptbook.jp/reference/statements/never&lt;br>
-簡単に言い換えると「あり得ない」ことを表す型です。&lt;/p>
-&lt;p>こちらがサンプル実装となります。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sample.ts" data-lang="sample.ts">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">type&lt;/span> &lt;span class="nx">Sample&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;A&amp;#34;&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="s2">&amp;#34;B;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> function testFunc(sample: Sample): void {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> switch (sample) {
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> case &amp;#34;&lt;/span>&lt;span class="nx">A&lt;/span>&lt;span class="s2">&amp;#34;:
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> console.log(sample);
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> break;
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> case &amp;#34;&lt;/span>&lt;span class="nx">B&lt;/span>&lt;span class="err">&amp;#34;&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sample&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 網羅性をチェック
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kr">const&lt;/span> &lt;span class="nx">_&lt;/span>: &lt;span class="kt">never&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">sample&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコードがビルドに成功するということは&lt;code>TypeScript&lt;/code>の型検査器によって「この&lt;code>default&lt;/code>節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。
-(たとえば、&lt;code> case “B”:&lt;/code>のコードを消すとエラーになります。)&lt;/p>
-&lt;p>この方法を取ることにより、&lt;code>Union&lt;/code>型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。
-将来&lt;code>Union&lt;/code>型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。&lt;/p>
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://amzn.to/3ygRaHO">Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title><link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid><description>&lt;h1 id="nextjsapp-routerにおいてuse-clientはクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する">Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する&lt;/h1>
-&lt;h2 id="nextjsapp-routerの概要">Next.js（App Router）の概要&lt;/h2>
-&lt;p>Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&lt;br>
-クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&lt;/p>
-&lt;h2 id="use-clientの適切な使用">「use client」の適切な使用&lt;/h2>
-&lt;p>「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&lt;br>
-実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&lt;/p>
-&lt;p>汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。
-そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&lt;/p>
-&lt;p>つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&lt;/p>
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;p>&lt;a href="https://amzn.to/4dmLbl1">吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.&lt;/a>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on tomato blog</title>
+    <link>http://localhost:1313/tags/typescript/</link>
+    <description>Recent content in TypeScript on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</title>
+      <link>http://localhost:1313/posts/20240505_never_switch/1/</link>
+      <pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20240505_never_switch/1/</guid>
+      <description>&lt;h1 id=&#34;typescriptにおいてnever型を使ってswitch文の網羅性を保証する&#34;&gt;&lt;code&gt;TypeScript&lt;/code&gt;において&lt;code&gt;never&lt;/code&gt;型を使って&lt;code&gt;switch&lt;/code&gt;文の網羅性を保証する&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;union&lt;/code&gt;型に対してswich文を使う場合は、網羅性の保証が重要となります。&lt;br&gt;&#xA;網羅性の保証方法として、&lt;code&gt;default&lt;/code&gt;句に&lt;code&gt;never&lt;/code&gt;型を代入する方法があります。&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;never&lt;/code&gt;型は「値を持たない」を意味するTypeScriptの特別な型です。&lt;br&gt;&#xA;詳しくはhttps://typescriptbook.jp/reference/statements/never&lt;br&gt;&#xA;簡単に言い換えると「あり得ない」ことを表す型です。&lt;/p&gt;&#xA;&lt;p&gt;こちらがサンプル実装となります。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sample.ts&#34; data-lang=&#34;sample.ts&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Sample&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;B;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt; function testFunc(sample: Sample): void {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;   switch (sample) {&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;     case &amp;#34;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;       console.log(sample);&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;       break;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;     case &amp;#34;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;k&#34;&gt;default&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 網羅性をチェック&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;       &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;never&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;sample&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;このコードがビルドに成功するということは&lt;code&gt;TypeScript&lt;/code&gt;の型検査器によって「この&lt;code&gt;default&lt;/code&gt;節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。&#xA;(たとえば、&lt;code&gt; case “B”:&lt;/code&gt;のコードを消すとエラーになります。)&lt;/p&gt;&#xA;&lt;p&gt;この方法を取ることにより、&lt;code&gt;Union&lt;/code&gt;型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。&#xA;将来&lt;code&gt;Union&lt;/code&gt;型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。&lt;/p&gt;&#xA;&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://amzn.to/3ygRaHO&#34;&gt;Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する</title>
+      <link>http://localhost:1313/posts/20240504_use_client/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20240504_use_client/1/</guid>
+      <description>&lt;h1 id=&#34;nextjsapp-routerにおいてuse-clientはクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する&#34;&gt;Next.js(App Router)において「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置する&lt;/h1&gt;&#xA;&lt;h2 id=&#34;nextjsapp-routerの概要&#34;&gt;Next.js（App Router）の概要&lt;/h2&gt;&#xA;&lt;p&gt;Next.jsのコンポーネントは、デフォルトではサーバーコンポーネントとして機能します。&lt;br&gt;&#xA;クライアントコンポーネントを利用する際には、ファイルの先頭で「use client」を宣言する必要があります。&lt;/p&gt;&#xA;&lt;h2 id=&#34;use-clientの適切な使用&#34;&gt;「use client」の適切な使用&lt;/h2&gt;&#xA;&lt;p&gt;「use client」はどこでも宣言できますが、それが意味するのは全てのクライアントコンポーネントで使用すべきということではありません。&lt;br&gt;&#xA;実際に、クライアントコンポーネントになるのは「&amp;ldquo;use client&amp;quot;が宣言されたファイル」ではなく、「宣言されたコンポーネントファイルをRootとしたSubtree全体」です。&lt;/p&gt;&#xA;&lt;p&gt;汎用性の高いUIを開発する際には、親コンポーネントがサーバーコンポーネントとクライアントコンポーネントの両方になり得ることがあります。&#xA;そのため、「use client」の使用は最小限に抑えることが望ましいです。これにより、コンポーネントの柔軟性を保ちつつ、不必要なクライアントサイドの処理を避けることができます。&lt;/p&gt;&#xA;&lt;p&gt;つまり、「use client」はクライアントコンポーネントとサーバーコンポーネントの境界にのみ設置することが重要となります。&lt;/p&gt;&#xA;&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://amzn.to/4dmLbl1&#34;&gt;吉井 健文. 実践Next.js —— App Routerで進化するWebアプリ開発 エンジニア選書. 株式会社技術評論社.&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

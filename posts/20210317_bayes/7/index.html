@@ -1,4 +1,187 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="ラグランジュの未定数法 | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210317_bayes/7/"><meta name=twitter:card content="summary_large_image"><title>ラグランジュの未定数法 | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=ラグランジュの未定数法>ラグランジュの未定数法</h1><p>制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．</p><p>２接線が重なる点を求めるには勾配を求めることが有効である．
-勾配は勾配作用素$\nabla$を用いて以下のように定義される．</p><p>$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$</p><p>目的関数fを制約gのもとで解くことくを考えると．</p><p>$$\nabla f(\mu) = \lambda \nabla g(\mu)$$</p><p>が成り立ち，$\mu$が制約付き最適化の答えの候補となる．
-ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．</p><p>ラグランジュ関数を以下のように定義すると，</p><p>$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$</p><p>ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．</p><h3 id=例1>例1</h3><p>$g(x,y)=2x+y+1=0$という制約条件を満たすx,yで$f(x,y)=x^2+y^2$を最小化するものを求める．</p><p>$$\nabla f(x,y) = (2x,2y)$$</p><p>$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$</p><p>よって，</p><ul><li>$2x = 2\lambda$</li><li>$2y = \lambda$</li></ul><p>さらに$g(x,y)=2x+y+1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．</p><h2 id=多項分布の最尤推定>多項分布の最尤推定</h2><p>ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．</p><p>$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$</p><p>$$g=\sum_{j=1}^k\mu_j-1$$</p><p>ラグランジュの未定乗数法より</p><p>$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$</p><p>両辺を$\hat{\mu}_h$で微分すると</p><p>$$\frac{x_h}{\hat{\mu}_h}=\lambda$$</p><p>制約条件を用いて$\lambda$を求めると</p><p>$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$</p><p>したがって，</p><p>$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$</p><h2 id=参考>参考</h2><ul><li>手塚 太郎，"<a href=https://amzn.to/3cCILQM>しくみがわかるベイズ統計と機械学習</a>"</li></ul></div><div><div>Tags:</div><ul><li><a href=/tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/>しくみがわかるベイズ統計と機械学習</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>ラグランジュの未定数法</li></ol></nav></main><footer><p style=text-align:center>Copyright 2025. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="ラグランジュの未定数法 | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20210317_bayes/7/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>ラグランジュの未定数法 | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="ラグランジュの未定数法">ラグランジュの未定数法</h1>
+<p>制約付き最適化のうち，制約条件が等式で合わされる場合によく用いられるのがラグランジュの未定乗数法である．</p>
+<p>２接線が重なる点を求めるには勾配を求めることが有効である．
+勾配は勾配作用素$\nabla$を用いて以下のように定義される．</p>
+<p>$$\nabla f = (\frac{df}{dx}, \frac{df}{dy})$$</p>
+<p>目的関数fを制約gのもとで解くことくを考えると．</p>
+<p>$$\nabla f(\mu) = \lambda \nabla g(\mu)$$</p>
+<p>が成り立ち，$\mu$が制約付き最適化の答えの候補となる．
+ここで，$\lambda$はラグランジュ未定乗数と呼ばれる．</p>
+<p>ラグランジュ関数を以下のように定義すると，</p>
+<p>$$\mathcal{L}(\mu,\lambda)=f(\mu)-\lambda g(\mu)$$</p>
+<p>ラグランジュの未定乗数法は，$\nabla \mathcal{L}=0$を満たす$\mu$と$\lambda$，すなわちラグランジュ関数の勾配が0になる変数の値を見つけることとなる．</p>
+<h3 id="例1">例1</h3>
+<p>$g(x,y)=2x+y+1=0$という制約条件を満たすx,yで$f(x,y)=x^2+y^2$を最小化するものを求める．</p>
+<p>$$\nabla f(x,y) = (2x,2y)$$</p>
+<p>$$\lambda \nabla g(x,y) = (2\lambda, \lambda)$$</p>
+<p>よって，</p>
+<ul>
+<li>$2x = 2\lambda$</li>
+<li>$2y = \lambda$</li>
+</ul>
+<p>さらに$g(x,y)=2x+y+1=0$を用いて計算すると，$x=-2/5,y=-1/5,$となる．</p>
+<h2 id="多項分布の最尤推定">多項分布の最尤推定</h2>
+<p>ラグランジュの未定乗数法を多項分布の最尤推定に利用する．この場合，fは多項分布の対数，gは制約からくる$\sum_{j=1}^k\mu_j-1$となる．</p>
+<p>$$f= \frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j}$$</p>
+<p>$$g=\sum_{j=1}^k\mu_j-1$$</p>
+<p>ラグランジュの未定乗数法より</p>
+<p>$$\nabla (\frac{(\sum_{j=1}^kx_j)!}{\Pi_{j=1}^kx_j!}\Pi_{j=1}^k\mu_j^{x_j})=\lambda \nabla(\sum_{j=1}^k\mu_j-1)$$</p>
+<p>両辺を$\hat{\mu}_h$で微分すると</p>
+<p>$$\frac{x_h}{\hat{\mu}_h}=\lambda$$</p>
+<p>制約条件を用いて$\lambda$を求めると</p>
+<p>$$\lambda = \sum_{h=1}^k \hat{\mu}_h=m(試行の総和)$$</p>
+<p>したがって，</p>
+<p>$$\hat{\mu}_j=\frac{x_j}{\lambda}= \frac{x_j}{m}$$</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li>手塚 太郎，&quot;<a href="https://amzn.to/3cCILQM">しくみがわかるベイズ統計と機械学習</a>&quot;</li>
+</ul>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E3%81%97%E3%81%8F%E3%81%BF%E3%81%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%83%99%E3%82%A4%E3%82%BA%E7%B5%B1%E8%A8%88%E3%81%A8%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">しくみがわかるベイズ統計と機械学習</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">ラグランジュの未定数法</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+
+</html>

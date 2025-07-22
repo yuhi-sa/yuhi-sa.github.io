@@ -1,78 +1,292 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo] | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210204_hugo/1/"><meta name=twitter:card content="summary_large_image"><title>markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo] | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=markdownで記事を作成して無料ブログをつくるgithub-pageshugo>markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</h1><h2 id=はじめに>はじめに</h2><p>Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．</p><p>全体通して，参考にした記事たち
-参考1：<a href=https://qiita.com/ysdyt/items/a581277dd1312a0e83c3>Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する</a><br>参考2：<a href=https://qiita.com/ryoma-tokushige/items/eba3e6cd415e9755af87>【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】</a></p><h2 id=hugoとは>Hugoとは</h2><p>ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つが<a href=https://gohugo.io/>Hugo</a>である．</p><p>Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される．</p><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" src=.././fig1.png alt=hugo-logo.png></p><p>Hugoのメリットしては，</p><ul><li>ビルド，表示処理が早い</li><li>データベース不要で管理が簡単</li></ul><p>ということがあげられる．</p><p>参考1：<a href=https://knowledge.sakura.ad.jp/22908/>静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る</a><br>参考2：<a href=https://programming-world.net/ssg/hugo/>Hugoとは？静的サイトジェネレータについて解説</a></p><h2 id=hugoでサイトを作成>Hugoでサイトを作成</h2><h3 id=hugoのインストール>Hugoのインストール</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># Homebrew(macOS)の場合
-</span></span><span class=line><span class=cl>brew install hugo
-</span></span></code></pre></div><p>その他の方法でのインストール方法は，<a href=https://gohugo.io/getting-started/installing/>Install Hugo</a></p><h3 id=サイトの作成>サイトの作成</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hugo new site test # testは好きな名前
-</span></span><span class=line><span class=cl>cd test
-</span></span><span class=line><span class=cl>hugo # このコマンドで生成
-</span></span></code></pre></div><h3 id=サーバーでプレビュー>サーバーでプレビュー</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hugo server 
-</span></span></code></pre></div><p><a href=http://localhost:1313>http://localhost:1313</a>で確認できる</p><h3 id=フォルダの中身の確認>フォルダの中身の確認</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.
-</span></span><span class=line><span class=cl>├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル
-</span></span><span class=line><span class=cl>├── config.toml # hugoの設定ファイル
-</span></span><span class=line><span class=cl>├── content # 記事ファイルを置くファイル
-</span></span><span class=line><span class=cl>├── data # サイトの全ページから参照したいデータを記述したファイル
-</span></span><span class=line><span class=cl>├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル
-</span></span><span class=line><span class=cl>├── public # 生成されるhtmlなどのコード(これを公開する)
-</span></span><span class=line><span class=cl>├── static # サイト内の静的ファイルを置くファイル
-</span></span><span class=line><span class=cl>└── themes # テーマファイルを置く
-</span></span></code></pre></div><p>参考1：<a href=https://blog.chick-p.work/hugo-site-directory/>HUGO のディレクトリ構成</a><br>参考2：<a href=https://gohugo.io/getting-started/directory-structure/>Directory Structure</a></p><h3 id=テンプレートを利用する>テンプレートを利用する</h3><p><a href=https://themes.gohugo.io/>Hugo Themes</a>から好きなテーマを選択し，themesフォルダの中にcloneする．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cd themes
-</span></span><span class=line><span class=cl>git clone テーマフォルダ
-</span></span></code></pre></div><p>config.tomlに以下の行を追記する．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>theme = &#34;選んだテーマ名&#34;
-</span></span></code></pre></div><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" src=.././fig2.png alt=temple.png></p><h3 id=ブログ記事を作成する>ブログ記事を作成する</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cd test
-</span></span><span class=line><span class=cl>hugo new post/new-post.md
-</span></span></code></pre></div><p>new-post.mdの中身</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>---
-</span></span><span class=line><span class=cl>title: &#34;タイトル&#34;
-</span></span><span class=line><span class=cl>date: 2020-08-16T15:17:23+09:00
-</span></span><span class=line><span class=cl>draft: false # trueの場合は表示されない
-</span></span><span class=line><span class=cl>tags: [&#34;python&#34;, &#34;ros&#34;] 
-</span></span><span class=line><span class=cl>---
-</span></span><span class=line><span class=cl>あとは，記事をmarkdownで記載
-</span></span></code></pre></div><ul><li>hugoコマンドで、public以下に静的ファイルが生成</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>cd test
-</span></span><span class=line><span class=cl>hugo
-</span></span></code></pre></div><h2 id=github-pages>Github Pages</h2><h3 id=githubにリポジトリを作成する>Githubにリポジトリを作成する</h3><p>Githubの画面右上のプラスアイコン「+」をクリックし，「New repository」を選択する．
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo] | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20210204_hugo/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo] | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="markdownで記事を作成して無料ブログをつくるgithub-pageshugo">markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</h1>
+<h2 id="はじめに">はじめに</h2>
+<p>Github Pagesを用いると，無料でwebサイトを公開できる．静的サイトジェネレータ(今回は，Hugoを利用)と組み合わせることでブログを簡単に作れることを知って，やってみたいなあと思って作ってみた．そのまとめ．Github Pages + 静的ジェネレータの記事はめちゃめちゃわかりやすい記事が何本もあったが，自分のまとめように作ってみた．</p>
+<p>全体通して，参考にした記事たち
+参考1：<a href="https://qiita.com/ysdyt/items/a581277dd1312a0e83c3">Hugo + GitHub Pages（独自ドメイン適応）でサイトを作成・公開する</a><br>
+参考2：<a href="https://qiita.com/ryoma-tokushige/items/eba3e6cd415e9755af87">【2018年版】Hugoとgithub pagesでブログ作る方法【Circle CIも回します】</a></p>
+<h2 id="hugoとは">Hugoとは</h2>
+<p>ブログを作成する際，コンテンツの作成や編集のしやすさからWordPressのようなCMSを利用することが多い．しかし，CMSを使用するにはCMS自体のインストールや設定，データベースの準備など少し複雑な作業が必要となる．小規模なブログの場合，HTMLファイルを用いた静的なサイトを作成したほうがコストが低くなる場合がある．とはいえ，HTMLファイルをいちいち手動で作成するのはめんどくさい．そのため，HTMLファイルを半自動生成するようなツール(静的サイトジェネレータ)が存在し，その一つが<a href="https://gohugo.io/">Hugo</a>である．</p>
+<p>Hugoは，Go言語で開発された静的サイトジェネレータである．Hugoを使うとデータベースを使用することなく静的なHTMLファイルやCSSファイルによるブログを作成できる．コンテンツは，Markdown形式で記述して，ビルドすると静的なHTMLファイルによるウェブサイトが生成される．</p>
+<p><img style="max-width: 50%; height: auto; display: block; margin: 0 auto;" src=".././fig1.png" alt="hugo-logo.png"></p>
+<p>Hugoのメリットしては，</p>
+<ul>
+<li>ビルド，表示処理が早い</li>
+<li>データベース不要で管理が簡単</li>
+</ul>
+<p>ということがあげられる．</p>
+<p>参考1：<a href="https://knowledge.sakura.ad.jp/22908/">静的サイトジェネレータ「Hugo」と技術文書公開向けテーマ「Docsy」でOSSサイトを作る</a><br>
+参考2：<a href="https://programming-world.net/ssg/hugo/">Hugoとは？静的サイトジェネレータについて解説</a></p>
+<h2 id="hugoでサイトを作成">Hugoでサイトを作成</h2>
+<h3 id="hugoのインストール">Hugoのインストール</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Homebrew(macOS)の場合
+</span></span><span class="line"><span class="cl">brew install hugo
+</span></span></code></pre></div><p>その他の方法でのインストール方法は，<a href="https://gohugo.io/getting-started/installing/">Install Hugo</a></p>
+<h3 id="サイトの作成">サイトの作成</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo new site test # testは好きな名前
+</span></span><span class="line"><span class="cl">cd test
+</span></span><span class="line"><span class="cl">hugo # このコマンドで生成
+</span></span></code></pre></div><h3 id="サーバーでプレビュー">サーバーでプレビュー</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server 
+</span></span></code></pre></div><p><a href="http://localhost:1313">http://localhost:1313</a>で確認できる</p>
+<h3 id="フォルダの中身の確認">フォルダの中身の確認</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── archetypes # (初期生成されない)Hugo Pipes で処理するファイルを保存するためのファイル
+</span></span><span class="line"><span class="cl">├── config.toml # hugoの設定ファイル
+</span></span><span class="line"><span class="cl">├── content # 記事ファイルを置くファイル
+</span></span><span class="line"><span class="cl">├── data # サイトの全ページから参照したいデータを記述したファイル
+</span></span><span class="line"><span class="cl">├── layouts # テーマファイルを一部修正したいときやレイアウトパーツを追加したいときに利用するファイル
+</span></span><span class="line"><span class="cl">├── public # 生成されるhtmlなどのコード(これを公開する)
+</span></span><span class="line"><span class="cl">├── static # サイト内の静的ファイルを置くファイル
+</span></span><span class="line"><span class="cl">└── themes # テーマファイルを置く
+</span></span></code></pre></div><p>参考1：<a href="https://blog.chick-p.work/hugo-site-directory/">HUGO のディレクトリ構成</a><br>
+参考2：<a href="https://gohugo.io/getting-started/directory-structure/">Directory Structure</a></p>
+<h3 id="テンプレートを利用する">テンプレートを利用する</h3>
+<p><a href="https://themes.gohugo.io/">Hugo Themes</a>から好きなテーマを選択し，themesフォルダの中にcloneする．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd themes
+</span></span><span class="line"><span class="cl">git clone テーマフォルダ
+</span></span></code></pre></div><p>config.tomlに以下の行を追記する．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">theme = &#34;選んだテーマ名&#34;
+</span></span></code></pre></div><p><img style="max-width: 50%; height: auto; display: block; margin: 0 auto;" src=".././fig2.png" alt="temple.png"></p>
+<h3 id="ブログ記事を作成する">ブログ記事を作成する</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd test
+</span></span><span class="line"><span class="cl">hugo new post/new-post.md
+</span></span></code></pre></div><p>new-post.mdの中身</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;タイトル&#34;
+</span></span><span class="line"><span class="cl">date: 2020-08-16T15:17:23+09:00
+</span></span><span class="line"><span class="cl">draft: false # trueの場合は表示されない
+</span></span><span class="line"><span class="cl">tags: [&#34;python&#34;, &#34;ros&#34;] 
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">あとは，記事をmarkdownで記載
+</span></span></code></pre></div><ul>
+<li>hugoコマンドで、public以下に静的ファイルが生成</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd test
+</span></span><span class="line"><span class="cl">hugo
+</span></span></code></pre></div><h2 id="github-pages">Github Pages</h2>
+<h3 id="githubにリポジトリを作成する">Githubにリポジトリを作成する</h3>
+<p>Githubの画面右上のプラスアイコン「+」をクリックし，「New repository」を選択する．
 フォルダ名は，「アカウント名.github.io」にする．
-公開URLは https://アカウント名.github.io となる．</p><p><img style="max-width:50%;height:auto;display:block;margin:0 auto" src=.././fig3.png alt=github.png></p><p>参考：<a href=https://prog-8.com/docs/github-pages>自分で作ったWebページをインターネット上に公開しよう！</a></p><h3 id=publicフォルダをここに上げる>publicフォルダをここに上げる．</h3><p><span style=color:red>Github Pagesではフォルダ直下のhtmlファイルしか，公開してくれないため，hugoで作成したtestフォルダ内のpublicフォルダを「アカウント名.github.io」にアップロードする．</span>
-Githubへのアップロード方法は，<a href=https://qiita.com/under_chilchil/items/ec9d0050c1e3fb6576de>初心者用：GitHubにファイルをアップロードする方法（超基本）
+公開URLは https://アカウント名.github.io となる．</p>
+<p><img style="max-width: 50%; height: auto; display: block; margin: 0 auto;" src=".././fig3.png" alt="github.png"></p>
+<p>参考：<a href="https://prog-8.com/docs/github-pages">自分で作ったWebページをインターネット上に公開しよう！</a></p>
+<h3 id="publicフォルダをここに上げる">publicフォルダをここに上げる．</h3>
+<p><span style="color: red; ">Github Pagesではフォルダ直下のhtmlファイルしか，公開してくれないため，hugoで作成したtestフォルダ内のpublicフォルダを「アカウント名.github.io」にアップロードする．</span>
+Githubへのアップロード方法は，<a href="https://qiita.com/under_chilchil/items/ec9d0050c1e3fb6576de">初心者用：GitHubにファイルをアップロードする方法（超基本）
 </a>を参考．
-testフォルダ自体は，別のリポジトリを作成してそちらで管理する.もしくは，branchで分ける．</p><h2 id=その他>その他</h2><h3 id=hugo-実行方法>hugo 実行方法</h3><p>ローカルのサーバーで確認</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hugo server
-</span></span></code></pre></div><p>ローカルのサーバーで確認(ドラフトも対象)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hugo server -D
-</span></span></code></pre></div><h3 id=latex-数式を使うための編集>latex 数式を使うための編集</h3><p>/layouts/partials/add_mathjax.htmlを作成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;script&gt;
-</span></span><span class=line><span class=cl>    MathJax = {
-</span></span><span class=line><span class=cl>        tex: {
-</span></span><span class=line><span class=cl>        inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]]
-</span></span><span class=line><span class=cl>        }
-</span></span><span class=line><span class=cl>    };
-</span></span><span class=line><span class=cl>&lt;/script&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>&lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&#34;&gt;&lt;/script&gt;
-</span></span></code></pre></div><p>/layouts/partials/site-header.htmlに追記</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{{ partial &#34;add_mathjax.html&#34; . }}
-</span></span></code></pre></div><p>参考：<a href=https://somei-tec.com/article/computer-science/framework/hugo/hugo_mathjax/>MathJaxを用いてHugoで数式を表現する</a></p><h3 id=google-analytics>google Analytics</h3><p>config.tomlに以下の行を追加</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>googleAnalytics = &#34;測定ID&#34;
-</span></span></code></pre></div><p>Google Analyticsとの連携のための組み込みテンプレート({{ template &ldquo;_internal/google_analytics_async.html&rdquo; . }})が古いため変更を追加</p><p>layouts/partials/head.htmlを編集</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>- {{ template &#34;_internal/google_analytics_async.html&#34; . }}
-</span></span><span class=line><span class=cl>+ {{- partial &#34;analytics&#34; . -}}
-</span></span></code></pre></div><p>layouts/partials/analytics.htmlを作成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{{ if not .Site.IsServer }}
-</span></span><span class=line><span class=cl>{{ with .Site.GoogleAnalytics }}
-</span></span><span class=line><span class=cl>&lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
-</span></span><span class=line><span class=cl>&lt;script async src=&#34;https://www.googletagmanager.com/gtag/js?id={{ . }}&#34;&gt;&lt;/script&gt;
-</span></span><span class=line><span class=cl>&lt;script&gt;
-</span></span><span class=line><span class=cl>   window.dataLayer = window.dataLayer || [];
-</span></span><span class=line><span class=cl>   function gtag(){dataLayer.push(arguments);}
-</span></span><span class=line><span class=cl>   gtag(&#39;js&#39;, new Date());
-</span></span><span class=line><span class=cl>   gtag(&#39;config&#39;, &#39;{{ . }}&#39;);
-</span></span><span class=line><span class=cl>&lt;/script&gt;
-</span></span><span class=line><span class=cl>{{ end }}
-</span></span><span class=line><span class=cl>{{ end }}
-</span></span></code></pre></div><p>参考：<a href=https://qiita.com/momotaro98/items/4de7934fd79cd6b34fce>Hugoで未だ対応していないgtag.jsを利用して Googleアナリティクスする</a></p><h3 id=sitemapを作成>Sitemapを作成</h3><p>layouts/sitemap.xmlを作成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
-</span></span><span class=line><span class=cl>{{ range .Data.Pages }}{{ if .IsPage }}
-</span></span><span class=line><span class=cl>&lt;url&gt;
-</span></span><span class=line><span class=cl>  &lt;loc&gt;{{ .Permalink }}&lt;/loc&gt;
-</span></span><span class=line><span class=cl>  {{ if not .Lastmod.IsZero }}
-</span></span><span class=line><span class=cl>  &lt;lastmod&gt;{{ safeHTML ( .Lastmod.Format &#34;2006-01-02T15:04:05-07:00&#34; ) }}&lt;/lastmod&gt;
-</span></span><span class=line><span class=cl>  &lt;changefreq&gt;weekly&lt;/changefreq&gt;
-</span></span><span class=line><span class=cl>  {{ end }}
-</span></span><span class=line><span class=cl>&lt;/url&gt;
-</span></span><span class=line><span class=cl>{{ end }}{{ end }}
-</span></span><span class=line><span class=cl>&lt;/urlset&gt;
-</span></span></code></pre></div><p>layouts/robots.txtを作成</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Sitemap : {{ $.Site.BaseURL }}sitemap.xml
-</span></span></code></pre></div><p>config.tomlを編集</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>enableRobotsTXT = true
+testフォルダ自体は，別のリポジトリを作成してそちらで管理する.もしくは，branchで分ける．</p>
+<h2 id="その他">その他</h2>
+<h3 id="hugo-実行方法">hugo 実行方法</h3>
+<p>ローカルのサーバーで確認</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server
+</span></span></code></pre></div><p>ローカルのサーバーで確認(ドラフトも対象)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server -D
+</span></span></code></pre></div><h3 id="latex-数式を使うための編集">latex 数式を使うための編集</h3>
+<p>/layouts/partials/add_mathjax.htmlを作成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script&gt;
+</span></span><span class="line"><span class="cl">    MathJax = {
+</span></span><span class="line"><span class="cl">        tex: {
+</span></span><span class="line"><span class="cl">        inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\\(&#39;, &#39;\\)&#39;]]
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">&lt;/script&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;script id=&#34;MathJax-script&#34; async src=&#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&#34;&gt;&lt;/script&gt;
+</span></span></code></pre></div><p>/layouts/partials/site-header.htmlに追記</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{{ partial &#34;add_mathjax.html&#34; . }}
+</span></span></code></pre></div><p>参考：<a href="https://somei-tec.com/article/computer-science/framework/hugo/hugo_mathjax/">MathJaxを用いてHugoで数式を表現する</a></p>
+<h3 id="google-analytics">google Analytics</h3>
+<p>config.tomlに以下の行を追加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">googleAnalytics = &#34;測定ID&#34;
+</span></span></code></pre></div><p>Google Analyticsとの連携のための組み込みテンプレート({{ template &ldquo;_internal/google_analytics_async.html&rdquo; . }})が古いため変更を追加</p>
+<p>layouts/partials/head.htmlを編集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">- {{ template &#34;_internal/google_analytics_async.html&#34; . }}
+</span></span><span class="line"><span class="cl">+ {{- partial &#34;analytics&#34; . -}}
+</span></span></code></pre></div><p>layouts/partials/analytics.htmlを作成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{{ if not .Site.IsServer }}
+</span></span><span class="line"><span class="cl">{{ with .Site.GoogleAnalytics }}
+</span></span><span class="line"><span class="cl">&lt;!-- Global site tag (gtag.js) - Google Analytics --&gt;
+</span></span><span class="line"><span class="cl">&lt;script async src=&#34;https://www.googletagmanager.com/gtag/js?id={{ . }}&#34;&gt;&lt;/script&gt;
+</span></span><span class="line"><span class="cl">&lt;script&gt;
+</span></span><span class="line"><span class="cl">   window.dataLayer = window.dataLayer || [];
+</span></span><span class="line"><span class="cl">   function gtag(){dataLayer.push(arguments);}
+</span></span><span class="line"><span class="cl">   gtag(&#39;js&#39;, new Date());
+</span></span><span class="line"><span class="cl">   gtag(&#39;config&#39;, &#39;{{ . }}&#39;);
+</span></span><span class="line"><span class="cl">&lt;/script&gt;
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span><span class="line"><span class="cl">{{ end }}
+</span></span></code></pre></div><p>参考：<a href="https://qiita.com/momotaro98/items/4de7934fd79cd6b34fce">Hugoで未だ対応していないgtag.jsを利用して Googleアナリティクスする</a></p>
+<h3 id="sitemapを作成">Sitemapを作成</h3>
+<p>layouts/sitemap.xmlを作成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt;
+</span></span><span class="line"><span class="cl">{{ range .Data.Pages }}{{ if .IsPage }}
+</span></span><span class="line"><span class="cl">&lt;url&gt;
+</span></span><span class="line"><span class="cl">  &lt;loc&gt;{{ .Permalink }}&lt;/loc&gt;
+</span></span><span class="line"><span class="cl">  {{ if not .Lastmod.IsZero }}
+</span></span><span class="line"><span class="cl">  &lt;lastmod&gt;{{ safeHTML ( .Lastmod.Format &#34;2006-01-02T15:04:05-07:00&#34; ) }}&lt;/lastmod&gt;
+</span></span><span class="line"><span class="cl">  &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+</span></span><span class="line"><span class="cl">  {{ end }}
+</span></span><span class="line"><span class="cl">&lt;/url&gt;
+</span></span><span class="line"><span class="cl">{{ end }}{{ end }}
+</span></span><span class="line"><span class="cl">&lt;/urlset&gt;
+</span></span></code></pre></div><p>layouts/robots.txtを作成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Sitemap : {{ $.Site.BaseURL }}sitemap.xml
+</span></span></code></pre></div><p>config.tomlを編集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">enableRobotsTXT = true
 </span></span></code></pre></div><p>url/sitemap.xmlで表示される．
-<a href=https://yuhi-sa.github.io/sitemap.xml>https://yuhi-sa.github.io/sitemap.xml</a></p><p>参考：<a href=https://takaken.tokyo/dev/hugo/sitemaps/hugo-create-sitemaps/>XMLサイトマップの作り方</a></p><h3 id=作成したサイト>作成したサイト</h3><ul><li><a href=https://yuhi-sa.github.io/>とまとまとブログ</a></li><li><a href=https://github.com/yuhi-sa/blog.com>Githubリポジトリ</a></li></ul></div><div><div>Tags:</div><ul><li><a href=/tags/%E3%81%9D%E3%81%AE%E4%BB%96/>その他</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>markdownで記事を作成して無料ブログをつくる[Github Pages+Hugo]</li></ol></nav></main><footer><p style=text-align:center>Copyright 2025. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>
+<a href="https://yuhi-sa.github.io/sitemap.xml">https://yuhi-sa.github.io/sitemap.xml</a></p>
+<p>参考：<a href="https://takaken.tokyo/dev/hugo/sitemaps/hugo-create-sitemaps/">XMLサイトマップの作り方</a></p>
+<h3 id="作成したサイト">作成したサイト</h3>
+<ul>
+<li><a href="https://yuhi-sa.github.io/">とまとまとブログ</a></li>
+<li><a href="https://github.com/yuhi-sa/blog.com">Githubリポジトリ</a></li>
+</ul>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E3%81%9D%E3%81%AE%E4%BB%96/">その他</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">markdownで記事を作成して無料ブログをつくる[Github Pages&#43;Hugo]</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+
+</html>

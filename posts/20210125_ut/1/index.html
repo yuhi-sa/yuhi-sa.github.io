@@ -1,115 +1,304 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210125_ut/1/"><meta name=twitter:card content="summary_large_image"><title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=unscented-transformationアンセンテッド変換u変換のpythonプログラム>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</h1><h2 id=unscented-transformation>Unscented Transformation</h2><p>U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．</p><p>まず，この場合，モンテカロ的に</p><p>$$
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20210125_ut/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="unscented-transformationアンセンテッド変換u変換のpythonプログラム">Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</h1>
+<h2 id="unscented-transformation">Unscented Transformation</h2>
+<p>U変換は，標準正規分布に従う確率変数$x$の平均$\bar{x}$と分散共分散行列$P_x$が既知であるとき，$x$の非線形変換$y=f(x)$で変換される確率変数$y$の$\bar{y}$と$P_y$を推定する方法である．</p>
+<p>まず，この場合，モンテカロ的に</p>
+<p>$$
 \bar{y}\simeq\frac{1}{N}\sum_{i=1}^Nf(x_i)
-$$</p><p>$$
+$$</p>
+<p>$$
 P_y \simeq \frac{1}{N}\sum_{i=1}^N(f(x_i)-\bar{y})(f(x_i)-\bar{y})^T
-$$</p><p>のように計算することが思いつくが，精度をよく計算するにはNを大きくする必要があり，実用上問題がある．</p><p>線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．</p><p>まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．</p><p>参考1：<a href=https://www.jstage.jst.go.jp/article/isciesci/50/7/50_KJ00004329717/_pdf>UKF （Unscented Kalman Filter）っ て何 ？</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>math</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>scipy.linalg</span>
-</span></span></code></pre></div><p>入力には$X=(X_1,X_2)$を用いる．</p><p>平均ベクトルは，</p><p>$$
+$$</p>
+<p>のように計算することが思いつくが，精度をよく計算するにはNを大きくする必要があり，実用上問題がある．</p>
+<p>線形近似をすることなく，モンテカロ法のよいところを利用できるように，できるだけ少ないサンプル点を用いて，変換後の確率変数の統計的性質を推定する方法がU変換である．</p>
+<p>まず，確率変数$x$からサンプルする値(シグマ点)を決め，シグマ点を非線形変換し，変換した値から$y$の$\bar{y}$と$P_y$を求める．</p>
+<p>参考1：<a href="https://www.jstage.jst.go.jp/article/isciesci/50/7/50_KJ00004329717/_pdf">UKF （Unscented Kalman Filter）っ て何 ？</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">scipy.linalg</span>
+</span></span></code></pre></div><p>入力には$X=(X_1,X_2)$を用いる．</p>
+<p>平均ベクトルは，</p>
+<p>$$
 \mu=(E[X_1],E[X_2])=(\bar{x}_1,\bar{x}_2)
 $$
-分散共分散ベクトルは，</p><p>$$
+分散共分散ベクトルは，</p>
+<p>$$
 P_x = [
 \begin{array}{cc}
-var[X_1] & cov[X_1,X_2] \
-cov[X_2,X_1] & var[X_2]
+var[X_1] &amp; cov[X_1,X_2] \
+cov[X_2,X_1] &amp; var[X_2]
 \end{array}
 ]
 = [
 \begin{array}{cc}
-\sigma_1^2 & \sigma_1\sigma_2 \
-\sigma_1\sigma_2 & \sigma_2^2
+\sigma_1^2 &amp; \sigma_1\sigma_2 \
+\sigma_1\sigma_2 &amp; \sigma_2^2
 \end{array}
 ]
-$$</p><p>で表すことができる．<br>よって， $X_1,X_2$にそれぞれ平均0分散1，平均1分散2の標準正規分布を用いると考えると，</p><p>$$
+$$</p>
+<p>で表すことができる．<br>
+よって，  $X_1,X_2$にそれぞれ平均0分散1，平均1分散2の標準正規分布を用いると考えると，</p>
+<p>$$
 \bar{x}=[0, 1]
-$$</p><p>$$
+$$</p>
+<p>$$
 P_x = [
 \begin{array}{cc}
-1 & 2 \
-2 & 4
+1 &amp; 2 \
+2 &amp; 4
 \end{array}
 ]
 $$
-となる．</p><p>これを入力として用いる．出力は1次元とし$f(x)=x[0]*x[1]$の非線形変換を考える．</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Number of dimensions of x</span>
-</span></span><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=mi>2</span>
-</span></span><span class=line><span class=cl><span class=c1># Number of dimensions of y</span>
-</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Mean and Variance of x</span>
-</span></span><span class=line><span class=cl><span class=n>x_mean</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>])</span>
-</span></span><span class=line><span class=cl><span class=n>x_P</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>],[</span><span class=mi>2</span><span class=p>,</span><span class=mi>4</span><span class=p>]])</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Mean&#34;</span><span class=p>,</span><span class=n>x_mean</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Variance&#34;</span><span class=p>,</span><span class=n>x_P</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Nonlinear transformation of x</span>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>f</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>[</span><span class=n>x</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>*</span><span class=n>x</span><span class=p>[</span><span class=mi>1</span><span class=p>]]</span>
-</span></span></code></pre></div><h2 id=シグマ点の計算>シグマ点の計算</h2><p>$$
+となる．</p>
+<p>これを入力として用いる．出力は1次元とし$f(x)=x[0]*x[1]$の非線形変換を考える．</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Number of dimensions of x</span>
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Number of dimensions of y</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Mean and Variance of x</span>
+</span></span><span class="line"><span class="cl"><span class="n">x_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">x_P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Mean&#34;</span><span class="p">,</span><span class="n">x_mean</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Variance&#34;</span><span class="p">,</span><span class="n">x_P</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Nonlinear transformation of x</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</span></span></code></pre></div><h2 id="シグマ点の計算">シグマ点の計算</h2>
+<p>$$
 \sigma_0 = \bar{x} \tag{1}
-$$</p><p>$$
+$$</p>
+<p>$$
 \sigma_i = \bar{x}+(\sqrt{(n+\lambda)}P_x) \tag{2}
-$$</p><p>$$
+$$</p>
+<p>$$
 \sigma_i = \bar{x}-(\sqrt{(n+\lambda)}P_x) \tag{3}
-$$</p><p>ここで，$\lambda$は以下のように計算される．</p><p>$$
+$$</p>
+<p>ここで，$\lambda$は以下のように計算される．</p>
+<p>$$
 \lambda = \alpha^2*(n+\kappa)-n \tag{4}
-$$</p><p>ここで，$\alpha$と$\kappa$はハイパーパラメータである．</p><p>$\alpha$:0-1のスカラー値として指定され，平均の状態値の周りのシグマポイントの広がりを決定する．通常、小さい正の数値をとる．シグマポイントの広がりは$\alpha$に比例し，値が小さいほどシグマポイントは平均の状態に近くなる．</p><p>$\kappa$：通常は0に設定される．値が小さいほどシグマポイントは平均の状態に近くなり，広がりは$\kappa$の平方根に比例する．</p><ul><li>参考1：<a href=https://jp.mathworks.com/help/control/ref/ukf_block.html>Unscented Kalman Filter， MathWorks</a></li><li>参考2：<a href=https://myenigma.hatenablog.com/entry/20140614/1402731732>Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Parameter</span>
-</span></span><span class=line><span class=cl><span class=n>alpha</span> <span class=o>=</span> <span class=mf>0.5</span>
-</span></span><span class=line><span class=cl><span class=n>kappa</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=c1># 式4</span>
-</span></span><span class=line><span class=cl><span class=n>lambd</span><span class=o>=</span><span class=n>alpha</span><span class=o>**</span><span class=mi>2</span><span class=o>*</span><span class=p>(</span><span class=n>n</span><span class=o>+</span><span class=n>kappa</span><span class=p>)</span><span class=o>-</span><span class=n>n</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>lambd</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=c1># Sampling sigma points</span>
-</span></span><span class=line><span class=cl><span class=n>sigma</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=n>n</span><span class=p>,</span> <span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 式1</span>
-</span></span><span class=line><span class=cl><span class=n>sigma</span><span class=p>[:,</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=n>x_mean</span>
-</span></span><span class=line><span class=cl><span class=n>gamma</span><span class=o>=</span><span class=n>math</span><span class=o>.</span><span class=n>sqrt</span><span class=p>(</span><span class=n>n</span><span class=o>+</span><span class=n>lamda</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=c1># 式2</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>sigma</span><span class=p>[:,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=n>x_mean</span> <span class=o>+</span> <span class=n>gamma</span> <span class=o>*</span> <span class=n>x_P</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl><span class=c1># 式3</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>sigma</span><span class=p>[:,</span><span class=n>i</span><span class=o>+</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span><span class=n>x_mean</span> <span class=o>-</span> <span class=n>gamma</span> <span class=o>*</span> <span class=n>x_P</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;selected sigma point&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>  <span class=nb>print</span><span class=p>(</span><span class=n>sigma</span><span class=p>[:,</span><span class=n>i</span><span class=p>])</span>
-</span></span></code></pre></div><h2 id=変換>変換</h2><p>非線形変換により$y_{\sigma}$をもとめる．</p><p>$$
+$$</p>
+<p>ここで，$\alpha$と$\kappa$はハイパーパラメータである．</p>
+<p>$\alpha$:0-1のスカラー値として指定され，平均の状態値の周りのシグマポイントの広がりを決定する．通常、小さい正の数値をとる．シグマポイントの広がりは$\alpha$に比例し，値が小さいほどシグマポイントは平均の状態に近くなる．</p>
+<p>$\kappa$：通常は0に設定される．値が小さいほどシグマポイントは平均の状態に近くなり，広がりは$\kappa$の平方根に比例する．</p>
+<ul>
+<li>参考1：<a href="https://jp.mathworks.com/help/control/ref/ukf_block.html">Unscented Kalman Filter， MathWorks</a></li>
+<li>参考2：<a href="https://myenigma.hatenablog.com/entry/20140614/1402731732">Unscentedカルマンフィルタを使用した自己位置推定MATLAB, Pythonサンプルプログラム</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Parameter</span>
+</span></span><span class="line"><span class="cl"><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
+</span></span><span class="line"><span class="cl"><span class="n">kappa</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 式4</span>
+</span></span><span class="line"><span class="cl"><span class="n">lambd</span><span class="o">=</span><span class="n">alpha</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">kappa</span><span class="p">)</span><span class="o">-</span><span class="n">n</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">lambd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Sampling sigma points</span>
+</span></span><span class="line"><span class="cl"><span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 式1</span>
+</span></span><span class="line"><span class="cl"><span class="n">sigma</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_mean</span>
+</span></span><span class="line"><span class="cl"><span class="n">gamma</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lamda</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 式2</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_mean</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">x_P</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 式3</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span><span class="n">x_mean</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">x_P</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;selected sigma point&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">print</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+</span></span></code></pre></div><h2 id="変換">変換</h2>
+<p>非線形変換により$y_{\sigma}$をもとめる．</p>
+<p>$$
 y_{\sigma}=f(\sigma) \tag{5}
-$$</p><p>重み関数$w_i$を求める．</p><p>$$
+$$</p>
+<p>重み関数$w_i$を求める．</p>
+<p>$$
 w_0=\frac{\lambda}{n+\lambda} \tag{6}
-$$</p><p>$$
+$$</p>
+<p>$$
 w_i=\frac{1}{2(n+\lambda)} \tag{7}
-$$</p><p>$y$の平均と分散は以下のように計算できる．</p><p>$$
+$$</p>
+<p>$y$の平均と分散は以下のように計算できる．</p>
+<p>$$
 \bar{y} \simeq \sum_{i=0}^{2n}w_iy_{\sigma i} \tag{8}
-$$</p><p>$$
+$$</p>
+<p>$$
 P_y \simeq \sum_{i=0}^{2n} w_i (y_{\sigma i}-\bar{y})*(y_{\sigma i}-\bar{y})^T \tag{9}
-$$</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>sigma_y</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=n>m</span><span class=p>,</span> <span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>))</span>
-</span></span><span class=line><span class=cl><span class=c1># Non-linear transformation　式5</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>sigma</span><span class=p>)):</span>
-</span></span><span class=line><span class=cl>  <span class=n>sigma_y</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>sigma</span><span class=p>[:,</span><span class=n>i</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>))</span>
-</span></span><span class=line><span class=cl><span class=c1># Weight function calculation　式6,7</span>
-</span></span><span class=line><span class=cl><span class=n>w</span><span class=p>[:,</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=n>lambd</span><span class=o>/</span><span class=p>(</span><span class=n>n</span><span class=o>+</span><span class=n>lambd</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>  <span class=n>w</span><span class=p>[:,</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span><span class=o>/</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=p>(</span><span class=n>n</span><span class=o>+</span><span class=n>lambd</span><span class=p>))</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;重み関数&#34;</span><span class=p>,</span> <span class=n>w</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>y_mean</span><span class=o>=</span><span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=c1># mean of y 式8</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>  <span class=n>y_mean</span> <span class=o>+=</span> <span class=n>w</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span><span class=o>*</span><span class=n>sigma_y</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>y_P</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl><span class=c1># variance of y 式9</span>
-</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=o>*</span><span class=n>n</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>  <span class=n>y_P</span> <span class=o>+=</span> <span class=n>w</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span><span class=o>*</span><span class=p>(</span><span class=n>sigma_y</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span><span class=o>-</span><span class=n>y_mean</span><span class=p>)</span><span class=o>*</span><span class=p>(</span><span class=n>sigma_y</span><span class=p>[:,</span><span class=n>i</span><span class=p>]</span><span class=o>-</span><span class=n>y_mean</span><span class=p>)</span><span class=o>.</span><span class=n>T</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>y_mean</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>y_P</span><span class=p>)</span>
-</span></span></code></pre></div></div><div><div>Tags:</div><ul><li><a href=/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/>機械学習</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</li></ol></nav></main><footer><p style=text-align:center>Copyright 2025. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>
+$$</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sigma_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Non-linear transformation　式5</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sigma</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">sigma</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Weight function calculation　式6,7</span>
+</span></span><span class="line"><span class="cl"><span class="n">w</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambd</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lambd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">lambd</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;重み関数&#34;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_mean</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mean of y 式8</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y_mean</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_P</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># variance of y 式9</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">y_P</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">y_mean</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sigma_y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">y_mean</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">y_mean</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">y_P</span><span class="p">)</span>
+</span></span></code></pre></div>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/">機械学習</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">Unscented Transformation(アンセンテッド変換,U変換)のpythonプログラム</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+
+</html>

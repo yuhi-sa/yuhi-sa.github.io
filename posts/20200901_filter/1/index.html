@@ -1,51 +1,264 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><meta name=robots content="index,follow"><meta property="og:title" content="代表的なフィルタ | tomato blog"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20200901_filter/1/"><meta name=twitter:card content="summary_large_image"><title>代表的なフィルタ | tomato blog</title><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></head><body><header><nav class="navbar navbar-expand-lg navbar-light bg-light"><div class=navbar-brand style=padding-left:10px>tomato blog</div><button class="navbar-toggler ml-auto" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ml-auto"><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/ class=nav-link>Blog</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/tags class=nav-link>Tags</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/about class=nav-link>About</a></li><li class=nav-item><a zgotmplz href=https://yuhi-sa.github.io/posts/privacy_policy class=nav-link>Privacy policy</a></li></ul></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main><div style="max-width:80%;margin:0 auto"><h1 id=ノイズ除去に利用される代表的なフィルタカルマンフィルタ拡張カルマンフィルタunscentedカルマンフィルタモンテカルロunscentedカルマンフィルタ粒子フィルタ>ノイズ除去に利用される代表的なフィルタ(カルマンフィルタ・拡張カルマンフィルタ・Unscentedカルマンフィルタ・モンテカルロUnscentedカルマンフィルタ・粒子フィルタ)</h1><h2 id=フィルタfilter>フィルタ(Filter)</h2><p>フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．</p><h2 id=モデル>モデル</h2><p>フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．</p><p>$$
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="robots" content="index,follow">
+
+
+<meta property="og:title" content="代表的なフィルタ | tomato blog">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="og:url" content="http://localhost:1313/posts/20200901_filter/1/">
+<meta name="twitter:card" content="summary_large_image">
+
+<title>代表的なフィルタ | tomato blog</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+
+</head>
+
+<body>
+  <header>
+    <div class="container">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
+      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">  
+        <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
+  </li>
+  <li class="nav-item">
+    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
+  </li>
+        </ul>
+      </div>
+    </nav>
+
+</div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  <main>
+    
+<div style="max-width: 80%; margin: 0 auto;">
+  
+  
+  <h1 id="ノイズ除去に利用される代表的なフィルタカルマンフィルタ拡張カルマンフィルタunscentedカルマンフィルタモンテカルロunscentedカルマンフィルタ粒子フィルタ">ノイズ除去に利用される代表的なフィルタ(カルマンフィルタ・拡張カルマンフィルタ・Unscentedカルマンフィルタ・モンテカルロUnscentedカルマンフィルタ・粒子フィルタ)</h1>
+<h2 id="フィルタfilter">フィルタ(Filter)</h2>
+<p>フィルタとは，測定された時系列データから信号成分だけを通し，ノイズ成分を除去する仕組みである．</p>
+<h2 id="モデル">モデル</h2>
+<p>フィルタリングでは，時間ステップ$t$，初期値$x_0$，観測値$z_t$，制御入力$u_{t-1}$が与えられたときの，潜在状態$x_t$を推定する．推定値$x$はプロセスモデル$f$によって，観測値$z$は観測モデル$h$によって与えられる．</p>
+<p>$$
 x_t = f(x_{t-1},u_{t-1},q_{t-1}) \tag{1}
 $$
 $$
 z_t=h(x_t,r_t) \tag{2}
 $$
-ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．</p><p>$$
+ここで，$q$は，プロセスノイズ，$r$は観測ノイズである．</p>
+<p>$$
 q\sim N(0,Q)
 $$
 $$
 r\sim N(0,R)
-$$</p><h2 id=カルマンフィルタkalman-filter>カルマンフィルタ(Kalman Filter)</h2><h3 id=目的>目的</h3><p>時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．</p><h3 id=方法>方法</h3><p>状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．</p><p>Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．</p><p>Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する．
-$x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．</p><p>$$
-x \sim (\mu,\Sigma)
-$$</p><blockquote><p>Step1 予測ステップ</p></blockquote><p>事前状態推定値</p><p>$$
+$$</p>
+<h2 id="カルマンフィルタkalman-filter">カルマンフィルタ(Kalman Filter)</h2>
+<h3 id="目的">目的</h3>
+<p>時刻$t$が観測されたとき，その状態を観測データ$z(t)$と時系列の状態空間モデルを用いて推定する．</p>
+<h3 id="方法">方法</h3>
+<p>状態空間モデルの係数は既知であり，時間によらず一定であると仮定する(LTI:Linear Time-Invariant,線形時不変)．</p>
+<p>Step1において，対象とする時系列をガウスノイズにより駆動された線形システムの出力とみなし，その線形システムの状態空間モデルを構築する．</p>
+<p>Step2においてStep1で得られた状態空間モデルの状態$x(t)$を時系列データ$y(t)$から推定する．
+$x$は，xの平均$\mu$と共分散$\Sigma$によって表される．また，プロセスノイズを$Q$，観測ノイズを$R$とする．</p>
+<p>$$
+x \sim	(\mu,\Sigma)
+$$</p>
+<blockquote>
+<p>Step1 予測ステップ</p></blockquote>
+<p>事前状態推定値</p>
+<p>$$
 \hat{\mu}=A\mu_{t-1}+B\mu_t \tag{3}
-$$</p><p>事前誤差共分散行列</p><p>$$
+$$</p>
+<p>事前誤差共分散行列</p>
+<p>$$
 \hat{\Sigma}=A\Sigma_{t-1}A^T+Q_{t-1} \tag{4}
-$$</p><blockquote><p>Step2 状態推定</p></blockquote><p>カルマンゲイン</p><p>$$
+$$</p>
+<blockquote>
+<p>Step2 状態推定</p></blockquote>
+<p>カルマンゲイン</p>
+<p>$$
 K_t=\hat{\Sigma_t}H^T(\hat{\Sigma_tH^T+R_t})^{-1} \tag{5}
 $$
-状態推定値</p><p>$$
+状態推定値</p>
+<p>$$
 \mu_t=\hat{\mu_t}+K_t(z_t-H\hat{\mu_t}) \tag{6}
 $$
-事後誤差共分散行列</p><p>$$
+事後誤差共分散行列</p>
+<p>$$
 \Sigma_t = (I_n-K_tH)\hat{\Sigma_t} \tag{7}
-$$</p><h2 id=拡張カルマンフィルタextended-kalman-filter>拡張カルマンフィルタ(Extended Kalman Filter)</h2><h3 id=目的-1>目的</h3><p>カルマンフィルターを非線形システムに拡張する．</p><h3 id=方法-1>方法</h3><p>事後確率密度関数をガウス分布と仮定して，非線形関数を最新の推定値の近傍で線形化する．まず，式1,2の非線形システム$f$および$h$を推定値近傍でテーラー展開し，高次項を無視して局所線形化システムを得る．</p><blockquote><p>テーラー展開(推定値を$\hat{x}_k$とする)</p></blockquote><p>$$
+$$</p>
+<h2 id="拡張カルマンフィルタextended-kalman-filter">拡張カルマンフィルタ(Extended Kalman Filter)</h2>
+<h3 id="目的-1">目的</h3>
+<p>カルマンフィルターを非線形システムに拡張する．</p>
+<h3 id="方法-1">方法</h3>
+<p>事後確率密度関数をガウス分布と仮定して，非線形関数を最新の推定値の近傍で線形化する．まず，式1,2の非線形システム$f$および$h$を推定値近傍でテーラー展開し，高次項を無視して局所線形化システムを得る．</p>
+<blockquote>
+<p>テーラー展開(推定値を$\hat{x}_k$とする)</p></blockquote>
+<p>$$
 f(x_t)= f(\hat{x}_k)+[\frac{\delta f(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{8}
-$$</p><p>$$
+$$</p>
+<p>$$
 h(x_t)= h(\hat{x}_k)+[\frac{\delta h(\hat{x}_k)}{\delta \hat{x}_k}] (x_t-\hat{x}_k)+\dots \tag{9}
-$$</p><p>以下，カルマンフィルタと同様</p><h2 id=unscented-カルマンフィルタunscented-kalman-filter-ukf>Unscented カルマンフィルタ(Unscented Kalman Filter, UKF)</h2><h3 id=目的-2>目的</h3><p>前述のEKFは，非線形性が弱いシステムでは優れた性能を示すが，非線形性が強いシステムの推定においては<code>平均に関する不確実性</code>を考慮に入れていないため，フィルタ性能が十分ではないことが知られている．UKFではこの問題に対応する．</p><h3 id=方法-2>方法</h3><p>UKFは，シグマ点とよばれる代表点を平均値の回りで用いて，推定値の共分散を計算する．これにより真の平均と共分散により近い値を獲得する．</p><blockquote><p>シグマ点</p></blockquote><p>$$
+$$</p>
+<p>以下，カルマンフィルタと同様</p>
+<h2 id="unscented-カルマンフィルタunscented-kalman-filter-ukf">Unscented カルマンフィルタ(Unscented Kalman Filter, UKF)</h2>
+<h3 id="目的-2">目的</h3>
+<p>前述のEKFは，非線形性が弱いシステムでは優れた性能を示すが，非線形性が強いシステムの推定においては<code>平均に関する不確実性</code>を考慮に入れていないため，フィルタ性能が十分ではないことが知られている．UKFではこの問題に対応する．</p>
+<h3 id="方法-2">方法</h3>
+<p>UKFは，シグマ点とよばれる代表点を平均値の回りで用いて，推定値の共分散を計算する．これにより真の平均と共分散により近い値を獲得する．</p>
+<blockquote>
+<p>シグマ点</p></blockquote>
+<p>$$
 \chi^0=\mu \tag{13}
-$$</p><p>$$
+$$</p>
+<p>$$
 \chi^i=\mu \pm(\sqrt{(n+\lambda)\Sigma})_i \tag{14}
-$$</p><blockquote><p>重みの計算</p></blockquote><p>$$
+$$</p>
+<blockquote>
+<p>重みの計算</p></blockquote>
+<p>$$
 w^0=\frac{\lambda}{\lambda+n} \tag{15}
-$$</p><p>$$
+$$</p>
+<p>$$
 w^i=\frac{0.5}{\lambda+n} \tag{16}
-$$</p><blockquote><p>重み付き平均で、観測値とその共分散を推定</p></blockquote><p>$$
+$$</p>
+<blockquote>
+<p>重み付き平均で、観測値とその共分散を推定</p></blockquote>
+<p>$$
 \hat{X} = f(X_{t-1}, u_t) \tag{17}
-$$</p><p>$$
+$$</p>
+<p>$$
 \hat{\mu_t}=\sum_iw^i\hat{\chi}_t^i \tag{18}
-$$</p><p>$$
+$$</p>
+<p>$$
 \hat{\Sigma}_t=\sum_iw^i(\hat{\chi}-\hat{\mu_t}) (\hat{\chi}-\hat{\mu_t}) ^T+Q_t \tag{19}
-$$</p><h2 id=モンテカルロ-unscented-カルマンフィルタmonte-carlo-unscented-kalman-filter-mcukf>モンテカルロ Unscented カルマンフィルタ(Monte Carlo Unscented Kalman Filter, MCUKF)</h2><h3 id=目的-3>目的</h3><p>UKFは，できるだけ少ないシグマ点で状態を表現することが望ましい．
-しかし，状態が高次元である場合，正しいスケーリングパラメータ$\lambda$を見つけることは困難である．MCUKFではその問題に対応する．</p><h3 id=方法-3>方法</h3><p>平均値と共分散を計算するためにUnscented transformを用いるのではなく，モンテカルロ法を用いる．実際には，式13-16のシグマ点とその重みを，一様に重み付けされたサンプルで置き換えることとなる．UKFアルゴリズムの残りの部分は変わらないが，分布を正確に表現するためには，より多くのサンプルが必要となる．</p><h2 id=粒子フィルタparticle-filter-pf>粒子フィルタ(Particle Filter, PF)</h2><h3 id=目的-4>目的</h3><p>非線形非ガウス状態空間モデルにおいては，共役事前分布の性質は一般には成り立たず，事後確率分泌はもはや，パラメトリックな確率分布では表せない場合もあり得る．したがって，確率分布のパラメータを用いた厳密なフィルタの導出も一般には不可能である．
-PFでは，この問題に対応する．</p><h3 id=方法-4>方法</h3><p>PFでは，状態の確率分布に従う多数の粒子により，非ガウス分布である状態の確率分布を近似表現する．粒子の初期値$\chi$は重み$\pi$で初期化される．各ステップで．1ステップ前の粒子にプロセスモデルを適用し，プロセスノイズを加えることで新しい粒子を生成する．
-観測値$z_t$が与えられたとき，各粒子の重み$\chi^i_t$は尤度$p(z_t|\chi_t^i)$によってアップデートする．</p><p>$$
+$$</p>
+<h2 id="モンテカルロ-unscented-カルマンフィルタmonte-carlo-unscented-kalman-filter-mcukf">モンテカルロ Unscented カルマンフィルタ(Monte Carlo Unscented Kalman Filter, MCUKF)</h2>
+<h3 id="目的-3">目的</h3>
+<p>UKFは，できるだけ少ないシグマ点で状態を表現することが望ましい．
+しかし，状態が高次元である場合，正しいスケーリングパラメータ$\lambda$を見つけることは困難である．MCUKFではその問題に対応する．</p>
+<h3 id="方法-3">方法</h3>
+<p>平均値と共分散を計算するためにUnscented transformを用いるのではなく，モンテカルロ法を用いる．実際には，式13-16のシグマ点とその重みを，一様に重み付けされたサンプルで置き換えることとなる．UKFアルゴリズムの残りの部分は変わらないが，分布を正確に表現するためには，より多くのサンプルが必要となる．</p>
+<h2 id="粒子フィルタparticle-filter-pf">粒子フィルタ(Particle Filter, PF)</h2>
+<h3 id="目的-4">目的</h3>
+<p>非線形非ガウス状態空間モデルにおいては，共役事前分布の性質は一般には成り立たず，事後確率分泌はもはや，パラメトリックな確率分布では表せない場合もあり得る．したがって，確率分布のパラメータを用いた厳密なフィルタの導出も一般には不可能である．
+PFでは，この問題に対応する．</p>
+<h3 id="方法-4">方法</h3>
+<p>PFでは，状態の確率分布に従う多数の粒子により，非ガウス分布である状態の確率分布を近似表現する．粒子の初期値$\chi$は重み$\pi$で初期化される．各ステップで．1ステップ前の粒子にプロセスモデルを適用し，プロセスノイズを加えることで新しい粒子を生成する．
+観測値$z_t$が与えられたとき，各粒子の重み$\chi^i_t$は尤度$p(z_t|\chi_t^i)$によってアップデートする．</p>
+<p>$$
 \chi:\pi_t^i=\pi_{t-1}^ip(z_t|\chi_t^i) \tag{20}
-$$</p></div><div><div>Tags:</div><ul><li><a href=/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/>フィルタリング</a></li></ul></div><nav aria-label=breadcrumb><ol class=breadcrumb><li class=breadcrumb-item><a href=/>Home</a></li><li class="breadcrumb-item active" aria-current=page>代表的なフィルタ</li></ol></nav></main><footer><p style=text-align:center>Copyright 2025. All rights reserved.</p></footer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/main.min.cbcf0adf3096d54322591302ca01248346902aa2474afcbd71c3a1b999e09ad9.css integrity="sha256-y88K3zCW1UMiWRMCygEkg0aQKqJHSvy9ccOhuZngmtk=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.aa0332253f313dc48905008b4ab314155e5a13302588d25bcf4949f7c1abdde0.css integrity="sha256-qgMyJT8xPcSJBQCLSrMUFV5aEzAliNJbz0lJ98Gr3eA=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js></script><script src=https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js></script><script>MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script></body></html>
+$$</p>
+</div>
+
+  <div>
+    <div>Tags:</div>
+    <ul>
+        <li><a href="/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/">フィルタリング</a></li>
+    </ul>
+  </div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+        
+        
+        <li class="breadcrumb-item active" aria-current="page">代表的なフィルタ</li>
+      
+    </ol>
+  </nav>
+  
+
+  </main>
+  <footer>
+    <div class="container" style="text-align: center;">
+  <p>Copyright © 2025. All rights reserved.</p>
+</div>
+
+  </footer>
+  
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/css/syntax.css">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+</body>
+
+</html>

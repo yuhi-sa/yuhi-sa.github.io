@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on tomato blog</title><link>https://yuhi-sa.github.io/tags/git/</link><description>Recent content in Git on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 08 Dec 2023 09:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</title><link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link><pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid><description/></item><item><title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title><link>https://yuhi-sa.github.io/posts/20231204_git/1/</link><pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on tomato blog</title>
+    <link>http://localhost:1313/tags/git/</link>
+    <description>Recent content in Git on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 08 Dec 2023 09:00:23 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gitのコミットメッセージを効果的に統一するためにcommitizenを利用する</title>
+      <link>http://localhost:1313/posts/20231208_cz/1/</link>
+      <pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20231208_cz/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gitフックを使ってローカル環境で、mainブランチへのpushを禁止する</title>
+      <link>http://localhost:1313/posts/20231204_git/1/</link>
+      <pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20231204_git/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

@@ -1,45 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DB on tomato blog</title><link>https://yuhi-sa.github.io/tags/db/</link><description>Recent content in DB on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/db/index.xml" rel="self" type="application/rss+xml"/><item><title>トランザクションの分離レベル(`isolation`)と防げる不整合</title><link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link><pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid><description>&lt;h1 id="トランザクションの分離レベルisolationと防げる不整合">トランザクションの分離レベル(&lt;code>isolation&lt;/code>)と防げる不整合&lt;/h1>
-&lt;h2 id="dbのトランザクション処理で問題となる不整合">&lt;code>DB&lt;/code>のトランザクション処理で問題となる不整合&lt;/h2>
-&lt;h3 id="dirty-read">&lt;code>Dirty Read&lt;/code>&lt;/h3>
-&lt;p>トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。&lt;br>
-これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。&lt;/p>
-&lt;h3 id="non-repeatable-read">&lt;code>Non-repeatable Read&lt;/code>&lt;/h3>
-&lt;p>トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。&lt;br>
-これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。&lt;/p>
-&lt;h3 id="phantom-read">&lt;code>Phantom Read&lt;/code>&lt;/h3>
-&lt;p>トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。&lt;br>
-これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。&lt;/p>
-&lt;h2 id="トランザクションの分離レベル">トランザクションの分離レベル&lt;/h2>
-&lt;p>以下の分離レベルが存在する。&lt;/p>
-&lt;h3 id="read-uncommitted">&lt;code>Read Uncommitted&lt;/code>&lt;/h3>
-&lt;ul>
-&lt;li>防げる不整合:なし&lt;/li>
-&lt;/ul>
-&lt;h3 id="read-committed">&lt;code>Read Committed&lt;/code>&lt;/h3>
-&lt;ul>
-&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>
-他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　&lt;/li>
-&lt;/ul>
-&lt;h3 id="repeatable-read">&lt;code>Repeatable Read&lt;/code>&lt;/h3>
-&lt;ul>
-&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。&lt;br>
-これにより、同じトランザクション内でのデータの再読み取りが一貫する。&lt;/p>
-&lt;h3 id="snapshot">&lt;code>Snapshot&lt;/code>&lt;/h3>
-&lt;ul>
-&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>, &lt;code>Phantom Read&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。&lt;br>
-これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。&lt;/p>
-&lt;h3 id="serializable">&lt;code>Serializable&lt;/code>&lt;/h3>
-&lt;ul>
-&lt;li>防げる不整合:&lt;code>Dirty Read&lt;/code>, &lt;code>Non-repeatable Read&lt;/code>, &lt;code>Phantom Read&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。&lt;br>
-これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。&lt;/p>
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html">https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions">https://www.prisma.io/docs/orm/prisma-client/queries/transactions&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DB on tomato blog</title>
+    <link>http://localhost:1313/tags/db/</link>
+    <description>Recent content in DB on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/db/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>トランザクションの分離レベル(`isolation`)と防げる不整合</title>
+      <link>http://localhost:1313/posts/20240518_db_transaction/1/</link>
+      <pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate>
+      <guid>http://localhost:1313/posts/20240518_db_transaction/1/</guid>
+      <description>&lt;h1 id=&#34;トランザクションの分離レベルisolationと防げる不整合&#34;&gt;トランザクションの分離レベル(&lt;code&gt;isolation&lt;/code&gt;)と防げる不整合&lt;/h1&gt;&#xA;&lt;h2 id=&#34;dbのトランザクション処理で問題となる不整合&#34;&gt;&lt;code&gt;DB&lt;/code&gt;のトランザクション処理で問題となる不整合&lt;/h2&gt;&#xA;&lt;h3 id=&#34;dirty-read&#34;&gt;&lt;code&gt;Dirty Read&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;トランザクションAが、「トランザクションBによって変更されたがまだコミットされていないデータ」を読み取る現象。&lt;br&gt;&#xA;これにより、変更を行ったトランザクションBがロールバックされた場合、トランザクションAが読み取ったデータは無効な状態となり、データの信頼性が損なわれる。&lt;/p&gt;&#xA;&lt;h3 id=&#34;non-repeatable-read&#34;&gt;&lt;code&gt;Non-repeatable Read&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;トランザクションAの中で同じデータを複数回読み取る際に、トランザクションBによってデータが更新されてしまい、異なる結果が返される現象。&lt;br&gt;&#xA;これにより、一貫性のないデータが提供され、トランザクションの信頼性が低下する。&lt;/p&gt;&#xA;&lt;h3 id=&#34;phantom-read&#34;&gt;&lt;code&gt;Phantom Read&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;トランザクションAが特定のクエリを実行して結果を得た後、同じクエリを再実行した際に、トランザクションBによって新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される現象。&lt;br&gt;&#xA;これにより、データセットの整合性が保たれないことを意味し、アプリケーションの処理に影響を与える可能性がある。&lt;/p&gt;&#xA;&lt;h2 id=&#34;トランザクションの分離レベル&#34;&gt;トランザクションの分離レベル&lt;/h2&gt;&#xA;&lt;p&gt;以下の分離レベルが存在する。&lt;/p&gt;&#xA;&lt;h3 id=&#34;read-uncommitted&#34;&gt;&lt;code&gt;Read Uncommitted&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;防げる不整合:なし&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;read-committed&#34;&gt;&lt;code&gt;Read Committed&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;防げる不整合:&lt;code&gt;Dirty Read&lt;/code&gt;&#xA;他のトランザクションがコミットした後のデータのみを読み取るため、未コミットのデータによる問題は防げる。　&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;repeatable-read&#34;&gt;&lt;code&gt;Repeatable Read&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;防げる不整合:&lt;code&gt;Dirty Read&lt;/code&gt;, &lt;code&gt;Non-repeatable Read&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションから見えないように保護される。&lt;br&gt;&#xA;これにより、同じトランザクション内でのデータの再読み取りが一貫する。&lt;/p&gt;&#xA;&lt;h3 id=&#34;snapshot&#34;&gt;&lt;code&gt;Snapshot&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;防げる不整合:&lt;code&gt;Dirty Read&lt;/code&gt;, &lt;code&gt;Non-repeatable Read&lt;/code&gt;, &lt;code&gt;Phantom Read&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;トランザクションが開始された時点のデータベースのスナップショットが作成され、トランザクションはそのスナップショットに対して操作を行う。&lt;br&gt;&#xA;これにより、他のトランザクションによる変更がトランザクションに影響を与えることはない。&lt;/p&gt;&#xA;&lt;h3 id=&#34;serializable&#34;&gt;&lt;code&gt;Serializable&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;防げる不整合:&lt;code&gt;Dirty Read&lt;/code&gt;, &lt;code&gt;Non-repeatable Read&lt;/code&gt;, &lt;code&gt;Phantom Read&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;最も厳格な分離レベルで、トランザクションが他のトランザクションとは完全に独立しているかのように動作する。&lt;br&gt;&#xA;これにより、他のトランザクションによるどのような変更も防ぐことができますが、パフォーマンスへの影響が大きくなる可能性がある。&lt;/p&gt;&#xA;&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html&#34;&gt;https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.prisma.io/docs/orm/prisma-client/queries/transactions&#34;&gt;https://www.prisma.io/docs/orm/prisma-client/queries/transactions&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
