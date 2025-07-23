@@ -1,0 +1,60 @@
+:root {
+  --primary-color: #212121; /* Dark Gray for primary elements (almost black) */
+  --secondary-color: #757575; /* Medium Gray for secondary elements */
+  --accent-color: #00796B; /* Teal for subtle accents/links */
+  --text-color: #212121; /* Dark text on light background */
+  --background-color: #F5F5F5; /* Light gray background (Material surface) */
+  --surface-color: #FFFFFF; /* White for cards, header, footer */
+  --header-bg: var(--surface-color);
+  --footer-bg: var(--surface-color);
+  --code-bg: #EEEEEE; /* Lighter gray for code blocks */
+  --border-color: #E0E0E0; /* Light gray borders */
+  --link-color: var(--accent-color);
+  --link-hover-color: #004D40;
+
+  --font-family-base: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-family-monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  --heading-color: #212121; /* Darker gray for headings */
+
+  /* Material Design Shadows */
+  --shadow-1: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  --shadow-2: 0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+
+  /* Dark Mode Variables */
+  --dark-primary-color: #E0E0E0;
+  --dark-secondary-color: #BDBDBD;
+  --dark-accent-color: #4DB6AC;
+  --dark-text-color: #E0E0E0;
+  --dark-background-color: #121212;
+  --dark-surface-color: #212121;
+  --dark-header-bg: var(--dark-surface-color);
+  --dark-footer-bg: var(--dark-surface-color);
+  --dark-code-bg: #333333;
+  --dark-border-color: #424242;
+  --dark-link-color: var(--dark-accent-color);
+  --dark-link-hover-color: #26A69A;
+  --dark-heading-color: #FFFFFF;
+
+  /* Dark Mode Shadows */
+  --dark-shadow-1: 0px 2px 1px -1px rgba(255,255,255,0.2), 0px 1px 1px 0px rgba(255,255,255,0.14), 0px 1px 3px 0px rgba(255,255,255,0.12);
+  --dark-shadow-2: 0px 3px 3px -2px rgba(255,255,255,0.2), 0px 3px 4px 0px rgba(255,255,255,0.14), 0px 1px 8px 0px rgba(255,255,255,0.12);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --primary-color: var(--dark-primary-color);
+  --secondary-color: var(--dark-secondary-color);
+  --accent-color: var(--dark-accent-color);
+  --text-color: var(--dark-text-color);
+  --background-color: var(--dark-background-color);
+  --header-bg: var(--dark-header-bg);
+  --footer-bg: var(--dark-footer-bg);
+  --code-bg: var(--dark-code-bg);
+  --border-color: var(--dark-border-color);
+  --link-color: var(--dark-link-color);
+  --link-hover-color: var(--dark-link-hover-color);
+  --heading-color: var(--dark-heading-color);
+  --shadow-1: var(--dark-shadow-1);
+  --shadow-2: var(--dark-shadow-2);
+}
