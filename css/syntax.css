@@ -1,9 +1,68 @@
-/* ============================================   SYNTAX HIGHLIGHTING - MONOKAI THEME   ============================================      Hugo Chroma syntax highlighting   Based on Monokai color scheme   Supports both light and dark themes   ============================================ *//* Base Styles */.chroma {  color: #f8f8f2;  background-color: #272822;  border-radius: var(--radius-md);  overflow-x: auto;}.bg {  color: #f8f8f2;  background-color: #272822;}/* Line Structure */.chroma .line {  display: flex;}.chroma .lnlinks {  outline: none;  text-decoration: none;  color: inherit;}/* Line Numbers */.chroma .lnt,.chroma .ln {  white-space: pre;
+/* ============================================
+   MODERN SYNTAX HIGHLIGHTING
+   ============================================
+   
+   Hugo Chroma syntax highlighting
+   Modern dark theme with enhanced colors
+   Improved readability and accessibility
+   ============================================ */
+
+/* Base Styles */
+.chroma {
+  color: #f8f8f2;
+  background: linear-gradient(135deg, #1a1b23, #2d2e3b);
+  border-radius: var(--radius-xl);
+  overflow-x: auto;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chroma::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.bg {
+  color: #f8f8f2;
+  background: transparent;
+}
+
+/* Line Structure */
+.chroma .line {
+  display: flex;
+  min-height: 1.5em;
+  padding: 0 var(--space-4);
+}
+
+.chroma .line:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chroma .lnlinks {
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+}/* Line Numbers */
+.chroma .lnt,
+.chroma .ln {
+  white-space: pre;
   -webkit-user-select: none;
   user-select: none;
-  margin-right: 0.4em;
-  padding: 0 0.4em 0 0.4em;
-  color: #7f7f7f;
+  margin-right: 0.8em;
+  padding: 0 var(--space-3);
+  color: #6b7380;
+  background: rgba(255, 255, 255, 0.05);
+  border-right: 2px solid var(--primary-500);
+  font-weight: var(--font-medium);
+  min-width: 3ch;
+  text-align: right;
 }
 
 .chroma .lntd {
@@ -18,68 +77,83 @@
   padding: 0;
   margin: 0;
   border: 0;
+  width: 100%;
 }
 
 .chroma .hl {
-  background-color: #3c3d38;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(139, 69, 19, 0.1));
+  border-left: 4px solid var(--primary-500);
 }
 
 /* Errors */
 .chroma .err {
-  color: #960050;
-  background-color: #1e0010;
+  color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-1);
 }
 
-/* Keywords */
+/* Enhanced Keywords */
 .chroma .k,     /* Keyword */
 .chroma .kc,    /* KeywordConstant */
 .chroma .kd,    /* KeywordDeclaration */
 .chroma .kp,    /* KeywordPseudo */
 .chroma .kr,    /* KeywordReserved */
 .chroma .kt {   /* KeywordType */
-  color: #66d9ef;
+  color: #6bcf7f;
+  font-weight: var(--font-semibold);
 }
 
 .chroma .kn {   /* KeywordNamespace */
-  color: #f92672;
+  color: #ff6b9d;
+  font-weight: var(--font-semibold);
 }
 
-/* Names */
+/* Enhanced Names */
 .chroma .na,    /* NameAttribute */
 .chroma .nb,    /* NameBuiltin */
-.chroma .nc,    /* NameClass */
+.chroma .nc {   /* NameClass */
+  color: #82aaff;
+  font-weight: var(--font-medium);
+}
 .chroma .nd,    /* NameDecorator */
 .chroma .ne,    /* NameException */
 .chroma .nf,    /* NameFunction */
 .chroma .nx {   /* NameOther */
-  color: #a6e22e;
+  color: #ffcb6b;
+  font-weight: var(--font-medium);
 }
 
 .chroma .no {   /* NameConstant */
-  color: #66d9ef;
+  color: #c3e88d;
+  font-weight: var(--font-semibold);
 }
 
 .chroma .nt {   /* NameTag */
-  color: #f92672;
+  color: #ff6b9d;
+  font-weight: var(--font-semibold);
 }
 
-/* Literals */
+/* Enhanced Literals */
 .chroma .l {    /* Literal */
-  color: #ae81ff;
+  color: #c792ea;
 }
 
 .chroma .ld {   /* LiteralDate */
-  color: #e6db74;
+  color: #f78c6c;
 }
 
-/* Strings */
+/* Enhanced Strings */
 .chroma .s,     /* LiteralString */
 .chroma .sa,    /* LiteralStringAffix */
 .chroma .sb,    /* LiteralStringBacktick */
 .chroma .sc,    /* LiteralStringChar */
 .chroma .dl,    /* LiteralStringDelimiter */
 .chroma .sd,    /* LiteralStringDoc */
-.chroma .s2,    /* LiteralStringDouble */
+.chroma .s2 {   /* LiteralStringDouble */
+  color: #c3e88d;
+  font-style: italic;
+}
 .chroma .sh,    /* LiteralStringHeredoc */
 .chroma .si,    /* LiteralStringInterpol */
 .chroma .sx,    /* LiteralStringOther */
