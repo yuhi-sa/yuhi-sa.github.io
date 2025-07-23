@@ -1,424 +1,105 @@
-<!DOCTYPE html>
-<html lang="en"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="http://localhost:1313/en/posts/20201223_elgamal/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Python]ElGamal cryptography on elliptic curves">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="http://localhost:1313/en/posts/20201223_elgamal/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="article:published_time" content="2020-12-23T15:17:23&#43;09:00">
-<meta property="article:modified_time" content="2020-12-23T15:17:23&#43;09:00">
-<meta property="article:tag" content="Algorithm">
-
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="[Python]ElGamal cryptography on elliptic curves">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>[Python]ElGamal cryptography on elliptic curves | tomato blog</title>
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "[Python]ElGamal cryptography on elliptic curves",
-  "description": "",
-  "author": {
-    "@type": "Person",
-    "name": ""
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "tomato blog",
-    
-    "url": "http:\/\/localhost:1313\/"
-  },
-  "datePublished": "2020-12-23T15:17:23\u002b09:00",
-  "dateModified": "2020-12-23T15:17:23\u002b09:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/en\/posts\/20201223_elgamal\/1\/"
-  },
-  
-  "url": "http:\/\/localhost:1313\/en\/posts\/20201223_elgamal\/1\/",
-  "wordCount":  548 ,
-  "keywords": [
-    "Algorithm"
-  ],
-  "articleSection": "posts"
-}
-</script>
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-  <link rel="stylesheet" href="/css/_variables.css">
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
-  
-  <header role="banner">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  <a class="navbar-brand" href="http://localhost:1313/">tomato blog</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/">Blog</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/tags/">Tags</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/about/">About</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/privacy_policy/">Privacy policy</a>
-  </li>
-
-      <li class="nav-item">
-        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="darkModeIcon"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  <main id="main-content" role="main">
-    
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">[Python]ElGamal cryptography on elliptic curves</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2020-12-23T15:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          December 23, 2020
-        </time>
-        
-        
-        
-        
-        
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          3 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/en/tags/algorithm/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Algorithm
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h1 id="key-generation">Key generation</h1>
-<ol>
-<li>Generate an elliptic curve $E/F_p$ and a Baze point $G$ of rank $l$. ($p,l$ are prime numbers)</li>
-<li>Generate the secret key $x$ by random numbers and compute $Y=xG$ on $E$.</li>
-</ol>
-<p>Secret key $x$, open key $E,G,Y$</p>
-<h1 id="encryption">Encryption</h1>
-<p>Let $m$ be the message to be sent.</p>
-<ol>
-<li>Generate $r$ as a random number and compute $U=rG=(u_x,u_y)$.</li>
-<li>Using the public key $Y$,<br>
-compute $V = xU =(v_x,v_y)$ and $c=v_x\oplus m$.<br>
-The $\oplus$ is an exclusive or.</li>
-<li>Send $(U,c)$ as a ciphertext.</li>
-</ol>
-<h1 id="eecryption">Eecryption</h1>
-<ol>
-<li>$V=xU=(v_x,v_y)$,<br>
-$m=v_x\oplus c$</li>
-</ol>
-<h2 id="simplified-python-implementation">Simplified Python Implementation</h2>
-<p><strong>[WARNING]</strong>
-The following program is a highly simplified implementation for understanding the basic concepts of Elliptic Curve ElGamal encryption. It uses extremely inefficient and insecure methods for modular inverse calculation and scalar multiplication. <strong>It is absolutely NOT suitable for any real-world cryptographic applications.</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:elgamal_ecc_simple.py" data-lang="python:elgamal_ecc_simple.py"><span class="line"><span class="cl"><span class="c1"># --- Parameter Settings (Very small prime field elliptic curve) ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># y^2 = x^3 + ax + b (mod l)</span>
-</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl"><span class="n">l</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># Modulus (prime number)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Base point G</span>
-</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># --- Key Generation ---</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Private key (should be a large random number in practice)</span>
-</span></span><span class="line"><span class="cl"><span class="n">private_key</span> <span class="o">=</span> <span class="mi">3</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># --- Utility Functions ---</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Calculates the positive modulus.&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">inv_mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Calculates the modular multiplicative inverse (inefficient brute-force implementation).
-</span></span></span><span class="line"><span class="cl"><span class="s2">    For prime y, Fermat&#39;s Little Theorem (x^(y-2) mod y) is more efficient.
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Extended Euclidean algorithm is generally used.
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># Not found</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">point_double</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Doubles a point on the elliptic curve (P + P).&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Slope s = (3*px^2 + a) / (2*py)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">s_num</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span>
-</span></span><span class="line"><span class="cl">    <span class="n">s_den</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="n">s</span> <span class="o">=</span> <span class="n">mod</span><span class="p">(</span><span class="n">s_num</span> <span class="o">*</span> <span class="n">inv_mod</span><span class="p">(</span><span class="n">s_den</span><span class="p">,</span> <span class="n">l</span><span class="p">),</span> <span class="n">l</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Coordinates of the new point</span>
-</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="n">mod</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">mod</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">l</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">scalar_mult</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s2">    Calculates scalar multiplication k * P (inefficient repeated addition).
-</span></span></span><span class="line"><span class="cl"><span class="s2">    In real cryptography, the &#34;double-and-add&#34; method, which applies repeated squaring
-</span></span></span><span class="line"><span class="cl"><span class="s2">    (binary method) to point addition, is used.
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Note: This simplified implementation calculates 2^k * P, not k * P.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># This does not meet the requirements for ElGamal encryption.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># A correct k * P calculation requires implementing a point addition function</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># and a proper scalar multiplication algorithm like double-and-add.</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># This code works for demonstration purposes only with small fixed values of k.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="n">p</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">point_double</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># Should be a large random number in practice</span>
-</span></span><span class="line"><span class="cl">    <span class="n">U</span> <span class="o">=</span> <span class="n">scalar_mult</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">V</span> <span class="o">=</span> <span class="n">scalar_mult</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Mask message with XOR</span>
-</span></span><span class="line"><span class="cl">    <span class="n">c</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">m</span> <span class="c1"># Use x-coordinate</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">U</span><span class="p">,</span> <span class="n">c</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">V</span> <span class="o">=</span> <span class="n">scalar_mult</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">m</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">^</span> <span class="n">c</span> <span class="c1"># Use x-coordinate</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">m</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Calculate public key Y = xG</span>
-</span></span><span class="line"><span class="cl">    <span class="n">public_key</span> <span class="o">=</span> <span class="n">scalar_mult</span><span class="p">(</span><span class="n">private_key</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Private key x: </span><span class="si">{</span><span class="n">private_key</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Public key Y: </span><span class="si">{</span><span class="n">public_key</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Plaintext</span>
-</span></span><span class="line"><span class="cl">    <span class="n">message</span> <span class="o">=</span> <span class="mi">4</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Plaintext m: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Encryption</span>
-</span></span><span class="line"><span class="cl">    <span class="n">U</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">public_key</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Ciphertext (U, c): (</span><span class="si">{</span><span class="n">U</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">)&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1"># Decryption</span>
-</span></span><span class="line"><span class="cl">    <span class="n">decrypted_message</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">private_key</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Decrypted message: </span><span class="si">{</span><span class="n">decrypted_message</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
-</span></span></code></pre></div>
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="548">
-    <meta itemprop="url" content="http://localhost:1313/en/posts/20201223_elgamal/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/en/" itemprop="item">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">Home</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/en/" itemprop="item">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/en/posts/" itemprop="item">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">[Python]ElGamal cryptography on elliptic curves</span>
-        <meta itemprop="position" content="4" />
-      </li>
-  </ol>
-</nav>
-</nav>
-  
-    
-  <div class="mt-3">
-    <h6 class="d-inline-block me-2">Tags:</h6>
-      <a href="/en/tags/algorithm/" class="badge badge-custom text-decoration-none me-1">Algorithm</a>
-  </div>
-
-  </nav>
-</div>
-
-  </main>
-  
-  <footer role="contentinfo">
-    <div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-</body>
-
-</html>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/><meta property="og:type" content="article"><meta property="og:title" content="[Python]ElGamal cryptography on elliptic curves"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2020-12-23T15:17:23+09:00"><meta property="article:modified_time" content="2020-12-23T15:17:23+09:00"><meta property="article:tag" content="Algorithm"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="[Python]ElGamal cryptography on elliptic curves"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>[Python]ElGamal cryptography on elliptic curves | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"[Python]ElGamal cryptography on elliptic curves","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-12-23T15:17:23\u002b09:00","dateModified":"2020-12-23T15:17:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201223_elgamal\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201223_elgamal\/1\/","wordCount":548,"keywords":["Algorithm"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>[Python]ElGamal cryptography on elliptic curves</h1><div class=article-meta><time datetime=2020-12-23T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+December 23, 2020
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+3 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/algorithm/ class="badge badge-custom" rel=tag itemprop=keywords>Algorithm</a></div></header><div class=article-content itemprop=articleBody><h1 id=key-generation>Key generation</h1><ol><li>Generate an elliptic curve $E/F_p$ and a Baze point $G$ of rank $l$. ($p,l$ are prime numbers)</li><li>Generate the secret key $x$ by random numbers and compute $Y=xG$ on $E$.</li></ol><p>Secret key $x$, open key $E,G,Y$</p><h1 id=encryption>Encryption</h1><p>Let $m$ be the message to be sent.</p><ol><li>Generate $r$ as a random number and compute $U=rG=(u_x,u_y)$.</li><li>Using the public key $Y$,<br>compute $V = xU =(v_x,v_y)$ and $c=v_x\oplus m$.<br>The $\oplus$ is an exclusive or.</li><li>Send $(U,c)$ as a ciphertext.</li></ol><h1 id=eecryption>Eecryption</h1><ol><li>$V=xU=(v_x,v_y)$,<br>$m=v_x\oplus c$</li></ol><h2 id=simplified-python-implementation>Simplified Python Implementation</h2><p><strong>[WARNING]</strong>
+The following program is a highly simplified implementation for understanding the basic concepts of Elliptic Curve ElGamal encryption. It uses extremely inefficient and insecure methods for modular inverse calculation and scalar multiplication. <strong>It is absolutely NOT suitable for any real-world cryptographic applications.</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:elgamal_ecc_simple.py data-lang=python:elgamal_ecc_simple.py><span class=line><span class=cl><span class=c1># --- Parameter Settings (Very small prime field elliptic curve) ---</span>
+</span></span><span class=line><span class=cl><span class=c1># y^2 = x^3 + ax + b (mod l)</span>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>l</span> <span class=o>=</span> <span class=mi>5</span> <span class=c1># Modulus (prime number)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Base point G</span>
+</span></span><span class=line><span class=cl><span class=n>g</span> <span class=o>=</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># --- Key Generation ---</span>
+</span></span><span class=line><span class=cl><span class=c1># Private key (should be a large random number in practice)</span>
+</span></span><span class=line><span class=cl><span class=n>private_key</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># --- Utility Functions ---</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>mod</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Calculates the positive modulus.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>x</span> <span class=o>%</span> <span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>inv_mod</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Calculates the modular multiplicative inverse (inefficient brute-force implementation).
+</span></span></span><span class=line><span class=cl><span class=s2>    For prime y, Fermat&#39;s Little Theorem (x^(y-2) mod y) is more efficient.
+</span></span></span><span class=line><span class=cl><span class=s2>    Extended Euclidean algorithm is generally used.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>x</span> <span class=o>*</span> <span class=n>i</span><span class=p>)</span> <span class=o>%</span> <span class=n>y</span> <span class=o>==</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>i</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=o>-</span><span class=mi>1</span> <span class=c1># Not found</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>point_double</span><span class=p>(</span><span class=n>p</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Doubles a point on the elliptic curve (P + P).&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Slope s = (3*px^2 + a) / (2*py)</span>
+</span></span><span class=line><span class=cl>    <span class=n>s_num</span> <span class=o>=</span> <span class=mi>3</span> <span class=o>*</span> <span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>+</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl>    <span class=n>s_den</span> <span class=o>=</span> <span class=mi>2</span> <span class=o>*</span> <span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>=</span> <span class=n>mod</span><span class=p>(</span><span class=n>s_num</span> <span class=o>*</span> <span class=n>inv_mod</span><span class=p>(</span><span class=n>s_den</span><span class=p>,</span> <span class=n>l</span><span class=p>),</span> <span class=n>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Coordinates of the new point</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span> <span class=o>=</span> <span class=n>mod</span><span class=p>(</span><span class=n>s</span> <span class=o>*</span> <span class=n>s</span> <span class=o>-</span> <span class=mi>2</span> <span class=o>*</span> <span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span> <span class=o>=</span> <span class=n>mod</span><span class=p>(</span><span class=n>s</span> <span class=o>*</span> <span class=p>(</span><span class=n>p</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>-</span> <span class=n>x</span><span class=p>)</span> <span class=o>-</span> <span class=n>p</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>l</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>[</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>scalar_mult</span><span class=p>(</span><span class=n>k</span><span class=p>,</span> <span class=n>p</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Calculates scalar multiplication k * P (inefficient repeated addition).
+</span></span></span><span class=line><span class=cl><span class=s2>    In real cryptography, the &#34;double-and-add&#34; method, which applies repeated squaring
+</span></span></span><span class=line><span class=cl><span class=s2>    (binary method) to point addition, is used.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Note: This simplified implementation calculates 2^k * P, not k * P.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># This does not meet the requirements for ElGamal encryption.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># A correct k * P calculation requires implementing a point addition function</span>
+</span></span><span class=line><span class=cl>    <span class=c1># and a proper scalar multiplication algorithm like double-and-add.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># This code works for demonstration purposes only with small fixed values of k.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>p</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>k</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=n>point_double</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>encrypt</span><span class=p>(</span><span class=n>G</span><span class=p>,</span> <span class=n>Y</span><span class=p>,</span> <span class=n>m</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>r</span> <span class=o>=</span> <span class=mi>3</span> <span class=c1># Should be a large random number in practice</span>
+</span></span><span class=line><span class=cl>    <span class=n>U</span> <span class=o>=</span> <span class=n>scalar_mult</span><span class=p>(</span><span class=n>r</span><span class=p>,</span> <span class=n>G</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>V</span> <span class=o>=</span> <span class=n>scalar_mult</span><span class=p>(</span><span class=n>r</span><span class=p>,</span> <span class=n>Y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Mask message with XOR</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span> <span class=o>=</span> <span class=n>V</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>^</span> <span class=n>m</span> <span class=c1># Use x-coordinate</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>U</span><span class=p>,</span> <span class=n>c</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decrypt</span><span class=p>(</span><span class=n>U</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>key</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>V</span> <span class=o>=</span> <span class=n>scalar_mult</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>U</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>m</span> <span class=o>=</span> <span class=n>V</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>^</span> <span class=n>c</span> <span class=c1># Use x-coordinate</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>m</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Calculate public key Y = xG</span>
+</span></span><span class=line><span class=cl>    <span class=n>public_key</span> <span class=o>=</span> <span class=n>scalar_mult</span><span class=p>(</span><span class=n>private_key</span><span class=p>,</span> <span class=n>g</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Private key x: </span><span class=si>{</span><span class=n>private_key</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Public key Y: </span><span class=si>{</span><span class=n>public_key</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Plaintext</span>
+</span></span><span class=line><span class=cl>    <span class=n>message</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Plaintext m: </span><span class=si>{</span><span class=n>message</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Encryption</span>
+</span></span><span class=line><span class=cl>    <span class=n>U</span><span class=p>,</span> <span class=n>c</span> <span class=o>=</span> <span class=n>encrypt</span><span class=p>(</span><span class=n>g</span><span class=p>,</span> <span class=n>public_key</span><span class=p>,</span> <span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Ciphertext (U, c): (</span><span class=si>{</span><span class=n>U</span><span class=si>}</span><span class=s2>, </span><span class=si>{</span><span class=n>c</span><span class=si>}</span><span class=s2>)&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1># Decryption</span>
+</span></span><span class=line><span class=cl>    <span class=n>decrypted_message</span> <span class=o>=</span> <span class=n>decrypt</span><span class=p>(</span><span class=n>U</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>private_key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Decrypted message: </span><span class=si>{</span><span class=n>decrypted_message</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="548"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/en/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>[Python]ElGamal cryptography on elliptic curves</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/en/tags/algorithm/ class="badge badge-custom text-decoration-none me-1">Algorithm</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>

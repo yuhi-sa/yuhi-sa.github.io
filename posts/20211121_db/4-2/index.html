@@ -1,379 +1,56 @@
-<!DOCTYPE html>
-<html lang="ja"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="http://localhost:1313/posts/20211121_db/4-2/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="SQLの条件式と集計">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="http://localhost:1313/posts/20211121_db/4-2/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="article:published_time" content="2021-12-09T10:00:23&#43;09:00">
-<meta property="article:modified_time" content="2021-12-09T10:00:23&#43;09:00">
-<meta property="article:tag" content="SQL"><meta property="article:tag" content="データベース">
-
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="SQLの条件式と集計">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>SQLの条件式と集計 | tomato blog</title>
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "SQLの条件式と集計",
-  "description": "",
-  "author": {
-    "@type": "Person",
-    "name": ""
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "tomato blog",
-    
-    "url": "http:\/\/localhost:1313\/"
-  },
-  "datePublished": "2021-12-09T10:00:23\u002b09:00",
-  "dateModified": "2021-12-09T10:00:23\u002b09:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/posts\/20211121_db\/4-2\/"
-  },
-  
-  "url": "http:\/\/localhost:1313\/posts\/20211121_db\/4-2\/",
-  "wordCount":  151 ,
-  "keywords": [
-    "SQL", "データベース"
-  ],
-  "articleSection": "posts"
-}
-</script>
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-  <link rel="stylesheet" href="/css/_variables.css">
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
-  
-  <header role="banner">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  <a class="navbar-brand" href="http://localhost:1313/">tomato blog</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/">Blog</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/tags/">Tags</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/about/">About</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/privacy_policy/">Privacy policy</a>
-  </li>
-
-      <li class="nav-item">
-        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="darkModeIcon"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  <main id="main-content" role="main">
-    
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">SQLの条件式と集計</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-12-09T10:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          December 9, 2021
-        </time>
-        
-        
-        
-        
-        
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/sql/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          SQL
-        </a>
-        
-        <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          データベース
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h1 id="sqlの条件式と集計">SQLの条件式と集計</h1>
-<p>SQLでは、データの検索や集計を行う際に、様々な条件式や句を組み合わせて柔軟なクエリを作成できます。</p>
-<h2 id="条件式">条件式</h2>
-<h3 id="case-式"><code>CASE</code> 式</h3>
-<p><code>CASE</code> 式は、SQLにおける条件分岐の機能を提供します。プログラミング言語の <code>if-else if-else</code> 文や <code>switch</code> 文に似ています。<code>SELECT</code> 句や <code>WHERE</code> 句、<code>ORDER BY</code> 句など、様々な場所で使用できます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CASE</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="err">条件</span><span class="mi">1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="err">結果</span><span class="mi">1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="err">条件</span><span class="mi">2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="err">結果</span><span class="mi">2</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">-- ... 任意の数のWHEN-THEN句
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="err">結果</span><span class="n">N</span><span class="w"> </span><span class="c1">-- どの条件にも合致しない場合のデフォルト値 (省略可能)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">END</span><span class="w">
-</span></span></span></code></pre></div><p><strong>例:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">product_name</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">price</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">CASE</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;高価格帯&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">WHEN</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;中価格帯&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;低価格帯&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">price_category</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">products</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h2 id="集計とグループ化">集計とグループ化</h2>
-<h3 id="group-by-句"><code>GROUP BY</code> 句</h3>
-<p><code>GROUP BY</code> 句は、指定した列の値に基づいて行をグループ化し、各グループに対して集計関数（<code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MAX</code>, <code>MIN</code> など）を適用するために使用します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="p">,</span><span class="w"> </span><span class="err">集計関数</span><span class="p">(</span><span class="err">列名</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">グループ化対象列</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><p><strong>例:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">category</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_products</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">price</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">average_price</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">products</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">category</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><p>このクエリは、<code>products</code> テーブルを <code>category</code> 列でグループ化し、各カテゴリの製品数と平均価格を計算します。</p>
-<h3 id="having-句"><code>HAVING</code> 句</h3>
-<p><code>HAVING</code> 句は、<code>GROUP BY</code> 句でグループ化された結果に対して、さらに条件を適用してフィルタリングを行うために使用します。<code>WHERE</code> 句が個々の行をフィルタリングするのに対し、<code>HAVING</code> 句は<strong>グループ全体</strong>をフィルタリングします。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">列リスト</span><span class="p">,</span><span class="w"> </span><span class="err">集計関数</span><span class="p">(</span><span class="err">列名</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">グループ化対象列</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">HAVING</span><span class="w"> </span><span class="err">グループに対する条件式</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><p><strong>例:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">category</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_products</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">price</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">average_price</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">products</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">category</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">HAVING</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 製品数が5つ以上のカテゴリのみを抽出
-</span></span></span></code></pre></div><p>このクエリは、カテゴリごとの製品数と平均価格を計算し、その中で製品数が5つ以上のカテゴリのみを表示します。</p>
-<h3 id="where-と-having-の違い"><code>WHERE</code> と <code>HAVING</code> の違い</h3>
-<ul>
-<li><code>WHERE</code> 句: <code>GROUP BY</code> の<strong>前</strong>に適用され、個々の行をフィルタリングします。集計関数は使用できません。</li>
-<li><code>HAVING</code> 句: <code>GROUP BY</code> の<strong>後</strong>に適用され、グループ化された結果をフィルタリングします。集計関数を使用できます。</li>
-</ul>
-<p>これらの句を適切に組み合わせることで、複雑なデータ分析やレポート作成を行うことができます。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="151">
-    <meta itemprop="url" content="http://localhost:1313/posts/20211121_db/4-2/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" itemprop="item">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">Home</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/" itemprop="item">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/posts/" itemprop="item">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">SQLの条件式と集計</span>
-        <meta itemprop="position" content="4" />
-      </li>
-  </ol>
-</nav>
-</nav>
-  
-    
-  <div class="mt-3">
-    <h6 class="d-inline-block me-2">Tags:</h6>
-      <a href="/tags/sql/" class="badge badge-custom text-decoration-none me-1">SQL</a>
-      <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/" class="badge badge-custom text-decoration-none me-1">データベース</a>
-  </div>
-
-  </nav>
-</div>
-
-  </main>
-  
-  <footer role="contentinfo">
-    <div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20211121_db/4-2/><meta property="og:type" content="article"><meta property="og:title" content="SQLの条件式と集計"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_db/4-2/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-12-09T10:00:23+09:00"><meta property="article:modified_time" content="2021-12-09T10:00:23+09:00"><meta property="article:tag" content="SQL"><meta property="article:tag" content="データベース"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="SQLの条件式と集計"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>SQLの条件式と集計 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"SQLの条件式と集計","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-12-09T10:00:23\u002b09:00","dateModified":"2021-12-09T10:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/4-2\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/4-2\/","wordCount":151,"keywords":["SQL","データベース"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>SQLの条件式と集計</h1><div class=article-meta><time datetime=2021-12-09T10:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+December 9, 2021
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/sql/ class="badge badge-custom" rel=tag itemprop=keywords>SQL
+</a><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/ class="badge badge-custom" rel=tag itemprop=keywords>データベース</a></div></header><div class=article-content itemprop=articleBody><h1 id=sqlの条件式と集計>SQLの条件式と集計</h1><p>SQLでは、データの検索や集計を行う際に、様々な条件式や句を組み合わせて柔軟なクエリを作成できます。</p><h2 id=条件式>条件式</h2><h3 id=case-式><code>CASE</code> 式</h3><p><code>CASE</code> 式は、SQLにおける条件分岐の機能を提供します。プログラミング言語の <code>if-else if-else</code> 文や <code>switch</code> 文に似ています。<code>SELECT</code> 句や <code>WHERE</code> 句、<code>ORDER BY</code> 句など、様々な場所で使用できます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CASE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>WHEN</span><span class=w> </span><span class=err>条件</span><span class=mi>1</span><span class=w> </span><span class=k>THEN</span><span class=w> </span><span class=err>結果</span><span class=mi>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>WHEN</span><span class=w> </span><span class=err>条件</span><span class=mi>2</span><span class=w> </span><span class=k>THEN</span><span class=w> </span><span class=err>結果</span><span class=mi>2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>-- ... 任意の数のWHEN-THEN句
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>    </span><span class=k>ELSE</span><span class=w> </span><span class=err>結果</span><span class=n>N</span><span class=w> </span><span class=c1>-- どの条件にも合致しない場合のデフォルト値 (省略可能)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>END</span><span class=w>
+</span></span></span></code></pre></div><p><strong>例:</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_name</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>price</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>CASE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>WHEN</span><span class=w> </span><span class=n>price</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>1000</span><span class=w> </span><span class=k>THEN</span><span class=w> </span><span class=s1>&#39;高価格帯&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>WHEN</span><span class=w> </span><span class=n>price</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>500</span><span class=w> </span><span class=k>THEN</span><span class=w> </span><span class=s1>&#39;中価格帯&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>ELSE</span><span class=w> </span><span class=s1>&#39;低価格帯&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>END</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>price_category</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>products</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><h2 id=集計とグループ化>集計とグループ化</h2><h3 id=group-by-句><code>GROUP BY</code> 句</h3><p><code>GROUP BY</code> 句は、指定した列の値に基づいて行をグループ化し、各グループに対して集計関数（<code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MAX</code>, <code>MIN</code> など）を適用するために使用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=p>,</span><span class=w> </span><span class=err>集計関数</span><span class=p>(</span><span class=err>列名</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=err>グループ化対象列</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p><strong>例:</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>category</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>total_products</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AVG</span><span class=p>(</span><span class=n>price</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>average_price</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>products</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>category</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p>このクエリは、<code>products</code> テーブルを <code>category</code> 列でグループ化し、各カテゴリの製品数と平均価格を計算します。</p><h3 id=having-句><code>HAVING</code> 句</h3><p><code>HAVING</code> 句は、<code>GROUP BY</code> 句でグループ化された結果に対して、さらに条件を適用してフィルタリングを行うために使用します。<code>WHERE</code> 句が個々の行をフィルタリングするのに対し、<code>HAVING</code> 句は<strong>グループ全体</strong>をフィルタリングします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w> </span><span class=err>列リスト</span><span class=p>,</span><span class=w> </span><span class=err>集計関数</span><span class=p>(</span><span class=err>列名</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=err>表名</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=err>グループ化対象列</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>HAVING</span><span class=w> </span><span class=err>グループに対する条件式</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></div><p><strong>例:</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>SELECT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>category</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>total_products</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AVG</span><span class=p>(</span><span class=n>price</span><span class=p>)</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=n>average_price</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>products</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>GROUP</span><span class=w> </span><span class=k>BY</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>category</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>HAVING</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>5</span><span class=p>;</span><span class=w> </span><span class=c1>-- 製品数が5つ以上のカテゴリのみを抽出
+</span></span></span></code></pre></div><p>このクエリは、カテゴリごとの製品数と平均価格を計算し、その中で製品数が5つ以上のカテゴリのみを表示します。</p><h3 id=where-と-having-の違い><code>WHERE</code> と <code>HAVING</code> の違い</h3><ul><li><code>WHERE</code> 句: <code>GROUP BY</code> の<strong>前</strong>に適用され、個々の行をフィルタリングします。集計関数は使用できません。</li><li><code>HAVING</code> 句: <code>GROUP BY</code> の<strong>後</strong>に適用され、グループ化された結果をフィルタリングします。集計関数を使用できます。</li></ul><p>これらの句を適切に組み合わせることで、複雑なデータ分析やレポート作成を行うことができます。</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="151"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20211121_db/4-2/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>SQLの条件式と集計</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/sql/ class="badge badge-custom text-decoration-none me-1">SQL</a>
+<a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/ class="badge badge-custom text-decoration-none me-1">データベース</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>

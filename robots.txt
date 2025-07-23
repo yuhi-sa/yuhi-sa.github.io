@@ -4,7 +4,7 @@ Disallow:
 
 
 
-Sitemap: http://localhost:1313/sitemap.xml
+Sitemap: https://yuhi-sa.github.io/sitemap.xml
 
 
 # Block AI crawlers if specified

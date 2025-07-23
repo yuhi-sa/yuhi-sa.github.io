@@ -1,534 +1,177 @@
-<!DOCTYPE html>
-<html lang="ja"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="http://localhost:1313/posts/20210107_pso_tcpso/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="http://localhost:1313/posts/20210107_pso_tcpso/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="article:published_time" content="2021-01-07T15:17:23&#43;09:00">
-<meta property="article:modified_time" content="2021-01-07T15:17:23&#43;09:00">
-<meta property="article:tag" content="群知能"><meta property="article:tag" content="最適化"><meta property="article:tag" content="Matlab">
-
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装 | tomato blog</title>
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装",
-  "description": "",
-  "author": {
-    "@type": "Person",
-    "name": ""
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "tomato blog",
-    
-    "url": "http:\/\/localhost:1313\/"
-  },
-  "datePublished": "2021-01-07T15:17:23\u002b09:00",
-  "dateModified": "2021-01-07T15:17:23\u002b09:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/posts\/20210107_pso_tcpso\/1\/"
-  },
-  
-  "url": "http:\/\/localhost:1313\/posts\/20210107_pso_tcpso\/1\/",
-  "wordCount":  711 ,
-  "keywords": [
-    "群知能", "最適化", "Matlab"
-  ],
-  "articleSection": "posts"
-}
-</script>
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-  <link rel="stylesheet" href="/css/_variables.css">
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
-  
-  <header role="banner">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  <a class="navbar-brand" href="http://localhost:1313/">tomato blog</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/">Blog</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/tags/">Tags</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/about/">About</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/privacy_policy/">Privacy policy</a>
-  </li>
-
-      <li class="nav-item">
-        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="darkModeIcon"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  <main id="main-content" role="main">
-    
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-01-07T15:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          January 7, 2021
-        </time>
-        
-        
-        
-        
-        
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          4 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          群知能
-        </a>
-        
-        <a href="/tags/%E6%9C%80%E9%81%A9%E5%8C%96/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          最適化
-        </a>
-        
-        <a href="/tags/matlab/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Matlab
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h1 id="粒子群最適化psoと協調型psotcpsoの解説とmatlab実装">粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1>
-<h2 id="粒子群最適化-pso-particle-swarm-optimization">粒子群最適化 (PSO: Particle Swarm Optimization)</h2>
-<p>PSOは、鳥や魚の群れの行動を模倣した最適化アルゴリズムです。群れ全体で餌の場所などの情報を共有し、個々の個体が自己の経験と他者の経験に基づいて行動を調整することで、効率的に最適解を探索します。</p>
-<p>PSOでは、「粒子」と呼ばれる探索エージェントが、位置と速度の情報を持って探索空間を飛び回ります。各粒子は、自身の過去最も良かった場所（pbest）と、群れ全体で最も良かった場所（gbest）の情報を頼りに、次の速度と位置を決定します。</p>
-<h3 id="粒子の更新則">粒子の更新則</h3>
-<p>粒子 $i$ の時刻 $t$ における位置を $x_i(t)$、速度を $v_i(t)$ とします。また、粒子 $i$ のこれまでの最良位置を $P_i(t)$、群れ全体の最良位置を $P_G(t)$ とすると、速度と位置は以下の式で更新されます。</p>
-<p>$$ v_i(t+1) = w \cdot v_i(t) + C_1 r_1 (P_i(t) - x_i(t)) + C_2 r_2 (P_G(t) - x_i(t)) $$</p>
-<p>$$ x_i(t+1) = x_i(t) + v_i(t+1) $$</p>
-<ul>
-<li>$w$: 慣性係数。現在の速度をどの程度維持するかを決定します。</li>
-<li>$C_1$: 認知係数。粒子自身の最良位置に向かう度合い。</li>
-<li>$C_2$: 社会的係数。群れ全体の最良位置に向かう度合い。</li>
-<li>$r_1, r_2$: [0, 1] の範囲の一様乱数。探索の多様性を生み出します。</li>
-</ul>
-<p>更新の概念は以下の図のように表せます。</p>
-<p><img src=".././fig1.png" alt="fig1.png"></p>
-<h3 id="psoの課題">PSOの課題</h3>
-<p>PSOは実装が容易である一方、パラメータへの依存性が高く、特に群れ全体の最良位置 $P_G(t)$ に粒子が集中しすぎることで、局所解に陥りやすいという問題があります。探索の<strong>収束速度</strong>と<strong>多様性の維持</strong>のバランスを取ることが重要です。</p>
-<p>以下は、PSOで最適解(0,0)を探索した例です。収束は速いものの、粒子が一点に集中し、局所解に陥っている様子がわかります。</p>
-<ul>
-<li>$t=0$
-<img src=".././fig2.png" alt="pso1.png"></li>
-<li>$t=250$
-<img src=".././fig3.png" alt="pso2.png"></li>
-<li>$t=500$
-<img src=".././fig4.png" alt="pso3.png"></li>
-</ul>
-<hr>
-<h2 id="協調型二群粒子群最適化-tcpso-two-swarm-cooperative-pso">協調型二群粒子群最適化 (TCPSO: Two-swarm Cooperative PSO)</h2>
-<p>TCPSOは、PSOの収束速度と多様性の問題を改善するために提案された手法です。役割の異なる2つの粒子群、すなわち大域的な探索を行う<strong>マスター粒子群</strong>と、集中的な探索を行う<strong>スレーブ粒子群</strong>を用いる点に特徴があります。</p>
-<h3 id="粒子の更新則-1">粒子の更新則</h3>
-<ul>
-<li>
-<p><strong>スレーブ粒子群 (Slave Swarm)</strong>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/><meta property="og:type" content="article"><meta property="og:title" content="粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-01-07T15:17:23+09:00"><meta property="article:modified_time" content="2021-01-07T15:17:23+09:00"><meta property="article:tag" content="群知能"><meta property="article:tag" content="最適化"><meta property="article:tag" content="Matlab"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-01-07T15:17:23\u002b09:00","dateModified":"2021-01-07T15:17:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210107_pso_tcpso\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210107_pso_tcpso\/1\/","wordCount":711,"keywords":["群知能","最適化","Matlab"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1><div class=article-meta><time datetime=2021-01-07T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+January 7, 2021
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+4 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/ class="badge badge-custom" rel=tag itemprop=keywords>群知能
+</a><a href=/tags/%E6%9C%80%E9%81%A9%E5%8C%96/ class="badge badge-custom" rel=tag itemprop=keywords>最適化
+</a><a href=/tags/matlab/ class="badge badge-custom" rel=tag itemprop=keywords>Matlab</a></div></header><div class=article-content itemprop=articleBody><h1 id=粒子群最適化psoと協調型psotcpsoの解説とmatlab実装>粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1><h2 id=粒子群最適化-pso-particle-swarm-optimization>粒子群最適化 (PSO: Particle Swarm Optimization)</h2><p>PSOは、鳥や魚の群れの行動を模倣した最適化アルゴリズムです。群れ全体で餌の場所などの情報を共有し、個々の個体が自己の経験と他者の経験に基づいて行動を調整することで、効率的に最適解を探索します。</p><p>PSOでは、「粒子」と呼ばれる探索エージェントが、位置と速度の情報を持って探索空間を飛び回ります。各粒子は、自身の過去最も良かった場所（pbest）と、群れ全体で最も良かった場所（gbest）の情報を頼りに、次の速度と位置を決定します。</p><h3 id=粒子の更新則>粒子の更新則</h3><p>粒子 $i$ の時刻 $t$ における位置を $x_i(t)$、速度を $v_i(t)$ とします。また、粒子 $i$ のこれまでの最良位置を $P_i(t)$、群れ全体の最良位置を $P_G(t)$ とすると、速度と位置は以下の式で更新されます。</p><p>$$ v_i(t+1) = w \cdot v_i(t) + C_1 r_1 (P_i(t) - x_i(t)) + C_2 r_2 (P_G(t) - x_i(t)) $$</p><p>$$ x_i(t+1) = x_i(t) + v_i(t+1) $$</p><ul><li>$w$: 慣性係数。現在の速度をどの程度維持するかを決定します。</li><li>$C_1$: 認知係数。粒子自身の最良位置に向かう度合い。</li><li>$C_2$: 社会的係数。群れ全体の最良位置に向かう度合い。</li><li>$r_1, r_2$: [0, 1] の範囲の一様乱数。探索の多様性を生み出します。</li></ul><p>更新の概念は以下の図のように表せます。</p><p><img src=.././fig1.png alt=fig1.png></p><h3 id=psoの課題>PSOの課題</h3><p>PSOは実装が容易である一方、パラメータへの依存性が高く、特に群れ全体の最良位置 $P_G(t)$ に粒子が集中しすぎることで、局所解に陥りやすいという問題があります。探索の<strong>収束速度</strong>と<strong>多様性の維持</strong>のバランスを取ることが重要です。</p><p>以下は、PSOで最適解(0,0)を探索した例です。収束は速いものの、粒子が一点に集中し、局所解に陥っている様子がわかります。</p><ul><li>$t=0$
+<img src=.././fig2.png alt=pso1.png></li><li>$t=250$
+<img src=.././fig3.png alt=pso2.png></li><li>$t=500$
+<img src=.././fig4.png alt=pso3.png></li></ul><hr><h2 id=協調型二群粒子群最適化-tcpso-two-swarm-cooperative-pso>協調型二群粒子群最適化 (TCPSO: Two-swarm Cooperative PSO)</h2><p>TCPSOは、PSOの収束速度と多様性の問題を改善するために提案された手法です。役割の異なる2つの粒子群、すなわち大域的な探索を行う<strong>マスター粒子群</strong>と、集中的な探索を行う<strong>スレーブ粒子群</strong>を用いる点に特徴があります。</p><h3 id=粒子の更新則-1>粒子の更新則</h3><ul><li><p><strong>スレーブ粒子群 (Slave Swarm)</strong>
 スレーブ粒子群は、慣性項 $w$ を持たず、群れ全体の最良位置 $P_G(t)$ に強く引き寄せられます。これにより、有望な領域を集中的に探索する役割を担います。
 $$ v_i^S(t+1) = C_1^S r_1 (P_i^S(t) - x_i^S(t)) + C_2^S r_2 (P_G(t) - x_i^S(t)) $$
 $$ x_i^S(t+1) = x_i^S(t) + v_i^S(t+1) $$
-<img src=".././fig5.png" alt="fig2.png"></p>
-</li>
-<li>
-<p><strong>マスター粒子群 (Master Swarm)</strong>
+<img src=.././fig5.png alt=fig2.png></p></li><li><p><strong>マスター粒子群 (Master Swarm)</strong>
 マスター粒子群は、スレーブ粒子群の最良位置 $P_G^S(t)$ の情報も利用します。これにより、スレーブ群が見つけた有望な領域を参考にしつつも、慣性項によって探索の多様性を維持し、大域的な探索を行います。
 $$ v_i^M(t+1) = w^M v_i^M(t) + C_1^M r_1 (P_i^M(t) - x_i^M(t)) + C_2^M r_2 (P_G^S(t) - x_i^M(t)) + C_3^M r_3 (P_G(t) - x_i^M(t)) $$
 $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
-<img src=".././fig6.png" alt="fig3.png"></p>
-</li>
-</ul>
-<h3 id="tcpsoの性質">TCPSOの性質</h3>
-<p>スレーブ群の高速な収束性と、マスター群の多様性維持能力を組み合わせることで、効率的な探索を実現します。しかし、問題が広範囲・高次元になると、マスター群も局所解に収束しやすくなるという課題は残ります。</p>
-<p>以下はTCPSOの実行例です。オレンジがスレーブ粒子群、青がマスター粒子群です。スレーブ群が素早く有望な領域に収束し、マスター群がその周辺を多様性を保ちながら探索している様子がわかります。</p>
-<ul>
-<li>$t=0$
-<img src=".././fig7.png" alt="tcpso1.png"></li>
-<li>$t=250$
-<img src=".././fig8.png" alt="tcpso2.png"></li>
-<li>$t=500$
-<img src=".././fig9.png" alt="tcpso3.png"></li>
-</ul>
-<hr>
-<h2 id="matlabプログラム">Matlabプログラム</h2>
-<h3 id="pso">PSO</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="c">% PSO パラメータ</span>
-</span></span><span class="line"><span class="cl"><span class="n">ns</span> <span class="p">=</span> <span class="mi">300</span><span class="p">;</span>       <span class="c">% 粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span>       <span class="c">% 認知係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">c2</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span>       <span class="c">% 社会的係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">w</span> <span class="p">=</span> <span class="mf">0.9</span><span class="p">;</span>        <span class="c">% 慣性係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">maxT</span> <span class="p">=</span> <span class="mi">500</span><span class="p">;</span>     <span class="c">% 最大繰り返し回数</span>
-</span></span><span class="line"><span class="cl"><span class="n">D</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>          <span class="c">% 問題の次元</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">% STEP1: 初期粒子群の生成</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">;</span> <span class="c">% 位置を[-0.5, 0.5]で初期化</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_v</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>   <span class="c">% 速度を0で初期化</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c">% 評価値</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">ps_best_pos</span> <span class="p">=</span> <span class="n">ps</span><span class="p">;</span>      <span class="c">% 各粒子の最良位置 (pbest)</span>
-</span></span><span class="line"><span class="cl"><span class="n">ps_best_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c">% 各粒子の最良評価値</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">g_best_pos</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="c">% 群全体の最良位置 (gbest)</span>
-</span></span><span class="line"><span class="cl"><span class="n">g_best_fitness</span> <span class="p">=</span> <span class="o">-</span><span class="nb">inf</span><span class="p">;</span>    <span class="c">% 群全体の最良評価値</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">t</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">maxT</span>
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP2: 評価値計算</span>
-</span></span><span class="line"><span class="cl">    <span class="c">% 評価関数: 1 / (abs(x) + abs(y)) (原点に近いほど高評価)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ps_fitness</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">./</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ps</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">);</span> <span class="c">% 0除算を避ける</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP3: 各粒子の最良位置の更新 (pbest)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">update_indices</span> <span class="p">=</span> <span class="n">ps_fitness</span> <span class="o">&gt;</span> <span class="n">ps_best_fitness</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ps_best_pos</span><span class="p">(</span><span class="n">update_indices</span><span class="p">,</span> <span class="p">:)</span> <span class="p">=</span> <span class="n">ps</span><span class="p">(</span><span class="n">update_indices</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ps_best_fitness</span><span class="p">(</span><span class="n">update_indices</span><span class="p">)</span> <span class="p">=</span> <span class="n">ps_fitness</span><span class="p">(</span><span class="n">update_indices</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP4: 全体の最良位置の更新 (gbest)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">current_max_fitness</span><span class="p">,</span> <span class="n">max_idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ps_fitness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">current_max_fitness</span> <span class="o">&gt;</span> <span class="n">g_best_fitness</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_fitness</span> <span class="p">=</span> <span class="n">current_max_fitness</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_pos</span> <span class="p">=</span> <span class="n">ps</span><span class="p">(</span><span class="n">max_idx</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP5: 各粒子の速度と位置を更新</span>
-</span></span><span class="line"><span class="cl">    <span class="n">r1</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">r2</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ps_v</span> <span class="p">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">ps_v</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">r1</span> <span class="o">.*</span> <span class="p">(</span><span class="n">ps_best_pos</span> <span class="o">-</span> <span class="n">ps</span><span class="p">)</span> <span class="o">+</span> <span class="n">c2</span> <span class="o">*</span> <span class="n">r2</span> <span class="o">.*</span> <span class="p">(</span><span class="n">g_best_pos</span> <span class="o">-</span> <span class="n">ps</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ps</span> <span class="p">=</span> <span class="n">ps</span> <span class="o">+</span> <span class="n">ps_v</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% 途中経過のプロット</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">mod</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">ps</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span> <span class="n">ps</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="s">&#39;b.&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">on</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">g_best_pos</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">g_best_pos</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s">&#39;r*&#39;</span><span class="p">,</span> <span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">off</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">title</span><span class="p">([</span><span class="s">&#39;PSO at Iteration: &#39;</span><span class="p">,</span> <span class="n">num2str</span><span class="p">(</span><span class="n">t</span><span class="p">)]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">drawnow</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div><h3 id="tcpso">TCPSO</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-matlab" data-lang="matlab"><span class="line"><span class="cl"><span class="c">% TCPSO パラメータ</span>
-</span></span><span class="line"><span class="cl"><span class="n">ns</span> <span class="p">=</span> <span class="mi">150</span><span class="p">;</span> <span class="c">% スレーブ粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">nm</span> <span class="p">=</span> <span class="mi">150</span><span class="p">;</span> <span class="c">% マスター粒子数</span>
-</span></span><span class="line"><span class="cl"><span class="n">w</span> <span class="p">=</span> <span class="mf">0.9</span><span class="p">;</span>  <span class="c">% マスター群の慣性係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1s</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">c2s</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="c">% スレーブ群の係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">c1m</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">c2m</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="n">c3m</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span> <span class="c">% マスター群の係数</span>
-</span></span><span class="line"><span class="cl"><span class="n">maxT</span> <span class="p">=</span> <span class="mi">500</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">D</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">% STEP1: 初期粒子群の生成</span>
-</span></span><span class="line"><span class="cl"><span class="c">% スレーブ群</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp_v</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp_best_pos</span> <span class="p">=</span> <span class="n">sp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">sp_best_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">s_gbest_pos</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="c">% スレーブ群のgbest</span>
-</span></span><span class="line"><span class="cl"><span class="n">s_gbest_fitness</span> <span class="p">=</span> <span class="o">-</span><span class="nb">inf</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">% マスター群</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp_v</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp_best_pos</span> <span class="p">=</span> <span class="n">mp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">mp_best_fitness</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">% 全体</span>
-</span></span><span class="line"><span class="cl"><span class="n">g_best_pos</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="c">% 全体のgbest</span>
-</span></span><span class="line"><span class="cl"><span class="n">g_best_fitness</span> <span class="p">=</span> <span class="o">-</span><span class="nb">inf</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">figure</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">t</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">maxT</span>
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP2: 評価値計算</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sp_fitness</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">./</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sp</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mp_fitness</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">./</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">mp</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP3: 各粒子の最良位置の更新 (pbest)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">update_s</span> <span class="p">=</span> <span class="n">sp_fitness</span> <span class="o">&gt;</span> <span class="n">sp_best_fitness</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sp_best_pos</span><span class="p">(</span><span class="n">update_s</span><span class="p">,</span> <span class="p">:)</span> <span class="p">=</span> <span class="n">sp</span><span class="p">(</span><span class="n">update_s</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sp_best_fitness</span><span class="p">(</span><span class="n">update_s</span><span class="p">)</span> <span class="p">=</span> <span class="n">sp_fitness</span><span class="p">(</span><span class="n">update_s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">update_m</span> <span class="p">=</span> <span class="n">mp_fitness</span> <span class="o">&gt;</span> <span class="n">mp_best_fitness</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mp_best_pos</span><span class="p">(</span><span class="n">update_m</span><span class="p">,</span> <span class="p">:)</span> <span class="p">=</span> <span class="n">mp</span><span class="p">(</span><span class="n">update_m</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mp_best_fitness</span><span class="p">(</span><span class="n">update_m</span><span class="p">)</span> <span class="p">=</span> <span class="n">mp_fitness</span><span class="p">(</span><span class="n">update_m</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP4: 全体の最良位置の更新</span>
-</span></span><span class="line"><span class="cl">    <span class="c">% スレーブ群のgbest</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">s_current_max</span><span class="p">,</span> <span class="n">s_max_idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">sp_fitness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">s_current_max</span> <span class="o">&gt;</span> <span class="n">s_gbest_fitness</span>
-</span></span><span class="line"><span class="cl">        <span class="n">s_gbest_fitness</span> <span class="p">=</span> <span class="n">s_current_max</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">s_gbest_pos</span> <span class="p">=</span> <span class="n">sp</span><span class="p">(</span><span class="n">s_max_idx</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% 全体のgbest</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">m_current_max</span><span class="p">,</span> <span class="n">m_max_idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mp_fitness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">m_current_max</span> <span class="o">&gt;</span> <span class="n">g_best_fitness</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_fitness</span> <span class="p">=</span> <span class="n">m_current_max</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_pos</span> <span class="p">=</span> <span class="n">mp</span><span class="p">(</span><span class="n">m_max_idx</span><span class="p">,</span> <span class="p">:);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">s_gbest_fitness</span> <span class="o">&gt;</span> <span class="n">g_best_fitness</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_fitness</span> <span class="p">=</span> <span class="n">s_gbest_fitness</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_best_pos</span> <span class="p">=</span> <span class="n">s_gbest_pos</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% STEP5: 各粒子の速度と位置を更新</span>
-</span></span><span class="line"><span class="cl">    <span class="c">% スレーブ群</span>
-</span></span><span class="line"><span class="cl">    <span class="n">r1s</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="n">r2s</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sp_v</span> <span class="p">=</span> <span class="n">c1s</span> <span class="o">*</span> <span class="n">r1s</span> <span class="o">.*</span> <span class="p">(</span><span class="n">sp_best_pos</span> <span class="o">-</span> <span class="n">sp</span><span class="p">)</span> <span class="o">+</span> <span class="n">c2s</span> <span class="o">*</span> <span class="n">r2s</span> <span class="o">.*</span> <span class="p">(</span><span class="n">g_best_pos</span> <span class="o">-</span> <span class="n">sp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sp</span> <span class="p">=</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">sp_v</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% マスター群</span>
-</span></span><span class="line"><span class="cl">    <span class="n">r1m</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="n">r2m</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span> <span class="n">r3m</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">D</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mp_v</span> <span class="p">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">mp_v</span> <span class="o">+</span> <span class="n">c1m</span> <span class="o">*</span> <span class="n">r1m</span> <span class="o">.*</span> <span class="p">(</span><span class="n">mp_best_pos</span> <span class="o">-</span> <span class="n">mp</span><span class="p">)</span> <span class="o">+</span> <span class="n">c2m</span> <span class="o">*</span> <span class="n">r2m</span> <span class="o">.*</span> <span class="p">(</span><span class="n">s_gbest_pos</span> <span class="o">-</span> <span class="n">mp</span><span class="p">)</span> <span class="o">+</span> <span class="n">c3m</span> <span class="o">*</span> <span class="n">r3m</span> <span class="o">.*</span> <span class="p">(</span><span class="n">g_best_pos</span> <span class="o">-</span> <span class="n">mp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mp</span> <span class="p">=</span> <span class="n">mp</span> <span class="o">+</span> <span class="n">mp_v</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">% 途中経過のプロット</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">mod</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span> <span class="n">sp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="s">&#39;b.&#39;</span><span class="p">);</span> <span class="c">% スレーブ</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">on</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">mp</span><span class="p">(:,</span><span class="mi">1</span><span class="p">),</span> <span class="n">mp</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span> <span class="s">&#39;g.&#39;</span><span class="p">);</span> <span class="c">% マスター</span>
-</span></span><span class="line"><span class="cl">        <span class="n">plot</span><span class="p">(</span><span class="n">g_best_pos</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">g_best_pos</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s">&#39;r*&#39;</span><span class="p">,</span> <span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">hold</span> <span class="n">off</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span> <span class="mf">0.5</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">title</span><span class="p">([</span><span class="s">&#39;TCPSO at Iteration: &#39;</span><span class="p">,</span> <span class="n">num2str</span><span class="p">(</span><span class="n">t</span><span class="p">)]);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">legend</span><span class="p">(</span><span class="s">&#39;Slave&#39;</span><span class="p">,</span> <span class="s">&#39;Master&#39;</span><span class="p">,</span> <span class="s">&#39;Gbest&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">drawnow</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">end</span>
-</span></span><span class="line"><span class="cl"><span class="k">end</span>
-</span></span></code></pre></div>
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="711">
-    <meta itemprop="url" content="http://localhost:1313/posts/20210107_pso_tcpso/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" itemprop="item">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">Home</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/" itemprop="item">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/posts/" itemprop="item">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</span>
-        <meta itemprop="position" content="4" />
-      </li>
-  </ol>
-</nav>
-</nav>
-  
-    
-  <div class="mt-3">
-    <h6 class="d-inline-block me-2">Tags:</h6>
-      <a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/" class="badge badge-custom text-decoration-none me-1">群知能</a>
-      <a href="/tags/%E6%9C%80%E9%81%A9%E5%8C%96/" class="badge badge-custom text-decoration-none me-1">最適化</a>
-      <a href="/tags/matlab/" class="badge badge-custom text-decoration-none me-1">Matlab</a>
-  </div>
-
-  </nav>
-</div>
-
-  </main>
-  
-  <footer role="contentinfo">
-    <div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-</body>
-
-</html>
+<img src=.././fig6.png alt=fig3.png></p></li></ul><h3 id=tcpsoの性質>TCPSOの性質</h3><p>スレーブ群の高速な収束性と、マスター群の多様性維持能力を組み合わせることで、効率的な探索を実現します。しかし、問題が広範囲・高次元になると、マスター群も局所解に収束しやすくなるという課題は残ります。</p><p>以下はTCPSOの実行例です。オレンジがスレーブ粒子群、青がマスター粒子群です。スレーブ群が素早く有望な領域に収束し、マスター群がその周辺を多様性を保ちながら探索している様子がわかります。</p><ul><li>$t=0$
+<img src=.././fig7.png alt=tcpso1.png></li><li>$t=250$
+<img src=.././fig8.png alt=tcpso2.png></li><li>$t=500$
+<img src=.././fig9.png alt=tcpso3.png></li></ul><hr><h2 id=matlabプログラム>Matlabプログラム</h2><h3 id=pso>PSO</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>% PSO パラメータ</span>
+</span></span><span class=line><span class=cl><span class=n>ns</span> <span class=p>=</span> <span class=mi>300</span><span class=p>;</span>       <span class=c>% 粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>c1</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span>       <span class=c>% 認知係数</span>
+</span></span><span class=line><span class=cl><span class=n>c2</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span>       <span class=c>% 社会的係数</span>
+</span></span><span class=line><span class=cl><span class=n>w</span> <span class=p>=</span> <span class=mf>0.9</span><span class=p>;</span>        <span class=c>% 慣性係数</span>
+</span></span><span class=line><span class=cl><span class=n>maxT</span> <span class=p>=</span> <span class=mi>500</span><span class=p>;</span>     <span class=c>% 最大繰り返し回数</span>
+</span></span><span class=line><span class=cl><span class=n>D</span> <span class=p>=</span> <span class=mi>2</span><span class=p>;</span>          <span class=c>% 問題の次元</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>% STEP1: 初期粒子群の生成</span>
+</span></span><span class=line><span class=cl><span class=n>ps</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>)</span> <span class=o>-</span> <span class=mf>0.5</span><span class=p>;</span> <span class=c>% 位置を[-0.5, 0.5]で初期化</span>
+</span></span><span class=line><span class=cl><span class=n>ps_v</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>   <span class=c>% 速度を0で初期化</span>
+</span></span><span class=line><span class=cl><span class=n>ps_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span> <span class=c>% 評価値</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ps_best_pos</span> <span class=p>=</span> <span class=n>ps</span><span class=p>;</span>      <span class=c>% 各粒子の最良位置 (pbest)</span>
+</span></span><span class=line><span class=cl><span class=n>ps_best_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span> <span class=c>% 各粒子の最良評価値</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>g_best_pos</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=c>% 群全体の最良位置 (gbest)</span>
+</span></span><span class=line><span class=cl><span class=n>g_best_fitness</span> <span class=p>=</span> <span class=o>-</span><span class=nb>inf</span><span class=p>;</span>    <span class=c>% 群全体の最良評価値</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>t</span> <span class=p>=</span> <span class=mi>1</span><span class=p>:</span><span class=n>maxT</span>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP2: 評価値計算</span>
+</span></span><span class=line><span class=cl>    <span class=c>% 評価関数: 1 / (abs(x) + abs(y)) (原点に近いほど高評価)</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_fitness</span> <span class=p>=</span> <span class=mi>1</span> <span class=o>./</span> <span class=p>(</span><span class=n>sum</span><span class=p>(</span><span class=nb>abs</span><span class=p>(</span><span class=n>ps</span><span class=p>),</span> <span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=mf>1e-9</span><span class=p>);</span> <span class=c>% 0除算を避ける</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP3: 各粒子の最良位置の更新 (pbest)</span>
+</span></span><span class=line><span class=cl>    <span class=n>update_indices</span> <span class=p>=</span> <span class=n>ps_fitness</span> <span class=o>&gt;</span> <span class=n>ps_best_fitness</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_best_pos</span><span class=p>(</span><span class=n>update_indices</span><span class=p>,</span> <span class=p>:)</span> <span class=p>=</span> <span class=n>ps</span><span class=p>(</span><span class=n>update_indices</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_best_fitness</span><span class=p>(</span><span class=n>update_indices</span><span class=p>)</span> <span class=p>=</span> <span class=n>ps_fitness</span><span class=p>(</span><span class=n>update_indices</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP4: 全体の最良位置の更新 (gbest)</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=n>current_max_fitness</span><span class=p>,</span> <span class=n>max_idx</span><span class=p>]</span> <span class=p>=</span> <span class=n>max</span><span class=p>(</span><span class=n>ps_fitness</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>current_max_fitness</span> <span class=o>&gt;</span> <span class=n>g_best_fitness</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_fitness</span> <span class=p>=</span> <span class=n>current_max_fitness</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_pos</span> <span class=p>=</span> <span class=n>ps</span><span class=p>(</span><span class=n>max_idx</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP5: 各粒子の速度と位置を更新</span>
+</span></span><span class=line><span class=cl>    <span class=n>r1</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>r2</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_v</span> <span class=p>=</span> <span class=n>w</span> <span class=o>*</span> <span class=n>ps_v</span> <span class=o>+</span> <span class=n>c1</span> <span class=o>*</span> <span class=n>r1</span> <span class=o>.*</span> <span class=p>(</span><span class=n>ps_best_pos</span> <span class=o>-</span> <span class=n>ps</span><span class=p>)</span> <span class=o>+</span> <span class=n>c2</span> <span class=o>*</span> <span class=n>r2</span> <span class=o>.*</span> <span class=p>(</span><span class=n>g_best_pos</span> <span class=o>-</span> <span class=n>ps</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps</span> <span class=p>=</span> <span class=n>ps</span> <span class=o>+</span> <span class=n>ps_v</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% 途中経過のプロット</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>mod</span><span class=p>(</span><span class=n>t</span><span class=p>,</span> <span class=mi>50</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span> <span class=o>||</span> <span class=n>t</span> <span class=o>==</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>ps</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span> <span class=n>ps</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span> <span class=s>&#39;b.&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>g_best_pos</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span> <span class=n>g_best_pos</span><span class=p>(</span><span class=mi>2</span><span class=p>),</span> <span class=s>&#39;r*&#39;</span><span class=p>,</span> <span class=s>&#39;MarkerSize&#39;</span><span class=p>,</span> <span class=mi>10</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>off</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>title</span><span class=p>([</span><span class=s>&#39;PSO at Iteration: &#39;</span><span class=p>,</span> <span class=n>num2str</span><span class=p>(</span><span class=n>t</span><span class=p>)]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>drawnow</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></div><h3 id=tcpso>TCPSO</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-matlab data-lang=matlab><span class=line><span class=cl><span class=c>% TCPSO パラメータ</span>
+</span></span><span class=line><span class=cl><span class=n>ns</span> <span class=p>=</span> <span class=mi>150</span><span class=p>;</span> <span class=c>% スレーブ粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>nm</span> <span class=p>=</span> <span class=mi>150</span><span class=p>;</span> <span class=c>% マスター粒子数</span>
+</span></span><span class=line><span class=cl><span class=n>w</span> <span class=p>=</span> <span class=mf>0.9</span><span class=p>;</span>  <span class=c>% マスター群の慣性係数</span>
+</span></span><span class=line><span class=cl><span class=n>c1s</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span> <span class=n>c2s</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span> <span class=c>% スレーブ群の係数</span>
+</span></span><span class=line><span class=cl><span class=n>c1m</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span> <span class=n>c2m</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span> <span class=n>c3m</span> <span class=p>=</span> <span class=mf>1.0</span><span class=p>;</span> <span class=c>% マスター群の係数</span>
+</span></span><span class=line><span class=cl><span class=n>maxT</span> <span class=p>=</span> <span class=mi>500</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>D</span> <span class=p>=</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>% STEP1: 初期粒子群の生成</span>
+</span></span><span class=line><span class=cl><span class=c>% スレーブ群</span>
+</span></span><span class=line><span class=cl><span class=n>sp</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>)</span> <span class=o>-</span> <span class=mf>0.5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>sp_v</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>sp_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>sp_best_pos</span> <span class=p>=</span> <span class=n>sp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>sp_best_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>s_gbest_pos</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=c>% スレーブ群のgbest</span>
+</span></span><span class=line><span class=cl><span class=n>s_gbest_fitness</span> <span class=p>=</span> <span class=o>-</span><span class=nb>inf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>% マスター群</span>
+</span></span><span class=line><span class=cl><span class=n>mp</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=n>D</span><span class=p>)</span> <span class=o>-</span> <span class=mf>0.5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>mp_v</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>mp_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=n>mp_best_pos</span> <span class=p>=</span> <span class=n>mp</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=n>mp_best_fitness</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>% 全体</span>
+</span></span><span class=line><span class=cl><span class=n>g_best_pos</span> <span class=p>=</span> <span class=nb>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=c>% 全体のgbest</span>
+</span></span><span class=line><span class=cl><span class=n>g_best_fitness</span> <span class=p>=</span> <span class=o>-</span><span class=nb>inf</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>figure</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>t</span> <span class=p>=</span> <span class=mi>1</span><span class=p>:</span><span class=n>maxT</span>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP2: 評価値計算</span>
+</span></span><span class=line><span class=cl>    <span class=n>sp_fitness</span> <span class=p>=</span> <span class=mi>1</span> <span class=o>./</span> <span class=p>(</span><span class=n>sum</span><span class=p>(</span><span class=nb>abs</span><span class=p>(</span><span class=n>sp</span><span class=p>),</span> <span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=mf>1e-9</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>mp_fitness</span> <span class=p>=</span> <span class=mi>1</span> <span class=o>./</span> <span class=p>(</span><span class=n>sum</span><span class=p>(</span><span class=nb>abs</span><span class=p>(</span><span class=n>mp</span><span class=p>),</span> <span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=mf>1e-9</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP3: 各粒子の最良位置の更新 (pbest)</span>
+</span></span><span class=line><span class=cl>    <span class=n>update_s</span> <span class=p>=</span> <span class=n>sp_fitness</span> <span class=o>&gt;</span> <span class=n>sp_best_fitness</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>sp_best_pos</span><span class=p>(</span><span class=n>update_s</span><span class=p>,</span> <span class=p>:)</span> <span class=p>=</span> <span class=n>sp</span><span class=p>(</span><span class=n>update_s</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=n>sp_best_fitness</span><span class=p>(</span><span class=n>update_s</span><span class=p>)</span> <span class=p>=</span> <span class=n>sp_fitness</span><span class=p>(</span><span class=n>update_s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>update_m</span> <span class=p>=</span> <span class=n>mp_fitness</span> <span class=o>&gt;</span> <span class=n>mp_best_fitness</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>mp_best_pos</span><span class=p>(</span><span class=n>update_m</span><span class=p>,</span> <span class=p>:)</span> <span class=p>=</span> <span class=n>mp</span><span class=p>(</span><span class=n>update_m</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=n>mp_best_fitness</span><span class=p>(</span><span class=n>update_m</span><span class=p>)</span> <span class=p>=</span> <span class=n>mp_fitness</span><span class=p>(</span><span class=n>update_m</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP4: 全体の最良位置の更新</span>
+</span></span><span class=line><span class=cl>    <span class=c>% スレーブ群のgbest</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=n>s_current_max</span><span class=p>,</span> <span class=n>s_max_idx</span><span class=p>]</span> <span class=p>=</span> <span class=n>max</span><span class=p>(</span><span class=n>sp_fitness</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>s_current_max</span> <span class=o>&gt;</span> <span class=n>s_gbest_fitness</span>
+</span></span><span class=line><span class=cl>        <span class=n>s_gbest_fitness</span> <span class=p>=</span> <span class=n>s_current_max</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>s_gbest_pos</span> <span class=p>=</span> <span class=n>sp</span><span class=p>(</span><span class=n>s_max_idx</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% 全体のgbest</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=n>m_current_max</span><span class=p>,</span> <span class=n>m_max_idx</span><span class=p>]</span> <span class=p>=</span> <span class=n>max</span><span class=p>(</span><span class=n>mp_fitness</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>m_current_max</span> <span class=o>&gt;</span> <span class=n>g_best_fitness</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_fitness</span> <span class=p>=</span> <span class=n>m_current_max</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_pos</span> <span class=p>=</span> <span class=n>mp</span><span class=p>(</span><span class=n>m_max_idx</span><span class=p>,</span> <span class=p>:);</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>s_gbest_fitness</span> <span class=o>&gt;</span> <span class=n>g_best_fitness</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_fitness</span> <span class=p>=</span> <span class=n>s_gbest_fitness</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>g_best_pos</span> <span class=p>=</span> <span class=n>s_gbest_pos</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% STEP5: 各粒子の速度と位置を更新</span>
+</span></span><span class=line><span class=cl>    <span class=c>% スレーブ群</span>
+</span></span><span class=line><span class=cl>    <span class=n>r1s</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=n>r2s</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>ns</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>sp_v</span> <span class=p>=</span> <span class=n>c1s</span> <span class=o>*</span> <span class=n>r1s</span> <span class=o>.*</span> <span class=p>(</span><span class=n>sp_best_pos</span> <span class=o>-</span> <span class=n>sp</span><span class=p>)</span> <span class=o>+</span> <span class=n>c2s</span> <span class=o>*</span> <span class=n>r2s</span> <span class=o>.*</span> <span class=p>(</span><span class=n>g_best_pos</span> <span class=o>-</span> <span class=n>sp</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>sp</span> <span class=p>=</span> <span class=n>sp</span> <span class=o>+</span> <span class=n>sp_v</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% マスター群</span>
+</span></span><span class=line><span class=cl>    <span class=n>r1m</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=n>r2m</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span> <span class=n>r3m</span> <span class=p>=</span> <span class=nb>rand</span><span class=p>(</span><span class=n>nm</span><span class=p>,</span> <span class=n>D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>mp_v</span> <span class=p>=</span> <span class=n>w</span> <span class=o>*</span> <span class=n>mp_v</span> <span class=o>+</span> <span class=n>c1m</span> <span class=o>*</span> <span class=n>r1m</span> <span class=o>.*</span> <span class=p>(</span><span class=n>mp_best_pos</span> <span class=o>-</span> <span class=n>mp</span><span class=p>)</span> <span class=o>+</span> <span class=n>c2m</span> <span class=o>*</span> <span class=n>r2m</span> <span class=o>.*</span> <span class=p>(</span><span class=n>s_gbest_pos</span> <span class=o>-</span> <span class=n>mp</span><span class=p>)</span> <span class=o>+</span> <span class=n>c3m</span> <span class=o>*</span> <span class=n>r3m</span> <span class=o>.*</span> <span class=p>(</span><span class=n>g_best_pos</span> <span class=o>-</span> <span class=n>mp</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>mp</span> <span class=p>=</span> <span class=n>mp</span> <span class=o>+</span> <span class=n>mp_v</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c>% 途中経過のプロット</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>mod</span><span class=p>(</span><span class=n>t</span><span class=p>,</span> <span class=mi>50</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span> <span class=o>||</span> <span class=n>t</span> <span class=o>==</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>sp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span> <span class=n>sp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span> <span class=s>&#39;b.&#39;</span><span class=p>);</span> <span class=c>% スレーブ</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>on</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>mp</span><span class=p>(:,</span><span class=mi>1</span><span class=p>),</span> <span class=n>mp</span><span class=p>(:,</span><span class=mi>2</span><span class=p>),</span> <span class=s>&#39;g.&#39;</span><span class=p>);</span> <span class=c>% マスター</span>
+</span></span><span class=line><span class=cl>        <span class=n>plot</span><span class=p>(</span><span class=n>g_best_pos</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span> <span class=n>g_best_pos</span><span class=p>(</span><span class=mi>2</span><span class=p>),</span> <span class=s>&#39;r*&#39;</span><span class=p>,</span> <span class=s>&#39;MarkerSize&#39;</span><span class=p>,</span> <span class=mi>10</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>hold</span> <span class=n>off</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>xlim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>ylim</span><span class=p>([</span><span class=o>-</span><span class=mf>0.5</span> <span class=mf>0.5</span><span class=p>]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>title</span><span class=p>([</span><span class=s>&#39;TCPSO at Iteration: &#39;</span><span class=p>,</span> <span class=n>num2str</span><span class=p>(</span><span class=n>t</span><span class=p>)]);</span>
+</span></span><span class=line><span class=cl>        <span class=n>legend</span><span class=p>(</span><span class=s>&#39;Slave&#39;</span><span class=p>,</span> <span class=s>&#39;Master&#39;</span><span class=p>,</span> <span class=s>&#39;Gbest&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>drawnow</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>end</span>
+</span></span><span class=line><span class=cl><span class=k>end</span>
+</span></span></code></pre></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="711"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/ class="badge badge-custom text-decoration-none me-1">群知能</a>
+<a href=/tags/%E6%9C%80%E9%81%A9%E5%8C%96/ class="badge badge-custom text-decoration-none me-1">最適化</a>
+<a href=/tags/matlab/ class="badge badge-custom text-decoration-none me-1">Matlab</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>

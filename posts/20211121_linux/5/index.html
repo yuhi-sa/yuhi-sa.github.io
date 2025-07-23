@@ -1,404 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="http://localhost:1313/posts/20211121_linux/5/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="公開鍵認証方式を用いたSSH通信の設定方法">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="http://localhost:1313/posts/20211121_linux/5/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="article:published_time" content="2021-12-03T10:00:23&#43;09:00">
-<meta property="article:modified_time" content="2021-12-03T10:00:23&#43;09:00">
-<meta property="article:tag" content="Linux"><meta property="article:tag" content="SSH"><meta property="article:tag" content="セキュリティ">
-
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="公開鍵認証方式を用いたSSH通信の設定方法">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>公開鍵認証方式を用いたSSH通信の設定方法 | tomato blog</title>
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "公開鍵認証方式を用いたSSH通信の設定方法",
-  "description": "",
-  "author": {
-    "@type": "Person",
-    "name": ""
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "tomato blog",
-    
-    "url": "http:\/\/localhost:1313\/"
-  },
-  "datePublished": "2021-12-03T10:00:23\u002b09:00",
-  "dateModified": "2021-12-03T10:00:23\u002b09:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/posts\/20211121_linux\/5\/"
-  },
-  
-  "url": "http:\/\/localhost:1313\/posts\/20211121_linux\/5\/",
-  "wordCount":  200 ,
-  "keywords": [
-    "Linux", "SSH", "セキュリティ"
-  ],
-  "articleSection": "posts"
-}
-</script>
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-  <link rel="stylesheet" href="/css/_variables.css">
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
-  
-  <header role="banner">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  <a class="navbar-brand" href="http://localhost:1313/">tomato blog</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/">Blog</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/tags/">Tags</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/about/">About</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/privacy_policy/">Privacy policy</a>
-  </li>
-
-      <li class="nav-item">
-        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="darkModeIcon"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  <main id="main-content" role="main">
-    
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">公開鍵認証方式を用いたSSH通信の設定方法</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-12-03T10:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          December 3, 2021
-        </time>
-        
-        
-        
-        
-        
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/linux/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Linux
-        </a>
-        
-        <a href="/tags/ssh/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          SSH
-        </a>
-        
-        <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          セキュリティ
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h1 id="公開鍵認証方式を用いたssh通信の設定方法">公開鍵認証方式を用いたSSH通信の設定方法</h1>
-<p>SSH（Secure Shell）は、ネットワークを介して安全にリモートサーバーに接続するためのプロトコルです。パスワード認証に比べて、公開鍵認証方式はセキュリティが高く、自動化にも適しています。</p>
-<h2 id="1-sshサーバーの設定変更-接続先pc">1. SSHサーバーの設定変更 [接続先PC]</h2>
-<p>SSHサーバー（<code>sshd</code>）の設定ファイル <code>/etc/ssh/sshd_config</code> を編集し、公開鍵認証を有効化し、パスワード認証を無効化します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/ssh/sshd_config
-</span></span></code></pre></div><p>以下の行を探し、設定を変更または追加します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 公開鍵認証を有効化
-</span></span><span class="line"><span class="cl">PubkeyAuthentication yes
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># パスワード認証を無効化 (セキュリティ向上のため強く推奨)
-</span></span><span class="line"><span class="cl">PasswordAuthentication no
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># rootユーザーでの直接ログインを禁止 (セキュリティ向上のため強く推奨)
-</span></span><span class="line"><span class="cl">PermitRootLogin no
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># SSHポートの変更 (オプション、デフォルトは22)
-</span></span><span class="line"><span class="cl"># Port 2222
-</span></span></code></pre></div><p>変更を保存したら、SSHサービスを再起動して設定を適用します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart sshd
-</span></span></code></pre></div><h2 id="2-秘密鍵と公開鍵の作成-接続元pc">2. 秘密鍵と公開鍵の作成 [接続元PC]</h2>
-<p>SSH接続を行うクライアントPCで、SSHキーペア（秘密鍵と公開鍵）を生成します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&#34;your_email@example.com&#34;</span>
-</span></span></code></pre></div><ul>
-<li><code>-t rsa</code>: RSA方式で鍵を生成します。より新しい <code>ed25519</code> も推奨されます。</li>
-<li><code>-b 4096</code>: RSA鍵のビット長を指定します（より安全）。</li>
-<li><code>-C &quot;your_email@example.com&quot;</code>: 鍵にコメントを追加します（メールアドレスなど）。</li>
-</ul>
-<p>コマンドを実行すると、鍵の保存場所とパスフレーズの入力を求められます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Generating public/private rsa key pair.
-</span></span><span class="line"><span class="cl">Enter file in which to save the key (/home/user/.ssh/id_rsa): # デフォルトでEnter (通常は変更不要)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Enter passphrase (empty for no passphrase): # パスフレーズを入力 (セキュリティのため推奨)
-</span></span><span class="line"><span class="cl">Enter same passphrase again: # パスフレーズを再入力
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Your identification has been saved in /home/user/.ssh/id_rsa.
-</span></span><span class="line"><span class="cl">Your public key has been saved in /home/user/.ssh/id_rsa.pub.
-</span></span></code></pre></div><ul>
-<li><strong>パスフレーズ</strong>: 秘密鍵を保護するためのパスワードです。設定すると、SSH接続時にこのパスフレーズの入力が必要になります。セキュリティのため、設定を強く推奨します。</li>
-</ul>
-<p>生成されるファイル:</p>
-<ul>
-<li><code>id_rsa</code>: <strong>秘密鍵</strong>。絶対に他人に知られてはいけません。</li>
-<li><code>id_rsa.pub</code>: <strong>公開鍵</strong>。サーバーに登録します。</li>
-</ul>
-<h2 id="3-公開鍵の登録-接続先pc">3. 公開鍵の登録 [接続先PC]</h2>
-<p>接続先のサーバーに、生成した公開鍵を登録します。</p>
-<h3 id="ssh-ディレクトリの作成と権限設定"><code>.ssh</code> ディレクトリの作成と権限設定</h3>
-<p>接続先のユーザーのホームディレクトリに <code>.ssh</code> ディレクトリが存在しない場合は作成し、適切な権限を設定します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ユーザーのホームディレクトリに移動</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /home/<span class="o">[</span>ユーザー名<span class="o">]</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># .ssh ディレクトリを作成</span>
-</span></span><span class="line"><span class="cl">mkdir .ssh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># .ssh ディレクトリの所有者をユーザー自身に設定</span>
-</span></span><span class="line"><span class="cl">sudo chown <span class="o">[</span>ユーザー名<span class="o">]</span>:<span class="o">[</span>ユーザーのグループ名<span class="o">]</span> .ssh
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># .ssh ディレクトリのパーミッションを700に設定 (所有者のみ読み書き実行可能)</span>
-</span></span><span class="line"><span class="cl">chmod <span class="m">700</span> .ssh
-</span></span></code></pre></div><h3 id="authorized_keys-ファイルの作成と公開鍵の登録"><code>authorized_keys</code> ファイルの作成と公開鍵の登録</h3>
-<p><code>.ssh</code> ディレクトリ内に <code>authorized_keys</code> ファイルを作成し、その中に公開鍵の内容を貼り付けます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># authorized_keys ファイルを作成</span>
-</span></span><span class="line"><span class="cl">touch .ssh/authorized_keys
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># authorized_keys ファイルのパーミッションを600に設定 (所有者のみ読み書き可能)</span>
-</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> .ssh/authorized_keys
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 公開鍵の内容を authorized_keys に追加</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 接続元PCからscpなどで公開鍵を転送するか、手動でコピー＆ペースト</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 例: scp ~/.ssh/id_rsa.pub user@remote_host:~/.ssh/id_rsa.pub</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># その後、リモートホストで</span>
-</span></span><span class="line"><span class="cl">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
-</span></span></code></pre></div><p><strong>注意</strong>: <code>authorized_keys</code> ファイルには、1行に1つの公開鍵を記述します。</p>
-<h2 id="4-ssh接続-接続元pc">4. SSH接続 [接続元PC]</h2>
-<p>これで、公開鍵認証方式でSSH接続ができるようになります。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh <span class="o">[</span>ユーザー名<span class="o">]</span>@<span class="o">[</span>IPアドレスまたはホスト名<span class="o">]</span>
-</span></span></code></pre></div><p>パスフレーズを設定している場合は、ここでパスフレーズの入力を求められます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Enter passphrase for key &#39;/Users/[ユーザー名]/.ssh/id_rsa&#39;: # パスフレーズを入力
-</span></span></code></pre></div><p>正しく設定されていれば、パスワードなしでリモートサーバーにログインできます。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="200">
-    <meta itemprop="url" content="http://localhost:1313/posts/20211121_linux/5/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" itemprop="item">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">Home</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/" itemprop="item">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/posts/" itemprop="item">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">公開鍵認証方式を用いたSSH通信の設定方法</span>
-        <meta itemprop="position" content="4" />
-      </li>
-  </ol>
-</nav>
-</nav>
-  
-    
-  <div class="mt-3">
-    <h6 class="d-inline-block me-2">Tags:</h6>
-      <a href="/tags/linux/" class="badge badge-custom text-decoration-none me-1">Linux</a>
-      <a href="/tags/ssh/" class="badge badge-custom text-decoration-none me-1">SSH</a>
-      <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/" class="badge badge-custom text-decoration-none me-1">セキュリティ</a>
-  </div>
-
-  </nav>
-</div>
-
-  </main>
-  
-  <footer role="contentinfo">
-    <div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20211121_linux/5/><meta property="og:type" content="article"><meta property="og:title" content="公開鍵認証方式を用いたSSH通信の設定方法"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/5/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-12-03T10:00:23+09:00"><meta property="article:modified_time" content="2021-12-03T10:00:23+09:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="SSH"><meta property="article:tag" content="セキュリティ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="公開鍵認証方式を用いたSSH通信の設定方法"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>公開鍵認証方式を用いたSSH通信の設定方法 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"公開鍵認証方式を用いたSSH通信の設定方法","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-12-03T10:00:23\u002b09:00","dateModified":"2021-12-03T10:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/5\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/5\/","wordCount":200,"keywords":["Linux","SSH","セキュリティ"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>公開鍵認証方式を用いたSSH通信の設定方法</h1><div class=article-meta><time datetime=2021-12-03T10:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+December 3, 2021
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/linux/ class="badge badge-custom" rel=tag itemprop=keywords>Linux
+</a><a href=/tags/ssh/ class="badge badge-custom" rel=tag itemprop=keywords>SSH
+</a><a href=/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/ class="badge badge-custom" rel=tag itemprop=keywords>セキュリティ</a></div></header><div class=article-content itemprop=articleBody><h1 id=公開鍵認証方式を用いたssh通信の設定方法>公開鍵認証方式を用いたSSH通信の設定方法</h1><p>SSH（Secure Shell）は、ネットワークを介して安全にリモートサーバーに接続するためのプロトコルです。パスワード認証に比べて、公開鍵認証方式はセキュリティが高く、自動化にも適しています。</p><h2 id=1-sshサーバーの設定変更-接続先pc>1. SSHサーバーの設定変更 [接続先PC]</h2><p>SSHサーバー（<code>sshd</code>）の設定ファイル <code>/etc/ssh/sshd_config</code> を編集し、公開鍵認証を有効化し、パスワード認証を無効化します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/ssh/sshd_config
+</span></span></code></pre></div><p>以下の行を探し、設定を変更または追加します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># 公開鍵認証を有効化
+</span></span><span class=line><span class=cl>PubkeyAuthentication yes
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># パスワード認証を無効化 (セキュリティ向上のため強く推奨)
+</span></span><span class=line><span class=cl>PasswordAuthentication no
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># rootユーザーでの直接ログインを禁止 (セキュリティ向上のため強く推奨)
+</span></span><span class=line><span class=cl>PermitRootLogin no
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># SSHポートの変更 (オプション、デフォルトは22)
+</span></span><span class=line><span class=cl># Port 2222
+</span></span></code></pre></div><p>変更を保存したら、SSHサービスを再起動して設定を適用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart sshd
+</span></span></code></pre></div><h2 id=2-秘密鍵と公開鍵の作成-接続元pc>2. 秘密鍵と公開鍵の作成 [接続元PC]</h2><p>SSH接続を行うクライアントPCで、SSHキーペア（秘密鍵と公開鍵）を生成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh-keygen -t rsa -b <span class=m>4096</span> -C <span class=s2>&#34;your_email@example.com&#34;</span>
+</span></span></code></pre></div><ul><li><code>-t rsa</code>: RSA方式で鍵を生成します。より新しい <code>ed25519</code> も推奨されます。</li><li><code>-b 4096</code>: RSA鍵のビット長を指定します（より安全）。</li><li><code>-C "your_email@example.com"</code>: 鍵にコメントを追加します（メールアドレスなど）。</li></ul><p>コマンドを実行すると、鍵の保存場所とパスフレーズの入力を求められます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Generating public/private rsa key pair.
+</span></span><span class=line><span class=cl>Enter file in which to save the key (/home/user/.ssh/id_rsa): # デフォルトでEnter (通常は変更不要)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Enter passphrase (empty for no passphrase): # パスフレーズを入力 (セキュリティのため推奨)
+</span></span><span class=line><span class=cl>Enter same passphrase again: # パスフレーズを再入力
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Your identification has been saved in /home/user/.ssh/id_rsa.
+</span></span><span class=line><span class=cl>Your public key has been saved in /home/user/.ssh/id_rsa.pub.
+</span></span></code></pre></div><ul><li><strong>パスフレーズ</strong>: 秘密鍵を保護するためのパスワードです。設定すると、SSH接続時にこのパスフレーズの入力が必要になります。セキュリティのため、設定を強く推奨します。</li></ul><p>生成されるファイル:</p><ul><li><code>id_rsa</code>: <strong>秘密鍵</strong>。絶対に他人に知られてはいけません。</li><li><code>id_rsa.pub</code>: <strong>公開鍵</strong>。サーバーに登録します。</li></ul><h2 id=3-公開鍵の登録-接続先pc>3. 公開鍵の登録 [接続先PC]</h2><p>接続先のサーバーに、生成した公開鍵を登録します。</p><h3 id=ssh-ディレクトリの作成と権限設定><code>.ssh</code> ディレクトリの作成と権限設定</h3><p>接続先のユーザーのホームディレクトリに <code>.ssh</code> ディレクトリが存在しない場合は作成し、適切な権限を設定します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># ユーザーのホームディレクトリに移動</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /home/<span class=o>[</span>ユーザー名<span class=o>]</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># .ssh ディレクトリを作成</span>
+</span></span><span class=line><span class=cl>mkdir .ssh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># .ssh ディレクトリの所有者をユーザー自身に設定</span>
+</span></span><span class=line><span class=cl>sudo chown <span class=o>[</span>ユーザー名<span class=o>]</span>:<span class=o>[</span>ユーザーのグループ名<span class=o>]</span> .ssh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># .ssh ディレクトリのパーミッションを700に設定 (所有者のみ読み書き実行可能)</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>700</span> .ssh
+</span></span></code></pre></div><h3 id=authorized_keys-ファイルの作成と公開鍵の登録><code>authorized_keys</code> ファイルの作成と公開鍵の登録</h3><p><code>.ssh</code> ディレクトリ内に <code>authorized_keys</code> ファイルを作成し、その中に公開鍵の内容を貼り付けます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># authorized_keys ファイルを作成</span>
+</span></span><span class=line><span class=cl>touch .ssh/authorized_keys
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># authorized_keys ファイルのパーミッションを600に設定 (所有者のみ読み書き可能)</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>600</span> .ssh/authorized_keys
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 公開鍵の内容を authorized_keys に追加</span>
+</span></span><span class=line><span class=cl><span class=c1># 接続元PCからscpなどで公開鍵を転送するか、手動でコピー＆ペースト</span>
+</span></span><span class=line><span class=cl><span class=c1># 例: scp ~/.ssh/id_rsa.pub user@remote_host:~/.ssh/id_rsa.pub</span>
+</span></span><span class=line><span class=cl><span class=c1># その後、リモートホストで</span>
+</span></span><span class=line><span class=cl>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</span></span></code></pre></div><p><strong>注意</strong>: <code>authorized_keys</code> ファイルには、1行に1つの公開鍵を記述します。</p><h2 id=4-ssh接続-接続元pc>4. SSH接続 [接続元PC]</h2><p>これで、公開鍵認証方式でSSH接続ができるようになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh <span class=o>[</span>ユーザー名<span class=o>]</span>@<span class=o>[</span>IPアドレスまたはホスト名<span class=o>]</span>
+</span></span></code></pre></div><p>パスフレーズを設定している場合は、ここでパスフレーズの入力を求められます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Enter passphrase for key &#39;/Users/[ユーザー名]/.ssh/id_rsa&#39;: # パスフレーズを入力
+</span></span></code></pre></div><p>正しく設定されていれば、パスワードなしでリモートサーバーにログインできます。</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="200"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20211121_linux/5/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>公開鍵認証方式を用いたSSH通信の設定方法</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/linux/ class="badge badge-custom text-decoration-none me-1">Linux</a>
+<a href=/tags/ssh/ class="badge badge-custom text-decoration-none me-1">SSH</a>
+<a href=/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/ class="badge badge-custom text-decoration-none me-1">セキュリティ</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>

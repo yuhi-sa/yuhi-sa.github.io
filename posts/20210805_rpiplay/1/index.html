@@ -1,419 +1,73 @@
-<!DOCTYPE html>
-<html lang="ja"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="http://localhost:1313/posts/20210805_rpiplay/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="http://localhost:1313/posts/20210805_rpiplay/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="article:published_time" content="2021-08-05T10:11:23&#43;09:00">
-<meta property="article:modified_time" content="2021-08-05T10:11:23&#43;09:00">
-<meta property="article:tag" content="Raspberry Pi"><meta property="article:tag" content="AirPlay"><meta property="article:tag" content="Linux">
-
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta name="twitter:title" content="Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay） | tomato blog</title>
-
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）",
-  "description": "",
-  "author": {
-    "@type": "Person",
-    "name": ""
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "tomato blog",
-    
-    "url": "http:\/\/localhost:1313\/"
-  },
-  "datePublished": "2021-08-05T10:11:23\u002b09:00",
-  "dateModified": "2021-08-05T10:11:23\u002b09:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/posts\/20210805_rpiplay\/1\/"
-  },
-  
-  "url": "http:\/\/localhost:1313\/posts\/20210805_rpiplay\/1\/",
-  "wordCount":  219 ,
-  "keywords": [
-    "Raspberry Pi", "AirPlay", "Linux"
-  ],
-  "articleSection": "posts"
-}
-</script>
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-  <link rel="stylesheet" href="/css/_variables.css">
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
-  
-  <header role="banner">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  <a class="navbar-brand" href="http://localhost:1313/">tomato blog</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/">Blog</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/tags/">Tags</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/about/">About</a>
-  </li>
-  <li class="nav-item mx-2">
-    <a class="nav-link" href="http://localhost:1313/posts/privacy_policy/">Privacy policy</a>
-  </li>
-
-      <li class="nav-item">
-        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
-          <i class="fas fa-moon" id="darkModeIcon"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  <main id="main-content" role="main">
-    
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-08-05T10:11:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          August 5, 2021
-        </time>
-        
-        
-        
-        
-        
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          2 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/raspberry-pi/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Raspberry Pi
-        </a>
-        
-        <a href="/tags/airplay/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          AirPlay
-        </a>
-        
-        <a href="/tags/linux/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Linux
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h1 id="raspberry-piでairplayレシーバーを構築するrpiplay">Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</h1>
-<p>Raspberry PiをAirPlayレシーバーとして機能させ、iPhoneやiPadなどのAppleデバイスから画面や音声をミラーリングする方法を解説します。ここでは、オープンソースのAirPlayレシーバーソフトウェア「RPiPlay」を使用します。</p>
-<h2 id="1-raspberry-piのシステム更新">1. Raspberry Piのシステム更新</h2>
-<p>まず、Raspberry Piのパッケージリストとシステムを最新の状態に保ちます。</p>
-<h3 id="パッケージリストの更新">パッケージリストの更新</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
-</span></span></code></pre></div><h3 id="インストール済みパッケージのアップグレード">インストール済みパッケージのアップグレード</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt upgrade
-</span></span></code></pre></div><h3 id="osのファームウェア更新オプション">OSのファームウェア更新（オプション）</h3>
-<p>より新しいファームウェアに更新したい場合は、<code>rpi-update</code> を使用します。これは開発版のファームウェアをインストールするため、安定性を重視する場合はスキップしても問題ありません。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install rpi-update
-</span></span><span class="line"><span class="cl">sudo rpi-update
-</span></span><span class="line"><span class="cl">sudo reboot <span class="c1"># 更新後、再起動</span>
-</span></span></code></pre></div><h2 id="2-rpiplayのセットアップ">2. RPiPlayのセットアップ</h2>
-<p>RPiPlayのソースコードをダウンロードし、ビルドします。</p>
-<h3 id="必要なパッケージのインストール">必要なパッケージのインストール</h3>
-<p>RPiPlayのビルドに必要な依存関係をインストールします。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install cmake
-</span></span><span class="line"><span class="cl">sudo apt install libavahi-compat-libdnssd-dev
-</span></span><span class="line"><span class="cl">sudo apt install libssl-dev
-</span></span><span class="line"><span class="cl">sudo apt install libplist-dev
-</span></span></code></pre></div><p><strong>補足</strong>: 環境によっては <code>libplist-dev</code> が不要な場合もありますが、エラーが出る場合はインストールしてください。</p>
-<h4 id="動作確認環境">動作確認環境</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PRETTY_NAME=&#34;Raspbian GNU/Linux 10 (buster)&#34;
-</span></span><span class="line"><span class="cl">NAME=&#34;Raspbian GNU/Linux&#34;
-</span></span><span class="line"><span class="cl">VERSION_ID=&#34;10&#34;
-</span></span><span class="line"><span class="cl">VERSION=&#34;10 (buster)&#34;
-</span></span><span class="line"><span class="cl">VERSION_CODENAME=buster
-</span></span><span class="line"><span class="cl">ID=raspbian
-</span></span><span class="line"><span class="cl">ID_LIKE=debian
-</span></span><span class="line"><span class="cl">HOME_URL=&#34;http://www.raspbian.org/&#34;
-</span></span><span class="line"><span class="cl">SUPPORT_URL=&#34;http://www.raspbian.org/RaspbianForums&#34;
-</span></span><span class="line"><span class="cl">BUG_REPORT_URL=&#34;http://www.raspbian.org/RaspbianBugs&#34;
-</span></span></code></pre></div><h3 id="rpiplayのダウンロードとビルド">RPiPlayのダウンロードとビルド</h3>
-<p>GitHubからRPiPlayのソースコードをクローンし、ビルドします。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/FD-/RPiPlay.git
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> RPiPlay
-</span></span><span class="line"><span class="cl">mkdir build
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
-</span></span><span class="line"><span class="cl">cmake ..
-</span></span><span class="line"><span class="cl">make
-</span></span></code></pre></div><p><code>make</code> コマンドが完了すると、<code>build</code> ディレクトリ内に <code>rpiplay</code> という実行ファイルが生成されます。</p>
-<h3 id="rpiplayの起動">RPiPlayの起動</h3>
-<p>生成された <code>rpiplay</code> 実行ファイルを直接起動できます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./rpiplay
-</span></span></code></pre></div><p>起動時に以下のオプションを引数として渡すことで、詳細な設定を行うことができます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">-n &lt;name&gt;: AirPlayサーバーのネットワーク名を指定します。
-</span></span><span class="line"><span class="cl">-b (on|auto|off): 黒い背景の表示設定 (常に表示、接続時のみ、表示しない)。
-</span></span><span class="line"><span class="cl">-r (90|180|270): 画像の回転角度を90度単位で指定します。
-</span></span><span class="line"><span class="cl">-f (horiz|vert|both): 画像の反転設定 (水平、垂直、両方)。
-</span></span><span class="line"><span class="cl">-l: 低遅延モードを有効にします。音声と映像の同期がずれる可能性があります。
-</span></span><span class="line"><span class="cl">-a (hdmi|analog|off): 音声出力デバイスを設定します。
-</span></span><span class="line"><span class="cl">-vr &lt;renderer&gt;: 使用するビデオレンダラーを選択します (rpi, gstreamer, dummy)。
-</span></span><span class="line"><span class="cl">-ar &lt;renderer&gt;: 使用するオーディオレンダラーを選択します (rpi, gstreamer, dummy)。
-</span></span><span class="line"><span class="cl">-d: デバッグログを有効にします。コンソール出力が多いため、再生が途切れる可能性があります。
-</span></span><span class="line"><span class="cl">-v/-h: ヘルプとバージョン情報を表示します。
-</span></span></code></pre></div><h2 id="3-raspberry-pi起動時にrpiplayを自動実行する">3. Raspberry Pi起動時にRPiPlayを自動実行する</h2>
-<p>Raspberry Piの起動時にRPiPlayが自動的に起動するように、<code>systemd</code> サービスとして設定します。</p>
-<h3 id="サービスファイルの作成">サービスファイルの作成</h3>
-<p><code>/etc/systemd/system/</code> ディレクトリに <code>rpiplay.service</code> という名前でサービスファイルを作成します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/systemd/system/rpiplay.service
-</span></span></code></pre></div><p>以下の内容をファイルに記述します。<code>ExecStart</code> のパスは、RPiPlayをクローンしたディレクトリに合わせて変更してください。<code>User=pi</code> は、<code>pi</code> ユーザーで実行する場合です。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-rpiplay.service" data-lang="rpiplay.service"><span class="line"><span class="cl"><span class="k">[Unit]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Description</span><span class="o">=</span><span class="s">RPi Play Service</span>
-</span></span><span class="line"><span class="cl"><span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Service]</span>
-</span></span><span class="line"><span class="cl"><span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
-</span></span><span class="line"><span class="cl"><span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
-</span></span><span class="line"><span class="cl"><span class="na">RestartSec</span><span class="o">=</span><span class="s">10</span>
-</span></span><span class="line"><span class="cl"><span class="na">User</span><span class="o">=</span><span class="s">pi # RPiPlayを実行するユーザー</span>
-</span></span><span class="line"><span class="cl"><span class="na">ExecStart</span><span class="o">=</span><span class="s">/home/pi/RPiPlay/build/rpiplay -n MyPiAirPlay -b auto -a hdmi # 実行ファイルのパスとオプション</span>
-</span></span><span class="line"><span class="cl"><span class="na">StandardOutput</span><span class="o">=</span><span class="s">inherit</span>
-</span></span><span class="line"><span class="cl"><span class="na">StandardError</span><span class="o">=</span><span class="s">journal</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">[Install]</span>
-</span></span><span class="line"><span class="cl"><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
-</span></span></code></pre></div><p><code>ExecStart</code> の <code>-n</code> オプションでAirPlayデバイスとして表示される名前を設定できます。</p>
-<h3 id="サービスを有効化して起動">サービスを有効化して起動</h3>
-<p>サービスファイルを作成したら、<code>systemd</code> にサービスを認識させ、有効化して起動します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl daemon-reload <span class="c1"># systemdの設定をリロード</span>
-</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> rpiplay.service <span class="c1"># 起動時に自動実行されるように有効化</span>
-</span></span><span class="line"><span class="cl">sudo systemctl start rpiplay.service <span class="c1"># サービスを今すぐ起動</span>
-</span></span></code></pre></div><p>サービスのステータスを確認するには、以下のコマンドを使用します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status rpiplay.service
-</span></span></code></pre></div><p>これで、Raspberry PiがAirPlayレシーバーとして機能するようになります。iPhoneやiPadからAirPlayのデバイスリストに「MyPiAirPlay」（または <code>-n</code> オプションで指定した名前）が表示されるはずです。</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://github.com/FD-/RPiPlay">FD-/RPiPlay GitHub Repository</a></li>
-<li><a href="https://www.nakamuland.com/?p=9842">ラズパイをAppleTV代わりにする。（9/24追記あり)</a></li>
-<li><a href="https://qiita.com/dyamaguc/items/f01e1f5e758b7245047b">RPiPlay試してみた</a></li>
-<li><a href="https://note.com/ethan_film/n/na1e5157f2fd3">Raspberry Pi 最新版RPiPlayでミラーリング（iPhone:Mac拡張ディスプレイ)</a></li>
-<li><a href="https://sparkgene.hatenablog.com/entry/20140823/1408761963">Raspberry Pi でrPlayを使ってAirPlayミラーリングを実現する</a></li>
-</ul>
-    </div>
-    
-    
-    <footer class="article-footer">
-      
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="219">
-    <meta itemprop="url" content="http://localhost:1313/posts/20210805_rpiplay/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    <nav aria-label="breadcrumb" class="breadcrumb-nav">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" itemprop="item">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">Home</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/" itemprop="item">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="http://localhost:1313/posts/" itemprop="item">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</span>
-        <meta itemprop="position" content="4" />
-      </li>
-  </ol>
-</nav>
-</nav>
-  
-    
-  <div class="mt-3">
-    <h6 class="d-inline-block me-2">Tags:</h6>
-      <a href="/tags/raspberry-pi/" class="badge badge-custom text-decoration-none me-1">Raspberry Pi</a>
-      <a href="/tags/airplay/" class="badge badge-custom text-decoration-none me-1">AirPlay</a>
-      <a href="/tags/linux/" class="badge badge-custom text-decoration-none me-1">Linux</a>
-  </div>
-
-  </nav>
-</div>
-
-  </main>
-  
-  <footer role="contentinfo">
-    <div class="container py-4">
-  <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-<script src="/js/dark-mode.min.js"></script>
-
-
-<script src="/js/copy-code.min.js"></script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210805_rpiplay/1/><meta property="og:type" content="article"><meta property="og:title" content="Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210805_rpiplay/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-08-05T10:11:23+09:00"><meta property="article:modified_time" content="2021-08-05T10:11:23+09:00"><meta property="article:tag" content="Raspberry Pi"><meta property="article:tag" content="AirPlay"><meta property="article:tag" content="Linux"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay） | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-08-05T10:11:23\u002b09:00","dateModified":"2021-08-05T10:11:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210805_rpiplay\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210805_rpiplay\/1\/","wordCount":219,"keywords":["Raspberry Pi","AirPlay","Linux"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</h1><div class=article-meta><time datetime=2021-08-05T10:11:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+August 5, 2021
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/raspberry-pi/ class="badge badge-custom" rel=tag itemprop=keywords>Raspberry Pi
+</a><a href=/tags/airplay/ class="badge badge-custom" rel=tag itemprop=keywords>AirPlay
+</a><a href=/tags/linux/ class="badge badge-custom" rel=tag itemprop=keywords>Linux</a></div></header><div class=article-content itemprop=articleBody><h1 id=raspberry-piでairplayレシーバーを構築するrpiplay>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</h1><p>Raspberry PiをAirPlayレシーバーとして機能させ、iPhoneやiPadなどのAppleデバイスから画面や音声をミラーリングする方法を解説します。ここでは、オープンソースのAirPlayレシーバーソフトウェア「RPiPlay」を使用します。</p><h2 id=1-raspberry-piのシステム更新>1. Raspberry Piのシステム更新</h2><p>まず、Raspberry Piのパッケージリストとシステムを最新の状態に保ちます。</p><h3 id=パッケージリストの更新>パッケージリストの更新</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update
+</span></span></code></pre></div><h3 id=インストール済みパッケージのアップグレード>インストール済みパッケージのアップグレード</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt upgrade
+</span></span></code></pre></div><h3 id=osのファームウェア更新オプション>OSのファームウェア更新（オプション）</h3><p>より新しいファームウェアに更新したい場合は、<code>rpi-update</code> を使用します。これは開発版のファームウェアをインストールするため、安定性を重視する場合はスキップしても問題ありません。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install rpi-update
+</span></span><span class=line><span class=cl>sudo rpi-update
+</span></span><span class=line><span class=cl>sudo reboot <span class=c1># 更新後、再起動</span>
+</span></span></code></pre></div><h2 id=2-rpiplayのセットアップ>2. RPiPlayのセットアップ</h2><p>RPiPlayのソースコードをダウンロードし、ビルドします。</p><h3 id=必要なパッケージのインストール>必要なパッケージのインストール</h3><p>RPiPlayのビルドに必要な依存関係をインストールします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install cmake
+</span></span><span class=line><span class=cl>sudo apt install libavahi-compat-libdnssd-dev
+</span></span><span class=line><span class=cl>sudo apt install libssl-dev
+</span></span><span class=line><span class=cl>sudo apt install libplist-dev
+</span></span></code></pre></div><p><strong>補足</strong>: 環境によっては <code>libplist-dev</code> が不要な場合もありますが、エラーが出る場合はインストールしてください。</p><h4 id=動作確認環境>動作確認環境</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>PRETTY_NAME=&#34;Raspbian GNU/Linux 10 (buster)&#34;
+</span></span><span class=line><span class=cl>NAME=&#34;Raspbian GNU/Linux&#34;
+</span></span><span class=line><span class=cl>VERSION_ID=&#34;10&#34;
+</span></span><span class=line><span class=cl>VERSION=&#34;10 (buster)&#34;
+</span></span><span class=line><span class=cl>VERSION_CODENAME=buster
+</span></span><span class=line><span class=cl>ID=raspbian
+</span></span><span class=line><span class=cl>ID_LIKE=debian
+</span></span><span class=line><span class=cl>HOME_URL=&#34;http://www.raspbian.org/&#34;
+</span></span><span class=line><span class=cl>SUPPORT_URL=&#34;http://www.raspbian.org/RaspbianForums&#34;
+</span></span><span class=line><span class=cl>BUG_REPORT_URL=&#34;http://www.raspbian.org/RaspbianBugs&#34;
+</span></span></code></pre></div><h3 id=rpiplayのダウンロードとビルド>RPiPlayのダウンロードとビルド</h3><p>GitHubからRPiPlayのソースコードをクローンし、ビルドします。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone https://github.com/FD-/RPiPlay.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> RPiPlay
+</span></span><span class=line><span class=cl>mkdir build
+</span></span><span class=line><span class=cl><span class=nb>cd</span> build
+</span></span><span class=line><span class=cl>cmake ..
+</span></span><span class=line><span class=cl>make
+</span></span></code></pre></div><p><code>make</code> コマンドが完了すると、<code>build</code> ディレクトリ内に <code>rpiplay</code> という実行ファイルが生成されます。</p><h3 id=rpiplayの起動>RPiPlayの起動</h3><p>生成された <code>rpiplay</code> 実行ファイルを直接起動できます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./rpiplay
+</span></span></code></pre></div><p>起動時に以下のオプションを引数として渡すことで、詳細な設定を行うことができます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>-n &lt;name&gt;: AirPlayサーバーのネットワーク名を指定します。
+</span></span><span class=line><span class=cl>-b (on|auto|off): 黒い背景の表示設定 (常に表示、接続時のみ、表示しない)。
+</span></span><span class=line><span class=cl>-r (90|180|270): 画像の回転角度を90度単位で指定します。
+</span></span><span class=line><span class=cl>-f (horiz|vert|both): 画像の反転設定 (水平、垂直、両方)。
+</span></span><span class=line><span class=cl>-l: 低遅延モードを有効にします。音声と映像の同期がずれる可能性があります。
+</span></span><span class=line><span class=cl>-a (hdmi|analog|off): 音声出力デバイスを設定します。
+</span></span><span class=line><span class=cl>-vr &lt;renderer&gt;: 使用するビデオレンダラーを選択します (rpi, gstreamer, dummy)。
+</span></span><span class=line><span class=cl>-ar &lt;renderer&gt;: 使用するオーディオレンダラーを選択します (rpi, gstreamer, dummy)。
+</span></span><span class=line><span class=cl>-d: デバッグログを有効にします。コンソール出力が多いため、再生が途切れる可能性があります。
+</span></span><span class=line><span class=cl>-v/-h: ヘルプとバージョン情報を表示します。
+</span></span></code></pre></div><h2 id=3-raspberry-pi起動時にrpiplayを自動実行する>3. Raspberry Pi起動時にRPiPlayを自動実行する</h2><p>Raspberry Piの起動時にRPiPlayが自動的に起動するように、<code>systemd</code> サービスとして設定します。</p><h3 id=サービスファイルの作成>サービスファイルの作成</h3><p><code>/etc/systemd/system/</code> ディレクトリに <code>rpiplay.service</code> という名前でサービスファイルを作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/systemd/system/rpiplay.service
+</span></span></code></pre></div><p>以下の内容をファイルに記述します。<code>ExecStart</code> のパスは、RPiPlayをクローンしたディレクトリに合わせて変更してください。<code>User=pi</code> は、<code>pi</code> ユーザーで実行する場合です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-rpiplay.service data-lang=rpiplay.service><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>RPi Play Service</span>
+</span></span><span class=line><span class=cl><span class=na>After</span><span class=o>=</span><span class=s>network.target</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=na>Type</span><span class=o>=</span><span class=s>simple</span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
+</span></span><span class=line><span class=cl><span class=na>RestartSec</span><span class=o>=</span><span class=s>10</span>
+</span></span><span class=line><span class=cl><span class=na>User</span><span class=o>=</span><span class=s>pi # RPiPlayを実行するユーザー</span>
+</span></span><span class=line><span class=cl><span class=na>ExecStart</span><span class=o>=</span><span class=s>/home/pi/RPiPlay/build/rpiplay -n MyPiAirPlay -b auto -a hdmi # 実行ファイルのパスとオプション</span>
+</span></span><span class=line><span class=cl><span class=na>StandardOutput</span><span class=o>=</span><span class=s>inherit</span>
+</span></span><span class=line><span class=cl><span class=na>StandardError</span><span class=o>=</span><span class=s>journal</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>multi-user.target</span>
+</span></span></code></pre></div><p><code>ExecStart</code> の <code>-n</code> オプションでAirPlayデバイスとして表示される名前を設定できます。</p><h3 id=サービスを有効化して起動>サービスを有効化して起動</h3><p>サービスファイルを作成したら、<code>systemd</code> にサービスを認識させ、有効化して起動します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload <span class=c1># systemdの設定をリロード</span>
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> rpiplay.service <span class=c1># 起動時に自動実行されるように有効化</span>
+</span></span><span class=line><span class=cl>sudo systemctl start rpiplay.service <span class=c1># サービスを今すぐ起動</span>
+</span></span></code></pre></div><p>サービスのステータスを確認するには、以下のコマンドを使用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl status rpiplay.service
+</span></span></code></pre></div><p>これで、Raspberry PiがAirPlayレシーバーとして機能するようになります。iPhoneやiPadからAirPlayのデバイスリストに「MyPiAirPlay」（または <code>-n</code> オプションで指定した名前）が表示されるはずです。</p><h2 id=参考>参考</h2><ul><li><a href=https://github.com/FD-/RPiPlay>FD-/RPiPlay GitHub Repository</a></li><li><a href="https://www.nakamuland.com/?p=9842">ラズパイをAppleTV代わりにする。（9/24追記あり)</a></li><li><a href=https://qiita.com/dyamaguc/items/f01e1f5e758b7245047b>RPiPlay試してみた</a></li><li><a href=https://note.com/ethan_film/n/na1e5157f2fd3>Raspberry Pi 最新版RPiPlayでミラーリング（iPhone:Mac拡張ディスプレイ)</a></li><li><a href=https://sparkgene.hatenablog.com/entry/20140823/1408761963>Raspberry Pi でrPlayを使ってAirPlayミラーリングを実現する</a></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="219"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210805_rpiplay/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/raspberry-pi/ class="badge badge-custom text-decoration-none me-1">Raspberry Pi</a>
+<a href=/tags/airplay/ class="badge badge-custom text-decoration-none me-1">AirPlay</a>
+<a href=/tags/linux/ class="badge badge-custom text-decoration-none me-1">Linux</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
