@@ -1268,18 +1268,6 @@ footer {
   .navbar-nav .nav-link {
     padding: 0.5rem 0;
   }
-  
-  /* Ensure hamburger menu is visible on mobile */
-  .navbar-toggler {
-    display: block !important;
-  }
-}
-
-/* Hide hamburger menu on desktop */
-@media (min-width: 992px) {
-  .navbar-toggler {
-    display: none !important;
-  }
 }
 
 /* Dark mode navbar styling */
