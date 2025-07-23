@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ROS on tomato blog</title><link>https://yuhi-sa.github.io/tags/ros/</link><description>Recent content in ROS on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml"/><item><title>強化学習によるROBOTIS OP3の歩行獲得：ROSパッケージのコード解説</title><link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link><pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid><description/></item><item><title>[ROS] PublisherとSubscriberを1つのノードに実装する方法</title><link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link><pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROS on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/ros/</link>
+    <description>Recent content in ROS on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>強化学習によるROBOTIS OP3の歩行獲得：ROSパッケージのコード解説</title>
+      <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
+      <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>[ROS] PublisherとSubscriberを1つのノードに実装する方法</title>
+      <link>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</link>
+      <pubDate>Sun, 16 Aug 2020 15:17:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

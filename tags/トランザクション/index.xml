@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トランザクション on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/</link><description>Recent content in トランザクション on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/index.xml" rel="self" type="application/rss+xml"/><item><title>トランザクションの分離レベルと防げる不整合</title><link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link><pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>トランザクション on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/</link>
+    <description>Recent content in トランザクション on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 18 May 2024 09:10:00 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>トランザクションの分離レベルと防げる不整合</title>
+      <link>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</link>
+      <pubDate>Sat, 18 May 2024 09:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240518_db_transaction/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

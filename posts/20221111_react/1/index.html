@@ -1,195 +1,566 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20221111_react/1/><meta property="og:type" content="article"><meta property="og:title" content="WebpackとBabelでReact/TypeScript開発環境を構築する"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20221111_react/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2022-11-11T09:00:23+09:00"><meta property="article:modified_time" content="2022-11-11T09:00:23+09:00"><meta property="article:tag" content="JavaScript"><meta property="article:tag" content="React"><meta property="article:tag" content="TypeScript"><meta property="article:tag" content="Webpack"><meta property="article:tag" content="Babel"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="WebpackとBabelでReact/TypeScript開発環境を構築する"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>WebpackとBabelでReact/TypeScript開発環境を構築する | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"WebpackとBabelでReact\/TypeScript開発環境を構築する","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2022-11-11T09:00:23\u002b09:00","dateModified":"2022-11-11T09:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20221111_react\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20221111_react\/1\/","wordCount":535,"keywords":["JavaScript","React","TypeScript","Webpack","Babel"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>WebpackとBabelでReact/TypeScript開発環境を構築する</h1><div class=article-meta><time datetime=2022-11-11T09:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-November 11, 2022
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-3 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/javascript/ class="badge badge-custom" rel=tag itemprop=keywords>JavaScript
-</a><a href=/tags/react/ class="badge badge-custom" rel=tag itemprop=keywords>React
-</a><a href=/tags/typescript/ class="badge badge-custom" rel=tag itemprop=keywords>TypeScript
-</a><a href=/tags/webpack/ class="badge badge-custom" rel=tag itemprop=keywords>Webpack
-</a><a href=/tags/babel/ class="badge badge-custom" rel=tag itemprop=keywords>Babel</a></div></header><div class=article-content itemprop=articleBody><h1 id=webpackとbabelでreacttypescript開発環境を構築する>WebpackとBabelでReact/TypeScript開発環境を構築する</h1><p>本記事では、<code>webpack</code> と <code>Babel</code> を用いて、ReactとTypeScriptを使ったモダンなWebアプリケーション開発環境をゼロから構築する手順を解説します。</p><h2 id=webpackとは>Webpackとは</h2><p><a href=https://webpack.js.org/>Webpack</a> は、JavaScriptアプリケーションのための<strong>モジュールバンドラー</strong>です。複数のJavaScriptファイルやその他のアセット（CSS、画像など）を依存関係に基づいて解析し、ブラウザで実行可能な単一または複数のファイルにまとめます。</p><ul><li><strong>主な機能</strong>:<ul><li>モジュール解決: <code>import</code> や <code>require</code> などの構文を解釈し、依存関係を解決します。</li><li>バンドル: 複数のファイルを一つにまとめます。</li><li>トランスパイル: Babelなどのローダーと連携し、新しいJavaScript構文を古いブラウザでも動作するように変換します。</li><li>最適化: コードの圧縮、不要なコードの削除など、パフォーマンス向上のための最適化を行います。</li></ul></li></ul><h2 id=babelとは>Babelとは</h2><p><a href=https://babeljs.io/>Babel</a> は、JavaScriptの<strong>トランスコンパイラー</strong>です。主に、最新のJavaScript（ES2015+）で書かれたコードを、古いブラウザや実行環境でも動作する互換性のあるJavaScript（ES5など）に変換するために使用されます。</p><ul><li><strong>主な機能</strong>:<ul><li>新しい構文の変換: <code>async/await</code>, アロー関数、クラス構文などを変換します。</li><li>JSXの変換: ReactのJSX構文を通常のJavaScriptに変換します。</li><li>TypeScriptの変換: TypeScriptコードをJavaScriptに変換します（型チェックは行いません）。</li></ul></li></ul><h2 id=環境構築>環境構築</h2><p>以下の記事を参考に、React/TypeScript開発環境を構築します。</p><ul><li><a href=https://dev-k.hatenablog.com/entry/react-webpack-hatenablog>React 環境構築　Webpack + Babelなぜ必要？</a></li><li><a href=https://dev-k.hatenablog.com/entry/building-react-with-webpack-for-beginners>WebpackとBabelでReact.js 構築　設定</a></li><li><a href=https://qiita.com/tseno/items/fb53fa13004542ef1b80>webpack + babel + TypeScript + React メモ</a></li></ul><h3 id=必要なモジュールのインストール>必要なモジュールのインストール</h3><p>プロジェクトディレクトリを作成し、npmで初期化します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir react_test
-</span></span><span class=line><span class=cl><span class=nb>cd</span> react_test
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># プロジェクトの初期化</span>
-</span></span><span class=line><span class=cl>npm init -y
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Babel関連モジュール</span>
-</span></span><span class=line><span class=cl>npm install -D @babel/core          <span class=c1># Babel本体</span>
-</span></span><span class=line><span class=cl>npm install -D @babel/preset-env    <span class=c1># 最新のJS構文をターゲット環境に合わせて変換</span>
-</span></span><span class=line><span class=cl>npm install -D @babel/preset-react  <span class=c1># ReactのJSXを変換</span>
-</span></span><span class=line><span class=cl>npm install -D @babel/preset-typescript <span class=c1># TypeScriptを変換</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Webpack関連モジュール</span>
-</span></span><span class=line><span class=cl>npm install -D webpack webpack-cli babel-loader ts-loader <span class=c1># webpack本体とCLI、Babel/TSをwebpackで扱うためのローダー</span>
-</span></span><span class=line><span class=cl>npm install -D webpack-dev-server html-webpack-plugin     <span class=c1># 開発サーバーとHTML生成プラグイン</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># ReactとTypeScript関連モジュール</span>
-</span></span><span class=line><span class=cl>npm install react react-dom         <span class=c1># React本体とDOM操作ライブラリ</span>
-</span></span><span class=line><span class=cl>npm install -D typescript @types/react @types/react-dom <span class=c1># TypeScript本体とReact/ReactDOMの型定義</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># tsconfig.json の生成</span>
-</span></span><span class=line><span class=cl>npx tsc --init
-</span></span></code></pre></div><h3 id=ファイル構成>ファイル構成</h3><p>最終的なファイル構成は以下のようになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.
-</span></span><span class=line><span class=cl>├── dist/
-</span></span><span class=line><span class=cl>│   ├── index.html
-</span></span><span class=line><span class=cl>│   └── main.js
-</span></span><span class=line><span class=cl>├── node_modules/
-</span></span><span class=line><span class=cl>├── package-lock.json
-</span></span><span class=line><span class=cl>├── package.json
-</span></span><span class=line><span class=cl>├── src/
-</span></span><span class=line><span class=cl>│   ├── index.html
-</span></span><span class=line><span class=cl>│   └── index.tsx
-</span></span><span class=line><span class=cl>├── tsconfig.json
-</span></span><span class=line><span class=cl>└── webpack.config.js
-</span></span></code></pre></div><h3 id=各種設定ファイル>各種設定ファイル</h3><h4 id=srcindexhtml><code>src/index.html</code></h4><p>ReactアプリケーションのエントリポイントとなるHTMLファイルです。<code>div</code> 要素にReactコンポーネントがマウントされます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=cp>&lt;!DOCTYPE html&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>html</span> <span class=na>lang</span><span class=o>=</span><span class=s>&#34;ja&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;UTF-8&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>meta</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;viewport&#34;</span> <span class=na>content</span><span class=o>=</span><span class=s>&#34;width=device-width, initial-scale=1.0&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>title</span><span class=p>&gt;</span>React App<span class=p>&lt;/</span><span class=nt>title</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;app&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=c>&lt;!-- WebpackによってバンドルされたJavaScriptがここに自動的に挿入される --&gt;</span>
-</span></span><span class=line><span class=cl>  <span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
-</span></span></code></pre></div><h4 id=srcindextsx><code>src/index.tsx</code></h4><p>Reactアプリケーションのメインエントリファイルです。TypeScriptとJSXで記述されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>import</span> <span class=nx>React</span> <span class=kr>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createRoot</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;react-dom/client&#34;</span><span class=p>;</span> <span class=c1>// React 18からcreateRootを使用
-</span></span></span><span class=line><span class=cl><span class=c1></span>
-</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>App</span> <span class=o>=</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span><span class=nx>Hello</span> <span class=nx>React</span> <span class=kd>with</span> <span class=nx>TypeScript</span><span class=o>!</span><span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;;</span>
-</span></span><span class=line><span class=cl><span class=p>};</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>// React 18の新しいAPIを使用
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>const</span> <span class=nx>container</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;app&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>container</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>root</span> <span class=o>=</span> <span class=nx>createRoot</span><span class=p>(</span><span class=nx>container</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=nx>root</span><span class=p>.</span><span class=nx>render</span><span class=p>(&lt;</span><span class=nt>App</span> <span class=p>/&gt;);</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div><h4 id=babelrc><code>.babelrc</code></h4><p>Babelの設定ファイルです。どのプリセット（プラグインのセット）を使用してコードを変換するかを定義します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;presets&#34;</span><span class=p>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>    <span class=s2>&#34;@babel/preset-env&#34;</span><span class=p>,</span>          <span class=c1>// 最新のJSをターゲット環境に合わせて変換
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s2>&#34;@babel/preset-react&#34;</span><span class=p>,</span>        <span class=c1>// ReactのJSXを変換
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s2>&#34;@babel/preset-typescript&#34;</span>    <span class=c1>// TypeScriptを変換 (型チェックは行わない)
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>]</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div><h4 id=packagejson><code>package.json</code></h4><p>プロジェクトのメタデータとスクリプト、依存関係を定義します。<code>scripts</code> セクションに開発サーバーの起動コマンドとビルドコマンドを追加します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;react_test&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=s2>&#34;1.0.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;React with TypeScript development environment&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;main&#34;</span><span class=p>:</span> <span class=s2>&#34;index.js&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;scripts&#34;</span><span class=p>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;start&#34;</span><span class=p>:</span> <span class=s2>&#34;webpack serve --open&#34;</span><span class=p>,</span>  <span class=c1>// 開発サーバーを起動し、ブラウザを自動で開く
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;build&#34;</span><span class=p>:</span> <span class=s2>&#34;webpack --mode production&#34;</span> <span class=c1>// 本番用にビルド
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;keywords&#34;</span><span class=p>:</span> <span class=p>[],</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;author&#34;</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;license&#34;</span><span class=p>:</span> <span class=s2>&#34;ISC&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;devDependencies&#34;</span><span class=p>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@babel/core&#34;</span><span class=p>:</span> <span class=s2>&#34;^7.20.2&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@babel/preset-env&#34;</span><span class=p>:</span> <span class=s2>&#34;^7.20.2&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@babel/preset-react&#34;</span><span class=p>:</span> <span class=s2>&#34;^7.18.6&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@babel/preset-typescript&#34;</span><span class=p>:</span> <span class=s2>&#34;^7.18.6&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@types/react&#34;</span><span class=p>:</span> <span class=s2>&#34;^18.0.25&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;@types/react-dom&#34;</span><span class=p>:</span> <span class=s2>&#34;^18.0.8&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;babel-loader&#34;</span><span class=p>:</span> <span class=s2>&#34;^9.1.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;html-webpack-plugin&#34;</span><span class=p>:</span> <span class=s2>&#34;^5.5.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;ts-loader&#34;</span><span class=p>:</span> <span class=s2>&#34;^9.4.1&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;typescript&#34;</span><span class=p>:</span> <span class=s2>&#34;^4.8.4&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;webpack&#34;</span><span class=p>:</span> <span class=s2>&#34;^5.75.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;webpack-cli&#34;</span><span class=p>:</span> <span class=s2>&#34;^4.10.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;webpack-dev-server&#34;</span><span class=p>:</span> <span class=s2>&#34;^4.11.1&#34;</span>
-</span></span><span class=line><span class=cl>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;dependencies&#34;</span><span class=p>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;react&#34;</span><span class=p>:</span> <span class=s2>&#34;^18.2.0&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;react-dom&#34;</span><span class=p>:</span> <span class=s2>&#34;^18.2.0&#34;</span>
-</span></span><span class=line><span class=cl>  <span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div><h4 id=tsconfigjson><code>tsconfig.json</code></h4><p>TypeScriptのコンパイラ設定ファイルです。TypeScriptコードをJavaScriptに変換する際のルールを定義します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;compilerOptions&#34;</span><span class=p>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;target&#34;</span><span class=p>:</span> <span class=s2>&#34;es2015&#34;</span><span class=p>,</span>                         <span class=c1>// 出力するJavaScriptのバージョン (ES5でも可)
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;module&#34;</span><span class=p>:</span> <span class=s2>&#34;esnext&#34;</span><span class=p>,</span>                         <span class=c1>// モジュールシステム (Webpackが処理するためesnextが柔軟)
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;jsx&#34;</span><span class=p>:</span> <span class=s2>&#34;react-jsx&#34;</span><span class=p>,</span>                         <span class=c1>// JSXの変換方法 (React 17+ の新しいJSXトランスフォーム)
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;strict&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                             <span class=c1>// 厳格な型チェックを有効にする
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;esModuleInterop&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                    <span class=c1>// CommonJSモジュールとESモジュールの互換性を高める
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;skipLibCheck&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                       <span class=c1>// 型定義ファイルの型チェックをスキップ (ビルド高速化)
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;forceConsistentCasingInFileNames&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>   <span class=c1>// ファイル名の大文字小文字を区別する
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;moduleResolution&#34;</span><span class=p>:</span> <span class=s2>&#34;node&#34;</span><span class=p>,</span>                 <span class=c1>// モジュール解決戦略
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;resolveJsonModule&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                 <span class=c1>// JSONファイルのインポートを許可
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;isolatedModules&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                    <span class=c1>// 各ファイルを独立したモジュールとしてコンパイル
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;noEmit&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                             <span class=c1>// TypeScriptからJSへの出力を行わない (Babel/Webpackが担当)
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;allowJs&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>                            <span class=c1>// JavaScriptファイルのコンパイルを許可
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nt>&#34;lib&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;dom&#34;</span><span class=p>,</span> <span class=s2>&#34;dom.iterable&#34;</span><span class=p>,</span> <span class=s2>&#34;esnext&#34;</span><span class=p>]</span>    <span class=c1>// 利用可能なライブラリ
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=nt>&#34;include&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;src&#34;</span><span class=p>]</span>                            <span class=c1>// コンパイル対象のファイル
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span></code></pre></div><h4 id=webpackconfigjs><code>webpack.config.js</code></h4><p>Webpackのバンドル設定ファイルです。エントリポイント、出力先、ローダー、プラグインなどを定義します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>path</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;path&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>HtmlWebpackPlugin</span> <span class=o>=</span> <span class=nx>require</span><span class=p>(</span><span class=s2>&#34;html-webpack-plugin&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// 開発モードに設定 (最適化やデバッグ情報が有効になる)
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;development&#34;</span><span class=p>,</span> 
-</span></span><span class=line><span class=cl>  <span class=c1>// エントリポイント (アプリケーションの開始点)
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>entry</span><span class=o>:</span> <span class=s2>&#34;./src/index.tsx&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// 出力設定
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>output</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nx>path</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>resolve</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s2>&#34;dist&#34;</span><span class=p>),</span> <span class=c1>// 出力ディレクトリ
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>filename</span><span class=o>:</span> <span class=s2>&#34;bundle.js&#34;</span><span class=p>,</span>                 <span class=c1>// 出力ファイル名
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>clean</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>                           <span class=c1>// ビルド前にdistディレクトリをクリーンアップ
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// モジュール解決の設定
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>resolve</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nx>extensions</span><span class=o>:</span> <span class=p>[</span><span class=s2>&#34;.ts&#34;</span><span class=p>,</span> <span class=s2>&#34;.tsx&#34;</span><span class=p>,</span> <span class=s2>&#34;.js&#34;</span><span class=p>,</span> <span class=s2>&#34;.jsx&#34;</span><span class=p>],</span> <span class=c1>// インポート時に解決する拡張子
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// モジュールルール (ローダーの設定)
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>module</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nx>rules</span><span class=o>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>      <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=nx>test</span><span class=o>:</span> <span class=sr>/\\.(ts|tsx)$/</span><span class=p>,</span> <span class=c1>// .tsまたは.tsxファイルに適用
-</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>exclude</span><span class=o>:</span> <span class=sr>/node_modules/</span><span class=p>,</span> <span class=c1>// node_modulesは除外
-</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>use</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>          <span class=nx>loader</span><span class=o>:</span> <span class=s2>&#34;babel-loader&#34;</span><span class=p>,</span> <span class=c1>// Babelを使って変換
-</span></span></span><span class=line><span class=cl><span class=c1></span>          <span class=nx>options</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=nx>presets</span><span class=o>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>              <span class=s2>&#34;@babel/preset-env&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>              <span class=s2>&#34;@babel/preset-react&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>              <span class=s2>&#34;@babel/preset-typescript&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=p>],</span>
-</span></span><span class=line><span class=cl>          <span class=p>},</span>
-</span></span><span class=line><span class=cl>        <span class=p>},</span>
-</span></span><span class=line><span class=cl>      <span class=p>},</span>
-</span></span><span class=line><span class=cl>      <span class=c1>// CSSや画像などのローダーもここに追加できる
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>],</span>
-</span></span><span class=line><span class=cl>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// プラグインの設定
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>plugins</span><span class=o>:</span> <span class=p>[</span>
-</span></span><span class=line><span class=cl>    <span class=k>new</span> <span class=nx>HtmlWebpackPlugin</span><span class=p>({</span>
-</span></span><span class=line><span class=cl>      <span class=nx>template</span><span class=o>:</span> <span class=s2>&#34;./src/index.html&#34;</span><span class=p>,</span> <span class=c1>// テンプレートとして使用するHTMLファイル
-</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>filename</span><span class=o>:</span> <span class=s2>&#34;index.html&#34;</span><span class=p>,</span>       <span class=c1>// 出力されるHTMLファイル名
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}),</span>
-</span></span><span class=line><span class=cl>  <span class=p>],</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// 開発サーバーの設定
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>devServer</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=kr>static</span><span class=o>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>      <span class=nx>directory</span><span class=o>:</span> <span class=nx>path</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s2>&#34;dist&#34;</span><span class=p>),</span> <span class=c1>// 静的ファイルの提供元ディレクトリ
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>},</span>
-</span></span><span class=line><span class=cl>    <span class=nx>compress</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span> <span class=c1>// gzip圧縮を有効にする
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>port</span><span class=o>:</span> <span class=mi>3000</span><span class=p>,</span>     <span class=c1>// 開発サーバーのポート番号
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>open</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>     <span class=c1>// サーバー起動時にブラウザを自動で開く
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>hot</span><span class=o>:</span> <span class=kc>true</span><span class=p>,</span>      <span class=c1>// ホットモジュールリプレイスメントを有効にする
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>},</span>
-</span></span><span class=line><span class=cl>  <span class=c1>// ソースマップの設定 (デバッグ用)
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>devtool</span><span class=o>:</span> <span class=s2>&#34;eval-source-map&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl><span class=p>};</span>
-</span></span></code></pre></div><p>これらの設定ファイルが揃ったら、<code>npm start</code> で開発サーバーを起動し、<code>npm run build</code> で本番用のビルドを行うことができます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback></code></pre></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="535"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20221111_react/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>WebpackとBabelでReact/TypeScript開発環境を構築する</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/javascript/ class="badge badge-custom text-decoration-none me-1">JavaScript</a>
-<a href=/tags/react/ class="badge badge-custom text-decoration-none me-1">React</a>
-<a href=/tags/typescript/ class="badge badge-custom text-decoration-none me-1">TypeScript</a>
-<a href=/tags/webpack/ class="badge badge-custom text-decoration-none me-1">Webpack</a>
-<a href=/tags/babel/ class="badge badge-custom text-decoration-none me-1">Babel</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20221111_react/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebpackとBabelでReact/TypeScript開発環境を構築する">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20221111_react/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2022-11-11T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2022-11-11T09:00:23&#43;09:00">
+<meta property="article:tag" content="JavaScript"><meta property="article:tag" content="React"><meta property="article:tag" content="TypeScript"><meta property="article:tag" content="Webpack"><meta property="article:tag" content="Babel">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="WebpackとBabelでReact/TypeScript開発環境を構築する">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>WebpackとBabelでReact/TypeScript開発環境を構築する | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "WebpackとBabelでReact\/TypeScript開発環境を構築する",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2022-11-11T09:00:23\u002b09:00",
+  "dateModified": "2022-11-11T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20221111_react\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20221111_react\/1\/",
+  "wordCount":  535 ,
+  "keywords": [
+    "JavaScript", "React", "TypeScript", "Webpack", "Babel"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">WebpackとBabelでReact/TypeScript開発環境を構築する</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2022-11-11T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          November 11, 2022
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          3 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/javascript/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          JavaScript
+        </a>
+        
+        <a href="/tags/react/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          React
+        </a>
+        
+        <a href="/tags/typescript/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          TypeScript
+        </a>
+        
+        <a href="/tags/webpack/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Webpack
+        </a>
+        
+        <a href="/tags/babel/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Babel
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="webpackとbabelでreacttypescript開発環境を構築する">WebpackとBabelでReact/TypeScript開発環境を構築する</h1>
+<p>本記事では、<code>webpack</code> と <code>Babel</code> を用いて、ReactとTypeScriptを使ったモダンなWebアプリケーション開発環境をゼロから構築する手順を解説します。</p>
+<h2 id="webpackとは">Webpackとは</h2>
+<p><a href="https://webpack.js.org/">Webpack</a> は、JavaScriptアプリケーションのための<strong>モジュールバンドラー</strong>です。複数のJavaScriptファイルやその他のアセット（CSS、画像など）を依存関係に基づいて解析し、ブラウザで実行可能な単一または複数のファイルにまとめます。</p>
+<ul>
+<li><strong>主な機能</strong>:
+<ul>
+<li>モジュール解決: <code>import</code> や <code>require</code> などの構文を解釈し、依存関係を解決します。</li>
+<li>バンドル: 複数のファイルを一つにまとめます。</li>
+<li>トランスパイル: Babelなどのローダーと連携し、新しいJavaScript構文を古いブラウザでも動作するように変換します。</li>
+<li>最適化: コードの圧縮、不要なコードの削除など、パフォーマンス向上のための最適化を行います。</li>
+</ul>
+</li>
+</ul>
+<h2 id="babelとは">Babelとは</h2>
+<p><a href="https://babeljs.io/">Babel</a> は、JavaScriptの<strong>トランスコンパイラー</strong>です。主に、最新のJavaScript（ES2015+）で書かれたコードを、古いブラウザや実行環境でも動作する互換性のあるJavaScript（ES5など）に変換するために使用されます。</p>
+<ul>
+<li><strong>主な機能</strong>:
+<ul>
+<li>新しい構文の変換: <code>async/await</code>, アロー関数、クラス構文などを変換します。</li>
+<li>JSXの変換: ReactのJSX構文を通常のJavaScriptに変換します。</li>
+<li>TypeScriptの変換: TypeScriptコードをJavaScriptに変換します（型チェックは行いません）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="環境構築">環境構築</h2>
+<p>以下の記事を参考に、React/TypeScript開発環境を構築します。</p>
+<ul>
+<li><a href="https://dev-k.hatenablog.com/entry/react-webpack-hatenablog">React 環境構築　Webpack + Babelなぜ必要？</a></li>
+<li><a href="https://dev-k.hatenablog.com/entry/building-react-with-webpack-for-beginners">WebpackとBabelでReact.js 構築　設定</a></li>
+<li><a href="https://qiita.com/tseno/items/fb53fa13004542ef1b80">webpack + babel + TypeScript + React メモ</a></li>
+</ul>
+<h3 id="必要なモジュールのインストール">必要なモジュールのインストール</h3>
+<p>プロジェクトディレクトリを作成し、npmで初期化します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir react_test
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> react_test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># プロジェクトの初期化</span>
+</span></span><span class="line"><span class="cl">npm init -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Babel関連モジュール</span>
+</span></span><span class="line"><span class="cl">npm install -D @babel/core          <span class="c1"># Babel本体</span>
+</span></span><span class="line"><span class="cl">npm install -D @babel/preset-env    <span class="c1"># 最新のJS構文をターゲット環境に合わせて変換</span>
+</span></span><span class="line"><span class="cl">npm install -D @babel/preset-react  <span class="c1"># ReactのJSXを変換</span>
+</span></span><span class="line"><span class="cl">npm install -D @babel/preset-typescript <span class="c1"># TypeScriptを変換</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Webpack関連モジュール</span>
+</span></span><span class="line"><span class="cl">npm install -D webpack webpack-cli babel-loader ts-loader <span class="c1"># webpack本体とCLI、Babel/TSをwebpackで扱うためのローダー</span>
+</span></span><span class="line"><span class="cl">npm install -D webpack-dev-server html-webpack-plugin     <span class="c1"># 開発サーバーとHTML生成プラグイン</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ReactとTypeScript関連モジュール</span>
+</span></span><span class="line"><span class="cl">npm install react react-dom         <span class="c1"># React本体とDOM操作ライブラリ</span>
+</span></span><span class="line"><span class="cl">npm install -D typescript @types/react @types/react-dom <span class="c1"># TypeScript本体とReact/ReactDOMの型定義</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># tsconfig.json の生成</span>
+</span></span><span class="line"><span class="cl">npx tsc --init
+</span></span></code></pre></div><h3 id="ファイル構成">ファイル構成</h3>
+<p>最終的なファイル構成は以下のようになります。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── dist/
+</span></span><span class="line"><span class="cl">│   ├── index.html
+</span></span><span class="line"><span class="cl">│   └── main.js
+</span></span><span class="line"><span class="cl">├── node_modules/
+</span></span><span class="line"><span class="cl">├── package-lock.json
+</span></span><span class="line"><span class="cl">├── package.json
+</span></span><span class="line"><span class="cl">├── src/
+</span></span><span class="line"><span class="cl">│   ├── index.html
+</span></span><span class="line"><span class="cl">│   └── index.tsx
+</span></span><span class="line"><span class="cl">├── tsconfig.json
+</span></span><span class="line"><span class="cl">└── webpack.config.js
+</span></span></code></pre></div><h3 id="各種設定ファイル">各種設定ファイル</h3>
+<h4 id="srcindexhtml"><code>src/index.html</code></h4>
+<p>ReactアプリケーションのエントリポイントとなるHTMLファイルです。<code>div</code> 要素にReactコンポーネントがマウントされます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ja&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1.0&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>React App<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;app&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- WebpackによってバンドルされたJavaScriptがここに自動的に挿入される --&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h4 id="srcindextsx"><code>src/index.tsx</code></h4>
+<p>Reactアプリケーションのメインエントリファイルです。TypeScriptとJSXで記述されます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">React</span> <span class="kr">from</span> <span class="s2">&#34;react&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createRoot</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;react-dom/client&#34;</span><span class="p">;</span> <span class="c1">// React 18からcreateRootを使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span> <span class="nx">React</span> <span class="kd">with</span> <span class="nx">TypeScript</span><span class="o">!</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// React 18の新しいAPIを使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;app&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">container</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">createRoot</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">App</span> <span class="p">/&gt;);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="babelrc"><code>.babelrc</code></h4>
+<p>Babelの設定ファイルです。どのプリセット（プラグインのセット）を使用してコードを変換するかを定義します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;presets&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">,</span>          <span class="c1">// 最新のJSをターゲット環境に合わせて変換
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s2">&#34;@babel/preset-react&#34;</span><span class="p">,</span>        <span class="c1">// ReactのJSXを変換
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s2">&#34;@babel/preset-typescript&#34;</span>    <span class="c1">// TypeScriptを変換 (型チェックは行わない)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="packagejson"><code>package.json</code></h4>
+<p>プロジェクトのメタデータとスクリプト、依存関係を定義します。<code>scripts</code> セクションに開発サーバーの起動コマンドとビルドコマンドを追加します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;react_test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;1.0.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;React with TypeScript development environment&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;main&#34;</span><span class="p">:</span> <span class="s2">&#34;index.js&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;scripts&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;start&#34;</span><span class="p">:</span> <span class="s2">&#34;webpack serve --open&#34;</span><span class="p">,</span>  <span class="c1">// 開発サーバーを起動し、ブラウザを自動で開く
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;build&#34;</span><span class="p">:</span> <span class="s2">&#34;webpack --mode production&#34;</span> <span class="c1">// 本番用にビルド
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;keywords&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;license&#34;</span><span class="p">:</span> <span class="s2">&#34;ISC&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;devDependencies&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@babel/core&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.20.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@babel/preset-env&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.20.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@babel/preset-react&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.18.6&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@babel/preset-typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;^7.18.6&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@types/react&#34;</span><span class="p">:</span> <span class="s2">&#34;^18.0.25&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;@types/react-dom&#34;</span><span class="p">:</span> <span class="s2">&#34;^18.0.8&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;babel-loader&#34;</span><span class="p">:</span> <span class="s2">&#34;^9.1.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;html-webpack-plugin&#34;</span><span class="p">:</span> <span class="s2">&#34;^5.5.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;ts-loader&#34;</span><span class="p">:</span> <span class="s2">&#34;^9.4.1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;^4.8.4&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;webpack&#34;</span><span class="p">:</span> <span class="s2">&#34;^5.75.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;webpack-cli&#34;</span><span class="p">:</span> <span class="s2">&#34;^4.10.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;webpack-dev-server&#34;</span><span class="p">:</span> <span class="s2">&#34;^4.11.1&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;dependencies&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;react&#34;</span><span class="p">:</span> <span class="s2">&#34;^18.2.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;react-dom&#34;</span><span class="p">:</span> <span class="s2">&#34;^18.2.0&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="tsconfigjson"><code>tsconfig.json</code></h4>
+<p>TypeScriptのコンパイラ設定ファイルです。TypeScriptコードをJavaScriptに変換する際のルールを定義します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;compilerOptions&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="s2">&#34;es2015&#34;</span><span class="p">,</span>                         <span class="c1">// 出力するJavaScriptのバージョン (ES5でも可)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;module&#34;</span><span class="p">:</span> <span class="s2">&#34;esnext&#34;</span><span class="p">,</span>                         <span class="c1">// モジュールシステム (Webpackが処理するためesnextが柔軟)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;jsx&#34;</span><span class="p">:</span> <span class="s2">&#34;react-jsx&#34;</span><span class="p">,</span>                         <span class="c1">// JSXの変換方法 (React 17+ の新しいJSXトランスフォーム)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;strict&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                             <span class="c1">// 厳格な型チェックを有効にする
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;esModuleInterop&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                    <span class="c1">// CommonJSモジュールとESモジュールの互換性を高める
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;skipLibCheck&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                       <span class="c1">// 型定義ファイルの型チェックをスキップ (ビルド高速化)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;forceConsistentCasingInFileNames&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>   <span class="c1">// ファイル名の大文字小文字を区別する
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;moduleResolution&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>                 <span class="c1">// モジュール解決戦略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;resolveJsonModule&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                 <span class="c1">// JSONファイルのインポートを許可
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;isolatedModules&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                    <span class="c1">// 各ファイルを独立したモジュールとしてコンパイル
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;noEmit&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                             <span class="c1">// TypeScriptからJSへの出力を行わない (Babel/Webpackが担当)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;allowJs&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                            <span class="c1">// JavaScriptファイルのコンパイルを許可
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;lib&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;dom&#34;</span><span class="p">,</span> <span class="s2">&#34;dom.iterable&#34;</span><span class="p">,</span> <span class="s2">&#34;esnext&#34;</span><span class="p">]</span>    <span class="c1">// 利用可能なライブラリ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;include&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;src&#34;</span><span class="p">]</span>                            <span class="c1">// コンパイル対象のファイル
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h4 id="webpackconfigjs"><code>webpack.config.js</code></h4>
+<p>Webpackのバンドル設定ファイルです。エントリポイント、出力先、ローダー、プラグインなどを定義します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">HtmlWebpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;html-webpack-plugin&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 開発モードに設定 (最適化やデバッグ情報が有効になる)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mode</span><span class="o">:</span> <span class="s2">&#34;development&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1">// エントリポイント (アプリケーションの開始点)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">entry</span><span class="o">:</span> <span class="s2">&#34;./src/index.tsx&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 出力設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">output</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">path</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&#34;dist&#34;</span><span class="p">),</span> <span class="c1">// 出力ディレクトリ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">filename</span><span class="o">:</span> <span class="s2">&#34;bundle.js&#34;</span><span class="p">,</span>                 <span class="c1">// 出力ファイル名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">clean</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>                           <span class="c1">// ビルド前にdistディレクトリをクリーンアップ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// モジュール解決の設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">resolve</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;.ts&#34;</span><span class="p">,</span> <span class="s2">&#34;.tsx&#34;</span><span class="p">,</span> <span class="s2">&#34;.js&#34;</span><span class="p">,</span> <span class="s2">&#34;.jsx&#34;</span><span class="p">],</span> <span class="c1">// インポート時に解決する拡張子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// モジュールルール (ローダーの設定)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\\.(ts|tsx)$/</span><span class="p">,</span> <span class="c1">// .tsまたは.tsxファイルに適用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">exclude</span><span class="o">:</span> <span class="sr">/node_modules/</span><span class="p">,</span> <span class="c1">// node_modulesは除外
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">use</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;babel-loader&#34;</span><span class="p">,</span> <span class="c1">// Babelを使って変換
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">presets</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;@babel/preset-env&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;@babel/preset-react&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;@babel/preset-typescript&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// CSSや画像などのローダーもここに追加できる
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// プラグインの設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="k">new</span> <span class="nx">HtmlWebpackPlugin</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">template</span><span class="o">:</span> <span class="s2">&#34;./src/index.html&#34;</span><span class="p">,</span> <span class="c1">// テンプレートとして使用するHTMLファイル
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">filename</span><span class="o">:</span> <span class="s2">&#34;index.html&#34;</span><span class="p">,</span>       <span class="c1">// 出力されるHTMLファイル名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}),</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 開発サーバーの設定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">devServer</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">static</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">directory</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">&#34;dist&#34;</span><span class="p">),</span> <span class="c1">// 静的ファイルの提供元ディレクトリ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">compress</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// gzip圧縮を有効にする
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">port</span><span class="o">:</span> <span class="mi">3000</span><span class="p">,</span>     <span class="c1">// 開発サーバーのポート番号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">open</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// サーバー起動時にブラウザを自動で開く
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">hot</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>      <span class="c1">// ホットモジュールリプレイスメントを有効にする
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ソースマップの設定 (デバッグ用)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">devtool</span><span class="o">:</span> <span class="s2">&#34;eval-source-map&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>これらの設定ファイルが揃ったら、<code>npm start</code> で開発サーバーを起動し、<code>npm run build</code> で本番用のビルドを行うことができます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></div>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="535">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20221111_react/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">WebpackとBabelでReact/TypeScript開発環境を構築する</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/javascript/" class="badge badge-custom text-decoration-none me-1">JavaScript</a>
+      <a href="/tags/react/" class="badge badge-custom text-decoration-none me-1">React</a>
+      <a href="/tags/typescript/" class="badge badge-custom text-decoration-none me-1">TypeScript</a>
+      <a href="/tags/webpack/" class="badge badge-custom text-decoration-none me-1">Webpack</a>
+      <a href="/tags/babel/" class="badge badge-custom text-decoration-none me-1">Babel</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Next.js on tomato blog</title><link>https://yuhi-sa.github.io/tags/next.js/</link><description>Recent content in Next.js on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 03 May 2024 10:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/next.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Next.js App Routerにおける`use client`の適切な使用法</title><link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link><pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid><description/></item><item><title>Next.jsのApp RouterとPages Router間でのprom-clientメトリクス共有の課題</title><link>https://yuhi-sa.github.io/posts/20231124_t3/1/</link><pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231124_t3/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Next.js on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/next.js/</link>
+    <description>Recent content in Next.js on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 03 May 2024 10:10:00 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/next.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Next.js App Routerにおける`use client`の適切な使用法</title>
+      <link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Next.jsのApp RouterとPages Router間でのprom-clientメトリクス共有の課題</title>
+      <link>https://yuhi-sa.github.io/posts/20231124_t3/1/</link>
+      <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231124_t3/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

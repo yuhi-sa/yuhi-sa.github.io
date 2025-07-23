@@ -1,1 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SSH on tomato blog</title><link>https://yuhi-sa.github.io/tags/ssh/</link><description>Recent content in SSH on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml"/><item><title>踏み台サーバー経由で多段SSH接続する方法</title><link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid><description/></item><item><title>公開鍵認証方式を用いたSSH通信の設定方法</title><link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link><pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid><description/></item><item><title>GitHubへのSSH接続設定</title><link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link><pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid><description/></item><item><title>UbuntuにおけるSSHサーバーの設定</title><link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link><pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSH on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/ssh/</link>
+    <description>Recent content in SSH on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 16 Jul 2022 15:00:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>踏み台サーバー経由で多段SSH接続する方法</title>
+      <link>https://yuhi-sa.github.io/posts/20220716_ssh/1/</link>
+      <pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20220716_ssh/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>公開鍵認証方式を用いたSSH通信の設定方法</title>
+      <link>https://yuhi-sa.github.io/posts/20211121_linux/5/</link>
+      <pubDate>Fri, 03 Dec 2021 10:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20211121_linux/5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHubへのSSH接続設定</title>
+      <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
+      <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>UbuntuにおけるSSHサーバーの設定</title>
+      <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link>
+      <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

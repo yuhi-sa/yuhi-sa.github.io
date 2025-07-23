@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ロボット on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/</link><description>Recent content in ロボット on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/index.xml" rel="self" type="application/rss+xml"/><item><title>強化学習によるROBOTIS OP3の歩行獲得：ROSパッケージのコード解説</title><link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link><pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ロボット on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/</link>
+    <description>Recent content in ロボット on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>強化学習によるROBOTIS OP3の歩行獲得：ROSパッケージのコード解説</title>
+      <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
+      <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

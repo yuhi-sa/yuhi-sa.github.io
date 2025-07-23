@@ -1,15 +1,370 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20240518_db_transaction/1/><meta property="og:type" content="article"><meta property="og:title" content="トランザクションの分離レベルと防げる不整合"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2024-05-18T09:10:00+09:00"><meta property="article:modified_time" content="2024-05-18T09:10:00+09:00"><meta property="article:tag" content="DB"><meta property="article:tag" content="トランザクション"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="トランザクションの分離レベルと防げる不整合"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>トランザクションの分離レベルと防げる不整合 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"トランザクションの分離レベルと防げる不整合","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2024-05-18T09:10:00\u002b09:00","dateModified":"2024-05-18T09:10:00\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20240518_db_transaction\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20240518_db_transaction\/1\/","wordCount":100,"keywords":["DB","トランザクション"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>トランザクションの分離レベルと防げる不整合</h1><div class=article-meta><time datetime=2024-05-18T09:10:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-May 18, 2024
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/db/ class="badge badge-custom" rel=tag itemprop=keywords>DB
-</a><a href=/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/ class="badge badge-custom" rel=tag itemprop=keywords>トランザクション</a></div></header><div class=article-content itemprop=articleBody><h1 id=トランザクションの分離レベルと防げる不整合>トランザクションの分離レベルと防げる不整合</h1><p>データベースにおける<strong>トランザクション</strong>は、一連の操作を一つの論理的な単位として扱い、すべて成功するか、すべて失敗するかのいずれかであることを保証する仕組みです。複数のトランザクションが同時に実行される環境では、データの整合性を保つために**分離レベル（Isolation Level）**が重要になります。</p><h2 id=データベースのトランザクション処理で問題となる不整合>データベースのトランザクション処理で問題となる不整合</h2><p>複数のトランザクションが並行して動作する際に発生しうる代表的なデータ不整合の現象です。</p><h3 id=1-ダーティリード-dirty-read>1. ダーティリード (Dirty Read)</h3><ul><li><strong>現象</strong>: あるトランザクションAが、<strong>別のトランザクションBによって変更されたが、まだコミットされていないデータ</strong>を読み取ってしまう現象です。</li><li><strong>問題点</strong>: もしトランザクションBが後でロールバックされた場合、トランザクションAが読み取ったデータは実際には存在しない無効なデータとなり、データの信頼性が損なわれます。</li></ul><h3 id=2-ノンリピータブルリード-non-repeatable-read>2. ノンリピータブルリード (Non-repeatable Read)</h3><ul><li><strong>現象</strong>: あるトランザクションAが同じデータを複数回読み取る際に、その間に<strong>別のトランザクションBによってデータが更新（または削除）され、異なる結果が返される</strong>現象です。</li><li><strong>問題点</strong>: トランザクションA内で一貫性のないデータが提供されることになり、トランザクションの信頼性や処理結果の正確性が低下します。</li></ul><h3 id=3-ファントムリード-phantom-read>3. ファントムリード (Phantom Read)</h3><ul><li><strong>現象</strong>: 特定の条件でクエリを実行して結果を得た後、同じクエリを再実行した際に、その間に<strong>別のトランザクションによって条件に合致する新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される</strong>現象です。</li><li><strong>問題点</strong>: データセットの整合性が保たれず、集計処理や条件に基づくデータ操作で予期せぬ結果を招く可能性があります。</li></ul><h2 id=トランザクションの分離レベル>トランザクションの分離レベル</h2><p>ANSI/ISO SQL標準では、これらの不整合を防ぐために、以下の4つの分離レベルが定義されています。分離レベルが上がるほど、防げる不整合の種類が増えますが、並行性が低下し、パフォーマンスへの影響が大きくなる可能性があります。</p><h3 id=1-read-uncommitted>1. <code>READ UNCOMMITTED</code></h3><ul><li><strong>防げる不整合</strong>: なし</li><li><strong>特徴</strong>: 最も低い分離レベルです。ダーティリード、ノンリピータブルリード、ファントムリードのすべてが発生する可能性があります。パフォーマンスは最も高いですが、データの一貫性はほとんど保証されません。</li></ul><h3 id=2-read-committed>2. <code>READ COMMITTED</code></h3><ul><li><strong>防げる不整合</strong>: <code>Dirty Read</code></li><li><strong>特徴</strong>: 他のトランザクションが<strong>コミットした後のデータのみ</strong>を読み取ります。これにより、未コミットのデータによるダーティリードは防げます。しかし、ノンリピータブルリードやファントムリードは発生する可能性があります。多くのデータベースシステムでデフォルトの分離レベルとして採用されています。</li></ul><h3 id=3-repeatable-read>3. <code>REPEATABLE READ</code></h3><ul><li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code></li><li><strong>特徴</strong>: トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションによる変更から保護されます。これにより、同じトランザクション内でのデータの再読み取りが一貫します（ノンリピータブルリードを防ぎます）。しかし、ファントムリードは発生する可能性があります。</li></ul><h3 id=4-serializable>4. <code>SERIALIZABLE</code></h3><ul><li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li><li><strong>特徴</strong>: 最も厳格な分離レベルです。トランザクションが他のトランザクションとは完全に独立して（直列に）実行されたかのように動作することを保証します。これにより、上記3つの不整合のすべてを防ぐことができます。しかし、並行性が大幅に低下し、パフォーマンスへの影響が最も大きくなる可能性があります。</li></ul><h3 id=snapshot-分離レベル-一部のdbシステムで提供><code>SNAPSHOT</code> 分離レベル (一部のDBシステムで提供)</h3><ul><li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li><li><strong>特徴</strong>: <code>SERIALIZABLE</code> と同等のデータ一貫性を持ちながら、より高い並行性を実現するために、一部のデータベースシステム（例: SQL Server, Oracle）で提供される分離レベルです。トランザクションが開始された時点のデータベースの<strong>スナップショット</strong>が作成され、トランザクションはそのスナップショットに対して操作を行います。これにより、他のトランザクションによる変更が現在のトランザクションに影響を与えることはありません。</li></ul><p>アプリケーションの要件（データの一貫性、パフォーマンス、並行性）に応じて、適切な分離レベルを選択することが重要です。</p><h2 id=参考>参考</h2><ul><li><a href=https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html>MySQL 8.0 Reference Manual: InnoDB Transaction Isolation Levels</a></li><li><a href=https://www.prisma.io/docs/orm/prisma-client/queries/transactions>Prisma ORM: Transactions</a></li><li><a href=https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB>トランザクション分離レベル - Wikipedia</a></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="100"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>トランザクションの分離レベルと防げる不整合</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/db/ class="badge badge-custom text-decoration-none me-1">DB</a>
-<a href=/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/ class="badge badge-custom text-decoration-none me-1">トランザクション</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="トランザクションの分離レベルと防げる不整合">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2024-05-18T09:10:00&#43;09:00">
+<meta property="article:modified_time" content="2024-05-18T09:10:00&#43;09:00">
+<meta property="article:tag" content="DB"><meta property="article:tag" content="トランザクション">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="トランザクションの分離レベルと防げる不整合">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>トランザクションの分離レベルと防げる不整合 | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "トランザクションの分離レベルと防げる不整合",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2024-05-18T09:10:00\u002b09:00",
+  "dateModified": "2024-05-18T09:10:00\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20240518_db_transaction\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20240518_db_transaction\/1\/",
+  "wordCount":  100 ,
+  "keywords": [
+    "DB", "トランザクション"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">トランザクションの分離レベルと防げる不整合</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2024-05-18T09:10:00&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          May 18, 2024
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/db/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          DB
+        </a>
+        
+        <a href="/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          トランザクション
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="トランザクションの分離レベルと防げる不整合">トランザクションの分離レベルと防げる不整合</h1>
+<p>データベースにおける<strong>トランザクション</strong>は、一連の操作を一つの論理的な単位として扱い、すべて成功するか、すべて失敗するかのいずれかであることを保証する仕組みです。複数のトランザクションが同時に実行される環境では、データの整合性を保つために**分離レベル（Isolation Level）**が重要になります。</p>
+<h2 id="データベースのトランザクション処理で問題となる不整合">データベースのトランザクション処理で問題となる不整合</h2>
+<p>複数のトランザクションが並行して動作する際に発生しうる代表的なデータ不整合の現象です。</p>
+<h3 id="1-ダーティリード-dirty-read">1. ダーティリード (Dirty Read)</h3>
+<ul>
+<li><strong>現象</strong>: あるトランザクションAが、<strong>別のトランザクションBによって変更されたが、まだコミットされていないデータ</strong>を読み取ってしまう現象です。</li>
+<li><strong>問題点</strong>: もしトランザクションBが後でロールバックされた場合、トランザクションAが読み取ったデータは実際には存在しない無効なデータとなり、データの信頼性が損なわれます。</li>
+</ul>
+<h3 id="2-ノンリピータブルリード-non-repeatable-read">2. ノンリピータブルリード (Non-repeatable Read)</h3>
+<ul>
+<li><strong>現象</strong>: あるトランザクションAが同じデータを複数回読み取る際に、その間に<strong>別のトランザクションBによってデータが更新（または削除）され、異なる結果が返される</strong>現象です。</li>
+<li><strong>問題点</strong>: トランザクションA内で一貫性のないデータが提供されることになり、トランザクションの信頼性や処理結果の正確性が低下します。</li>
+</ul>
+<h3 id="3-ファントムリード-phantom-read">3. ファントムリード (Phantom Read)</h3>
+<ul>
+<li><strong>現象</strong>: 特定の条件でクエリを実行して結果を得た後、同じクエリを再実行した際に、その間に<strong>別のトランザクションによって条件に合致する新たな行が追加されたり、既存の行が削除されたりして、異なる結果セットが返される</strong>現象です。</li>
+<li><strong>問題点</strong>: データセットの整合性が保たれず、集計処理や条件に基づくデータ操作で予期せぬ結果を招く可能性があります。</li>
+</ul>
+<h2 id="トランザクションの分離レベル">トランザクションの分離レベル</h2>
+<p>ANSI/ISO SQL標準では、これらの不整合を防ぐために、以下の4つの分離レベルが定義されています。分離レベルが上がるほど、防げる不整合の種類が増えますが、並行性が低下し、パフォーマンスへの影響が大きくなる可能性があります。</p>
+<h3 id="1-read-uncommitted">1. <code>READ UNCOMMITTED</code></h3>
+<ul>
+<li><strong>防げる不整合</strong>: なし</li>
+<li><strong>特徴</strong>: 最も低い分離レベルです。ダーティリード、ノンリピータブルリード、ファントムリードのすべてが発生する可能性があります。パフォーマンスは最も高いですが、データの一貫性はほとんど保証されません。</li>
+</ul>
+<h3 id="2-read-committed">2. <code>READ COMMITTED</code></h3>
+<ul>
+<li><strong>防げる不整合</strong>: <code>Dirty Read</code></li>
+<li><strong>特徴</strong>: 他のトランザクションが<strong>コミットした後のデータのみ</strong>を読み取ります。これにより、未コミットのデータによるダーティリードは防げます。しかし、ノンリピータブルリードやファントムリードは発生する可能性があります。多くのデータベースシステムでデフォルトの分離レベルとして採用されています。</li>
+</ul>
+<h3 id="3-repeatable-read">3. <code>REPEATABLE READ</code></h3>
+<ul>
+<li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code></li>
+<li><strong>特徴</strong>: トランザクションが開始された時点で読み取ったデータは、そのトランザクションが終了するまで他のトランザクションによる変更から保護されます。これにより、同じトランザクション内でのデータの再読み取りが一貫します（ノンリピータブルリードを防ぎます）。しかし、ファントムリードは発生する可能性があります。</li>
+</ul>
+<h3 id="4-serializable">4. <code>SERIALIZABLE</code></h3>
+<ul>
+<li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li>
+<li><strong>特徴</strong>: 最も厳格な分離レベルです。トランザクションが他のトランザクションとは完全に独立して（直列に）実行されたかのように動作することを保証します。これにより、上記3つの不整合のすべてを防ぐことができます。しかし、並行性が大幅に低下し、パフォーマンスへの影響が最も大きくなる可能性があります。</li>
+</ul>
+<h3 id="snapshot-分離レベル-一部のdbシステムで提供"><code>SNAPSHOT</code> 分離レベル (一部のDBシステムで提供)</h3>
+<ul>
+<li><strong>防げる不整合</strong>: <code>Dirty Read</code>, <code>Non-repeatable Read</code>, <code>Phantom Read</code></li>
+<li><strong>特徴</strong>: <code>SERIALIZABLE</code> と同等のデータ一貫性を持ちながら、より高い並行性を実現するために、一部のデータベースシステム（例: SQL Server, Oracle）で提供される分離レベルです。トランザクションが開始された時点のデータベースの<strong>スナップショット</strong>が作成され、トランザクションはそのスナップショットに対して操作を行います。これにより、他のトランザクションによる変更が現在のトランザクションに影響を与えることはありません。</li>
+</ul>
+<p>アプリケーションの要件（データの一貫性、パフォーマンス、並行性）に応じて、適切な分離レベルを選択することが重要です。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/ja/innodb-transaction-isolation-levels.html">MySQL 8.0 Reference Manual: InnoDB Transaction Isolation Levels</a></li>
+<li><a href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions">Prisma ORM: Transactions</a></li>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB">トランザクション分離レベル - Wikipedia</a></li>
+</ul>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="100">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">トランザクションの分離レベルと防げる不整合</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/db/" class="badge badge-custom text-decoration-none me-1">DB</a>
+      <a href="/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" class="badge badge-custom text-decoration-none me-1">トランザクション</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

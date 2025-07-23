@@ -1,132 +1,472 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210631_github_cards/1/><meta property="og:type" content="article"><meta property="og:title" content="GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210631_github_cards/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-06-30T10:17:23+09:00"><meta property="article:modified_time" content="2021-06-30T10:17:23+09:00"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="プログラミング"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-06-30T10:17:23\u002b09:00","dateModified":"2021-06-30T10:17:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210631_github_cards\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210631_github_cards\/1\/","wordCount":411,"keywords":["GitHub","プログラミング"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</h1><div class=article-meta><time datetime=2021-06-30T10:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-June 30, 2021
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/github/ class="badge badge-custom" rel=tag itemprop=keywords>GitHub
-</a><a href=/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class="badge badge-custom" rel=tag itemprop=keywords>プログラミング</a></div></header><div class=article-content itemprop=articleBody><h1 id=githubプロフィールreadmeを彩る動くprofile-summaryを自作>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</h1><h2 id=はじめに>はじめに</h2><p>GitHubのプロフィールREADMEには、自身のGitHubリポジトリのコミット数や使用言語などをグラフィカルに表示するSummary Cardsがあります。以前は以下のものを使用していました。</p><ul><li><a href=https://github.com/vn7n24fzkq/github-profile-summary-cards>GitHub Profile Summary Cards</a></li></ul><p>しかし、動きのあるものが欲しくなり、自分で作成してみることにしました。</p><p><a href=https://github.com/yuhi-sa/github_cards><img src="https://github.com/yuhi-sa/github_cards/blob/master/cards/lang.gif?raw=true" width=50%><img src="https://github.com/yuhi-sa/github_cards/blob/master/cards/top.gif?raw=true" width=50%></a></p><h2 id=リポジトリ情報の取得>リポジトリ情報の取得</h2><p>GitHubのAPIを利用して、リポジトリの情報を取得できます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>https://api.github.com/users/{username}/repos
-</span></span></code></pre></div><p>上記のAPIからは、以下のようなJSON形式の情報を取得できます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>[</span>
-</span></span><span class=line><span class=cl>    <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=mi>312465317</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;node_id&#34;</span><span class=p>:</span> <span class=s2>&#34;MDEwOlJlcG9zaXRvcnkzMTI0NjUzMTc=&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;1day&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;full_name&#34;</span><span class=p>:</span> <span class=s2>&#34;yuhi-sa/1day&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;private&#34;</span><span class=p>:</span> <span class=kc>false</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;owner&#34;</span><span class=p>:</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;login&#34;</span><span class=p>:</span> <span class=s2>&#34;yuhi-sa&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;id&#34;</span><span class=p>:</span> <span class=mi>62089243</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;node_id&#34;</span><span class=p>:</span> <span class=s2>&#34;MDQ6VXNlcjYyMDg5MjQz&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;avatar_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://avatars.githubusercontent.com/u/62089243?v=4&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;gravatar_id&#34;</span><span class=p>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;html_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://github.com/yuhi-sa&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;followers_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/followers&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;following_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/following{/other_user}&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;gists_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/gists{/gist_id}&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;starred_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/starred{/owner}{/repo}&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;subscriptions_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/subscriptions&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;organizations_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/orgs&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;repos_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/repos&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;events_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/events{/privacy}&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;received_events_url&#34;</span><span class=p>:</span> <span class=s2>&#34;https://api.github.com/users/yuhi-sa/received_events&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;User&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;site_admin&#34;</span><span class=p>:</span> <span class=kc>false</span>
-</span></span><span class=line><span class=cl>        <span class=p>},</span>
-</span></span><span class=line><span class=cl><span class=err>...リポジトリ数分続く</span>
-</span></span><span class=line><span class=cl><span class=err>]</span>
-</span></span></code></pre></div><p>この情報から、リポジトリごとの使用言語やサイズを取得します。</p><ul><li><a href=https://docs.github.com/ja/rest/overview/endpoints-available-for-github-apps>GitHub REST APIのドキュメント</a> に、GitHubで利用可能なAPIが記載されています。</li></ul><h2 id=カードの作成>カードの作成</h2><p>Pythonの <code>matplotlib.animation</code> を用いて、角度をずらしながら円グラフをプロットすることで、回転する円グラフを作成しました。</p><ul><li>円グラフを回転させるコードは<a href=https://sabopy.com/py/matplotlib-animation-28/>こちら</a>を参考にしました。</li><li>動画プロットの方法については、<a href=https://yuhi-sa.github.io/posts/20210630/1/>こちらの記事</a>も参照してください。</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>update</span><span class=p>(</span><span class=n>num</span><span class=p>,</span> <span class=n>pie_chart_elements</span><span class=p>,</span> <span class=n>ax</span><span class=p>,</span> <span class=n>colors</span><span class=p>,</span> <span class=n>names</span><span class=p>,</span> <span class=n>sizes</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>pie_chart_elements</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>        <span class=n>ax</span><span class=o>.</span><span class=n>cla</span><span class=p>()</span> <span class=c1># 現在の軸をクリア</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=c1># 円グラフを再描画。startangleで回転角度を調整</span>
-</span></span><span class=line><span class=cl>    <span class=n>pie_chart_elements</span> <span class=o>=</span> <span class=n>ax</span><span class=o>.</span><span class=n>pie</span><span class=p>(</span><span class=n>sizes</span><span class=p>,</span> <span class=n>labels</span><span class=o>=</span><span class=n>names</span><span class=p>,</span> <span class=n>autopct</span><span class=o>=</span><span class=k>lambda</span> <span class=n>p</span><span class=p>:</span> <span class=s1>&#39;</span><span class=si>{:.1f}</span><span class=s1>%&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>p</span><span class=p>)</span> <span class=k>if</span> <span class=n>p</span> <span class=o>&gt;=</span> <span class=mf>2.5</span> <span class=k>else</span> <span class=s1>&#39;&#39;</span><span class=p>,</span>\
-</span></span><span class=line><span class=cl>                                <span class=n>shadow</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>startangle</span><span class=o>=</span><span class=mi>4</span><span class=o>*</span><span class=n>num</span><span class=p>,</span> <span class=n>colors</span><span class=o>=</span><span class=n>colors</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>ax</span><span class=o>.</span><span class=n>set_title</span><span class=p>(</span><span class=s2>&#34;Top Size Repos&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>    <span class=n>names</span><span class=p>,</span> <span class=n>sizes</span> <span class=o>=</span> <span class=n>get_repo_data</span><span class=p>(</span><span class=n>user</span><span class=p>)</span> <span class=c1># APIからデータを取得する関数</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=n>fig</span><span class=p>,</span> <span class=n>ax</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>subplots</span><span class=p>()</span> <span class=c1># FigureとAxesを同時に作成</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=c1># 初期の円グラフを描画</span>
-</span></span><span class=line><span class=cl>    <span class=n>pie_chart_elements</span> <span class=o>=</span> <span class=n>ax</span><span class=o>.</span><span class=n>pie</span><span class=p>(</span><span class=n>sizes</span><span class=p>,</span> <span class=n>labels</span><span class=o>=</span><span class=n>names</span><span class=p>,</span> <span class=n>autopct</span><span class=o>=</span><span class=k>lambda</span> <span class=n>p</span><span class=p>:</span> <span class=s1>&#39;</span><span class=si>{:.1f}</span><span class=s1>%&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>p</span><span class=p>)</span> <span class=k>if</span> <span class=n>p</span> <span class=o>&gt;=</span> <span class=mf>2.5</span> <span class=k>else</span> <span class=s1>&#39;&#39;</span><span class=p>,</span>\
-</span></span><span class=line><span class=cl>                                <span class=n>shadow</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>startangle</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>colors</span><span class=o>=</span><span class=n>colors</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=c1># アニメーションを作成</span>
-</span></span><span class=line><span class=cl>    <span class=c1># frames: update関数に渡される値のシーケンス (0から90まで)</span>
-</span></span><span class=line><span class=cl>    <span class=c1># fargs: update関数に追加で渡す引数</span>
-</span></span><span class=line><span class=cl>    <span class=c1># interval: フレーム間の遅延時間 (ミリ秒)</span>
-</span></span><span class=line><span class=cl>    <span class=n>ani</span> <span class=o>=</span> <span class=n>animation</span><span class=o>.</span><span class=n>FuncAnimation</span><span class=p>(</span><span class=n>fig</span><span class=p>,</span> <span class=n>update</span><span class=p>,</span> <span class=n>frames</span><span class=o>=</span><span class=mi>91</span><span class=p>,</span> <span class=n>fargs</span><span class=o>=</span><span class=p>[</span><span class=n>pie_chart_elements</span><span class=p>,</span> <span class=n>ax</span><span class=p>,</span> <span class=n>colors</span><span class=p>,</span> <span class=n>names</span><span class=p>,</span> <span class=n>sizes</span><span class=p>],</span> <span class=n>interval</span><span class=o>=</span><span class=mi>100</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    <span class=c1># アニメーションをGIFとして保存</span>
-</span></span><span class=line><span class=cl>    <span class=c1># writer: &#39;ffmpeg&#39; を使用する場合、別途ffmpegのインストールが必要</span>
-</span></span><span class=line><span class=cl>    <span class=c1># dpi: 解像度</span>
-</span></span><span class=line><span class=cl>    <span class=n>ani</span><span class=o>.</span><span class=n>save</span><span class=p>(</span><span class=s1>&#39;../cards/top.gif&#39;</span><span class=p>,</span> <span class=n>writer</span><span class=o>=</span><span class=s2>&#34;ffmpeg&#34;</span><span class=p>,</span> <span class=n>dpi</span><span class=o>=</span><span class=mi>100</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span> <span class=c1># アニメーションを表示</span>
-</span></span></code></pre></div><ul><li><a href=https://github.com/yuhi-sa/github_cards/blob/master/src/repoLangs.py>使用言語の円グラフのコード</a></li><li><a href=https://github.com/yuhi-sa/github_cards/blob/master/src/repoTops.py>リポジトリのサイズの円グラフのコード</a></li></ul><h2 id=github-actionsによる自動生成>GitHub Actionsによる自動生成</h2><p>毎日新しいカードが自動生成されるように、GitHub Actionsの <code>schedule</code> イベントを利用しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Create Card</span><span class=w> </span><span class=c># ワークフローの名前</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>master ]</span><span class=w> </span><span class=c># masterブランチへのpushで実行</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>master ]</span><span class=w> </span><span class=c># masterブランチへのプルリクエストで実行</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>fork</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>master ]</span><span class=w> </span><span class=c># リポジリがフォークされた時に実行</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>schedule</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>cron</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;45 10 * * *&#39;</span><span class=w> </span><span class=c># 毎日UTC 10:45に実行 (日本時間19:45)</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=c># ジョブのID</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w> </span><span class=c># Ubuntu環境で実行</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v4</span><span class=w> </span><span class=c># リポジトリをチェックアウト</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Python 3.9</span><span class=w> </span><span class=c># Python 3.9環境をセットアップ</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-python@v5</span><span class=w> </span><span class=c># actions/setup-python@v5 を使用</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>python-version</span><span class=p>:</span><span class=w> </span><span class=m>3.9</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w> </span><span class=c># 依存関係をインストール</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>        python -m pip install --upgrade pip
-</span></span></span><span class=line><span class=cl><span class=sd>        pip install flake8 pytest # flake8とpytestは通常テスト用なので、必要なければ削除
-</span></span></span><span class=line><span class=cl><span class=sd>        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi # requirements.txtがあればインストール</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Remove Old Gifs and Configure Git</span><span class=w> </span><span class=c># 古いGIFを削除し、Gitを設定</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>        rm -f cards/lang.gif cards/top.gif # -f オプションでファイルが存在しなくてもエラーにならない
-</span></span></span><span class=line><span class=cl><span class=sd>        git config user.name &#34;github-actions[bot]&#34; # GitHub Actionsのbotユーザー名
-</span></span></span><span class=line><span class=cl><span class=sd>        git config user.email &#34;github-actions[bot]@users.noreply.github.com&#34; # GitHub Actionsのbotメールアドレス
-</span></span></span><span class=line><span class=cl><span class=sd>        # git add と git commit は、次のステップでまとめて行うのが一般的
-</span></span></span><span class=line><span class=cl><span class=sd>        # git push は、このステップでは行わない
-</span></span></span><span class=line><span class=cl><span class=sd>        </span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Update Card</span><span class=w> </span><span class=c># カードを更新（生成）</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>        bash start.bash # カード生成スクリプトを実行</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Commit and Push Changes</span><span class=w> </span><span class=c># 変更をコミットしてプッシュ</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span></span></span><span class=line><span class=cl><span class=sd>        git add cards/ # 生成されたGIFファイルを追加
-</span></span></span><span class=line><span class=cl><span class=sd>        git commit -m &#34;Update profile summary cards&#34; # コミットメッセージ
-</span></span></span><span class=line><span class=cl><span class=sd>        git push origin master # masterブランチにプッシュ</span><span class=w>
-</span></span></span></code></pre></div><ul><li><a href=https://yuhi-sa.github.io/posts/20210630/2/>GitHub ActionsのYAMLファイルの書き方</a></li></ul><h2 id=使い方>使い方</h2><ol><li><a href=https://github.com/yuhi-sa/github_cards>このリポジトリ</a>をフォーク（Fork）します。</li><li><code>username.txt</code> ファイルを編集し、ご自身のGitHubユーザー名に書き換えます。</li><li>フォークしたリポジトリのGitHub Actionsタブに移動し、ワークフローを手動で実行（<code>Run workflow</code>）します。
-（以降は24時間ごとに自動で更新されます）</li><li>ご自身のGitHubプロフィールREADMEに、以下のMarkdownコードを追記してください。<code>{username}</code> の部分をご自身のGitHubユーザー名に置き換えてください。</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=line><span class=cl><span class=gh># 使用言語の円グラフ
-</span></span></span><span class=line><span class=cl><span class=gh></span>![<span class=nt>Repos per Language</span>](<span class=na>https://github.com/{username}/github_cards/blob/master/cards/lang.gif?raw=true</span>)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=gu>## リポジトリサイズの円グラフ
-</span></span></span><span class=line><span class=cl><span class=gu></span>![<span class=nt>Top Size Repos</span>](<span class=na>https://github.com/{username}/github_cards/blob/master/cards/top.gif?raw=true</span>)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=gh># 横幅を指定する場合の書き方
-</span></span></span><span class=line><span class=cl><span class=gh></span><span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://github.com/{username}/github_cards/blob/master/cards/lang.gif?raw=true&#34;</span> <span class=na>width</span><span class=o>=</span><span class=s>&#34;40%&#34;</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://github.com/{username}/github_cards/blob/master/cards/top.gif?raw=true&#34;</span> <span class=na>width</span><span class=o>=</span><span class=s>&#34;40%&#34;</span><span class=p>&gt;</span>
-</span></span></code></pre></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="411"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210631_github_cards/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/github/ class="badge badge-custom text-decoration-none me-1">GitHub</a>
-<a href=/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class="badge badge-custom text-decoration-none me-1">プログラミング</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20210631_github_cards/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210631_github_cards/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2021-06-30T10:17:23&#43;09:00">
+<meta property="article:modified_time" content="2021-06-30T10:17:23&#43;09:00">
+<meta property="article:tag" content="GitHub"><meta property="article:tag" content="プログラミング">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作 | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2021-06-30T10:17:23\u002b09:00",
+  "dateModified": "2021-06-30T10:17:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210631_github_cards\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20210631_github_cards\/1\/",
+  "wordCount":  411 ,
+  "keywords": [
+    "GitHub", "プログラミング"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2021-06-30T10:17:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          June 30, 2021
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          2 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/github/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          GitHub
+        </a>
+        
+        <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          プログラミング
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="githubプロフィールreadmeを彩る動くprofile-summaryを自作">GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</h1>
+<h2 id="はじめに">はじめに</h2>
+<p>GitHubのプロフィールREADMEには、自身のGitHubリポジトリのコミット数や使用言語などをグラフィカルに表示するSummary Cardsがあります。以前は以下のものを使用していました。</p>
+<ul>
+<li><a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">GitHub Profile Summary Cards</a></li>
+</ul>
+<p>しかし、動きのあるものが欲しくなり、自分で作成してみることにしました。</p>
+<p><a href ="https://github.com/yuhi-sa/github_cards"><img src="https://github.com/yuhi-sa/github_cards/blob/master/cards/lang.gif?raw=true" width="50%"><img src="https://github.com/yuhi-sa/github_cards/blob/master/cards/top.gif?raw=true" width="50%"></a></p>
+<h2 id="リポジトリ情報の取得">リポジトリ情報の取得</h2>
+<p>GitHubのAPIを利用して、リポジトリの情報を取得できます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://api.github.com/users/{username}/repos
+</span></span></code></pre></div><p>上記のAPIからは、以下のようなJSON形式の情報を取得できます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">312465317</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;node_id&#34;</span><span class="p">:</span> <span class="s2">&#34;MDEwOlJlcG9zaXRvcnkzMTI0NjUzMTc=&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;1day&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;full_name&#34;</span><span class="p">:</span> <span class="s2">&#34;yuhi-sa/1day&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;private&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;owner&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;login&#34;</span><span class="p">:</span> <span class="s2">&#34;yuhi-sa&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">62089243</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;node_id&#34;</span><span class="p">:</span> <span class="s2">&#34;MDQ6VXNlcjYyMDg5MjQz&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;avatar_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://avatars.githubusercontent.com/u/62089243?v=4&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;gravatar_id&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;html_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://github.com/yuhi-sa&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;followers_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/followers&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;following_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/following{/other_user}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;gists_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/gists{/gist_id}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;starred_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/starred{/owner}{/repo}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;subscriptions_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/subscriptions&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;organizations_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/orgs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;repos_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/repos&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;events_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/events{/privacy}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;received_events_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://api.github.com/users/yuhi-sa/received_events&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;User&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;site_admin&#34;</span><span class="p">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="err">...リポジトリ数分続く</span>
+</span></span><span class="line"><span class="cl"><span class="err">]</span>
+</span></span></code></pre></div><p>この情報から、リポジトリごとの使用言語やサイズを取得します。</p>
+<ul>
+<li><a href="https://docs.github.com/ja/rest/overview/endpoints-available-for-github-apps">GitHub REST APIのドキュメント</a> に、GitHubで利用可能なAPIが記載されています。</li>
+</ul>
+<h2 id="カードの作成">カードの作成</h2>
+<p>Pythonの <code>matplotlib.animation</code> を用いて、角度をずらしながら円グラフをプロットすることで、回転する円グラフを作成しました。</p>
+<ul>
+<li>円グラフを回転させるコードは<a href="https://sabopy.com/py/matplotlib-animation-28/">こちら</a>を参考にしました。</li>
+<li>動画プロットの方法については、<a href="https://yuhi-sa.github.io/posts/20210630/1/">こちらの記事</a>も参照してください。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">pie_chart_elements</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">sizes</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pie_chart_elements</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span> <span class="c1"># 現在の軸をクリア</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 円グラフを再描画。startangleで回転角度を調整</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pie_chart_elements</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="mf">2.5</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>\
+</span></span><span class="line"><span class="cl">                                <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">num</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&#34;Top Size Repos&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">names</span><span class="p">,</span> <span class="n">sizes</span> <span class="o">=</span> <span class="n">get_repo_data</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="c1"># APIからデータを取得する関数</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span> <span class="c1"># FigureとAxesを同時に作成</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 初期の円グラフを描画</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pie_chart_elements</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="mf">2.5</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>\
+</span></span><span class="line"><span class="cl">                                <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># アニメーションを作成</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># frames: update関数に渡される値のシーケンス (0から90まで)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># fargs: update関数に追加で渡す引数</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># interval: フレーム間の遅延時間 (ミリ秒)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="mi">91</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">[</span><span class="n">pie_chart_elements</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">sizes</span><span class="p">],</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># アニメーションをGIFとして保存</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># writer: &#39;ffmpeg&#39; を使用する場合、別途ffmpegのインストールが必要</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dpi: 解像度</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;../cards/top.gif&#39;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s2">&#34;ffmpeg&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># アニメーションを表示</span>
+</span></span></code></pre></div><ul>
+<li><a href="https://github.com/yuhi-sa/github_cards/blob/master/src/repoLangs.py">使用言語の円グラフのコード</a></li>
+<li><a href="https://github.com/yuhi-sa/github_cards/blob/master/src/repoTops.py">リポジトリのサイズの円グラフのコード</a></li>
+</ul>
+<h2 id="github-actionsによる自動生成">GitHub Actionsによる自動生成</h2>
+<p>毎日新しいカードが自動生成されるように、GitHub Actionsの <code>schedule</code> イベントを利用しました。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create Card</span><span class="w"> </span><span class="c"># ワークフローの名前</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">master ]</span><span class="w"> </span><span class="c"># masterブランチへのpushで実行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">master ]</span><span class="w"> </span><span class="c"># masterブランチへのプルリクエストで実行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">fork</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="l">master ]</span><span class="w"> </span><span class="c"># リポジリがフォークされた時に実行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;45 10 * * *&#39;</span><span class="w"> </span><span class="c"># 毎日UTC 10:45に実行 (日本時間19:45)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="c"># ジョブのID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w"> </span><span class="c"># Ubuntu環境で実行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w"> </span><span class="c"># リポジトリをチェックアウト</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up Python 3.9</span><span class="w"> </span><span class="c"># Python 3.9環境をセットアップ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-python@v5</span><span class="w"> </span><span class="c"># actions/setup-python@v5 を使用</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="m">3.9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install dependencies</span><span class="w"> </span><span class="c"># 依存関係をインストール</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        python -m pip install --upgrade pip
+</span></span></span><span class="line"><span class="cl"><span class="sd">        pip install flake8 pytest # flake8とpytestは通常テスト用なので、必要なければ削除
+</span></span></span><span class="line"><span class="cl"><span class="sd">        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi # requirements.txtがあればインストール</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Remove Old Gifs and Configure Git</span><span class="w"> </span><span class="c"># 古いGIFを削除し、Gitを設定</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        rm -f cards/lang.gif cards/top.gif # -f オプションでファイルが存在しなくてもエラーにならない
+</span></span></span><span class="line"><span class="cl"><span class="sd">        git config user.name &#34;github-actions[bot]&#34; # GitHub Actionsのbotユーザー名
+</span></span></span><span class="line"><span class="cl"><span class="sd">        git config user.email &#34;github-actions[bot]@users.noreply.github.com&#34; # GitHub Actionsのbotメールアドレス
+</span></span></span><span class="line"><span class="cl"><span class="sd">        # git add と git commit は、次のステップでまとめて行うのが一般的
+</span></span></span><span class="line"><span class="cl"><span class="sd">        # git push は、このステップでは行わない
+</span></span></span><span class="line"><span class="cl"><span class="sd">        </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update Card</span><span class="w"> </span><span class="c"># カードを更新（生成）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        bash start.bash # カード生成スクリプトを実行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Commit and Push Changes</span><span class="w"> </span><span class="c"># 変更をコミットしてプッシュ</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        git add cards/ # 生成されたGIFファイルを追加
+</span></span></span><span class="line"><span class="cl"><span class="sd">        git commit -m &#34;Update profile summary cards&#34; # コミットメッセージ
+</span></span></span><span class="line"><span class="cl"><span class="sd">        git push origin master # masterブランチにプッシュ</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><a href="https://yuhi-sa.github.io/posts/20210630/2/">GitHub ActionsのYAMLファイルの書き方</a></li>
+</ul>
+<h2 id="使い方">使い方</h2>
+<ol>
+<li><a href="https://github.com/yuhi-sa/github_cards">このリポジトリ</a>をフォーク（Fork）します。</li>
+<li><code>username.txt</code> ファイルを編集し、ご自身のGitHubユーザー名に書き換えます。</li>
+<li>フォークしたリポジトリのGitHub Actionsタブに移動し、ワークフローを手動で実行（<code>Run workflow</code>）します。
+（以降は24時間ごとに自動で更新されます）</li>
+<li>ご自身のGitHubプロフィールREADMEに、以下のMarkdownコードを追記してください。<code>{username}</code> の部分をご自身のGitHubユーザー名に置き換えてください。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gh"># 使用言語の円グラフ
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>![<span class="nt">Repos per Language</span>](<span class="na">https://github.com/{username}/github_cards/blob/master/cards/lang.gif?raw=true</span>)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## リポジトリサイズの円グラフ
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>![<span class="nt">Top Size Repos</span>](<span class="na">https://github.com/{username}/github_cards/blob/master/cards/top.gif?raw=true</span>)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh"># 横幅を指定する場合の書き方
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://github.com/{username}/github_cards/blob/master/cards/lang.gif?raw=true&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;40%&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://github.com/{username}/github_cards/blob/master/cards/top.gif?raw=true&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;40%&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="411">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210631_github_cards/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/github/" class="badge badge-custom text-decoration-none me-1">GitHub</a>
+      <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" class="badge badge-custom text-decoration-none me-1">プログラミング</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

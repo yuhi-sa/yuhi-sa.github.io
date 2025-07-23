@@ -1,22 +1,377 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20211121_linux/6/><meta property="og:type" content="article"><meta property="og:title" content="Linuxのログファイルと閲覧コマンド"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/6/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-12-30T10:00:23+09:00"><meta property="article:modified_time" content="2021-12-30T10:00:23+09:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="ログ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Linuxのログファイルと閲覧コマンド"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Linuxのログファイルと閲覧コマンド | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"Linuxのログファイルと閲覧コマンド","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-12-30T10:00:23\u002b09:00","dateModified":"2021-12-30T10:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/6\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/6\/","wordCount":101,"keywords":["Linux","ログ"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Linuxのログファイルと閲覧コマンド</h1><div class=article-meta><time datetime=2021-12-30T10:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-December 30, 2021
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/linux/ class="badge badge-custom" rel=tag itemprop=keywords>Linux
-</a><a href=/tags/%E3%83%AD%E3%82%B0/ class="badge badge-custom" rel=tag itemprop=keywords>ログ</a></div></header><div class=article-content itemprop=articleBody><h1 id=linuxのログファイルと閲覧コマンド>Linuxのログファイルと閲覧コマンド</h1><p>Linuxシステムは、システムの動作状況、エラー、セキュリティイベントなどを記録するために様々なログファイルを生成します。これらのログファイルは、システムの監視、トラブルシューティング、セキュリティ監査に不可欠です。</p><h2 id=主要なログファイル>主要なログファイル</h2><p>ログファイルは通常 <code>/var/log</code> ディレクトリ以下に保存されています。</p><h3 id=1-varlogmessages-または-syslog>1. <code>/var/log/messages</code> (または <code>syslog</code>)</h3><ul><li><strong>内容</strong>: システム全体の一般的な情報、カーネルメッセージ、システムデーモンからのメッセージ、ハードウェア関連のイベントなどが記録されます。</li><li><strong>場所</strong>: ディストリビューションによってファイル名が異なります。<ul><li>Red Hat系 (CentOS, Fedora): <code>/var/log/messages</code></li><li>Debian系 (Ubuntu): <code>/var/log/syslog</code></li></ul></li></ul><h3 id=2-varlogsecure-または-authlog>2. <code>/var/log/secure</code> (または <code>auth.log</code>)</h3><ul><li><strong>内容</strong>: 認証関連のイベント、セキュリティ関連の情報が記録されます。ログイン試行、sudoコマンドの実行、SSH接続などが含まれます。</li><li><strong>場所</strong>:<ul><li>Red Hat系: <code>/var/log/secure</code></li><li>Debian系: <code>/var/log/auth.log</code></li></ul></li></ul><h3 id=3-varlogwtmp>3. <code>/var/log/wtmp</code></h3><ul><li><strong>内容</strong>: システムへのログインおよびログアウトの履歴が記録されます。バイナリ形式で保存されており、直接テキストエディタで開いても読めません。</li><li><strong>閲覧コマンド</strong>: <code>last</code><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>last
-</span></span></code></pre></div>このコマンドは、ユーザーのログイン/ログアウト履歴、システムのリブート履歴などを表示します。</li></ul><h3 id=4-varrunutmp-または-varlogutmp>4. <code>/var/run/utmp</code> (または <code>/var/log/utmp</code>)</h3><ul><li><strong>内容</strong>: 現在ログインしているユーザーの情報が記録されます。これもバイナリ形式です。</li><li><strong>閲覧コマンド</strong>: <code>who</code>, <code>w</code>, <code>users</code><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>who    <span class=c1># 現在ログインしているユーザーの一覧</span>
-</span></span><span class=line><span class=cl>w      <span class=c1># 現在ログインしているユーザーと、そのユーザーが実行しているプロセス</span>
-</span></span><span class=line><span class=cl>users  <span class=c1># 現在ログインしているユーザー名のみ</span>
-</span></span></code></pre></div></li></ul><h3 id=5-varloglastlog>5. <code>/var/log/lastlog</code></h3><ul><li><strong>内容</strong>: 各ユーザーの最終ログイン日時が記録されます。これもバイナリ形式です。</li><li><strong>閲覧コマンド</strong>: <code>lastlog</code><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>lastlog
-</span></span></code></pre></div>このコマンドは、システム上の全ユーザーの最終ログイン情報を表示します。</li></ul><h2 id=ログファイルの閲覧と管理>ログファイルの閲覧と管理</h2><p>ログファイルは時間とともに大きくなるため、定期的な管理が必要です。</p><ul><li><strong>リアルタイム監視</strong>: <code>tail -f /var/log/syslog</code> のように <code>-f</code> オプションを付けて <code>tail</code> コマンドを使用すると、ログファイルの末尾に追記される内容をリアルタイムで表示できます。</li><li><strong>検索</strong>: <code>grep</code> コマンドを使って、特定のキーワードを含む行を検索できます。<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>grep <span class=s2>&#34;error&#34;</span> /var/log/messages
-</span></span></code></pre></div></li><li><strong>ページング</strong>: <code>less</code> や <code>more</code> コマンドを使って、長いログファイルをページ単位で閲覧できます。<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>less /var/log/secure
-</span></span></code></pre></div></li><li><strong>ログローテーション</strong>: <code>logrotate</code> サービスが、ログファイルを定期的に圧縮、削除、または新しいファイルに切り替えることで、ディスク容量の消費を抑えます。設定は <code>/etc/logrotate.conf</code> や <code>/etc/logrotate.d/</code> ディレクトリ内のファイルで行われます。</li></ul><p>これらのログファイルとコマンドを理解することで、Linuxシステムの健全性を維持し、問題発生時に迅速に対応できるようになります。</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="101"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20211121_linux/6/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Linuxのログファイルと閲覧コマンド</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/linux/ class="badge badge-custom text-decoration-none me-1">Linux</a>
-<a href=/tags/%E3%83%AD%E3%82%B0/ class="badge badge-custom text-decoration-none me-1">ログ</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20211121_linux/6/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linuxのログファイルと閲覧コマンド">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_linux/6/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2021-12-30T10:00:23&#43;09:00">
+<meta property="article:modified_time" content="2021-12-30T10:00:23&#43;09:00">
+<meta property="article:tag" content="Linux"><meta property="article:tag" content="ログ">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="Linuxのログファイルと閲覧コマンド">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>Linuxのログファイルと閲覧コマンド | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Linuxのログファイルと閲覧コマンド",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2021-12-30T10:00:23\u002b09:00",
+  "dateModified": "2021-12-30T10:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/6\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20211121_linux\/6\/",
+  "wordCount":  101 ,
+  "keywords": [
+    "Linux", "ログ"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">Linuxのログファイルと閲覧コマンド</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2021-12-30T10:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          December 30, 2021
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/linux/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Linux
+        </a>
+        
+        <a href="/tags/%E3%83%AD%E3%82%B0/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          ログ
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="linuxのログファイルと閲覧コマンド">Linuxのログファイルと閲覧コマンド</h1>
+<p>Linuxシステムは、システムの動作状況、エラー、セキュリティイベントなどを記録するために様々なログファイルを生成します。これらのログファイルは、システムの監視、トラブルシューティング、セキュリティ監査に不可欠です。</p>
+<h2 id="主要なログファイル">主要なログファイル</h2>
+<p>ログファイルは通常 <code>/var/log</code> ディレクトリ以下に保存されています。</p>
+<h3 id="1-varlogmessages-または-syslog">1. <code>/var/log/messages</code> (または <code>syslog</code>)</h3>
+<ul>
+<li><strong>内容</strong>: システム全体の一般的な情報、カーネルメッセージ、システムデーモンからのメッセージ、ハードウェア関連のイベントなどが記録されます。</li>
+<li><strong>場所</strong>: ディストリビューションによってファイル名が異なります。
+<ul>
+<li>Red Hat系 (CentOS, Fedora): <code>/var/log/messages</code></li>
+<li>Debian系 (Ubuntu): <code>/var/log/syslog</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-varlogsecure-または-authlog">2. <code>/var/log/secure</code> (または <code>auth.log</code>)</h3>
+<ul>
+<li><strong>内容</strong>: 認証関連のイベント、セキュリティ関連の情報が記録されます。ログイン試行、sudoコマンドの実行、SSH接続などが含まれます。</li>
+<li><strong>場所</strong>:
+<ul>
+<li>Red Hat系: <code>/var/log/secure</code></li>
+<li>Debian系: <code>/var/log/auth.log</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-varlogwtmp">3. <code>/var/log/wtmp</code></h3>
+<ul>
+<li><strong>内容</strong>: システムへのログインおよびログアウトの履歴が記録されます。バイナリ形式で保存されており、直接テキストエディタで開いても読めません。</li>
+<li><strong>閲覧コマンド</strong>: <code>last</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">last
+</span></span></code></pre></div>このコマンドは、ユーザーのログイン/ログアウト履歴、システムのリブート履歴などを表示します。</li>
+</ul>
+<h3 id="4-varrunutmp-または-varlogutmp">4. <code>/var/run/utmp</code> (または <code>/var/log/utmp</code>)</h3>
+<ul>
+<li><strong>内容</strong>: 現在ログインしているユーザーの情報が記録されます。これもバイナリ形式です。</li>
+<li><strong>閲覧コマンド</strong>: <code>who</code>, <code>w</code>, <code>users</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">who    <span class="c1"># 現在ログインしているユーザーの一覧</span>
+</span></span><span class="line"><span class="cl">w      <span class="c1"># 現在ログインしているユーザーと、そのユーザーが実行しているプロセス</span>
+</span></span><span class="line"><span class="cl">users  <span class="c1"># 現在ログインしているユーザー名のみ</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="5-varloglastlog">5. <code>/var/log/lastlog</code></h3>
+<ul>
+<li><strong>内容</strong>: 各ユーザーの最終ログイン日時が記録されます。これもバイナリ形式です。</li>
+<li><strong>閲覧コマンド</strong>: <code>lastlog</code>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">lastlog
+</span></span></code></pre></div>このコマンドは、システム上の全ユーザーの最終ログイン情報を表示します。</li>
+</ul>
+<h2 id="ログファイルの閲覧と管理">ログファイルの閲覧と管理</h2>
+<p>ログファイルは時間とともに大きくなるため、定期的な管理が必要です。</p>
+<ul>
+<li><strong>リアルタイム監視</strong>: <code>tail -f /var/log/syslog</code> のように <code>-f</code> オプションを付けて <code>tail</code> コマンドを使用すると、ログファイルの末尾に追記される内容をリアルタイムで表示できます。</li>
+<li><strong>検索</strong>: <code>grep</code> コマンドを使って、特定のキーワードを含む行を検索できます。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grep <span class="s2">&#34;error&#34;</span> /var/log/messages
+</span></span></code></pre></div></li>
+<li><strong>ページング</strong>: <code>less</code> や <code>more</code> コマンドを使って、長いログファイルをページ単位で閲覧できます。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">less /var/log/secure
+</span></span></code></pre></div></li>
+<li><strong>ログローテーション</strong>: <code>logrotate</code> サービスが、ログファイルを定期的に圧縮、削除、または新しいファイルに切り替えることで、ディスク容量の消費を抑えます。設定は <code>/etc/logrotate.conf</code> や <code>/etc/logrotate.d/</code> ディレクトリ内のファイルで行われます。</li>
+</ul>
+<p>これらのログファイルとコマンドを理解することで、Linuxシステムの健全性を維持し、問題発生時に迅速に対応できるようになります。</p>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="101">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211121_linux/6/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Linuxのログファイルと閲覧コマンド</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/linux/" class="badge badge-custom text-decoration-none me-1">Linux</a>
+      <a href="/tags/%E3%83%AD%E3%82%B0/" class="badge badge-custom text-decoration-none me-1">ログ</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

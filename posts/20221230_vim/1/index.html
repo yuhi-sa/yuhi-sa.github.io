@@ -1,49 +1,466 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20221230_vim/1/><meta property="og:type" content="article"><meta property="og:title" content="Vimの基本的な使い方とおすすめプラグイン"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20221230_vim/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2022-12-30T09:00:23+09:00"><meta property="article:modified_time" content="2022-12-30T09:00:23+09:00"><meta property="article:tag" content="Vim"><meta property="article:tag" content="エディタ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Vimの基本的な使い方とおすすめプラグイン"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Vimの基本的な使い方とおすすめプラグイン | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"Vimの基本的な使い方とおすすめプラグイン","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2022-12-30T09:00:23\u002b09:00","dateModified":"2022-12-30T09:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20221230_vim\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20221230_vim\/1\/","wordCount":246,"keywords":["Vim","エディタ"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Vimの基本的な使い方とおすすめプラグイン</h1><div class=article-meta><time datetime=2022-12-30T09:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-December 30, 2022
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/vim/ class="badge badge-custom" rel=tag itemprop=keywords>Vim
-</a><a href=/tags/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF/ class="badge badge-custom" rel=tag itemprop=keywords>エディタ</a></div></header><div class=article-content itemprop=articleBody><h1 id=vimの基本的な使い方とおすすめプラグイン>Vimの基本的な使い方とおすすめプラグイン</h1><p>Vimは、強力なテキストエディタであり、その効率的な操作性から多くの開発者に愛用されています。ここでは、Vimの基本的な操作方法と、開発効率を向上させるためのおすすめプラグインを紹介します。</p><h2 id=vimの基本操作>Vimの基本操作</h2><p>Vimには複数のモードがあり、それぞれのモードで異なる操作が可能です。</p><h3 id=モード切り替え>モード切り替え</h3><ul><li><code>i</code>: <strong>挿入モード (Insert Mode)</strong>。テキストの入力ができます。</li><li><code>Esc</code> キー: <strong>ノーマルモード (Normal Mode)</strong>。コマンドの実行やカーソル移動ができます。</li><li><code>v</code>: <strong>ビジュアルモード (Visual Mode)</strong>。テキストを選択して操作できます。</li><li><code>:</code>: <strong>コマンドラインモード (Command-line Mode)</strong>。コマンドを入力して実行できます。</li></ul><h3 id=ノーマルモードでの移動>ノーマルモードでの移動</h3><ul><li><code>h</code>: 左へ移動</li><li><code>j</code>: 下へ移動</li><li><code>k</code>: 上へ移動</li><li><code>l</code>: 右へ移動</li><li><code>w</code>: 次の単語の先頭へ移動</li><li><code>b</code>: 前の単語の先頭へ移動</li><li><code>{</code>: 段落の先頭へ移動</li><li><code>}</code>: 段落の末尾へ移動</li><li><code>gg</code>: ファイルの先頭へ移動</li><li><code>G</code>: ファイルの末尾へ移動</li><li><code>0</code>: 行の先頭へ移動</li><li><code>$</code>: 行の末尾へ移動</li></ul><h3 id=ファイルの保存と終了>ファイルの保存と終了</h3><ul><li><code>:w</code>: 上書き保存</li><li><code>:q</code>: 編集終了（変更がない場合のみ）</li><li><code>:q!</code>: 変更を破棄して強制終了</li><li><code>:wq</code>: 保存して終了</li><li><code>:x</code>: 保存して終了（<code>:wq</code> とほぼ同じ）</li></ul><h3 id=ノーマルモードでの操作>ノーマルモードでの操作</h3><ul><li><code>x</code>: カーソル位置の1文字を削除</li><li><code>dd</code>: 現在の行を削除</li><li><code>dw</code>: カーソル位置から単語の終わりまでを削除</li><li><code>2dd</code>: 現在の行から2行を削除</li><li><code>u</code>: 直前の操作を取り消し (Undo)</li><li><code>Ctrl + r</code>: 取り消した操作をやり直し (Redo)</li><li><code>yy</code>: 現在の行をコピー (Yank)</li><li><code>p</code>: カーソル位置の<strong>下</strong>にペースト</li><li><code>P</code>: カーソル位置の<strong>上</strong>にペースト</li><li><code>2yy</code>: 現在の行から2行をコピー</li><li><code>.</code>: 直前の操作を繰り返す (Repeat)</li></ul><h3 id=検索と置換>検索と置換</h3><ul><li><code>/検索内容</code>: 下方向へ検索</li><li><code>?検索内容</code>: 上方向へ検索</li><li><code>n</code>: 次の検索結果へ移動</li><li><code>N</code>: 前の検索結果へ移動</li><li><code>:%s/置換前/置換後/g</code>: ファイル全体で一括置換</li><li><code>:%s/置換前/置換後/gc</code>: ファイル全体で一括置換（確認あり）</li></ul><h3 id=その他の便利な操作>その他の便利な操作</h3><ul><li><code>o</code>: 現在の行の下に新しい行を挿入し、挿入モードへ移行</li><li><code>O</code>: 現在の行の上に新しい行を挿入し、挿入モードへ移行</li><li><code>J</code>: 現在の行と次の行を連結</li></ul><h2 id=vimのプラグイン>Vimのプラグイン</h2><p>Vimの機能を拡張するためには、プラグインマネージャーとプラグインの導入が不可欠です。</p><h3 id=vim-plug>Vim Plug</h3><ul><li>Vimの軽量プラグインマネージャーです。</li><li><a href=https://github.com/junegunn/vim-plug>https://github.com/junegunn/vim-plug</a></li></ul><h3 id=おすすめプラグイン>おすすめプラグイン</h3><ul><li><strong>vim-horizon</strong>: Vimのカラースキームを変更するプラグイン。<ul><li><a href=https://github.com/ntk148v/vim-horizon>https://github.com/ntk148v/vim-horizon</a></li></ul></li><li><strong>NERDTree</strong>: ディレクトリツリーをサイドバーに表示するプラグイン。<ul><li><a href=https://github.com/preservim/nerdtree>https://github.com/preservim/nerdtree</a></li></ul></li><li><strong>fzf</strong>: 高速なファイル検索、バッファ検索、履歴検索などができるファジーファインダー。<ul><li><a href=https://github.com/junegunn/fzf>https://github.com/junegunn/fzf</a></li></ul></li><li><strong>vim-fugitive</strong>: VimからGitコマンドを操作できるプラグイン。<ul><li><a href=https://github.com/tpope/vim-fugitive>https://github.com/tpope/vim-fugitive</a></li></ul></li><li><strong>vim-gitgutter</strong>: Gitの変更差分（追加、変更、削除）を行番号の横に表示するプラグイン。<ul><li><a href=https://github.com/airblade/vim-gitgutter>https://github.com/airblade/vim-gitgutter</a></li></ul></li><li><strong>vim-commentary</strong>: <code>gcc</code> コマンドで簡単にコメントアウト/アンコメントできるプラグイン。<ul><li><a href=https://github.com/tpope/vim-commentary>https://github.com/tpope/vim-commentary</a></li></ul></li><li><strong>coc.nvim</strong>: コード補完、LSP（Language Server Protocol）サポート、スニペットなど、IDEのような機能を提供するプラグイン。<ul><li><a href=https://github.com/neoclide/coc.nvim>https://github.com/neoclide/coc.nvim</a></li></ul></li></ul><h3 id=vimrc-設定例><code>.vimrc</code> 設定例</h3><p><code>~/.vimrc</code> ファイルに以下の設定を記述することで、Vimの動作やプラグインをカスタマイズできます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-vim data-lang=vim><span class=line><span class=cl><span class=c>&#34; シェルをzshに設定 (お使いのシェルに合わせて変更)</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>shell</span><span class=p>=</span><span class=sr>/bin/</span><span class=nx>zsh</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; インデント設定</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>shiftwidth</span><span class=p>=</span><span class=m>4</span>    <span class=c>&#34; 自動インデントの幅</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>tabstop</span><span class=p>=</span><span class=m>4</span>       <span class=c>&#34; タブ文字の表示幅</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>expandtab</span>       <span class=c>&#34; タブをスペースに変換</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>autoindent</span>      <span class=c>&#34; 自動インデントを有効にする</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; 検索設定</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>hlsearch</span>        <span class=c>&#34; 検索結果をハイライト表示</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; クリップボード設定 (システムクリップボードと連携)</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>clipboard</span><span class=p>=</span><span class=nx>unnamed</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; シンタックスハイライトを有効にする</span>
-</span></span><span class=line><span class=cl><span class=k>syntax</span> <span class=nx>on</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; Vim Plugの初期化</span>
-</span></span><span class=line><span class=cl><span class=nx>call</span> <span class=nx>plug</span>#<span class=nx>begin</span><span class=p>()</span>
-</span></span><span class=line><span class=cl><span class=nx>Plug</span> <span class=s1>&#39;ntk148v/vim-horizon&#39;</span>
-</span></span><span class=line><span class=cl><span class=nx>Plug</span> <span class=s1>&#39;preservim/nerdtree&#39;</span>
-</span></span><span class=line><span class=cl><span class=nx>Plug</span> <span class=s1>&#39;junegunn/fzf&#39;</span><span class=p>,</span> { <span class=s1>&#39;do&#39;</span>: { <span class=p>-&gt;</span> <span class=nx>fzf</span>#<span class=nx>install</span><span class=p>()</span> } }
-</span></span><span class=line><span class=cl><span class=nx>Plug</span> <span class=s1>&#39;neoclide/coc.nvim&#39;</span><span class=p>,</span> {<span class=s1>&#39;branch&#39;</span>: <span class=s1>&#39;release&#39;</span>}
-</span></span><span class=line><span class=cl><span class=nx>call</span> <span class=nx>plug</span>#<span class=nx>end</span><span class=p>()</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; カラースキームの設定</span>
-</span></span><span class=line><span class=cl><span class=k>set</span> <span class=nx>termguicolors</span>   <span class=c>&#34; ターミナルのTrue Colorを有効にする (カラースキームが正しく表示されるように)</span>
-</span></span><span class=line><span class=cl><span class=k>colorscheme</span> <span class=nx>horizon</span> <span class=c>&#34; horizonカラースキームを適用</span>
-</span></span><span class=line><span class=cl><span class=c>
-</span></span></span><span class=line><span class=cl><span class=c>&#34; lightline.vim の設定例 (ステータスラインをカスタマイズするプラグイン)</span>
-</span></span><span class=line><span class=cl><span class=c>&#34; lightline.vim を使用する場合は、Plug &#39;itchyny/lightline.vim&#39; も追加</span>
-</span></span><span class=line><span class=cl><span class=c>&#34; let g:lightline = {}</span>
-</span></span><span class=line><span class=cl><span class=c>&#34; let g:lightline.colorscheme = &#39;horizon&#39;</span>
-</span></span></code></pre></div><h2 id=参考>参考</h2><ul><li><a href=https://www.udemy.com/course/vim-tmux-zsh/>現役シリコンバレーエンジニアが教える NeoVim(VIM) + Tmux + Zsh 入門</a></li><li><a href=https://vimhelp.org/>Vim documentation</a></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="246"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20221230_vim/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Vimの基本的な使い方とおすすめプラグイン</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/vim/ class="badge badge-custom text-decoration-none me-1">Vim</a>
-<a href=/tags/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF/ class="badge badge-custom text-decoration-none me-1">エディタ</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20221230_vim/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vimの基本的な使い方とおすすめプラグイン">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20221230_vim/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2022-12-30T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2022-12-30T09:00:23&#43;09:00">
+<meta property="article:tag" content="Vim"><meta property="article:tag" content="エディタ">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="Vimの基本的な使い方とおすすめプラグイン">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>Vimの基本的な使い方とおすすめプラグイン | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Vimの基本的な使い方とおすすめプラグイン",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2022-12-30T09:00:23\u002b09:00",
+  "dateModified": "2022-12-30T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20221230_vim\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20221230_vim\/1\/",
+  "wordCount":  246 ,
+  "keywords": [
+    "Vim", "エディタ"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">Vimの基本的な使い方とおすすめプラグイン</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2022-12-30T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          December 30, 2022
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          2 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/vim/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Vim
+        </a>
+        
+        <a href="/tags/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          エディタ
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="vimの基本的な使い方とおすすめプラグイン">Vimの基本的な使い方とおすすめプラグイン</h1>
+<p>Vimは、強力なテキストエディタであり、その効率的な操作性から多くの開発者に愛用されています。ここでは、Vimの基本的な操作方法と、開発効率を向上させるためのおすすめプラグインを紹介します。</p>
+<h2 id="vimの基本操作">Vimの基本操作</h2>
+<p>Vimには複数のモードがあり、それぞれのモードで異なる操作が可能です。</p>
+<h3 id="モード切り替え">モード切り替え</h3>
+<ul>
+<li><code>i</code>: <strong>挿入モード (Insert Mode)</strong>。テキストの入力ができます。</li>
+<li><code>Esc</code> キー: <strong>ノーマルモード (Normal Mode)</strong>。コマンドの実行やカーソル移動ができます。</li>
+<li><code>v</code>: <strong>ビジュアルモード (Visual Mode)</strong>。テキストを選択して操作できます。</li>
+<li><code>:</code>: <strong>コマンドラインモード (Command-line Mode)</strong>。コマンドを入力して実行できます。</li>
+</ul>
+<h3 id="ノーマルモードでの移動">ノーマルモードでの移動</h3>
+<ul>
+<li><code>h</code>: 左へ移動</li>
+<li><code>j</code>: 下へ移動</li>
+<li><code>k</code>: 上へ移動</li>
+<li><code>l</code>: 右へ移動</li>
+<li><code>w</code>: 次の単語の先頭へ移動</li>
+<li><code>b</code>: 前の単語の先頭へ移動</li>
+<li><code>{</code>: 段落の先頭へ移動</li>
+<li><code>}</code>: 段落の末尾へ移動</li>
+<li><code>gg</code>: ファイルの先頭へ移動</li>
+<li><code>G</code>: ファイルの末尾へ移動</li>
+<li><code>0</code>: 行の先頭へ移動</li>
+<li><code>$</code>: 行の末尾へ移動</li>
+</ul>
+<h3 id="ファイルの保存と終了">ファイルの保存と終了</h3>
+<ul>
+<li><code>:w</code>: 上書き保存</li>
+<li><code>:q</code>: 編集終了（変更がない場合のみ）</li>
+<li><code>:q!</code>: 変更を破棄して強制終了</li>
+<li><code>:wq</code>: 保存して終了</li>
+<li><code>:x</code>: 保存して終了（<code>:wq</code> とほぼ同じ）</li>
+</ul>
+<h3 id="ノーマルモードでの操作">ノーマルモードでの操作</h3>
+<ul>
+<li><code>x</code>: カーソル位置の1文字を削除</li>
+<li><code>dd</code>: 現在の行を削除</li>
+<li><code>dw</code>: カーソル位置から単語の終わりまでを削除</li>
+<li><code>2dd</code>: 現在の行から2行を削除</li>
+<li><code>u</code>: 直前の操作を取り消し (Undo)</li>
+<li><code>Ctrl + r</code>: 取り消した操作をやり直し (Redo)</li>
+<li><code>yy</code>: 現在の行をコピー (Yank)</li>
+<li><code>p</code>: カーソル位置の<strong>下</strong>にペースト</li>
+<li><code>P</code>: カーソル位置の<strong>上</strong>にペースト</li>
+<li><code>2yy</code>: 現在の行から2行をコピー</li>
+<li><code>.</code>: 直前の操作を繰り返す (Repeat)</li>
+</ul>
+<h3 id="検索と置換">検索と置換</h3>
+<ul>
+<li><code>/検索内容</code>: 下方向へ検索</li>
+<li><code>?検索内容</code>: 上方向へ検索</li>
+<li><code>n</code>: 次の検索結果へ移動</li>
+<li><code>N</code>: 前の検索結果へ移動</li>
+<li><code>:%s/置換前/置換後/g</code>: ファイル全体で一括置換</li>
+<li><code>:%s/置換前/置換後/gc</code>: ファイル全体で一括置換（確認あり）</li>
+</ul>
+<h3 id="その他の便利な操作">その他の便利な操作</h3>
+<ul>
+<li><code>o</code>: 現在の行の下に新しい行を挿入し、挿入モードへ移行</li>
+<li><code>O</code>: 現在の行の上に新しい行を挿入し、挿入モードへ移行</li>
+<li><code>J</code>: 現在の行と次の行を連結</li>
+</ul>
+<h2 id="vimのプラグイン">Vimのプラグイン</h2>
+<p>Vimの機能を拡張するためには、プラグインマネージャーとプラグインの導入が不可欠です。</p>
+<h3 id="vim-plug">Vim Plug</h3>
+<ul>
+<li>Vimの軽量プラグインマネージャーです。</li>
+<li><a href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a></li>
+</ul>
+<h3 id="おすすめプラグイン">おすすめプラグイン</h3>
+<ul>
+<li><strong>vim-horizon</strong>: Vimのカラースキームを変更するプラグイン。
+<ul>
+<li><a href="https://github.com/ntk148v/vim-horizon">https://github.com/ntk148v/vim-horizon</a></li>
+</ul>
+</li>
+<li><strong>NERDTree</strong>: ディレクトリツリーをサイドバーに表示するプラグイン。
+<ul>
+<li><a href="https://github.com/preservim/nerdtree">https://github.com/preservim/nerdtree</a></li>
+</ul>
+</li>
+<li><strong>fzf</strong>: 高速なファイル検索、バッファ検索、履歴検索などができるファジーファインダー。
+<ul>
+<li><a href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></li>
+</ul>
+</li>
+<li><strong>vim-fugitive</strong>: VimからGitコマンドを操作できるプラグイン。
+<ul>
+<li><a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a></li>
+</ul>
+</li>
+<li><strong>vim-gitgutter</strong>: Gitの変更差分（追加、変更、削除）を行番号の横に表示するプラグイン。
+<ul>
+<li><a href="https://github.com/airblade/vim-gitgutter">https://github.com/airblade/vim-gitgutter</a></li>
+</ul>
+</li>
+<li><strong>vim-commentary</strong>: <code>gcc</code> コマンドで簡単にコメントアウト/アンコメントできるプラグイン。
+<ul>
+<li><a href="https://github.com/tpope/vim-commentary">https://github.com/tpope/vim-commentary</a></li>
+</ul>
+</li>
+<li><strong>coc.nvim</strong>: コード補完、LSP（Language Server Protocol）サポート、スニペットなど、IDEのような機能を提供するプラグイン。
+<ul>
+<li><a href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="vimrc-設定例"><code>.vimrc</code> 設定例</h3>
+<p><code>~/.vimrc</code> ファイルに以下の設定を記述することで、Vimの動作やプラグインをカスタマイズできます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="c">&#34; シェルをzshに設定 (お使いのシェルに合わせて変更)</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">shell</span><span class="p">=</span><span class="sr">/bin/</span><span class="nx">zsh</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; インデント設定</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">shiftwidth</span><span class="p">=</span><span class="m">4</span>    <span class="c">&#34; 自動インデントの幅</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">tabstop</span><span class="p">=</span><span class="m">4</span>       <span class="c">&#34; タブ文字の表示幅</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">expandtab</span>       <span class="c">&#34; タブをスペースに変換</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">autoindent</span>      <span class="c">&#34; 自動インデントを有効にする</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; 検索設定</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">hlsearch</span>        <span class="c">&#34; 検索結果をハイライト表示</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; クリップボード設定 (システムクリップボードと連携)</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">clipboard</span><span class="p">=</span><span class="nx">unnamed</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; シンタックスハイライトを有効にする</span>
+</span></span><span class="line"><span class="cl"><span class="k">syntax</span> <span class="nx">on</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; Vim Plugの初期化</span>
+</span></span><span class="line"><span class="cl"><span class="nx">call</span> <span class="nx">plug</span>#<span class="nx">begin</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Plug</span> <span class="s1">&#39;ntk148v/vim-horizon&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Plug</span> <span class="s1">&#39;preservim/nerdtree&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Plug</span> <span class="s1">&#39;junegunn/fzf&#39;</span><span class="p">,</span> { <span class="s1">&#39;do&#39;</span>: { <span class="p">-&gt;</span> <span class="nx">fzf</span>#<span class="nx">install</span><span class="p">()</span> } }
+</span></span><span class="line"><span class="cl"><span class="nx">Plug</span> <span class="s1">&#39;neoclide/coc.nvim&#39;</span><span class="p">,</span> {<span class="s1">&#39;branch&#39;</span>: <span class="s1">&#39;release&#39;</span>}
+</span></span><span class="line"><span class="cl"><span class="nx">call</span> <span class="nx">plug</span>#<span class="nx">end</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; カラースキームの設定</span>
+</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nx">termguicolors</span>   <span class="c">&#34; ターミナルのTrue Colorを有効にする (カラースキームが正しく表示されるように)</span>
+</span></span><span class="line"><span class="cl"><span class="k">colorscheme</span> <span class="nx">horizon</span> <span class="c">&#34; horizonカラースキームを適用</span>
+</span></span><span class="line"><span class="cl"><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">&#34; lightline.vim の設定例 (ステータスラインをカスタマイズするプラグイン)</span>
+</span></span><span class="line"><span class="cl"><span class="c">&#34; lightline.vim を使用する場合は、Plug &#39;itchyny/lightline.vim&#39; も追加</span>
+</span></span><span class="line"><span class="cl"><span class="c">&#34; let g:lightline = {}</span>
+</span></span><span class="line"><span class="cl"><span class="c">&#34; let g:lightline.colorscheme = &#39;horizon&#39;</span>
+</span></span></code></pre></div><h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://www.udemy.com/course/vim-tmux-zsh/">現役シリコンバレーエンジニアが教える NeoVim(VIM) + Tmux + Zsh 入門</a></li>
+<li><a href="https://vimhelp.org/">Vim documentation</a></li>
+</ul>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="246">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20221230_vim/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Vimの基本的な使い方とおすすめプラグイン</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/vim/" class="badge badge-custom text-decoration-none me-1">Vim</a>
+      <a href="/tags/%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF/" class="badge badge-custom text-decoration-none me-1">エディタ</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

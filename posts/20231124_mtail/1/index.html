@@ -1,56 +1,385 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20231124_mtail/1/><meta property="og:type" content="article"><meta property="og:title" content="mtailを用いたPrometheus形式メトリクスの公開"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20231124_mtail/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2023-11-24T09:00:23+09:00"><meta property="article:modified_time" content="2023-11-24T09:00:23+09:00"><meta property="article:tag" content="監視"><meta property="article:tag" content="Prometheus"><meta property="article:tag" content="ログ"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="mtailを用いたPrometheus形式メトリクスの公開"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>mtailを用いたPrometheus形式メトリクスの公開 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"mtailを用いたPrometheus形式メトリクスの公開","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2023-11-24T09:00:23\u002b09:00","dateModified":"2023-11-24T09:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20231124_mtail\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20231124_mtail\/1\/","wordCount":146,"keywords":["監視","Prometheus","ログ"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>mtailを用いたPrometheus形式メトリクスの公開</h1><div class=article-meta><time datetime=2023-11-24T09:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-November 24, 2023
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E7%9B%A3%E8%A6%96/ class="badge badge-custom" rel=tag itemprop=keywords>監視
-</a><a href=/tags/prometheus/ class="badge badge-custom" rel=tag itemprop=keywords>Prometheus
-</a><a href=/tags/%E3%83%AD%E3%82%B0/ class="badge badge-custom" rel=tag itemprop=keywords>ログ</a></div></header><div class=article-content itemprop=articleBody><h1 id=mtailを用いたprometheus形式メトリクスの公開>mtailを用いたPrometheus形式メトリクスの公開</h1><h2 id=概要>概要</h2><p><a href=https://github.com/google/mtail>mtail</a> は、Googleが開発したオープンソースのログパースツールです。ログファイルから特定のパターンに一致する行を抽出し、それに基づいてメトリクスを生成し、<code>/metrics</code> エンドポイントに<strong>Prometheus形式</strong>で公開することができます。これにより、既存のログからビジネスメトリクスやシステムの状態をPrometheusで収集・監視することが可能になります。</p><h2 id=mtailの使い方>mtailの使い方</h2><p>mtailを利用するには、mtailプログラム（デーモン）を起動し、監視対象のログファイルと、メトリクスを定義するmtailプログラム（設定ファイル）を指定する必要があります。</p><h3 id=mtailプログラム設定ファイルの例-samplemtail>mtailプログラム（設定ファイル）の例: <code>sample.mtail</code></h3><p>mtailプログラムは、Go言語に似た独自の構文で記述されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># メトリクスの定義と初期化
-</span></span><span class=line><span class=cl># &#39;errors_total&#39; という名前のカウンタータイプのメトリクスを定義
-</span></span><span class=line><span class=cl>counter errors_total
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl># ログファイル内のパターンマッチングルール
-</span></span><span class=line><span class=cl># 各行が「error」を含む場合に、errors_totalカウンターをインクリメント
-</span></span><span class=line><span class=cl>/error/ {
-</span></span><span class=line><span class=cl>  errors_total++
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl># 例: HTTPリクエストのステータスコードをカウント
-</span></span><span class=line><span class=cl># 正規表現でステータスコードをキャプチャし、ラベルとして使用
-</span></span><span class=line><span class=cl>/^HTTP\/1\.[01] (\d{3})/ {
-</span></span><span class=line><span class=cl>  http_requests_total[$1]++
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>counter http_requests_total by status_code
-</span></span></code></pre></div><ul><li><code>counter errors_total</code>: Prometheusで使用するメトリクスを定義しています。<code>counter</code> はカウンタータイプのメトリクスで、値は単調増加します。</li><li><code>/error/ { errors_total++ }</code>: ログの各行が正規表現 <code>/error/</code> にマッチした場合に、<code>errors_total</code> カウンターを1増加させます。</li><li><code>counter http_requests_total by status_code</code>: <code>http_requests_total</code> というカウンターメトリクスを定義し、<code>status_code</code> というラベルを持つことを示しています。</li><li><code>/^HTTP\/1\.[01] (\d{3})/ { http_requests_total[$1]++ }</code>: HTTPアクセスログからステータスコード（例: 200, 404, 500）を抽出し、そのステータスコードをラベルとして <code>http_requests_total</code> カウンターをインクリメントします。</li></ul><h2 id=dockerでmtailを起動する>Dockerでmtailを起動する</h2><p>mtailをDockerコンテナとして実行することで、環境構築の手間を省き、簡単にデプロイできます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=c># ベースイメージとしてCentOS 7を使用</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>FROM</span><span class=s> centos:7</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># wgetをインストールし、キャッシュをクリア</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>RUN</span> yum install -y wget <span class=o>&amp;&amp;</span> yum clean all<span class=err>
-</span></span></span><span class=line><span class=cl><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># 作業ディレクトリを/tmpに設定</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>WORKDIR</span><span class=s> /tmp</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># mtailのバイナリをダウンロードし、展開、実行権限を付与</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># リリースバージョンは適宜最新のものに更新してください</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>RUN</span> wget -O mtail.tar.gz https://github.com/google/mtail/releases/download/v3.0.0-rc52/mtail_3.0.0-rc52_linux_amd64.tar.gz <span class=o>&amp;&amp;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>    tar xzvf mtail.tar.gz <span class=o>&amp;&amp;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>    chmod +x mtail<span class=err>
-</span></span></span><span class=line><span class=cl><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># コンテナ起動時に実行されるコマンド</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># -progs: mtailプログラム（設定ファイル）のパスを指定</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># -logs: mtailが監視するログファイルのパスを指定</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># 例: CMD [&#34;/tmp/mtail&#34;, &#34;-progs&#34;, &#34;/etc/mtail/sample.mtail&#34;, &#34;-logs&#34;, &#34;/var/log/nginx/access.log&#34;]</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;/tmp/mtail&#34;</span><span class=p>,</span> <span class=s2>&#34;-progs&#34;</span><span class=p>,</span> <span class=s2>&#34;/path/to/sample.mtail&#34;</span><span class=p>,</span> <span class=s2>&#34;-logs&#34;</span><span class=p>,</span> <span class=s2>&#34;/path/to/logfile&#34;</span><span class=p>]</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=c># mtailがメトリクスを公開するデフォルトポート (Prometheusがスクレイピングするポート)</span><span class=err>
-</span></span></span><span class=line><span class=cl><span class=err></span><span class=k>EXPOSE</span><span class=s> 3903</span><span class=err>
-</span></span></span></code></pre></div><h3 id=cmd-命令の引数><code>CMD</code> 命令の引数</h3><ul><li><code>-progs /path/to/sample.mtail</code>: mtailが使用する設定ファイル（mtailプログラム）のパスを指定します。コンテナ内に配置したmtailプログラムのパスを指定してください。</li><li><code>-logs /path/to/logfile</code>: mtailが監視するログファイルのパスを指定します。mtailはこのログファイルを監視し、設定に定義されたパターンに一致する行を検出して対応するメトリクスを生成します。このログファイルは、Dockerのボリュームマウントなどを使ってコンテナ内に提供する必要があります。</li></ul><p>このDockerイメージをビルドし、実行することで、mtailがログを監視し、Prometheusが収集可能なメトリクスを公開するようになります.</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="146"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20231124_mtail/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>mtailを用いたPrometheus形式メトリクスの公開</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/%E7%9B%A3%E8%A6%96/ class="badge badge-custom text-decoration-none me-1">監視</a>
-<a href=/tags/prometheus/ class="badge badge-custom text-decoration-none me-1">Prometheus</a>
-<a href=/tags/%E3%83%AD%E3%82%B0/ class="badge badge-custom text-decoration-none me-1">ログ</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20231124_mtail/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="mtailを用いたPrometheus形式メトリクスの公開">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20231124_mtail/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2023-11-24T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2023-11-24T09:00:23&#43;09:00">
+<meta property="article:tag" content="監視"><meta property="article:tag" content="Prometheus"><meta property="article:tag" content="ログ">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="mtailを用いたPrometheus形式メトリクスの公開">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>mtailを用いたPrometheus形式メトリクスの公開 | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "mtailを用いたPrometheus形式メトリクスの公開",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2023-11-24T09:00:23\u002b09:00",
+  "dateModified": "2023-11-24T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20231124_mtail\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20231124_mtail\/1\/",
+  "wordCount":  146 ,
+  "keywords": [
+    "監視", "Prometheus", "ログ"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">mtailを用いたPrometheus形式メトリクスの公開</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2023-11-24T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          November 24, 2023
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/%E7%9B%A3%E8%A6%96/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          監視
+        </a>
+        
+        <a href="/tags/prometheus/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Prometheus
+        </a>
+        
+        <a href="/tags/%E3%83%AD%E3%82%B0/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          ログ
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="mtailを用いたprometheus形式メトリクスの公開">mtailを用いたPrometheus形式メトリクスの公開</h1>
+<h2 id="概要">概要</h2>
+<p><a href="https://github.com/google/mtail">mtail</a> は、Googleが開発したオープンソースのログパースツールです。ログファイルから特定のパターンに一致する行を抽出し、それに基づいてメトリクスを生成し、<code>/metrics</code> エンドポイントに<strong>Prometheus形式</strong>で公開することができます。これにより、既存のログからビジネスメトリクスやシステムの状態をPrometheusで収集・監視することが可能になります。</p>
+<h2 id="mtailの使い方">mtailの使い方</h2>
+<p>mtailを利用するには、mtailプログラム（デーモン）を起動し、監視対象のログファイルと、メトリクスを定義するmtailプログラム（設定ファイル）を指定する必要があります。</p>
+<h3 id="mtailプログラム設定ファイルの例-samplemtail">mtailプログラム（設定ファイル）の例: <code>sample.mtail</code></h3>
+<p>mtailプログラムは、Go言語に似た独自の構文で記述されます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># メトリクスの定義と初期化
+</span></span><span class="line"><span class="cl"># &#39;errors_total&#39; という名前のカウンタータイプのメトリクスを定義
+</span></span><span class="line"><span class="cl">counter errors_total
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># ログファイル内のパターンマッチングルール
+</span></span><span class="line"><span class="cl"># 各行が「error」を含む場合に、errors_totalカウンターをインクリメント
+</span></span><span class="line"><span class="cl">/error/ {
+</span></span><span class="line"><span class="cl">  errors_total++
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 例: HTTPリクエストのステータスコードをカウント
+</span></span><span class="line"><span class="cl"># 正規表現でステータスコードをキャプチャし、ラベルとして使用
+</span></span><span class="line"><span class="cl">/^HTTP\/1\.[01] (\d{3})/ {
+</span></span><span class="line"><span class="cl">  http_requests_total[$1]++
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">counter http_requests_total by status_code
+</span></span></code></pre></div><ul>
+<li><code>counter errors_total</code>: Prometheusで使用するメトリクスを定義しています。<code>counter</code> はカウンタータイプのメトリクスで、値は単調増加します。</li>
+<li><code>/error/ { errors_total++ }</code>: ログの各行が正規表現 <code>/error/</code> にマッチした場合に、<code>errors_total</code> カウンターを1増加させます。</li>
+<li><code>counter http_requests_total by status_code</code>: <code>http_requests_total</code> というカウンターメトリクスを定義し、<code>status_code</code> というラベルを持つことを示しています。</li>
+<li><code>/^HTTP\/1\.[01] (\d{3})/ { http_requests_total[$1]++ }</code>: HTTPアクセスログからステータスコード（例: 200, 404, 500）を抽出し、そのステータスコードをラベルとして <code>http_requests_total</code> カウンターをインクリメントします。</li>
+</ul>
+<h2 id="dockerでmtailを起動する">Dockerでmtailを起動する</h2>
+<p>mtailをDockerコンテナとして実行することで、環境構築の手間を省き、簡単にデプロイできます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># ベースイメージとしてCentOS 7を使用</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> centos:7</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># wgetをインストールし、キャッシュをクリア</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yum install -y wget <span class="o">&amp;&amp;</span> yum clean all<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 作業ディレクトリを/tmpに設定</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /tmp</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># mtailのバイナリをダウンロードし、展開、実行権限を付与</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># リリースバージョンは適宜最新のものに更新してください</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> wget -O mtail.tar.gz https://github.com/google/mtail/releases/download/v3.0.0-rc52/mtail_3.0.0-rc52_linux_amd64.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    tar xzvf mtail.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    chmod +x mtail<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># コンテナ起動時に実行されるコマンド</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># -progs: mtailプログラム（設定ファイル）のパスを指定</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># -logs: mtailが監視するログファイルのパスを指定</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: CMD [&#34;/tmp/mtail&#34;, &#34;-progs&#34;, &#34;/etc/mtail/sample.mtail&#34;, &#34;-logs&#34;, &#34;/var/log/nginx/access.log&#34;]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/tmp/mtail&#34;</span><span class="p">,</span> <span class="s2">&#34;-progs&#34;</span><span class="p">,</span> <span class="s2">&#34;/path/to/sample.mtail&#34;</span><span class="p">,</span> <span class="s2">&#34;-logs&#34;</span><span class="p">,</span> <span class="s2">&#34;/path/to/logfile&#34;</span><span class="p">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># mtailがメトリクスを公開するデフォルトポート (Prometheusがスクレイピングするポート)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 3903</span><span class="err">
+</span></span></span></code></pre></div><h3 id="cmd-命令の引数"><code>CMD</code> 命令の引数</h3>
+<ul>
+<li><code>-progs /path/to/sample.mtail</code>: mtailが使用する設定ファイル（mtailプログラム）のパスを指定します。コンテナ内に配置したmtailプログラムのパスを指定してください。</li>
+<li><code>-logs /path/to/logfile</code>: mtailが監視するログファイルのパスを指定します。mtailはこのログファイルを監視し、設定に定義されたパターンに一致する行を検出して対応するメトリクスを生成します。このログファイルは、Dockerのボリュームマウントなどを使ってコンテナ内に提供する必要があります。</li>
+</ul>
+<p>このDockerイメージをビルドし、実行することで、mtailがログを監視し、Prometheusが収集可能なメトリクスを公開するようになります.</p>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="146">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_mtail/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">mtailを用いたPrometheus形式メトリクスの公開</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/%E7%9B%A3%E8%A6%96/" class="badge badge-custom text-decoration-none me-1">監視</a>
+      <a href="/tags/prometheus/" class="badge badge-custom text-decoration-none me-1">Prometheus</a>
+      <a href="/tags/%E3%83%AD%E3%82%B0/" class="badge badge-custom text-decoration-none me-1">ログ</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

@@ -1,47 +1,409 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20211121_db/7/><meta property="og:type" content="article"><meta property="og:title" content="SQLにおけるテーブルの作成と変更"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_db/7/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-01-04T10:00:23+09:00"><meta property="article:modified_time" content="2021-01-04T10:00:23+09:00"><meta property="article:tag" content="SQL"><meta property="article:tag" content="データベース"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="SQLにおけるテーブルの作成と変更"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>SQLにおけるテーブルの作成と変更 | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"SQLにおけるテーブルの作成と変更","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-01-04T10:00:23\u002b09:00","dateModified":"2021-01-04T10:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/7\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/7\/","wordCount":231,"keywords":["SQL","データベース"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>SQLにおけるテーブルの作成と変更</h1><div class=article-meta><time datetime=2021-01-04T10:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-January 4, 2021
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/sql/ class="badge badge-custom" rel=tag itemprop=keywords>SQL
-</a><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/ class="badge badge-custom" rel=tag itemprop=keywords>データベース</a></div></header><div class=article-content itemprop=articleBody><h1 id=sqlにおけるテーブルの作成と変更>SQLにおけるテーブルの作成と変更</h1><p>SQLのデータ定義言語（DDL: Data Definition Language）は、データベースの構造やオブジェクト（テーブル、ビューなど）を作成、変更、削除するために使用されます。</p><h2 id=1-テーブルの作成-create-table>1. テーブルの作成 (CREATE TABLE)</h2><p><code>CREATE TABLE</code> 文は、新しいテーブルをデータベース内に作成するために使用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=w> </span><span class=p>(</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=err>列名</span><span class=mi>1</span><span class=w> </span><span class=err>データ型</span><span class=w> </span><span class=p>[</span><span class=k>DEFAULT</span><span class=w> </span><span class=err>値</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=err>制約</span><span class=p>],</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=err>列名</span><span class=mi>2</span><span class=w> </span><span class=err>データ型</span><span class=w> </span><span class=p>[</span><span class=k>DEFAULT</span><span class=w> </span><span class=err>値</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=err>制約</span><span class=p>],</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>-- ...
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>    </span><span class=err>列名</span><span class=n>N</span><span class=w> </span><span class=err>データ型</span><span class=w> </span><span class=p>[</span><span class=k>DEFAULT</span><span class=w> </span><span class=err>値</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=err>制約</span><span class=p>],</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>[</span><span class=err>テーブルレベル制約</span><span class=p>]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></div><h3 id=データ型>データ型</h3><p>各列には、格納するデータの種類に応じたデータ型を指定します。</p><ul><li><strong>文字型</strong>:<ul><li><code>CHAR(size)</code>: 固定長文字列。指定した <code>size</code> の長さでデータを格納します。</li><li><code>VARCHAR(size)</code>: 可変長文字列。指定した <code>size</code> を上限として、実際のデータ長で格納します。</li></ul></li><li><strong>数値型</strong>:<ul><li><code>INT</code> / <code>INTEGER</code>: 整数。</li><li><code>BIGINT</code>: より大きな整数。</li><li><code>FLOAT</code> / <code>DOUBLE</code>: 浮動小数点数。</li></ul></li><li><strong>日付/時間型</strong>:<ul><li><code>DATE</code>: 日付（例: &lsquo;YYYY-MM-DD&rsquo;）。</li><li><code>TIME</code>: 時刻（例: &lsquo;HH:MM:SS&rsquo;）。</li><li><code>DATETIME</code> / <code>TIMESTAMP</code>: 日付と時刻。</li></ul></li></ul><h3 id=制約-constraints>制約 (Constraints)</h3><p>列やテーブルに対して制約を設定することで、データの整合性を保ちます。</p><ul><li><code>NOT NULL</code>: その列に <code>NULL</code> 値（値がない状態）を許可しません。</li><li><code>UNIQUE</code>: その列の値がテーブル内で一意であることを保証します。</li><li><code>PRIMARY KEY</code>: 主キー制約。その列（または列の組み合わせ）がテーブルの各行を一意に識別し、<code>NOT NULL</code> と <code>UNIQUE</code> の両方を満たします。</li><li><code>FOREIGN KEY</code>: 外部キー制約。他のテーブルの主キーを参照し、テーブル間の関連性を定義します。参照整合性を保証します。</li><li><code>DEFAULT 値</code>: 値が明示的に指定されなかった場合に、自動的に挿入されるデフォルト値を設定します。</li></ul><h3 id=サブクエリからのテーブル作成-create-table-as-select>サブクエリからのテーブル作成 (CREATE TABLE AS SELECT)</h3><p>既存のテーブルやクエリの結果を基に、新しいテーブルを作成することもできます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>新しいテーブル名</span><span class=w> </span><span class=p>[(</span><span class=err>列名</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=err>列名</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=p>...)]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>AS</span><span class=w> </span><span class=err>サブクエリ</span><span class=p>;</span><span class=w>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20211121_db/7/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLにおけるテーブルの作成と変更">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20211121_db/7/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2021-01-04T10:00:23&#43;09:00">
+<meta property="article:modified_time" content="2021-01-04T10:00:23&#43;09:00">
+<meta property="article:tag" content="SQL"><meta property="article:tag" content="データベース">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="SQLにおけるテーブルの作成と変更">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>SQLにおけるテーブルの作成と変更 | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SQLにおけるテーブルの作成と変更",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2021-01-04T10:00:23\u002b09:00",
+  "dateModified": "2021-01-04T10:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/7\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20211121_db\/7\/",
+  "wordCount":  231 ,
+  "keywords": [
+    "SQL", "データベース"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">SQLにおけるテーブルの作成と変更</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2021-01-04T10:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          January 4, 2021
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          2 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/sql/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          SQL
+        </a>
+        
+        <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          データベース
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="sqlにおけるテーブルの作成と変更">SQLにおけるテーブルの作成と変更</h1>
+<p>SQLのデータ定義言語（DDL: Data Definition Language）は、データベースの構造やオブジェクト（テーブル、ビューなど）を作成、変更、削除するために使用されます。</p>
+<h2 id="1-テーブルの作成-create-table">1. テーブルの作成 (CREATE TABLE)</h2>
+<p><code>CREATE TABLE</code> 文は、新しいテーブルをデータベース内に作成するために使用します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">列名</span><span class="mi">1</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="err">値</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">制約</span><span class="p">],</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">列名</span><span class="mi">2</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="err">値</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">制約</span><span class="p">],</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">-- ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="err">列名</span><span class="n">N</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="err">値</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">制約</span><span class="p">],</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">[</span><span class="err">テーブルレベル制約</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h3 id="データ型">データ型</h3>
+<p>各列には、格納するデータの種類に応じたデータ型を指定します。</p>
+<ul>
+<li><strong>文字型</strong>:
+<ul>
+<li><code>CHAR(size)</code>: 固定長文字列。指定した <code>size</code> の長さでデータを格納します。</li>
+<li><code>VARCHAR(size)</code>: 可変長文字列。指定した <code>size</code> を上限として、実際のデータ長で格納します。</li>
+</ul>
+</li>
+<li><strong>数値型</strong>:
+<ul>
+<li><code>INT</code> / <code>INTEGER</code>: 整数。</li>
+<li><code>BIGINT</code>: より大きな整数。</li>
+<li><code>FLOAT</code> / <code>DOUBLE</code>: 浮動小数点数。</li>
+</ul>
+</li>
+<li><strong>日付/時間型</strong>:
+<ul>
+<li><code>DATE</code>: 日付（例: &lsquo;YYYY-MM-DD&rsquo;）。</li>
+<li><code>TIME</code>: 時刻（例: &lsquo;HH:MM:SS&rsquo;）。</li>
+<li><code>DATETIME</code> / <code>TIMESTAMP</code>: 日付と時刻。</li>
+</ul>
+</li>
+</ul>
+<h3 id="制約-constraints">制約 (Constraints)</h3>
+<p>列やテーブルに対して制約を設定することで、データの整合性を保ちます。</p>
+<ul>
+<li><code>NOT NULL</code>: その列に <code>NULL</code> 値（値がない状態）を許可しません。</li>
+<li><code>UNIQUE</code>: その列の値がテーブル内で一意であることを保証します。</li>
+<li><code>PRIMARY KEY</code>: 主キー制約。その列（または列の組み合わせ）がテーブルの各行を一意に識別し、<code>NOT NULL</code> と <code>UNIQUE</code> の両方を満たします。</li>
+<li><code>FOREIGN KEY</code>: 外部キー制約。他のテーブルの主キーを参照し、テーブル間の関連性を定義します。参照整合性を保証します。</li>
+<li><code>DEFAULT 値</code>: 値が明示的に指定されなかった場合に、自動的に挿入されるデフォルト値を設定します。</li>
+</ul>
+<h3 id="サブクエリからのテーブル作成-create-table-as-select">サブクエリからのテーブル作成 (CREATE TABLE AS SELECT)</h3>
+<p>既存のテーブルやクエリの結果を基に、新しいテーブルを作成することもできます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">新しいテーブル名</span><span class="w"> </span><span class="p">[(</span><span class="err">列名</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">列名</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">...)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w"> </span><span class="err">サブクエリ</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><p><strong>例:</strong>
-<code>employees</code> テーブルから <code>department_id</code> が10の従業員だけを抽出して、新しいテーブル <code>department10_employees</code> を作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>department10_employees</span><span class=w> </span><span class=k>AS</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>SELECT</span><span class=w> </span><span class=n>employee_id</span><span class=p>,</span><span class=w> </span><span class=n>first_name</span><span class=p>,</span><span class=w> </span><span class=n>last_name</span><span class=p>,</span><span class=w> </span><span class=n>email</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=n>employees</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>WHERE</span><span class=w> </span><span class=n>department_id</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>10</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div><h3 id=ビューの作成-create-view>ビューの作成 (CREATE VIEW)</h3><p>ビューは、1つまたは複数のテーブル（または他のビュー）に基づいた<strong>仮想的なテーブル</strong>です。ビュー自体はデータを物理的に格納せず、参照元のテーブルのデータが変更されると、ビューの内容も自動的に反映されます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>VIEW</span><span class=w> </span><span class=err>ビュー名</span><span class=w> </span><span class=p>[(</span><span class=err>列名</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=err>列名</span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=p>...)]</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>AS</span><span class=w> </span><span class=err>サブクエリ</span><span class=p>;</span><span class=w>
+<code>employees</code> テーブルから <code>department_id</code> が10の従業員だけを抽出して、新しいテーブル <code>department10_employees</code> を作成します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">department10_employees</span><span class="w"> </span><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">employee_id</span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">department_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><h3 id="ビューの作成-create-view">ビューの作成 (CREATE VIEW)</h3>
+<p>ビューは、1つまたは複数のテーブル（または他のビュー）に基づいた<strong>仮想的なテーブル</strong>です。ビュー自体はデータを物理的に格納せず、参照元のテーブルのデータが変更されると、ビューの内容も自動的に反映されます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="err">ビュー名</span><span class="w"> </span><span class="p">[(</span><span class="err">列名</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">列名</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">...)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w"> </span><span class="err">サブクエリ</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><p><strong>例:</strong>
-<code>products</code> テーブルから、価格が1000以上の製品のみを表示するビュー <code>expensive_products</code> を作成します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>VIEW</span><span class=w> </span><span class=n>expensive_products</span><span class=w> </span><span class=k>AS</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>SELECT</span><span class=w> </span><span class=n>product_id</span><span class=p>,</span><span class=w> </span><span class=n>product_name</span><span class=p>,</span><span class=w> </span><span class=n>price</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=n>products</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>WHERE</span><span class=w> </span><span class=n>price</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>1000</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div><p>ビューは、複雑なクエリを簡素化したり、特定のユーザーに表示するデータを制限したりするのに役立ちます。</p><h2 id=2-テーブルの変更と削除>2. テーブルの変更と削除</h2><h3 id=テーブル構造の変更-alter-table>テーブル構造の変更 (ALTER TABLE)</h3><p><code>ALTER TABLE</code> 文は、既存のテーブルの構造を変更するために使用します。</p><ul><li><strong>列の追加</strong>:<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ADD</span><span class=w> </span><span class=err>列名</span><span class=w> </span><span class=err>データ型</span><span class=w> </span><span class=p>[</span><span class=k>DEFAULT</span><span class=w> </span><span class=err>値</span><span class=p>]</span><span class=w> </span><span class=p>[</span><span class=err>制約</span><span class=p>];</span><span class=w>
-</span></span></span></code></pre></div></li><li><strong>列の変更</strong>:<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>MODIFY</span><span class=w> </span><span class=err>列名</span><span class=w> </span><span class=err>データ型</span><span class=w> </span><span class=p>[</span><span class=err>制約</span><span class=p>];</span><span class=w> </span><span class=c1>-- MySQL, Oracleなど
-</span></span></span><span class=line><span class=cl><span class=c1>-- または
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>COLUMN</span><span class=w> </span><span class=err>列名</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=k>DATA</span><span class=w> </span><span class=k>TYPE</span><span class=w> </span><span class=err>データ型</span><span class=p>;</span><span class=w> </span><span class=c1>-- PostgreSQLなど
-</span></span></span></code></pre></div></li><li><strong>列の削除</strong>:<div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>DROP</span><span class=w> </span><span class=k>COLUMN</span><span class=w> </span><span class=err>列名</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div></li></ul><h3 id=テーブル名の変更-rename-table>テーブル名の変更 (RENAME TABLE)</h3><p>テーブルの名前を変更します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>RENAME</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>旧テーブル名</span><span class=w> </span><span class=k>TO</span><span class=w> </span><span class=err>新テーブル名</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div><h3 id=テーブルの削除-drop-table>テーブルの削除 (DROP TABLE)</h3><p><code>DROP TABLE</code> 文は、データベースからテーブルとその中のすべてのデータを完全に削除します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>DROP</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=err>テーブル名</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div><p><strong>注意</strong>: <code>DROP TABLE</code> は元に戻せない操作なので、実行には十分な注意が必要です。</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="231"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20211121_db/7/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>SQLにおけるテーブルの作成と変更</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/sql/ class="badge badge-custom text-decoration-none me-1">SQL</a>
-<a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/ class="badge badge-custom text-decoration-none me-1">データベース</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<code>products</code> テーブルから、価格が1000以上の製品のみを表示するビュー <code>expensive_products</code> を作成します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">expensive_products</span><span class="w"> </span><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">product_id</span><span class="p">,</span><span class="w"> </span><span class="n">product_name</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">products</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>ビューは、複雑なクエリを簡素化したり、特定のユーザーに表示するデータを制限したりするのに役立ちます。</p>
+<h2 id="2-テーブルの変更と削除">2. テーブルの変更と削除</h2>
+<h3 id="テーブル構造の変更-alter-table">テーブル構造の変更 (ALTER TABLE)</h3>
+<p><code>ALTER TABLE</code> 文は、既存のテーブルの構造を変更するために使用します。</p>
+<ul>
+<li><strong>列の追加</strong>:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ADD</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="k">DEFAULT</span><span class="w"> </span><span class="err">値</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="err">制約</span><span class="p">];</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li><strong>列の変更</strong>:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">MODIFY</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="err">データ型</span><span class="w"> </span><span class="p">[</span><span class="err">制約</span><span class="p">];</span><span class="w"> </span><span class="c1">-- MySQL, Oracleなど
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- または
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="err">データ型</span><span class="p">;</span><span class="w"> </span><span class="c1">-- PostgreSQLなど
+</span></span></span></code></pre></div></li>
+<li><strong>列の削除</strong>:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="err">列名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ul>
+<h3 id="テーブル名の変更-rename-table">テーブル名の変更 (RENAME TABLE)</h3>
+<p>テーブルの名前を変更します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">RENAME</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">旧テーブル名</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="err">新テーブル名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><h3 id="テーブルの削除-drop-table">テーブルの削除 (DROP TABLE)</h3>
+<p><code>DROP TABLE</code> 文は、データベースからテーブルとその中のすべてのデータを完全に削除します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">テーブル名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><strong>注意</strong>: <code>DROP TABLE</code> は元に戻せない操作なので、実行には十分な注意が必要です。</p>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="231">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211121_db/7/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">SQLにおけるテーブルの作成と変更</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/sql/" class="badge badge-custom text-decoration-none me-1">SQL</a>
+      <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/" class="badge badge-custom text-decoration-none me-1">データベース</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

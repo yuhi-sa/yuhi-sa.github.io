@@ -1,22 +1,519 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210713_readable/1/><meta property="og:type" content="article"><meta property="og:title" content="『リーダブルコード』読書メモ"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210713_readable/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2021-07-13T10:17:23+09:00"><meta property="article:modified_time" content="2021-07-13T10:17:23+09:00"><meta property="article:tag" content="プログラミング"><meta property="article:tag" content="読書"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="『リーダブルコード』読書メモ"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>『リーダブルコード』読書メモ | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"『リーダブルコード』読書メモ","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-07-13T10:17:23\u002b09:00","dateModified":"2021-07-13T10:17:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210713_readable\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210713_readable\/1\/","wordCount":212,"keywords":["プログラミング","読書"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>『リーダブルコード』読書メモ</h1><div class=article-meta><time datetime=2021-07-13T10:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-July 13, 2021
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class="badge badge-custom" rel=tag itemprop=keywords>プログラミング
-</a><a href=/tags/%E8%AA%AD%E6%9B%B8/ class="badge badge-custom" rel=tag itemprop=keywords>読書</a></div></header><div class=article-content itemprop=articleBody><h1 id=リーダブルコード読書メモ>『リーダブルコード』読書メモ</h1><p>『リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック』は、読みやすく、理解しやすいコードを書くための具体的な指針を示した書籍です。以下に、その主要なポイントをまとめます。</p><h2 id=1-名前に情報を詰め込む>1. 名前に情報を詰め込む</h2><p>変数をはじめとする名前は、その役割や内容を明確に伝えるべきです。</p><ul><li><p><strong>汎用的な単語ではなく、明確な単語を使う</strong>:</p><table><thead><tr><th style=text-align:left>汎用的な単語</th><th style=text-align:left>代替案の例</th></tr></thead><tbody><tr><td style=text-align:left><code>get</code></td><td style=text-align:left><code>fetch</code>, <code>download</code>, <code>retrieve</code></td></tr><tr><td style=text-align:left><code>size</code></td><td style=text-align:left><code>height</code>, <code>numNodes</code>, <code>memoryBytes</code></td></tr><tr><td style=text-align:left><code>stop</code></td><td style=text-align:left><code>kill</code>, <code>pause</code>, <code>halt</code></td></tr><tr><td style=text-align:left><code>send</code></td><td style=text-align:left><code>deliver</code>, <code>dispatch</code>, <code>announce</code>, <code>distribute</code>, <code>route</code></td></tr><tr><td style=text-align:left><code>find</code></td><td style=text-align:left><code>search</code>, <code>extract</code>, <code>locate</code>, <code>recover</code></td></tr><tr><td style=text-align:left><code>start</code></td><td style=text-align:left><code>launch</code>, <code>create</code>, <code>begin</code>, <code>open</code></td></tr><tr><td style=text-align:left><code>make</code></td><td style=text-align:left><code>create</code>, <code>setUp</code>, <code>build</code>, <code>generate</code>, <code>compose</code>, <code>add</code>, <code>new</code></td></tr></tbody></table></li><li><p><strong>抽象的な名前ではなく、具体的な名前</strong>:</p><ul><li><code>tmp</code> は、生存期間が非常に短く、一時的な保管が最も重要な変数にのみ使用します。</li><li>イテレータ変数には、安易に <code>i</code>, <code>j</code>, <code>k</code> を使うのではなく、<code>club_idx</code>, <code>member_idx</code>, <code>user_idx</code> のように、何を表すインデックスなのかがわかるように命名します。</li><li>より直接的で、明確な表現にします。<div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>// 悪い例
-</span></span><span class=line><span class=cl>ServerCanStart
-</span></span><span class=line><span class=cl>// 良い例
-</span></span><span class=line><span class=cl>CanListenOnPort
-</span></span></code></pre></div></li></ul></li><li><p><strong>接尾辞や接頭辞で情報を追加する</strong>:</p><ul><li><code>delay</code> → <code>delay_secs</code> (単位)</li><li><code>size</code> → <code>size_mb</code> (単位)</li><li><code>limit</code> → <code>max_kbp</code> (限界値)</li><li><code>angle</code> → <code>degree_cw</code> (単位と方向)</li><li><code>html</code> → <code>html_utf8</code> (エンコーディング)</li></ul></li><li><p><strong>名前の長さを適切に決める</strong>:</p><ul><li>長すぎる名前は短縮を検討します。<ul><li><code>FormatString</code> → <code>FormatStr</code></li><li><code>ConvertToString</code> → <code>ToString</code></li></ul></li><li>短すぎる名前は長くします。</li></ul></li><li><p><strong>名前のフォーマットで情報を伝える</strong>:</p><ul><li>大文字やアンダースコアなどの命名規則に意味を含ませる（例: 定数にはすべて大文字とアンダースコアを使用する）。</li></ul></li></ul><h2 id=2-誤解されない名前を使う>2. 誤解されない名前を使う</h2><p>名前は、読み手が誤解しないように慎重に選びます。</p><ul><li><p><strong>多義語に気をつける</strong>:</p><ul><li><code>filter</code> → <code>select</code> (含める), <code>exclude</code> (除外する)</li><li><code>clip</code> → <code>remove</code> (削除する), <code>truncate</code> (切り詰める)</li></ul></li><li><p><strong>限界値を示す</strong>:</p><ul><li>最大値には <code>max</code> や <code>limit</code> を、最小値には <code>min</code> を使う。</li><li>例: <code>max_users</code>, <code>min_length</code></li></ul></li><li><p><strong>範囲を示す</strong>:</p><ul><li>包含的な範囲には <code>first</code> と <code>last</code> を使う。</li><li>排他的な範囲には <code>begin</code> と <code>end</code> を使う。</li></ul></li><li><p><strong>ブール値の変数名</strong>:</p><ul><li>ブール値の変数には、<code>is_</code>, <code>has_</code>, <code>can_</code>, <code>should_</code> などの接頭辞をつけ、真偽が明確にわかるようにします。</li><li>例: <code>is_valid</code>, <code>has_permission</code>, <code>can_read</code>, <code>should_process</code></li></ul></li><li><p><strong>ユーザーの期待に合わせる</strong>:</p><ul><li><code>get</code> メソッドは、通常、軽量で副作用のないアクセサ（ゲッター）であるという認識があります。計算コストが高い処理や副作用がある場合は、<code>compute</code> や <code>calculate</code> などの動詞を使います。</li><li><code>size</code> メソッドは、通常 $O(1)$ の計算量で返されると期待されます。計算量が多い場合は、<code>count</code> や <code>calculate_size</code> など、計算を伴うことを示唆する名前にします。</li></ul></li></ul><h2 id=3-美しさコードのフォーマットとレイアウト>3. 美しさ（コードのフォーマットとレイアウト）</h2><p>コードの見た目は、読みやすさに大きく影響します。</p><ul><li><strong>読み手が慣れているパターンと一貫性のあるレイアウトを使う</strong>:<ul><li>プロジェクトや言語のコーディング規約に従います。</li></ul></li><li><strong>似ているコードは似ているように見せる</strong>:<ul><li>構造が似ているコードブロックは、同じようなフォーマットで記述します。</li></ul></li><li><strong>関連するコードはまとめてブロックにする</strong>:<ul><li>論理的に関連する行は、空行などで区切ってグループ化します。</li></ul></li><li><strong>一貫性のある改行</strong>:<ul><li>改行のルールを統一し、視覚的なノーズを減らします。</li></ul></li><li><strong>縦の線を揃える</strong>:<ul><li>代入演算子や引数などを縦に揃えることで、コードの構造が把握しやすくなります。</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>details</span>  <span class=o>=</span> <span class=n>request</span><span class=o>.</span><span class=n>POST</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;detail&#39;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>location</span> <span class=o>=</span> <span class=n>request</span><span class=o>.</span><span class=n>POST</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;location&#39;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>phone</span>    <span class=o>=</span> <span class=n>request</span><span class=o>.</span><span class=n>POST</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;phone&#39;</span><span class=p>)</span>
-</span></span></code></pre></div></li><li><strong>意味のある並びにする</strong>:<ul><li>変数宣言や関数呼び出しの引数などは、論理的な順序で並べます。</li></ul></li><li><strong>宣言をブロックにまとめる</strong>:<ul><li>関連する変数宣言は、コードブロックの先頭など、一箇所にまとめます。</li></ul></li></ul><h2 id=4-コメント>4. コメント</h2><p>コメントは、コードだけでは伝わりにくい「なぜ（Why）」や「何が（What）」を補足するために書きます。</p><ul><li><strong>コードからすぐにわかることをコメントに書かない</strong>:<ul><li>例: <code>i = 0; // iを0に初期化</code> のようなコメントは不要です。</li></ul></li><li><strong>定数にコメントをつける</strong>:<ul><li>マジックナンバー（意味不明な数値）ではなく、名前付き定数を使用し、その定数の意味をコメントで補足します。</li></ul></li><li><strong>代名詞の使用を避ける</strong>:<ul><li>「それ」「これ」のような代名詞は避け、具体的な名詞を使います。</li></ul></li><li><strong>関数の動作は正確に説明する</strong>:<ul><li>関数の目的、引数、戻り値、副作用、例外などを簡潔かつ正確に記述します。</li></ul></li><li><strong>よくわからない引数にはインラインコメント</strong>:<ul><li>関数呼び出しの際に、引数の意味が分かりにくい場合は、その場でコメントを追加します。</li></ul></li></ul><h2 id=参考文献>参考文献</h2><ul><li>Dustin Boswell, Trevor Foucher, 『リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック』, オライリージャパン (2012)</li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="212"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210713_readable/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>『リーダブルコード』読書メモ</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/ class="badge badge-custom text-decoration-none me-1">プログラミング</a>
-<a href=/tags/%E8%AA%AD%E6%9B%B8/ class="badge badge-custom text-decoration-none me-1">読書</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20210713_readable/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="『リーダブルコード』読書メモ">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210713_readable/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2021-07-13T10:17:23&#43;09:00">
+<meta property="article:modified_time" content="2021-07-13T10:17:23&#43;09:00">
+<meta property="article:tag" content="プログラミング"><meta property="article:tag" content="読書">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="『リーダブルコード』読書メモ">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>『リーダブルコード』読書メモ | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "『リーダブルコード』読書メモ",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2021-07-13T10:17:23\u002b09:00",
+  "dateModified": "2021-07-13T10:17:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210713_readable\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20210713_readable\/1\/",
+  "wordCount":  212 ,
+  "keywords": [
+    "プログラミング", "読書"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">『リーダブルコード』読書メモ</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2021-07-13T10:17:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          July 13, 2021
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          プログラミング
+        </a>
+        
+        <a href="/tags/%E8%AA%AD%E6%9B%B8/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          読書
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="リーダブルコード読書メモ">『リーダブルコード』読書メモ</h1>
+<p>『リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック』は、読みやすく、理解しやすいコードを書くための具体的な指針を示した書籍です。以下に、その主要なポイントをまとめます。</p>
+<h2 id="1-名前に情報を詰め込む">1. 名前に情報を詰め込む</h2>
+<p>変数をはじめとする名前は、その役割や内容を明確に伝えるべきです。</p>
+<ul>
+<li>
+<p><strong>汎用的な単語ではなく、明確な単語を使う</strong>:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">汎用的な単語</th>
+          <th style="text-align: left">代替案の例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>get</code></td>
+          <td style="text-align: left"><code>fetch</code>, <code>download</code>, <code>retrieve</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>size</code></td>
+          <td style="text-align: left"><code>height</code>, <code>numNodes</code>, <code>memoryBytes</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>stop</code></td>
+          <td style="text-align: left"><code>kill</code>, <code>pause</code>, <code>halt</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>send</code></td>
+          <td style="text-align: left"><code>deliver</code>, <code>dispatch</code>, <code>announce</code>, <code>distribute</code>, <code>route</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>find</code></td>
+          <td style="text-align: left"><code>search</code>, <code>extract</code>, <code>locate</code>, <code>recover</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>start</code></td>
+          <td style="text-align: left"><code>launch</code>, <code>create</code>, <code>begin</code>, <code>open</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>make</code></td>
+          <td style="text-align: left"><code>create</code>, <code>setUp</code>, <code>build</code>, <code>generate</code>, <code>compose</code>, <code>add</code>, <code>new</code></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p><strong>抽象的な名前ではなく、具体的な名前</strong>:</p>
+<ul>
+<li><code>tmp</code> は、生存期間が非常に短く、一時的な保管が最も重要な変数にのみ使用します。</li>
+<li>イテレータ変数には、安易に <code>i</code>, <code>j</code>, <code>k</code> を使うのではなく、<code>club_idx</code>, <code>member_idx</code>, <code>user_idx</code> のように、何を表すインデックスなのかがわかるように命名します。</li>
+<li>より直接的で、明確な表現にします。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 悪い例
+</span></span><span class="line"><span class="cl">ServerCanStart
+</span></span><span class="line"><span class="cl">// 良い例
+</span></span><span class="line"><span class="cl">CanListenOnPort
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>接尾辞や接頭辞で情報を追加する</strong>:</p>
+<ul>
+<li><code>delay</code> → <code>delay_secs</code> (単位)</li>
+<li><code>size</code> → <code>size_mb</code> (単位)</li>
+<li><code>limit</code> → <code>max_kbp</code> (限界値)</li>
+<li><code>angle</code> → <code>degree_cw</code> (単位と方向)</li>
+<li><code>html</code> → <code>html_utf8</code> (エンコーディング)</li>
+</ul>
+</li>
+<li>
+<p><strong>名前の長さを適切に決める</strong>:</p>
+<ul>
+<li>長すぎる名前は短縮を検討します。
+<ul>
+<li><code>FormatString</code> → <code>FormatStr</code></li>
+<li><code>ConvertToString</code> → <code>ToString</code></li>
+</ul>
+</li>
+<li>短すぎる名前は長くします。</li>
+</ul>
+</li>
+<li>
+<p><strong>名前のフォーマットで情報を伝える</strong>:</p>
+<ul>
+<li>大文字やアンダースコアなどの命名規則に意味を含ませる（例: 定数にはすべて大文字とアンダースコアを使用する）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-誤解されない名前を使う">2. 誤解されない名前を使う</h2>
+<p>名前は、読み手が誤解しないように慎重に選びます。</p>
+<ul>
+<li>
+<p><strong>多義語に気をつける</strong>:</p>
+<ul>
+<li><code>filter</code> → <code>select</code> (含める), <code>exclude</code> (除外する)</li>
+<li><code>clip</code> → <code>remove</code> (削除する), <code>truncate</code> (切り詰める)</li>
+</ul>
+</li>
+<li>
+<p><strong>限界値を示す</strong>:</p>
+<ul>
+<li>最大値には <code>max</code> や <code>limit</code> を、最小値には <code>min</code> を使う。</li>
+<li>例: <code>max_users</code>, <code>min_length</code></li>
+</ul>
+</li>
+<li>
+<p><strong>範囲を示す</strong>:</p>
+<ul>
+<li>包含的な範囲には <code>first</code> と <code>last</code> を使う。</li>
+<li>排他的な範囲には <code>begin</code> と <code>end</code> を使う。</li>
+</ul>
+</li>
+<li>
+<p><strong>ブール値の変数名</strong>:</p>
+<ul>
+<li>ブール値の変数には、<code>is_</code>, <code>has_</code>, <code>can_</code>, <code>should_</code> などの接頭辞をつけ、真偽が明確にわかるようにします。</li>
+<li>例: <code>is_valid</code>, <code>has_permission</code>, <code>can_read</code>, <code>should_process</code></li>
+</ul>
+</li>
+<li>
+<p><strong>ユーザーの期待に合わせる</strong>:</p>
+<ul>
+<li><code>get</code> メソッドは、通常、軽量で副作用のないアクセサ（ゲッター）であるという認識があります。計算コストが高い処理や副作用がある場合は、<code>compute</code> や <code>calculate</code> などの動詞を使います。</li>
+<li><code>size</code> メソッドは、通常 $O(1)$ の計算量で返されると期待されます。計算量が多い場合は、<code>count</code> や <code>calculate_size</code> など、計算を伴うことを示唆する名前にします。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-美しさコードのフォーマットとレイアウト">3. 美しさ（コードのフォーマットとレイアウト）</h2>
+<p>コードの見た目は、読みやすさに大きく影響します。</p>
+<ul>
+<li><strong>読み手が慣れているパターンと一貫性のあるレイアウトを使う</strong>:
+<ul>
+<li>プロジェクトや言語のコーディング規約に従います。</li>
+</ul>
+</li>
+<li><strong>似ているコードは似ているように見せる</strong>:
+<ul>
+<li>構造が似ているコードブロックは、同じようなフォーマットで記述します。</li>
+</ul>
+</li>
+<li><strong>関連するコードはまとめてブロックにする</strong>:
+<ul>
+<li>論理的に関連する行は、空行などで区切ってグループ化します。</li>
+</ul>
+</li>
+<li><strong>一貫性のある改行</strong>:
+<ul>
+<li>改行のルールを統一し、視覚的なノーズを減らします。</li>
+</ul>
+</li>
+<li><strong>縦の線を揃える</strong>:
+<ul>
+<li>代入演算子や引数などを縦に揃えることで、コードの構造が把握しやすくなります。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">details</span>  <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;detail&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">location</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;location&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">phone</span>    <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+<li><strong>意味のある並びにする</strong>:
+<ul>
+<li>変数宣言や関数呼び出しの引数などは、論理的な順序で並べます。</li>
+</ul>
+</li>
+<li><strong>宣言をブロックにまとめる</strong>:
+<ul>
+<li>関連する変数宣言は、コードブロックの先頭など、一箇所にまとめます。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-コメント">4. コメント</h2>
+<p>コメントは、コードだけでは伝わりにくい「なぜ（Why）」や「何が（What）」を補足するために書きます。</p>
+<ul>
+<li><strong>コードからすぐにわかることをコメントに書かない</strong>:
+<ul>
+<li>例: <code>i = 0; // iを0に初期化</code> のようなコメントは不要です。</li>
+</ul>
+</li>
+<li><strong>定数にコメントをつける</strong>:
+<ul>
+<li>マジックナンバー（意味不明な数値）ではなく、名前付き定数を使用し、その定数の意味をコメントで補足します。</li>
+</ul>
+</li>
+<li><strong>代名詞の使用を避ける</strong>:
+<ul>
+<li>「それ」「これ」のような代名詞は避け、具体的な名詞を使います。</li>
+</ul>
+</li>
+<li><strong>関数の動作は正確に説明する</strong>:
+<ul>
+<li>関数の目的、引数、戻り値、副作用、例外などを簡潔かつ正確に記述します。</li>
+</ul>
+</li>
+<li><strong>よくわからない引数にはインラインコメント</strong>:
+<ul>
+<li>関数呼び出しの際に、引数の意味が分かりにくい場合は、その場でコメントを追加します。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li>Dustin Boswell, Trevor Foucher, 『リーダブルコード ―より良いコードを書くためのシンプルで実践的なテクニック』, オライリージャパン (2012)</li>
+</ul>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="212">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210713_readable/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">『リーダブルコード』読書メモ</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" class="badge badge-custom text-decoration-none me-1">プログラミング</a>
+      <a href="/tags/%E8%AA%AD%E6%9B%B8/" class="badge badge-custom text-decoration-none me-1">読書</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>
