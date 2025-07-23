@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20201015_euclidean/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2020-10-15T15:17:23&#43;09:00">
+<meta property="article:modified_time" content="2020-10-15T15:17:23&#43;09:00">
+<meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="Python">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>ユークリッドの互除法と拡張ユークリッドの互除法（Python実装） | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2020-10-15T15:17:23\u002b09:00",
+  "dateModified": "2020-10-15T15:17:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/",
+  "wordCount":  330 ,
+  "keywords": [
+    "アルゴリズム", "Python"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2020-10-15T15:17:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          October 15, 2020
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          2 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          アルゴリズム
+        </a>
+        
+        <a href="/tags/python/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Python
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="ユークリッドの互除法と拡張ユークリッドの互除法python実装-ユークリッドの互除法-概要ユークリッドの互除法は2つの自然数-a-と-b-の最大公約数-greatest-common-divisor-gcd-を効率的に求めるアルゴリズムですその原理はa-を-b-で割った余りを-r-とするとa-と-b-の最大公約数はb-と-r-の最大公約数に等しいという性質に基づいていますつまりgcda-b--gcdb-a--b-が成り立ちますこれを余りが0になるまで再帰的に繰り返すことで最終的な最大公約数が得られます-アルゴリズム1--入力として2つの自然数-a-b-a-ge-b-を受け取る2--b-が-0-ならばa-が最大公約数である3--b-が-0-でなければa-を-b-で割った余り-r-を計算する4--a-に-b-をb-に-r-を代入しステップ2に戻る-pythonによる実装アルゴリズムをシンプルに実装できます-再帰関数による実装pythoneuclid_recursivepydef-gcd_recursivea-b----再帰関数を用いて最大公約数を求める----if-b--0--------return-a----else--------return-gcd_recursiveb-a--b-例printgcd_recursive54-20----2printgcd_recursive111-30----3-ループによる実装pythoneuclid_iterativepydef-gcd_iterativea-b----ループを用いて最大公約数を求める----while-b--------a-b--b-a--b----return-a-例printgcd_iterative54-20----2printgcd_iterative111-30----3-拡張ユークリッドの互除法-概要拡張ユークリッドの互除法はユークリッドの互除法を拡張したもので2つの整数-a-b-の最大公約数-d--textgcda-b-を求めると同時に次の一不定方程式ベズーの等式を満たす整数解-x-y-を見つけるアルゴリズムですax--by--textgcda-bこのアルゴリズムはrsa暗号における逆元の計算などで広く利用されています-アルゴリズムユークリッドの互除法の計算過程を逆にたどることで係数-x-y-を求めることができますa_0--a-a_1--b-とし互除法の計算過程をa_i-1--q_i-a_i--a_i1としますこの式を繰り返し変形していくとx-y-が求められます再帰的なアルゴリズムで実装するのが一般的ですベースケースは-b0-のときでtextgcda-0--a-なのでa-cdot-1--0-cdot-0--a-となり解は-x-y--1-0-です再帰ステップではgcdb-a--b-の結果を利用して-gcda-b-の解を構成しますb--x--a--b--y--gcdb-a--bとなる-x-y-が分かっているとするとa--b--a---a--b--b-なのでb--x--a---a--b--b--y--gcda-ba--y--b--x---a--b--y--gcda-bとなり元の式の解は-x-y--y-x---a--b--y-となります-pythonによる実装pythonextended_euclidpydef-extended_gcda-b--------拡張ユークリッドの互除法を用いてax--by--gcda-b-を満たす----gcd-x-y-のタプルを返す--------if-b--0--------return-a-1-0----else--------d-x-y--extended_gcdb-a--b--------return-d-y-x---a--b--y-例-54x--20y--gcd54-20--2d-x-y--extended_gcd54-20printfgcd54-20--dprintf54x--20y--54x--20y-例-111x--30y--gcd111-30--3d-x-y--extended_gcd111-30printfgcd111-30--dprintf111x--30y--111x--30y">ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）## ユークリッドの互除法### 概要ユークリッドの互除法は、2つの自然数 $a$ と $b$ の<strong>最大公約数 (Greatest Common Divisor, GCD)</strong> を効率的に求めるアルゴリズムです。その原理は、「$a$ を $b$ で割った余りを $r$ とすると、$a$ と $b$ の最大公約数は、$b$ と $r$ の最大公約数に等しい」という性質に基づいています。つまり、<code>gcd(a, b) = gcd(b, a % b)</code> が成り立ちます。これを、余りが0になるまで再帰的に繰り返すことで、最終的な最大公約数が得られます。### アルゴリズム1.  入力として2つの自然数 $a, b$ ($a \ge b$) を受け取る。2.  $b$ が 0 ならば、$a$ が最大公約数である。3.  $b$ が 0 でなければ、$a$ を $b$ で割った余り $r$ を計算する。4.  $a$ に $b$ を、$b$ に $r$ を代入し、ステップ2に戻る。### Pythonによる実装アルゴリズムをシンプルに実装できます。#### 再帰関数による実装<code>python:euclid_recursive.pydef gcd_recursive(a, b):    &quot;&quot;&quot;再帰関数を用いて最大公約数を求める&quot;&quot;&quot;    if b == 0:        return a    else:        return gcd_recursive(b, a % b)# 例print(gcd_recursive(54, 20)) # -&gt; 2print(gcd_recursive(111, 30)) # -&gt; 3</code>#### ループによる実装<code>python:euclid_iterative.pydef gcd_iterative(a, b):    &quot;&quot;&quot;ループを用いて最大公約数を求める&quot;&quot;&quot;    while b:        a, b = b, a % b    return a# 例print(gcd_iterative(54, 20)) # -&gt; 2print(gcd_iterative(111, 30)) # -&gt; 3</code>&mdash;## 拡張ユークリッドの互除法### 概要拡張ユークリッドの互除法は、ユークリッドの互除法を拡張したもので、2つの整数 $a, b$ の最大公約数 $d = \text{gcd}(a, b)$ を求めると同時に、次の一不定方程式（ベズーの等式）を満たす整数解 $(x, y)$ を見つけるアルゴリズムです。$$ax + by = \text{gcd}(a, b)$$このアルゴリズムは、RSA暗号における逆元の計算などで広く利用されています。### アルゴリズムユークリッドの互除法の計算過程を逆にたどることで、係数 $x, y$ を求めることができます。$a_0 = a, a_1 = b$ とし、互除法の計算過程を$a_{i-1} = q_i a_i + a_{i+1}$とします。この式を繰り返し変形していくと、$x, y$ が求められます。再帰的なアルゴリズムで実装するのが一般的です。ベースケースは $b=0$ のときで、$\text{gcd}(a, 0) = a$ なので、$a \cdot 1 + 0 \cdot 0 = a$ となり、解は $(x, y) = (1, 0)$ です。再帰ステップでは、<code>gcd(b, a % b)</code> の結果を利用して <code>gcd(a, b)</code> の解を構成します。<code>b * x' + (a % b) * y' = gcd(b, a % b)</code>となる $x&rsquo;, y&rsquo;$ が分かっているとすると、<code>a % b = a - (a // b) * b</code> なので、<code>b * x' + (a - (a // b) * b) * y' = gcd(a, b)``a * y' + b * (x' - (a // b) * y') = gcd(a, b)</code>となり、元の式の解は $(x, y) = (y&rsquo;, x&rsquo; - (a // b) * y&rsquo;)$ となります。### Pythonによる実装<code>python:extended_euclid.pydef extended_gcd(a, b):    &quot;&quot;&quot;    拡張ユークリッドの互除法を用いて、ax + by = gcd(a, b) を満たす    (gcd, x, y) のタプルを返す。    &quot;&quot;&quot;    if b == 0:        return a, 1, 0    else:        d, x, y = extended_gcd(b, a % b)        return d, y, x - (a // b) * y# 例: 54x + 20y = gcd(54, 20) = 2d, x, y = extended_gcd(54, 20)print(f&quot;gcd({54}, {20}) = {d}&quot;)print(f&quot;{54}*({x}) + {20}*({y}) = {54*x + 20*y}&quot;)# 例: 111x + 30y = gcd(111, 30) = 3d, x, y = extended_gcd(111, 30)print(f&quot;gcd({111}, {30}) = {d}&quot;)print(f&quot;{111}*({x}) + {30}*({y}) = {111*x + 30*y}&quot;)</code></h1>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="330">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">ユークリッドの互除法と拡張ユークリッドの互除法（Python実装）</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/" class="badge badge-custom text-decoration-none me-1">アルゴリズム</a>
+      <a href="/tags/python/" class="badge badge-custom text-decoration-none me-1">Python</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

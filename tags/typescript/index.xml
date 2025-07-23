@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/typescript/</link>
+    <description>Recent content in TypeScript on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 05 May 2024 10:10:00 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TypeScriptの`never`型で`switch`文の網羅性を保証する</title>
+      <link>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</link>
+      <pubDate>Sun, 05 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240505_never_switch/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Next.js App Routerにおける`use client`の適切な使用法</title>
+      <link>https://yuhi-sa.github.io/posts/20240504_use_client/1/</link>
+      <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20240504_use_client/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugoテーマの自作：TypeScriptとReactの導入</title>
+      <link>https://yuhi-sa.github.io/posts/20231218_hugo/1/</link>
+      <pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20231218_hugo/1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WebpackとBabelでReact/TypeScript開発環境を構築する</title>
+      <link>https://yuhi-sa.github.io/posts/20221111_react/1/</link>
+      <pubDate>Fri, 11 Nov 2022 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20221111_react/1/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

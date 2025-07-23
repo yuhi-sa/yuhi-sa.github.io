@@ -1,0 +1,11 @@
+User-agent: *
+
+Disallow:
+
+
+
+Sitemap: https://yuhi-sa.github.io/sitemap.xml
+
+
+# Block AI crawlers if specified
+

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="DS201学習記録：CassandraのGossipプロトコルについて">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2023-06-10T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2023-06-10T09:00:23&#43;09:00">
+<meta property="article:tag" content="Cassandra"><meta property="article:tag" content="DataStax">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="DS201学習記録：CassandraのGossipプロトコルについて">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>DS201学習記録：CassandraのGossipプロトコルについて | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DS201学習記録：CassandraのGossipプロトコルについて",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2023-06-10T09:00:23\u002b09:00",
+  "dateModified": "2023-06-10T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/9\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/9\/",
+  "wordCount":  60 ,
+  "keywords": [
+    "Cassandra", "DataStax"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">DS201学習記録：CassandraのGossipプロトコルについて</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2023-06-10T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          June 10, 2023
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/cassandra/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Cassandra
+        </a>
+        
+        <a href="/tags/datastax/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          DataStax
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="ds201学習記録cassandraのgossipプロトコルについて">DS201学習記録：CassandraのGossipプロトコルについて</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
+<h2 id="gossipプロトコル">Gossipプロトコル</h2>
+<p>Cassandraは、分散データベースとしてクラスター内のノード間で情報を共有し、クラスターの状態を維持するために<strong>Gossipプロトコル</strong>を使用します。Gossipプロトコルは、ノードが定期的にお互いに通信し、自身の状態や他のノードから得た情報を交換することで、クラスター全体に情報を伝播させる分散型の通信メカニズムです。</p>
+<h3 id="gossipプロトコルの動作">Gossipプロトコルの動作</h3>
+<ol>
+<li><strong>定期的な情報交換</strong>:
+各ノードは、クラスター内のランダムに選ばれた他のノードと定期的に「ゴシップ（情報交換）」メッセージを送信します。</li>
+<li><strong>情報の伝播</strong>:
+ノードは、自身が持つ情報（例: 自身の状態、負荷、スキーマバージョンなど）と、他のノードから受信した情報を比較します。より新しい情報があれば、自身の情報を更新し、その新しい情報をさらに他のノードに伝播させます。</li>
+<li><strong>効率的な情報伝達</strong>:
+すべての情報を送信するのではなく、変更された情報や最も新しい情報のみを効率的に伝達します。これにより、ネットワーク帯域幅の消費を抑えつつ、クラスター全体に情報が迅速に伝わります。</li>
+<li><strong>障害検知</strong>:
+Gossipプロトコルは、ノードのハートビート情報も交換します。これにより、ノードが応答しなくなった場合、他のノードがそのノードを「ダウン」と判断し、クラスター全体にその情報が伝播されます。</li>
+</ol>
+<p>Gossipプロトコルは、Cassandraの分散アーキテクチャにおいて、ノードの参加・離脱、障害検知、スキーマの同期、負荷情報の共有など、クラスターの健全性と一貫性を維持するための基盤となっています。</p>
+<h2 id="演習">演習</h2>
+<h3 id="nodetool-gossipinfo-コマンド"><code>nodetool gossipinfo</code> コマンド</h3>
+<p><code>nodetool gossipinfo</code> コマンドは、ローカルノードがGossipプロトコルを通じて収集しているクラスター内のノードに関する情報を表示します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">nodetool</span> <span class="n">gossipinfo</span>
+</span></span><span class="line"><span class="cl"><span class="n">localhost</span><span class="o">/</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">generation</span><span class="p">:</span><span class="mi">1686366680</span>
+</span></span><span class="line"><span class="cl">  <span class="n">heartbeat</span><span class="p">:</span><span class="mi">8156</span>
+</span></span><span class="line"><span class="cl">  <span class="n">STATUS</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LOAD</span><span class="p">:</span><span class="mi">8135</span><span class="p">:</span><span class="mf">1.2650205E7</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SCHEMA</span><span class="p">:</span><span class="mi">223</span><span class="p">:</span><span class="mi">8</span><span class="n">aec9840</span><span class="o">-</span><span class="mi">06</span><span class="n">b7</span><span class="o">-</span><span class="mi">356</span><span class="n">a</span><span class="o">-</span><span class="n">b5ed</span><span class="o">-</span><span class="mf">07e43</span><span class="n">a42d65e</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DC</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">datacenter1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RACK</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="n">rack1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RELEASE_VERSION</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mf">4.1</span><span class="o">.</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RPC_ADDRESS</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">NET_VERSION</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">12</span>
+</span></span><span class="line"><span class="cl">  <span class="n">HOST_ID</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">349</span><span class="n">d6a93</span><span class="o">-</span><span class="mi">038</span><span class="n">a</span><span class="o">-</span><span class="mi">45</span><span class="n">a9</span><span class="o">-</span><span class="n">bd86</span><span class="o">-</span><span class="n">cc22ed3d8e0d</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RPC_READY</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="bp">true</span>
+</span></span><span class="line"><span class="cl">  <span class="n">NATIVE_ADDRESS_AND_PORT</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9042</span>
+</span></span><span class="line"><span class="cl">  <span class="n">STATUS_WITH_PORT</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="n">NORMAL</span><span class="p">,</span><span class="o">-</span><span class="mi">1868919513406135542</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SSTABLE_VERSIONS</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">big</span><span class="o">-</span><span class="n">nb</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TOKENS</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="o">&lt;</span><span class="n">hidden</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p>この出力は、各ノードの状態がキーバリューペアとして表されていることを示しています。例えば、<code>STATUS</code> はノードの稼働状態（<code>NORMAL</code> など）、<code>LOAD</code> はノードの負荷、<code>DC</code> はデータセンター、<code>RACK</code> はラック情報などです。</p>
+<p>複数のノードで構成されるクラスターの場合、あるノードで <code>nodetool gossipinfo</code> コマンドを実行すると、そのノードがGossipプロトコルを通じて認識している<strong>他のノードの情報も確認できます</strong>。これにより、クラスター全体の健全性を把握することができます。</p>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="60">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/9/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">DS201学習記録：CassandraのGossipプロトコルについて</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/cassandra/" class="badge badge-custom text-decoration-none me-1">Cassandra</a>
+      <a href="/tags/datastax/" class="badge badge-custom text-decoration-none me-1">DataStax</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

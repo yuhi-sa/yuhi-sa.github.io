@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20230328_mail_auth/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="メールにおける認証・暗号化技術">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230328_mail_auth/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2023-03-28T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2023-03-28T09:00:23&#43;09:00">
+<meta property="article:tag" content="セキュリティ"><meta property="article:tag" content="メール">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="メールにおける認証・暗号化技術">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>メールにおける認証・暗号化技術 | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "メールにおける認証・暗号化技術",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2023-03-28T09:00:23\u002b09:00",
+  "dateModified": "2023-03-28T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230328_mail_auth\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20230328_mail_auth\/1\/",
+  "wordCount":  82 ,
+  "keywords": [
+    "セキュリティ", "メール"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">メールにおける認証・暗号化技術</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2023-03-28T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          March 28, 2023
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          セキュリティ
+        </a>
+        
+        <a href="/tags/%E3%83%A1%E3%83%BC%E3%83%AB/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          メール
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="メールにおける認証暗号化技術">メールにおける認証・暗号化技術</h1>
+<p>電子メールは、ビジネスやプライベートで広く利用されていますが、その通信は様々なセキュリティリスクに晒されています。これらのリスクに対処するため、メールの送受信には様々な認証・暗号化技術が用いられています。</p>
+<p><img src=".././mail_auth.jpg" alt="メールにおける認証"></p>
+<h2 id="1-通信経路の暗号化">1. 通信経路の暗号化</h2>
+<h3 id="smtp-simple-mail-transfer-protocol-over-tls">SMTP (Simple Mail Transfer Protocol) over TLS</h3>
+<p>SMTPはメール送信に使われるプロトコルですが、そのままでは通信内容が平文で流れます。<strong>TLS (Transport Layer Security)</strong> を利用することで、SMTP通信を暗号化し、通信経路上の第三者による盗聴や改ざんを防ぐことができます。</p>
+<ul>
+<li><strong>注意点</strong>: TLSによる暗号化は通信経路の保護に限定されます。メールが最終的に到達するメールサーバーに保存された段階では復号化されているため、メールサーバー自体への不正アクセスには対応できません。</li>
+</ul>
+<h2 id="2-送信者メールサーバーが送信者を認証">2. 送信者メールサーバーが送信者を認証</h2>
+<h3 id="smtp-auth-smtp-authentication">SMTP Auth (SMTP Authentication)</h3>
+<p>SMTP Authは、メール送信時に、送信者（ユーザー）が正当なユーザーであることをメールサーバーが認証する仕組みです。ユーザー名とパスワードを用いて認証を行い、不正なユーザーによるメールサーバーの利用を防ぎます。</p>
+<ul>
+<li><strong>認証方式</strong>: チャレンジレスポンス方式など、パスワードを直接送信しない安全な認証方式が用いられることが多いです。</li>
+</ul>
+<h2 id="3-受信側のメールサーバーが送信側のメールサーバーを認証">3. 受信側のメールサーバーが送信側のメールサーバーを認証</h2>
+<p>これらの技術は、送信元ドメインの詐称（なりすましメール）を防ぐことを目的としています。</p>
+<h3 id="spf-sender-policy-framework">SPF (Sender Policy Framework)</h3>
+<p>SPFは、メールの送信元IPアドレスが、そのドメインの正規の送信サーバーからのものであるかを検証する仕組みです。</p>
+<ul>
+<li><strong>仕組み</strong>: 送信側ドメインのDNSサーバーに、メール送信を許可するIPアドレスを記述した<strong>SPFレコード</strong>を登録します。受信側のメールサーバーは、メールを受信した際に、送信元ドメインのSPFレコードをDNSに問い合わせ、メールの送信元IPアドレスがSPFレコードに記載されているIPアドレスと一致するかを確認します。</li>
+<li><strong>方式</strong>: IPアドレスベースの認証。</li>
+</ul>
+<h3 id="dkim-domainkeys-identified-mail">DKIM (DomainKeys Identified Mail)</h3>
+<p>DKIMは、メールにデジタル署名を付与することで、メールの送信元ドメインが正当であることと、メールの内容が改ざんされていないことを検証する仕組みです。</p>
+<ul>
+<li><strong>仕組み</strong>: 送信側は、メールのヘッダーや本文の一部をハッシュ化し、自身の秘密鍵で署名してメールに付与します。送信側ドメインのDNSサーバーには、対応する<strong>公開鍵</strong>が登録されています。受信側のメールサーバーは、メールを受信した際に、送信元ドメインのDNSから公開鍵を取得し、その公開鍵で署名を検証します。</li>
+<li><strong>方式</strong>: デジタル署名方式。</li>
+</ul>
+<h2 id="4-受信者が送信者を認証メール内容を保護">4. 受信者が送信者を認証・メール内容を保護</h2>
+<p>これらの技術は、メールの送信者認証に加え、メールの内容の機密性や完全性を保護することを目的としています。</p>
+<h3 id="smime-secure--multipurpose-internet-mail-extensions">S/MIME (Secure / Multipurpose Internet Mail Extensions)</h3>
+<p>S/MIMEは、公開鍵暗号方式を用いてメールの<strong>デジタル署名</strong>と<strong>暗号化</strong>を行う標準的な技術です。</p>
+<ul>
+<li><strong>デジタル署名</strong>: 送信者の身元を証明し、メールの改ざんを検知できます。</li>
+<li><strong>暗号化</strong>: メール内容を暗号化し、受信者以外には読めないようにします。</li>
+</ul>
+<p>S/MIMEを利用するには、信頼できる認証局（CA）が発行したデジタル証明書が必要です。</p>
+<h3 id="pgp-pretty-good-privacy">PGP (Pretty Good Privacy)</h3>
+<p>PGPは、S/MIMEと同様に、公開鍵暗号方式を用いてメールの<strong>デジタル署名</strong>と<strong>暗号化</strong>を行うソフトウェアです。</p>
+<ul>
+<li><strong>特徴</strong>: S/MIMEが認証局による信頼の階層構造を利用するのに対し、PGPは「信頼の輪（Web of Trust）」という分散型の信頼モデルを採用しています。</li>
+<li><strong>利用</strong>: 送信者と受信者が事前に公開鍵を交換しておく必要があります。</li>
+</ul>
+<p>これらの技術を組み合わせることで、メール通信のセキュリティを多層的に強化し、フィッシング詐欺やスパム、情報漏洩などのリスクを低減することができます。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://amzn.to/42Khntj">2023 情報処理安全確保支援士「専門知識＋午後問題」の重点対策」</a></li>
+<li><a href="https://www.sendgrid.com/blog/spf-dkim-dmarc/">SPFとは？DKIMとは？DMARCとは？メール認証技術の仕組みを解説</a></li>
+<li><a href="https://www.sendgrid.com/blog/s-mime-pgp/">S/MIMEとは？PGPとは？メールの暗号化と署名について解説</a></li>
+</ul>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="82">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20230328_mail_auth/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">メールにおける認証・暗号化技術</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/" class="badge badge-custom text-decoration-none me-1">セキュリティ</a>
+      <a href="/tags/%E3%83%A1%E3%83%BC%E3%83%AB/" class="badge badge-custom text-decoration-none me-1">メール</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>
