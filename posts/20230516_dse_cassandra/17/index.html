@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/17\/",
-  "wordCount":  55 ,
+  "wordCount":  54 ,
   "keywords": [
     "Cassandra", "DataStax"
   ],
@@ -219,8 +219,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="ds201学習記録cassandraのcompactionについて">DS201学習記録：CassandraのCompactionについて</h1>
-<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
+      <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
 <h2 id="compaction-コンパクション">Compaction (コンパクション)</h2>
 <p>Cassandraは、高い書き込み性能を実現するために、書き込み時に既存のデータを直接上書きせず、新しいデータをSSTable（Sorted String Table）としてディスクに追記します。このため、同じキーのデータが複数のSSTableに分散して存在したり、削除されたデータが物理的にディスクから消えずに残ったりします。</p>
 <p>**Compaction（コンパクション）**は、これらのSSTableを統合し、不要なデータを削除し、データの配置を最適化することで、データベースのパフォーマンスを向上させ、ディスクスペースを効率的に利用するためのプロセスです。</p>
@@ -257,7 +256,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="55">
+    <meta itemprop="wordCount" content="54">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/17/">
   </article>
   

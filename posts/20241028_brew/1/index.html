@@ -41,7 +41,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "brewにおいて依存関係なく削除できるpkgを表示するコマンド",
-  "description": "brewにおいて依存関係なく削除できるpkgを表示するコマンド for pkg in $(brew list); do if [ -z \u0026#34;$(brew uses --installed $pkg)\u0026#34; ]; then echo \u0026#34;$pkg can be uninstalled\u0026#34; fi …",
+  "description": "for pkg in $(brew list); do if [ -z \u0026#34;$(brew uses --installed $pkg)\u0026#34; ]; then echo \u0026#34;$pkg can be uninstalled\u0026#34; fi done ",
   "author": {
     "@type": "Person",
     "name": ""
@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20241028_brew\/1\/",
-  "wordCount":  23 ,
+  "wordCount":  22 ,
   "keywords": [
     "Shell"
   ],
@@ -212,8 +212,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="brewにおいて依存関係なく削除できるpkgを表示するコマンド">brewにおいて依存関係なく削除できるpkgを表示するコマンド</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.sh" data-lang=".sh"><span class="line"><span class="cl"><span class="k">for</span> pkg in <span class="k">$(</span>brew list<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+      <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.sh" data-lang=".sh"><span class="line"><span class="cl"><span class="k">for</span> pkg in <span class="k">$(</span>brew list<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="k">$(</span>brew uses --installed <span class="nv">$pkg</span><span class="k">)</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$pkg</span><span class="s2"> can be uninstalled&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">fi</span>
@@ -227,7 +226,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="23">
+    <meta itemprop="wordCount" content="22">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20241028_brew/1/">
   </article>
   

@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/en\/posts\/20201220_binary\/1\/",
-  "wordCount":  571 ,
+  "wordCount":  565 ,
   "keywords": [
     "algorithm"
   ],
@@ -212,8 +212,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="binary-exponentiation-modular-exponentiation-in-python">Binary Exponentiation (Modular Exponentiation) in Python</h1>
-<h2 id="binary-exponentiation-method">Binary Exponentiation Method</h2>
+      <h2 id="binary-exponentiation-method">Binary Exponentiation Method</h2>
 <p>Calculating $a^k$ by direct multiplication requires $k$ multiplications. However, when $k$ is a very large number, this becomes computationally expensive and impractical. The <strong>binary exponentiation method</strong> (also known as <strong>exponentiation by squaring</strong> or <strong>modular exponentiation</strong>) is an efficient algorithm to compute $a^k \pmod{p}$ (the remainder when $a^k$ is divided by $p$). This method significantly reduces the number of multiplications to $O(\log k)$. It is crucial for cryptographic algorithms like RSA, where exponents can be extremely large.</p>
 <p>The core idea is to express the exponent $k$ in its binary representation. For example, to calculate $5^{21} \pmod{p}$:</p>
 <p>First, convert the exponent $21$ to binary:
@@ -282,7 +281,7 @@ We can pre-calculate powers of $a$ that are powers of two (i.e., $a^1, a^2, a^4,
     </footer>
     
     
-    <meta itemprop="wordCount" content="571">
+    <meta itemprop="wordCount" content="565">
     <meta itemprop="url" content="https://yuhi-sa.github.io/en/posts/20201220_binary/1/">
   </article>
   

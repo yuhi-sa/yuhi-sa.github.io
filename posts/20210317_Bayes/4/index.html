@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20210317_bayes\/4\/",
-  "wordCount":  214 ,
+  "wordCount":  213 ,
   "keywords": [
     "統計学", "機械学習"
   ],
@@ -188,7 +188,7 @@
         
         <span aria-label="Reading time">
           <i class="far fa-clock" aria-hidden="true"></i>
-          2 min read
+          1 min read
         </span>
         
       </div>
@@ -219,8 +219,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="正規分布における最尤推定">正規分布における最尤推定</h1>
-<p>最尤推定（Maximum Likelihood Estimation, MLE）は、統計モデルのパラメータを推定する一般的な手法の一つです。20世紀初頭に統計学者ロナルド・フィッシャーによって体系化されました。</p>
+      <p>最尤推定（Maximum Likelihood Estimation, MLE）は、統計モデルのパラメータを推定する一般的な手法の一つです。20世紀初頭に統計学者ロナルド・フィッシャーによって体系化されました。</p>
 <h3 id="最尤推定の考え方">最尤推定の考え方</h3>
 <p>最尤推定では、<strong>尤度関数</strong>を最大化するパラメータを推定します。尤度関数とは、「<strong>与えられたデータが、特定のパラメータを持つモデルから生成される確率（または確率密度）</strong>」と解釈できる関数です。</p>
 <p>観測データ $x = {x_1, x_2, \dots, x_n}$ があり、これがパラメータ $\theta$ を持つ確率分布 $p(x|\theta)$ に従うと仮定します。各観測が独立同分布（i.i.d.）である場合、尤度関数 $L(\theta|x)$ は、各観測値の確率の積として定義されます。</p>
@@ -230,7 +229,7 @@
 <p>尤度関数は積の形をしているため、計算が複雑になることがあります。また、積の微分は扱いにくいです。そこで、単調増加関数である対数をとった<strong>対数尤度関数</strong> $\log L(\theta|x)$ を最大化することが一般的です。対数をとることで積が和になり、微分が容易になります。</p>
 <p>$$ \log L(\theta|x) = \sum_{i=1}^n \log p(x_i|\theta) $$</p>
 <p>対数関数は単調増加であるため、尤度関数を最大化することと対数尤度関数を最大化することは等価です。</p>
-<h3 id="正規分布における最尤推定-1">正規分布における最尤推定</h3>
+<h3 id="正規分布における最尤推定">正規分布における最尤推定</h3>
 <p>ここでは、観測データ $x = {x_1, x_2, \dots, x_n}$ が正規分布 $\mathcal{N}(x | \mu, \sigma^2)$ に従うと仮定し、そのパラメータである平均 $\mu$ と分散 $\sigma^2$ を最尤推定で求めてみます。</p>
 <p>正規分布の確率密度関数は以下の通りです。
 $$ p(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) $$</p>
@@ -263,7 +262,7 @@ $$ \frac{1}{(\sigma^2)^2} \sum_{i=1}^n (x_i - \mu)^2 = \frac{n}{\sigma^2} \impli
     </footer>
     
     
-    <meta itemprop="wordCount" content="214">
+    <meta itemprop="wordCount" content="213">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210317_bayes/4/">
   </article>
   

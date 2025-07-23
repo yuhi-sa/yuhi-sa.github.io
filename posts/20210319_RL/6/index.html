@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20210319_rl\/6\/",
-  "wordCount":  86 ,
+  "wordCount":  83 ,
   "keywords": [
     "強化学習"
   ],
@@ -212,8 +212,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="advantage-actor-critic-a2c">Advantage Actor-Critic (A2C)</h1>
-<p>Actor-Critic法は、方策ベースの強化学習手法である方策勾配法と、価値ベースの強化学習手法であるTD学習を組み合わせたものです。Actor（方策）が行動を選択し、Critic（価値関数）がその行動を評価することで、学習を効率化します。</p>
+      <p>Actor-Critic法は、方策ベースの強化学習手法である方策勾配法と、価値ベースの強化学習手法であるTD学習を組み合わせたものです。Actor（方策）が行動を選択し、Critic（価値関数）がその行動を評価することで、学習を効率化します。</p>
 <h2 id="アドバンテージ関数-advantage-function">アドバンテージ関数 (Advantage Function)</h2>
 <p>方策勾配法では、行動価値関数 $Q(s,a)$ を用いて方策の更新方向を決定します。しかし、行動価値関数は状態そのものの価値 $V(s)$ に大きく依存する傾向があります。例えば、ある状態の価値が非常に高い場合、その状態でのどの行動も高いQ値を持つことになります。</p>
 <p>そこで、状態の価値 $V(s)$ を差し引いた<strong>アドバンテージ関数</strong> $A(s,a)$ を用いて行動を評価することを考えます。</p>
@@ -223,7 +222,7 @@
 <p>アドバンテージ関数を利用する場合の方策勾配は、以下のようになります。</p>
 <p>$$ \nabla J(\theta) = \mathbb{E}<em>{s \sim d^{\pi</em>\theta}, a \sim \pi_\theta}[\nabla \log \pi_\theta(a|s) A(s,a)] $$</p>
 <p>この式は、方策勾配法における $Q(s,a)$ を $A(s,a)$ に置き換えた形になっています。$A(s,a)$ は、ベースラインとして機能し、勾配の分散を削減する効果があります。これにより、学習の安定性と効率が向上します。</p>
-<h2 id="advantage-actor-critic-a2c-1">Advantage Actor-Critic (A2C)</h2>
+<h2 id="advantage-actor-critic-a2c">Advantage Actor-Critic (A2C)</h2>
 <p>アドバンテージ関数を用いたActor-Critic法は、<strong>Advantage Actor-Critic (A2C)</strong> と呼ばれます。</p>
 <ul>
 <li><strong>Actor (アクター)</strong>: 方策 $\pi_\theta(a|s)$ を学習し、行動を選択します。アクターは、アドバンテージ関数 $A(s,a)$ を用いて方策のパラメータ $\theta$ を更新します。</li>
@@ -242,7 +241,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="86">
+    <meta itemprop="wordCount" content="83">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/6/">
   </article>
   

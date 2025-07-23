@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/8\/",
-  "wordCount":  31 ,
+  "wordCount":  30 ,
   "keywords": [
     "Cassandra", "DataStax"
   ],
@@ -219,8 +219,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="ds201学習記録cassandraのvnodeについて">DS201学習記録：CassandraのVNodeについて</h1>
-<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
+      <p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
 <h2 id="vnode-仮想ノード">VNode (仮想ノード)</h2>
 <p>Cassandraの初期バージョンでは、各物理ノードがリング上の単一の大きなトークン範囲を担当していました。この設計では、ノードの追加や削除、故障が発生した場合に、大量のデータを再分配する必要があり、運用上のオーバーヘッドが大きくなるという課題がありました。</p>
 <p>この問題を解決するために、Cassandra 1.2から**VNode（仮想ノード）**が導入されました。VNodeは、物理ノードごとに複数の仮想的なノードを作成し、それぞれがリング上の小さなトークン範囲を担当する仕組みです。</p>
@@ -258,7 +257,7 @@ VNodeは、手動でのトークン割り当てや、ノードの追加・削除
     </footer>
     
     
-    <meta itemprop="wordCount" content="31">
+    <meta itemprop="wordCount" content="30">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/8/">
   </article>
   

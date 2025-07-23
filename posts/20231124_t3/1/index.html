@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20231124_t3\/1\/",
-  "wordCount":  265 ,
+  "wordCount":  262 ,
   "keywords": [
     "JavaScript", "Next.js", "Prometheus"
   ],
@@ -226,8 +226,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="nextjsのapp-routerとpages-router間でのprom-clientメトリクス共有の課題">Next.jsのApp RouterとPages Router間でのprom-clientメトリクス共有の課題</h1>
-<p>Next.jsのアプリケーションにおいて、<code>App Router</code> と <code>Pages Router</code> の両方で共通の <code>prom-client</code> メトリクス（例: <code>Counter</code>）を共有しようとすると、いくつかの課題に直面します。特に、<code>global</code> オブジェクトにメトリクスレジストリを登録しようとした際に問題が発生します。</p>
+      <p>Next.jsのアプリケーションにおいて、<code>App Router</code> と <code>Pages Router</code> の両方で共通の <code>prom-client</code> メトリクス（例: <code>Counter</code>）を共有しようとすると、いくつかの課題に直面します。特に、<code>global</code> オブジェクトにメトリクスレジストリを登録しようとした際に問題が発生します。</p>
 <h2 id="発生した問題">発生した問題</h2>
 <p>T3 StackのようなNext.jsプロジェクトで、ログのメトリクス化のために <code>prom-client</code> の <code>Counter</code> を <code>Logger</code> クラスで共有することを検討しました。具体的には、<code>prom-client</code> のデフォルトレジストリを <code>global</code> オブジェクトに登録し、アプリケーション全体で単一のメトリクスインスタンスを使用しようとしました。</p>
 <p>しかし、このアプローチでは、<code>Pages Router</code> のAPIルートから <code>global</code> のレジストリに <code>Counter</code> を登録しようとすると、ビルドエラーが発生しました。</p>
@@ -319,7 +318,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="265">
+    <meta itemprop="wordCount" content="262">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_t3/1/">
   </article>
   

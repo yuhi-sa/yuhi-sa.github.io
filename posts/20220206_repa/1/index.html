@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20220206_repa\/1\/",
-  "wordCount":  139 ,
+  "wordCount":  136 ,
   "keywords": [
     "機械学習", "深層学習"
   ],
@@ -219,8 +219,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="リパラメータ化トリック-reparameterization-trick">リパラメータ化トリック (Reparameterization Trick)</h1>
-<p>深層学習モデルにおいて、確率分布からサンプリングされた変数を扱う場合、そのサンプリング操作は通常微分不可能です。そのため、誤差逆伝播法（バックプロパゲーション）を用いて勾配を計算し、モデルのパラメータを更新することができません。</p>
+      <p>深層学習モデルにおいて、確率分布からサンプリングされた変数を扱う場合、そのサンプリング操作は通常微分不可能です。そのため、誤差逆伝播法（バックプロパゲーション）を用いて勾配を計算し、モデルのパラメータを更新することができません。</p>
 <p>この問題を解決するために、D. P. KingmaとM. Wellingが変分オートエンコーダ（VAE）の論文で導入した手法が、<strong>リパラメータ化トリック (Reparameterization Trick)</strong> です。</p>
 <h2 id="原理">原理</h2>
 <p>リパラメータ化トリックは、確率分布からのサンプリング操作を、<strong>パラメータに依存しないランダムノイズ</strong>と、<strong>パラメータに依存する決定的な変換</strong>に分離することで、微分可能にする手法です。</p>
@@ -267,7 +266,7 @@ $$ \text{ここで } \epsilon \sim \mathcal{N}(0, 1) $$</p>
     </footer>
     
     
-    <meta itemprop="wordCount" content="139">
+    <meta itemprop="wordCount" content="136">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20220206_repa/1/">
   </article>
   

@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20220716_ssh\/1\/",
-  "wordCount":  158 ,
+  "wordCount":  157 ,
   "keywords": [
     "Linux", "SSH", "ネットワーク"
   ],
@@ -226,8 +226,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="踏み台サーバー経由で多段ssh接続する方法">踏み台サーバー経由で多段SSH接続する方法</h1>
-<p>セキュリティ上の理由やネットワーク構成により、目的のサーバーに直接SSH接続できない場合があります。このような場合、一度**踏み台サーバー（Bastion Host / Jump Host）**に接続し、そこから目的のサーバーに接続する「多段SSH」が必要になります。</p>
+      <p>セキュリティ上の理由やネットワーク構成により、目的のサーバーに直接SSH接続できない場合があります。このような場合、一度**踏み台サーバー（Bastion Host / Jump Host）**に接続し、そこから目的のサーバーに接続する「多段SSH」が必要になります。</p>
 <p>ここでは、<code>ssh</code> コマンドの <code>ProxyCommand</code> オプションや <code>ProxyJump</code> オプション、またはSSH設定ファイル (<code>~/.ssh/config</code>) を利用して多段SSH接続を行う方法を解説します。</p>
 <h2 id="1-ssh-コマンドの-proxycommand-オプションを使用する">1. <code>ssh</code> コマンドの <code>ProxyCommand</code> オプションを使用する</h2>
 <p><code>ProxyCommand</code> オプションは、SSH接続を確立する前に実行されるコマンドを指定します。このコマンドの標準入力/出力が、目的のサーバーへのSSH接続のトンネルとして利用されます。</p>
@@ -294,7 +293,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="158">
+    <meta itemprop="wordCount" content="157">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20220716_ssh/1/">
   </article>
   

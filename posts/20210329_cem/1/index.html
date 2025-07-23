@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20210329_cem\/1\/",
-  "wordCount":  198 ,
+  "wordCount":  194 ,
   "keywords": [
     "機械学習", "最適化", "モンテカルロ法"
   ],
@@ -226,8 +226,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="クロスエントロピー法-cross-entropy-method">クロスエントロピー法 (Cross Entropy Method)</h1>
-<p>クロスエントロピー法 (Cross Entropy Method, CEM) は、モンテカルロ法における<strong>重点サンプリング (Importance Sampling)</strong> の一種であり、最適化問題や希少事象の確率推定に用いられるアルゴリズムです。</p>
+      <p>クロスエントロピー法 (Cross Entropy Method, CEM) は、モンテカルロ法における<strong>重点サンプリング (Importance Sampling)</strong> の一種であり、最適化問題や希少事象の確率推定に用いられるアルゴリズムです。</p>
 <h2 id="モンテカルロサンプリング">モンテカルロサンプリング</h2>
 <p>モンテカルロ法は、乱数を用いることで、複雑な問題の近似解を求める数値計算手法の総称です。</p>
 <p>例えば、確率変数 $X$ が確率密度関数 $f(x)$ に従うとき、関数 $H(X)$ の期待値 $l = \mathbb{E}[H(X)] = \int H(x)f(x)dx$ を知りたいとします。
@@ -238,7 +237,7 @@
 <p>重点サンプリングでは、目的の分布 $f(x)$ ではなく、別のサンプリング分布 $g(x)$ からサンプルを生成します。そして、そのサンプルに<strong>重み</strong> $w(x) = f(x)/g(x)$ を掛けることで、期待値を推定します。</p>
 <p>$$ l_{IS} = \frac{1}{N} \sum_{i=1}^N H(X_i) \frac{f(X_i)}{g(X_i)} = \mathbb{E}_g\left[H(X)\frac{f(X)}{g(X)}\right] $$</p>
 <p>ここで、$X_i \sim g(x)$ です。重点サンプリングの効率は、サンプリング分布 $g(x)$ の選択に大きく依存します。特に、分散を最小化する最適なサンプリング分布 $g^<em>(x)$ は、$g^</em>(x) \propto |H(x)|f(x)$ の形をとることが知られています。</p>
-<h2 id="クロスエントロピー法-cross-entropy-method-1">クロスエントロピー法 (Cross Entropy Method)</h2>
+<h2 id="クロスエントロピー法-cross-entropy-method">クロスエントロピー法 (Cross Entropy Method)</h2>
 <p>クロスエントロピー法は、この重点サンプリングにおける最適なサンプリング分布 $g^*(x)$ に近い分布を、反復的に見つけるためのアルゴリズムです。</p>
 <p>「クロスエントロピー」は、2つの確率分布 $p$ と $q$ の間の類似度を測る尺度の一つで、以下のように定義されます。</p>
 <p>$$ H(p, q) = -\int p(x) \log q(x) dx $$</p>
@@ -270,7 +269,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="198">
+    <meta itemprop="wordCount" content="194">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210329_cem/1/">
   </article>
   

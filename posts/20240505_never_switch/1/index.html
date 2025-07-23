@@ -60,7 +60,7 @@
   },
   
   "url": "https:\/\/yuhi-sa.github.io\/posts\/20240505_never_switch\/1\/",
-  "wordCount":  196 ,
+  "wordCount":  195 ,
   "keywords": [
     "TypeScript"
   ],
@@ -212,8 +212,7 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <h1 id="typescriptのnever型でswitch文の網羅性を保証する">TypeScriptの<code>never</code>型で<code>switch</code>文の網羅性を保証する</h1>
-<p>TypeScriptで<strong>ユニオン型 (Union Type)</strong> に対して <code>switch</code> 文を使用する場合、すべてのケースを網羅していることを保証することが重要です。ユニオン型に新しい型が追加された際に、<code>switch</code> 文の処理が更新されないと、予期せぬバグにつながる可能性があります。</p>
+      <p>TypeScriptで<strong>ユニオン型 (Union Type)</strong> に対して <code>switch</code> 文を使用する場合、すべてのケースを網羅していることを保証することが重要です。ユニオン型に新しい型が追加された際に、<code>switch</code> 文の処理が更新されないと、予期せぬバグにつながる可能性があります。</p>
 <p>この網羅性をコンパイル時にチェックする方法として、<code>switch</code> 文の <code>default</code> 句に <code>never</code> 型を代入するテクニックがあります。</p>
 <h2 id="never-型とは"><code>never</code> 型とは</h2>
 <p><code>never</code> 型は、TypeScriptの特別な型で、「<strong>決して発生しない値</strong>」を表します。これは、関数が何も返さない（無限ループに陥る、常に例外をスローするなど）場合や、到達不能なコードパスの型として使用されます。</p>
@@ -269,7 +268,7 @@
     </footer>
     
     
-    <meta itemprop="wordCount" content="196">
+    <meta itemprop="wordCount" content="195">
     <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240505_never_switch/1/">
   </article>
   
