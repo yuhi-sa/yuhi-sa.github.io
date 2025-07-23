@@ -1,55 +1,372 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><meta property="og:type" content="article"><meta property="og:title" content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2020-10-15T15:17:23+09:00"><meta property="article:modified_time" content="2020-10-15T15:17:23+09:00"><meta property="article:tag" content="algorithm"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Euclidean Algorithm and Extended Euclidean Algorithm in Python | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"Euclidean Algorithm and Extended Euclidean Algorithm in Python","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-10-15T15:17:23\u002b09:00","dateModified":"2020-10-15T15:17:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/","wordCount":474,"keywords":["algorithm"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1><div class=article-meta><time datetime=2020-10-15T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-October 15, 2020
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-3 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/algorithm/ class="badge badge-custom" rel=tag itemprop=keywords>algorithm</a></div></header><div class=article-content itemprop=articleBody><h1 id=euclidean-algorithm-and-extended-euclidean-algorithm-in-python>Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1><h2 id=euclidean-algorithm>Euclidean Algorithm</h2><p>The Euclidean algorithm is a method for finding the greatest common divisor (GCD) of two integers $a$ and $b$ $(a>b)$ by repeatedly dividing $a$ by the remainder $r$ of $a$ divided by $b$ using the division algorithm.</p><h3 id=algorithm>Algorithm</h3><p>Inputs: Integers $a$ and $b$.
-Output: GCD $d$.</p><ol><li>Set $a_0=a$ and $a_1=b$.</li><li>If $a_i=0$, set $d=a_{i-1}$ and terminate.</li><li>Determine $a_{i+1}$ and $q_i$ from $a_{i-1}=a_iq_i+a_{i+1}$ and return to step 2.</li></ol><h3 id=python-code>Python code</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-euclid.py data-lang=euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=n>a_list</span> <span class=o>=</span> <span class=p>[]</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>a</span> <span class=o>&lt;</span> <span class=n>b</span><span class=p>:</span> 
-</span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>a</span> <span class=o>&gt;=</span> <span class=n>b</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span><span class=p>(</span><span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>!=</span><span class=mi>0</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>%</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span><span class=mi>1</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span>
-</span></span></code></pre></div><h2 id=extended-euclidean-algorithm>Extended Euclidean Algorithm</h2><p>The Extended Euclidean Algorithm is an extension of the Euclidean algorithm. In addition to finding the greatest common divisor (GCD) of two integers $a$ and $b$, it also finds integers $x$ and $y$ that satisfy Bézout&rsquo;s identity: $ax + by = \text{gcd}(a, b)$. This algorithm is widely used in cryptography, particularly for computing modular multiplicative inverses in RSA.</p><h3 id=algorithm-1>Algorithm</h3><p>The algorithm works by tracing the steps of the Euclidean algorithm backward.</p><ol><li><strong>Base Case</strong>: If $b = 0$, then $\text{gcd}(a, b) = a$. In this case, $x=1$ and $y=0$ satisfy $a \cdot 1 + b \cdot 0 = a$.</li><li><strong>Recursive Step</strong>: For $a \cdot x + b \cdot y = \text{gcd}(a, b)$, we know that $\text{gcd}(a, b) = \text{gcd}(b, a \pmod b)$.
+<!DOCTYPE html>
+<html lang="en"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Euclidean Algorithm and Extended Euclidean Algorithm in Python">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2020-10-15T15:17:23&#43;09:00">
+<meta property="article:modified_time" content="2020-10-15T15:17:23&#43;09:00">
+<meta property="article:tag" content="algorithm">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="Euclidean Algorithm and Extended Euclidean Algorithm in Python">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>Euclidean Algorithm and Extended Euclidean Algorithm in Python | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Euclidean Algorithm and Extended Euclidean Algorithm in Python",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2020-10-15T15:17:23\u002b09:00",
+  "dateModified": "2020-10-15T15:17:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/",
+  "wordCount":  474 ,
+  "keywords": [
+    "algorithm"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2020-10-15T15:17:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          October 15, 2020
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          3 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/en/tags/algorithm/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          algorithm
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="euclidean-algorithm-and-extended-euclidean-algorithm-in-python">Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1>
+<h2 id="euclidean-algorithm">Euclidean Algorithm</h2>
+<p>The Euclidean algorithm is a method for finding the greatest common divisor (GCD) of two integers $a$ and $b$ $(a&gt;b)$ by repeatedly dividing $a$ by the remainder $r$ of $a$ divided by $b$ using the division algorithm.</p>
+<h3 id="algorithm">Algorithm</h3>
+<p>Inputs: Integers $a$ and $b$.
+Output: GCD $d$.</p>
+<ol>
+<li>Set $a_0=a$ and $a_1=b$.</li>
+<li>If $a_i=0$, set $d=a_{i-1}$ and terminate.</li>
+<li>Determine $a_{i+1}$ and $q_i$ from $a_{i-1}=a_iq_i+a_{i+1}$ and return to step 2.</li>
+</ol>
+<h3 id="python-code">Python code</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-euclid.py" data-lang="euclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">%</span><span class="n">a_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</span></span></code></pre></div><h2 id="extended-euclidean-algorithm">Extended Euclidean Algorithm</h2>
+<p>The Extended Euclidean Algorithm is an extension of the Euclidean algorithm. In addition to finding the greatest common divisor (GCD) of two integers $a$ and $b$, it also finds integers $x$ and $y$ that satisfy Bézout&rsquo;s identity: $ax + by = \text{gcd}(a, b)$. This algorithm is widely used in cryptography, particularly for computing modular multiplicative inverses in RSA.</p>
+<h3 id="algorithm-1">Algorithm</h3>
+<p>The algorithm works by tracing the steps of the Euclidean algorithm backward.</p>
+<ol>
+<li><strong>Base Case</strong>: If $b = 0$, then $\text{gcd}(a, b) = a$. In this case, $x=1$ and $y=0$ satisfy $a \cdot 1 + b \cdot 0 = a$.</li>
+<li><strong>Recursive Step</strong>: For $a \cdot x + b \cdot y = \text{gcd}(a, b)$, we know that $\text{gcd}(a, b) = \text{gcd}(b, a \pmod b)$.
 Let $b \cdot x&rsquo; + (a \pmod b) \cdot y&rsquo; = \text{gcd}(b, a \pmod b)$.
 Since $a \pmod b = a - \lfloor a/b \rfloor \cdot b$, we can substitute this into the equation:
 $b \cdot x&rsquo; + (a - \lfloor a/b \rfloor \cdot b) \cdot y&rsquo; = \text{gcd}(a, b)$
 Rearranging the terms to match $a \cdot x + b \cdot y$:
 $a \cdot y&rsquo; + b \cdot (x&rsquo; - \lfloor a/b \rfloor \cdot y&rsquo;) = \text{gcd}(a, b)$
-Thus, the solution for $(x, y)$ is $(y&rsquo;, x&rsquo; - \lfloor a/b \rfloor \cdot y&rsquo;)$.</li></ol><h3 id=python-implementation>Python Implementation</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:extended_euclid.py data-lang=python:extended_euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>extended_gcd</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
-</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
-</span></span></span><span class=line><span class=cl><span class=s2>    Computes the greatest common divisor (GCD) of a and b,
-</span></span></span><span class=line><span class=cl><span class=s2>    and also finds integers x and y such that ax + by = gcd(a, b).
-</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>x0</span><span class=p>,</span> <span class=n>x1</span><span class=p>,</span> <span class=n>y0</span><span class=p>,</span> <span class=n>y1</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>        <span class=n>q</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>a</span> <span class=o>//</span> <span class=n>b</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>%</span> <span class=n>b</span>
-</span></span><span class=line><span class=cl>        <span class=n>x0</span><span class=p>,</span> <span class=n>x1</span> <span class=o>=</span> <span class=n>x1</span><span class=p>,</span> <span class=n>x0</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>x1</span>
-</span></span><span class=line><span class=cl>        <span class=n>y0</span><span class=p>,</span> <span class=n>y1</span> <span class=o>=</span> <span class=n>y1</span><span class=p>,</span> <span class=n>y0</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>y1</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span><span class=p>,</span> <span class=n>x0</span><span class=p>,</span> <span class=n>y0</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Example</span>
-</span></span><span class=line><span class=cl><span class=c1># Find gcd(48, 18) and x, y such that 48x + 18y = gcd(48, 18)</span>
-</span></span><span class=line><span class=cl><span class=n>gcd</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span> <span class=n>y</span> <span class=o>=</span> <span class=n>extended_gcd</span><span class=p>(</span><span class=mi>48</span><span class=p>,</span> <span class=mi>18</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;GCD(48, 18): </span><span class=si>{</span><span class=n>gcd</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span> <span class=c1># Output: 6</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;x: </span><span class=si>{</span><span class=n>x</span><span class=si>}</span><span class=s2>, y: </span><span class=si>{</span><span class=n>y</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>     <span class=c1># Output: x: -1, y: 3 (48*(-1) + 18*3 = 6)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Another example</span>
-</span></span><span class=line><span class=cl><span class=n>gcd</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span> <span class=n>y</span> <span class=o>=</span> <span class=n>extended_gcd</span><span class=p>(</span><span class=mi>111</span><span class=p>,</span> <span class=mi>30</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;GCD(111, 30): </span><span class=si>{</span><span class=n>gcd</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span> <span class=c1># Output: 3</span>
-</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;x: </span><span class=si>{</span><span class=n>x</span><span class=si>}</span><span class=s2>, y: </span><span class=si>{</span><span class=n>y</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>     <span class=c1># Output: x: 3, y: -11 (111*3 + 30*(-11) = 3)</span>
-</span></span></code></pre></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="474"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/en/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Euclidean Algorithm and Extended Euclidean Algorithm in Python</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/en/tags/algorithm/ class="badge badge-custom text-decoration-none me-1">Algorithm</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+Thus, the solution for $(x, y)$ is $(y&rsquo;, x&rsquo; - \lfloor a/b \rfloor \cdot y&rsquo;)$.</li>
+</ol>
+<h3 id="python-implementation">Python Implementation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python:extended_euclid.py" data-lang="python:extended_euclid.py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">extended_gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Computes the greatest common divisor (GCD) of a and b,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    and also finds integers x and y such that ax + by = gcd(a, b).
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x0</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">x1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y0</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">y1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Example</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Find gcd(48, 18) and x, y such that 48x + 18y = gcd(48, 18)</span>
+</span></span><span class="line"><span class="cl"><span class="n">gcd</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">extended_gcd</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;GCD(48, 18): </span><span class="si">{</span><span class="n">gcd</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span> <span class="c1"># Output: 6</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;x: </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, y: </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>     <span class="c1"># Output: x: -1, y: 3 (48*(-1) + 18*3 = 6)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Another example</span>
+</span></span><span class="line"><span class="cl"><span class="n">gcd</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">extended_gcd</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;GCD(111, 30): </span><span class="si">{</span><span class="n">gcd</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span> <span class="c1"># Output: 3</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;x: </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, y: </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>     <span class="c1"># Output: x: 3, y: -11 (111*3 + 30*(-11) = 3)</span>
+</span></span></code></pre></div>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="474">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/en/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/en/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/en/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Euclidean Algorithm and Extended Euclidean Algorithm in Python</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/en/tags/algorithm/" class="badge badge-custom text-decoration-none me-1">Algorithm</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>

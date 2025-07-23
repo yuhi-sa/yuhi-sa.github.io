@@ -1,46 +1,368 @@
-<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/><meta property="og:type" content="article"><meta property="og:title" content="DS201学習記録：Cassandraのパーティションについて"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2023-05-16T09:00:23+09:00"><meta property="article:modified_time" content="2023-05-16T09:00:23+09:00"><meta property="article:tag" content="Cassandra"><meta property="article:tag" content="DataStax"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="DS201学習記録：Cassandraのパーティションについて"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>DS201学習記録：Cassandraのパーティションについて | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"DS201学習記録：Cassandraのパーティションについて","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2023-05-16T09:00:23\u002b09:00","dateModified":"2023-05-16T09:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/","wordCount":158,"keywords":["Cassandra","DataStax"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
-<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
-<i class="fas fa-moon" id=darkModeIcon></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>DS201学習記録：Cassandraのパーティションについて</h1><div class=article-meta><time datetime=2023-05-16T09:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
-May 16, 2023
-</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
-1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/cassandra/ class="badge badge-custom" rel=tag itemprop=keywords>Cassandra
-</a><a href=/tags/datastax/ class="badge badge-custom" rel=tag itemprop=keywords>DataStax</a></div></header><div class=article-content itemprop=articleBody><h1 id=ds201学習記録cassandraのパーティションについて>DS201学習記録：Cassandraのパーティションについて</h1><p><a href=https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm>DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p><h2 id=パーティション-partition>パーティション (Partition)</h2><p>Cassandraにおける<strong>パーティション</strong>は、データを分散して格納するための基本的な概念です。Cassandraのテーブルは、1つまたは複数のパーティションで構成されており、各パーティションは一意の<strong>パーティションキー</strong>によって識別されます。</p><p>パーティションキーは、データをクラスター内のどのノードに配置するかを決定するための基準となります。パーティションキーの値に基づいてデータが物理的に分散されるため、適切なパーティションキーの設計は、Cassandraのパフォーマンスとスケーラビリティに直結します。</p><h3 id=primary-key-とパーティションキー><code>PRIMARY KEY</code> とパーティションキー</h3><p>CQL（Cassandra Query Language）でテーブルを定義する際、<code>PRIMARY KEY</code> を指定します。このプライマリキーの最初の列が<strong>パーティションキー</strong>となります。</p><p><strong>例:</strong>
-<code>videos</code> テーブルの定義例です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cql data-lang=cql><span class=line><span class=cl><span class=n>cqlsh</span><span class=nv>:killrvideo</span><span class=o>&gt;</span><span class=w> </span><span class=n>DESCRIBE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>videos</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>killrvideo</span><span class=p>.</span><span class=n>videos</span><span class=w> </span><span class=p>(</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>video_id</span><span class=w> </span><span class=nb>timeuuid</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>added_date</span><span class=w> </span><span class=nb>timestamp</span><span class=p>,</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>title</span><span class=w> </span><span class=nb>text</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>)</span><span class=w> </span><span class=k>WITH</span><span class=w> </span><span class=n>additional_write_policy</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;99p&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>bloom_filter_fp_chance</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0.01</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>caching</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=s1>&#39;keys&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;ALL&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;rows_per_partition&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;NONE&#39;</span><span class=p>}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>cdc</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>false</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>comment</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>compaction</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=s1>&#39;class&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;max_threshold&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;32&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;min_threshold&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;4&#39;</span><span class=p>}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>compression</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{</span><span class=s1>&#39;chunk_length_in_kb&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;16&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;class&#39;</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;org.apache.cassandra.io.compress.LZ4Compressor&#39;</span><span class=p>}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>memtable</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;default&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>crc_check_chance</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>1.0</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>default_time_to_live</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>extensions</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>{}</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>gc_grace_seconds</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>864000</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>max_index_interval</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>2048</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>memtable_flush_period_in_ms</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>0</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>min_index_interval</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mf>128</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>read_repair</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;BLOCKING&#39;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>AND</span><span class=w> </span><span class=n>speculative_retry</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;99p&#39;</span><span class=p>;</span><span class=w>
-</span></span></span></code></pre></div><p>上記のテーブル定義では、<code>PRIMARY KEY (video_id)</code> と宣言されています。これにより、<code>video_id</code> 列がこのテーブルの<strong>パーティションキー</strong>となります。</p><h3 id=トークン-token>トークン (Token)</h3><p>Cassandraは、パーティションキーのハッシュ値を計算し、そのハッシュ値（<strong>トークン</strong>）に基づいてデータをクラスター内のどのノードに配置するかを決定します。このプロセスは、<strong>パーティショナー</strong>によって管理されます。</p><p><code>token()</code> 関数を使用すると、特定のパーティションキーのトークン値を確認できます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cql data-lang=cql><span class=line><span class=cl><span class=n>cqlsh</span><span class=nv>:killrvideo</span><span class=o>&gt;</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=k>token</span><span class=p>(</span><span class=n>video_id</span><span class=p>),</span><span class=w> </span><span class=n>video_id</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>videos</span><span class=p>;</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w> </span><span class=n>system</span><span class=p>.</span><span class=k>token</span><span class=p>(</span><span class=n>video_id</span><span class=p>)</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=n>video_id</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>------------------------+--------------------------------------
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>   </span><span class=o>-</span><span class=mf>7805440677194688247</span><span class=w> </span><span class=o>|</span><span class=w> </span><span class=mh>245e8024-14bd-11e5-9743-8238354b7e32</span><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w>
-</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>(</span><span class=mf>1</span><span class=w> </span><span class=n>rows</span><span class=p>)</span><span class=w>
-</span></span></span></code></pre></div><p>クエリ結果の最初の列 <code>"system.token(video_id)"</code> は、<code>video_id</code> のトークン値を表しています。このトークン値は、Cassandra内部で使用されるパーティションキーのハッシュ値であり、データがどのノードに配置されるかを決定するために使われます。</p><h3 id=適切なパーティションキーの設計>適切なパーティションキーの設計</h3><p>適切なパーティションキーの設計は、Cassandraの性能を最大限に引き出す上で非常に重要です。</p><ul><li><strong>均等なデータ分散</strong>: データがクラスター全体に均等に分散されるように、カーディナリティ（値の種類）が高く、アクセスパターンが均一な列をパーティションキーに選ぶべきです。</li><li><strong>ホットスポットの回避</strong>: 特定のパーティションにアクセスが集中する「ホットスポット」を避けるように設計する必要があります。</li><li><strong>クエリの効率</strong>: ほとんどのクエリはパーティションキーを指定して行われるため、クエリパターンを考慮してパーティションキーを決定します。</li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="158"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
-<span itemprop=name>Home</span>
-</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
-</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
-</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>DS201学習記録：Cassandraのパーティションについて</span>
-<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/cassandra/ class="badge badge-custom text-decoration-none me-1">Cassandra</a>
-<a href=/tags/datastax/ class="badge badge-custom text-decoration-none me-1">DataStax</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
+<!DOCTYPE html>
+<html lang="ja"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+
+
+<meta name="description" content="勉強したことなどをメモしています">
+
+
+<link rel="canonical" href="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/">
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="DS201学習記録：Cassandraのパーティションについて">
+<meta property="og:description" content="勉強したことなどをメモしています">
+<meta property="og:url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/">
+<meta property="og:site_name" content="tomato blog">
+<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+<meta property="article:published_time" content="2023-05-16T09:00:23&#43;09:00">
+<meta property="article:modified_time" content="2023-05-16T09:00:23&#43;09:00">
+<meta property="article:tag" content="Cassandra"><meta property="article:tag" content="DataStax">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title" content="DS201学習記録：Cassandraのパーティションについて">
+<meta name="twitter:description" content="勉強したことなどをメモしています">
+<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
+
+
+<title>DS201学習記録：Cassandraのパーティションについて | tomato blog</title>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DS201学習記録：Cassandraのパーティションについて",
+  "description": "",
+  "author": {
+    "@type": "Person",
+    "name": ""
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "tomato blog",
+    
+    "url": "https:\/\/yuhi-sa.github.io\/"
+  },
+  "datePublished": "2023-05-16T09:00:23\u002b09:00",
+  "dateModified": "2023-05-16T09:00:23\u002b09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/"
+  },
+  
+  "url": "https:\/\/yuhi-sa.github.io\/posts\/20230516_dse_cassandra\/3\/",
+  "wordCount":  158 ,
+  "keywords": [
+    "Cassandra", "DataStax"
+  ],
+  "articleSection": "posts"
+}
+</script>
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+  <link rel="stylesheet" href="/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css" integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+  
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    
+  <a class="navbar-brand" href="https://yuhi-sa.github.io/">tomato blog</a>
+  <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/">Blog</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/tags/">Tags</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/about/">About</a>
+  </li>
+  <li class="nav-item mx-2">
+    <a class="nav-link" href="https://yuhi-sa.github.io/posts/privacy_policy/">Privacy policy</a>
+  </li>
+
+      <li class="nav-item">
+        <button id="darkModeToggle" class="nav-link btn btn-link border-0" type="button" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+          <span class="d-lg-none ms-2">ダークモード</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+    
+    
+    
+  </div>
+</nav>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LN6QP6VVM3');
+  </script>
+
+
+
+  
+  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+  </header>
+  
+  <main id="main-content" role="main">
+    
+<div class="container">
+  <article itemscope itemtype="https://schema.org/Article">
+    
+    <header class="article-header">
+      <h1 itemprop="headline">DS201学習記録：Cassandraのパーティションについて</h1>
+      
+      
+      
+      <div class="article-meta">
+        <time datetime="2023-05-16T09:00:23&#43;09:00" itemprop="datePublished">
+          <i class="far fa-calendar-alt" aria-hidden="true"></i>
+          May 16, 2023
+        </time>
+        
+        
+        
+        
+        
+        
+        <span aria-label="Reading time">
+          <i class="far fa-clock" aria-hidden="true"></i>
+          1 min read
+        </span>
+        
+      </div>
+      
+      
+      <div class="article-tags" role="group" aria-label="Article tags">
+        
+        <a href="/tags/cassandra/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          Cassandra
+        </a>
+        
+        <a href="/tags/datastax/" 
+           class="badge badge-custom" 
+           rel="tag"
+           itemprop="keywords">
+          DataStax
+        </a>
+        
+      </div>
+      
+    </header>
+    
+    
+    
+    
+    
+    <div class="article-content" itemprop="articleBody">
+      <h1 id="ds201学習記録cassandraのパーティションについて">DS201学習記録：Cassandraのパーティションについて</h1>
+<p><a href="https://www.datastax.com/jp/resources/datasheet/ds201-datastax-enterprise-foundations-apache-cassandratm">DS201: Foundations of Apache Cassandra™ and DataStax Enterprise</a> の学習記録です。</p>
+<h2 id="パーティション-partition">パーティション (Partition)</h2>
+<p>Cassandraにおける<strong>パーティション</strong>は、データを分散して格納するための基本的な概念です。Cassandraのテーブルは、1つまたは複数のパーティションで構成されており、各パーティションは一意の<strong>パーティションキー</strong>によって識別されます。</p>
+<p>パーティションキーは、データをクラスター内のどのノードに配置するかを決定するための基準となります。パーティションキーの値に基づいてデータが物理的に分散されるため、適切なパーティションキーの設計は、Cassandraのパフォーマンスとスケーラビリティに直結します。</p>
+<h3 id="primary-key-とパーティションキー"><code>PRIMARY KEY</code> とパーティションキー</h3>
+<p>CQL（Cassandra Query Language）でテーブルを定義する際、<code>PRIMARY KEY</code> を指定します。このプライマリキーの最初の列が<strong>パーティションキー</strong>となります。</p>
+<p><strong>例:</strong>
+<code>videos</code> テーブルの定義例です。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cql" data-lang="cql"><span class="line"><span class="cl"><span class="n">cqlsh</span><span class="nv">:killrvideo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DESCRIBE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">videos</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">killrvideo</span><span class="p">.</span><span class="n">videos</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">video_id</span><span class="w"> </span><span class="nb">timeuuid</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">added_date</span><span class="w"> </span><span class="nb">timestamp</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">text</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">additional_write_policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;99p&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">bloom_filter_fp_chance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">caching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;keys&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rows_per_partition&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;NONE&#39;</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">cdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">compaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;max_threshold&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;32&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;min_threshold&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">compression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;chunk_length_in_kb&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;org.apache.cassandra.io.compress.LZ4Compressor&#39;</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">memtable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;default&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">crc_check_chance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">default_time_to_live</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">extensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">gc_grace_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">864000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">max_index_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2048</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">memtable_flush_period_in_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">min_index_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">128</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">read_repair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;BLOCKING&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">speculative_retry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;99p&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>上記のテーブル定義では、<code>PRIMARY KEY (video_id)</code> と宣言されています。これにより、<code>video_id</code> 列がこのテーブルの<strong>パーティションキー</strong>となります。</p>
+<h3 id="トークン-token">トークン (Token)</h3>
+<p>Cassandraは、パーティションキーのハッシュ値を計算し、そのハッシュ値（<strong>トークン</strong>）に基づいてデータをクラスター内のどのノードに配置するかを決定します。このプロセスは、<strong>パーティショナー</strong>によって管理されます。</p>
+<p><code>token()</code> 関数を使用すると、特定のパーティションキーのトークン値を確認できます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cql" data-lang="cql"><span class="line"><span class="cl"><span class="n">cqlsh</span><span class="nv">:killrvideo</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">token</span><span class="p">(</span><span class="n">video_id</span><span class="p">),</span><span class="w"> </span><span class="n">video_id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">videos</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">system</span><span class="p">.</span><span class="k">token</span><span class="p">(</span><span class="n">video_id</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">video_id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">------------------------+--------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="o">-</span><span class="mf">7805440677194688247</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">245e8024-14bd-11e5-9743-8238354b7e32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mf">1</span><span class="w"> </span><span class="n">rows</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>クエリ結果の最初の列 <code>&quot;system.token(video_id)&quot;</code> は、<code>video_id</code> のトークン値を表しています。このトークン値は、Cassandra内部で使用されるパーティションキーのハッシュ値であり、データがどのノードに配置されるかを決定するために使われます。</p>
+<h3 id="適切なパーティションキーの設計">適切なパーティションキーの設計</h3>
+<p>適切なパーティションキーの設計は、Cassandraの性能を最大限に引き出す上で非常に重要です。</p>
+<ul>
+<li><strong>均等なデータ分散</strong>: データがクラスター全体に均等に分散されるように、カーディナリティ（値の種類）が高く、アクセスパターンが均一な列をパーティションキーに選ぶべきです。</li>
+<li><strong>ホットスポットの回避</strong>: 特定のパーティションにアクセスが集中する「ホットスポット」を避けるように設計する必要があります。</li>
+<li><strong>クエリの効率</strong>: ほとんどのクエリはパーティションキーを指定して行われるため、クエリパターンを考慮してパーティションキーを決定します。</li>
+</ul>
+    </div>
+    
+    
+    <footer class="article-footer">
+      
+    </footer>
+    
+    
+    <meta itemprop="wordCount" content="158">
+    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20230516_dse_cassandra/3/">
+  </article>
+  
+  
+  <nav class="article-navigation" aria-label="Article navigation">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb-item" 
+        itemprop="itemListElement" 
+        itemscope 
+        itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item">
+        <i class="fas fa-home" aria-hidden="true"></i>
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/" itemprop="item">
+            <span itemprop="name">tomato blog</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <li class="breadcrumb-item" 
+            itemprop="itemListElement" 
+            itemscope 
+            itemtype="https://schema.org/ListItem">
+          <a href="https://yuhi-sa.github.io/posts/" itemprop="item">
+            <span itemprop="name">Posts</span>
+          </a>
+          <meta itemprop="position" content="3" />
+        </li>
+      
+      <li class="breadcrumb-item active" 
+          aria-current="page" 
+          itemprop="itemListElement" 
+          itemscope 
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">DS201学習記録：Cassandraのパーティションについて</span>
+        <meta itemprop="position" content="4" />
+      </li>
+  </ol>
+</nav>
+</nav>
+  
+    
+  <div class="mt-3">
+    <h6 class="d-inline-block me-2">Tags:</h6>
+      <a href="/tags/cassandra/" class="badge badge-custom text-decoration-none me-1">Cassandra</a>
+      <a href="/tags/datastax/" class="badge badge-custom text-decoration-none me-1">DataStax</a>
+  </div>
+
+  </nav>
+</div>
+
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+
+  </footer>
+  
+  
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="/js/dark-mode.min.js"></script>
+
+
+<script src="/js/copy-code.min.js"></script>
+
+</body>
+
+</html>
