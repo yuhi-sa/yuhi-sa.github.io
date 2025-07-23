@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CQL on tomato blog</title>
-    <link>https://yuhi-sa.github.io/tags/cql/</link>
+    <link>http://localhost:1313/tags/cql/</link>
     <description>Recent content in CQL on tomato blog</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Tue, 16 May 2023 09:00:23 +0900</lastBuildDate>
-    <atom:link href="https://yuhi-sa.github.io/tags/cql/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/cql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DS201学習記録：Cassandra Query Language (CQL) の基本</title>
-      <link>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</link>
+      <link>http://localhost:1313/posts/20230516_dse_cassandra/2/</link>
       <pubDate>Tue, 16 May 2023 09:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20230516_dse_cassandra/2/</guid>
+      <guid>http://localhost:1313/posts/20230516_dse_cassandra/2/</guid>
       <description></description>
     </item>
   </channel>

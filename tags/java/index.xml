@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on tomato blog</title>
-    <link>https://yuhi-sa.github.io/tags/java/</link>
+    <link>http://localhost:1313/tags/java/</link>
     <description>Recent content in Java on tomato blog</description>
     <generator>Hugo</generator>
     <language>ja</language>
     <lastBuildDate>Fri, 12 Nov 2021 10:00:23 +0900</lastBuildDate>
-    <atom:link href="https://yuhi-sa.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>オブジェクト指向プログラミングの基本概念</title>
-      <link>https://yuhi-sa.github.io/posts/20211112_java/1/</link>
+      <link>http://localhost:1313/posts/20211112_java/1/</link>
       <pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid>
+      <guid>http://localhost:1313/posts/20211112_java/1/</guid>
       <description></description>
     </item>
   </channel>

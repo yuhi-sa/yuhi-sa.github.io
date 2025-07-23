@@ -9,7 +9,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20220206_repa/1/</loc>
+    <loc>http://localhost:1313/en/posts/20220206_repa/1/</loc>
     
     <lastmod>2022-02-06T15:00:23&#43;09:00</lastmod>
     
@@ -19,7 +19,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20220206_repa/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20220206_repa/1/" />
     
   </url>
   
@@ -32,7 +32,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20220206_ema/1/</loc>
+    <loc>http://localhost:1313/en/posts/20220206_ema/1/</loc>
     
     <lastmod>2022-02-06T14:00:23&#43;09:00</lastmod>
     
@@ -42,14 +42,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20220206_ema/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20220206_ema/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20211209_nd_ce/1/</loc>
+    <loc>http://localhost:1313/en/posts/20211209_nd_ce/1/</loc>
     
     <lastmod>2021-12-09T11:00:23&#43;09:00</lastmod>
     
@@ -59,7 +59,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20211209_nd_ce/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20211209_nd_ce/1/" />
     
   </url>
   
@@ -68,7 +68,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20211102_op3/1/</loc>
+    <loc>http://localhost:1313/en/posts/20211102_op3/1/</loc>
     
     <lastmod>2021-11-02T10:17:23&#43;09:00</lastmod>
     
@@ -78,7 +78,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20211102_op3/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20211102_op3/1/" />
     
   </url>
   
@@ -87,7 +87,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210912_google_cal_sync/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210912_google_cal_sync/1/</loc>
     
     <lastmod>2021-09-12T10:00:23&#43;09:00</lastmod>
     
@@ -97,14 +97,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210912_google_cal_sync/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210912_google_cal_sync/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210805_rpiplay/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210805_rpiplay/1/</loc>
     
     <lastmod>2021-08-05T10:11:23&#43;09:00</lastmod>
     
@@ -114,14 +114,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210805_rpiplay/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210805_rpiplay/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210520_mac_tips/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210520_mac_tips/1/</loc>
     
     <lastmod>2021-04-20T10:00:23&#43;09:00</lastmod>
     
@@ -131,14 +131,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210520_mac_tips/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210520_mac_tips/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210514_py_print/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210514_py_print/1/</loc>
     
     <lastmod>2021-04-16T10:00:23&#43;09:00</lastmod>
     
@@ -148,7 +148,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210514_py_print/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210514_py_print/1/" />
     
   </url>
   
@@ -157,7 +157,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210215_pytorch_dtype/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210215_pytorch_dtype/1/</loc>
     
     <lastmod>2021-02-15T13:00:23&#43;09:00</lastmod>
     
@@ -167,7 +167,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210215_pytorch_dtype/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210215_pytorch_dtype/1/" />
     
   </url>
   
@@ -176,7 +176,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20210125_ut/1/</loc>
+    <loc>http://localhost:1313/en/posts/20210125_ut/1/</loc>
     
     <lastmod>2021-01-25T15:17:23&#43;09:00</lastmod>
     
@@ -186,14 +186,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20210125_ut/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20210125_ut/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20201223_elgamal/1/</loc>
+    <loc>http://localhost:1313/en/posts/20201223_elgamal/1/</loc>
     
     <lastmod>2020-12-23T15:17:23&#43;09:00</lastmod>
     
@@ -203,7 +203,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20201223_elgamal/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20201223_elgamal/1/" />
     
   </url>
   
@@ -212,7 +212,7 @@
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20201220_binary/1/</loc>
+    <loc>http://localhost:1313/en/posts/20201220_binary/1/</loc>
     
     <lastmod>2020-12-20T15:17:23&#43;09:00</lastmod>
     
@@ -222,14 +222,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20201220_binary/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20201220_binary/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/</loc>
+    <loc>http://localhost:1313/en/posts/20201015_euclidean/1/</loc>
     
     <lastmod>2020-10-15T15:17:23&#43;09:00</lastmod>
     
@@ -239,14 +239,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20201015_euclidean/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20201015_euclidean/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/about/</loc>
+    <loc>http://localhost:1313/en/posts/about/</loc>
     
     <lastmod>2020-08-16T15:17:23&#43;09:00</lastmod>
     
@@ -256,14 +256,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/about/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/about/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/20200816_ros_pubsub/1/</loc>
+    <loc>http://localhost:1313/en/posts/20200816_ros_pubsub/1/</loc>
     
     <lastmod>2020-08-16T15:17:23&#43;09:00</lastmod>
     
@@ -273,14 +273,14 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/20200816_ros_pubsub/1/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/20200816_ros_pubsub/1/" />
     
   </url>
   
 
   
   <url>
-    <loc>https://yuhi-sa.github.io/en/posts/privacy_policy/</loc>
+    <loc>http://localhost:1313/en/posts/privacy_policy/</loc>
     
     <lastmod>2020-08-16T15:17:23&#43;09:00</lastmod>
     
@@ -290,7 +290,7 @@
     
     
     
-    <xhtml:link rel="alternate" hreflang="ja" href="https://yuhi-sa.github.io/posts/privacy_policy/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="http://localhost:1313/posts/privacy_policy/" />
     
   </url>
   
