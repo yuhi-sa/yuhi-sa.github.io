@@ -1,183 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja"
-  dir="ltr">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<meta name="robots" content="index,follow">
-
-
-<meta property="og:title" content="TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する | tomato blog">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="og:url" content="http://localhost:1313/posts/20240505_never_switch/1/">
-<meta name="twitter:card" content="summary_large_image">
-
-<title>TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する | tomato blog</title>
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\(', '\)']]
-    }
-  };
-</script>
-
-
-<script src="/js/copy-code.js"></script>
-
-</head>
-
-<body>
-  <header>
-    <div class="container">
-  
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="navbar-brand" style="padding-left: 10px;">tomato blog</div>
-      <button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">  
-        <ul class="navbar-nav ml-auto">
-  <li class="nav-item">
-    <a ZgotmplZ href="http://localhost:1313/" class="nav-link"> Blog </a>
-  </li>
-  <li class="nav-item">
-    <a ZgotmplZ href="http://localhost:1313/tags" class="nav-link"> Tags </a>
-  </li>
-  <li class="nav-item">
-    <a ZgotmplZ href="http://localhost:1313/posts/about" class="nav-link"> About </a>
-  </li>
-  <li class="nav-item">
-    <a ZgotmplZ href="http://localhost:1313/posts/privacy_policy" class="nav-link"> Privacy policy </a>
-  </li>
-        </ul>
-      </div>
-    </nav>
-
-</div>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  <main>
-    
-<div style="max-width: 80%; margin: 0 auto;">
-  
-  
-  <h1 id="typescriptにおいてnever型を使ってswitch文の網羅性を保証する"><code>TypeScript</code>において<code>never</code>型を使って<code>switch</code>文の網羅性を保証する</h1>
-<p><code>union</code>型に対してswich文を使う場合は、網羅性の保証が重要となります。<br>
-網羅性の保証方法として、<code>default</code>句に<code>never</code>型を代入する方法があります。</p>
-<p><code>never</code>型は「値を持たない」を意味するTypeScriptの特別な型です。<br>
-詳しくはhttps://typescriptbook.jp/reference/statements/never<br>
-簡単に言い換えると「あり得ない」ことを表す型です。</p>
-<p>こちらがサンプル実装となります。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sample.ts" data-lang="sample.ts"><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Sample</span> <span class="o">=</span> <span class="s2">&#34;A&#34;</span> <span class="o">|</span> <span class="s2">&#34;B;
-</span></span></span><span class="line"><span class="cl"><span class="s2"> function testFunc(sample: Sample): void {
-</span></span></span><span class="line"><span class="cl"><span class="s2">   switch (sample) {
-</span></span></span><span class="line"><span class="cl"><span class="s2">     case &#34;</span><span class="nx">A</span><span class="s2">&#34;:
-</span></span></span><span class="line"><span class="cl"><span class="s2">       console.log(sample);
-</span></span></span><span class="line"><span class="cl"><span class="s2">       break;
-</span></span></span><span class="line"><span class="cl"><span class="s2">     case &#34;</span><span class="nx">B</span><span class="err">&#34;</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sample</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">       <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">     <span class="k">default</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 網羅性をチェック
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="kr">const</span> <span class="nx">_</span>: <span class="kt">never</span> <span class="o">=</span> <span class="nx">sample</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> <span class="p">}</span>
-</span></span></code></pre></div><p>このコードがビルドに成功するということは<code>TypeScript</code>の型検査器によって「この<code>default</code>節が実行されることはあり得ない」と結論付けられたということを意味しています。つまり、全てのパターンが網羅されているということになります。
-(たとえば、<code> case “B”:</code>のコードを消すとエラーになります。)</p>
-<p>この方法を取ることにより、<code>Union</code>型のすべてのパターンに対して漏れなく処理が書かれていることを保証することができます。
-将来<code>Union</code>型に新しい型が追加されたときに、それに対応する処理が書かれていることを保証することができます。</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://amzn.to/3ygRaHO">Software Design 編集部. Software Design (ソフトウェアデザイン) 2024年05月号 [雑誌] (p.102-P123). 株式会社技術評論社.</a></li>
-</ul>
-
-</div>
-
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/typescript/">TypeScript</a></li>
-    </ul>
-  </div>
-
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      
-        
-        
-        <li class="breadcrumb-item active" aria-current="page">TypeScriptにおいてnever型を使ってswitch文の網羅性を保証する</li>
-      
-    </ol>
-  </nav>
-  
-
-  </main>
-  <footer>
-    <div class="container" style="text-align: center;">
-  <p>Copyright © 2025. All rights reserved.</p>
-</div>
-
-  </footer>
-  
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="/css/main.css">
-
-  <link rel="stylesheet" href="/css/syntax.css">
-
-  
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\(', '\)']]
-    }
-  };
-</script>
-
-
-<script src="/js/copy-code.js"></script>
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20240505_never_switch/1/><meta property="og:type" content="article"><meta property="og:title" content="TypeScriptの`never`型で`switch`文の網羅性を保証する"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20240505_never_switch/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="article:published_time" content="2024-05-05T10:10:00+09:00"><meta property="article:modified_time" content="2024-05-05T10:10:00+09:00"><meta property="article:tag" content="TypeScript"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="TypeScriptの`never`型で`switch`文の網羅性を保証する"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>TypeScriptの`never`型で`switch`文の網羅性を保証する | tomato blog</title><script type=application/ld+json>{"@context":"https://schema.org","@type":"Article","headline":"TypeScriptの\u0060never\u0060型で\u0060switch\u0060文の網羅性を保証する","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2024-05-05T10:10:00\u002b09:00","dateModified":"2024-05-05T10:10:00\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20240505_never_switch\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20240505_never_switch\/1\/","wordCount":196,"keywords":["TypeScript"],"articleSection":"posts"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet><link rel=stylesheet href=/css/_variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.a2e6da62b5470ac5173777db2938fb15d20a6e370c8f20bfbf34220f03c279c5.css integrity="sha256-oubaYrVHCsUXN3fbKTj7FdIKbjcMjyC/vzQiDwPCecU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></head><body itemscope itemtype=https://schema.org/WebPage><a href=#main-content class="sr-only sr-only-focusable">Skip to main content</a><header role=banner><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/>tomato blog</a>
+<button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto"><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/>Blog</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/tags/>Tags</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/about/>About</a></li><li class="nav-item mx-2"><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/>Privacy policy</a></li><li class=nav-item><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button aria-label="Toggle dark mode">
+<i class="fas fa-moon" id=darkModeIcon></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main><div class=container><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>TypeScriptの`never`型で`switch`文の網羅性を保証する</h1><div class=article-meta><time datetime=2024-05-05T10:10:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt" aria-hidden=true></i>
+May 5, 2024
+</time><span aria-label="Reading time"><i class="far fa-clock" aria-hidden=true></i>
+1 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/typescript/ class="badge badge-custom" rel=tag itemprop=keywords>TypeScript</a></div></header><div class=article-content itemprop=articleBody><h1 id=typescriptのnever型でswitch文の網羅性を保証する>TypeScriptの<code>never</code>型で<code>switch</code>文の網羅性を保証する</h1><p>TypeScriptで<strong>ユニオン型 (Union Type)</strong> に対して <code>switch</code> 文を使用する場合、すべてのケースを網羅していることを保証することが重要です。ユニオン型に新しい型が追加された際に、<code>switch</code> 文の処理が更新されないと、予期せぬバグにつながる可能性があります。</p><p>この網羅性をコンパイル時にチェックする方法として、<code>switch</code> 文の <code>default</code> 句に <code>never</code> 型を代入するテクニックがあります。</p><h2 id=never-型とは><code>never</code> 型とは</h2><p><code>never</code> 型は、TypeScriptの特別な型で、「<strong>決して発生しない値</strong>」を表します。これは、関数が何も返さない（無限ループに陥る、常に例外をスローするなど）場合や、到達不能なコードパスの型として使用されます。</p><p>より詳しく: <a href=https://typescriptbook.jp/reference/statements/never>TypeScript Deep Dive: never</a></p><p>簡単に言えば、<code>never</code> 型は「あり得ない」ことを表す型です。</p><h2 id=never-型を用いた網羅性チェックの仕組み><code>never</code> 型を用いた網羅性チェックの仕組み</h2><p>このテクニックのサンプル実装は以下のようになります。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript:sample.ts data-lang=typescript:sample.ts><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Sample</span> <span class=o>=</span> <span class=s2>&#34;A&#34;</span> <span class=o>|</span> <span class=s2>&#34;B&#34;</span><span class=p>;</span> <span class=c1>// ユニオン型を定義
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>testFunc</span><span class=p>(</span><span class=nx>sample</span>: <span class=kt>Sample</span><span class=p>)</span><span class=o>:</span> <span class=k>void</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>switch</span> <span class=p>(</span><span class=nx>sample</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=s2>&#34;A&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Case A:&#34;</span><span class=p>,</span> <span class=nx>sample</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=s2>&#34;B&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Case B:&#34;</span><span class=p>,</span> <span class=nx>sample</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// ここで網羅性をチェック
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=c1>// &#39;sample&#39; の型が &#39;never&#39; でなければコンパイルエラーになる
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=kr>const</span> <span class=nx>_</span>: <span class=kt>never</span> <span class=o>=</span> <span class=nx>sample</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// もしここに到達する可能性があれば、TypeScriptはエラーを報告する
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 実行例
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>testFunc</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>);</span> <span class=c1>// &#34;Case A: A&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>testFunc</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>);</span> <span class=c1>// &#34;Case B: B&#34;
+</span></span></span><span class=line><span class=cl><span class=c1>// testFunc(&#34;C&#34;); // コンパイルエラー: Argument of type &#39;&#34;C&#34;&#39; is not assignable to parameter of type &#39;&#34;A&#34; | &#34;B&#34;&#39;.
+</span></span></span></code></pre></div><h3 id=解説>解説</h3><ol><li><code>type Sample = "A" | "B";</code> で、<code>"A"</code> または <code>"B"</code> のいずれかの文字列リテラルのみを許容するユニオン型 <code>Sample</code> を定義します。</li><li><code>switch (sample)</code> 文で、<code>sample</code> の値に応じて処理を分岐させます。</li><li><code>default</code> 句では、<code>case "A"</code> と <code>case "B"</code> の両方が処理された後、<code>sample</code> の型は理論上「あり得ない」状態になります。もし <code>sample</code> が <code>"A"</code> でも <code>"B"</code> でもない値であれば、この <code>default</code> 句に到達します。</li><li><code>const _: never = sample;</code> の行がポイントです。TypeScriptの型検査器は、この時点で <code>sample</code> の型が <code>never</code> であることを期待します。<ul><li>もし <code>switch</code> 文の <code>case</code> 句がユニオン型のすべてのパターンを網羅していれば、<code>default</code> 句に到達する <code>sample</code> の値は存在しないため、<code>sample</code> の型は <code>never</code> と推論され、コンパイルは成功します。</li><li>例えば、ユニオン型 <code>Sample</code> に <code>| "C"</code> を追加したにもかかわらず、<code>case "C":</code> を追加し忘れた場合、<code>default</code> 句に到達する <code>sample</code> の型は <code>never</code> ではなく <code>"C"</code> と推論されます。このとき、<code>"C"</code> 型の値を <code>never</code> 型の変数に代入しようとすることになるため、TypeScriptはコンパイルエラーを報告します。</li></ul></li></ol><p>このテクニックを用いることで、<code>Union</code> 型のすべてのパターンに対して漏れなく処理が書かれていることをコンパイル時に保証できます。これにより、将来 <code>Union</code> 型に新しい型が追加されたときに、それに対応する処理が <code>switch</code> 文に書かれていない場合に、早期にエラーを検知できるようになります。</p><h2 id=参考>参考</h2><ul><li>Software Design 編集部, 『Software Design (ソフトウェアデザイン) 2024年05月号』, 株式会社技術評論社 (p.102-P123)</li><li><a href=https://typescript-jp.gitbook.io/deep-dive/future-javascript/never>TypeScript Deep Dive 日本語版: never</a></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="196"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20240505_never_switch/1/"></article><nav class=article-navigation aria-label="Article navigation"><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>Home</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>TypeScriptの`never`型で`switch`文の網羅性を保証する</span>
+<meta itemprop=position content="4"></li></ol></nav></nav><div class=mt-3><h6 class="d-inline-block me-2">Tags:</h6><a href=/tags/typescript/ class="badge badge-custom text-decoration-none me-1">TypeScript</a></div></nav></div></main><footer role=contentinfo><div class="container py-4"><div class="row justify-content-center"><div class="col-md-6 text-center"><p class="text-muted mb-0">Copyright &copy; 2025. All rights reserved.</p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js></script><script src=/js/dark-mode.min.js></script><script src=/js/copy-code.min.js></script></body></html>
