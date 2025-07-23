@@ -9,7 +9,7 @@
     <lastBuildDate>Fri, 24 Nov 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E7%9B%A3%E8%A6%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>mtailを用いたPrometheus形式メトリクスの公開</title>
+      <title>mtailによるログからのPrometheusCメトリクス生成と公開</title>
       <link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link>
       <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid>

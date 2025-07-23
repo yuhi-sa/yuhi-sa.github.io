@@ -9,7 +9,7 @@
     <lastBuildDate>Fri, 12 Nov 2021 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>オブジェクト指向プログラミングの基本概念</title>
+      <title>オブジェクト指向プログラミング：基本概念とJavaでの実装</title>
       <link>https://yuhi-sa.github.io/posts/20211112_java/1/</link>
       <pubDate>Fri, 12 Nov 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211112_java/1/</guid>
@@ -23,7 +23,7 @@
       <description></description>
     </item>
     <item>
-      <title>GitHubプロフィールREADMEを彩る、動くProfile Summaryを自作</title>
+      <title>GitHub Profile README用動的サマリーカードの自作実装</title>
       <link>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</link>
       <pubDate>Wed, 30 Jun 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210631_github_cards/1/</guid>

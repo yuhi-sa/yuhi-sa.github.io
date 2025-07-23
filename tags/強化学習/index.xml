@@ -9,7 +9,7 @@
     <lastBuildDate>Tue, 02 Nov 2021 10:17:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>強化学習によるROBOTIS OP3の歩行獲得：ROSパッケージのコード解説</title>
+      <title>強化学習によるROBOTIS OP3歩行学習：ROSパッケージ実装解説</title>
       <link>https://yuhi-sa.github.io/posts/20211102_op3/1/</link>
       <pubDate>Tue, 02 Nov 2021 10:17:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20211102_op3/1/</guid>
@@ -58,7 +58,7 @@
       <description></description>
     </item>
     <item>
-      <title>強化学習とは</title>
+      <title>強化学習の基礎：概要とマルコフ決定過程</title>
       <link>https://yuhi-sa.github.io/posts/20210319_rl/1/</link>
       <pubDate>Thu, 18 Mar 2021 18:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210319_rl/1/</guid>

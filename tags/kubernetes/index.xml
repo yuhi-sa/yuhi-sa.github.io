@@ -30,7 +30,7 @@
       <description></description>
     </item>
     <item>
-      <title>Dockerfileの主要な命令</title>
+      <title>Dockerfileの基本命令とベストプラクティス</title>
       <link>https://yuhi-sa.github.io/posts/20220831_k8s/1/</link>
       <pubDate>Wed, 31 Aug 2022 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20220831_k8s/1/</guid>

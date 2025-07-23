@@ -9,14 +9,14 @@
     <lastBuildDate>Fri, 08 Dec 2023 09:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Gitコミットメッセージの統一：Commitizenの活用</title>
+      <title>Commitizenによる統一されたGitコミットメッセージの管理</title>
       <link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link>
       <pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid>
       <description></description>
     </item>
     <item>
-      <title>Gitフックでmainブランチへの直接Pushを禁止する</title>
+      <title>Gitフックを使用したmainブランチ直接Push防止の実装</title>
       <link>https://yuhi-sa.github.io/posts/20231204_git/1/</link>
       <pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid>

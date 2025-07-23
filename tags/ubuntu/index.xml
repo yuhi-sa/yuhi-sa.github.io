@@ -9,17 +9,17 @@
     <lastBuildDate>Fri, 09 Apr 2021 10:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>UbuntuでローカルDNSサーバーを設定する方法</title>
-      <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link>
-      <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>UbuntuにおけるSSHサーバーの設定</title>
+      <title>UbuntuでのSSHサーバー設定と運用ガイド</title>
       <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link>
       <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ubuntu環境でのローカルDNSサーバー設定ガイド</title>
+      <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</link>
+      <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/1/</guid>
       <description></description>
     </item>
   </channel>

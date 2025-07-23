@@ -1,31 +1,115 @@
+/* ============================================
+   DESIGN TOKENS - MODERN THEME
+   ============================================
+   
+   Modern, accessible color system with:
+   - High contrast ratios (WCAG AA compliant)
+   - Smooth gradients and modern aesthetics
+   - Comprehensive spacing and typography scales
+   - Semantic color naming
+   ============================================ */
+
 :root {
-  /* Modern Color Palette */
-  --primary-color: #0066CC; /* Modern blue */
-  --primary-hover: #0052A3;
-  --secondary-color: #6B7280; /* Neutral gray */
-  --accent-color: #10B981; /* Modern green */
-  --accent-hover: #059669;
+  /* ============================================
+   * COLOR SYSTEM
+   ============================================ */
   
-  /* Text Colors */
-  --text-primary: #111827; /* Almost black */
-  --text-secondary: #6B7280; /* Medium gray */
-  --text-muted: #9CA3AF; /* Light gray */
+  /* Primary Colors - Modern Blue Gradient */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-200: #bfdbfe;
+  --primary-300: #93c5fd;
+  --primary-400: #60a5fa;
+  --primary-500: #3b82f6;  /* Main primary */
+  --primary-600: #2563eb;
+  --primary-700: #1d4ed8;
+  --primary-800: #1e40af;
+  --primary-900: #1e3a8a;
   
-  /* Background Colors */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F9FAFB;
-  --bg-tertiary: #F3F4F6;
+  /* Secondary Colors - Modern Purple */
+  --secondary-50: #faf5ff;
+  --secondary-100: #f3e8ff;
+  --secondary-200: #e9d5ff;
+  --secondary-300: #d8b4fe;
+  --secondary-400: #c084fc;
+  --secondary-500: #a855f7;
+  --secondary-600: #9333ea;  /* Main secondary */
+  --secondary-700: #7c3aed;
+  --secondary-800: #6b21a8;
+  --secondary-900: #581c87;
   
-  /* Border Colors */
-  --border-light: #E5E7EB;
-  --border-medium: #D1D5DB;
-  --border-dark: #9CA3AF;
+  /* Success Colors */
+  --success-50: #f0fdf4;
+  --success-100: #dcfce7;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
   
-  /* Modern Typography */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', system-ui, sans-serif;
-  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  /* Warning Colors */
+  --warning-50: #fffbeb;
+  --warning-100: #fef3c7;
+  --warning-500: #f59e0b;
+  --warning-600: #d97706;
   
-  /* Font Sizes (Fluid Typography) */
+  /* Error Colors */
+  --error-50: #fef2f2;
+  --error-100: #fee2e2;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  
+  /* Neutral Colors - Modern Gray Scale */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  
+  /* Light Theme Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: var(--gray-50);
+  --bg-tertiary: var(--gray-100);
+  
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-700);
+  --text-muted: var(--gray-500);
+  
+  --border-light: var(--gray-200);
+  --border-medium: var(--gray-300);
+  --border-dark: var(--gray-400);
+  
+  /* Primary Actions */
+  --primary-color: var(--primary-600);
+  --primary-hover: var(--primary-700);
+  --primary-active: var(--primary-800);
+  
+  --secondary-color: var(--secondary-600);
+  --secondary-hover: var(--secondary-700);
+  
+  /* ============================================
+   * TYPOGRAPHY SYSTEM
+   ============================================ */
+  
+  /* Font Families */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-serif: 'Georgia', 'Times New Roman', serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --font-family-base: var(--font-family-sans);
+  
+  /* Font Weights */
+  --font-thin: 100;
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+  
+  /* Font Sizes - Modern Scale */
   --text-xs: 0.75rem;    /* 12px */
   --text-sm: 0.875rem;   /* 14px */
   --text-base: 1rem;     /* 16px */
@@ -34,14 +118,23 @@
   --text-2xl: 1.5rem;    /* 24px */
   --text-3xl: 1.875rem;  /* 30px */
   --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
   
-  /* Font Weights */
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
   
-  /* Spacing Scale */
+  /* ============================================
+   * SPACING SYSTEM
+   ============================================ */
+  
+  --space-px: 1px;
+  --space-0: 0;
   --space-1: 0.25rem;   /* 4px */
   --space-2: 0.5rem;    /* 8px */
   --space-3: 0.75rem;   /* 12px */
@@ -53,71 +146,102 @@
   --space-12: 3rem;     /* 48px */
   --space-16: 4rem;     /* 64px */
   --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
   
-  /* Border Radius */
-  --radius-sm: 0.25rem;  /* 4px */
-  --radius-md: 0.5rem;   /* 8px */
-  --radius-lg: 0.75rem;  /* 12px */
-  --radius-xl: 1rem;     /* 16px */
-  --radius-full: 9999px; /* Full rounded */
+  /* ============================================
+   * LAYOUT & EFFECTS
+   ============================================ */
   
-  /* Modern Shadows */
-    /* Shadows */
+  /* Border Radius - Modern Curves */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+  
+  /* Shadows - Modern Depth */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
   
-  /* Dark Mode Colors */
-  --dark-primary-color: #3B82F6;
-  --dark-primary-hover: #2563EB;
-  --dark-accent-color: #10B981;
-  --dark-accent-hover: #059669;
+  /* Container Sizes */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
   
-  --dark-text-primary: #F9FAFB;
-  --dark-text-secondary: #D1D5DB;
-  --dark-text-muted: #9CA3AF;
+  /* Z-Index Scale */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-auto: auto;
   
-  --dark-bg-primary: #111827;
-  --dark-bg-secondary: #1F2937;
-  --dark-bg-tertiary: #374151;
-  
-  --dark-border-light: #374151;
-  --dark-border-medium: #4B5563;
-  --dark-border-dark: #6B7280;
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode */
+/* ============================================
+ * DARK THEME
+ ============================================ */
+
 [data-theme="dark"] {
-  --bg-primary: #111827;
-  --bg-secondary: #1F2937;
-  --bg-tertiary: #374151;
+  /* Dark Theme Colors */
+  --bg-primary: var(--gray-900);
+  --bg-secondary: var(--gray-800);
+  --bg-tertiary: var(--gray-700);
   
-  --text-primary: #F9FAFB;
-  --text-secondary: #D1D5DB;
-  --text-muted: #9CA3AF;
+  --text-primary: var(--gray-100);
+  --text-secondary: var(--gray-300);
+  --text-muted: var(--gray-400);
   
-  --border-light: #374151;
-  --border-medium: #4B5563;
-  --border-dark: #6B7280;
+  --border-light: var(--gray-700);
+  --border-medium: var(--gray-600);
+  --border-dark: var(--gray-500);
   
-  --primary-color: #3B82F6;
-  --primary-hover: #2563EB;
-  --accent-color: #10B981;
-  --accent-hover: #059669;
+  /* Enhanced shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
-/* Legacy compatibility */
-body {
-  --text-color: var(--text-primary);
-  --background-color: var(--bg-secondary);
-  --surface-color: var(--bg-primary);
-  --header-bg: var(--bg-primary);
-  --footer-bg: var(--bg-primary);
-  --code-bg: var(--bg-tertiary);
-  --border-color: var(--border-light);
-  --link-color: var(--primary-color);
-  --link-hover-color: var(--primary-hover);
-  --heading-color: var(--text-primary);
-  --shadow-1: var(--shadow-md);
-  --shadow-2: var(--shadow-lg);
+/* ============================================
+ * MODERN TAG SYSTEM
+ ============================================ */
+
+:root {
+  /* Tag Color Palette - Modern & Vibrant */
+  --tag-blue: var(--primary-500);
+  --tag-blue-bg: var(--primary-50);
+  --tag-purple: var(--secondary-500);
+  --tag-purple-bg: var(--secondary-50);
+  --tag-green: var(--success-500);
+  --tag-green-bg: var(--success-50);
+  --tag-orange: var(--warning-500);
+  --tag-orange-bg: var(--warning-50);
+  --tag-red: var(--error-500);
+  --tag-red-bg: var(--error-50);
+  --tag-gray: var(--gray-500);
+  --tag-gray-bg: var(--gray-100);
+}
+
+[data-theme="dark"] {
+  --tag-blue-bg: rgba(59, 130, 246, 0.1);
+  --tag-purple-bg: rgba(168, 85, 247, 0.1);
+  --tag-green-bg: rgba(34, 197, 94, 0.1);
+  --tag-orange-bg: rgba(245, 158, 11, 0.1);
+  --tag-red-bg: rgba(239, 68, 68, 0.1);
+  --tag-gray-bg: rgba(100, 116, 139, 0.1);
 }

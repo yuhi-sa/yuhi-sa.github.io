@@ -9,7 +9,7 @@
     <lastBuildDate>Mon, 29 Mar 2021 11:00:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/%E3%83%A2%E3%83%B3%E3%83%86%E3%82%AB%E3%83%AB%E3%83%AD%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>クロスエントロピー法 (Cross Entropy Method)</title>
+      <title>クロスエントロピー法：モンテカルロ最適化の実践的手法</title>
       <link>https://yuhi-sa.github.io/posts/20210329_cem/1/</link>
       <pubDate>Mon, 29 Mar 2021 11:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210329_cem/1/</guid>

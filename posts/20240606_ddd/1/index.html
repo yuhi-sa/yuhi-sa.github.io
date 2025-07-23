@@ -15,7 +15,7 @@
 
 
 <meta property="og:type" content="article">
-<meta property="og:title" content="`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話">
+<meta property="og:title" content="DDDの集約設計：不変条件がトランザクションより優先される理由">
 <meta property="og:description" content="勉強したことなどをメモしています">
 <meta property="og:url" content="https://yuhi-sa.github.io/posts/20240606_ddd/1/">
 <meta property="og:site_name" content="tomato blog">
@@ -27,12 +27,12 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:title" content="`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話">
+<meta name="twitter:title" content="DDDの集約設計：不変条件がトランザクションより優先される理由">
 <meta name="twitter:description" content="勉強したことなどをメモしています">
 <meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
 
 
-<title>`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話 | tomato blog</title>
+<title>DDDの集約設計：不変条件がトランザクションより優先される理由 | tomato blog</title>
 
 
 
@@ -40,8 +40,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "\u0060DDD\u0060(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話",
-  "description": "DDD(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。\n不変条件とは 不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（immutable）」とは異なり、 …",
+  "headline": "DDDの集約設計：不変条件がトランザクションより優先される理由",
+  "description": "DDD(ドメイン駆動設計)において、集約はシステムの重要な部分です。多くの場合、集約について議論するときにトランザクションが強調されますが、実際には「不変条件」の方が重要です。\n不変条件とは 不変条件とは、オブジェクトが常に満たすべき条件や性質のことです。これは「変更不可能なオブジェクト（immutable）」とは異な …",
   "author": {
     "@type": "Person",
     "name": ""
@@ -84,11 +84,11 @@
 
 
 
-  <link rel="stylesheet" href="/css/variables.min.3a487f6c38c2cbc7452d36e3c2cb5d7fd79fc37ceae3c408cc4ed6b3f0bb7eb9.css" integrity="sha256-Okh/bDjCy8dFLTbjwstdf9efw3zq48QIzE7Ws/C7frk=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/variables.min.a30b56798942d82854bc6f4bd220ef9a86ec072ae421ad2736eb7636c9717ad4.css" integrity="sha256-owtWeYlC2ChUvG9L0iDvmobsByrkIa0nNut2NslxetQ=" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="/css/main.min.b1d469254ed41e4db87c7d6c7f3db225fe3fc048a2b4dbad2060194f6dd623b0.css" integrity="sha256-sdRpJU7UHk24fH1sfz2yJf4/wEiitNutIGAZT23WI7A=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.min.0948589b9301f0e32f95975b2c5acfcab8f729a1a8d5f8153cbe9e24c8d76484.css" integrity="sha256-CUhYm5MB8OMvlZdbLFrPyrj3KaGo1fgVPL6eJMjXZIQ=" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="/css/syntax.min.5864fa76b597098c4d36042f0d64ab22e0312a8acea4622517bd4a58ff023b11.css" integrity="sha256-WGT6drWXCYxNNgQvDWSrIuAxKorOpGIlF71KWP8COxE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/syntax.min.f52c1d8102d7773f513d5d2dfef979f62d7761a2b6443656e208a00f7c5e2786.css" integrity="sha256-9SwdgQLXdz9RPV0t/vl59i13YaK2RDZW4gigD3xeJ4Y=" crossorigin="anonymous">
 
 
 
@@ -171,7 +171,7 @@
   <article itemscope itemtype="https://schema.org/Article">
     
     <header class="article-header">
-      <h1 itemprop="headline">`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</h1>
+      <h1 itemprop="headline">DDDの集約設計：不変条件がトランザクションより優先される理由</h1>
       
       
       
@@ -212,12 +212,12 @@
     
     
     <div class="article-content" itemprop="articleBody">
-      <p><code>DDD</code>(ドメイン駆動設計)において、集約はシステムの重要な部分である。多くの場合、集約について話すときにトランザクションが強調されますが、実際には「不変条件」の方が重要である。</p>
+      <p><code>DDD</code>(ドメイン駆動設計)において、集約はシステムの重要な部分です。多くの場合、集約について議論するときにトランザクションが強調されますが、実際には「不変条件」の方が重要です。</p>
 <h2 id="不変条件とは">不変条件とは</h2>
-<p>不変条件とは、オブジェクトが常に満たすべき条件や性質のこと。これは「変更不可能なオブジェクト（<code>immutable</code>）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(<code>invariant</code>)です。
-例えば、銀行口座の残高が負にならないことなどで。</p>
+<p>不変条件とは、オブジェクトが常に満たすべき条件や性質のことです。これは「変更不可能なオブジェクト（<code>immutable</code>）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(<code>invariant</code>)です。
+例えば、銀行口座の残高が負にならないことなどです。</p>
 <h2 id="集約と不変条件">集約と不変条件</h2>
-<p>集約は、この不変条件を保つように設計されるべきである。<code>TypeScript</code>を使う場合、<code>zod</code>の<code>refine</code>を使用して不変条件をチェックすることができる。</p>
+<p>集約は、この不変条件を保つように設計されるべきです。<code>TypeScript</code>を使う場合、<code>zod</code>の<code>refine</code>を使用して不変条件をチェックできます。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.ts" data-lang=".ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;zod&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// BankAccountのスキーマを定義
@@ -321,7 +321,7 @@
           itemprop="itemListElement" 
           itemscope 
           itemtype="https://schema.org/ListItem">
-        <span itemprop="name">`DDD`(ドメイン駆動設計)の集約においてトランザクションよりも不変条件の方が重要という話</span>
+        <span itemprop="name">DDDの集約設計：不変条件がトランザクションより優先される理由</span>
         <meta itemprop="position" content="4" />
       </li>
   </ol>

@@ -23,14 +23,14 @@
       <description></description>
     </item>
     <item>
-      <title>GitHubへのSSH接続設定</title>
+      <title>GitHubでのSSH認証設定：セキュアな接続の構築方法</title>
       <link>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</link>
       <pubDate>Wed, 18 Aug 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210818_github_ssh/1/</guid>
       <description></description>
     </item>
     <item>
-      <title>UbuntuにおけるSSHサーバーの設定</title>
+      <title>UbuntuでのSSHサーバー設定と運用ガイド</title>
       <link>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</link>
       <pubDate>Fri, 09 Apr 2021 10:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210409_ubuntu_ssh/2/</guid>

@@ -9,7 +9,7 @@
     <lastBuildDate>Fri, 03 May 2024 10:10:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/spark/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Spark SQLのビュー：並列実行時の名前空間の衝突について</title>
+      <title>Spark SQLビューの並列実行時における名前空間衝突の対処法</title>
       <link>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</link>
       <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20240504_spark_view/1/</guid>

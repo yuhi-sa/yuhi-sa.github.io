@@ -9,7 +9,7 @@
     <lastBuildDate>Thu, 05 Aug 2021 10:11:23 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Raspberry PiでAirPlayレシーバーを構築する（RPiPlay）</title>
+      <title>Raspberry PiによるAirPlayレシーバーの構築方法（RPiPlay使用）</title>
       <link>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</link>
       <pubDate>Thu, 05 Aug 2021 10:11:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20210805_rpiplay/1/</guid>
