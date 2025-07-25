@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -220,7 +238,7 @@
 <h2 id="準備">準備</h2>
 <h3 id="ガウス分布-正規分布">ガウス分布 (正規分布)</h3>
 <p>平均 $\mu$、分散 $\sigma^2$ のガウス分布の確率密度関数は次の通りです。</p>
-<p>$$ p(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left{-\frac{(x-\mu)^2}{2\sigma^2}\right} $$</p>
+<p>$$ p(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\lbrace-\frac{(x-\mu)^2}{2\sigma^2}\rbrace $$</p>
 <h3 id="期待値と分散の性質">期待値と分散の性質</h3>
 <p>確率変数 $X$ がガウス分布に従うとき、</p>
 <ul>
@@ -232,10 +250,10 @@
 <p>2つのガウス分布 $p_1(x) = \mathcal{N}(x | \mu_1, \sigma_1^2)$ と $p_2(x) = \mathcal{N}(x | \mu_2, \sigma_2^2)$ の間のクロスエントロピー $H(p_1, p_2)$ は、以下のように定義されます。</p>
 <p>$$ H(p_1, p_2) = -\int_{-\infty}^{\infty} p_1(x) \log p_2(x) dx = -\mathbb{E}_{p_1}[\log p_2(x)] $$</p>
 <p>ここで、$\log p_2(x)$ は以下のようになります。</p>
-<p>$$ \log p_2(x) = \log \left(\frac{1}{\sqrt{2\pi\sigma_2^2}} \exp\left{-\frac{(x-\mu_2)^2}{2\sigma_2^2}\right}\right) $$
+<p>$$ \log p_2(x) = \log (\frac{1}{\sqrt{2\pi\sigma_2^2}} \exp\lbrace-\frac{(x-\mu_2)^2}{2\sigma_2^2}\rbrace) $$
 $$ = -\frac{1}{2} \log(2\pi\sigma_2^2) - \frac{(x-\mu_2)^2}{2\sigma_2^2} $$</p>
 <p>これを期待値の式に代入します。</p>
-<p>$$ H(p_1, p_2) = -\mathbb{E}<em>{p_1}\left[-\frac{1}{2} \log(2\pi\sigma_2^2) - \frac{(x-\mu_2)^2}{2\sigma_2^2}\right] $$
+<p>$$ H(p_1, p_2) = -\mathbb{E}<em>{p_1}[-\frac{1}{2} \log(2\pi\sigma_2^2) - \frac{(x-\mu_2)^2}{2\sigma_2^2}] $$
 $$ = \frac{1}{2} \log(2\pi\sigma_2^2) + \frac{1}{2\sigma_2^2} \mathbb{E}</em>{p_1}[(x-\mu_2)^2] $$</p>
 <p>ここで、$\mathbb{E}_{p_1}[(x-\mu_2)^2]$ を展開します。</p>
 <p>$$ \mathbb{E}<em>{p_1}[(x-\mu_2)^2] = \mathbb{E}</em>{p_1}[x^2 - 2x\mu_2 + \mu_2^2] $$

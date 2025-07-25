@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -261,7 +279,7 @@ PDF $f(x)$ は、累積分布関数 $F(x)$ の導関数として定義されま�
 ここで $\lambda &gt; 0$ はレートパラメータです。</p>
 <h3 id="ラプラス分布-laplace-distribution">ラプラス分布 (Laplace Distribution)</h3>
 <p>平均値の周りで指数関数的に減少する分布です。正規分布よりも尖ったピークと、裾の重い（ファットテール）形状を持ちます。</p>
-<p>$$ p(x | \mu, b) = \frac{1}{2b} \exp\left(-\frac{|x - \mu|}{b}\right) $$
+<p>$$ p(x | \mu, b) = \frac{1}{2b} \exp\lbrace-\frac{|x - \mu|}{b}\rbrace $$
 ここで $\mu$ は位置パラメータ、$b &gt; 0$ は尺度パラメータです。</p>
 <h2 id="期待値-expectation">期待値 (Expectation)</h2>
 <p>確率変数 $X$ が確率分布 $p(x)$ に従うとき、関数 $f(X)$ の期待値は、その関数の「平均的な値」を表します。</p>

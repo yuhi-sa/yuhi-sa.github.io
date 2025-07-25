@@ -142,7 +142,7 @@
       <description></description>
     </item>
     <item>
-      <title>mtailによるログからのPrometheusCメトリクス生成と公開</title>
+      <title>mtailによるログからのPrometheusメトリクス生成と公開</title>
       <link>https://yuhi-sa.github.io/posts/20231124_mtail/1/</link>
       <pubDate>Fri, 24 Nov 2023 09:00:23 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/posts/20231124_mtail/1/</guid>

@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -245,7 +263,7 @@ $p(x, y) = p(x)p(y)</li>
 <p><strong>注意</strong>: 微分エントロピーは、離散の場合とは異なり、負の値をとることがあり、情報の絶対量を表すものではありません。</p>
 <h4 id="微分エントロピーの最大化">微分エントロピーの最大化</h4>
 <p>ある制約の下で微分エントロピーを最大化する分布を考えると、その確率変数の性質がわかります。例えば、平均 $\mu$ と分散 $\sigma^2$ が固定されているという制約の下で微分エントロピーを最大化する分布は、<strong>ガウス分布</strong>になります。</p>
-<p>$$ p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left{-\frac{(x-\mu)^2}{2\sigma^2}\right} $$</p>
+<p>$$ p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\lbrace-\frac{(x-\mu)^2}{2\sigma^2}\rbrace $$</p>
 <p>ガウス分布の微分エントロピーは次式で与えられます。</p>
 <p>$$ H[X] = \frac{1}{2} {1 + \ln(2\pi\sigma^2)} $$</p>
 <p>この式から、エントロピーは分散 $\sigma^2$ が大きいほど（分布の広がりが大きいほど）高くなることがわかります。</p>
@@ -258,7 +276,7 @@ $p(x, y) = p(x)p(y)</li>
 <p>これは、「$X$と$Y$を特定するための情報量は、$X$を特定するための情報量と、$X$が与えられた下で$Y$を特定するために必要な追加の情報量の和に等しい」と解釈できます。</p>
 <h3 id="相対エントロピーカルバックライブラーダイバージェンス">相対エントロピー（カルバック・ライブラー・ダイバージェンス）</h3>
 <p>ある未知の真の分布 $p(x)$ を、モデル $q(x)$ で近似することを考えます。このとき、2つの分布の「隔たり」を測る尺度として<strong>相対エントロピー</strong>、または<strong>KLダイバージェンス</strong>が用いられます。</p>
-<p>$$ KL(p||q) = -\int p(x) \ln \left{ \frac{q(x)}{p(x)} \right} dx $$</p>
+<p>$$ KL(p||q) = -\int p(x) \ln \lbrace \frac{q(x)}{p(x)} \rbrace dx $$</p>
 <p>KLダイバージェンスには以下の重要な性質があります。</p>
 <ul>
 <li>$KL(p||q) \ge 0$</li>
@@ -274,7 +292,7 @@ $$ KL(p||q) = -\int p(x) \ln q(x|\theta) dx + \int p(x) \ln p(x) dx $$</p>
 <h3 id="相互情報量">相互情報量</h3>
 <p>2つの確率変数 $X, Y$ がどれだけ強く依存しているか、一方を知ることで他方の不確実性がどれだけ減少するかを表す尺度が<strong>相互情報量</strong>です。</p>
 <p>これは、同時分布 $p(x, y)$ と、変数が独立だと仮定した場合の分布 $p(x)p(y)$ との間のKLダイバージェンスとして定義されます。</p>
-<p>$$ I[X, Y] \equiv KL(p(x, y) || p(x)p(y)) = \iint p(x, y) \ln \left( \frac{p(x, y)}{p(x)p(y)} \right) dx dy $$</p>
+<p>$$ I[X, Y] \equiv KL(p(x, y) || p(x)p(y)) = \iint p(x, y) \ln ( \frac{p(x, y)}{p(x)p(y)} ) dx dy $$</p>
 <p>相互情報量は、エントロピーを用いて以下のように表現することもできます。</p>
 <p>$$ I[X, Y] = H[X] - H[X|Y] = H[Y] - H[Y|X] $$</p>
 <p>これは、「$Y$を知ることで減少する$X$の不確実性の量」と解釈できます。</p>

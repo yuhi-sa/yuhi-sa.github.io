@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -238,7 +256,7 @@
 <h2 id="2-最尤推定-maximum-likelihood-estimation">2. 最尤推定 (Maximum Likelihood Estimation)</h2>
 <p>最尤推定は、観測データが得られる確率（<strong>尤度</strong>）を最大化するパラメータ $\hat{w}$ を見つける手法です。</p>
 <p>ここで、誤差項 $\epsilon$ が平均 $0$、分散 $\sigma^2$ のガウス分布に従うと仮定します。すると、目標値 $y$ の条件付き確率は、平均 $\Phi w$、分散 $\sigma^2$ のガウス分布となります。</p>
-<p>$$ p(y | w, \sigma^2) = \mathcal{N}(y | \Phi w, \sigma^2 I) = \frac{1}{(2\pi\sigma^2)^{N/2}} \exp\left{-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)\right} $$</p>
+<p>$$ p(y | w, \sigma^2) = \mathcal{N}(y | \Phi w, \sigma^2 I) = \frac{1}{(2\pi\sigma^2)^{N/2}} \exp\lbrace-\frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w)\rbrace $$</p>
 <p>この尤度の対数をとった<strong>対数尤度</strong>を最大化します。</p>
 <p>$$ \ln p(y|w) = -\frac{N}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2}(y-\Phi w)^T(y-\Phi w) $$</p>
 <p>対数尤度を最大化することは、右辺第二項の二乗誤差項を最小化することと等価です。したがって、<strong>誤差にガウス分布を仮定した場合、最尤推定は最小二乗法と等価な解を与えます。</strong></p>

@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -221,7 +239,7 @@
 <p>目的関数 $f(x, y)$ を、制約条件 $g(x, y) = 0$ の下で最適化する問題を考えます。
 最適解となる点では、目的関数の等高線と制約条件の曲線が接します。このとき、両者の勾配ベクトルは平行になります。</p>
 <p>勾配ベクトルは、関数が最も急峻に変化する方向を示し、勾配作用素 $\nabla$ を用いて以下のように定義されます。
-$$ \nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right) $$</p>
+$$ \nabla f = (\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}) $$</p>
 <p>したがって、最適解の点では、以下の関係が成り立ちます。
 $$ \nabla f(x, y) = \lambda \nabla g(x, y) $$
 ここで $\lambda$ は**ラグランジュ乗数（Lagrange Multiplier）**と呼ばれる定数です。</p>
@@ -259,7 +277,7 @@ $$ p(x_1, \dots, x_k | \mu_1, \dots, \mu_k) = \frac{(\sum x_j)!}{\prod x_j!} \pr
 対数尤度関数は、定数項を除くと $\sum_{j=1}^k x_j \log \mu_j$ となります。
 制約条件は $\sum_{j=1}^k \mu_j - 1 = 0$ です。</p>
 <p>ラグランジュ関数は、
-$$ \mathcal{L}(\mu_1, \dots, \mu_k, \lambda) = \sum_{j=1}^k x_j \log \mu_j - \lambda \left(\sum_{j=1}^k \mu_j - 1\right) $$</p>
+$$ \mathcal{L}(\mu_1, \dots, \mu_k, \lambda) = \sum_{j=1}^k x_j \log \mu_j - \lambda (\sum_{j=1}^k \mu_j - 1) $$</p>
 <p>これを $\mu_h$ で偏微分し、0と置きます。
 $$ \frac{\partial \mathcal{L}}{\partial \mu_h} = \frac{x_h}{\mu_h} - \lambda = 0 \implies \mu_h = \frac{x_h}{\lambda} $$</p>
 <p>全ての $h$ について $\mu_h = x_h / \lambda$ が成り立つので、これを制約条件 $\sum_{j=1}^k \mu_j = 1$ に代入します。

@@ -101,6 +101,24 @@
 <script src="/js/dark-mode.min.js"></script>
 
 
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -220,19 +238,19 @@
 <p>正規分布は、平均（$\mu$）と分散（$\sigma^2$）の2つのパラメータによってその形状が完全に決定されます。</p>
 <h2 id="標準正規分布">標準正規分布</h2>
 <p>最も基本的な正規分布は、平均が0、分散が1の正規分布であり、これを<strong>標準正規分布</strong>と呼びます。その確率密度関数は以下の通りです。</p>
-<p>$$ p(x) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{x^2}{2}\right) $$</p>
+<p>$$ p(x) = \frac{1}{\sqrt{2\pi}} \exp\lbrace-\frac{x^2}{2}\rbrace $$</p>
 <p>この関数は、全区間での積分値が1になるように正規化されています。</p>
 <h3 id="平行移動平均-mu-の導入">平行移動（平均 $\mu$ の導入）</h3>
 <p>標準正規分布は平均が0ですが、分布の中心を任意の $\mu$ に移動させたい場合は、変数を $x - \mu$ に置き換えることで実現できます。</p>
-<p>$$ p(x | \mu) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{(x - \mu)^2}{2}\right) $$</p>
+<p>$$ p(x | \mu) = \frac{1}{\sqrt{2\pi}} \exp\lbrace-\frac{(x - \mu)^2}{2}\rbrace $$</p>
 <p>この分布は、平均 $\mu$、分散1の正規分布です。</p>
 <h3 id="スケーリング分散-sigma2-の導入">スケーリング（分散 $\sigma^2$ の導入）</h3>
 <p>分布の広がり（ばらつき）を調整したい場合は、分散 $\sigma^2$ を導入します。標準正規分布の確率密度関数を2階微分すると、変曲点が $x = \pm 1$ であることがわかります。この変曲点の位置を $\sigma$ にしたい場合、変数を $x/\sigma$ に置き換え、さらに正規化定数を調整します。</p>
-<p>$$ p(x | 0, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{x^2}{2\sigma^2}\right) $$</p>
+<p>$$ p(x | 0, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\lbrace-\frac{x^2}{2\sigma^2}\rbrace $$</p>
 <p>この分布は、平均0、分散 $\sigma^2$ の正規分布です。</p>
 <h3 id="一般の正規分布">一般の正規分布</h3>
 <p>上記の平行移動とスケーリングを組み合わせることで、任意の平均 $\mu$ と分散 $\sigma^2$ を持つ一般の正規分布 $\mathcal{N}(x | \mu, \sigma^2)$ の確率密度関数が得られます。</p>
-<p>$$ \mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right) $$</p>
+<p>$$ \mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\lbrace-\frac{(x - \mu)^2}{2\sigma^2}\rbrace $$</p>
 <h2 id="参考">参考</h2>
 <ul>
 <li>手塚 太郎, 『しくみがわかるベイズ統計と機械学習』, 講談社 (2017)</li>
