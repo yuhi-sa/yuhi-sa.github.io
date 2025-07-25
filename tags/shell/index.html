@@ -410,14 +410,39 @@ body {
   <article>
     <header class="article-header">
       
-        <h1>すべてのタグ</h1>
+        <h1>タグ: Shell</h1>
       
+      <p>tagsに1件の記事があります</p>
     </header>
 
     <div class="article-content">
-      <ul class="tag-list">
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20241028_brew/1/">Homebrewで依存関係のないパッケージを検出するシェルスクリプト</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-10-28">2024年10月28日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">Shell</span>
+              
+            </div>
+            
+          </div>
+        </header>
         
-      </ul>
+        <div class="post-summary-content">
+          <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.sh" data-lang=".sh"><span class="line"><span class="cl"><span class="k">for</span> pkg in <span class="k">$(</span>brew list<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="k">$(</span>brew uses --installed <span class="nv">$pkg</span><span class="k">)</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$pkg</span><span class="s2"> can be uninstalled&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div>
+        </div>
+        
+      </article>
+      
     </div>
   </article>
 </div>
