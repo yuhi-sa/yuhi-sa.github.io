@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -388,66 +388,68 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Next.js App Routerでのuse clientディレクティブの適切な使用パターン</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2024-05-03T10:10:00&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          May 3, 2024
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Next.js App Routerでのuse clientディレクティブの適切な使用パターン</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2024-05-03T10:10:00&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              May 3, 2024
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/typescript/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              TypeScript
+            </a>
+            
+            <a href="/tags/next.js/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Next.js
+            </a>
+            
+            <a href="/tags/react/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              React
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/typescript/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          TypeScript
-        </a>
-        
-        <a href="/tags/next.js/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Next.js
-        </a>
-        
-        <a href="/tags/react/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          React
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="nextjs-app-routerの基本">Next.js App Routerの基本</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="nextjs-app-routerの基本">Next.js App Routerの基本</h2>
 <p>Next.jsのApp Routerでは、デフォルトで<strong>サーバーコンポーネント</strong>が採用されています。これは、コンポーネントがサーバー側でレンダリングされ、クライアントに送られるのはHTMLと最小限のJavaScriptのみであることを意味します。これにより、初期ロードの高速化やSEOの向上といったメリットが得られます。</p>
 <p>一方、クライアントサイドでインタラクティブな機能（イベントハンドリング、Hooksの使用など）を必要とするコンポーネントは、<strong>クライアントコンポーネント</strong>としてマークする必要があります。クライアントコンポーネントを利用するには、ファイルの先頭に <code>&quot;use client&quot;</code> ディレクティブを宣言します。</p>
 <h2 id="use-clientの適切な使用"><code>use client</code>の適切な使用</h2>
@@ -494,21 +496,21 @@ body {
 <li><a href="https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#server-components">Next.js Documentation: Server Components</a></li>
 <li><a href="https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#client-components">Next.js Documentation: Client Components</a></li>
 </ul>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="128">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240504_use_client/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="128">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240504_use_client/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -564,7 +566,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -614,16 +616,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -637,7 +639,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

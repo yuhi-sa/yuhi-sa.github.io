@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -407,66 +407,68 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-01-07T15:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          January 7, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">粒子群最適化(PSO)と協調型PSO(TCPSO)の解説とMatlab実装</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-01-07T15:17:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              January 7, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              4 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              群知能
+            </a>
+            
+            <a href="/tags/%E6%9C%80%E9%81%A9%E5%8C%96/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              最適化
+            </a>
+            
+            <a href="/tags/matlab/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Matlab
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          4 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E7%BE%A4%E7%9F%A5%E8%83%BD/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          群知能
-        </a>
-        
-        <a href="/tags/%E6%9C%80%E9%81%A9%E5%8C%96/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          最適化
-        </a>
-        
-        <a href="/tags/matlab/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Matlab
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="粒子群最適化-pso-particle-swarm-optimization">粒子群最適化 (PSO: Particle Swarm Optimization)</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="粒子群最適化-pso-particle-swarm-optimization">粒子群最適化 (PSO: Particle Swarm Optimization)</h2>
 <p>PSOは、鳥や魚の群れの行動を模倣した最適化アルゴリズムです。群れ全体で餌の場所などの情報を共有し、個々の個体が自己の経験と他者の経験に基づいて行動を調整することで、効率的に最適解を探索します。</p>
 <p>PSOでは、「粒子」と呼ばれる探索エージェントが、位置と速度の情報を持って探索空間を飛び回ります。各粒子は、自身の過去最も良かった場所（pbest）と、群れ全体で最も良かった場所（gbest）の情報を頼りに、次の速度と位置を決定します。</p>
 <h3 id="粒子の更新則">粒子の更新則</h3>
@@ -674,21 +676,21 @@ $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></div>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="710">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="710">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210107_pso_tcpso/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -744,7 +746,7 @@ $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -794,16 +796,16 @@ $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -817,7 +819,7 @@ $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

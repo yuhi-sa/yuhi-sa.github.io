@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -407,66 +407,68 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">強化学習によるROBOTIS OP3歩行学習：ROSパッケージ実装解説</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-11-02T10:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          November 2, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">強化学習によるROBOTIS OP3歩行学習：ROSパッケージ実装解説</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-11-02T10:17:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              November 2, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              強化学習
+            </a>
+            
+            <a href="/tags/ros/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              ROS
+            </a>
+            
+            <a href="/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              ロボット
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          強化学習
-        </a>
-        
-        <a href="/tags/ros/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          ROS
-        </a>
-        
-        <a href="/tags/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          ロボット
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="はじめに">はじめに</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="はじめに">はじめに</h2>
 <p>本記事では、ROBOTIS OP3ヒューマノイドロボットがGazeboシミュレーション環境内で強化学習を用いて歩行を獲得するROS（Robot Operating System）パッケージのコードについて解説します。</p>
 <ul>
 <li>関連リポジトリ: <a href="https://github.com/yuhi-sa/op3_walk">op3_walk</a></li>
@@ -522,21 +524,21 @@ window.MathJax = {
 <h2 id="学習曲線">学習曲線</h2>
 <p>学習の進行に伴う歩行距離の変化を示したグラフです。世代が進むにつれて歩行距離が伸び、エージェントが効率的な歩行を学習していることがわかります。</p>
 <p><img src="https://github.com/yuhi-sa/op3_walk/blob/main/docs/learning.png?raw=true" alt="歩行距離"></p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="105">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211102_op3/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="105">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211102_op3/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -592,7 +594,7 @@ window.MathJax = {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -642,16 +644,16 @@ window.MathJax = {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -665,7 +667,7 @@ window.MathJax = {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -388,66 +388,68 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Next.jsのApp RouterとPages Router間におけるprom-clientメトリクス共有の技術的課題</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2023-11-24T09:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          November 24, 2023
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Next.jsのApp RouterとPages Router間におけるprom-clientメトリクス共有の技術的課題</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2023-11-24T09:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              November 24, 2023
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              2 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/javascript/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              JavaScript
+            </a>
+            
+            <a href="/tags/next.js/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Next.js
+            </a>
+            
+            <a href="/tags/prometheus/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Prometheus
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          2 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/javascript/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          JavaScript
-        </a>
-        
-        <a href="/tags/next.js/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Next.js
-        </a>
-        
-        <a href="/tags/prometheus/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Prometheus
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>Next.jsのアプリケーションにおいて、<code>App Router</code> と <code>Pages Router</code> の両方で共通の <code>prom-client</code> メトリクス（例: <code>Counter</code>）を共有しようとすると、いくつかの課題に直面します。特に、<code>global</code> オブジェクトにメトリクスレジストリを登録しようとした際に問題が発生します。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>Next.jsのアプリケーションにおいて、<code>App Router</code> と <code>Pages Router</code> の両方で共通の <code>prom-client</code> メトリクス（例: <code>Counter</code>）を共有しようとすると、いくつかの課題に直面します。特に、<code>global</code> オブジェクトにメトリクスレジストリを登録しようとした際に問題が発生します。</p>
 <h2 id="発生した問題">発生した問題</h2>
 <p>T3 StackのようなNext.jsプロジェクトで、ログのメトリクス化のために <code>prom-client</code> の <code>Counter</code> を <code>Logger</code> クラスで共有することを検討しました。具体的には、<code>prom-client</code> のデフォルトレジストリを <code>global</code> オブジェクトに登録し、アプリケーション全体で単一のメトリクスインスタンスを使用しようとしました。</p>
 <p>しかし、このアプローチでは、<code>Pages Router</code> のAPIルートから <code>global</code> のレジストリに <code>Counter</code> を登録しようとすると、ビルドエラーが発生しました。</p>
@@ -531,21 +533,21 @@ body {
 </ul>
 <h2 id="結論">結論</h2>
 <p>Next.jsの <code>App Router</code> と <code>Pages Router</code> のAPIルート間で <code>prom-client</code> のメトリクスを完全に共有することは、現在のところ困難です。それぞれのルーターで独立したメトリクス収集を行うか、Prometheus Pushgatewayのような外部サービスを利用してメトリクスを集約するなどの代替手段を検討する必要があります。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="262">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_t3/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="262">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_t3/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -601,7 +603,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -651,16 +653,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -674,7 +676,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

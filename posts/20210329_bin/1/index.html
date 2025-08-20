@@ -136,8 +136,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -387,59 +387,61 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Pythonによる2進数変換とビットごとの論理演算（OR, XOR）</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-03-29T12:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          March 29, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Pythonによる2進数変換とビットごとの論理演算（OR, XOR）</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-03-29T12:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              March 29, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              2 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/python/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Python
+            </a>
+            
+            <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              プログラミング
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          2 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/python/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Python
-        </a>
-        
-        <a href="/tags/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          プログラミング
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>Pythonには、整数と2進数文字列の変換や、ビットごとの論理演算を行うための組み込み関数や演算子が用意されています。ここでは、それらの基本的な使い方と、カスタム関数での実装例を紹介します。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>Pythonには、整数と2進数文字列の変換や、ビットごとの論理演算を行うための組み込み関数や演算子が用意されています。ここでは、それらの基本的な使い方と、カスタム関数での実装例を紹介します。</p>
 <h2 id="2進数変換">2進数変換</h2>
 <p>Pythonの組み込み関数 <code>bin()</code> を使うと、整数を &ldquo;0b&rdquo; プレフィックス付きの2進数文字列に変換できます。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">num</span> <span class="o">=</span> <span class="mi">10</span>
@@ -513,21 +515,21 @@ body {
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;カスタムXOR関数: 3 XOR 5 = </span><span class="si">{</span><span class="n">custom_xor</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span> <span class="c1"># 出力: カスタムXOR関数: 3 XOR 5 = 6</span>
 </span></span></code></pre></div><h2 id="まとめ">まとめ</h2>
 <p>Pythonでは、ビットごとの論理演算は組み込みの演算子 <code>|</code> (OR) と <code>^</code> (XOR) を使うのが最も効率的で推奨されます。カスタム関数は、これらの演算の仕組みを理解するための学習目的として役立ちます。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="280">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210329_bin/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="280">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210329_bin/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -583,7 +585,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -624,16 +626,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -647,7 +649,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

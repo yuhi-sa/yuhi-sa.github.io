@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -407,66 +407,68 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">K-means法</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-03-18T16:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          March 18, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">K-means法</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-03-18T16:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              March 18, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              アルゴリズム
+            </a>
+            
+            <a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              機械学習
+            </a>
+            
+            <a href="/tags/%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              クラスタリング
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          アルゴリズム
-        </a>
-        
-        <a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          機械学習
-        </a>
-        
-        <a href="/tags/%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          クラスタリング
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>K-means法は、<strong>非階層型クラスタリング</strong>の一種です。非階層型クラスタリングとは、与えられたデータを、あらかじめ決められたクラスタ数 $K$ に分割し、各クラスタが互いに似た性質を持つようにグループ分けする手法を探索するものです。階層型クラスタリングとは異なり、階層的な構造を持たないため、サンプル数が多いビッグデータの分析に適しています。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>K-means法は、<strong>非階層型クラスタリング</strong>の一種です。非階層型クラスタリングとは、与えられたデータを、あらかじめ決められたクラスタ数 $K$ に分割し、各クラスタが互いに似た性質を持つようにグループ分けする手法を探索するものです。階層型クラスタリングとは異なり、階層的な構造を持たないため、サンプル数が多いビッグデータの分析に適しています。</p>
 <p>K-means法は、データ点とクラスタの中心（重心）との距離を測定し、その距離が最小になるようにデータを $K$ 個のクラスタに分割する手法です。各クラスタ $C_j$ の重心 $c_j$ は、そのクラスタに属するデータ点の平均として計算されます。</p>
 <p>$$ c_j = \frac{1}{|C_j|} \sum_{x \in C_j} x $$</p>
 <p>K-means法は、以下の**評価関数（目的関数）**を最小化するようにクラスタリングを行います。この評価関数は、各データ点からそれが属するクラスタの重心までの距離の二乗和を表しており、クラスタ内の凝集度が高いほど値が小さくなります。</p>
@@ -479,21 +481,21 @@ window.MathJax = {
 <li><strong>収束判定</strong>: クラスタ重心が移動しなくなるか、事前に設定した最大反復回数に達するまで、ステップ2とステップ3を繰り返します。</li>
 </ol>
 <p>K-means法は、シンプルで高速なため広く利用されていますが、初期重心の選択に結果が依存する、クラスタの形状が球状であると仮定している、クラスタ数 $K$ を事前に指定する必要がある、といった課題も持ち合わせています。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="47">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210318_pid/2/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="47">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210318_pid/2/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -549,7 +551,7 @@ window.MathJax = {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -599,16 +601,16 @@ window.MathJax = {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -622,7 +624,7 @@ window.MathJax = {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

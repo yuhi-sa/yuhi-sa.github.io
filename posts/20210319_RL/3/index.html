@@ -135,8 +135,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -405,52 +405,54 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">モデルフリー強化学習</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-03-19T12:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          March 19, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">モデルフリー強化学習</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-03-19T12:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              March 19, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              強化学習
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          強化学習
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>モデルフリー強化学習は、環境のモデル（状態遷移関数 $T(s&rsquo;|s,a)$ や報酬関数 $R(s,s&rsquo;)$）が<strong>未知</strong>であることを前提とし、エージェントが自ら環境と相互作用して経験を蓄積し、その経験から直接最適な方策を学習する手法です。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>モデルフリー強化学習は、環境のモデル（状態遷移関数 $T(s&rsquo;|s,a)$ や報酬関数 $R(s,s&rsquo;)$）が<strong>未知</strong>であることを前提とし、エージェントが自ら環境と相互作用して経験を蓄積し、その経験から直接最適な方策を学習する手法です。</p>
 <h2 id="探索と活用のトレードオフ-exploration-exploitation-trade-off">探索と活用のトレードオフ (Exploration-Exploitation Trade-off)</h2>
 <p>強化学習では、エージェントは「これまでに得た知識を最大限に活用して報酬を最大化する（<strong>活用</strong>）」ことと、「まだ知らない行動や状態を試して新たな知識を得る（<strong>探索</strong>）」ことの間でバランスを取る必要があります。これを「探索と活用のトレードオフ」と呼びます。</p>
 <p>無限に行動できるのであれば、十分に探索した後に活用に専念すれば良いですが、多くの場合、行動回数には制限があります。このトレードオフのバランスを取る一般的な手法として、<strong>ε-Greedy法</strong>があります。</p>
@@ -508,21 +510,21 @@ SARSAは、次の状態 $s_{t+1}$ で実際に選択された行動 $a_{t+1}$ �
 <ul>
 <li>久保隆宏, 『Pythonで学ぶ強化学習 入門から実践まで』, 翔泳社 (2019)</li>
 </ul>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="163">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/3/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="163">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/3/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -578,7 +580,7 @@ SARSAは、次の状態 $s_{t+1}$ で実際に選択された行動 $a_{t+1}$ �
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -610,16 +612,16 @@ SARSAは、次の状態 $s_{t+1}$ で実際に選択された行動 $a_{t+1}$ �
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -633,7 +635,7 @@ SARSAは、次の状態 $s_{t+1}$ で実際に選択された行動 $a_{t+1}$ �
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

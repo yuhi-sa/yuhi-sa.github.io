@@ -136,8 +136,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -387,59 +387,61 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">トランザクションの分離レベルと防げる不整合</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2024-05-18T09:10:00&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          May 18, 2024
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">トランザクションの分離レベルと防げる不整合</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2024-05-18T09:10:00&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              May 18, 2024
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/db/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              DB
+            </a>
+            
+            <a href="/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              トランザクション
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/db/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          DB
-        </a>
-        
-        <a href="/tags/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          トランザクション
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>データベースにおける<strong>トランザクション</strong>は、一連の操作を一つの論理的な単位として扱い、すべて成功するか、すべて失敗するかのいずれかであることを保証する仕組みです。複数のトランザクションが同時に実行される環境では、データの整合性を保つために**分離レベル（Isolation Level）**が重要になります。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>データベースにおける<strong>トランザクション</strong>は、一連の操作を一つの論理的な単位として扱い、すべて成功するか、すべて失敗するかのいずれかであることを保証する仕組みです。複数のトランザクションが同時に実行される環境では、データの整合性を保つために**分離レベル（Isolation Level）**が重要になります。</p>
 <h2 id="データベースのトランザクション処理で問題となる不整合">データベースのトランザクション処理で問題となる不整合</h2>
 <p>複数のトランザクションが並行して動作する際に発生しうる代表的なデータ不整合の現象です。</p>
 <h3 id="1-ダーティリード-dirty-read">1. ダーティリード (Dirty Read)</h3>
@@ -491,21 +493,21 @@ body {
 <li><a href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions">Prisma ORM: Transactions</a></li>
 <li><a href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB">トランザクション分離レベル - Wikipedia</a></li>
 </ul>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="99">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="99">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240518_db_transaction/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -561,7 +563,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -602,16 +604,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -625,7 +627,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

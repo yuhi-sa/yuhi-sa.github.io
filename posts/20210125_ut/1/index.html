@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -407,66 +407,68 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Unscented Transformation（アンセンテッド変換）のPython実装</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-01-25T15:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          January 25, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Unscented Transformation（アンセンテッド変換）のPython実装</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-01-25T15:17:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              January 25, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              3 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              機械学習
+            </a>
+            
+            <a href="/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              フィルタリング
+            </a>
+            
+            <a href="/tags/python/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Python
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          3 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          機械学習
-        </a>
-        
-        <a href="/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          フィルタリング
-        </a>
-        
-        <a href="/tags/python/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Python
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="unscented-transformationu変換とは">Unscented Transformation（U変換）とは</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="unscented-transformationu変換とは">Unscented Transformation（U変換）とは</h2>
 <p>Unscented Transformation（U変換）は、確率変数 $x$ が非線形関数 $f$ によって変換された確率変数 $y = f(x)$ の平均 $\bar{y}$ と共分散 $P_y$ を推定する手法です。</p>
 <p>$x$ の平均 $\bar{x}$ と共分散 $P_x$ が既知である場合、単純にモンテカルロ法で多数のサンプルを生成して変換し、その平均と共分散を計算することも考えられます。</p>
 <p>$$ \bar{y} \approx \frac{1}{N} \sum_{i=1}^N f(x_i) $$
@@ -576,21 +578,21 @@ $$ P_y \approx \sum_{i=0}^{2n} w_i (y_{\sigma, i} - \bar{y})(y_{\sigma, i} - \ba
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">出力yの推定平均: </span><span class="si">{</span><span class="n">y_mean</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;出力yの推定共分散行列:</span><span class="se">\n</span><span class="si">{</span><span class="n">y_P</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>この実装により、非線形変換後の確率変数の平均と共分散を、少数のシグマ点から効率的に推定できることがわかります。このU変換は、Unscented Kalman Filter (UKF) の基盤となる技術です。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="483">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210125_ut/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="483">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210125_ut/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -646,7 +648,7 @@ $$ P_y \approx \sum_{i=0}^{2n} w_i (y_{\sigma, i} - \bar{y})(y_{\sigma, i} - \ba
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -696,16 +698,16 @@ $$ P_y \approx \sum_{i=0}^{2n} w_i (y_{\sigma, i} - \bar{y})(y_{\sigma, i} - \ba
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -719,7 +721,7 @@ $$ P_y \approx \sum_{i=0}^{2n} w_i (y_{\sigma, i} - \bar{y})(y_{\sigma, i} - \ba
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

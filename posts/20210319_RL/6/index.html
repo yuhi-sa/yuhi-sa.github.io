@@ -135,8 +135,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -405,52 +405,54 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Advantage Actor-Critic (A2C)</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-03-22T11:30:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          March 22, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Advantage Actor-Critic (A2C)</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-03-22T11:30:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              March 22, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              強化学習
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          強化学習
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>Actor-Critic法は、方策ベースの強化学習手法である方策勾配法と、価値ベースの強化学習手法であるTD学習を組み合わせたものです。Actor（方策）が行動を選択し、Critic（価値関数）がその行動を評価することで、学習を効率化します。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>Actor-Critic法は、方策ベースの強化学習手法である方策勾配法と、価値ベースの強化学習手法であるTD学習を組み合わせたものです。Actor（方策）が行動を選択し、Critic（価値関数）がその行動を評価することで、学習を効率化します。</p>
 <h2 id="アドバンテージ関数-advantage-function">アドバンテージ関数 (Advantage Function)</h2>
 <p>方策勾配法では、行動価値関数 $Q(s,a)$ を用いて方策の更新方向を決定します。しかし、行動価値関数は状態そのものの価値 $V(s)$ に大きく依存する傾向があります。例えば、ある状態の価値が非常に高い場合、その状態でのどの行動も高いQ値を持つことになります。</p>
 <p>そこで、状態の価値 $V(s)$ を差し引いた<strong>アドバンテージ関数</strong> $A(s,a)$ を用いて行動を評価することを考えます。</p>
@@ -471,21 +473,21 @@ window.MathJax = {
 <ul>
 <li>久保隆宏, 『Pythonで学ぶ強化学習 入門から実践まで』, 翔栄社 (2019)</li>
 </ul>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="83">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/6/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="83">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/6/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -541,7 +543,7 @@ window.MathJax = {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -573,16 +575,16 @@ window.MathJax = {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -596,7 +598,7 @@ window.MathJax = {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

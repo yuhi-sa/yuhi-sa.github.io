@@ -135,8 +135,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -405,52 +405,54 @@ window.MathJax = {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">方策勾配法</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-03-22T11:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          March 22, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">方策勾配法</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-03-22T11:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              March 22, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              強化学習
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          強化学習
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>方策勾配法（Policy Gradient Method）は、強化学習における方策ベースの手法の一つです。価値関数を学習するのではなく、<strong>方策そのもの</strong>をパラメータ化された関数として表現し、そのパラメータを直接最適化することで、最適な方策を見つけます。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>方策勾配法（Policy Gradient Method）は、強化学習における方策ベースの手法の一つです。価値関数を学習するのではなく、<strong>方策そのもの</strong>をパラメータ化された関数として表現し、そのパラメータを直接最適化することで、最適な方策を見つけます。</p>
 <p>方策は、状態 $s$ を入力として受け取り、各行動 $a$ を選択する確率 $\pi_\theta(a|s)$ を出力する関数として表現されます。ここで $\theta$ は方策のパラメータです。</p>
 <h2 id="方策の評価と最適化">方策の評価と最適化</h2>
 <p>方策の良さは、その方策に従って行動したときに得られる<strong>期待報酬</strong>（または期待累積報酬）によって評価されます。この期待報酬を最大化することが方策勾配法の目的です。</p>
@@ -484,21 +486,21 @@ window.MathJax = {
 <ul>
 <li>久保隆宏, 『Pythonで学ぶ強化学習 入門から実践まで』, 翔栄社 (2019)</li>
 </ul>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="118">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/5/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="118">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210319_rl/5/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -554,7 +556,7 @@ window.MathJax = {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -586,16 +588,16 @@ window.MathJax = {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -609,7 +611,7 @@ window.MathJax = {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

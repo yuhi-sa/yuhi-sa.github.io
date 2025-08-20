@@ -136,8 +136,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -387,59 +387,61 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Linuxにおけるスーパーユーザーと権限管理</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2021-11-21T10:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          November 21, 2021
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Linuxにおけるスーパーユーザーと権限管理</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2021-11-21T10:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              November 21, 2021
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/linux/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Linux
+            </a>
+            
+            <a href="/tags/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              コマンド
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/linux/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Linux
-        </a>
-        
-        <a href="/tags/%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          コマンド
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>Linuxシステムでは、セキュリティと安定性を保つために、ユーザーアカウントに異なる権限が割り当てられています。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>Linuxシステムでは、セキュリティと安定性を保つために、ユーザーアカウントに異なる権限が割り当てられています。</p>
 <h2 id="ユーザーアカウントの種類">ユーザーアカウントの種類</h2>
 <ul>
 <li><strong>スーパーユーザー (Superuser)</strong>:
@@ -500,21 +502,21 @@ body {
 </span></span><span class="line"><span class="cl"># 特定のユーザーが特定のコマンドをパスワードなしで実行可能
 </span></span><span class="line"><span class="cl">your_username ALL=(ALL) NOPASSWD: /usr/bin/apt update, /usr/bin/apt upgrade
 </span></span></code></pre></div><p><code>NOPASSWD:</code> を指定すると、そのコマンド実行時にパスワードの入力を省略できます。セキュリティ上のリスクを考慮し、必要最小限の範囲で設定することが重要です。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="114">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211121_linux/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="114">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20211121_linux/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -570,7 +572,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -611,16 +613,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -634,7 +636,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -388,66 +388,68 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">mtailによるログからのPrometheusメトリクス生成と公開</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2023-11-24T09:00:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          November 24, 2023
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">mtailによるログからのPrometheusメトリクス生成と公開</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2023-11-24T09:00:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              November 24, 2023
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/%E7%9B%A3%E8%A6%96/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              監視
+            </a>
+            
+            <a href="/tags/prometheus/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Prometheus
+            </a>
+            
+            <a href="/tags/%E3%83%AD%E3%82%B0/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              ログ
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/%E7%9B%A3%E8%A6%96/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          監視
-        </a>
-        
-        <a href="/tags/prometheus/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Prometheus
-        </a>
-        
-        <a href="/tags/%E3%83%AD%E3%82%B0/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          ログ
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="概要">概要</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="概要">概要</h2>
 <p><a href="https://github.com/google/mtail">mtail</a> は、Googleが開発したオープンソースのログパースツールです。ログファイルから特定のパターンに一致する行を抽出し、それに基づいてメトリクスを生成し、<code>/metrics</code> エンドポイントに<strong>Prometheus形式</strong>で公開することができます。これにより、既存のログからビジネスメトリクスやシステムの状態をPrometheusで収集・監視することが可能になります。</p>
 <h2 id="mtailの使い方">mtailの使い方</h2>
 <p>mtailを利用するには、mtailプログラム（デーモン）を起動し、監視対象のログファイルと、メトリクスを定義するmtailプログラム（設定ファイル）を指定する必要があります。</p>
@@ -506,21 +508,21 @@ body {
 <li><code>-logs /path/to/logfile</code>: mtailが監視するログファイルのパスを指定します。mtailはこのログファイルを監視し、設定に定義されたパターンに一致する行を検出して対応するメトリクスを生成します。このログファイルは、Dockerのボリュームマウントなどを使ってコンテナ内に提供する必要があります。</li>
 </ul>
 <p>このDockerイメージをビルドし、実行することで、mtailがログを監視し、Prometheusが収集可能なメトリクスを公開するようになります.</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="145">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_mtail/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="145">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20231124_mtail/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -576,7 +578,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -626,16 +628,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -649,7 +651,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

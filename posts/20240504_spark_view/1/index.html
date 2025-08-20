@@ -136,8 +136,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -387,59 +387,61 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Spark SQLビューの並列実行時における名前空間衝突の対処法</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2024-05-03T10:10:00&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          May 3, 2024
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Spark SQLビューの並列実行時における名前空間衝突の対処法</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2024-05-03T10:10:00&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              May 3, 2024
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              1 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/tags/spark/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              Spark
+            </a>
+            
+            <a href="/tags/sql/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              SQL
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          1 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/tags/spark/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          Spark
-        </a>
-        
-        <a href="/tags/sql/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          SQL
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <p>Apache SparkのSpark SQLでは、一時的なテーブルとして「ビュー（View）」を作成できます。このビューには、そのスコープに応じて2つの種類があります。</p>
+        <div class="article-content" itemprop="articleBody">
+          <p>Apache SparkのSpark SQLでは、一時的なテーブルとして「ビュー（View）」を作成できます。このビューには、そのスコープに応じて2つの種類があります。</p>
 <h2 id="spark-sqlにおけるビューの種類">Spark SQLにおけるビューの種類</h2>
 <ol>
 <li>
@@ -477,21 +479,21 @@ body {
 <h3 id="結論">結論</h3>
 <p>Spark SQLにおいて、特に明示的に <code>GLOBAL</code> キーワードを使用しない限り、デフォルトで作成されるビューはテンポラリ・ビューです。テンポラリ・ビューは各 <code>SparkSession</code> にスコープが限定されるため、<strong>基本的に並列実行でビューの名前空間が衝突することはありません。</strong></p>
 <p>もし、複数の <code>SparkSession</code> 間でビューを共有する必要がある場合は、グローバル・テンポラリ・ビューを使用することになりますが、その際は名前の衝突を避けるための命名規則や管理方法を考慮する必要があります。</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="63">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240504_spark_view/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="63">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20240504_spark_view/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -547,7 +549,7 @@ body {
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -588,16 +590,16 @@ body {
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -611,7 +613,7 @@ body {
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 

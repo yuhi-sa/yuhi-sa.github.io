@@ -135,8 +135,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.6bc9f24a0999553f3c1aab5eca0ef6e4193509469463dd5532765809b9a44335.css" 
-        integrity="sha256-a8nySgmZVT88Gqteyg725Bk1CUaUY91VMnZYCbmkQzU=" 
+        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
+        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
         crossorigin="anonymous">
   
   
@@ -386,52 +386,54 @@ body {
         class="site-main"
         aria-label="Main content">
     
-<div class="container">
-  <article itemscope itemtype="https://schema.org/Article">
-    
-    <header class="article-header">
-      <h1 itemprop="headline">Python program for exponentiation calculation using binary method</h1>
-      
-      
-      
-      <div class="article-meta">
-        <time datetime="2020-12-20T15:17:23&#43;09:00" itemprop="datePublished">
-          <i class="far fa-calendar-alt" aria-hidden="true"></i>
-          December 20, 2020
-        </time>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <article itemscope itemtype="https://schema.org/Article">
+        
+        <header class="article-header">
+          <h1 itemprop="headline">Python program for exponentiation calculation using binary method</h1>
+
+          
+
+          <div class="article-meta">
+            <time datetime="2020-12-20T15:17:23&#43;09:00" itemprop="datePublished">
+              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
+              December 20, 2020
+            </time>
+
+            
+
+            
+
+            
+            <span aria-label="Reading time" class="ms-3">
+              <i class="far fa-clock me-1" aria-hidden="true"></i>
+              3 min read
+            </span>
+            
+          </div>
+
+          
+          <div class="article-tags" role="group" aria-label="Article tags">
+            
+            <a href="/en/tags/algorithm/"
+               class="badge badge-custom text-decoration-none me-1"
+               rel="tag"
+               itemprop="keywords">
+              algorithm
+            </a>
+            
+          </div>
+          
+        </header>
         
         
         
         
         
-        
-        <span aria-label="Reading time">
-          <i class="far fa-clock" aria-hidden="true"></i>
-          3 min read
-        </span>
-        
-      </div>
-      
-      
-      <div class="article-tags" role="group" aria-label="Article tags">
-        
-        <a href="/en/tags/algorithm/" 
-           class="badge badge-custom" 
-           rel="tag"
-           itemprop="keywords">
-          algorithm
-        </a>
-        
-      </div>
-      
-    </header>
-    
-    
-    
-    
-    
-    <div class="article-content" itemprop="articleBody">
-      <h2 id="binary-exponentiation-method">Binary Exponentiation Method</h2>
+        <div class="article-content" itemprop="articleBody">
+          <h2 id="binary-exponentiation-method">Binary Exponentiation Method</h2>
 <p>Calculating $a^k$ by direct multiplication requires $k$ multiplications. However, when $k$ is a very large number, this becomes computationally expensive and impractical. The <strong>binary exponentiation method</strong> (also known as <strong>exponentiation by squaring</strong> or <strong>modular exponentiation</strong>) is an efficient algorithm to compute $a^k \pmod{p}$ (the remainder when $a^k$ is divided by $p$). This method significantly reduces the number of multiplications to $O(\log k)$. It is crucial for cryptographic algorithms like RSA, where exponents can be extremely large.</p>
 <p>The core idea is to express the exponent $k$ in its binary representation. For example, to calculate $5^{21} \pmod{p}$:</p>
 <p>First, convert the exponent $21$ to binary:
@@ -492,21 +494,21 @@ We can pre-calculate powers of $a$ that are powers of two (i.e., $a^1, a^2, a^4,
 <li>When the loop finishes, <code>res</code> holds the final calculated modular exponentiation result.</li>
 </ol>
 <p>This method ensures that intermediate calculations do not exceed the modulus, allowing for fast and memory-efficient computation of large modular exponentiations.</p>
-    </div>
-    
-    
-    <footer class="article-footer">
+        </div>
+        
+        
+        <footer class="article-footer">
+          
+        </footer>
+
+        
+        <meta itemprop="wordCount" content="565">
+        <meta itemprop="url" content="https://yuhi-sa.github.io/en/posts/20201220_binary/1/">
+      </article>
       
-    </footer>
-    
-    
-    <meta itemprop="wordCount" content="565">
-    <meta itemprop="url" content="https://yuhi-sa.github.io/en/posts/20201220_binary/1/">
-  </article>
-  
-  
-  <nav class="article-navigation" aria-label="Article navigation">
-    
+      
+      <nav class="article-navigation mt-5" aria-label="Article navigation">
+        
 
 <nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -562,7 +564,7 @@ We can pre-calculate powers of $a$ that are powers of two (i.e., $a^1, a^2, a^4,
   </ol>
 </nav>
   
-      
+          
   
   <div class="terms-wrapper " role="region" aria-label="Tags">
     
@@ -594,16 +596,16 @@ We can pre-calculate powers of $a$ that are powers of two (i.e., $a^1, a^2, a^4,
     
   </div>
 
-  </nav>
+      </nav>
+    </div>
+  </div>
 </div>
 
   </main>
   
   
   <footer role="contentinfo" class="site-footer">
-    
-
-<div class="container footer-container">
+    <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       
@@ -617,7 +619,7 @@ We can pre-calculate powers of $a$ that are powers of two (i.e., $a^1, a^2, a^4,
       
       
       
-      <p class="theme-attribution text-muted small mb-0">
+      <p class="theme-attribution text-muted small mt-2 mb-0">
         Powered by 
         <a href="https://gohugo.io/" 
            target="_blank" 
