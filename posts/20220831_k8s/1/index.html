@@ -136,8 +136,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
-        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
+        href="/css/main.min.dcd2769b0b2ca58cab7fc3b30e7545c5ecf3154027c81ee66d79a01223e4cace.css" 
+        integrity="sha256-3NJ2mwsspYyrf8OzDnVFxezzFUAnyB7mbXmgEiPkys4=" 
         crossorigin="anonymous">
   
   
@@ -444,7 +444,7 @@ body {
           <p>Dockerfileは、Dockerイメージを自動的に構築するためのテキストファイルです。Dockerfileに記述された命令は、上から順に実行され、最終的にDockerイメージが作成されます。ここでは、Dockerfileでよく使用される主要な命令について解説します。</p>
 <h2 id="from"><code>FROM</code></h2>
 <p>ベースとなるイメージを指定します。Dockerfileの最初の命令でなければなりません。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> &lt;イメージ名&gt;[:&lt;タグ&gt;]</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">&lt;イメージ名&gt;[:&lt;タグ</span>&gt;<span class="o">]</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: FROM ubuntu:22.04</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: FROM python:3.9-slim-buster</span><span class="err">
 </span></span></span></code></pre></div><h2 id="label"><code>LABEL</code></h2>
@@ -454,15 +454,15 @@ body {
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: LABEL version=&#34;1.0&#34; description=&#34;My custom web app image&#34;</span><span class="err">
 </span></span></span></code></pre></div><h2 id="user"><code>USER</code></h2>
 <p>以降の <code>RUN</code>, <code>CMD</code>, <code>ENTRYPOINT</code> 命令が実行されるユーザーを指定します。デフォルトは <code>root</code> です。セキュリティのため、特権を必要としない操作では非rootユーザーを指定することが推奨されます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">USER</span><span class="s"> &lt;ユーザー名&gt;[:&lt;グループ名&gt;]</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">USER</span><span class="w"> </span><span class="s">&lt;ユーザー名&gt;[:&lt;グループ名</span>&gt;<span class="o">]</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: USER appuser</span><span class="err">
 </span></span></span></code></pre></div><h2 id="workdir"><code>WORKDIR</code></h2>
 <p>以降の <code>RUN</code>, <code>CMD</code>, <code>ENTRYPOINT</code>, <code>COPY</code>, <code>ADD</code> 命令が実行される作業ディレクトリを指定します。相対パスで指定した場合、前の <code>WORKDIR</code> 命令からの相対パスとなります。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="s"> /path/to/workdir</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/path/to/workdir</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: WORKDIR /app</span><span class="err">
 </span></span></span></code></pre></div><h2 id="expose"><code>EXPOSE</code></h2>
 <p>コンテナがリッスンするポートを指定します。これはドキュメント目的であり、実際にポートを公開するには <code>docker run -p</code> オプションが必要です。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">EXPOSE</span><span class="s"> &lt;ポート番号&gt; [&lt;ポート番号&gt;/&lt;プロトコル&gt; ...]</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">EXPOSE</span><span class="w"> </span><span class="s">&lt;ポート番号</span>&gt; <span class="o">[</span>&lt;ポート番号&gt;/&lt;プロトコル&gt; ...<span class="o">]</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: EXPOSE 80</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 例: EXPOSE 8080/tcp 8080/udp</span><span class="err">
 </span></span></span></code></pre></div><h2 id="copy"><code>COPY</code></h2>

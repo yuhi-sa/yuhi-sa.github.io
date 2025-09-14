@@ -137,8 +137,8 @@
   
 
   <link rel="stylesheet" 
-        href="/css/main.min.7078f56269e52be356e50ffc9df03aa3595b461c3ea70a1f5fd6a3a27bd28a3b.css" 
-        integrity="sha256-cHj1YmnlK&#43;NW5Q/8nfA6o1lbRhw&#43;pwofX9ajonvSijs=" 
+        href="/css/main.min.dcd2769b0b2ca58cab7fc3b30e7545c5ecf3154027c81ee66d79a01223e4cace.css" 
+        integrity="sha256-3NJ2mwsspYyrf8OzDnVFxezzFUAnyB7mbXmgEiPkys4=" 
         crossorigin="anonymous">
   
   
@@ -480,13 +480,13 @@ body {
 <h2 id="dockerでmtailを起動する">Dockerでmtailを起動する</h2>
 <p>mtailをDockerコンテナとして実行することで、環境構築の手間を省き、簡単にデプロイできます。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># ベースイメージとしてCentOS 7を使用</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> centos:7</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="w"> </span><span class="s">centos:7</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># wgetをインストールし、キャッシュをクリア</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> yum install -y wget <span class="o">&amp;&amp;</span> yum clean all<span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 作業ディレクトリを/tmpに設定</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /tmp</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/tmp</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># mtailのバイナリをダウンロードし、展開、実行権限を付与</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># リリースバージョンは適宜最新のものに更新してください</span><span class="err">
@@ -501,7 +501,7 @@ body {
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/tmp/mtail&#34;</span><span class="p">,</span> <span class="s2">&#34;-progs&#34;</span><span class="p">,</span> <span class="s2">&#34;/path/to/sample.mtail&#34;</span><span class="p">,</span> <span class="s2">&#34;-logs&#34;</span><span class="p">,</span> <span class="s2">&#34;/path/to/logfile&#34;</span><span class="p">]</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># mtailがメトリクスを公開するデフォルトポート (Prometheusがスクレイピングするポート)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 3903</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3903</span><span class="err">
 </span></span></span></code></pre></div><h3 id="cmd-命令の引数"><code>CMD</code> 命令の引数</h3>
 <ul>
 <li><code>-progs /path/to/sample.mtail</code>: mtailが使用する設定ファイル（mtailプログラム）のパスを指定します。コンテナ内に配置したmtailプログラムのパスを指定してください。</li>
