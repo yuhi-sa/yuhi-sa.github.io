@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webdev on tomato blog</title>
+    <link>https://yuhi-sa.github.io/tags/webdev/</link>
+    <description>Recent content in Webdev on tomato blog</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 06 Oct 2025 08:10:00 +0900</lastBuildDate>
+    <atom:link href="https://yuhi-sa.github.io/tags/webdev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>初めての投稿：モダンなHugoテーマの紹介</title>
+      <link>https://yuhi-sa.github.io/posts/my-first-post/</link>
+      <pubDate>Mon, 06 Oct 2025 08:10:00 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/posts/my-first-post/</guid>
+      <description>&lt;p&gt;これは、新しいHugoテーマのテスト用サンプル記事です。&lt;/p&gt;&#xA;&lt;h2 id=&#34;モダンなデザイン&#34;&gt;モダンなデザイン&lt;/h2&gt;&#xA;&lt;p&gt;このテーマは、シンプルさと可読性を重視して設計されています。十分な余白、洗練されたタイポグラフィ、そしてレスポンシブデザインにより、どのデバイスでも快適な読書体験を提供します。&lt;/p&gt;&#xA;&lt;h3 id=&#34;主な特徴&#34;&gt;主な特徴&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;SCSSによる構造化&lt;/strong&gt;: スタイルシートは、メンテナンス性を考慮してコンポーネントごとに分割されています。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;BEM命名規則&lt;/strong&gt;: CSSのクラス名はBEMに基づいており、予測可能で堅牢です。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ダークモード&lt;/strong&gt;: ボタン一つでライトモードとダークモードを切り替えられます。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;今後、このテーマを使って素晴らしいブログを構築していくのが楽しみです。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

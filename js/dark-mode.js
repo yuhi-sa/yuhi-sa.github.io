@@ -78,26 +78,10 @@ class DarkModeManager {
       }
     }
 
-    // Update navbar theme
-    this.updateNavbarTheme(currentTheme);
-    
     // Update aria-label for better accessibility
     const label = currentTheme === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え';
     this.toggleButton.setAttribute('aria-label', label);
     this.toggleButton.setAttribute('title', label);
-  }
-  
-  updateNavbarTheme(theme) {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-      if (theme === 'dark') {
-        navbar.classList.remove('navbar-light', 'bg-light');
-        navbar.classList.add('navbar-dark', 'bg-dark');
-      } else {
-        navbar.classList.remove('navbar-dark', 'bg-dark');
-        navbar.classList.add('navbar-light', 'bg-light');
-      }
-    }
   }
 }
 
