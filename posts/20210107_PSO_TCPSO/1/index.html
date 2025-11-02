@@ -153,6 +153,33 @@ body {
 
 
 
+<script>
+  
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      ignoreHtmlClass: 'tex2jax_ignore',
+      processHtmlClass: 'tex2jax_process'
+    },
+    startup: {
+      ready: () => {
+        console.log('MathJax is loaded and ready');
+        MathJax.startup.defaultReady();
+      }
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
+        async
+        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
+        crossorigin="anonymous">
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -800,6 +827,33 @@ $$ x_i^M(t+1) = x_i^M(t) + v_i^M(t+1) $$
   
 
 
+<script>
+  
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      ignoreHtmlClass: 'tex2jax_ignore',
+      processHtmlClass: 'tex2jax_process'
+    },
+    startup: {
+      ready: () => {
+        console.log('MathJax is loaded and ready');
+        MathJax.startup.defaultReady();
+      }
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
+        async
+        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
+        crossorigin="anonymous">
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
