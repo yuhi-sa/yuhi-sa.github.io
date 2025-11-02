@@ -4,33 +4,6 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  <url>
-    <loc>https://yuhi-sa.github.io/posts/my-first-post/</loc>
-    
-    <lastmod>2025-10-06T08:10:00&#43;09:00</lastmod>
-    
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    
-    
-    
-  </url>
-  
-
-  
   <url>
     <loc>https://yuhi-sa.github.io/posts/20250821_-hardening/1/</loc>
     
@@ -43,6 +16,12 @@
     
     
   </url>
+  
+
+  
+
+  
+
   
 
   
@@ -292,6 +271,8 @@
     
     
   </url>
+  
+
   
 
   

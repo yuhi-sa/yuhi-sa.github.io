@@ -139,10 +139,32 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
       crossorigin="anonymous">
 
-<link rel="stylesheet"
-      href="/scss/main.min.1498ceb9a67ff007f2bb4834671f5a5aaf9e04fb9fe390f5bef82f9a513fa817.css"
-      integrity="sha256-FJjOuaZ/8Afyu0g0Zx9aWq&#43;eBPuf45D1vvgvmlE/qBc="
-      crossorigin="anonymous">
+
+
+
+
+
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
+        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
+        crossorigin="anonymous">
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
+        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
+        crossorigin="anonymous">
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
+        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
+        crossorigin="anonymous">
 
 
 <style>
@@ -171,33 +193,6 @@ body {
 
 
 
-<script>
-  
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-      ignoreHtmlClass: 'tex2jax_ignore',
-      processHtmlClass: 'tex2jax_process'
-    },
-    startup: {
-      ready: () => {
-        console.log('MathJax is loaded and ready');
-        MathJax.startup.defaultReady();
-      }
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
-        async
-        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
-        crossorigin="anonymous">
-</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -210,8 +205,8 @@ body {
   
   
 
-  <script src="/js/dark-mode.min.98dbd8f23e542605beeba9f9d1d84547cb15ae4c79a9aff07ba0939c56bb9fb1.js" 
-          integrity="sha256-mNvY8j5UJgW&#43;66n50dhFR8sVrkx5qa/we6CTnFa7n7E="
+  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
+          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
           defer>
   </script>
 
@@ -267,7 +262,7 @@ body {
   
   
   <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-custom" role="navigation" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
   <div class="container">
     
   
@@ -415,14 +410,87 @@ body {
   <article>
     <header class="article-header">
       
-        <h1>すべてのタグ</h1>
+        <h1>タグ: DDD</h1>
       
+      <p>tagsに1件の記事があります</p>
     </header>
 
     <div class="article-content">
-      <ul class="tag-list">
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240606_ddd/1/">DDDの集約設計：不変条件がトランザクションより優先される理由</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-06-06">2024年6月6日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">DDD</span>
+              
+            </div>
+            
+          </div>
+        </header>
         
-      </ul>
+        <div class="post-summary-content">
+          <p><code>DDD</code>(ドメイン駆動設計)において、集約はシステムの重要な部分です。多くの場合、集約について議論するときにトランザクションが強調されますが、実際には「不変条件」の方が重要です。</p>
+<h2 id="不変条件とは">不変条件とは</h2>
+<p>不変条件とは、オブジェクトが常に満たすべき条件や性質のことです。これは「変更不可能なオブジェクト（<code>immutable</code>）」とは異なり、オブジェクトの状態が変わる際にも必ず守られるべきルール(<code>invariant</code>)です。
+例えば、銀行口座の残高が負にならないことなどです。</p>
+<h2 id="集約と不変条件">集約と不変条件</h2>
+<p>集約は、この不変条件を保つように設計されるべきです。<code>TypeScript</code>を使う場合、<code>zod</code>の<code>refine</code>を使用して不変条件をチェックできます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.ts" data-lang=".ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">z</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;zod&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// BankAccountのスキーマを定義
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">BankAccountSchema</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="kt">object</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">id</span>: <span class="kt">z.string</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">balance</span>: <span class="kt">z.number</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"><span class="p">}).</span><span class="nx">refine</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">balance</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">message</span><span class="o">:</span> <span class="s2">&#34;Balance must be non-negative&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// BankAccount型を定義
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">type</span> <span class="nx">BankAccount</span> <span class="o">=</span> <span class="nx">z</span><span class="p">.</span><span class="k">infer</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="na">BankAccountSchema</span><span class="p">&gt;;</span>
+</span></span></code></pre></div><h2 id="トランザクションと不変条件">トランザクションと不変条件</h2>
+<p>不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。</p>
+<h2 id="リポジトリの役割">リポジトリの役割</h2>
+<p>集約の永続化と取得を管理するのがリポジトリ。<code>zod</code>のスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.ts" data-lang=".ts"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">BankAccountRepository</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">private</span> <span class="nx">storage</span>: <span class="kt">Map</span><span class="p">&lt;</span><span class="nt">string</span><span class="p">,</span> <span class="na">BankAccount</span><span class="p">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">save</span><span class="p">(</span><span class="nx">account</span>: <span class="kt">BankAccount</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// zodのスキーマでバリデーション
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">BankAccountSchema</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">account</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="kr">set</span><span class="p">(</span><span class="nx">account</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">findById</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">BankAccount</span> <span class="o">|</span> <span class="kc">undefined</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="使用例">使用例</h2>
+<p>リポジトリを使って銀行口座を管理する具体例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.ts" data-lang=".ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">repository</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BankAccountRepository</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">account</span>: <span class="kt">BankAccount</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;123&#34;</span><span class="p">,</span> <span class="nx">balance</span>: <span class="kt">100</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="nx">repository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">account</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">retrievedAccount</span> <span class="o">=</span> <span class="nx">repository</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="s2">&#34;123&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">retrievedAccount</span><span class="p">);</span> <span class="c1">// { id: &#34;123&#34;, balance: 100 }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 不変条件を破る例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">invalidAccount</span>: <span class="kt">BankAccount</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&#34;456&#34;</span><span class="p">,</span> <span class="nx">balance</span><span class="o">:</span> <span class="o">-</span><span class="mi">50</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">repository</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">invalidAccount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// &#34;Balance must be non-negative&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h2 id="まとめ">まとめ</h2>
+<p>不変条件を定義し、永続化を集約単位でのみ行うことでオブジェクトのライフサイクルの間、常に不変条件が保たれるようにすることが<code>DDD</code>において重要である。</p>
+        </div>
+        
+      </article>
+      
     </div>
   </article>
 </div>
@@ -468,33 +536,6 @@ body {
   
 
 
-<script>
-  
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-      ignoreHtmlClass: 'tex2jax_ignore',
-      processHtmlClass: 'tex2jax_process'
-    },
-    startup: {
-      ready: () => {
-        console.log('MathJax is loaded and ready');
-        MathJax.startup.defaultReady();
-      }
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
-        async
-        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
-        crossorigin="anonymous">
-</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -507,8 +548,8 @@ body {
   
   
 
-  <script src="/js/dark-mode.min.98dbd8f23e542605beeba9f9d1d84547cb15ae4c79a9aff07ba0939c56bb9fb1.js" 
-          integrity="sha256-mNvY8j5UJgW&#43;66n50dhFR8sVrkx5qa/we6CTnFa7n7E="
+  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
+          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
           defer>
   </script>
 

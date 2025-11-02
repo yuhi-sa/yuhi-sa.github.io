@@ -229,10 +229,32 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
       crossorigin="anonymous">
 
-<link rel="stylesheet"
-      href="/scss/main.min.1498ceb9a67ff007f2bb4834671f5a5aaf9e04fb9fe390f5bef82f9a513fa817.css"
-      integrity="sha256-FJjOuaZ/8Afyu0g0Zx9aWq&#43;eBPuf45D1vvgvmlE/qBc="
-      crossorigin="anonymous">
+
+
+
+
+
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
+        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
+        crossorigin="anonymous">
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
+        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
+        crossorigin="anonymous">
+  
+  
+
+  <link rel="stylesheet" 
+        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
+        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
+        crossorigin="anonymous">
 
 
 <style>
@@ -261,33 +283,6 @@ body {
 
 
 
-<script>
-  
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-      ignoreHtmlClass: 'tex2jax_ignore',
-      processHtmlClass: 'tex2jax_process'
-    },
-    startup: {
-      ready: () => {
-        console.log('MathJax is loaded and ready');
-        MathJax.startup.defaultReady();
-      }
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
-        async
-        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
-        crossorigin="anonymous">
-</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -300,8 +295,8 @@ body {
   
   
 
-  <script src="/js/dark-mode.min.98dbd8f23e542605beeba9f9d1d84547cb15ae4c79a9aff07ba0939c56bb9fb1.js" 
-          integrity="sha256-mNvY8j5UJgW&#43;66n50dhFR8sVrkx5qa/we6CTnFa7n7E="
+  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
+          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
           defer>
   </script>
 
@@ -357,7 +352,7 @@ body {
   
   
   <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-custom" role="navigation" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
   <div class="container">
     
   
@@ -505,14 +500,774 @@ body {
   <article>
     <header class="article-header">
       
-        <h1>すべてのタグ</h1>
+        <h1>タグ: セキュリティ</h1>
       
+      <p>tagsに11件の記事があります</p>
     </header>
 
     <div class="article-content">
-      <ul class="tag-list">
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20250821_-hardening/1/">Micro Hardening研修参加レポート</a></h2>
+          <div class="post-meta">
+            <time datetime="2025-08-21">2025年8月21日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
         
-      </ul>
+        <div class="post-summary-content">
+          <ul>
+<li>研修日：8/21(木)</li>
+<li>主催：<a href="https://www.sec-k.co.jp/mh">川口洋さん</a></li>
+</ul>
+<p>セキュリティ研修「マイクロハーデニング」に参加した記録です。</p>
+<h2 id="研修の概要">研修の概要</h2>
+<p>実際のECサイト（WordPress+Apache+MySQLが1台のサーバーで稼働）を4人1組のチームで防御し、売上最大化を目指す内容。1分ごとにクローラーがECサイトで購入を行い、45分間で購入できた点数を競う。攻撃による改ざんで売上が下がったり、防御に成功するとボーナスが加算される仕組み。</p>
+<p>研修は45分×4セットで実施。</p>
+<p>※具体的な脆弱性はネタバレ防止のため記載しません。自分たちの考えや学びを中心にまとめています。</p>
+<h1 id="各セットの取り組み">各セットの取り組み</h1>
+<h3 id="1セット目">1セット目</h3>
+<p>最初は攻撃手法や脆弱性の全容が分からず、まず「どんな攻撃が来るのか」を知ることを重視。サービスが止まった場合は復旧のみ行い、観察フェーズとした。</p>
+<ul>
+<li>アクセスログを確認（自分たちのIPを除外）
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">tail</span> <span class="o">-</span><span class="n">n</span> <span class="mi">500</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">access_log</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&#34;192.168.0.200&#34;</span>
+</span></span></code></pre></div></li>
+<li>lastコマンドでアクセスユーザーの確認</li>
+<li>/var/www/htmlの改ざんチェック</li>
+<li>アクセスログをzip化しAI（ChatGPT）に投げてアドバイスをもらう</li>
+</ul>
+<h3 id="2セット目">2セット目</h3>
+<p>1セット目の観察で「SSH経由での侵入・改ざん」や「WordPressの脆弱性を突かれ設定ファイルが取得されている」ことが判明。改ざん検知や復旧体制を強化し、被害拡大を防ぐことを重視。</p>
+<ul>
+<li><code>/var/www/html</code>をバックアップし、diffで改ざんを検知
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">html</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">diff</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">html</span>
+</span></span></code></pre></div></li>
+<li>改ざんがあれば即時復旧</li>
+<li>MySQLのデータもdumpしてバックアップ
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysqldump -u root -p wordpress &gt; /tmp/wordpress_backup.sql
+</span></span></code></pre></div></li>
+<li>ログ監視も継続</li>
+</ul>
+<h3 id="3セット目">3セット目</h3>
+<p>2セット目までの観察・検知で「FTP経由での攻撃」や「不要なプラグインの悪用」「PUTメソッドの悪用」など、攻撃者が使える余計な入り口が多いことが判明。不要なサービスやアカウントを整理・制限し、攻撃面を減らすことに注力。</p>
+<ul>
+<li>不要なWordPressプラグインの洗い出し・停止</li>
+<li>FTPが悪用されていたためFTPサービス停止
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo service vsftpd stop
+</span></span></code></pre></div></li>
+<li>不要アカウントのロック、利用アカウントのパスワード変更
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo passwd -l admin
+</span></span></code></pre></div></li>
+<li>PUTメソッド（正常運用で不要）が悪用されていたため禁止</li>
+</ul>
+<p>サービスやプラグインの削除・停止は1つずつ行い、影響を都度確認しながら進めた。</p>
+<h3 id="4セット目">4セット目</h3>
+<p>前回までで主なバックドアや攻撃経路を塞いだつもりだったが、特定の商品だけ購入できなくなるという異常が発生。「データ改ざんが起きている」と判断し、原因究明とアクセス制限を強化。</p>
+<ul>
+<li>phpMyAdminへのアクセスを禁止</li>
+<li>特定商品のみ購入できなくなり、データ改ざんを疑うも、どこが改ざんされたか特定できずにタイムアップ</li>
+<li>ネタバレで「商品タイトルの改ざん」と判明。自分たちは「商品情報自体（在庫や価格など）の改ざん」と思い込み、DBばかりを重点的に調査していた。</li>
+</ul>
+<h1 id="ネタバレで印象に残ったこと">ネタバレで印象に残ったこと</h1>
+<ul>
+<li>脆弱なWordPressは「停止」だけでなく「削除」も必要な場合がある</li>
+<li>一部プラグインはdisable関数が未実装で、WordPressからデータが渡ることがある</li>
+<li>WebDAVの設定やFTPサーバーのログも要注意</li>
+</ul>
+<p><a href="https://ja.wikipedia.org/wiki/%E4%B8%8A%E9%87%8E%E5%AE%A3">上野宣</a>さんの解き方が一番美しかったとのこと。</p>
+<ul>
+<li>1回目は徹底的にログを取り続ける</li>
+<li>クローラーの1分ごとのアクセスに合わせて、1分ごとに設定を変え、どの設定で購入できなくなるかを確認する</li>
+</ul>
+<p>一般的な障害対応については、以下の記事が参考になる。</p>
+<ul>
+<li><a href="https://note.com/mmiya/n/n746eb2e36f81">重大事故の時にどうするか？</a></li>
+</ul>
+<h1 id="チームの振り返り">チームの振り返り</h1>
+<h3 id="チーム運営情報共有">チーム運営・情報共有</h3>
+<ul>
+<li>防御対応の役割分担を明確にして対応</li>
+<li>セットごとにスレッドでやったこと・気づきを共有</li>
+<li>怪しい点や解決案も積極的に提案</li>
+</ul>
+<h3 id="ai活用">AI活用</h3>
+<ul>
+<li>アクセスログやエラーログをAIに投げて助言・対策案をもらった</li>
+</ul>
+<h3 id="今後の開発運用で取り入れたいこと">今後の開発運用で取り入れたいこと</h3>
+<ul>
+<li>余計なライブラリは入れない</li>
+<li>脆弱なバージョンは使わない</li>
+<li>EOL対応を徹底</li>
+<li>権限管理の徹底</li>
+</ul>
+<h1 id="まとめ個人の学び">まとめ・個人の学び</h1>
+<ul>
+<li>普段はSplunkやk8s環境で運用しているため、Linuxのログの場所や見るべきポイントの知見が少なかったと実感</li>
+<li>あらゆるログを幅広く確認することの大切さ</li>
+<li>改ざん箇所は先入観なく、システマチックに1つずつ確認する必要性</li>
+<li>不要なサービスやアカウントは作らない</li>
+</ul>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/">Hackfes2025参加メモ</a></h2>
+          <div class="post-meta">
+            <time datetime="2025-07-19">2025年7月19日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+        <div class="post-summary-content">
+          <h2 id="イベント概要">イベント概要</h2>
+<ul>
+<li>日時: 2025年7月19日(土)</li>
+<li><a href="https://hackfes2025.hacker.or.jp">https://hackfes2025.hacker.or.jp</a></li>
+</ul>
+<h2 id="webアプリケーションspa脆弱性診断入門徳丸-浩">「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩</h2>
+<p>10:10 - 11:40</p>
+<p>Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。
+対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。</p>
+<h3 id="corscross-origin-resource-sharingの設定不備">CORS（Cross-Origin Resource Sharing）の設定不備</h3>
+<p>ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORSによって処理されます。</p>
+<p>プリフライトリクエスト</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OPTIONS /api/v1/login HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: api.example.jp
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Access-Control-Request-Method: POST
+</span></span><span class="line"><span class="cl">Access-Control-Request-Headers: content-type
+</span></span><span class="line"><span class="cl">Origin: http://spa.example.jp
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+</span></span><span class="line"><span class="cl">Sec-Fetch-Mode: cors
+</span></span><span class="line"><span class="cl">Sec-Fetch-Site: cross-site
+</span></span><span class="line"><span class="cl">Sec-Fetch-Dest: empty
+</span></span><span class="line"><span class="cl">Referer: http://spa.example.jp/
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Accept-Language: ja,en-US;q=0.9,en;q=0.8
+</span></span><span class="line"><span class="cl">Priority: u=1, i
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span></code></pre></div><p>レスポンス</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HTTP/1.1 204 No Content
+</span></span><span class="line"><span class="cl">X-Powered-By: Express
+</span></span><span class="line"><span class="cl">Access-Control-Allow-Origin: http://spa.example.jp
+</span></span><span class="line"><span class="cl">Vary: Origin, Access-Control-Request-Headers
+</span></span><span class="line"><span class="cl">Access-Control-Allow-Credentials: true
+</span></span><span class="line"><span class="cl">Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+</span></span><span class="line"><span class="cl">Access-Control-Allow-Headers: content-type
+</span></span><span class="line"><span class="cl">Access-Control-Max-Age: 300
+</span></span><span class="line"><span class="cl">Content-Length: 0
+</span></span><span class="line"><span class="cl">Date: Sat, 19 Jul 2025 01:31:57 GMT
+</span></span></code></pre></div><p>Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきではないオリジンからのリクエストに対しても、アクセスが許可されてしまいます。</p>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240608_cissp/3/">自費で18万円かけてCISSP試験に挑戦してみた話</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-11-09">2024年11月9日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+        <div class="post-summary-content">
+          <h2 id="きっかけ">きっかけ</h2>
+<p>昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)<br>
+もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。<br>
+ということで、まずは知識をつけねばと思い、手近なところでIPAが実施する<a href="https://www.ipa.go.jp/shiken/kubun/sc.html">情報処理安全確保支援士</a>を取ってみました。<br>
+こちらは運良く合格した部分もありもう少し学習したいなと考えていました。<br>
+そんな時、セキュリティ業界では<a href="https://japan.isc2.org/cissp_about.html">CISSP(Certified Information Systems Security Professional)</a>という資格があると聞き、受験してみようと思いました。(名前もかっこいいし。。。。x2)</p>
+<h3 id="補足">補足</h3>
+<p>CISSPの認定を受けるためには、試験に合格することと5年間の実務経験が必要になります。<br>
+私には実務経験が足りないため、現在はAssociate会員というステータスにあります。したがって、正確にはCISSPを取得したわけではなく、CISSPの試験に合格しただけということになります。</p>
+<h2 id="学習期間と教材">学習期間と教材</h2>
+<ul>
+<li>学習期間：2024年6月初ー9月末</li>
+<li>教材選び：身近に資格保持者がいなかったため、社内のセキュリティ担当の方にアドバイスいただきました。</li>
+</ul>
+<h3 id="本">本</h3>
+<ul>
+<li>新版 CISSP CBK公式ガイドブック</li>
+<li>CISSP公式問題集</li>
+<li>Eleventh Hour CISSP®: Study Guide</li>
+<li>Official Practice Tests（英語版の公式問題集）</li>
+<li>CISSP Exam Cram (English Edition)</li>
+<li>CISSP Study Guide (English Edition)</li>
+</ul>
+<h3 id="記事系">記事系</h3>
+<ul>
+<li>CISSP 勉強ノート
+<ul>
+<li><a href="https://tex2e.github.io/blog/security/cissp-notes">https://tex2e.github.io/blog/security/cissp-notes</a></li>
+</ul>
+</li>
+<li>その他、社内記事</li>
+</ul>
+<h3 id="動画">動画</h3>
+<ul>
+<li>Udemyの講座
+<ul>
+<li>【日本語】初心者から学べるCISSP講座：CISSP Domain1 ビデオ学習　2024年度版</li>
+<li>&hellip;..</li>
+<li>【日本語】初心者から学べるCISSP講座：CISSP Domain7 ビデオ学習　2024年度版</li>
+</ul>
+</li>
+</ul>
+<h2 id="やったこと">やったこと</h2>
+<ol>
+<li>記事で全体像を把握。</li>
+<li>Udemyの講座を2周。</li>
+<li>CISSP CBK公式ガイドを1周＋付属問題3周。</li>
+<li>CISSP公式問題集を4周。</li>
+</ol>
+<h3 id="その他">その他</h3>
+<p>この期間に以下の本を新しく読んだり、読み直したりしました。(趣味も兼ねて読んでいたので試験に直接関係しないのも多いです。)</p>
+<ul>
+<li>長嶋仁. <a href="https://amzn.to/3ZYa7v4">セキュリティ技術の教科書　第2版 教科書シリーズ</a>. Kindle 版. </li>
+<li>光成 滋生. <a href="https://amzn.to/3ZRY4PK">図解即戦力　暗号と認証のしくみと理論がこれ1冊でしっかりわかる教科書</a>. 株式会社技術評論社. Kindle 版. </li>
+<li>アンドリュー・スチュワート; 小林啓倫. <a href="https://amzn.to/3U3N4uN">情報セキュリティの敗北史. 株式会社白揚社</a>. Kindle 版. </li>
+<li>ダニエル・J・ソロブ; ウッドロウ・ハーツォグ; 小向太郎. <a href="https://amzn.to/4eVW7G7">データセキュリティ法の迷走. 株式会社勁草書房</a>. Kindle 版. </li>
+<li>セキュリティ集団スプラウト. <a href="https://amzn.to/3U1aIbu">闇ウェブ (文春新書)</a> . 文藝春秋. Kindle 版. </li>
+<li>小谷賢. <a href="https://amzn.to/3YgLsjU">インテリジェンス　――国家・組織は情報をいかに扱うべきか</a> (ちくま学芸文庫). 筑摩書房. Kindle 版. </li>
+<li>中島明日香. <a href="https://amzn.to/4eB4Bme">サイバー攻撃　ネット世界の裏側で起きていること</a> (ブルーバックス). 講談社. Kindle 版. </li>
+<li>谷脇 康彦. <a href="https://amzn.to/4eB6mjw">サイバーセキュリティ</a> (岩波新書) . 株式会社 岩波書店. Kindle 版. </li>
+<li>面 和毅; 中村 行宏. <a href="https://amzn.to/47WK4Gt">サイバー攻撃から企業システムを守る！　OSINT実践ガイド</a> . 日経BP. Kindle 版. </li>
+<li>足立照嘉. <a href="https://amzn.to/3Njgl0J">サイバー犯罪入門 国もマネーも乗っ取られる衝撃の現実</a> (幻冬舎新書) . 株式会社 幻冬舎. Kindle 版. 
+以下の音声コンテンツを聞くようになりました。</li>
+<li><a href="https://www.tsujileaks.com/">podcast - #セキュリティのアレ</a></li>
+</ul>
+<h2 id="おかね">おかね</h2>
+<p>思ったより金がかかった。(自費)</p>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240829/1/">『OSINT実践ガイド』読書メモ：オープンソースインテリジェンスの基礎</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-08-29">2024年8月29日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+        <div class="post-summary-content">
+          <p><a href="https://amzn.to/4cJOO2P">面 和毅; 中村 行宏. サイバー攻撃から企業システムを守る！　OSINT実践ガイド. 日経BP. Kindle 版.</a> を読んだ感想メモ</p>
+<h2 id="概要">概要</h2>
+<p>OSINTとは、Open Source Intelligence（オープンソースインテリジェンス）の略で、公開されている情報源から有益な情報を収集・分析する手法のことです。インターネットや公的なデータベース、ニュース記事、SNSなど、誰でもアクセス可能な情報からインテリジェンスを生成することが主な目的です。OSINTはサイバーセキュリティの分野で特に重要であり、攻撃の予防や対策、リスク管理において欠かせない手法となっています。</p>
+<h2 id="osintの歴史">OSINTの歴史</h2>
+<p>OSINTの概念は新しいものではなく、歴史的には情報戦の一部として用いられてきました。例えば、第二次世界大戦中の1941年、CIAの前身であるOSS（Office of Strategic Services）は、OSINTを用いてナチス・ドイツの新型戦艦や航空機の画像を収集していました。これにより、敵の技術や戦力の評価が可能となり、戦略的な意思決定に役立てられました。</p>
+<h2 id="現在のosint">現在のOSINT</h2>
+<p>現代においては、OSINTは主にインターネット上の情報を対象としています。次のような多岐にわたる情報源からデータが収集されます。</p>
+<ul>
+<li><strong>ウェブサイトやニュース記事</strong>: 一般公開されている情報源。</li>
+<li><strong>ソーシャルメディア（SNS）</strong>: Twitter、Facebook、Instagramなど、個人や組織が情報を発信するプラットフォーム。</li>
+<li><strong>GitHubなどのコード共有サイト</strong>: ソースコードやプロジェクトの進捗状況が公開されている。</li>
+<li><strong>脆弱性データベース</strong>: CVEやNVDといった、既知の脆弱性情報が集約されているデータベース。</li>
+<li><strong>ゼロデイ攻撃に関する情報</strong>: 未知の脆弱性を狙った攻撃についての公開情報。</li>
+</ul>
+<h2 id="osintの調査方法">OSINTの調査方法</h2>
+<h3 id="データソースの見つけ方">データソースの見つけ方</h3>
+<p>OSINT調査を行う際には、目的に応じたデータソースを見つけることが重要です。以下のツールやリソースは、OSINTのデータソースを探索する際に役立ちます。</p>
+<ul>
+<li><a href="https://osintframework.com">OSINT Framework</a>: 様々なOSINTツールや情報源へのリンク集。</li>
+<li><a href="https://attack.mitre.org">MITRE ATT&amp;CK</a>: サイバー攻撃のライフサイクルと、それに関連する戦術や技術のリソース。</li>
+<li><a href="https://www.researchgate.net/publication/361323824_Mapping_Tools_for_Open_Source_Intelligence_with_Cyber_Kill_Chain_for_Adversarial_Aware_Security">Mapping Tools for Open Source Intelligence with Cyber Kill Chain for Adversarial Aware Security</a>: サイバーキルチェーンとデータソースのマッピングに関する論文。</li>
+</ul>
+<h3 id="便利ツール">便利ツール</h3>
+<p>以下のツールは、OSINT調査を支援するために広く利用されています。</p>
+<ul>
+<li><strong>Shodan</strong>: インターネットに接続されたデバイスの検索エンジン。デバイスのセキュリティ状況を確認可能。 <a href="https://www.shodan.io/dashboard">Shodan</a></li>
+<li><strong>Censys</strong>: インターネット上のデバイスとサービスを調査するためのプラットフォーム。 <a href="https://search.censys.io">Censys</a></li>
+<li><strong>Have I Been Pwned</strong>: メールアドレスの漏洩をチェック。 <a href="https://haveibeenpwned.com">Have I Been Pwned</a></li>
+<li><strong>VirusTotal</strong>: ファイルやURLをスキャンしてマルウェアの有無を確認。 <a href="https://www.virustotal.com/gui/home/upload">VirusTotal</a></li>
+<li><strong>Aguse</strong>: Webサイトのレピュテーションを調べる。 <a href="https://www.aguse.jp">Aguse</a></li>
+<li><strong>Exploit Database</strong>: 公開されているエクスプロイト情報のデータベース。 <a href="https://www.exploit-db.com">Exploit-DB</a></li>
+<li><strong>SecurityTrails</strong>: ドメインやIPアドレスの利用履歴を確認。 <a href="https://securitytrails.com">SecurityTrails</a></li>
+</ul>
+<h2 id="その他の重要リソース">その他の重要リソース</h2>
+<h3 id="脆弱性情報収集">脆弱性情報収集</h3>
+<ul>
+<li><strong>NVD</strong>: National Vulnerability Databaseは、米国政府が提供する脆弱性情報のデータベース。 <a href="https://nvd.nist.gov/vuln/search">NVD</a></li>
+<li><strong>JVN iPedia</strong>: 日本の脆弱性データベース。 <a href="https://jvndb.jvn.jp/">JVN iPedia</a></li>
+<li><strong>Vulmon</strong>: グローバルな脆弱性情報を提供。 <a href="https://vulmon.com">Vulmon</a></li>
+</ul>
+<h3 id="ssltlsの強度確認">SSL/TLSの強度確認</h3>
+<ul>
+<li>SSL Labs: サーバーのSSL/TLS設定の強度をチェック。 <a href="https://www.ssllabs.com/ssltest/">SSL Labs</a></li>
+</ul>
+<h3 id="その他の調査ツール">その他の調査ツール</h3>
+<ul>
+<li><strong>Anymail Finder</strong>: メールアドレスの漏洩状況を確認。 <a href="https://anymailfinder.com/">Anymail Finder</a></li>
+<li><strong>MaxMind</strong>: IPアドレスの地理的情報を調査。 <a href="https://www.maxmind.com/en/geoip-web-services-demo">MaxMind</a></li>
+<li><strong>Wigle</strong>: WifiネットワークのSSID情報を収集。 <a href="https://wigle.net">Wigle</a></li>
+<li><strong>BuiltWith</strong>: ウェブサイトで使用されている技術を確認。 <a href="https://builtwith.com">BuiltWith</a></li>
+<li><strong>Phishtank</strong>: フィッシングサイトを報告・検証するためのリソース。 <a href="https://phishtank.org">Phishtank</a></li>
+</ul>
+<h2 id="諸外国のosint活動事例">諸外国のOSINT活動事例</h2>
+<h3 id="中国のapt1に関するレポート-mandiant">中国のAPT1に関するレポート (Mandiant)</h3>
+<p>Mandiantが発表したレポートでは、中国のAPT1（Advanced Persistent Threat 1）、別名「61398部隊」として知られるグループに関する詳細な調査結果が示されています。このレポートでは、中国の人民解放軍総参謀部GSD第3部第2局との関係が特定されており、APT1の以下のような活動が明らかにされました。</p>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240608_cissp/2/">主要セキュリティモデルの比較：Biba完全性モデル、Clark-Wilsonモデル、Brewer-Nashモデル、Bell-LaPadulaモデル</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-06-16">2024年6月16日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+        <div class="post-summary-content">
+          <p>セキュリティガバナンスを効果的に管理するために、以下の主要なセキュリティモデルがあります。</p>
+<h2 id="biba完全性モデル">Biba完全性モデル</h2>
+<ul>
+<li>策定者: ケネス・J・ビバ（Kenneth J. Biba）</li>
+<li>策定年: 1977年</li>
+<li>策定国: アメリカ合衆国</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>データの完全性を保護することを目的としたセキュリティモデル。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>主なルールは「no write up, no read down」で、低い信頼レベルのデータを高い信頼レベルに書き込むことや、高い信頼レベルのデータを低い信頼レベルから読むことを防止。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>主に商業環境でのデータの完全性維持に利用される。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>完全性に特化しており、機密性や可用性は対象外。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>軍事用途よりも商業用途に向いている。</li>
+</ul>
+</li>
+</ul>
+<h2 id="clark-wilsonモデル">Clark-Wilsonモデル</h2>
+<ul>
+<li>策定者: デイビッド・D・クラーク（David D. Clark）とデイビッド・R・ウィルソン（David R. Wilson）</li>
+<li>策定年: 1987年</li>
+<li>策定国: アメリカ合衆国</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>商業的なトランザクションのセキュリティを確保するためのモデル。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>3つの主要概念（CDI：Constrained Data Items、TP：Transformation Procedures、IVP：Integrity Verification Procedures）を使って完全性を維持。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>分離の義務（セグリゲーション・オブ・デューティ）を強調し、不正行為を防止。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>トランザクションと完全性に特化しており、他のセキュリティ属性は二次的。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>商業環境に特に適している。</li>
+</ul>
+</li>
+</ul>
+<h2 id="brewer-nashモデル中国のウォールモデル">Brewer-Nashモデル（中国のウォールモデル）</h2>
+<ul>
+<li>策定者: デビッド・F・C・ブリュワー（David F.C. Brewer）とマイケル・J・ナッシュ（Michael J. Nash）</li>
+<li>策定年: 1989年</li>
+<li>策定国: イギリス</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>利益相反を防止することを目的としたモデル。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ユーザーは、一度アクセスした情報に基づいて、競合するデータへのアクセスが制限される。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>主に金融や法律などの分野で利用される。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>利益相反の管理に特化しており、他のセキュリティ属性は対象外。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ダイナミックなアクセス制御を提供。</li>
+</ul>
+</li>
+</ul>
+<h2 id="bell-lapadulaモデル">Bell-LaPadulaモデル</h2>
+<ul>
+<li>策定者: デビッド・E・ベル（David E. Bell）とレナード・J・ラパドゥラ（Leonard J. LaPadula）</li>
+<li>策定年: 1973年</li>
+<li>策定国: アメリカ合衆国</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>機密性を保護するためのセキュリティモデル。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>主なルールは「no read up, no write down」で、低いクリアランスレベルのデータを高いクリアランスレベルから読むことや、高いクリアランスレベルのデータを低いクリアランスレベルに書き込むことを防止。
+主に軍事や政府機関で利用される。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>機密性に特化しており、完全性や可用性は対象外。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>軍事用途や機密情報の管理に向いている。</li>
+</ul>
+</li>
+</ul>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240608_cissp/1/">CISSP：セキュリティガバナンスにおける主要フレームワークの比較</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-06-06">2024年6月6日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+        <div class="post-summary-content">
+          <p>セキュリティガバナンスを効果的に管理するために、以下の主要なフレームワークと標準があります。</p>
+<h2 id="nist-national-institute-of-standards-and-technology">NIST (National Institute of Standards and Technology)</h2>
+<ul>
+<li>策定団体: アメリカ合衆国商務省の国家標準技術研究所（NIST）</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>主にアメリカ国内の政府機関や企業向けに標準とガイドラインを提供。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>特にサイバーセキュリティに関するフレームワーク（NIST Cybersecurity Framework）が有名。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>NIST SP 800シリーズは、具体的なセキュリティ管理と技術に関する詳細なガイドラインを提供。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>政府主導であり、特にアメリカ国内での適用が多い。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>実践的で技術的なガイドラインが豊富。</li>
+</ul>
+</li>
+</ul>
+<h2 id="itil-information-technology-infrastructure-library">ITIL (Information Technology Infrastructure Library)</h2>
+<ul>
+<li>策定団体: AXELOS（英国政府と民間企業の合弁企業）</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>ITサービスマネジメントのベストプラクティスを提供。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>セキュリティ管理も含むが、主にITサービス全般の効率化と品質向上を目的とする。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>サービスライフサイクル（サービスストラテジー、サービスデザイン、サービストランジション、サービスオペレーション、継続的サービス改善）に焦点を当てている。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>ITサービスマネジメント全般に焦点を当てており、セキュリティはその一部として扱われる。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>プロセスと役割の明確な定義が特徴。</li>
+</ul>
+</li>
+</ul>
+<h2 id="isoiec-27000シリーズ">ISO/IEC 27000シリーズ</h2>
+<ul>
+<li>策定団体: 国際標準化機構（ISO）と国際電気標準会議（IEC）</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>情報セキュリティ管理のための国際標準。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ISO/IEC 27001: 情報セキュリティマネジメントシステム（ISMS）の要件を定義。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ISO/IEC 27002: ISO/IEC 27001の実装ガイドラインを提供。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>グローバルに認知され、広く適用される。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>国際標準として広く受け入れられており、認証制度が存在する。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>組織全体の情報セキュリティ管理に焦点を当てている。</li>
+</ul>
+</li>
+</ul>
+<h2 id="coso-committee-of-sponsoring-organizations-of-the-treadway-commission">COSO (Committee of Sponsoring Organizations of the Treadway Commission)</h2>
+<ul>
+<li>策定団体: COSO（トレッドウェイ委員会スポンサー団体委員会）</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>リスク管理と内部統制のフレームワークを提供。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>COSO Internal Control - Integrated Framework: 組織の内部統制を強化し、リスクを管理するためのガイドライン。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>会計と財務報告の視点からもリスク管理を強調。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>主に内部統制とリスク管理に焦点を当てており、情報セキュリティはその一部。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>財務報告の信頼性確保にも関連。</li>
+</ul>
+</li>
+</ul>
+<h2 id="cobit-control-objectives-for-information-and-related-technologies">COBIT (Control Objectives for Information and Related Technologies)</h2>
+<ul>
+<li>策定団体: ISACA（Information Systems Audit and Control Association）</li>
+<li>特徴:</li>
+<li>
+<ul>
+<li>ITガバナンスと管理のためのフレームワーク。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>COBIT 2019: ITガバナンスと管理のための包括的なフレームワークを提供し、リスク管理、コンプライアンス、セキュリティ管理を含む。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ビジネスとITの整合性を重視。</li>
+</ul>
+</li>
+<li>違い:</li>
+<li>
+<ul>
+<li>ITガバナンスに特化しており、ビジネス目標とIT戦略の整合性を強調。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>フレームワーク全体がIT管理とガバナンスに焦点を当てている。</li>
+</ul>
+</li>
+</ul>
+        </div>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20240503_riss/1/">情報処理安全確保支援士（登録セキスペ）合格体験記：勉強法から登録まで</a></h2>
+          <div class="post-meta">
+            <time datetime="2024-05-03">2024年5月3日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+              <span class="tag">資格</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20230328_mail_auth/1/">メールセキュリティ：認証・暗号化技術の仕組みと実装</a></h2>
+          <div class="post-meta">
+            <time datetime="2023-03-28">2023年3月28日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+              <span class="tag">メール</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20230105_sec/2/">シングルサインオン（SSO）とID連携</a></h2>
+          <div class="post-meta">
+            <time datetime="2023-01-03">2023年1月3日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+              <span class="tag">認証</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20230105_sec/1/">チャレンジレスポンス認証方式</a></h2>
+          <div class="post-meta">
+            <time datetime="2023-01-03">2023年1月3日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">セキュリティ</span>
+              
+              <span class="tag">認証</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+      </article>
+      
+      <article class="post-summary">
+        <header>
+          <h2><a href="https://yuhi-sa.github.io/posts/20211121_linux/5/">公開鍵認証方式を用いたSSH通信の設定方法</a></h2>
+          <div class="post-meta">
+            <time datetime="2021-12-03">2021年12月3日</time>
+            
+            <div class="tags">
+              
+              <span class="tag">Linux</span>
+              
+              <span class="tag">SSH</span>
+              
+              <span class="tag">セキュリティ</span>
+              
+            </div>
+            
+          </div>
+        </header>
+        
+      </article>
+      
     </div>
   </article>
 </div>
@@ -558,33 +1313,6 @@ body {
   
 
 
-<script>
-  
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-      ignoreHtmlClass: 'tex2jax_ignore',
-      processHtmlClass: 'tex2jax_process'
-    },
-    startup: {
-      ready: () => {
-        console.log('MathJax is loaded and ready');
-        MathJax.startup.defaultReady();
-      }
-    }
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js" 
-        async
-        integrity="sha384-MNl652OVx3v0AUeA7QLaAUCVK8oMyGKGMl2jIKxvz0AjJFPNTTfv6CHTdZaVQ6LI"
-        crossorigin="anonymous">
-</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
@@ -597,8 +1325,8 @@ body {
   
   
 
-  <script src="/js/dark-mode.min.98dbd8f23e542605beeba9f9d1d84547cb15ae4c79a9aff07ba0939c56bb9fb1.js" 
-          integrity="sha256-mNvY8j5UJgW&#43;66n50dhFR8sVrkx5qa/we6CTnFa7n7E="
+  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
+          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
           defer>
   </script>
 

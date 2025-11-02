@@ -6,29 +6,8 @@
     <description>Recent content in Tags on tomato blog</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 06 Oct 2025 08:10:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 21 Aug 2025 09:10:00 +0900</lastBuildDate>
     <atom:link href="https://yuhi-sa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hugo</title>
-      <link>https://yuhi-sa.github.io/tags/hugo/</link>
-      <pubDate>Mon, 06 Oct 2025 08:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Themes</title>
-      <link>https://yuhi-sa.github.io/tags/themes/</link>
-      <pubDate>Mon, 06 Oct 2025 08:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/tags/themes/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Webdev</title>
-      <link>https://yuhi-sa.github.io/tags/webdev/</link>
-      <pubDate>Mon, 06 Oct 2025 08:10:00 +0900</pubDate>
-      <guid>https://yuhi-sa.github.io/tags/webdev/</guid>
-      <description></description>
-    </item>
     <item>
       <title>セキュリティ</title>
       <link>https://yuhi-sa.github.io/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/</link>
@@ -111,6 +90,13 @@
       <link>https://yuhi-sa.github.io/tags/%E8%B3%87%E6%A0%BC/</link>
       <pubDate>Fri, 03 May 2024 10:10:00 +0900</pubDate>
       <guid>https://yuhi-sa.github.io/tags/%E8%B3%87%E6%A0%BC/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>https://yuhi-sa.github.io/tags/hugo/</link>
+      <pubDate>Mon, 18 Dec 2023 09:00:23 +0900</pubDate>
+      <guid>https://yuhi-sa.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     <item>
