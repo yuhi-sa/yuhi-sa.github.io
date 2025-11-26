@@ -1,786 +1,174 @@
-
-
-<!DOCTYPE html>
-<html lang="ja"
-      dir="ltr"
-      data-theme="light">
-
-<head>
-  
-
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="format-detection" content="telephone=no">
-
-
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="https://yuhi-sa.github.io/posts/20210630_py_plot/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210630_py_plot/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:locale" content="ja">
-
-
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-
-<meta property="article:published_time" content="2021-06-30T10:17:23&#43;09:00">
-<meta property="article:modified_time" content="2021-06-30T10:17:23&#43;09:00">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="Matplotlib">
-<meta property="article:tag" content="データ可視化">
-<meta property="article:section" content="posts">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法 | tomato blog
-</title>
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-
-
-
-
-
-
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法",
-    "description": "",
-    "author": {
-      "@type": "Person",
-      "name": ""
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    },
-    "datePublished": "2021-06-30T10:17:23\u002b09:00",
-    "dateModified": "2021-06-30T10:17:23\u002b09:00",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/"
-    },
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/",
-    "wordCount":  260 ,
-    "keywords": ["Python", "Matplotlib", "データ可視化"
-    ],
-    "articleSection": "Posts",
-    "inLanguage": "ja",
-    "timeRequired": "PT2M"
-  }
-  </script>
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet">
-
-
-<link rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-      crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-      crossorigin="anonymous">
-
-
-
-
-
-
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
-        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
-        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
-        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
-        crossorigin="anonymous">
-
-
-<style>
- 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  color: #000;
-  background: #fff;
-}
-
-[data-theme="dark"] body {
-  color: #fff;
-  background: #000;
-}
-
-.container {
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-</style>
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage" class="theme-tomatohugo">
-  
-  
-  <a href="#main-content" 
-     class="skip-link sr-only sr-only-focusable"
-     aria-label="Skip to main content">
-    Skip to main content
-  </a>
-  
-  
-  <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  
-  <a class="navbar-brand" 
-     href="https://yuhi-sa.github.io/" 
-     aria-label="Return to tomato blog homepage">
-    tomato blog
-  </a>
-  
-  
-  <button class="navbar-toggler d-lg-none" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav" 
-          aria-controls="navbarNav" 
-          aria-expanded="false" 
-          aria-label="Toggle navigation menu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto" role="menubar">
-      
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/"
-         role="menuitem"
-         aria-label="Navigate to Blog">
-        Blog
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/tags/"
-         role="menuitem"
-         aria-label="Navigate to Tags">
-        Tags
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/about/"
-         role="menuitem"
-         aria-label="Navigate to About">
-        About
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/privacy_policy/"
-         role="menuitem"
-         aria-label="Navigate to Privacy policy">
-        Privacy policy
-      </a>
-    
-  </li>
-
-      
-      
-      <li class="nav-item" role="none">
-        <button id="darkModeToggle" 
-                class="nav-link btn btn-link border-0" 
-                type="button" 
-                role="menuitem"
-                aria-label="Toggle dark mode"
-                title="Switch between light and dark themes">
-          <i class="fas fa-moon" id="darkModeIcon" aria-hidden="true"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  
-  <main id="main-content" 
-        role="main" 
-        class="site-main"
-        aria-label="Main content">
-    
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <article itemscope itemtype="https://schema.org/Article">
-        
-        <header class="article-header">
-          <h1 itemprop="headline">PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法</h1>
-
-          
-
-          <div class="article-meta">
-            <time datetime="2021-06-30T10:17:23&#43;09:00" itemprop="datePublished">
-              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
-              June 30, 2021
-            </time>
-
-            
-
-            
-
-            
-            <span aria-label="Reading time" class="ms-3">
-              <i class="far fa-clock me-1" aria-hidden="true"></i>
-              2 min read
-            </span>
-            
-          </div>
-
-          
-          <div class="article-tags" role="group" aria-label="Article tags">
-            
-            <a href="/tags/python/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              Python
-            </a>
-            
-            <a href="/tags/matplotlib/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              Matplotlib
-            </a>
-            
-            <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              データ可視化
-            </a>
-            
-          </div>
-          
-        </header>
-        
-        
-        
-        
-        
-        <div class="article-content" itemprop="articleBody">
-          <p>MatplotlibとNumpyを使って、3次元データを可視化し、それをアニメーション（GIF画像）として保存する方法を紹介します。時系列で変化する3Dデータを表現する際に非常に有効です。</p>
-<h2 id="作成されるgif画像">作成されるGIF画像</h2>
-<p><img src=".././ani.gif" alt=""></p>
-<h2 id="コード">コード</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span> <span class="c1"># 3Dプロットのために必要</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">make_animation</span><span class="p">(</span><span class="n">data_frames</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;animation.gif&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s2">    3Dデータをアニメーション（GIF）として作成し保存する関数。
-</span></span></span><span class="line"><span class="cl"><span class="s2">
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param data_frames: 各フレームの3D座標 (X, Y, Z) のリスト。
-</span></span></span><span class="line"><span class="cl"><span class="s2">                        例: [[X_frame1, Y_frame1, Z_frame1], [X_frame2, Y_frame2, Z_frame2], ...]
-</span></span></span><span class="line"><span class="cl"><span class="s2">    :param filename: 保存するGIFファイルのパス。
-</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;フレームを生成中...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c1"># 図のサイズを指定</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># 軸ラベルの設定</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z-axis&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># 軸の範囲をデータに合わせて自動調整、または手動で設定</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># ax.set_xlim(-500, 500) # 例</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># ax.set_ylim(-3, 3)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># ax.set_zlim(-3, 3)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">ims</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 各フレームのArtistオブジェクトを格納するリスト</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_frames</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># プログレスバー表示</span>
-</span></span><span class="line"><span class="cl">        <span class="n">progress</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_frames</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">進捗: </span><span class="si">{</span><span class="n">progress</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&#34;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># 3Dプロット。marker=&#39;o&#39; で点を表示、linestyle=&#39;None&#39; で線を表示しない</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># im = ax.plot(X, Y, Z, marker=&#34;o&#34;, color=&#34;red&#34;, linestyle=&#39;None&#39;)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># plot()はリストを返すので、ims.append(im[0])のように要素を取り出す</span>
-</span></span><span class="line"><span class="cl">        <span class="n">im</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;red&#34;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span> <span class="c1"># カンマでアンパック</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">ims</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">im</span><span class="p">])</span> <span class="c1"># ArtistAnimationはリストのリストを期待する</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">アニメーションを生成中...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># アニメーションの作成</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># fig: アニメーションの対象となるFigureオブジェクト</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># ims: 各フレームのArtistオブジェクトのリスト</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># interval: フレーム間の遅延時間（ミリ秒）</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># blit: Trueにすると、変更された部分のみを再描画し高速化（ただし、複雑な3Dプロットでは問題を起こす可能性あり）</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">ArtistAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ims</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># アニメーションの保存</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># writer: アニメーションを保存するためのライター。&#39;ffmpeg&#39; や &#39;imagemagick&#39; などが必要になる場合がある。</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># fps: フレーム/秒</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s1">&#39;pillow&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># &#39;pillow&#39; は追加のライブラリ不要でGIF保存可能</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;アニメーションを </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> に保存しました。&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># アニメーションを表示</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># サンプルデータの生成</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 時刻tに応じてsin波とcos波が変化する3D軌跡</span>
-</span></span><span class="line"><span class="cl">    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span> <span class="c1"># 0から20πまで500点</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">data_frames</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 各フレームで1点だけプロットする例</span>
-</span></span><span class="line"><span class="cl">        <span class="n">X_val</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="c1"># X軸は時間経過で変化</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Y_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Z_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="n">data_frames</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="n">X_val</span><span class="p">],</span> <span class="p">[</span><span class="n">Y_val</span><span class="p">],</span> <span class="p">[</span><span class="n">Z_val</span><span class="p">]])</span> <span class="c1"># 各要素をリストにする</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">make_animation</span><span class="p">(</span><span class="n">data_frames</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;sin_cos_3d_animation.gif&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">main</span><span class="p">()</span>
-</span></span></code></pre></div><h3 id="コードの解説">コードの解説</h3>
-<ul>
-<li><code>matplotlib.animation.ArtistAnimation</code>: <code>plot</code> 関数が返すArtistオブジェクトのリストを渡すことで、それらのオブジェクトが各フレームで描画されるアニメーションを作成します。</li>
-<li><code>fig.add_subplot(111, projection='3d')</code>: 3Dプロットを作成するために必須です。</li>
-<li><code>ax.plot(X, Y, Z, ...)</code>: 3D空間にデータをプロットします。<code>marker</code> や <code>color</code>, <code>linestyle</code> などで表示をカスタマイズできます。</li>
-<li><code>ani.save(filename, writer='pillow', fps=20)</code>: アニメーションをGIFファイルとして保存します。
-<ul>
-<li><code>writer='pillow'</code>: Pillowライブラリを使用してGIFを生成します。別途 <code>pip install pillow</code> が必要ですが、<code>ffmpeg</code> などの外部ツールをインストールする必要がないため手軽です。</li>
-<li><code>fps</code>: Frames Per Second（1秒あたりのフレーム数）で、アニメーションの速度を調整します。</li>
-</ul>
-</li>
-<li>プログレスバー: <code>\r</code> を使って同じ行を上書きすることで、コンソールにプログレスバーを表示しています。</li>
-</ul>
-<p>このコードを参考に、様々な3Dデータをアニメーション化して可視化してみてください。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></div>
-        </div>
-        
-        
-        <footer class="article-footer">
-          
-        </footer>
-
-        
-        <meta itemprop="wordCount" content="260">
-        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210630_py_plot/1/">
-      </article>
-      
-      
-      <nav class="article-navigation mt-5" aria-label="Article navigation">
-        
-
-<nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" 
-         itemprop="item"
-         aria-label="Navigate to homepage">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">tomato blog</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-    
-    
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/" 
-             itemprop="item"
-             aria-label="Navigate to tomato blog">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/posts/" 
-             itemprop="item"
-             aria-label="Navigate to Posts">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法</span>
-        <meta itemprop="position" content="4" />
-      </li>
-    
-  </ol>
-</nav>
-  
-          
-  
-  <div class="terms-wrapper " role="region" aria-label="Tags">
-    
-    
-    <h6 class="terms-label" id="terms-tags">
-      Tags:
-    </h6>
-    
-    
-    <ul class="terms-list" 
-        role="list" 
-        aria-labelledby="terms-tags"
-        aria-describedby="terms-count-tags">
-      <li class="terms-item" role="listitem">
-        <a href="/tags/python/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with Python"
-           title="Python (14 posts)">
-          Python
-        </a>
-      </li>
-      <li class="terms-item" role="listitem">
-        <a href="/tags/matplotlib/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with Matplotlib"
-           title="Matplotlib (1 post)">
-          Matplotlib
-        </a>
-      </li>
-      <li class="terms-item" role="listitem">
-        <a href="/tags/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with データ可視化"
-           title="データ可視化 (0 posts)">
-          データ可視化
-        </a>
-      </li>
-    </ul>
-    
-    
-    <span id="terms-count-tags" class="sr-only">
-      3 tags total
-    </span>
-    
-  </div>
-
-      </nav>
-    </div>
-  </div>
-</div>
-
-  </main>
-  
-  
-  <footer role="contentinfo" class="site-footer">
-    <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-      
-      
-      <p class="copyright-text text-muted mb-2">
-        &copy; 2025
-          tomato blog.
-        All rights reserved.
-      </p>
-      
-      
-      
-      
-      <p class="theme-attribution text-muted small mt-2 mb-0">
-        Powered by 
-        <a href="https://gohugo.io/" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">Hugo</a>
-        with 
-        <a href="https://github.com/yuhi-sa/tomatohugo" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">TomatoHugo</a>
-      </p>
-      
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-  
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-  
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法",
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/",
-    "description": "勉強したことなどをメモしています",
-    "inLanguage": "ja",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    }
-  }
-  </script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210630_py_plot/1/><meta property="og:type" content="article"><meta property="og:title" content="PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210630_py_plot/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2021-06-30T10:17:23+09:00"><meta property="article:modified_time" content="2025-07-23T20:43:29+09:00"><meta property="article:tag" content="Python"><meta property="article:tag" content="Matplotlib"><meta property="article:tag" content="データ可視化"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-06-30T10:17:23\u002b09:00","dateModified":"2025-07-23T20:43:29\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/","wordCount":336,"keywords":["Python","Matplotlib","データ可視化"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT2M"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css integrity="sha256-ljM14ZWag8FsbwnnW+JuQrdGIig1qIL3eonWj5iDqv4=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法</h1><div class=article-meta><time datetime=2021-06-30T10:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+June 30, 2021
+</time><time datetime=2025-07-23T20:43:29+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated July 23, 2025
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python
+</a><a href=/tags/matplotlib/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Matplotlib
+</a><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>データ可視化</a></div></header><div class=article-content itemprop=articleBody><p>MatplotlibとNumpyを使って、3次元データを可視化し、それをアニメーション（GIF画像）として保存する方法を紹介します。時系列で変化する3Dデータを表現する際に非常に有効です。</p><h2 id=作成されるgif画像>作成されるGIF画像</h2><p><img src=.././ani.gif alt></p><h2 id=コード>コード</h2><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">76
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>numpy</span> <span style=font-weight:700>as</span> <span style=color:#555>np</span> 
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>matplotlib.pyplot</span> <span style=font-weight:700>as</span> <span style=color:#555>plt</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>matplotlib.animation</span> <span style=font-weight:700>as</span> <span style=color:#555>animation</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>from</span> <span style=color:#555>mpl_toolkits.mplot3d</span> <span style=font-weight:700>import</span> Axes3D <span style=color:#998;font-style:italic># 3Dプロットのために必要</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> <span style=color:#900;font-weight:700>make_animation</span>(data_frames, filename<span style=font-weight:700>=</span><span style=color:#b84>&#34;animation.gif&#34;</span>):
+</span></span><span style=display:flex><span>    <span style=color:#b84>&#34;&#34;&#34;
+</span></span></span><span style=display:flex><span><span style=color:#b84>    3Dデータをアニメーション（GIF）として作成し保存する関数。
+</span></span></span><span style=display:flex><span><span style=color:#b84>
+</span></span></span><span style=display:flex><span><span style=color:#b84>    :param data_frames: 各フレームの3D座標 (X, Y, Z) のリスト。
+</span></span></span><span style=display:flex><span><span style=color:#b84>                        例: [[X_frame1, Y_frame1, Z_frame1], [X_frame2, Y_frame2, Z_frame2], ...]
+</span></span></span><span style=display:flex><span><span style=color:#b84>    :param filename: 保存するGIFファイルのパス。
+</span></span></span><span style=display:flex><span><span style=color:#b84>    &#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>&#34;フレームを生成中...&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    fig <span style=font-weight:700>=</span> plt<span style=font-weight:700>.</span>figure(figsize<span style=font-weight:700>=</span>(<span style=color:#099>8</span>, <span style=color:#099>6</span>)) <span style=color:#998;font-style:italic># 図のサイズを指定</span>
+</span></span><span style=display:flex><span>    ax <span style=font-weight:700>=</span> fig<span style=font-weight:700>.</span>add_subplot(<span style=color:#099>111</span>, projection<span style=font-weight:700>=</span><span style=color:#b84>&#39;3d&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 軸ラベルの設定</span>
+</span></span><span style=display:flex><span>    ax<span style=font-weight:700>.</span>set_xlabel(<span style=color:#b84>&#39;X-axis&#39;</span>)
+</span></span><span style=display:flex><span>    ax<span style=font-weight:700>.</span>set_ylabel(<span style=color:#b84>&#39;Y-axis&#39;</span>)
+</span></span><span style=display:flex><span>    ax<span style=font-weight:700>.</span>set_zlabel(<span style=color:#b84>&#39;Z-axis&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 軸の範囲をデータに合わせて自動調整、または手動で設定</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># ax.set_xlim(-500, 500) # 例</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># ax.set_ylim(-3, 3)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># ax.set_zlim(-3, 3)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    ims <span style=font-weight:700>=</span> [] <span style=color:#998;font-style:italic># 各フレームのArtistオブジェクトを格納するリスト</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=font-weight:700>for</span> i, (X, Y, Z) <span style=font-weight:700>in</span> <span style=color:#999>enumerate</span>(data_frames):
+</span></span><span style=display:flex><span>        <span style=color:#998;font-style:italic># プログレスバー表示</span>
+</span></span><span style=display:flex><span>        progress <span style=font-weight:700>=</span> (i <span style=font-weight:700>+</span> <span style=color:#099>1</span>) <span style=font-weight:700>*</span> <span style=color:#099>100</span> <span style=font-weight:700>/</span> <span style=color:#999>len</span>(data_frames)
+</span></span><span style=display:flex><span>        <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;</span><span style=color:#b84>\r</span><span style=color:#b84>進捗: </span><span style=color:#b84>{</span>progress<span style=color:#b84>:</span><span style=color:#b84>.1f</span><span style=color:#b84>}</span><span style=color:#b84>%&#34;</span>, end<span style=font-weight:700>=</span><span style=color:#b84>&#34;&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#998;font-style:italic># 3Dプロット。marker=&#39;o&#39; で点を表示、linestyle=&#39;None&#39; で線を表示しない</span>
+</span></span><span style=display:flex><span>        <span style=color:#998;font-style:italic># im = ax.plot(X, Y, Z, marker=&#34;o&#34;, color=&#34;red&#34;, linestyle=&#39;None&#39;)</span>
+</span></span><span style=display:flex><span>        <span style=color:#998;font-style:italic># plot()はリストを返すので、ims.append(im[0])のように要素を取り出す</span>
+</span></span><span style=display:flex><span>        im, <span style=font-weight:700>=</span> ax<span style=font-weight:700>.</span>plot(X, Y, Z, marker<span style=font-weight:700>=</span><span style=color:#b84>&#34;o&#34;</span>, color<span style=font-weight:700>=</span><span style=color:#b84>&#34;red&#34;</span>, linestyle<span style=font-weight:700>=</span><span style=color:#b84>&#39;None&#39;</span>) <span style=color:#998;font-style:italic># カンマでアンパック</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        ims<span style=font-weight:700>.</span>append([im]) <span style=color:#998;font-style:italic># ArtistAnimationはリストのリストを期待する</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>&#34;</span><span style=color:#b84>\n</span><span style=color:#b84>アニメーションを生成中...&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># アニメーションの作成</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># fig: アニメーションの対象となるFigureオブジェクト</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># ims: 各フレームのArtistオブジェクトのリスト</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># interval: フレーム間の遅延時間（ミリ秒）</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># blit: Trueにすると、変更された部分のみを再描画し高速化（ただし、複雑な3Dプロットでは問題を起こす可能性あり）</span>
+</span></span><span style=display:flex><span>    ani <span style=font-weight:700>=</span> animation<span style=font-weight:700>.</span>ArtistAnimation(fig, ims, interval<span style=font-weight:700>=</span><span style=color:#099>50</span>, blit<span style=font-weight:700>=</span><span style=font-weight:700>False</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># アニメーションの保存</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># writer: アニメーションを保存するためのライター。&#39;ffmpeg&#39; や &#39;imagemagick&#39; などが必要になる場合がある。</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># fps: フレーム/秒</span>
+</span></span><span style=display:flex><span>    ani<span style=font-weight:700>.</span>save(filename, writer<span style=font-weight:700>=</span><span style=color:#b84>&#39;pillow&#39;</span>, fps<span style=font-weight:700>=</span><span style=color:#099>20</span>) <span style=color:#998;font-style:italic># &#39;pillow&#39; は追加のライブラリ不要でGIF保存可能</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;アニメーションを </span><span style=color:#b84>{</span>filename<span style=color:#b84>}</span><span style=color:#b84> に保存しました。&#34;</span>)
+</span></span><span style=display:flex><span>    plt<span style=font-weight:700>.</span>show() <span style=color:#998;font-style:italic># アニメーションを表示</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>def</span> <span style=color:#900;font-weight:700>main</span>():
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># サンプルデータの生成</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 時刻tに応じてsin波とcos波が変化する3D軌跡</span>
+</span></span><span style=display:flex><span>    t <span style=font-weight:700>=</span> np<span style=font-weight:700>.</span>linspace(<span style=color:#099>0</span>, <span style=color:#099>20</span> <span style=font-weight:700>*</span> np<span style=font-weight:700>.</span>pi, <span style=color:#099>500</span>) <span style=color:#998;font-style:italic># 0から20πまで500点</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    data_frames <span style=font-weight:700>=</span> []
+</span></span><span style=display:flex><span>    <span style=font-weight:700>for</span> i <span style=font-weight:700>in</span> <span style=color:#999>range</span>(<span style=color:#999>len</span>(t)):
+</span></span><span style=display:flex><span>        <span style=color:#998;font-style:italic># 各フレームで1点だけプロットする例</span>
+</span></span><span style=display:flex><span>        X_val <span style=font-weight:700>=</span> t[i] <span style=font-weight:700>/</span> (<span style=color:#099>20</span> <span style=font-weight:700>*</span> np<span style=font-weight:700>.</span>pi) <span style=font-weight:700>*</span> <span style=color:#099>5</span> <span style=color:#998;font-style:italic># X軸は時間経過で変化</span>
+</span></span><span style=display:flex><span>        Y_val <span style=font-weight:700>=</span> np<span style=font-weight:700>.</span>sin(t[i])
+</span></span><span style=display:flex><span>        Z_val <span style=font-weight:700>=</span> np<span style=font-weight:700>.</span>cos(t[i])
+</span></span><span style=display:flex><span>        data_frames<span style=font-weight:700>.</span>append([[X_val], [Y_val], [Z_val]]) <span style=color:#998;font-style:italic># 各要素をリストにする</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    make_animation(data_frames, filename<span style=font-weight:700>=</span><span style=color:#b84>&#34;sin_cos_3d_animation.gif&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>if</span> <span style=color:teal>__name__</span> <span style=font-weight:700>==</span> <span style=color:#b84>&#39;__main__&#39;</span>:
+</span></span><span style=display:flex><span>  main()
+</span></span></code></pre></td></tr></table></div></div><h3 id=コードの解説>コードの解説</h3><ul><li><code>matplotlib.animation.ArtistAnimation</code>: <code>plot</code> 関数が返すArtistオブジェクトのリストを渡すことで、それらのオブジェクトが各フレームで描画されるアニメーションを作成します。</li><li><code>fig.add_subplot(111, projection='3d')</code>: 3Dプロットを作成するために必須です。</li><li><code>ax.plot(X, Y, Z, ...)</code>: 3D空間にデータをプロットします。<code>marker</code> や <code>color</code>, <code>linestyle</code> などで表示をカスタマイズできます。</li><li><code>ani.save(filename, writer='pillow', fps=20)</code>: アニメーションをGIFファイルとして保存します。<ul><li><code>writer='pillow'</code>: Pillowライブラリを使用してGIFを生成します。別途 <code>pip install pillow</code> が必要ですが、<code>ffmpeg</code> などの外部ツールをインストールする必要がないため手軽です。</li><li><code>fps</code>: Frames Per Second（1秒あたりのフレーム数）で、アニメーションの速度を調整します。</li></ul></li><li>プログレスバー: <code>\r</code> を使って同じ行を上書きすることで、コンソールにプログレスバーを表示しています。</li></ul><p>このコードを参考に、様々な3Dデータをアニメーション化して可視化してみてください。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback></code></pre></td></tr></table></div></div></div><footer class=article-footer></footer><meta itemprop=wordCount content="336"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210630_py_plot/1/"></article><nav class="article-navigation mt-5" aria-label="Article navigation"><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法</span>
+<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/python/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with Python" title="Python (14 posts)">Python</a></li><li class=terms-item role=listitem><a href=/tags/matplotlib/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with Matplotlib" title="Matplotlib (1 post)">Matplotlib</a></li><li class=terms-item role=listitem><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E5%8F%AF%E8%A6%96%E5%8C%96/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with データ可視化" title="データ可視化 (0 posts)">データ可視化</a></li></ul><span id=terms-count-tags class=sr-only>3 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2025
+tomato blog.
+All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"PythonのMatplotlibで3Dアニメーション（GIF）を作成する方法","url":"https:\/\/yuhi-sa.github.io\/posts\/20210630_py_plot\/1\/","description":"勉強したことなどをメモしています","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>

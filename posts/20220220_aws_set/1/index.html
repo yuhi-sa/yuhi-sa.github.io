@@ -1,855 +1,249 @@
-
-
-<!DOCTYPE html>
-<html lang="ja"
-      dir="ltr"
-      data-theme="light">
-
-<head>
-  
-
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="format-detection" content="telephone=no">
-
-
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="https://yuhi-sa.github.io/posts/20220220_aws_set/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20220220_aws_set/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:locale" content="ja">
-
-
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-
-<meta property="article:published_time" content="2022-02-20T15:00:23&#43;09:00">
-<meta property="article:modified_time" content="2022-02-20T15:00:23&#43;09:00">
-<meta property="article:tag" content="AWS">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="boto3">
-<meta property="article:section" content="posts">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用 | tomato blog
-</title>
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-
-
-
-
-
-
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用",
-    "description": "",
-    "author": {
-      "@type": "Person",
-      "name": ""
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    },
-    "datePublished": "2022-02-20T15:00:23\u002b09:00",
-    "dateModified": "2022-02-20T15:00:23\u002b09:00",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/"
-    },
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/",
-    "wordCount":  382 ,
-    "keywords": ["AWS", "Python", "boto3"
-    ],
-    "articleSection": "Posts",
-    "inLanguage": "ja",
-    "timeRequired": "PT2M"
-  }
-  </script>
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet">
-
-
-<link rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-      crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-      crossorigin="anonymous">
-
-
-
-
-
-
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
-        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
-        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
-        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
-        crossorigin="anonymous">
-
-
-<style>
- 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  color: #000;
-  background: #fff;
-}
-
-[data-theme="dark"] body {
-  color: #fff;
-  background: #000;
-}
-
-.container {
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-</style>
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage" class="theme-tomatohugo">
-  
-  
-  <a href="#main-content" 
-     class="skip-link sr-only sr-only-focusable"
-     aria-label="Skip to main content">
-    Skip to main content
-  </a>
-  
-  
-  <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  
-  <a class="navbar-brand" 
-     href="https://yuhi-sa.github.io/" 
-     aria-label="Return to tomato blog homepage">
-    tomato blog
-  </a>
-  
-  
-  <button class="navbar-toggler d-lg-none" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav" 
-          aria-controls="navbarNav" 
-          aria-expanded="false" 
-          aria-label="Toggle navigation menu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto" role="menubar">
-      
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/"
-         role="menuitem"
-         aria-label="Navigate to Blog">
-        Blog
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/tags/"
-         role="menuitem"
-         aria-label="Navigate to Tags">
-        Tags
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/about/"
-         role="menuitem"
-         aria-label="Navigate to About">
-        About
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/privacy_policy/"
-         role="menuitem"
-         aria-label="Navigate to Privacy policy">
-        Privacy policy
-      </a>
-    
-  </li>
-
-      
-      
-      <li class="nav-item" role="none">
-        <button id="darkModeToggle" 
-                class="nav-link btn btn-link border-0" 
-                type="button" 
-                role="menuitem"
-                aria-label="Toggle dark mode"
-                title="Switch between light and dark themes">
-          <i class="fas fa-moon" id="darkModeIcon" aria-hidden="true"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  
-  <main id="main-content" 
-        role="main" 
-        class="site-main"
-        aria-label="Main content">
-    
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <article itemscope itemtype="https://schema.org/Article">
-        
-        <header class="article-header">
-          <h1 itemprop="headline">Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用</h1>
-
-          
-
-          <div class="article-meta">
-            <time datetime="2022-02-20T15:00:23&#43;09:00" itemprop="datePublished">
-              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
-              February 20, 2022
-            </time>
-
-            
-
-            
-
-            
-            <span aria-label="Reading time" class="ms-3">
-              <i class="far fa-clock me-1" aria-hidden="true"></i>
-              2 min read
-            </span>
-            
-          </div>
-
-          
-          <div class="article-tags" role="group" aria-label="Article tags">
-            
-            <a href="/tags/aws/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              AWS
-            </a>
-            
-            <a href="/tags/python/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              Python
-            </a>
-            
-            <a href="/tags/boto3/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              boto3
-            </a>
-            
-          </div>
-          
-        </header>
-        
-        
-        
-        
-        
-        <div class="article-content" itemprop="articleBody">
-          <p>本記事では、PythonのAWS SDKである <code>boto3</code> を用いてAWSサービスを利用するための基本的なセットアップ手順と、S3（Simple Storage Service）およびいくつかのAIサービスの簡単な利用例を解説します。</p>
-<h2 id="1-awsアカウントのセットアップ">1. AWSアカウントのセットアップ</h2>
-<p>AWSサービスを利用するには、まずAWSアカウントが必要です。</p>
-<ol>
-<li>
-<p><strong>AWSアカウントの作成</strong>:
-<a href="https://aws.amazon.com/">AWS公式サイト</a> にアクセスし、アカウントを作成します。クレジットカード情報の登録が必要ですが、無料利用枠があります。</p>
-</li>
-<li>
-<p><strong>IAMユーザーの作成と権限設定</strong>:
-セキュリティのベストプラクティスとして、rootユーザーではなく、IAM（Identity and Access Management）ユーザーを作成し、そのユーザーでAWSサービスを操作することを強く推奨します。</p>
-<ul>
-<li>AWSマネジメントコンソールにログインし、IAMダッシュボードに移動します。</li>
-<li>「ユーザーグループ」を作成します（例: <code>administrators</code>）。このグループに、必要な権限を持つポリシー（例: <code>AdministratorAccess</code>）をアタッチします。</li>
-<li>「ユーザー」を作成し、作成したユーザーグループに追加します。</li>
-<li>ユーザー作成時に発行される<strong>アクセスキーID</strong>と<strong>シークレットアクセスキー</strong>をメモしておきます。<strong>シークレットアクセスキーは、この時しか表示されないため、必ず安全な場所に保管してください。</strong></li>
-</ul>
-</li>
-</ol>
-<h2 id="2-python環境のセットアップ">2. Python環境のセットアップ</h2>
-<p>AWSサービスをPythonから操作するために、AWS CLIと <code>boto3</code> をインストールします。</p>
-<ol>
-<li>
-<p><strong>AWS CLIのインストール</strong>:
-AWS CLI（Command Line Interface）は、コマンドラインからAWSサービスを操作するためのツールです。<code>boto3</code> の設定にも利用できます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install awscli
-</span></span></code></pre></div></li>
-<li>
-<p><strong>AWS認証情報の設定</strong>:
-<code>aws configure</code> コマンドを実行し、IAMユーザー作成時にメモしたアクセスキーIDとシークレットアクセスキーを設定します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aws configure
-</span></span></code></pre></div><p>プロンプトに従って情報を入力します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AWS Access Key ID [None]: YOUR_ACCESS_KEY_ID
-</span></span><span class="line"><span class="cl">AWS Secret Access Key [None]: YOUR_SECRET_ACCESS_KEY
-</span></span><span class="line"><span class="cl">Default region name [None]: ap-northeast-1 # 利用するAWSリージョン (例: 東京リージョン)
-</span></span><span class="line"><span class="cl">Default output format [None]: json # 出力形式
-</span></span></code></pre></div><p>設定されたアクセスキーは、次のコマンドで確認できます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">aws configure get aws_access_key_id
-</span></span><span class="line"><span class="cl">aws configure get aws_secret_access_key
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Boto3のインストール</strong>:
-<code>boto3</code> は、PythonからAWSサービスを操作するためのSDK（Software Development Kit）です。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pip install boto3
-</span></span></code></pre></div></li>
-</ol>
-<h2 id="3-s3-simple-storage-service-の利用例">3. S3 (Simple Storage Service) の利用例</h2>
-<p>S3は、スケーラブルで耐久性の高いオブジェクトストレージサービスです。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># S3クライアントの初期化</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># region_nameはaws configureで設定したリージョンと合わせる</span>
-</span></span><span class="line"><span class="cl"><span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&#34;s3&#34;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&#34;ap-northeast-1&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># バケット名の生成 (S3のバケット名はグローバルで一意である必要がある)</span>
-</span></span><span class="line"><span class="cl"><span class="n">bucket_name</span> <span class="o">=</span> <span class="s2">&#34;my-unique-test-bucket-&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># バケットの作成</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># LocationConstraintはリージョンを指定。us-east-1 (バージニア北部) の場合は不要</span>
-</span></span><span class="line"><span class="cl">    <span class="n">s3</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">CreateBucketConfiguration</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LocationConstraint&#39;</span><span class="p">:</span> <span class="s1">&#39;ap-northeast-1&#39;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;バケット &#39;</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">&#39; を作成しました。&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># 作成されたバケットの確認</span>
-</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_buckets</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;既存のバケット:&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">bucket</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Buckets&#39;</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;  - </span><span class="si">{</span><span class="n">bucket</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">finally</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># バケットの削除 (空でないと削除できないため、通常はオブジェクトを先に削除する必要がある)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># 例: s3.delete_object(Bucket=bucket_name, Key=&#39;your_object_key&#39;)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># s3.delete_bucket(Bucket=bucket_name)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># print(f&#34;バケット &#39;{bucket_name}&#39; を削除しました。&#34;)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">pass</span> <span class="c1"># この例では削除処理をコメントアウト</span>
-</span></span></code></pre></div><h2 id="4-aws-aiサービスの利用例">4. AWS AIサービスの利用例</h2>
-<p>AWSは、機械学習の専門知識がなくても利用できる様々なAIサービスを提供しています。</p>
-<h3 id="1-amazon-translate-テキスト翻訳">1. Amazon Translate (テキスト翻訳)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">translate</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&#34;translate&#34;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&#34;ap-northeast-1&#34;</span><span class="p">)</span> <span class="c1"># リージョンを指定</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">text_to_translate</span> <span class="o">=</span> <span class="s2">&#34;こんにちは、元気ですか？&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">translate</span><span class="o">.</span><span class="n">translate_text</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Text</span><span class="o">=</span><span class="n">text_to_translate</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">SourceLanguageCode</span><span class="o">=</span><span class="s2">&#34;ja&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">TargetLanguageCode</span><span class="o">=</span><span class="s2">&#34;en&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;翻訳前: </span><span class="si">{</span><span class="n">text_to_translate</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;翻訳後: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;TranslatedText&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 出力例: 翻訳後: Hello, how are you?</span>
-</span></span></code></pre></div><h3 id="2-amazon-polly-テキスト読み上げ">2. Amazon Polly (テキスト読み上げ)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">contextlib</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">polly</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&#34;polly&#34;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&#34;ap-northeast-1&#34;</span><span class="p">)</span> <span class="c1"># リージョンを指定</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">text_to_synthesize</span> <span class="o">=</span> <span class="s2">&#34;お元気ですか？&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">output_file_path</span> <span class="o">=</span> <span class="s2">&#34;polly_synth.mp3&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">response</span> <span class="o">=</span> <span class="n">polly</span><span class="o">.</span><span class="n">synthesize_speech</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Text</span><span class="o">=</span><span class="n">text_to_synthesize</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">OutputFormat</span><span class="o">=</span><span class="s2">&#34;mp3&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">VoiceId</span><span class="o">=</span><span class="s2">&#34;Mizuki&#34;</span> <span class="c1"># 日本語の女性の声</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 音声ストリームをファイルに保存</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="s2">&#34;AudioStream&#34;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">closing</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&#34;AudioStream&#34;</span><span class="p">])</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">,</span> <span class="s2">&#34;wb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;音声を &#39;</span><span class="si">{</span><span class="n">output_file_path</span><span class="si">}</span><span class="s2">&#39; に保存しました。&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1"># 保存した音声ファイルを再生 (OSによってコマンドが異なる)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Windowsの場合: os.startfile(output_file_path)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># macOSの場合: os.system(f&#34;afplay {output_file_path}&#34;)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1"># Linuxの場合: os.system(f&#34;mpg123 {output_file_path}&#34;) # mpg123のインストールが必要</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;音声ストリームが取得できませんでした。&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><h3 id="3-amazon-comprehend-自然言語処理">3. Amazon Comprehend (自然言語処理)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">boto3</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Comprehendは一部のリージョンでしか利用できない場合があるため、us-east-1を指定</span>
-</span></span><span class="line"><span class="cl"><span class="n">comprehend</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&#34;comprehend&#34;</span><span class="p">,</span> <span class="n">region_name</span><span class="o">=</span><span class="s2">&#34;us-east-1&#34;</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">text_to_analyze</span> <span class="o">=</span> <span class="s2">&#34;I&#39;m looking forward to visiting Japan next summer. It will be a great trip!&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 文字列の言語を検出</span>
-</span></span><span class="line"><span class="cl"><span class="n">response_lang</span> <span class="o">=</span> <span class="n">comprehend</span><span class="o">.</span><span class="n">detect_dominant_language</span><span class="p">(</span><span class="n">Text</span><span class="o">=</span><span class="n">text_to_analyze</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;検出された言語: </span><span class="si">{</span><span class="n">response_lang</span><span class="p">[</span><span class="s1">&#39;Languages&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;LanguageCode&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 出力例: 検出された言語: en</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 文字列の感情を分析</span>
-</span></span><span class="line"><span class="cl"><span class="n">response_sentiment</span> <span class="o">=</span> <span class="n">comprehend</span><span class="o">.</span><span class="n">detect_sentiment</span><span class="p">(</span><span class="n">Text</span><span class="o">=</span><span class="n">text_to_analyze</span><span class="p">,</span> <span class="n">LanguageCode</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;感情分析結果: </span><span class="si">{</span><span class="n">response_sentiment</span><span class="p">[</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;感情スコア: </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">response_sentiment</span><span class="p">[</span><span class="s1">&#39;SentimentScore&#39;</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 出力例: 感情分析結果: POSITIVE</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 文字列の構文を解析</span>
-</span></span><span class="line"><span class="cl"><span class="n">response_syntax</span> <span class="o">=</span> <span class="n">comprehend</span><span class="o">.</span><span class="n">detect_syntax</span><span class="p">(</span><span class="n">Text</span><span class="o">=</span><span class="n">text_to_analyze</span><span class="p">,</span> <span class="n">LanguageCode</span><span class="o">=</span><span class="s2">&#34;en&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;構文解析結果 (一部):&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">response_syntax</span><span class="p">[</span><span class="s1">&#39;SyntaxTokens&#39;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]:</span> <span class="c1"># 最初の5トークンのみ表示</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;  Text: </span><span class="si">{</span><span class="n">token</span><span class="p">[</span><span class="s1">&#39;Text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, PartOfSpeech: </span><span class="si">{</span><span class="n">token</span><span class="p">[</span><span class="s1">&#39;PartOfSpeech&#39;</span><span class="p">][</span><span class="s1">&#39;Tag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 出力例:</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   Text: I&#39;m, PartOfSpeech: PRON</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   Text: looking, PartOfSpeech: VERB</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   Text: forward, PartOfSpeech: ADV</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   Text: to, PartOfSpeech: PART</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#   Text: visiting, PartOfSpeech: VERB</span>
-</span></span></code></pre></div><h2 id="参考">参考</h2>
-<ul>
-<li>松浦健一郎・司ゆき, 『AWSでつくるAIプログラミング入門』, 翔泳社 (2020)</li>
-<li>真野 智之, 『AWSによるクラウド入門』 (オンライン書籍)
-<ul>
-<li><a href="https://tomomano.github.io/learn-aws-by-coding/">https://tomomano.github.io/learn-aws-by-coding/</a></li>
-</ul>
-</li>
-</ul>
-        </div>
-        
-        
-        <footer class="article-footer">
-          
-        </footer>
-
-        
-        <meta itemprop="wordCount" content="382">
-        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20220220_aws_set/1/">
-      </article>
-      
-      
-      <nav class="article-navigation mt-5" aria-label="Article navigation">
-        
-
-<nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" 
-         itemprop="item"
-         aria-label="Navigate to homepage">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">tomato blog</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-    
-    
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/" 
-             itemprop="item"
-             aria-label="Navigate to tomato blog">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/posts/" 
-             itemprop="item"
-             aria-label="Navigate to Posts">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用</span>
-        <meta itemprop="position" content="4" />
-      </li>
-    
-  </ol>
-</nav>
-  
-          
-  
-  <div class="terms-wrapper " role="region" aria-label="Tags">
-    
-    
-    <h6 class="terms-label" id="terms-tags">
-      Tags:
-    </h6>
-    
-    
-    <ul class="terms-list" 
-        role="list" 
-        aria-labelledby="terms-tags"
-        aria-describedby="terms-count-tags">
-      <li class="terms-item" role="listitem">
-        <a href="/tags/aws/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with AWS"
-           title="AWS (4 posts)">
-          AWS
-        </a>
-      </li>
-      <li class="terms-item" role="listitem">
-        <a href="/tags/python/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with Python"
-           title="Python (14 posts)">
-          Python
-        </a>
-      </li>
-      <li class="terms-item" role="listitem">
-        <a href="/tags/boto3/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with Boto3"
-           title="Boto3 (1 post)">
-          Boto3
-        </a>
-      </li>
-    </ul>
-    
-    
-    <span id="terms-count-tags" class="sr-only">
-      3 tags total
-    </span>
-    
-  </div>
-
-      </nav>
-    </div>
-  </div>
-</div>
-
-  </main>
-  
-  
-  <footer role="contentinfo" class="site-footer">
-    <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-      
-      
-      <p class="copyright-text text-muted mb-2">
-        &copy; 2025
-          tomato blog.
-        All rights reserved.
-      </p>
-      
-      
-      
-      
-      <p class="theme-attribution text-muted small mt-2 mb-0">
-        Powered by 
-        <a href="https://gohugo.io/" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">Hugo</a>
-        with 
-        <a href="https://github.com/yuhi-sa/tomatohugo" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">TomatoHugo</a>
-      </p>
-      
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-  
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-  
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用",
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/",
-    "description": "勉強したことなどをメモしています",
-    "inLanguage": "ja",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    }
-  }
-  </script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20220220_aws_set/1/><meta property="og:type" content="article"><meta property="og:title" content="Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20220220_aws_set/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2022-02-20T15:00:23+09:00"><meta property="article:modified_time" content="2025-07-23T20:43:29+09:00"><meta property="article:tag" content="AWS"><meta property="article:tag" content="Python"><meta property="article:tag" content="boto3"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2022-02-20T15:00:23\u002b09:00","dateModified":"2025-07-23T20:43:29\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/","wordCount":493,"keywords":["AWS","Python","boto3"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT3M"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css integrity="sha256-ljM14ZWag8FsbwnnW+JuQrdGIig1qIL3eonWj5iDqv4=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用</h1><div class=article-meta><time datetime=2022-02-20T15:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+February 20, 2022
+</time><time datetime=2025-07-23T20:43:29+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated July 23, 2025
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+3 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/aws/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>AWS
+</a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python
+</a><a href=/tags/boto3/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>boto3</a></div></header><div class=article-content itemprop=articleBody><p>本記事では、PythonのAWS SDKである <code>boto3</code> を用いてAWSサービスを利用するための基本的なセットアップ手順と、S3（Simple Storage Service）およびいくつかのAIサービスの簡単な利用例を解説します。</p><h2 id=1-awsアカウントのセットアップ>1. AWSアカウントのセットアップ</h2><p>AWSサービスを利用するには、まずAWSアカウントが必要です。</p><ol><li><p><strong>AWSアカウントの作成</strong>:
+<a href=https://aws.amazon.com/>AWS公式サイト</a> にアクセスし、アカウントを作成します。クレジットカード情報の登録が必要ですが、無料利用枠があります。</p></li><li><p><strong>IAMユーザーの作成と権限設定</strong>:
+セキュリティのベストプラクティスとして、rootユーザーではなく、IAM（Identity and Access Management）ユーザーを作成し、そのユーザーでAWSサービスを操作することを強く推奨します。</p><ul><li>AWSマネジメントコンソールにログインし、IAMダッシュボードに移動します。</li><li>「ユーザーグループ」を作成します（例: <code>administrators</code>）。このグループに、必要な権限を持つポリシー（例: <code>AdministratorAccess</code>）をアタッチします。</li><li>「ユーザー」を作成し、作成したユーザーグループに追加します。</li><li>ユーザー作成時に発行される<strong>アクセスキーID</strong>と<strong>シークレットアクセスキー</strong>をメモしておきます。<strong>シークレットアクセスキーは、この時しか表示されないため、必ず安全な場所に保管してください。</strong></li></ul></li></ol><h2 id=2-python環境のセットアップ>2. Python環境のセットアップ</h2><p>AWSサービスをPythonから操作するために、AWS CLIと <code>boto3</code> をインストールします。</p><ol><li><p><strong>AWS CLIのインストール</strong>:
+AWS CLI（Command Line Interface）は、コマンドラインからAWSサービスを操作するためのツールです。<code>boto3</code> の設定にも利用できます。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pip install awscli
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>AWS認証情報の設定</strong>:
+<code>aws configure</code> コマンドを実行し、IAMユーザー作成時にメモしたアクセスキーIDとシークレットアクセスキーを設定します。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>aws configure
+</span></span></code></pre></td></tr></table></div></div><p>プロンプトに従って情報を入力します。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>AWS Access Key ID [None]: YOUR_ACCESS_KEY_ID
+</span></span><span style=display:flex><span>AWS Secret Access Key [None]: YOUR_SECRET_ACCESS_KEY
+</span></span><span style=display:flex><span>Default region name [None]: ap-northeast-1 # 利用するAWSリージョン (例: 東京リージョン)
+</span></span><span style=display:flex><span>Default output format [None]: json # 出力形式
+</span></span></code></pre></td></tr></table></div></div><p>設定されたアクセスキーは、次のコマンドで確認できます。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>aws configure get aws_access_key_id
+</span></span><span style=display:flex><span>aws configure get aws_secret_access_key
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>Boto3のインストール</strong>:
+<code>boto3</code> は、PythonからAWSサービスを操作するためのSDK（Software Development Kit）です。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pip install boto3
+</span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=3-s3-simple-storage-service-の利用例>3. S3 (Simple Storage Service) の利用例</h2><p>S3は、スケーラブルで耐久性の高いオブジェクトストレージサービスです。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>boto3</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>random</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># S3クライアントの初期化</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># region_nameはaws configureで設定したリージョンと合わせる</span>
+</span></span><span style=display:flex><span>s3 <span style=font-weight:700>=</span> boto3<span style=font-weight:700>.</span>client(<span style=color:#b84>&#34;s3&#34;</span>, region_name<span style=font-weight:700>=</span><span style=color:#b84>&#34;ap-northeast-1&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># バケット名の生成 (S3のバケット名はグローバルで一意である必要がある)</span>
+</span></span><span style=display:flex><span>bucket_name <span style=font-weight:700>=</span> <span style=color:#b84>&#34;my-unique-test-bucket-&#34;</span> <span style=font-weight:700>+</span> <span style=color:#999>str</span>(random<span style=font-weight:700>.</span>randint(<span style=color:#099>0</span>, <span style=color:#099>10</span><span style=font-weight:700>**</span><span style=color:#099>5</span>))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>try</span>:
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># バケットの作成</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># LocationConstraintはリージョンを指定。us-east-1 (バージニア北部) の場合は不要</span>
+</span></span><span style=display:flex><span>    s3<span style=font-weight:700>.</span>create_bucket(
+</span></span><span style=display:flex><span>        Bucket<span style=font-weight:700>=</span>bucket_name,
+</span></span><span style=display:flex><span>        CreateBucketConfiguration<span style=font-weight:700>=</span>{<span style=color:#b84>&#39;LocationConstraint&#39;</span>: <span style=color:#b84>&#39;ap-northeast-1&#39;</span>}
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;バケット &#39;</span><span style=color:#b84>{</span>bucket_name<span style=color:#b84>}</span><span style=color:#b84>&#39; を作成しました。&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 作成されたバケットの確認</span>
+</span></span><span style=display:flex><span>    response <span style=font-weight:700>=</span> s3<span style=font-weight:700>.</span>list_buckets()
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>&#34;既存のバケット:&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=font-weight:700>for</span> bucket <span style=font-weight:700>in</span> response[<span style=color:#b84>&#39;Buckets&#39;</span>]:
+</span></span><span style=display:flex><span>        <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;  - </span><span style=color:#b84>{</span>bucket[<span style=color:#b84>&#39;Name&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=font-weight:700>finally</span>:
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># バケットの削除 (空でないと削除できないため、通常はオブジェクトを先に削除する必要がある)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 例: s3.delete_object(Bucket=bucket_name, Key=&#39;your_object_key&#39;)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># s3.delete_bucket(Bucket=bucket_name)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># print(f&#34;バケット &#39;{bucket_name}&#39; を削除しました。&#34;)</span>
+</span></span><span style=display:flex><span>    <span style=font-weight:700>pass</span> <span style=color:#998;font-style:italic># この例では削除処理をコメントアウト</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=4-aws-aiサービスの利用例>4. AWS AIサービスの利用例</h2><p>AWSは、機械学習の専門知識がなくても利用できる様々なAIサービスを提供しています。</p><h3 id=1-amazon-translate-テキスト翻訳>1. Amazon Translate (テキスト翻訳)</h3><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>boto3</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>translate <span style=font-weight:700>=</span> boto3<span style=font-weight:700>.</span>client(<span style=color:#b84>&#34;translate&#34;</span>, region_name<span style=font-weight:700>=</span><span style=color:#b84>&#34;ap-northeast-1&#34;</span>) <span style=color:#998;font-style:italic># リージョンを指定</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>text_to_translate <span style=font-weight:700>=</span> <span style=color:#b84>&#34;こんにちは、元気ですか？&#34;</span>
+</span></span><span style=display:flex><span>result <span style=font-weight:700>=</span> translate<span style=font-weight:700>.</span>translate_text(
+</span></span><span style=display:flex><span>    Text<span style=font-weight:700>=</span>text_to_translate,
+</span></span><span style=display:flex><span>    SourceLanguageCode<span style=font-weight:700>=</span><span style=color:#b84>&#34;ja&#34;</span>,
+</span></span><span style=display:flex><span>    TargetLanguageCode<span style=font-weight:700>=</span><span style=color:#b84>&#34;en&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;翻訳前: </span><span style=color:#b84>{</span>text_to_translate<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;翻訳後: </span><span style=color:#b84>{</span>result[<span style=color:#b84>&#39;TranslatedText&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 出力例: 翻訳後: Hello, how are you?</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-amazon-polly-テキスト読み上げ>2. Amazon Polly (テキスト読み上げ)</h3><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>boto3</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>contextlib</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>os</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>polly <span style=font-weight:700>=</span> boto3<span style=font-weight:700>.</span>client(<span style=color:#b84>&#34;polly&#34;</span>, region_name<span style=font-weight:700>=</span><span style=color:#b84>&#34;ap-northeast-1&#34;</span>) <span style=color:#998;font-style:italic># リージョンを指定</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>text_to_synthesize <span style=font-weight:700>=</span> <span style=color:#b84>&#34;お元気ですか？&#34;</span>
+</span></span><span style=display:flex><span>output_file_path <span style=font-weight:700>=</span> <span style=color:#b84>&#34;polly_synth.mp3&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>response <span style=font-weight:700>=</span> polly<span style=font-weight:700>.</span>synthesize_speech(
+</span></span><span style=display:flex><span>    Text<span style=font-weight:700>=</span>text_to_synthesize,
+</span></span><span style=display:flex><span>    OutputFormat<span style=font-weight:700>=</span><span style=color:#b84>&#34;mp3&#34;</span>,
+</span></span><span style=display:flex><span>    VoiceId<span style=font-weight:700>=</span><span style=color:#b84>&#34;Mizuki&#34;</span> <span style=color:#998;font-style:italic># 日本語の女性の声</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 音声ストリームをファイルに保存</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>if</span> <span style=color:#b84>&#34;AudioStream&#34;</span> <span style=font-weight:700>in</span> response:
+</span></span><span style=display:flex><span>    <span style=font-weight:700>with</span> contextlib<span style=font-weight:700>.</span>closing(response[<span style=color:#b84>&#34;AudioStream&#34;</span>]) <span style=font-weight:700>as</span> stream:
+</span></span><span style=display:flex><span>        <span style=font-weight:700>with</span> <span style=color:#999>open</span>(output_file_path, <span style=color:#b84>&#34;wb&#34;</span>) <span style=font-weight:700>as</span> file:
+</span></span><span style=display:flex><span>            file<span style=font-weight:700>.</span>write(stream<span style=font-weight:700>.</span>read())
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;音声を &#39;</span><span style=color:#b84>{</span>output_file_path<span style=color:#b84>}</span><span style=color:#b84>&#39; に保存しました。&#34;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># 保存した音声ファイルを再生 (OSによってコマンドが異なる)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># Windowsの場合: os.startfile(output_file_path)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># macOSの場合: os.system(f&#34;afplay {output_file_path}&#34;)</span>
+</span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic># Linuxの場合: os.system(f&#34;mpg123 {output_file_path}&#34;) # mpg123のインストールが必要</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>else</span>:
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>&#34;音声ストリームが取得できませんでした。&#34;</span>)
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-amazon-comprehend-自然言語処理>3. Amazon Comprehend (自然言語処理)</h3><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>boto3</span>
+</span></span><span style=display:flex><span><span style=font-weight:700>import</span> <span style=color:#555>json</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># Comprehendは一部のリージョンでしか利用できない場合があるため、us-east-1を指定</span>
+</span></span><span style=display:flex><span>comprehend <span style=font-weight:700>=</span> boto3<span style=font-weight:700>.</span>client(<span style=color:#b84>&#34;comprehend&#34;</span>, region_name<span style=font-weight:700>=</span><span style=color:#b84>&#34;us-east-1&#34;</span>) 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>text_to_analyze <span style=font-weight:700>=</span> <span style=color:#b84>&#34;I&#39;m looking forward to visiting Japan next summer. It will be a great trip!&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 文字列の言語を検出</span>
+</span></span><span style=display:flex><span>response_lang <span style=font-weight:700>=</span> comprehend<span style=font-weight:700>.</span>detect_dominant_language(Text<span style=font-weight:700>=</span>text_to_analyze)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;検出された言語: </span><span style=color:#b84>{</span>response_lang[<span style=color:#b84>&#39;Languages&#39;</span>][<span style=color:#099>0</span>][<span style=color:#b84>&#39;LanguageCode&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 出力例: 検出された言語: en</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 文字列の感情を分析</span>
+</span></span><span style=display:flex><span>response_sentiment <span style=font-weight:700>=</span> comprehend<span style=font-weight:700>.</span>detect_sentiment(Text<span style=font-weight:700>=</span>text_to_analyze, LanguageCode<span style=font-weight:700>=</span><span style=color:#b84>&#34;en&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;感情分析結果: </span><span style=color:#b84>{</span>response_sentiment[<span style=color:#b84>&#39;Sentiment&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;感情スコア: </span><span style=color:#b84>{</span>json<span style=font-weight:700>.</span>dumps(response_sentiment[<span style=color:#b84>&#39;SentimentScore&#39;</span>], indent<span style=font-weight:700>=</span><span style=color:#099>2</span>)<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 出力例: 感情分析結果: POSITIVE</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 文字列の構文を解析</span>
+</span></span><span style=display:flex><span>response_syntax <span style=font-weight:700>=</span> comprehend<span style=font-weight:700>.</span>detect_syntax(Text<span style=font-weight:700>=</span>text_to_analyze, LanguageCode<span style=font-weight:700>=</span><span style=color:#b84>&#34;en&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#999>print</span>(<span style=color:#b84>&#34;構文解析結果 (一部):&#34;</span>)
+</span></span><span style=display:flex><span><span style=font-weight:700>for</span> token <span style=font-weight:700>in</span> response_syntax[<span style=color:#b84>&#39;SyntaxTokens&#39;</span>][:<span style=color:#099>5</span>]: <span style=color:#998;font-style:italic># 最初の5トークンのみ表示</span>
+</span></span><span style=display:flex><span>    <span style=color:#999>print</span>(<span style=color:#b84>f</span><span style=color:#b84>&#34;  Text: </span><span style=color:#b84>{</span>token[<span style=color:#b84>&#39;Text&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>, PartOfSpeech: </span><span style=color:#b84>{</span>token[<span style=color:#b84>&#39;PartOfSpeech&#39;</span>][<span style=color:#b84>&#39;Tag&#39;</span>]<span style=color:#b84>}</span><span style=color:#b84>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic># 出力例:</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic>#   Text: I&#39;m, PartOfSpeech: PRON</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic>#   Text: looking, PartOfSpeech: VERB</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic>#   Text: forward, PartOfSpeech: ADV</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic>#   Text: to, PartOfSpeech: PART</span>
+</span></span><span style=display:flex><span><span style=color:#998;font-style:italic>#   Text: visiting, PartOfSpeech: VERB</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参考>参考</h2><ul><li>松浦健一郎・司ゆき, 『AWSでつくるAIプログラミング入門』, 翔泳社 (2020)</li><li>真野 智之, 『AWSによるクラウド入門』 (オンライン書籍)<ul><li><a href=https://tomomano.github.io/learn-aws-by-coding/>https://tomomano.github.io/learn-aws-by-coding/</a></li></ul></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="493"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20220220_aws_set/1/"></article><nav class="article-navigation mt-5" aria-label="Article navigation"><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用</span>
+<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/aws/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with AWS" title="AWS (4 posts)">AWS</a></li><li class=terms-item role=listitem><a href=/tags/python/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with Python" title="Python (14 posts)">Python</a></li><li class=terms-item role=listitem><a href=/tags/boto3/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with Boto3" title="Boto3 (1 post)">Boto3</a></li></ul><span id=terms-count-tags class=sr-only>3 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2025
+tomato blog.
+All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Python (boto3) を用いたAWS利用のためのセットアップとS3・AIサービスの活用","url":"https:\/\/yuhi-sa.github.io\/posts\/20220220_aws_set\/1\/","description":"勉強したことなどをメモしています","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>

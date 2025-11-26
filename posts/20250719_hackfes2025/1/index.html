@@ -1,844 +1,158 @@
-
-
-<!DOCTYPE html>
-<html lang="ja"
-      dir="ltr"
-      data-theme="light">
-
-<head>
-  
-
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="format-detection" content="telephone=no">
-
-
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hackfes2025参加メモ">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:locale" content="ja">
-
-
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-
-<meta property="article:published_time" content="2025-07-19T09:10:00&#43;09:00">
-<meta property="article:modified_time" content="2025-07-19T09:10:00&#43;09:00">
-<meta property="article:tag" content="セキュリティ">
-<meta property="article:section" content="posts">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hackfes2025参加メモ">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>Hackfes2025参加メモ | tomato blog
-</title>
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-
-
-
-
-
-
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Hackfes2025参加メモ",
-    "description": "イベント概要 日時: 2025年7月19日(土) https:\/\/hackfes2025.hacker.or.jp 「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩 10:10 - 11:40\nBurp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。 対象 …",
-    "author": {
-      "@type": "Person",
-      "name": ""
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    },
-    "datePublished": "2025-07-19T09:10:00\u002b09:00",
-    "dateModified": "2025-07-19T09:10:00\u002b09:00",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/"
-    },
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/",
-    "wordCount":  275 ,
-    "keywords": ["セキュリティ"
-    ],
-    "articleSection": "Posts",
-    "inLanguage": "ja",
-    "timeRequired": "PT2M"
-  }
-  </script>
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet">
-
-
-<link rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-      crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-      crossorigin="anonymous">
-
-
-
-
-
-
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
-        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
-        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
-        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
-        crossorigin="anonymous">
-
-
-<style>
- 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  color: #000;
-  background: #fff;
-}
-
-[data-theme="dark"] body {
-  color: #fff;
-  background: #000;
-}
-
-.container {
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-</style>
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage" class="theme-tomatohugo">
-  
-  
-  <a href="#main-content" 
-     class="skip-link sr-only sr-only-focusable"
-     aria-label="Skip to main content">
-    Skip to main content
-  </a>
-  
-  
-  <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  
-  <a class="navbar-brand" 
-     href="https://yuhi-sa.github.io/" 
-     aria-label="Return to tomato blog homepage">
-    tomato blog
-  </a>
-  
-  
-  <button class="navbar-toggler d-lg-none" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav" 
-          aria-controls="navbarNav" 
-          aria-expanded="false" 
-          aria-label="Toggle navigation menu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto" role="menubar">
-      
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/"
-         role="menuitem"
-         aria-label="Navigate to Blog">
-        Blog
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/tags/"
-         role="menuitem"
-         aria-label="Navigate to Tags">
-        Tags
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/about/"
-         role="menuitem"
-         aria-label="Navigate to About">
-        About
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/privacy_policy/"
-         role="menuitem"
-         aria-label="Navigate to Privacy policy">
-        Privacy policy
-      </a>
-    
-  </li>
-
-      
-      
-      <li class="nav-item" role="none">
-        <button id="darkModeToggle" 
-                class="nav-link btn btn-link border-0" 
-                type="button" 
-                role="menuitem"
-                aria-label="Toggle dark mode"
-                title="Switch between light and dark themes">
-          <i class="fas fa-moon" id="darkModeIcon" aria-hidden="true"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  
-  <main id="main-content" 
-        role="main" 
-        class="site-main"
-        aria-label="Main content">
-    
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <article itemscope itemtype="https://schema.org/Article">
-        
-        <header class="article-header">
-          <h1 itemprop="headline">Hackfes2025参加メモ</h1>
-
-          
-
-          <div class="article-meta">
-            <time datetime="2025-07-19T09:10:00&#43;09:00" itemprop="datePublished">
-              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
-              July 19, 2025
-            </time>
-
-            
-
-            
-
-            
-            <span aria-label="Reading time" class="ms-3">
-              <i class="far fa-clock me-1" aria-hidden="true"></i>
-              2 min read
-            </span>
-            
-          </div>
-
-          
-          <div class="article-tags" role="group" aria-label="Article tags">
-            
-            <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              セキュリティ
-            </a>
-            
-          </div>
-          
-        </header>
-        
-        
-        
-        
-        
-        <div class="article-content" itemprop="articleBody">
-          <h2 id="イベント概要">イベント概要</h2>
-<ul>
-<li>日時: 2025年7月19日(土)</li>
-<li><a href="https://hackfes2025.hacker.or.jp">https://hackfes2025.hacker.or.jp</a></li>
-</ul>
-<h2 id="webアプリケーションspa脆弱性診断入門徳丸-浩">「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩</h2>
-<p>10:10 - 11:40</p>
-<p>Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。
-対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。</p>
-<h3 id="corscross-origin-resource-sharingの設定不備">CORS（Cross-Origin Resource Sharing）の設定不備</h3>
-<p>ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORSによって処理されます。</p>
-<p>プリフライトリクエスト</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">OPTIONS /api/v1/login HTTP/1.1
-</span></span><span class="line"><span class="cl">Host: api.example.jp
-</span></span><span class="line"><span class="cl">Accept: */*
-</span></span><span class="line"><span class="cl">Access-Control-Request-Method: POST
-</span></span><span class="line"><span class="cl">Access-Control-Request-Headers: content-type
-</span></span><span class="line"><span class="cl">Origin: http://spa.example.jp
-</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
-</span></span><span class="line"><span class="cl">Sec-Fetch-Mode: cors
-</span></span><span class="line"><span class="cl">Sec-Fetch-Site: cross-site
-</span></span><span class="line"><span class="cl">Sec-Fetch-Dest: empty
-</span></span><span class="line"><span class="cl">Referer: http://spa.example.jp/
-</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
-</span></span><span class="line"><span class="cl">Accept-Language: ja,en-US;q=0.9,en;q=0.8
-</span></span><span class="line"><span class="cl">Priority: u=1, i
-</span></span><span class="line"><span class="cl">Connection: keep-alive
-</span></span></code></pre></div><p>レスポンス</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HTTP/1.1 204 No Content
-</span></span><span class="line"><span class="cl">X-Powered-By: Express
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Origin: http://spa.example.jp
-</span></span><span class="line"><span class="cl">Vary: Origin, Access-Control-Request-Headers
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Credentials: true
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Headers: content-type
-</span></span><span class="line"><span class="cl">Access-Control-Max-Age: 300
-</span></span><span class="line"><span class="cl">Content-Length: 0
-</span></span><span class="line"><span class="cl">Date: Sat, 19 Jul 2025 01:31:57 GMT
-</span></span></code></pre></div><p>Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきではないオリジンからのリクエストに対しても、アクセスが許可されてしまいます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HTTP/1.1 204 No Content
-</span></span><span class="line"><span class="cl">X-Powered-By: Express
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Origin: http://trap.example.jp
-</span></span><span class="line"><span class="cl">Vary: Origin, Access-Control-Request-Headers
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Credentials: true
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
-</span></span><span class="line"><span class="cl">Access-Control-Allow-Headers: content-type
-</span></span><span class="line"><span class="cl">Access-Control-Max-Age: 300
-</span></span><span class="line"><span class="cl">Content-Length: 0
-</span></span><span class="line"><span class="cl">Date: Sat, 19 Jul 2025 01:34:06 GMT
-</span></span></code></pre></div><p>これにより、悪意のあるドメイン（例: trap.example.jp）からAPIが操作可能になってしまいます。</p>
-<h3 id="パスワード変更処理における現在のパスワードの検証不備">パスワード変更処理における現在のパスワードの検証不備</h3>
-<p>再認証とパスワード変更の機能が別々のAPIとして実装されている場合、セッションが有効な状態であれば、再認証を省略してパスワード変更APIを直接呼び出すことが可能になるケースがあります。</p>
-<h3 id="jwtの署名検証回避algnone攻撃">JWTの署名検証回避（alg=none攻撃）</h3>
-<p>JWTはBase64URLでエンコードされたJSONデータのため、容易にデコードできます。
-以下のサイトなどで、JWTのデコードやエンコードを試すことができます。</p>
-<ul>
-<li><a href="https://jwt.io/ja">https://jwt.io/ja</a></li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InFrQTZJVVRXVE1LWXRpbTRGSXFOOFFNY2x3ODd1Tm0yMHU5Nk9rcTh0XzAifQ.eyJzdWIiOjY4LCJ1c2VyaWQiOiJzcGEtdGVzdC0wMzEwIiwiZW1haWwiOiJzcGEtdGVzdC0wMzEwQGdtYWlsLmNvbSIsImljb24iOiJkdW1teS1pY29uLnBuZyIsImlzX3N1cGVyIjowLCJpYXQiOjE3NTI4ODg0NTAsImV4cCI6MTc1Mzc1MjQ1MH0.xGjjwXjql18iSQE2RPQG4qUwqh2y19kY0NjRL7OsWOKYurKmKVLdVfarHf7pA_2_ScFxX4QVfT_dj6Np8M7hM7Tz2LBWuz9OmeD2g2RGlhbWOg0GB5UHik7Dtdx4NYNuZSeIc9WbsQ-MGWNieUKuvMWrw34rs_C5E1SDxn-8LDZ7hnmGd907TtxD4SyJN8z50-fWSqimOS93rHah4GONxfK4erPlndh0qjE_6JgvhiVMkb_qFzG6pi83ETh-rmwOwq97gVc-IRimLmHWOzGaf1S9HXtXbeG6OMkREZI7409CoCYPt2JW5Qp-x4Aq3ulF628iyDgEvJsAV2oiidDs9A
-</span></span></code></pre></div><p>デコードされたヘッダー</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;typ&#34;</span><span class="p">:</span> <span class="s2">&#34;JWT&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;alg&#34;</span><span class="p">:</span> <span class="s2">&#34;RS256&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;kid&#34;</span><span class="p">:</span> <span class="s2">&#34;qkA6IUTWTMKYtim4FIqN8QMclw87uNm20u96Okq8t_0&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>デコードされたペイロード</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;sub&#34;</span><span class="p">:</span> <span class="mi">68</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;userid&#34;</span><span class="p">:</span> <span class="s2">&#34;spa-test-0310&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;spa-test-0310@gmail.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;dummy-icon.png&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;is_super&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;iat&#34;</span><span class="p">:</span> <span class="mi">1752888450</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;exp&#34;</span><span class="p">:</span> <span class="mi">1753752450</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>JWTの署名部はバイナリ形式のデータをBase64URLエンコードしたものであり、JSON形式ではありません。そのため、署名検証が正しく機能しない場合、ペイロードの改ざんが容易になります。</p>
-<p>ヘッダーの<code>alg</code>を<code>RS256</code>から<code>none</code>に書き換えます。
-攻撃者は、ヘッダーの<code>alg</code>を<code>none</code>に変更し、ペイロードの<code>sub</code>を管理者を示す値（例: 1）に書き換えることで、不正なトークンを生成します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;typ&#34;</span><span class="p">:</span> <span class="s2">&#34;JWT&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;alg&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;kid&#34;</span><span class="p">:</span> <span class="s2">&#34;qkA6IUTWTMKYtim4FIqN8QMclw87uNm20u96Okq8t_0&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;sub&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;userid&#34;</span><span class="p">:</span> <span class="s2">&#34;spa-test-0310&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;spa-test-0310@gmail.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;dummy-icon.png&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;is_super&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;iat&#34;</span><span class="p">:</span> <span class="mi">1752888450</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;exp&#34;</span><span class="p">:</span> <span class="mi">1753752450</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>再度エンコードする</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIiwia2lkIjoicWtBNklVVFdUTUtZdGltNEZJcU44UU1jbHc4N3VObTIwdTk2T2txOHRfMCJ9.eyJzdWIiOjEsInVzZXJpZCI6InNwYS10ZXN0LTAzMTAiLCJlbWFpbCI6InNwYS10ZXN0LTAzMTBAZ21haWwuY29tIiwiaWNvbiI6ImR1bW15LWljb24ucG5nIiwiaXNfc3VwZXIiOjAsImlhdCI6MTc1Mjg4ODQ1MCwiZXhwIjoxNzUzNzUyNDUwfQ.
-</span></span></code></pre></div><p>ブラウザの開発者ツールなどを利用して、Cookieの値を生成した不正なトークンに書き換えます。</p>
-<p>サーバー側の実装によっては、署名検証時に<code>kid</code>のチェックが不十分な場合、<code>alg</code>が<code>none</code>に改ざんされた署名なしのトークンを受け入れてしまうことがあります。</p>
-<ul>
-<li><a href="https://qiita.com/ockeghem/items/cc0b8ab74f46834d055b">https://qiita.com/ockeghem/items/cc0b8ab74f46834d055b</a></li>
-</ul>
-<h3 id="オブジェクトレベルの認可不備bola">オブジェクトレベルの認可不備（BOLA）</h3>
-<p>OWASP API Security Top 10でも指摘されているように、APIにおける認可不備は非常に重大な問題です。
-リクエスト内のパラメータやURLに含まれるIDを別のユーザーのものに書き換えることで、他人の情報を不正に取得できてしまう脆弱性です。</p>
-<h3 id="オブジェクトプロパティレベルの認可不備">オブジェクトプロパティレベルの認可不備</h3>
-<p>API側でリクエスト内の特定のプロパティに対する認可チェックが不十分な場合、本来変更が許可されていないプロパティ（例: <code>role</code>など）を不正に書き換えることで、オブジェクトを不正に操作できてしまいます。</p>
-<h3 id="機能レベルの認可不備bfla">機能レベルの認可不備（BFLA）</h3>
-<p>権限チェックが不十分なことにより、一般ユーザーが管理者向けのAPI（例: ユーザー削除や設定変更など）を実行できてしまう脆弱性です。</p>
-<h3 id="xss">XSS</h3>
-<p>XSSは一般的に「蓄積型」「反射型」「DOM-Based型」の3つに分類されますが、DOM-Based型は他の2つの特性を併せ持つ場合もあり、分類が重なることもあります。
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/><meta property="og:type" content="article"><meta property="og:title" content="Hackfes2025参加メモ"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2025-07-19T09:10:00+09:00"><meta property="article:modified_time" content="2025-07-23T20:43:29+09:00"><meta property="article:tag" content="セキュリティ"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Hackfes2025参加メモ"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Hackfes2025参加メモ | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hackfes2025参加メモ","description":"イベント概要 日時: 2025年7月19日(土) https:\/\/hackfes2025.hacker.or.jp 「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩 10:10 - 11:40\nBurp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。 対象 …","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2025-07-19T09:10:00\u002b09:00","dateModified":"2025-07-23T20:43:29\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/","wordCount":340,"keywords":["セキュリティ"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT2M"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css integrity="sha256-ljM14ZWag8FsbwnnW+JuQrdGIig1qIL3eonWj5iDqv4=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Hackfes2025参加メモ</h1><div class=article-meta><time datetime=2025-07-19T09:10:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+July 19, 2025
+</time><time datetime=2025-07-23T20:43:29+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated July 23, 2025
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>セキュリティ</a></div></header><div class=article-content itemprop=articleBody><h2 id=イベント概要>イベント概要</h2><ul><li>日時: 2025年7月19日(土)</li><li><a href=https://hackfes2025.hacker.or.jp>https://hackfes2025.hacker.or.jp</a></li></ul><h2 id=webアプリケーションspa脆弱性診断入門徳丸-浩>「Webアプリケーション（SPA）脆弱性診断入門」徳丸 浩</h2><p>10:10 - 11:40</p><p>Burp Suiteを用いてSPA（Single Page Application）に対する脆弱性診断を実践。
+対象は、HTMLとJavaScriptで構成された動的コンテンツ生成型のシンプルなSPAサーバー。</p><h3 id=corscross-origin-resource-sharingの設定不備>CORS（Cross-Origin Resource Sharing）の設定不備</h3><p>ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORSによって処理されます。</p><p>プリフライトリクエスト</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>OPTIONS /api/v1/login HTTP/1.1
+</span></span><span style=display:flex><span>Host: api.example.jp
+</span></span><span style=display:flex><span>Accept: */*
+</span></span><span style=display:flex><span>Access-Control-Request-Method: POST
+</span></span><span style=display:flex><span>Access-Control-Request-Headers: content-type
+</span></span><span style=display:flex><span>Origin: http://spa.example.jp
+</span></span><span style=display:flex><span>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+</span></span><span style=display:flex><span>Sec-Fetch-Mode: cors
+</span></span><span style=display:flex><span>Sec-Fetch-Site: cross-site
+</span></span><span style=display:flex><span>Sec-Fetch-Dest: empty
+</span></span><span style=display:flex><span>Referer: http://spa.example.jp/
+</span></span><span style=display:flex><span>Accept-Encoding: gzip, deflate, br
+</span></span><span style=display:flex><span>Accept-Language: ja,en-US;q=0.9,en;q=0.8
+</span></span><span style=display:flex><span>Priority: u=1, i
+</span></span><span style=display:flex><span>Connection: keep-alive
+</span></span></code></pre></td></tr></table></div></div><p>レスポンス</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>HTTP/1.1 204 No Content
+</span></span><span style=display:flex><span>X-Powered-By: Express
+</span></span><span style=display:flex><span>Access-Control-Allow-Origin: http://spa.example.jp
+</span></span><span style=display:flex><span>Vary: Origin, Access-Control-Request-Headers
+</span></span><span style=display:flex><span>Access-Control-Allow-Credentials: true
+</span></span><span style=display:flex><span>Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+</span></span><span style=display:flex><span>Access-Control-Allow-Headers: content-type
+</span></span><span style=display:flex><span>Access-Control-Max-Age: 300
+</span></span><span style=display:flex><span>Content-Length: 0
+</span></span><span style=display:flex><span>Date: Sat, 19 Jul 2025 01:31:57 GMT
+</span></span></code></pre></td></tr></table></div></div><p>Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきではないオリジンからのリクエストに対しても、アクセスが許可されてしまいます。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>HTTP/1.1 204 No Content
+</span></span><span style=display:flex><span>X-Powered-By: Express
+</span></span><span style=display:flex><span>Access-Control-Allow-Origin: http://trap.example.jp
+</span></span><span style=display:flex><span>Vary: Origin, Access-Control-Request-Headers
+</span></span><span style=display:flex><span>Access-Control-Allow-Credentials: true
+</span></span><span style=display:flex><span>Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+</span></span><span style=display:flex><span>Access-Control-Allow-Headers: content-type
+</span></span><span style=display:flex><span>Access-Control-Max-Age: 300
+</span></span><span style=display:flex><span>Content-Length: 0
+</span></span><span style=display:flex><span>Date: Sat, 19 Jul 2025 01:34:06 GMT
+</span></span></code></pre></td></tr></table></div></div><p>これにより、悪意のあるドメイン（例: trap.example.jp）からAPIが操作可能になってしまいます。</p><h3 id=パスワード変更処理における現在のパスワードの検証不備>パスワード変更処理における現在のパスワードの検証不備</h3><p>再認証とパスワード変更の機能が別々のAPIとして実装されている場合、セッションが有効な状態であれば、再認証を省略してパスワード変更APIを直接呼び出すことが可能になるケースがあります。</p><h3 id=jwtの署名検証回避algnone攻撃>JWTの署名検証回避（alg=none攻撃）</h3><p>JWTはBase64URLでエンコードされたJSONデータのため、容易にデコードできます。
+以下のサイトなどで、JWTのデコードやエンコードを試すことができます。</p><ul><li><a href=https://jwt.io/ja>https://jwt.io/ja</a></li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6InFrQTZJVVRXVE1LWXRpbTRGSXFOOFFNY2x3ODd1Tm0yMHU5Nk9rcTh0XzAifQ.eyJzdWIiOjY4LCJ1c2VyaWQiOiJzcGEtdGVzdC0wMzEwIiwiZW1haWwiOiJzcGEtdGVzdC0wMzEwQGdtYWlsLmNvbSIsImljb24iOiJkdW1teS1pY29uLnBuZyIsImlzX3N1cGVyIjowLCJpYXQiOjE3NTI4ODg0NTAsImV4cCI6MTc1Mzc1MjQ1MH0.xGjjwXjql18iSQE2RPQG4qUwqh2y19kY0NjRL7OsWOKYurKmKVLdVfarHf7pA_2_ScFxX4QVfT_dj6Np8M7hM7Tz2LBWuz9OmeD2g2RGlhbWOg0GB5UHik7Dtdx4NYNuZSeIc9WbsQ-MGWNieUKuvMWrw34rs_C5E1SDxn-8LDZ7hnmGd907TtxD4SyJN8z50-fWSqimOS93rHah4GONxfK4erPlndh0qjE_6JgvhiVMkb_qFzG6pi83ETh-rmwOwq97gVc-IRimLmHWOzGaf1S9HXtXbeG6OMkREZI7409CoCYPt2JW5Qp-x4Aq3ulF628iyDgEvJsAV2oiidDs9A
+</span></span></code></pre></td></tr></table></div></div><p>デコードされたヘッダー</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;typ&#34;</span>: <span style=color:#b84>&#34;JWT&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;alg&#34;</span>: <span style=color:#b84>&#34;RS256&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;kid&#34;</span>: <span style=color:#b84>&#34;qkA6IUTWTMKYtim4FIqN8QMclw87uNm20u96Okq8t_0&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>デコードされたペイロード</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;sub&#34;</span>: <span style=color:#099>68</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;userid&#34;</span>: <span style=color:#b84>&#34;spa-test-0310&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;email&#34;</span>: <span style=color:#b84>&#34;spa-test-0310@gmail.com&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;icon&#34;</span>: <span style=color:#b84>&#34;dummy-icon.png&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;is_super&#34;</span>: <span style=color:#099>0</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;iat&#34;</span>: <span style=color:#099>1752888450</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;exp&#34;</span>: <span style=color:#099>1753752450</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>JWTの署名部はバイナリ形式のデータをBase64URLエンコードしたものであり、JSON形式ではありません。そのため、署名検証が正しく機能しない場合、ペイロードの改ざんが容易になります。</p><p>ヘッダーの<code>alg</code>を<code>RS256</code>から<code>none</code>に書き換えます。
+攻撃者は、ヘッダーの<code>alg</code>を<code>none</code>に変更し、ペイロードの<code>sub</code>を管理者を示す値（例: 1）に書き換えることで、不正なトークンを生成します。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;typ&#34;</span>: <span style=color:#b84>&#34;JWT&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;alg&#34;</span>: <span style=color:#b84>&#34;none&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;kid&#34;</span>: <span style=color:#b84>&#34;qkA6IUTWTMKYtim4FIqN8QMclw87uNm20u96Okq8t_0&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">9
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;sub&#34;</span>: <span style=color:#099>1</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;userid&#34;</span>: <span style=color:#b84>&#34;spa-test-0310&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;email&#34;</span>: <span style=color:#b84>&#34;spa-test-0310@gmail.com&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;icon&#34;</span>: <span style=color:#b84>&#34;dummy-icon.png&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;is_super&#34;</span>: <span style=color:#099>0</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;iat&#34;</span>: <span style=color:#099>1752888450</span>,
+</span></span><span style=display:flex><span>  <span style=color:navy>&#34;exp&#34;</span>: <span style=color:#099>1753752450</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>再度エンコードする</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIiwia2lkIjoicWtBNklVVFdUTUtZdGltNEZJcU44UU1jbHc4N3VObTIwdTk2T2txOHRfMCJ9.eyJzdWIiOjEsInVzZXJpZCI6InNwYS10ZXN0LTAzMTAiLCJlbWFpbCI6InNwYS10ZXN0LTAzMTBAZ21haWwuY29tIiwiaWNvbiI6ImR1bW15LWljb24ucG5nIiwiaXNfc3VwZXIiOjAsImlhdCI6MTc1Mjg4ODQ1MCwiZXhwIjoxNzUzNzUyNDUwfQ.
+</span></span></code></pre></td></tr></table></div></div><p>ブラウザの開発者ツールなどを利用して、Cookieの値を生成した不正なトークンに書き換えます。</p><p>サーバー側の実装によっては、署名検証時に<code>kid</code>のチェックが不十分な場合、<code>alg</code>が<code>none</code>に改ざんされた署名なしのトークンを受け入れてしまうことがあります。</p><ul><li><a href=https://qiita.com/ockeghem/items/cc0b8ab74f46834d055b>https://qiita.com/ockeghem/items/cc0b8ab74f46834d055b</a></li></ul><h3 id=オブジェクトレベルの認可不備bola>オブジェクトレベルの認可不備（BOLA）</h3><p>OWASP API Security Top 10でも指摘されているように、APIにおける認可不備は非常に重大な問題です。
+リクエスト内のパラメータやURLに含まれるIDを別のユーザーのものに書き換えることで、他人の情報を不正に取得できてしまう脆弱性です。</p><h3 id=オブジェクトプロパティレベルの認可不備>オブジェクトプロパティレベルの認可不備</h3><p>API側でリクエスト内の特定のプロパティに対する認可チェックが不十分な場合、本来変更が許可されていないプロパティ（例: <code>role</code>など）を不正に書き換えることで、オブジェクトを不正に操作できてしまいます。</p><h3 id=機能レベルの認可不備bfla>機能レベルの認可不備（BFLA）</h3><p>権限チェックが不十分なことにより、一般ユーザーが管理者向けのAPI（例: ユーザー削除や設定変更など）を実行できてしまう脆弱性です。</p><h3 id=xss>XSS</h3><p>XSSは一般的に「蓄積型」「反射型」「DOM-Based型」の3つに分類されますが、DOM-Based型は他の2つの特性を併せ持つ場合もあり、分類が重なることもあります。
 XSS攻撃では、改行コードや文字エンコーディングの解釈差異を利用してサニタイズ処理を回避される可能性があるため、出力時のエスケープ処理には注意が必要です。
-近年のWebアプリケーションでは、<code>HttpOnly</code>属性によりCookieを盗むことが難しくなっていますが、被害者のブラウザ上で任意のAPIを呼び出せる点がXSSの大きな脅威です。</p>
-<h3 id="ssrf">SSRF</h3>
-<p>攻撃者は、公開サーバーを踏み台にして、直接アクセスできない内部ネットワーク（社内ネットワークやクラウド環境など）のサーバーへリクエストを送信できてしまいます。</p>
-<p>SSRFの攻撃で狙われる代表的なエンドポイントの例：</p>
-<ul>
-<li><code>file:///etc/hosts</code>：サーバー上のローカルファイルを読み取る</li>
-<li><code>http://169.254.169.254/</code>：クラウド環境のメタデータサービス（IMDS）へアクセスし、認証情報などを窃取する</li>
-<li><code>http://localhost:NNNN/</code>：アプリケーションが内部で利用しているローカルサービスへアクセスする</li>
-</ul>
-<h2 id="バグバウンティ入門-バグハンターへの道森岡-優太">「バグバウンティ入門 〜バグハンターへの道〜」森岡 優太</h2>
-<p>12:40 - 14:10
-セッション中は写真撮影が禁止されていたため、ハンズオンの詳細な内容は割愛します。</p>
-<p>バグバウンティプラットフォームは、脆弱性を発見する「バグハンター」と、脆弱性報奨金制度を導入したい企業とを仲介する役割を担っています。</p>
-<h3 id="代表的なバグバウンティプラットフォーム">代表的なバグバウンティプラットフォーム</h3>
-<ul>
-<li>HackerOne（アメリカ）</li>
-<li>Bugcrowd（アメリカ）</li>
-<li>Intigriti（ベルギー）</li>
-</ul>
-<p>日本のバグバウンティプラットフォーム</p>
-<ul>
-<li>IssueHunt（日本）</li>
-</ul>
-<p>プログラムの種類</p>
-<ul>
-<li>BBP（Bug Bounty Program）：発見した脆弱性に対して報奨金が支払われるプログラム。</li>
-<li>VDP（Vulnerability Disclosure Program）：脆弱性の報告を受け付ける窓口として機能するプログラム。通常、報奨金は支払われない。</li>
-</ul>
-<p>バグハンティングでよく使われるツール</p>
-<ul>
-<li><a href="https://www.lopseg.com.br/osint">https://www.lopseg.com.br/osint</a></li>
-<li><a href="https://github.com/vavkamil/awesome-bugbounty-tools">https://github.com/vavkamil/awesome-bugbounty-tools</a></li>
-</ul>
-<h2 id="llm-を活用したソースコードにおける脆弱性の検出蔀-綾人">「LLM を活用したソースコードにおける脆弱性の検出」蔀 綾人</h2>
-<p>16:00-16:45</p>
-<p>静的解析：AST（抽象構文木）を用いたコード解析
-動的解析：パラメータのファジングなど</p>
-<h3 id="llmを用いた脆弱性検出の手法">LLMを用いた脆弱性検出の手法</h3>
-<ol>
-<li>Ajax関数の特定</li>
-<li>Ajaxで呼び出される関数のコールグラフを作成する</li>
-<li>呼び出し先の一覧を作成</li>
-<li>LLMによる汚染解析と、従来手法による汚染解析</li>
-<li>診断結果とPoC（概念実証コード）の作成</li>
-</ol>
-<h2 id="サイバーセキュリティ概念の現実世界への応用対ロシア対北朝鮮の脅威への対処法yulii_smirnov">「サイバーセキュリティ概念の現実世界への応用：対ロシア、対北朝鮮の脅威への対処法」Yulii_Smirnov</h2>
-<p>16:45 - 17:30</p>
-<p>バーチャलなサイバー攻撃が、いかにして現実世界（リアル）へ影響を及ぼすかに焦点を当てた講演でした。</p>
-<h3 id="国際電話型の特殊詐欺">国際電話型の特殊詐欺</h3>
-<ul>
-<li>末尾が「0110」の番号で警察署を騙る</li>
-<li>大量の携帯電話、SIMボックス、偽基地局などを利用して発信元を偽装する</li>
-<li>このように、特殊詐欺と通信技術が密接に結びついています。</li>
-</ul>
-<h3 id="自動車盗難デバイスgameboyコードグラバー">自動車盗難デバイス「GameBoy（コードグラバー）」</h3>
-<ul>
-<li>日本の中古車需要が高いロシアなどで普及</li>
-<li>スマートキーの信号を中継・増幅して解錠する（リレーアタック）</li>
-<li>背後には、FSB（ロシア連邦保安庁）やSVR（ロシア対外情報庁）と関連するフロント企業の関与も指摘されています。</li>
-</ul>
-<h3 id="違法無線と北朝鮮">違法無線と北朝鮮</h3>
-<ul>
-<li>Glocom（マレーシアに拠点を置く北朝鮮系のフロント企業）</li>
-<li>国連の制裁を逃れながら、違法な無線機器を製造・販売している</li>
-</ul>
-<h3 id="ロシアのサイバー攻撃の戦略">ロシアのサイバー攻撃の戦略</h3>
-<ul>
-<li>ハイブリッド戦争の一環としてサイバー攻撃を活用している</li>
-<li>デジタル領域での攻撃はあくまで入口であり、その目的は現実世界へ影響を及ぼすことです。</li>
-<li>ロシアの伝統的な軍事戦術である「マスキロフカ」（偽装・欺瞞戦術）との関連性も指摘されています。</li>
-</ul>
-<h3 id="osintオープンソースインテリジェンス関連組織の紹介">OSINT（オープンソース・インテリジェンス）関連組織の紹介</h3>
-<ul>
-<li><a href="https://roles.rcast.u-tokyo.ac.jp">https://roles.rcast.u-tokyo.ac.jp</a></li>
-<li><a href="https://deepdive.or.jp">https://deepdive.or.jp</a></li>
-<li>公開情報から脅威を検知・分析する取り組みを行っています。</li>
-</ul>
-
-        </div>
-        
-        
-        <footer class="article-footer">
-          
-        </footer>
-
-        
-        <meta itemprop="wordCount" content="275">
-        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/">
-      </article>
-      
-      
-      <nav class="article-navigation mt-5" aria-label="Article navigation">
-        
-
-<nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" 
-         itemprop="item"
-         aria-label="Navigate to homepage">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">tomato blog</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-    
-    
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/" 
-             itemprop="item"
-             aria-label="Navigate to tomato blog">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/posts/" 
-             itemprop="item"
-             aria-label="Navigate to Posts">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Hackfes2025参加メモ</span>
-        <meta itemprop="position" content="4" />
-      </li>
-    
-  </ol>
-</nav>
-  
-          
-  
-  <div class="terms-wrapper " role="region" aria-label="Tags">
-    
-    
-    <h6 class="terms-label" id="terms-tags">
-      Tags:
-    </h6>
-    
-    
-    <ul class="terms-list" 
-        role="list" 
-        aria-labelledby="terms-tags"
-        aria-describedby="terms-count-tags">
-      <li class="terms-item" role="listitem">
-        <a href="/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with セキュリティ"
-           title="セキュリティ (0 posts)">
-          セキュリティ
-        </a>
-      </li>
-    </ul>
-    
-    
-    <span id="terms-count-tags" class="sr-only">
-      1 tags total
-    </span>
-    
-  </div>
-
-      </nav>
-    </div>
-  </div>
-</div>
-
-  </main>
-  
-  
-  <footer role="contentinfo" class="site-footer">
-    <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-      
-      
-      <p class="copyright-text text-muted mb-2">
-        &copy; 2025
-          tomato blog.
-        All rights reserved.
-      </p>
-      
-      
-      
-      
-      <p class="theme-attribution text-muted small mt-2 mb-0">
-        Powered by 
-        <a href="https://gohugo.io/" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">Hugo</a>
-        with 
-        <a href="https://github.com/yuhi-sa/tomatohugo" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">TomatoHugo</a>
-      </p>
-      
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-  
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-  
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Hackfes2025参加メモ",
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/",
-    "description": "勉強したことなどをメモしています",
-    "inLanguage": "ja",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    }
-  }
-  </script>
-
-</body>
-
-</html>
+近年のWebアプリケーションでは、<code>HttpOnly</code>属性によりCookieを盗むことが難しくなっていますが、被害者のブラウザ上で任意のAPIを呼び出せる点がXSSの大きな脅威です。</p><h3 id=ssrf>SSRF</h3><p>攻撃者は、公開サーバーを踏み台にして、直接アクセスできない内部ネットワーク（社内ネットワークやクラウド環境など）のサーバーへリクエストを送信できてしまいます。</p><p>SSRFの攻撃で狙われる代表的なエンドポイントの例：</p><ul><li><code>file:///etc/hosts</code>：サーバー上のローカルファイルを読み取る</li><li><code>http://169.254.169.254/</code>：クラウド環境のメタデータサービス（IMDS）へアクセスし、認証情報などを窃取する</li><li><code>http://localhost:NNNN/</code>：アプリケーションが内部で利用しているローカルサービスへアクセスする</li></ul><h2 id=バグバウンティ入門-バグハンターへの道森岡-優太>「バグバウンティ入門 〜バグハンターへの道〜」森岡 優太</h2><p>12:40 - 14:10
+セッション中は写真撮影が禁止されていたため、ハンズオンの詳細な内容は割愛します。</p><p>バグバウンティプラットフォームは、脆弱性を発見する「バグハンター」と、脆弱性報奨金制度を導入したい企業とを仲介する役割を担っています。</p><h3 id=代表的なバグバウンティプラットフォーム>代表的なバグバウンティプラットフォーム</h3><ul><li>HackerOne（アメリカ）</li><li>Bugcrowd（アメリカ）</li><li>Intigriti（ベルギー）</li></ul><p>日本のバグバウンティプラットフォーム</p><ul><li>IssueHunt（日本）</li></ul><p>プログラムの種類</p><ul><li>BBP（Bug Bounty Program）：発見した脆弱性に対して報奨金が支払われるプログラム。</li><li>VDP（Vulnerability Disclosure Program）：脆弱性の報告を受け付ける窓口として機能するプログラム。通常、報奨金は支払われない。</li></ul><p>バグハンティングでよく使われるツール</p><ul><li><a href=https://www.lopseg.com.br/osint>https://www.lopseg.com.br/osint</a></li><li><a href=https://github.com/vavkamil/awesome-bugbounty-tools>https://github.com/vavkamil/awesome-bugbounty-tools</a></li></ul><h2 id=llm-を活用したソースコードにおける脆弱性の検出蔀-綾人>「LLM を活用したソースコードにおける脆弱性の検出」蔀 綾人</h2><p>16:00-16:45</p><p>静的解析：AST（抽象構文木）を用いたコード解析
+動的解析：パラメータのファジングなど</p><h3 id=llmを用いた脆弱性検出の手法>LLMを用いた脆弱性検出の手法</h3><ol><li>Ajax関数の特定</li><li>Ajaxで呼び出される関数のコールグラフを作成する</li><li>呼び出し先の一覧を作成</li><li>LLMによる汚染解析と、従来手法による汚染解析</li><li>診断結果とPoC（概念実証コード）の作成</li></ol><h2 id=サイバーセキュリティ概念の現実世界への応用対ロシア対北朝鮮の脅威への対処法yulii_smirnov>「サイバーセキュリティ概念の現実世界への応用：対ロシア、対北朝鮮の脅威への対処法」Yulii_Smirnov</h2><p>16:45 - 17:30</p><p>バーチャलなサイバー攻撃が、いかにして現実世界（リアル）へ影響を及ぼすかに焦点を当てた講演でした。</p><h3 id=国際電話型の特殊詐欺>国際電話型の特殊詐欺</h3><ul><li>末尾が「0110」の番号で警察署を騙る</li><li>大量の携帯電話、SIMボックス、偽基地局などを利用して発信元を偽装する</li><li>このように、特殊詐欺と通信技術が密接に結びついています。</li></ul><h3 id=自動車盗難デバイスgameboyコードグラバー>自動車盗難デバイス「GameBoy（コードグラバー）」</h3><ul><li>日本の中古車需要が高いロシアなどで普及</li><li>スマートキーの信号を中継・増幅して解錠する（リレーアタック）</li><li>背後には、FSB（ロシア連邦保安庁）やSVR（ロシア対外情報庁）と関連するフロント企業の関与も指摘されています。</li></ul><h3 id=違法無線と北朝鮮>違法無線と北朝鮮</h3><ul><li>Glocom（マレーシアに拠点を置く北朝鮮系のフロント企業）</li><li>国連の制裁を逃れながら、違法な無線機器を製造・販売している</li></ul><h3 id=ロシアのサイバー攻撃の戦略>ロシアのサイバー攻撃の戦略</h3><ul><li>ハイブリッド戦争の一環としてサイバー攻撃を活用している</li><li>デジタル領域での攻撃はあくまで入口であり、その目的は現実世界へ影響を及ぼすことです。</li><li>ロシアの伝統的な軍事戦術である「マスキロフカ」（偽装・欺瞞戦術）との関連性も指摘されています。</li></ul><h3 id=osintオープンソースインテリジェンス関連組織の紹介>OSINT（オープンソース・インテリジェンス）関連組織の紹介</h3><ul><li><a href=https://roles.rcast.u-tokyo.ac.jp>https://roles.rcast.u-tokyo.ac.jp</a></li><li><a href=https://deepdive.or.jp>https://deepdive.or.jp</a></li><li>公開情報から脅威を検知・分析する取り組みを行っています。</li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="340"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/"></article><nav class="article-navigation mt-5" aria-label="Article navigation"><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Hackfes2025参加メモ</span>
+<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with セキュリティ" title="セキュリティ (0 posts)">セキュリティ</a></li></ul><span id=terms-count-tags class=sr-only>1 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2025
+tomato blog.
+All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Hackfes2025参加メモ","url":"https:\/\/yuhi-sa.github.io\/posts\/20250719_hackfes2025\/1\/","description":"勉強したことなどをメモしています","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>

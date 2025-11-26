@@ -1,748 +1,123 @@
-
-
-<!DOCTYPE html>
-<html lang="ja"
-      dir="ltr"
-      data-theme="light">
-
-<head>
-  
-
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="format-detection" content="telephone=no">
-
-
-<meta name="robots" content="index,follow">
-
-
-<meta name="description" content="勉強したことなどをメモしています">
-
-
-<link rel="canonical" href="https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/">
-
-
-<meta property="og:type" content="article">
-<meta property="og:title" content="GitHub Actionsの基本的な書き方">
-<meta property="og:description" content="勉強したことなどをメモしています">
-<meta property="og:url" content="https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/">
-<meta property="og:site_name" content="tomato blog">
-<meta property="og:locale" content="ja">
-
-
-<meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-
-<meta property="article:published_time" content="2021-06-30T10:17:23&#43;09:00">
-<meta property="article:modified_time" content="2021-06-30T10:17:23&#43;09:00">
-<meta property="article:tag" content="GitHub">
-<meta property="article:tag" content="CI/CD">
-<meta property="article:section" content="posts">
-
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GitHub Actionsの基本的な書き方">
-<meta name="twitter:description" content="勉強したことなどをメモしています">
-<meta name="twitter:image" content="https://yuhi-sa.github.io/ogp.jpeg">
-
-
-<title>GitHub Actionsの基本的な書き方 | tomato blog
-</title>
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-
-
-
-
-
-
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "GitHub Actionsの基本的な書き方",
-    "description": "",
-    "author": {
-      "@type": "Person",
-      "name": ""
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    },
-    "datePublished": "2021-06-30T10:17:23\u002b09:00",
-    "dateModified": "2021-06-30T10:17:23\u002b09:00",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/"
-    },
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/",
-    "wordCount":  173 ,
-    "keywords": ["GitHub", "CI\/CD"
-    ],
-    "articleSection": "Posts",
-    "inLanguage": "ja",
-    "timeRequired": "PT1M"
-  }
-  </script>
-
-
-
-
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet">
-
-
-<link rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-      crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-      rel="stylesheet" 
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-      crossorigin="anonymous">
-
-
-
-
-
-
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css" 
-        integrity="sha256-ljM14ZWag8FsbwnnW&#43;JuQrdGIig1qIL3eonWj5iDqv4=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css" 
-        integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" 
-        crossorigin="anonymous">
-  
-  
-
-  <link rel="stylesheet" 
-        href="/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css" 
-        integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" 
-        crossorigin="anonymous">
-
-
-<style>
- 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  color: #000;
-  background: #fff;
-}
-
-[data-theme="dark"] body {
-  color: #fff;
-  background: #000;
-}
-
-.container {
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-</style>
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-
-
-
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage" class="theme-tomatohugo">
-  
-  
-  <a href="#main-content" 
-     class="skip-link sr-only sr-only-focusable"
-     aria-label="Skip to main content">
-    Skip to main content
-  </a>
-  
-  
-  <header role="banner" class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" aria-label="Main navigation">
-  <div class="container">
-    
-  
-  <a class="navbar-brand" 
-     href="https://yuhi-sa.github.io/" 
-     aria-label="Return to tomato blog homepage">
-    tomato blog
-  </a>
-  
-  
-  <button class="navbar-toggler d-lg-none" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#navbarNav" 
-          aria-controls="navbarNav" 
-          aria-expanded="false" 
-          aria-label="Toggle navigation menu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto" role="menubar">
-      
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/"
-         role="menuitem"
-         aria-label="Navigate to Blog">
-        Blog
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/tags/"
-         role="menuitem"
-         aria-label="Navigate to Tags">
-        Tags
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/about/"
-         role="menuitem"
-         aria-label="Navigate to About">
-        About
-      </a>
-    
-  </li>
-  
-  
-  
-  
-  
-  
-  <li class="nav-item" role="none">
-    
-    
-      
-      <a class="nav-link" 
-         href="https://yuhi-sa.github.io/posts/privacy_policy/"
-         role="menuitem"
-         aria-label="Navigate to Privacy policy">
-        Privacy policy
-      </a>
-    
-  </li>
-
-      
-      
-      <li class="nav-item" role="none">
-        <button id="darkModeToggle" 
-                class="nav-link btn btn-link border-0" 
-                type="button" 
-                role="menuitem"
-                aria-label="Toggle dark mode"
-                title="Switch between light and dark themes">
-          <i class="fas fa-moon" id="darkModeIcon" aria-hidden="true"></i>
-          <span class="d-lg-none ms-2">ダークモード</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-    
-    
-    
-  </div>
-</nav>
-
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-LN6QP6VVM3');
-  </script>
-
-
-
-  
-  <script data-ad-client="ca-pub-9558545098866170" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-
-
-  </header>
-  
-  
-  <main id="main-content" 
-        role="main" 
-        class="site-main"
-        aria-label="Main content">
-    
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <article itemscope itemtype="https://schema.org/Article">
-        
-        <header class="article-header">
-          <h1 itemprop="headline">GitHub Actionsの基本的な書き方</h1>
-
-          
-
-          <div class="article-meta">
-            <time datetime="2021-06-30T10:17:23&#43;09:00" itemprop="datePublished">
-              <i class="far fa-calendar-alt me-1" aria-hidden="true"></i>
-              June 30, 2021
-            </time>
-
-            
-
-            
-
-            
-            <span aria-label="Reading time" class="ms-3">
-              <i class="far fa-clock me-1" aria-hidden="true"></i>
-              1 min read
-            </span>
-            
-          </div>
-
-          
-          <div class="article-tags" role="group" aria-label="Article tags">
-            
-            <a href="/tags/github/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              GitHub
-            </a>
-            
-            <a href="/tags/ci/cd/"
-               class="badge badge-custom text-decoration-none me-1"
-               rel="tag"
-               itemprop="keywords">
-              CI/CD
-            </a>
-            
-          </div>
-          
-        </header>
-        
-        
-        
-        
-        
-        <div class="article-content" itemprop="articleBody">
-          <h2 id="github-actionsとは">GitHub Actionsとは</h2>
-<p>GitHub Actionsは、GitHubリポジトリ内で直接、ソフトウェア開発ワークフローを自動化できるCI/CD（継続的インテグレーション/継続的デリバリー）プラットフォームです。コードのビルド、テスト、デプロイなどを自動化し、開発プロセスを効率化します。</p>
-<p>ワークフローは、リポジトリのルートディレクトリに以下の構造でYAMLファイルを配置することで定義します。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.github/workflows/{任意のファイル名}.yml
-</span></span></code></pre></div><h2 id="yamlファイルの構成要素">YAMLファイルの構成要素</h2>
-<p>GitHub Actionsのワークフローを定義するYAMLファイルは、主に以下の要素で構成されます。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span>{<span class="l">このワークフローの名前}</span><span class="w"> </span><span class="c"># ワークフローの名前。GitHub UIで表示される</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># ワークフローが実行されるトリガーイベントを指定</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 例1: pushイベント (指定したブランチへのpush時)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w"> </span><span class="c"># または master</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w"> </span><span class="c"># 複数のブランチを指定可能</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 例2: pull_requestイベント (指定したブランチへのプルリクエスト時)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 例3: scheduleイベント (CRON形式で時間を指定)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># UTC時間で指定するため、日本時間(JST)の場合は-9時間する</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;45 10 * * *&#39;</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">  
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># その他のトリガーイベント: https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 実行するジョブの定義</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="c"># ジョブのID (任意の名前)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ビルドとテスト</span><span class="w"> </span><span class="c"># ジョブの表示名</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w"> </span><span class="c"># ジョブを実行する環境 (ランナー) を指定</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="c"># ubuntu-latest, windows-latest, macos-latest など</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="c"># または、特定のバージョン (ubuntu-20.04)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># ジョブ内で実行される一連のステップ</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w"> </span><span class="c"># リポジトリのコードをチェックアウトするアクション</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                                  </span><span class="c"># GitHubが提供するアクションや、コミュニティのアクションを利用できる</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">依存関係のインストール</span><span class="w"> </span><span class="c"># ステップの名前</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          npm install # 例: Node.jsプロジェクトの依存関係をインストール
-</span></span></span><span class="line"><span class="cl"><span class="sd">          pip install -r requirements.txt # 例: Pythonプロジェクトの依存関係をインストール</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">コードのビルド</span><span class="w"> </span><span class="c"># ステップの名前</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          npm run build # 例: プロジェクトをビルド
-</span></span></span><span class="line"><span class="cl"><span class="sd">          make # 例: makeコマンドを実行</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">テストの実行</span><span class="w"> </span><span class="c"># ステップの名前</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          npm test # 例: テストを実行
-</span></span></span><span class="line"><span class="cl"><span class="sd">          pytest # 例: Pythonのテストを実行</span><span class="w">
-</span></span></span></code></pre></div><h3 id="主要な要素の解説">主要な要素の解説</h3>
-<ul>
-<li><code>name</code>: ワークフロー全体の名前です。GitHubのActionsタブで表示されます。</li>
-<li><code>on</code>: ワークフローがいつ実行されるかを定義します。<code>push</code>, <code>pull_request</code>, <code>schedule</code> など、様々なイベントを指定できます。</li>
-<li><code>jobs</code>: ワークフロー内で実行される一連のジョブを定義します。各ジョブは独立して実行することも、依存関係を設定して順次実行することも可能です。
-<ul>
-<li><code>runs-on</code>: ジョブを実行する仮想環境（ランナー）を指定します。Ubuntu, Windows, macOSの最新バージョンや特定のバージョンを選択できます。</li>
-<li><code>steps</code>: ジョブ内で実行される個々のタスクのシーケンスです。
-<ul>
-<li><code>uses</code>: 既存の<strong>アクション</strong>（再利用可能なタスクの単位）を使用します。<code>actions/checkout@v4</code> は、リポジトリのコードをランナーにチェックアウトする公式アクションです。</li>
-<li><code>name</code>: ステップの表示名です。</li>
-<li><code>run</code>: シェルコマンドを実行します。複数行のコマンドは <code>|</code> を使って記述できます。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>GitHub Actionsは非常に柔軟性が高く、様々なツールやサービスと連携して複雑なワークフローを構築できます。</p>
-        </div>
-        
-        
-        <footer class="article-footer">
-          
-        </footer>
-
-        
-        <meta itemprop="wordCount" content="173">
-        <meta itemprop="url" content="https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/">
-      </article>
-      
-      
-      <nav class="article-navigation mt-5" aria-label="Article navigation">
-        
-
-<nav aria-label="Breadcrumb navigation" class="breadcrumb-nav" role="navigation">
-  <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    
-    
-    <li class="breadcrumb-item" 
-        itemprop="itemListElement" 
-        itemscope 
-        itemtype="https://schema.org/ListItem">
-      <a href="/" 
-         itemprop="item"
-         aria-label="Navigate to homepage">
-        <i class="fas fa-home" aria-hidden="true"></i>
-        <span itemprop="name">tomato blog</span>
-      </a>
-      <meta itemprop="position" content="1" />
-    </li>
-    
-    
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/" 
-             itemprop="item"
-             aria-label="Navigate to tomato blog">
-            <span itemprop="name">tomato blog</span>
-          </a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="breadcrumb-item" 
-            itemprop="itemListElement" 
-            itemscope 
-            itemtype="https://schema.org/ListItem">
-          <a href="https://yuhi-sa.github.io/posts/" 
-             itemprop="item"
-             aria-label="Navigate to Posts">
-            <span itemprop="name">Posts</span>
-          </a>
-          <meta itemprop="position" content="3" />
-        </li>
-      
-      
-      <li class="breadcrumb-item active" 
-          aria-current="page" 
-          itemprop="itemListElement" 
-          itemscope 
-          itemtype="https://schema.org/ListItem">
-        <span itemprop="name">GitHub Actionsの基本的な書き方</span>
-        <meta itemprop="position" content="4" />
-      </li>
-    
-  </ol>
-</nav>
-  
-          
-  
-  <div class="terms-wrapper " role="region" aria-label="Tags">
-    
-    
-    <h6 class="terms-label" id="terms-tags">
-      Tags:
-    </h6>
-    
-    
-    <ul class="terms-list" 
-        role="list" 
-        aria-labelledby="terms-tags"
-        aria-describedby="terms-count-tags">
-      <li class="terms-item" role="listitem">
-        <a href="/tags/github/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with GitHub"
-           title="GitHub (3 posts)">
-          GitHub
-        </a>
-      </li>
-      <li class="terms-item" role="listitem">
-        <a href="/tags/ci/cd/" 
-           class="terms-link badge badge-custom text-decoration-none"
-           rel="tag"
-           aria-label="View all posts tagged with CI/CD"
-           title="CI/CD (1 post)">
-          CI/CD
-        </a>
-      </li>
-    </ul>
-    
-    
-    <span id="terms-count-tags" class="sr-only">
-      2 tags total
-    </span>
-    
-  </div>
-
-      </nav>
-    </div>
-  </div>
-</div>
-
-  </main>
-  
-  
-  <footer role="contentinfo" class="site-footer">
-    <div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
-      
-      
-      <p class="copyright-text text-muted mb-2">
-        &copy; 2025
-          tomato blog.
-        All rights reserved.
-      </p>
-      
-      
-      
-      
-      <p class="theme-attribution text-muted small mt-2 mb-0">
-        Powered by 
-        <a href="https://gohugo.io/" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">Hugo</a>
-        with 
-        <a href="https://github.com/yuhi-sa/tomatohugo" 
-           target="_blank" 
-           rel="noopener"
-           class="text-decoration-none">TomatoHugo</a>
-      </p>
-      
-    </div>
-  </div>
-</div>
-
-  </footer>
-  
-  
-  
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
-        crossorigin="anonymous"
-        defer>
-</script>
-
-
-  
-  
-
-  <script src="/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js" 
-          integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF&#43;eqaeCE="
-          defer>
-  </script>
-
-
-
-
-<script>
-  
-  window.addEventListener('load', function() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3';
-    document.head.appendChild(script);
-    
-    script.onload = function() {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LN6QP6VVM3');
-    };
-  });
-</script>
-
-
-<script>
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js')
-        .then(function(registration) {
-          console.log('SW registered: ', registration);
-        })
-        .catch(function(registrationError) {
-          console.log('SW registration failed: ', registrationError);
-        });
-    });
-  }
-</script>
-
-  
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "GitHub Actionsの基本的な書き方",
-    "url": "https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/",
-    "description": "勉強したことなどをメモしています",
-    "inLanguage": "ja",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "tomato blog",
-      "url": "https:\/\/yuhi-sa.github.io\/"
-    }
-  }
-  </script>
-
-</body>
-
-</html>
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="勉強したことなどをメモしています"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/><meta property="og:type" content="article"><meta property="og:title" content="GitHub Actionsの基本的な書き方"><meta property="og:description" content="勉強したことなどをメモしています"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2021-06-30T10:17:23+09:00"><meta property="article:modified_time" content="2025-07-23T20:43:29+09:00"><meta property="article:tag" content="GitHub"><meta property="article:tag" content="CI/CD"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="GitHub Actionsの基本的な書き方"><meta name=twitter:description content="勉強したことなどをメモしています"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>GitHub Actionsの基本的な書き方 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"GitHub Actionsの基本的な書き方","description":"","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-06-30T10:17:23\u002b09:00","dateModified":"2025-07-23T20:43:29\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/","wordCount":224,"keywords":["GitHub","CI\/CD"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT2M"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.963335e1959a83c16c6f09e75be26e42b746222835a882f77a89d68f9883aafe.css integrity="sha256-ljM14ZWag8FsbwnnW+JuQrdGIig1qIL3eonWj5iDqv4=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.65d091264255d75817988ed1dce4adcef2482557713854f8aaa3dde137672915.css integrity="sha256-ZdCRJkJV11gXmI7R3OStzvJIJVdxOFT4qqPd4TdnKRU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.20b142b4e47bd9042b2d9fffa65797c455e75d76c4797957d567b04a03fd8b0c.css integrity="sha256-ILFCtOR72QQrLZ//pleXxFXnXXbEeXlX1WewSgP9iww=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>GitHub Actionsの基本的な書き方</h1><div class=article-meta><time datetime=2021-06-30T10:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+June 30, 2021
+</time><time datetime=2025-07-23T20:43:29+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated July 23, 2025
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/github/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>GitHub
+</a><a href=/tags/ci/cd/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>CI/CD</a></div></header><div class=article-content itemprop=articleBody><h2 id=github-actionsとは>GitHub Actionsとは</h2><p>GitHub Actionsは、GitHubリポジトリ内で直接、ソフトウェア開発ワークフローを自動化できるCI/CD（継続的インテグレーション/継続的デリバリー）プラットフォームです。コードのビルド、テスト、デプロイなどを自動化し、開発プロセスを効率化します。</p><p>ワークフローは、リポジトリのルートディレクトリに以下の構造でYAMLファイルを配置することで定義します。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>.github/workflows/{任意のファイル名}.yml
+</span></span></code></pre></td></tr></table></div></div><h2 id=yamlファイルの構成要素>YAMLファイルの構成要素</h2><p>GitHub Actionsのワークフローを定義するYAMLファイルは、主に以下の要素で構成されます。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:navy>name</span>:<span style=color:#bbb> </span>{このワークフローの名前}<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ワークフローの名前。GitHub UIで表示される</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:navy>on</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># ワークフローが実行されるトリガーイベントを指定</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># 例1: pushイベント (指定したブランチへのpush時)</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:navy>push</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:navy>branches</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- main<span style=color:#bbb> </span><span style=color:#998;font-style:italic># または master</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- develop<span style=color:#bbb> </span><span style=color:#998;font-style:italic># 複数のブランチを指定可能</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># 例2: pull_requestイベント (指定したブランチへのプルリクエスト時)</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:navy>pull_request</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:navy>branches</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- main<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- develop<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># 例3: scheduleイベント (CRON形式で時間を指定)</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># UTC時間で指定するため、日本時間(JST)の場合は-9時間する</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:navy>schedule</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:navy>cron</span>:<span style=color:#bbb> </span><span style=color:#b84>&#39;45 10 * * *&#39;</span><span style=color:#bbb> 
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># その他のトリガーイベント: https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:navy>jobs</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#998;font-style:italic># 実行するジョブの定義</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:navy>build</span>:<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ジョブのID (任意の名前)</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:navy>name</span>:<span style=color:#bbb> </span>ビルドとテスト<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ジョブの表示名</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:navy>runs-on</span>:<span style=color:#bbb> </span>ubuntu-latest<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ジョブを実行する環境 (ランナー) を指定</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#998;font-style:italic># ubuntu-latest, windows-latest, macos-latest など</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#998;font-style:italic># または、特定のバージョン (ubuntu-20.04)</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:navy>steps</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#998;font-style:italic># ジョブ内で実行される一連のステップ</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:navy>uses</span>:<span style=color:#bbb> </span>actions/checkout@v4<span style=color:#bbb> </span><span style=color:#998;font-style:italic># リポジトリのコードをチェックアウトするアクション</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                  </span><span style=color:#998;font-style:italic># GitHubが提供するアクションや、コミュニティのアクションを利用できる</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:navy>name</span>:<span style=color:#bbb> </span>依存関係のインストール<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ステップの名前</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:navy>run</span>:<span style=color:#bbb> </span>|<span style=color:#b84>
+</span></span></span><span style=display:flex><span><span style=color:#b84>          npm install # 例: Node.jsプロジェクトの依存関係をインストール
+</span></span></span><span style=display:flex><span><span style=color:#b84>          pip install -r requirements.txt # 例: Pythonプロジェクトの依存関係をインストール</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:navy>name</span>:<span style=color:#bbb> </span>コードのビルド<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ステップの名前</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:navy>run</span>:<span style=color:#bbb> </span>|<span style=color:#b84>
+</span></span></span><span style=display:flex><span><span style=color:#b84>          npm run build # 例: プロジェクトをビルド
+</span></span></span><span style=display:flex><span><span style=color:#b84>          make # 例: makeコマンドを実行</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:navy>name</span>:<span style=color:#bbb> </span>テストの実行<span style=color:#bbb> </span><span style=color:#998;font-style:italic># ステップの名前</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:navy>run</span>:<span style=color:#bbb> </span>|<span style=color:#b84>
+</span></span></span><span style=display:flex><span><span style=color:#b84>          npm test # 例: テストを実行
+</span></span></span><span style=display:flex><span><span style=color:#b84>          pytest # 例: Pythonのテストを実行</span><span style=color:#bbb>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=主要な要素の解説>主要な要素の解説</h3><ul><li><code>name</code>: ワークフロー全体の名前です。GitHubのActionsタブで表示されます。</li><li><code>on</code>: ワークフローがいつ実行されるかを定義します。<code>push</code>, <code>pull_request</code>, <code>schedule</code> など、様々なイベントを指定できます。</li><li><code>jobs</code>: ワークフロー内で実行される一連のジョブを定義します。各ジョブは独立して実行することも、依存関係を設定して順次実行することも可能です。<ul><li><code>runs-on</code>: ジョブを実行する仮想環境（ランナー）を指定します。Ubuntu, Windows, macOSの最新バージョンや特定のバージョンを選択できます。</li><li><code>steps</code>: ジョブ内で実行される個々のタスクのシーケンスです。<ul><li><code>uses</code>: 既存の<strong>アクション</strong>（再利用可能なタスクの単位）を使用します。<code>actions/checkout@v4</code> は、リポジトリのコードをランナーにチェックアウトする公式アクションです。</li><li><code>name</code>: ステップの表示名です。</li><li><code>run</code>: シェルコマンドを実行します。複数行のコマンドは <code>|</code> を使って記述できます。</li></ul></li></ul></li></ul><p>GitHub Actionsは非常に柔軟性が高く、様々なツールやサービスと連携して複雑なワークフローを構築できます。</p></div><footer class=article-footer></footer><meta itemprop=wordCount content="224"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210630_gtihub_action/1/"></article><nav class="article-navigation mt-5" aria-label="Article navigation"><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>GitHub Actionsの基本的な書き方</span>
+<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/github/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with GitHub" title="GitHub (3 posts)">GitHub</a></li><li class=terms-item role=listitem><a href=/tags/ci/cd/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with CI/CD" title="CI/CD (1 post)">CI/CD</a></li></ul><span id=terms-count-tags class=sr-only>2 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2025
+tomato blog.
+All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"GitHub Actionsの基本的な書き方","url":"https:\/\/yuhi-sa.github.io\/posts\/20210630_gtihub_action\/1\/","description":"勉強したことなどをメモしています","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
