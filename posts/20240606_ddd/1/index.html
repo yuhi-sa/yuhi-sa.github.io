@@ -23,7 +23,7 @@ Updated July 23, 2025
 </span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-.ts data-lang=.ts><span style=display:flex><span><span style=font-weight:700>import</span> { z } <span style=font-weight:700>from</span> <span style=color:#b84>&#39;zod&#39;</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#998;font-style:italic>// BankAccountのスキーマを定義
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span><span style=font-weight:700>const</span> BankAccountSchema <span style=font-weight:700>=</span> z.<span style=color:#458;font-weight:700>object</span>({
+</span></span></span><span style=display:flex><span><span style=font-weight:700>const</span> BankAccountSchema <span style=font-weight:700>=</span> z.<span style=color:#458;font-weight:700>object</span>({
 </span></span><span style=display:flex><span>  id: <span style=color:#458;font-weight:700>z.string</span>(),
 </span></span><span style=display:flex><span>  balance: <span style=color:#458;font-weight:700>z.number</span>(),
 </span></span><span style=display:flex><span>}).refine(data <span style=font-weight:700>=&gt;</span> data.balance <span style=font-weight:700>&gt;=</span> <span style=color:#099>0</span>, {
@@ -31,7 +31,7 @@ Updated July 23, 2025
 </span></span><span style=display:flex><span>});
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#998;font-style:italic>// BankAccount型を定義
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span><span style=font-weight:700>type</span> BankAccount <span style=font-weight:700>=</span> z.<span style=font-weight:700>infer</span>&lt;<span style=color:navy>typeof</span> <span style=color:teal>BankAccountSchema</span>&gt;;
+</span></span></span><span style=display:flex><span><span style=font-weight:700>type</span> BankAccount <span style=font-weight:700>=</span> z.<span style=font-weight:700>infer</span>&lt;<span style=color:navy>typeof</span> <span style=color:teal>BankAccountSchema</span>&gt;;
 </span></span></code></pre></td></tr></table></div></div><h2 id=トランザクションと不変条件>トランザクションと不変条件</h2><p>不変条件を常に保つことが約束された集約単位でトランザクションを行えば、不変条件は常に保たれる。</p><h2 id=リポジトリの役割>リポジトリの役割</h2><p>集約の永続化と取得を管理するのがリポジトリ。<code>zod</code>のスキーマを使用してバリデーションを行うことで、不変条件を確実に保つことができる。</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
@@ -50,7 +50,7 @@ Updated July 23, 2025
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  save(account: <span style=color:#458;font-weight:700>BankAccount</span>)<span style=font-weight:700>:</span> <span style=font-weight:700>void</span> {
 </span></span><span style=display:flex><span>    <span style=color:#998;font-style:italic>// zodのスキーマでバリデーション
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span>    BankAccountSchema.parse(account);
+</span></span></span><span style=display:flex><span>    BankAccountSchema.parse(account);
 </span></span><span style=display:flex><span>    <span style=font-weight:700>this</span>.storage.<span style=font-weight:700>set</span>(account.id, account);
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>
@@ -80,20 +80,20 @@ Updated July 23, 2025
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=font-weight:700>const</span> retrievedAccount <span style=font-weight:700>=</span> repository.findById(<span style=color:#b84>&#34;123&#34;</span>);
 </span></span><span style=display:flex><span>console.log(retrievedAccount); <span style=color:#998;font-style:italic>// { id: &#34;123&#34;, balance: 100 }
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span>
+</span></span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#998;font-style:italic>// 不変条件を破る例
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span><span style=font-weight:700>const</span> invalidAccount: <span style=color:#458;font-weight:700>BankAccount</span> <span style=font-weight:700>=</span> { id<span style=font-weight:700>:</span> <span style=color:#b84>&#34;456&#34;</span>, balance<span style=font-weight:700>:</span> <span style=font-weight:700>-</span><span style=color:#099>50</span> };
+</span></span></span><span style=display:flex><span><span style=font-weight:700>const</span> invalidAccount: <span style=color:#458;font-weight:700>BankAccount</span> <span style=font-weight:700>=</span> { id<span style=font-weight:700>:</span> <span style=color:#b84>&#34;456&#34;</span>, balance<span style=font-weight:700>:</span> <span style=font-weight:700>-</span><span style=color:#099>50</span> };
 </span></span><span style=display:flex><span><span style=font-weight:700>try</span> {
 </span></span><span style=display:flex><span>  repository.save(invalidAccount);
 </span></span><span style=display:flex><span>} <span style=font-weight:700>catch</span> (error) {
 </span></span><span style=display:flex><span>  console.error(error.errors[<span style=color:#099>0</span>].message); <span style=color:#998;font-style:italic>// &#34;Balance must be non-negative&#34;
-</span></span></span><span style=display:flex><span><span style=color:#998;font-style:italic></span>}
+</span></span></span><span style=display:flex><span>}
 </span></span></code></pre></td></tr></table></div></div><h2 id=まとめ>まとめ</h2><p>不変条件を定義し、永続化を集約単位でのみ行うことでオブジェクトのライフサイクルの間、常に不変条件が保たれるようにすることが<code>DDD</code>において重要である。</p><h2 id=参考>参考</h2><ul><li><a href=https://tchiba.hatenablog.jp/entry/aggregate-and-class-invariant>https://tchiba.hatenablog.jp/entry/aggregate-and-class-invariant</a></li></ul></div><footer class=article-footer></footer><meta itemprop=wordCount content="175"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20240606_ddd/1/"></article><nav class="article-navigation mt-5" aria-label="Article navigation"><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
 <span itemprop=name>tomato blog</span>
 </a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
 </a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
 </a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>DDDの集約設計：不変条件がトランザクションより優先される理由</span>
-<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/ddd/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with DDD" title="DDD (1 post)">DDD</a></li></ul><span id=terms-count-tags class=sr-only>1 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2025
+<meta itemprop=position content="4"></li></ol></nav><div class=terms-wrapper role=region aria-label=Tags><h6 class=terms-label id=terms-tags>Tags:</h6><ul class=terms-list role=list aria-labelledby=terms-tags aria-describedby=terms-count-tags><li class=terms-item role=listitem><a href=/tags/ddd/ class="terms-link badge badge-custom text-decoration-none" rel=tag aria-label="View all posts tagged with DDD" title="DDD (1 post)">DDD</a></li></ul><span id=terms-count-tags class=sr-only>1 tags total</span></div></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container py-5"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2026
 tomato blog.
 All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
 <a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
