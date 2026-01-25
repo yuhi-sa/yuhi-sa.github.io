@@ -1,4 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tomato blog</title><link>https://yuhi-sa.github.io/posts/</link><description>Recent content in Posts on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Tue, 06 Jan 2026 22:56:23 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Micro Hardening研修参加レポート</title><link>https://yuhi-sa.github.io/posts/20250821_-hardening/1/</link><pubDate>Thu, 21 Aug 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250821_-hardening/1/</guid><description>&lt;ul&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on tomato blog</title><link>https://yuhi-sa.github.io/posts/</link><description>Recent content in Posts on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 25 Jan 2026 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>PrismaとMySQLのタイムゾーン不整合問題とその対応</title><link>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</link><pubDate>Sun, 25 Jan 2026 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</guid><description>&lt;h2 id="はじめに"&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;本記事では、PrismaとMySQLを組み合わせた際に発生しやすいタイムゾーン（特にJST/UTC）不整合の問題と、その対応策について解説します。&lt;/p&gt;
+&lt;h2 id="背景前提"&gt;背景・前提&lt;/h2&gt;
+&lt;p&gt;多くの日本の開発現場では、MySQLサーバーのタイムゾーン設定がJST（日本標準時）になっていることが一般的です。一方、Prisma（Node.js ORM）は&lt;code&gt;DateTime&lt;/code&gt;型の値を「タイムゾーン情報なしのISO8601文字列」として扱い、&lt;strong&gt;DBサーバ側のタイムゾーン設定や値のタイムゾーンを自動で解釈・変換しません&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;特に、以下のような前提や制約がある場合に時刻の不整合が発生しやすくなります：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBがクラウドのマネージドサービスで、&lt;strong&gt;DBサーバのタイムゾーン設定をJSTに変更できない&lt;/strong&gt;、またはUTC固定運用が求められる場合&lt;/li&gt;
+&lt;li&gt;Prismaやアプリケーション側はUTCで時刻を扱うが、SQLを直接発行する運用や、DBのデフォルト値・トリガー等でJST時刻が生成される場合&lt;/li&gt;
+&lt;li&gt;チームやプロジェクトでSQLを直打ちする文化があり、ORMを介さずにデータを操作するケースが混在する場合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;このような状況下で、アプリケーション・ORM・DB間で時刻のズレや不整合が発生しやすくなります。&lt;/p&gt;
+&lt;p&gt;実際に、時刻の生成や保存方法が複数存在することで、アプリケーション・ORM・DB間で時刻のズレや不整合が発生しやすくなります。主なパターンは次の3つです。&lt;/p&gt;
+&lt;h3 id="db時刻生成保存方法の主なパターン"&gt;DB時刻生成・保存方法の主なパターン&lt;/h3&gt;
+&lt;h4 id="1-db自動生成"&gt;1. DB自動生成&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;createdAt&lt;/code&gt;や&lt;code&gt;updatedAt&lt;/code&gt;は、Prisma schemaの&lt;code&gt;@default(now())&lt;/code&gt;により&lt;strong&gt;UTC&lt;/strong&gt;で自動生成される。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;createdAt DateTime @default(now()) @map(&amp;#34;created_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;updatedAt DateTime @default(now()) @map(&amp;#34;updated_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="2-アプリ生成new-date"&gt;2. アプリ生成（new Date()）&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;アプリケーション側で&lt;code&gt;new Date()&lt;/code&gt;（UTC）などを使って時刻を生成し、DBに保存するケース。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
+&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;5
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;6
+&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
+&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="font-weight:bold"&gt;const&lt;/span&gt; now &lt;span style="font-weight:bold"&gt;=&lt;/span&gt; &lt;span style="font-weight:bold"&gt;new&lt;/span&gt; &lt;span style="color:#999"&gt;Date&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="font-weight:bold"&gt;await&lt;/span&gt; prisma.someModel.create({
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	data&lt;span style="font-weight:bold"&gt;:&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;		&lt;span style="color:#998;font-style:italic"&gt;// ...他のフィールド
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;		deletedAt: &lt;span style="color:#458;font-weight:bold"&gt;now&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id="3-dbsql直書き"&gt;3. DB/SQL直書き&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLを直接発行し、DB側の&lt;code&gt;ON UPDATE&lt;/code&gt;や&lt;code&gt;DEFAULT CURRENT_TIMESTAMP&lt;/code&gt;などの仕組みで、JST時刻が自動生成されるケース。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="主な対応策"&gt;主な対応策&lt;/h2&gt;
+&lt;p&gt;どの経路（アプリ・ORM・DB）から時刻が生成・保存されても、最終的にJSTで一貫した時刻管理ができるように設計・運用します。&lt;/p&gt;</description></item><item><title>Micro Hardening研修参加レポート</title><link>https://yuhi-sa.github.io/posts/20250821_-hardening/1/</link><pubDate>Thu, 21 Aug 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250821_-hardening/1/</guid><description>&lt;ul&gt;
 &lt;li&gt;研修日：8/21(木)&lt;/li&gt;
 &lt;li&gt;主催：&lt;a href="https://www.sec-k.co.jp/mh"&gt;川口洋さん&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
