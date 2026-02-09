@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>開発 on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E9%96%8B%E7%99%BA/</link><description>Recent content in 開発 on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 25 Jan 2026 09:10:00 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E9%96%8B%E7%99%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>PrismaとMySQLのタイムゾーン不整合問題とその対応</title><link>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</link><pubDate>Sun, 25 Jan 2026 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</guid><description>&lt;h2 id="はじめに"&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>開発 on tomato blog</title><link>https://yuhi-sa.github.io/tags/%E9%96%8B%E7%99%BA/</link><description>Recent content in 開発 on tomato blog</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 25 Jan 2026 10:47:34 +0900</lastBuildDate><atom:link href="https://yuhi-sa.github.io/tags/%E9%96%8B%E7%99%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>PrismaとMySQLのタイムゾーン不整合問題とその対応</title><link>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</link><pubDate>Sun, 25 Jan 2026 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/</guid><description>&lt;h2 id="はじめに"&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;本記事では、PrismaとMySQLを組み合わせた際に発生しやすいタイムゾーン（特にJST/UTC）不整合の問題と、その対応策について解説します。&lt;/p&gt;
 &lt;h2 id="背景前提"&gt;背景・前提&lt;/h2&gt;
 &lt;p&gt;多くの日本の開発現場では、MySQLサーバーのタイムゾーン設定がJST（日本標準時）になっていることが一般的です。一方、Prisma（Node.js ORM）は&lt;code&gt;DateTime&lt;/code&gt;型の値を「タイムゾーン情報なしのISO8601文字列」として扱い、&lt;strong&gt;DBサーバ側のタイムゾーン設定や値のタイムゾーンを自動で解釈・変換しません&lt;/strong&gt;。&lt;/p&gt;
@@ -15,44 +15,68 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;createdAt&lt;/code&gt;や&lt;code&gt;updatedAt&lt;/code&gt;は、Prisma schemaの&lt;code&gt;@default(now())&lt;/code&gt;により&lt;strong&gt;UTC&lt;/strong&gt;で自動生成される。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;createdAt DateTime @default(now()) @map(&amp;#34;created_at&amp;#34;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;updatedAt DateTime @default(now()) @map(&amp;#34;updated_at&amp;#34;)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="2-アプリ生成new-date"&gt;2. アプリ生成（new Date()）&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;createdAt DateTime @default(now()) @map(&amp;#34;created_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;updatedAt DateTime @default(now()) @map(&amp;#34;updated_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="2-アプリ生成new-date"&gt;2. アプリ生成（new Date()）&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;アプリケーション側で&lt;code&gt;new Date()&lt;/code&gt;（UTC）などを使って時刻を生成し、DBに保存するケース。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;5
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;6
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="font-weight:bold"&gt;const&lt;/span&gt; now &lt;span style="font-weight:bold"&gt;=&lt;/span&gt; &lt;span style="font-weight:bold"&gt;new&lt;/span&gt; &lt;span style="color:#999"&gt;Date&lt;/span&gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="font-weight:bold"&gt;await&lt;/span&gt; prisma.someModel.create({
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	data&lt;span style="font-weight:bold"&gt;:&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;		&lt;span style="color:#998;font-style:italic"&gt;// ...他のフィールド
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;		deletedAt: &lt;span style="color:#458;font-weight:bold"&gt;now&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;	}
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;});
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h4 id="3-dbsql直書き"&gt;3. DB/SQL直書き&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;now&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;prisma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;someModel&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;create&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="c1"&gt;// ...他のフィールド
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="nx"&gt;deletedAt&lt;/span&gt;: &lt;span class="kt"&gt;now&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="3-dbsql直書き"&gt;3. DB/SQL直書き&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;SQLを直接発行し、DB側の&lt;code&gt;ON UPDATE&lt;/code&gt;や&lt;code&gt;DEFAULT CURRENT_TIMESTAMP&lt;/code&gt;などの仕組みで、JST時刻が自動生成されるケース。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id="主な対応策"&gt;主な対応策&lt;/h2&gt;
-&lt;p&gt;どの経路（アプリ・ORM・DB）から時刻が生成・保存されても、最終的にJSTで一貫した時刻管理ができるように設計・運用します。&lt;/p&gt;</description></item><item><title>Commitizenによる統一されたGitコミットメッセージの管理</title><link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link><pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid><description/></item><item><title>Gitフックを使用したmainブランチ直接Push防止の実装</title><link>https://yuhi-sa.github.io/posts/20231204_git/1/</link><pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid><description/></item><item><title>PythonでJSONを返す簡易モックサーバーの構築</title><link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid><description/></item></channel></rss>
+&lt;p&gt;どの経路（アプリ・ORM・DB）から時刻が生成・保存されても、最終的にJSTで一貫した時刻管理ができるように設計・運用します。&lt;/p&gt;
+&lt;h3 id="db自動生成の見直し"&gt;DB自動生成の見直し&lt;/h3&gt;
+&lt;p&gt;Prisma schemaの&lt;code&gt;@default&lt;/code&gt;値に&lt;code&gt;dbgenerated(&amp;quot;CURRENT_TIMESTAMP(3)&amp;quot;)&lt;/code&gt;を採用し、&lt;strong&gt;JSTで時刻生成&lt;/strong&gt;を行うように変更。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;createdAt DateTime @default(dbgenerated(&amp;#34;CURRENT_TIMESTAMP(3)&amp;#34;)) @map(&amp;#34;created_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;updatedAt DateTime @default(dbgenerated(&amp;#34;CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)&amp;#34;)) @map(&amp;#34;updated_at&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;補足：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dbgenerated(&amp;quot;NOW(3)&amp;quot;)&lt;/code&gt;も同様の動作となりますが、標準性や移植性の観点からは&lt;code&gt;CURRENT_TIMESTAMP&lt;/code&gt;の利用を推奨します。&lt;/li&gt;
+&lt;li&gt;なお、PrismaのMySQL対応には既知のバグがあり、&lt;code&gt;DATETIME(3)&lt;/code&gt;型のカラムに&lt;code&gt;@default dbgenerated(&amp;quot;CURRENT_TIMESTAMP(3)&amp;quot;)&lt;/code&gt;を設定すると、スキーマ変更がなくても&lt;code&gt;prisma migrate dev&lt;/code&gt;実行時に同内容のmigrationファイルが繰り返し生成される場合があります。
+この場合、migrationファイルの内容を確認し、実質的な差分がない場合は手動で削除するなどの運用をする必要があります。&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/prisma/prisma/issues/20586"&gt;https://github.com/prisma/prisma/issues/20586&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="アプリ生成の補正"&gt;アプリ生成の補正&lt;/h3&gt;
+&lt;p&gt;Prisma Clientの拡張（&lt;code&gt;$extends&lt;/code&gt;）で、&lt;strong&gt;書き込み時にUTC→JST、取得時にJST→UTC&lt;/strong&gt;の補正を自動化。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-typescript" data-lang="typescript"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;setOffsetTime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;offsetTime&lt;/span&gt;: &lt;span class="kt"&gt;number&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;Object&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kt"&gt;object&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="k"&gt;instanceof&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;			&lt;span class="kt"&gt;object&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getTime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;offsetTime&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;typeof&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;			&lt;span class="nx"&gt;setOffsetTime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;offsetTime&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;PrismaClient&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;$extends&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="nx"&gt;$allModels&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;			&lt;span class="kr"&gt;async&lt;/span&gt; &lt;span class="nx"&gt;$allOperations&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;				&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;offsetTime&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// JST補正
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;				&lt;span class="nx"&gt;setOffsetTime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;offsetTime&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;				&lt;span class="kr"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;				&lt;span class="nx"&gt;setOffsetTime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;offsetTime&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;				&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;			&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;		&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="dbsql直書き"&gt;DB/SQL直書き&lt;/h3&gt;
+&lt;p&gt;DBやSQLで直接時刻を生成・更新する場合も、MySQLサーバー自体のタイムゾーン設定がJSTで統一されていれば、&lt;code&gt;DEFAULT CURRENT_TIMESTAMP&lt;/code&gt;や&lt;code&gt;ON UPDATE CURRENT_TIMESTAMP&lt;/code&gt;による自動生成時刻もJSTとなります。
+そのため、アプリやORM経由でJSTに統一した時刻と、DB/SQL直書きで生成される時刻にズレが生じず、一貫性が保たれるため問題ありません。&lt;/p&gt;</description></item><item><title>Commitizenによる統一されたGitコミットメッセージの管理</title><link>https://yuhi-sa.github.io/posts/20231208_cz/1/</link><pubDate>Fri, 08 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231208_cz/1/</guid><description/></item><item><title>Gitフックを使用したmainブランチ直接Push防止の実装</title><link>https://yuhi-sa.github.io/posts/20231204_git/1/</link><pubDate>Mon, 04 Dec 2023 09:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20231204_git/1/</guid><description/></item><item><title>PythonでJSONを返す簡易モックサーバーの構築</title><link>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</link><pubDate>Sat, 16 Jul 2022 15:00:23 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20220716_python_mock_server/1/</guid><description/></item></channel></rss>

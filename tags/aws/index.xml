@@ -5,31 +5,42 @@
 &lt;/ul&gt;
 &lt;h2 id="1日目午前"&gt;1日目午前&lt;/h2&gt;
 &lt;h3 id="プロトタイプフェーズ100人以下のシステムの場合"&gt;プロトタイプフェーズ(100人以下)のシステムの場合&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;4
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;5
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;6
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;7
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;8
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;9
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;graph TD
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; User -- Request--&amp;gt; Route53
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Route53 -- DNS Resolution --&amp;gt; ElasticIP
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; subgraph VPC [AWS VPC]
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ElasticIP --&amp;gt; EC2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; EC2 --&amp;gt;| RDS
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; RDS --&amp;gt;| EC2
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; EC2 --&amp;gt; ElasticIP
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;主要コンポーネント:&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>【AWS】JAWS DAYS 2025に参加してきた</title><link>https://yuhi-sa.github.io/posts/20250301_aws/1/</link><pubDate>Sun, 02 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250301_aws/1/</guid><description>&lt;h2 id="イベント概要"&gt;イベント概要&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; User -- Request--&amp;gt; Route53
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Route53 -- DNS Resolution --&amp;gt; ElasticIP
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph VPC [AWS VPC]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ElasticIP --&amp;gt; EC2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; EC2 --&amp;gt;| RDS
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; RDS --&amp;gt;| EC2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; EC2 --&amp;gt; ElasticIP
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;主要コンポーネント:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Route 53&lt;/strong&gt;: AWSのDNSサービス。ドメイン名をIPアドレスに変換する役割を担います。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Elastic IP&lt;/strong&gt;: 固定IPアドレスを提供するサービス。EC2インスタンスが再起動しても同じIPアドレスを維持できます。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;EC2&lt;/strong&gt;: 仮想サーバーインスタンスを提供するサービス。アプリケーションを実行します。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RDS&lt;/strong&gt;: リレーショナルデータベースサービス。データの永続化を担当します。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;このフェーズの特徴:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;シンプルな構成で迅速に開発・デプロイが可能&lt;/li&gt;
+&lt;li&gt;少ないリソースで運用可能&lt;/li&gt;
+&lt;li&gt;単一障害点が存在するため、高可用性は限定的&lt;/li&gt;
+&lt;li&gt;水平スケーリングの仕組みがない&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="vpcについて"&gt;VPCについて&lt;/h2&gt;
+&lt;h3 id="vpcとは"&gt;VPCとは&lt;/h3&gt;
+&lt;p&gt;VPC (Virtual Private Cloud) は、AWS上で独自の仮想ネットワークを作成するサービスです。オンプレミスのネットワーク環境と同様の制御が可能で、セキュリティやネットワークの設定を細かく管理できます。&lt;/p&gt;
+&lt;h3 id="サブネットの概念"&gt;サブネットの概念&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;サブネット&lt;/strong&gt;: VPC内のIPアドレス範囲を区切る単位&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;パブリックサブネット&lt;/strong&gt;: インターネットへの直接アクセスが可能なサブネット&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;プライベートサブネット&lt;/strong&gt;: インターネットから直接アクセスできないサブネット&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="vpcにおけるセキュリティ制御"&gt;VPCにおけるセキュリティ制御&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;NACL (Network Access Control List)&lt;/strong&gt;:&lt;/p&gt;</description></item><item><title>【AWS】JAWS DAYS 2025に参加してきた</title><link>https://yuhi-sa.github.io/posts/20250301_aws/1/</link><pubDate>Sun, 02 Mar 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250301_aws/1/</guid><description>&lt;h2 id="イベント概要"&gt;イベント概要&lt;/h2&gt;
 &lt;div class="image-row"&gt;
  &lt;img src=".././1.jpeg" alt="イベント概要" width="60%" /&gt;
 &lt;/div&gt;

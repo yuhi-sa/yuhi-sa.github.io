@@ -1,12 +1,12 @@
 /*
   TomatoHugo Design Variables
-  Simple Black & White Color System
+  Warm Tomato Color System
   Minimal design tokens for maintainable styling
 */
 
 :root {
   /* ============================================
-   * SIMPLE BLACK & WHITE COLOR SYSTEM
+   * WARM TOMATO COLOR SYSTEM
    ============================================ */
   
   /* Core Colors */
@@ -17,6 +17,12 @@
   --text-muted: #666666;
   --border-light: #e0e0e0;
   --border-medium: #cccccc;
+
+  /* Accent Colors */
+  --accent: #e54d2e;
+  --accent-hover: #c9391c;
+  --accent-light: #fef2f0;
+  --accent-text: #ffffff;
   
   /* ============================================
    * TYPOGRAPHY SYSTEM
@@ -86,7 +92,7 @@
 }
 
 /* ============================================
- * DARK THEME - SIMPLE BLACK & WHITE
+ * DARK THEME - WARM TOMATO COLORS
  ============================================ */
 
 [data-theme="dark"] {
@@ -97,7 +103,13 @@
   --text-muted: #888888;
   --border-light: #333333;
   --border-medium: #444444;
-  
+
+  /* Accent Colors */
+  --accent: #f07563;
+  --accent-hover: #f59484;
+  --accent-light: #2a1512;
+  --accent-text: #ffffff;
+
   /* Minimal shadows for dark mode */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.8);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.8);

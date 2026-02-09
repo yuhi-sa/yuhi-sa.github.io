@@ -19,6 +19,7 @@
   font-family: var(--font-family-mono);
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
 /* Line Numbers */
@@ -132,18 +133,19 @@
 
 [data-theme="dark"] .chroma {
   color: #e1e4e8;
-  background: #24292e;
-  border-color: var(--border-light);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 [data-theme="dark"] .chroma .lnt,
 [data-theme="dark"] .chroma .ln {
   color: #959da5;
-  border-color: var(--border-light);
+  border-right: 1px solid var(--border-medium);
 }
 
 [data-theme="dark"] .chroma .hl {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 [data-theme="dark"] .chroma .err {

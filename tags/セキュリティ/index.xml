@@ -12,15 +12,8 @@
 &lt;p&gt;最初は攻撃手法や脆弱性の全容が分からず、まず「どんな攻撃が来るのか」を知ることを重視。サービスが止まった場合は復旧のみ行い、観察フェーズとした。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;アクセスログを確認（自分たちのIPを除外）
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo tail &lt;span style="font-weight:bold"&gt;-&lt;/span&gt;n &lt;span style="color:#099"&gt;500&lt;/span&gt; &lt;span style="font-weight:bold"&gt;/&lt;/span&gt;&lt;span style="font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;&lt;span style="color:#999"&gt;log&lt;/span&gt;&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;httpd&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;access_log &lt;span style="font-weight:bold"&gt;|&lt;/span&gt; grep &lt;span style="font-weight:bold"&gt;-&lt;/span&gt;v &lt;span style="color:#b84"&gt;&amp;#34;192.168.0.200&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;httpd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;access_log&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;192.168.0.200&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;lastコマンドでアクセスユーザーの確認&lt;/li&gt;
 &lt;li&gt;/var/www/htmlの改ざんチェック&lt;/li&gt;
 &lt;li&gt;アクセスログをzip化しAI（ChatGPT）に投げてアドバイスをもらう&lt;/li&gt;
@@ -29,28 +22,13 @@
 &lt;p&gt;1セット目の観察で「SSH経由での侵入・改ざん」や「WordPressの脆弱性を突かれ設定ファイルが取得されている」ことが判明。改ざん検知や復旧体制を強化し、被害拡大を防ぐことを重視。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;/var/www/html&lt;/code&gt;をバックアップし、diffで改ざんを検知
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cp &lt;span style="font-weight:bold"&gt;-&lt;/span&gt;r &lt;span style="font-weight:bold"&gt;/&lt;/span&gt;&lt;span style="font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;www&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;html &lt;span style="font-weight:bold"&gt;/&lt;/span&gt;tmp&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;html
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo diff &lt;span style="font-weight:bold"&gt;-&lt;/span&gt;r &lt;span style="font-weight:bold"&gt;/&lt;/span&gt;&lt;span style="font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;www&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;html &lt;span style="font-weight:bold"&gt;/&lt;/span&gt;tmp&lt;span style="font-weight:bold"&gt;/&lt;/span&gt;html
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-gdscript3" data-lang="gdscript3"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;改ざんがあれば即時復旧&lt;/li&gt;
 &lt;li&gt;MySQLのデータもdumpしてバックアップ
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mysqldump -u root -p wordpress &amp;gt; /tmp/wordpress_backup.sql
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mysqldump -u root -p wordpress &amp;gt; /tmp/wordpress_backup.sql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;ログ監視も継続&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="3セット目"&gt;3セット目&lt;/h3&gt;
@@ -58,28 +36,61 @@
 &lt;ul&gt;
 &lt;li&gt;不要なWordPressプラグインの洗い出し・停止&lt;/li&gt;
 &lt;li&gt;FTPが悪用されていたためFTPサービス停止
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo service vsftpd stop
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo service vsftpd stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;不要アカウントのロック、利用アカウントのパスワード変更
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo passwd -l admin
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo passwd -l admin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;PUTメソッド（正常運用で不要）が悪用されていたため禁止&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;サービスやプラグインの削除・停止は1つずつ行い、影響を都度確認しながら進めた。&lt;/p&gt;</description></item><item><title>Hackfes2025参加メモ</title><link>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</link><pubDate>Sat, 19 Jul 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</guid><description>&lt;h2 id="イベント概要"&gt;イベント概要&lt;/h2&gt;
+&lt;p&gt;サービスやプラグインの削除・停止は1つずつ行い、影響を都度確認しながら進めた。&lt;/p&gt;
+&lt;h3 id="4セット目"&gt;4セット目&lt;/h3&gt;
+&lt;p&gt;前回までで主なバックドアや攻撃経路を塞いだつもりだったが、特定の商品だけ購入できなくなるという異常が発生。「データ改ざんが起きている」と判断し、原因究明とアクセス制限を強化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;phpMyAdminへのアクセスを禁止&lt;/li&gt;
+&lt;li&gt;特定商品のみ購入できなくなり、データ改ざんを疑うも、どこが改ざんされたか特定できずにタイムアップ&lt;/li&gt;
+&lt;li&gt;ネタバレで「商品タイトルの改ざん」と判明。自分たちは「商品情報自体（在庫や価格など）の改ざん」と思い込み、DBばかりを重点的に調査していた。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="ネタバレで印象に残ったこと"&gt;ネタバレで印象に残ったこと&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;脆弱なWordPressは「停止」だけでなく「削除」も必要な場合がある&lt;/li&gt;
+&lt;li&gt;一部プラグインはdisable関数が未実装で、WordPressからデータが渡ることがある&lt;/li&gt;
+&lt;li&gt;WebDAVの設定やFTPサーバーのログも要注意&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://ja.wikipedia.org/wiki/%E4%B8%8A%E9%87%8E%E5%AE%A3"&gt;上野宣&lt;/a&gt;さんの解き方が一番美しかったとのこと。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1回目は徹底的にログを取り続ける&lt;/li&gt;
+&lt;li&gt;クローラーの1分ごとのアクセスに合わせて、1分ごとに設定を変え、どの設定で購入できなくなるかを確認する&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一般的な障害対応については、以下の記事が参考になる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://note.com/mmiya/n/n746eb2e36f81"&gt;重大事故の時にどうするか？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="チームの振り返り"&gt;チームの振り返り&lt;/h1&gt;
+&lt;h3 id="チーム運営情報共有"&gt;チーム運営・情報共有&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;防御対応の役割分担を明確にして対応&lt;/li&gt;
+&lt;li&gt;セットごとにスレッドでやったこと・気づきを共有&lt;/li&gt;
+&lt;li&gt;怪しい点や解決案も積極的に提案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="ai活用"&gt;AI活用&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;アクセスログやエラーログをAIに投げて助言・対策案をもらった&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="今後の開発運用で取り入れたいこと"&gt;今後の開発運用で取り入れたいこと&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;余計なライブラリは入れない&lt;/li&gt;
+&lt;li&gt;脆弱なバージョンは使わない&lt;/li&gt;
+&lt;li&gt;EOL対応を徹底&lt;/li&gt;
+&lt;li&gt;権限管理の徹底&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="まとめ個人の学び"&gt;まとめ・個人の学び&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;普段はSplunkやk8s環境で運用しているため、Linuxのログの場所や見るべきポイントの知見が少なかったと実感&lt;/li&gt;
+&lt;li&gt;あらゆるログを幅広く確認することの大切さ&lt;/li&gt;
+&lt;li&gt;改ざん箇所は先入観なく、システマチックに1つずつ確認する必要性&lt;/li&gt;
+&lt;li&gt;不要なサービスやアカウントは作らない&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>Hackfes2025参加メモ</title><link>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</link><pubDate>Sat, 19 Jul 2025 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20250719_hackfes2025/1/</guid><description>&lt;h2 id="イベント概要"&gt;イベント概要&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;日時: 2025年7月19日(土)&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://hackfes2025.hacker.or.jp"&gt;https://hackfes2025.hacker.or.jp&lt;/a&gt;&lt;/li&gt;
@@ -91,43 +102,33 @@
 &lt;h3 id="corscross-origin-resource-sharingの設定不備"&gt;CORS（Cross-Origin Resource Sharing）の設定不備&lt;/h3&gt;
 &lt;p&gt;ログインAPIへのプリフライトリクエスト（OPTIONSメソッド）は、CORSによって処理されます。&lt;/p&gt;
 &lt;p&gt;プリフライトリクエスト&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;
-&lt;table style="border-spacing:0;padding:0;margin:0;border:0;"&gt;&lt;tr&gt;&lt;td style="vertical-align:top;padding:0;margin:0;border:0;"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 1
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 2
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 3
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 4
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 5
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 6
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 7
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 8
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt; 9
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;10
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;11
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;12
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;13
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;14
-&lt;/span&gt;&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"&gt;15
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%"&gt;
-&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;OPTIONS /api/v1/login HTTP/1.1
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Host: api.example.jp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Accept: */*
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Access-Control-Request-Method: POST
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Access-Control-Request-Headers: content-type
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Origin: http://spa.example.jp
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sec-Fetch-Mode: cors
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sec-Fetch-Site: cross-site
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Sec-Fetch-Dest: empty
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Referer: http://spa.example.jp/
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Accept-Encoding: gzip, deflate, br
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Accept-Language: ja,en-US;q=0.9,en;q=0.8
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Priority: u=1, i
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Connection: keep-alive
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;レスポンス&lt;/p&gt;</description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h2 id="きっかけ"&gt;きっかけ&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;OPTIONS /api/v1/login HTTP/1.1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host: api.example.jp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept: */*
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Request-Method: POST
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Request-Headers: content-type
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Origin: http://spa.example.jp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Mode: cors
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Site: cross-site
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Sec-Fetch-Dest: empty
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Referer: http://spa.example.jp/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Encoding: gzip, deflate, br
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Accept-Language: ja,en-US;q=0.9,en;q=0.8
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Priority: u=1, i
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Connection: keep-alive
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;レスポンス&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;HTTP/1.1 204 No Content
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;X-Powered-By: Express
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Allow-Origin: http://spa.example.jp
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Vary: Origin, Access-Control-Request-Headers
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Allow-Credentials: true
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Allow-Methods: GET,HEAD,PUT,PATCH,POST,DELETE
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Allow-Headers: content-type
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Access-Control-Max-Age: 300
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Content-Length: 0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Date: Sat, 19 Jul 2025 01:31:57 GMT
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Burp Repeaterを使ってOriginヘッダーを悪意あるドメインに書き換えたリクエストを送信すると、本来許可されるべきではないオリジンからのリクエストに対しても、アクセスが許可されてしまいます。&lt;/p&gt;</description></item><item><title>自費で18万円かけてCISSP試験に挑戦してみた話</title><link>https://yuhi-sa.github.io/posts/20240608_cissp/3/</link><pubDate>Sat, 09 Nov 2024 09:10:00 +0900</pubDate><guid>https://yuhi-sa.github.io/posts/20240608_cissp/3/</guid><description>&lt;h2 id="きっかけ"&gt;きっかけ&lt;/h2&gt;
 &lt;p&gt;昨今の情報漏洩うんぬんかんぬんの話を聞くと、やらかしそうで怖い。(学生時代、サークルのDBを消し飛ばしたりした。。。)&lt;br&gt;
 もちろん、誰のPCがハッキングされてもおかしくありませんし、その人を責める文化は良くないと思います。しかし、自分のPCが原因で情報漏洩するのは嫌だああああああああ。&lt;br&gt;
 ということで、まずは知識をつけねばと思い、手近なところでIPAが実施する&lt;a href="https://www.ipa.go.jp/shiken/kubun/sc.html"&gt;情報処理安全確保支援士&lt;/a&gt;を取ってみました。&lt;br&gt;
