@@ -1,0 +1,159 @@
+<!doctype html><html lang=en dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build …"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20231218_hugo/1/><meta property="og:type" content="article"><meta property="og:title" content="Integrating TypeScript and React into a Hugo Theme"><meta property="og:description" content="A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build …"><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20231218_hugo/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="en"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2023-12-18T09:00:23+09:00"><meta property="article:modified_time" content="2023-12-18T09:00:23+09:00"><meta property="article:tag" content="Hugo"><meta property="article:tag" content="TypeScript"><meta property="article:tag" content="React"><meta property="article:tag" content="Web Development"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Integrating TypeScript and React into a Hugo Theme"><meta name=twitter:description content="A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Integrating TypeScript and React into a Hugo Theme | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20231218_hugo/1/><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20231218_hugo/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Integrating TypeScript and React into a Hugo Theme","description":"A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build configuration.","author":{"@type":"Person","name":""},"publisher":{"@type":"Organization","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2023-12-18T09:00:23\u002b09:00","dateModified":"2023-12-18T09:00:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20231218_hugo\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20231218_hugo\/1\/","wordCount":860,"keywords":["Hugo","TypeScript","React","Web Development"],"articleSection":"Posts","inLanguage":"en","timeRequired":"PT5M"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.c50b1500452fdb66f687cdcbf45a7774123c0111e1054e26db51fee604557b28.css integrity="sha256-xQsVAEUv22b2h83L9Fp3dBI8ARHhBU4m21H+5gRVeyg=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script async src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-LN6QP6VVM3")</script><script data-ad-client=ca-pub-9558545098866170 async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Integrating TypeScript and React into a Hugo Theme</h1><p class="lead article-description" itemprop=description>A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build configuration.</p><div class=article-meta><time datetime=2023-12-18T09:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+December 18, 2023
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+5 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/hugo/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Hugo
+</a><a href=/en/tags/typescript/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>TypeScript
+</a><a href=/en/tags/react/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>React
+</a><a href=/en/tags/web-development/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Web Development</a></div></header><div class=article-content itemprop=articleBody><p>This article explains how to introduce TypeScript and React when creating a custom Hugo theme. For the basic Hugo setup, please refer to <a href=https://yuhi-sa.github.io/posts/20210204_hugo/1/>Creating a Free Blog with Markdown (GitHub Pages + Hugo)</a>.</p><h2 id=1-initializing-the-hugo-theme>1. Initializing the Hugo Theme</h2><p>You can easily create a theme scaffold using the <code>hugo new theme</code> command.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo new theme tomatohugo
+</span></span></code></pre></div><p>Running this command creates a directory named <code>tomatohugo</code> with the basic file and directory structure needed for theme development.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>tomatohugo git:(main) tree .
+</span></span><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>├── LICENSE
+</span></span><span class=line><span class=cl>├── README.md
+</span></span><span class=line><span class=cl>├── archetypes/
+</span></span><span class=line><span class=cl>│   └── default.md
+</span></span><span class=line><span class=cl>├── assets/
+</span></span><span class=line><span class=cl>│   ├── css/
+</span></span><span class=line><span class=cl>│   │   └── main.css
+</span></span><span class=line><span class=cl>│   └── js/
+</span></span><span class=line><span class=cl>│       └── main.js
+</span></span><span class=line><span class=cl>├── content/
+</span></span><span class=line><span class=cl>│   ├── _index.md
+</span></span><span class=line><span class=cl>│   └── posts/
+</span></span><span class=line><span class=cl>│       ├── _index.md
+</span></span><span class=line><span class=cl>│       ├── post-1.md
+</span></span><span class=line><span class=cl>│       ├── post-2.md
+</span></span><span class=line><span class=cl>│       └── post-3/
+</span></span><span class=line><span class=cl>│           ├── bryce-canyon.jpg
+</span></span><span class=line><span class=cl>│           └── index.md
+</span></span><span class=line><span class=cl>├── data/
+</span></span><span class=line><span class=cl>├── hugo.toml
+</span></span><span class=line><span class=cl>├── i18n/
+</span></span><span class=line><span class=cl>├── layouts/
+</span></span><span class=line><span class=cl>│   ├── _default/
+</span></span><span class=line><span class=cl>│   │   ├── baseof.html
+</span></span><span class=line><span class=cl>│   │   ├── home.html
+</span></span><span class=line><span class=cl>│   │   ├── list.html
+</span></span><span class=line><span class=cl>│   │   └── single.html
+</span></span><span class=line><span class=cl>│   └── partials/
+</span></span><span class=line><span class=cl>│       ├── footer.html
+</span></span><span class=line><span class=cl>│       ├── head/
+</span></span><span class=line><span class=cl>│       │   ├── css.html
+</span></span><span class=line><span class=cl>│       │   └── js.html
+</span></span><span class=line><span class=cl>│       ├── head.html
+</span></span><span class=line><span class=cl>│       ├── header.html
+</span></span><span class=line><span class=cl>│       ├── menu.html
+</span></span><span class=line><span class=cl>│       └── terms.html
+</span></span><span class=line><span class=cl>├── static/
+</span></span><span class=line><span class=cl>│   └── favicon.ico
+</span></span><span class=line><span class=cl>└── theme.toml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>15 directories, 25 files
+</span></span></code></pre></div><ul><li><code>LICENSE</code>: Theme license information.</li><li><code>README.md</code>: Theme description and usage instructions.</li><li><code>archetypes/</code>: Templates for content creation.</li><li><code>assets/</code>: Frontend resources such as CSS and JavaScript. Processed by Hugo Pipes.</li><li><code>content/</code>: Sample content.</li><li><code>data/</code>: Data files used by the theme.</li><li><code>hugo.toml</code>: Site-wide configuration file (Hugo 0.112.0+).</li><li><code>i18n/</code>: Translation files for multilingual support.</li><li><code>layouts/</code>: HTML template files.</li><li><code>static/</code>: Static files (images, favicon, etc.). Copied as-is during build.</li><li><code>theme.toml</code>: File defining theme settings.</li></ul><p>After initialization, you can start a local server with the <code>hugo server</code> command to verify that the simple theme works correctly.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hugo server
+</span></span></code></pre></div><p>Commit example after initialization: <a href=https://github.com/yuhi-sa/tomatohugo/commit/695eed912b903388faf16a1791b852697811d348>https://github.com/yuhi-sa/tomatohugo/commit/695eed912b903388faf16a1791b852697811d348</a></p><h2 id=2-introducing-typescript>2. Introducing TypeScript</h2><p>Set up the Node.js environment and configure Webpack and the TypeScript compiler to use TypeScript within the theme.</p><ol><li><p><strong>Initialize <code>package.json</code></strong>:
+Run the <code>npm init</code> command at the root of the theme directory to create a <code>package.json</code> file.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div></li></ol><p>npm init -y
+```</p><ol start=2><li><p><strong>Install TypeScript and <code>ts-loader</code></strong>:
+Install the TypeScript compiler and the loader for processing TypeScript files with Webpack.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div></li></ol><p>npm install &ndash;save-dev typescript ts-loader webpack webpack-cli
+```</p><ol start=3><li><p><strong>Create <code>tsconfig.json</code></strong>:
+Create the TypeScript configuration file <code>tsconfig.json</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json></code></pre></div></li></ol><p>{
+&ldquo;compilerOptions&rdquo;: {
+&ldquo;target&rdquo;: &ldquo;es5&rdquo;, // JavaScript output version
+&ldquo;module&rdquo;: &ldquo;commonjs&rdquo;, // Module system
+&ldquo;outDir&rdquo;: &ldquo;./assets/js/&rdquo;, // Output directory for compiled JS files
+&ldquo;strict&rdquo;: true // Enable strict type checking
+},
+&ldquo;include&rdquo;: [
+&ldquo;./assets/ts/**/*.ts&rdquo; // TypeScript files to compile
+],
+&ldquo;exclude&rdquo;: [
+&ldquo;node_modules&rdquo; // Directories to exclude
+]
+}
+```</p><ol start=4><li><p><strong>Create a TypeScript file</strong>:
+Create a TypeScript file (e.g., <code>main.ts</code>) in the <code>./assets/ts/</code> directory.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript:assets/ts/main.ts data-lang=typescript:assets/ts/main.ts></code></pre></div></li></ol><p>const message: string = &ldquo;Hello, TypeScript!&rdquo;;
+console.log(message);
+```</p><ol start=5><li><p><strong>Create <code>webpack.config.js</code></strong>:
+Create the Webpack configuration file. Webpack is a module bundler for JavaScript applications, used here to bundle TypeScript files.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:webpack.config.js data-lang=javascript:webpack.config.js></code></pre></div></li></ol><p>const path = require(&lsquo;path&rsquo;);</p><p>module.exports = {
+mode: &lsquo;development&rsquo;, // or &lsquo;production&rsquo;
+entry: &lsquo;./assets/ts/main.ts&rsquo;, // Entry point
+module: {
+rules: [
+{
+test: /\.ts$/, // Target .ts files
+use: &rsquo;ts-loader&rsquo;, // Use ts-loader
+exclude: /node_modules/,
+},
+],
+},
+resolve: {
+extensions: [&rsquo;.ts&rsquo;, &lsquo;.js&rsquo;], // Extensions to resolve during import
+},
+output: {
+filename: &lsquo;bundle.js&rsquo;, // Output file name
+path: path.resolve(__dirname, &lsquo;assets/js&rsquo;), // Output directory
+},
+};
+```</p><ol start=6><li><p><strong>Run the build</strong>:
+Run Webpack to compile TypeScript files into JavaScript and bundle them.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div></li></ol><p>npx webpack
+```
+This creates <code>./assets/js/bundle.js</code>.</p><ol start=7><li><p><strong>Integration into Hugo templates</strong>:
+To incorporate the generated JavaScript file into Hugo templates, add code like the following in an appropriate location such as <code>layouts/partials/head/js.html</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-html:layouts/partials/head/js.html data-lang=html:layouts/partials/head/js.html></code></pre></div></li></ol><p>{{- with resources.Get &ldquo;js/bundle.js&rdquo; }}</p><script src="{{ .RelPermalink }}"></script><p>{{- end }}
+```
+PR example for TypeScript introduction: <a href=https://github.com/yuhi-sa/tomatohugo/pull/1>https://github.com/yuhi-sa/tomatohugo/pull/1</a></p><h2 id=3-introducing-react>3. Introducing React</h2><p>Add React to the TypeScript environment.</p><ol><li><p><strong>Install React-related libraries</strong>:
+Install React itself, the DOM manipulation library, and their type definition files.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div></li></ol><p>npm install &ndash;save react react-dom
+npm install &ndash;save-dev @types/react @types/react-dom
+```</p><ol start=2><li><p><strong>Writing a React component</strong>:
+Since React uses JSX (JavaScript XML) syntax for writing components, change the TypeScript file extension to <code>assets/ts/main.tsx</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript:assets/ts/main.tsx data-lang=typescript:assets/ts/main.tsx></code></pre></div></li></ol><p>import React from &lsquo;react&rsquo;;
+import { createRoot } from &lsquo;react-dom/client&rsquo;; // Recommended API for React 18+</p><p>const App = () => {
+return (<div><h1>Hello, React!</h1></div>);
+};</p><p>// Get the mount point element in HTML
+const appElement = document.getElementById(&lsquo;app-root&rsquo;); // Example: id is &lsquo;app-root&rsquo;
+if (appElement) {
+const root = createRoot(appElement); // Create root with createRoot
+root.render(<app>); // Render the component
+}
+```
+<strong>Note</strong>: From React 18 onwards, using <code>createRoot</code> instead of <code>ReactDOM.render</code> is recommended. Also change the mount point ID in the HTML to <code>app-root</code> or similar.</p><ol start=3><li><p><strong>Integration into Hugo templates</strong>:
+Add an HTML element for calling the React component to the appropriate Hugo template file (e.g., <code>layouts/_default/single.html</code> or <code>layouts/_default/home.html</code>).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html></code></pre></div></li></ol><main><div id=app-root></div></main><p>{{- partial &ldquo;head/js.html&rdquo; . -}}
+```</p><ol start=4><li><p><strong>Update Webpack configuration</strong>:
+Update the Webpack configuration to bundle React components (.tsx files).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript:webpack.config.js data-lang=javascript:webpack.config.js></code></pre></div></li></ol><p>const path = require(&lsquo;path&rsquo;);</p><p>module.exports = {
+mode: &lsquo;development&rsquo;,
+entry: &lsquo;./assets/ts/main.tsx&rsquo;, // Change entry point to .tsx
+module: {
+rules: [
+{
+test: /\.tsx?$/, // Target .ts or .tsx files
+use: &rsquo;ts-loader&rsquo;,
+exclude: /node_modules/,
+},
+],
+},
+resolve: {
+extensions: [&rsquo;.ts&rsquo;, &lsquo;.tsx&rsquo;, &lsquo;.js&rsquo;], // Add .tsx to extensions
+},
+output: {
+filename: &lsquo;bundle.js&rsquo;,
+path: path.resolve(__dirname, &lsquo;assets/js&rsquo;),
+},
+};
+```</p><ol start=5><li><p><strong>Verification</strong>:
+Verify the setup by starting the local server and confirming that &ldquo;Hello, React!&rdquo; is displayed.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div></li></ol><p>hugo server
+```
+PR example for React introduction: <a href=https://github.com/yuhi-sa/tomatohugo/pull/2>https://github.com/yuhi-sa/tomatohugo/pull/2</a></p></div><footer class=article-footer></footer><meta itemprop=wordCount content="860"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20231218_hugo/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/en/posts/20231213_shell/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span><span class=post-nav__title>Shell Script to Convert Excel Files to CSV</span>
+</a><a href=/en/posts/20240504_use_client/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
+</span><span class=post-nav__title>Proper Usage Patterns for the use client Directive in Next.js App Router</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20221111_react/1/>Building a React/TypeScript Development Environment with Webpack and Babel</a></h3><div class=card-meta><time datetime=2022-11-11>November 11, 2022</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/en/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/en/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Integrating TypeScript and React into a Hugo Theme</span>
+<meta itemprop=position content="4"></li></ol></nav></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container pt-4 pb-3" style="border-top:2px solid var(--accent,#e54d2e)"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2026
+tomato blog.
+All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script>"serviceWorker"in navigator&&window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").then(function(e){console.log("SW registered: ",e)}).catch(function(e){console.log("SW registration failed: ",e)})})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Integrating TypeScript and React into a Hugo Theme","url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20231218_hugo\/1\/","description":"A step-by-step guide to integrating TypeScript and React into a Hugo theme using Webpack, covering tsconfig.json setup, React component mounting, and build configuration.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
