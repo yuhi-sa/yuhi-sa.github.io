@@ -5,6 +5,8 @@ Disallow:
 
 
 Sitemap: https://yuhi-sa.github.io/sitemap.xml
+Sitemap: https://yuhi-sa.github.io/devtoolbox/sitemap.xml
+Sitemap: https://yuhi-sa.github.io/calcbox/sitemap.xml
 
 
 # Block AI crawlers if specified
