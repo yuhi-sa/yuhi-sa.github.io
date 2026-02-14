@@ -329,7 +329,7 @@ body {
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  content: ">";
+  content: '>';
   margin: 0 var(--space-2);
 }
 

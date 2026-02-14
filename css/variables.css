@@ -29,9 +29,8 @@
    ============================================ */
 
   /* Font Families */
-  --font-family-sans:
-    -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-  --font-family-mono: "SF Mono", Monaco, "Consolas", monospace;
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Consolas', monospace;
 
   /* Font Weights */
   --font-normal: 400;
@@ -96,7 +95,7 @@
  * DARK THEME - WARM TOMATO COLORS
  ============================================ */
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --bg-primary: #000000;
   --bg-secondary: #1a1a1a;
   --text-primary: #ffffff;

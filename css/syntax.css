@@ -131,97 +131,97 @@
  * DARK THEME SYNTAX HIGHLIGHTING
  ============================================ */
 
-[data-theme="dark"] .chroma {
+[data-theme='dark'] .chroma {
   color: #e1e4e8;
   background: var(--bg-secondary);
   border: 1px solid var(--border-medium);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-[data-theme="dark"] .chroma .lnt,
-[data-theme="dark"] .chroma .ln {
+[data-theme='dark'] .chroma .lnt,
+[data-theme='dark'] .chroma .ln {
   color: #959da5;
   border-right: 1px solid var(--border-medium);
 }
 
-[data-theme="dark"] .chroma .hl {
+[data-theme='dark'] .chroma .hl {
   background: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .chroma .err {
+[data-theme='dark'] .chroma .err {
   color: #f97583;
   background: rgba(249, 117, 131, 0.1);
 }
 
-[data-theme="dark"] .chroma .k,
-[data-theme="dark"] .chroma .kc,
-[data-theme="dark"] .chroma .kd,
-[data-theme="dark"] .chroma .kp,
-[data-theme="dark"] .chroma .kr,
-[data-theme="dark"] .chroma .kt,
-[data-theme="dark"] .chroma .kn {
+[data-theme='dark'] .chroma .k,
+[data-theme='dark'] .chroma .kc,
+[data-theme='dark'] .chroma .kd,
+[data-theme='dark'] .chroma .kp,
+[data-theme='dark'] .chroma .kr,
+[data-theme='dark'] .chroma .kt,
+[data-theme='dark'] .chroma .kn {
   color: #f97583;
 }
 
-[data-theme="dark"] .chroma .na,
-[data-theme="dark"] .chroma .nb,
-[data-theme="dark"] .chroma .nc,
-[data-theme="dark"] .chroma .nd,
-[data-theme="dark"] .chroma .ne,
-[data-theme="dark"] .chroma .nf,
-[data-theme="dark"] .chroma .nx {
+[data-theme='dark'] .chroma .na,
+[data-theme='dark'] .chroma .nb,
+[data-theme='dark'] .chroma .nc,
+[data-theme='dark'] .chroma .nd,
+[data-theme='dark'] .chroma .ne,
+[data-theme='dark'] .chroma .nf,
+[data-theme='dark'] .chroma .nx {
   color: #b392f0;
 }
 
-[data-theme="dark"] .chroma .no {
+[data-theme='dark'] .chroma .no {
   color: #79b8ff;
 }
 
-[data-theme="dark"] .chroma .nt {
+[data-theme='dark'] .chroma .nt {
   color: #85e89d;
 }
 
-[data-theme="dark"] .chroma .s,
-[data-theme="dark"] .chroma .sa,
-[data-theme="dark"] .chroma .sb,
-[data-theme="dark"] .chroma .sc,
-[data-theme="dark"] .chroma .dl,
-[data-theme="dark"] .chroma .sd,
-[data-theme="dark"] .chroma .s2,
-[data-theme="dark"] .chroma .sh,
-[data-theme="dark"] .chroma .si,
-[data-theme="dark"] .chroma .sx,
-[data-theme="dark"] .chroma .sr,
-[data-theme="dark"] .chroma .s1,
-[data-theme="dark"] .chroma .ss {
+[data-theme='dark'] .chroma .s,
+[data-theme='dark'] .chroma .sa,
+[data-theme='dark'] .chroma .sb,
+[data-theme='dark'] .chroma .sc,
+[data-theme='dark'] .chroma .dl,
+[data-theme='dark'] .chroma .sd,
+[data-theme='dark'] .chroma .s2,
+[data-theme='dark'] .chroma .sh,
+[data-theme='dark'] .chroma .si,
+[data-theme='dark'] .chroma .sx,
+[data-theme='dark'] .chroma .sr,
+[data-theme='dark'] .chroma .s1,
+[data-theme='dark'] .chroma .ss {
   color: #9ecbff;
 }
 
-[data-theme="dark"] .chroma .se {
+[data-theme='dark'] .chroma .se {
   color: #f97583;
 }
 
-[data-theme="dark"] .chroma .m,
-[data-theme="dark"] .chroma .mb,
-[data-theme="dark"] .chroma .mf,
-[data-theme="dark"] .chroma .mh,
-[data-theme="dark"] .chroma .mi,
-[data-theme="dark"] .chroma .il,
-[data-theme="dark"] .chroma .mo {
+[data-theme='dark'] .chroma .m,
+[data-theme='dark'] .chroma .mb,
+[data-theme='dark'] .chroma .mf,
+[data-theme='dark'] .chroma .mh,
+[data-theme='dark'] .chroma .mi,
+[data-theme='dark'] .chroma .il,
+[data-theme='dark'] .chroma .mo {
   color: #79b8ff;
 }
 
-[data-theme="dark"] .chroma .o,
-[data-theme="dark"] .chroma .ow {
+[data-theme='dark'] .chroma .o,
+[data-theme='dark'] .chroma .ow {
   color: #f97583;
 }
 
-[data-theme="dark"] .chroma .c,
-[data-theme="dark"] .chroma .ch,
-[data-theme="dark"] .chroma .cm,
-[data-theme="dark"] .chroma .c1,
-[data-theme="dark"] .chroma .cs,
-[data-theme="dark"] .chroma .cp,
-[data-theme="dark"] .chroma .cpf {
+[data-theme='dark'] .chroma .c,
+[data-theme='dark'] .chroma .ch,
+[data-theme='dark'] .chroma .cm,
+[data-theme='dark'] .chroma .c1,
+[data-theme='dark'] .chroma .cs,
+[data-theme='dark'] .chroma .cp,
+[data-theme='dark'] .chroma .cpf {
   color: #959da5;
 }
