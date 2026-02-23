@@ -254,6 +254,18 @@ body {
   color: var(--accent-text);
 }
 
+/* TAG CLOUD - Sidebar variant (Term pages) */
+.tag-cloud--sidebar {
+  margin-bottom: var(--space-6);
+}
+
+.tag-cloud--sidebar__title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  margin: 0 0 var(--space-3) 0;
+  color: var(--text-primary);
+}
+
 /* Tags in articles */
 .article-tags {
   margin-top: var(--space-4);
@@ -365,8 +377,11 @@ body {
 }
 
 .navbar-toggler-icon {
-  background-image: none; /* We will use font-awesome or custom icon instead if needed */
-  /* For now, let's rely on font awesome which is already included */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23333' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+[data-theme='dark'] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ccc' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .site-header {
