@@ -618,3 +618,72 @@ body {
     flex-direction: column;
   }
 }
+
+/* ============================================
+ * AMAZON ASSOCIATE CARD
+ * ============================================ */
+
+.amazon-card {
+  margin: var(--space-4) 0;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  transition: box-shadow var(--transition-fast);
+}
+
+.amazon-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.amazon-card__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.amazon-card__img {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amazon-card__img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.amazon-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.amazon-card__title {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.amazon-card__cta {
+  display: inline-block;
+  width: fit-content;
+  padding: var(--space-1) var(--space-3);
+  background-color: #ff9900;
+  color: #000000;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  border-radius: 4px;
+  transition: background-color var(--transition-fast);
+}
+
+.amazon-card__link:hover .amazon-card__cta {
+  background-color: #e88b00;
+}

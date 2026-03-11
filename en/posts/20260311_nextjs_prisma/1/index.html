@@ -1,0 +1,618 @@
+<!doctype html><html lang=en dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N+1 prevention, transactions, and …"><meta name=keywords content="Next.js,Prisma,App Router,Server Actions,TypeScript,ORM,Database,N+1 Problem"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/><meta property="og:type" content="article"><meta property="og:title" content="Next.js App Router + Prisma Practical Patterns: Type-Safe Database Operations"><meta property="og:description" content="Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N+1 prevention, transactions, and …"><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="en"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-03-11T11:00:00+09:00"><meta property="article:modified_time" content="2026-03-11T10:38:23+09:00"><meta property="article:tag" content="Next.js"><meta property="article:tag" content="Prisma"><meta property="article:tag" content="TypeScript"><meta property="article:tag" content="Web Development"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Next.js App Router + Prisma Practical Patterns: Type-Safe Database Operations"><meta name=twitter:description content="Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N+1 prevention, transactions, and …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Next.js App Router + Prisma Practical Patterns: Type-Safe Database Operations | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next.js App Router \u002b Prisma Practical Patterns: Type-Safe Database Operations","description":"Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N\u002b1 prevention, transactions, and type-safe queries.","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-03-11T11:00:00\u002b09:00","dateModified":"2026-03-11T10:38:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20260311_nextjs_prisma\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20260311_nextjs_prisma\/1\/","wordCount":2153,"keywords":["Next.js","Prisma","TypeScript","Web Development"],"articleSection":"Posts","inLanguage":"en","timeRequired":"PT11M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/en\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/en\/posts\/"},{"@type":"ListItem","position":3,"name":"Next.js App Router \u002b Prisma Practical Patterns: Type-Safe Database Operations"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.9d6d8fa69ecfbf1dc3bf0c9651f1d6f6bda86c6112544c52b1fa8a1f185baa2e.css integrity="sha256-nW2Ppp7Pvx3DvwyWUfHW9r2obGESVExSsfqKHxhbqi4=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Next.js App Router + Prisma Practical Patterns: Type-Safe Database Operations</h1><p class="lead article-description" itemprop=description>Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N+1 prevention, transactions, and type-safe queries.</p><div class=article-meta><time datetime=2026-03-11T11:00:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+March 11, 2026
+</time><time datetime=2026-03-11T10:38:23+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated
+March 11, 2026
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+11 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/next.js/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Next.js
+</a><a href=/en/tags/prisma/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Prisma
+</a><a href=/en/tags/typescript/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>TypeScript
+</a><a href=/en/tags/web-development/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Web Development</a></div></header><div class=article-content itemprop=articleBody><h2 id=introduction>Introduction</h2><p>Combining Next.js App Router with Prisma enables type-safe database operations directly from Server Components and Server Actions. This article covers practical design patterns with complete code examples.</p><p>For Prisma timezone configuration, see <a href=https://yuhi-sa.github.io/en/posts/20260125_prisma_jst/1/>Prisma and MySQL Timezone Mismatch</a>. For the theoretical background on transactions, see <a href=https://yuhi-sa.github.io/en/posts/20240518_db_transaction/1/>Transaction Isolation Levels and Data Inconsistencies</a>.</p><h2 id=prerequisites-prisma-schema-definition>Prerequisites: Prisma Schema Definition</h2><p>This article uses the following schema as a running example.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>prisma</span><span class=o>/</span><span class=n>schema</span><span class=o>.</span><span class=n>prisma</span>
+</span></span><span class=line><span class=cl><span class=n>generator</span> <span class=n>client</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>provider</span> <span class=o>=</span> <span class=s2>&#34;prisma-client-js&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>datasource</span> <span class=n>db</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>provider</span> <span class=o>=</span> <span class=s2>&#34;postgresql&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=n>url</span>      <span class=o>=</span> <span class=n>env</span><span class=p>(</span><span class=s2>&#34;DATABASE_URL&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>User</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>        <span class=ne>String</span>   <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>email</span>     <span class=ne>String</span>   <span class=err>@</span><span class=n>unique</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span>      <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>role</span>      <span class=n>Role</span>     <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>USER</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>posts</span>     <span class=n>Post</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=n>profile</span>   <span class=n>Profile</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>createdAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>now</span><span class=p>())</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;created_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>updatedAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>updatedAt</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;updated_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;users&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Post</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>        <span class=ne>String</span>   <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>title</span>     <span class=ne>String</span>
+</span></span><span class=line><span class=cl>  <span class=n>content</span>   <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>published</span> <span class=n>Boolean</span>  <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=bp>false</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>author</span>    <span class=n>User</span>     <span class=err>@</span><span class=n>relation</span><span class=p>(</span><span class=n>fields</span><span class=p>:</span> <span class=p>[</span><span class=n>authorId</span><span class=p>],</span> <span class=n>references</span><span class=p>:</span> <span class=p>[</span><span class=n>id</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=n>authorId</span>  <span class=ne>String</span>   <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;author_id&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>tags</span>      <span class=n>Tag</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=n>createdAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>now</span><span class=p>())</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;created_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>updatedAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>updatedAt</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;updated_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;posts&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Profile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>     <span class=ne>String</span>  <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>bio</span>    <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>avatar</span> <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>user</span>   <span class=n>User</span>    <span class=err>@</span><span class=n>relation</span><span class=p>(</span><span class=n>fields</span><span class=p>:</span> <span class=p>[</span><span class=n>userId</span><span class=p>],</span> <span class=n>references</span><span class=p>:</span> <span class=p>[</span><span class=n>id</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=n>userId</span> <span class=ne>String</span>  <span class=err>@</span><span class=n>unique</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;user_id&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;profiles&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Tag</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>    <span class=ne>String</span> <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span>  <span class=ne>String</span> <span class=err>@</span><span class=n>unique</span>
+</span></span><span class=line><span class=cl>  <span class=n>posts</span> <span class=n>Post</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;tags&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>enum</span> <span class=n>Role</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>USER</span>
+</span></span><span class=line><span class=cl>  <span class=n>ADMIN</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=prisma-client-singleton-pattern>Prisma Client Singleton Pattern</h2><p>In development, <code>next dev</code> reloads modules on every hot reload. If Prisma Client is instantiated normally, each reload creates a new connection, eventually exhausting the connection pool.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/prisma.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>PrismaClient</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>globalForPrisma</span> <span class=o>=</span> <span class=nx>globalThis</span> <span class=kr>as</span> <span class=kt>unknown</span> <span class=kr>as</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span>: <span class=kt>PrismaClient</span> <span class=o>|</span> <span class=kc>undefined</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>prisma</span> <span class=o>=</span> <span class=nx>globalForPrisma</span><span class=p>.</span><span class=nx>prisma</span> <span class=o>??</span> <span class=k>new</span> <span class=nx>PrismaClient</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>NODE_ENV</span> <span class=o>!==</span> <span class=s2>&#34;production&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>globalForPrisma</span><span class=p>.</span><span class=nx>prisma</span> <span class=o>=</span> <span class=nx>prisma</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Key points:</p><ul><li>Storing the Prisma Client in <code>globalThis</code> ensures the same instance is reused across hot reloads</li><li>The <code>globalThis</code> assignment is skipped in production (hot reloads don&rsquo;t occur in production)</li><li>This pattern is also recommended in the <a href=https://yuhi-sa.github.io/en/posts/20231124_t3/1/>T3 Stack</a></li></ul><h2 id=direct-db-access-from-server-components>Direct DB Access from Server Components</h2><p>With App Router Server Components, you can call Prisma Client directly within components. No API endpoints required.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/page.tsx
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>UsersPage() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>take</span>: <span class=kt>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span><span class=nx>Users</span><span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>users</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>user</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span> <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>id</span><span class=p>}&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>name</span> <span class=o>??</span> <span class=nx>user</span><span class=p>.</span><span class=nx>email</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>))}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Benefits of direct access from Server Components:</p><ul><li>Eliminates the API layer, reducing code volume and latency</li><li>No need to design <code>fetch</code> caching strategies (direct DB access)</li><li>Fetch only the data the component needs</li></ul><h3 id=cache-control>Cache Control</h3><p>Be mindful of Next.js caching behavior when fetching data in Server Components.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Force dynamic rendering
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>dynamic</span> <span class=o>=</span> <span class=s2>&#34;force-dynamic&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Or set revalidation interval
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>revalidate</span> <span class=o>=</span> <span class=mi>60</span><span class=p>;</span> <span class=c1>// Revalidate every 60 seconds
+</span></span></span></code></pre></div><h2 id=crud-implementation-with-server-actions>CRUD Implementation with Server Actions</h2><p>Server Actions allow form submissions and DB operations to be handled entirely on the server side.</p><h3 id=create>Create</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/actions.ts
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;use server&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>revalidatePath</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;next/cache&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>z</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;zod&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>CreateUserSchema</span> <span class=o>=</span> <span class=nx>z</span><span class=p>.</span><span class=kt>object</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>email</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>email</span><span class=p>(</span><span class=s2>&#34;Please enter a valid email address&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>min</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s2>&#34;Name is required&#34;</span><span class=p>).</span><span class=nx>max</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span>: <span class=kt>z.enum</span><span class=p>([</span><span class=s2>&#34;USER&#34;</span><span class=p>,</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>]).</span><span class=k>default</span><span class=p>(</span><span class=s2>&#34;USER&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>ActionState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>success</span>: <span class=kt>boolean</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>message</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errors?</span>: <span class=kt>Record</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>,</span> <span class=na>string</span><span class=err>[]</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createUser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>_prevState</span>: <span class=kt>ActionState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>rawData</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;email&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;role&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>validated</span> <span class=o>=</span> <span class=nx>CreateUserSchema</span><span class=p>.</span><span class=nx>safeParse</span><span class=p>(</span><span class=nx>rawData</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>validated</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;Validation error&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span>: <span class=kt>validated.error.flatten</span><span class=p>().</span><span class=nx>fieldErrors</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span>: <span class=kt>validated.data</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;User created successfully&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>error</span> <span class=k>instanceof</span> <span class=nb>Error</span> <span class=o>&amp;&amp;</span> <span class=nx>error</span><span class=p>.</span><span class=nx>message</span><span class=p>.</span><span class=nx>includes</span><span class=p>(</span><span class=s2>&#34;Unique constraint&#34;</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;This email address is already registered&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;Failed to create user&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=read>Read</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/queries.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>GetUsersParams</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>page?</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>perPage?</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span><span class=o>?:</span> <span class=s2>&#34;USER&#34;</span> <span class=o>|</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>getUsers</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>page</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>perPage</span> <span class=o>=</span> <span class=mi>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=nx>GetUsersParams</span> <span class=o>=</span> <span class=p>{})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>where</span>: <span class=kt>Prisma.UserWhereInput</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...(</span><span class=nx>search</span> <span class=o>&amp;&amp;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>OR</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=p>...(</span><span class=nx>role</span> <span class=o>&amp;&amp;</span> <span class=p>{</span> <span class=nx>role</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>users</span><span class=p>,</span> <span class=nx>total</span><span class=p>]</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>Promise</span><span class=p>.</span><span class=nx>all</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>skip</span><span class=o>:</span> <span class=p>(</span><span class=nx>page</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=nx>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>take</span>: <span class=kt>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>count</span><span class=p>({</span> <span class=nx>where</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>users</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>pagination</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>page</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>total</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>totalPages</span>: <span class=kt>Math.ceil</span><span class=p>(</span><span class=nx>total</span> <span class=o>/</span> <span class=nx>perPage</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=update>Update</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Add to app/users/actions.ts
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>updateUser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>userId</span>: <span class=kt>string</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>_prevState</span>: <span class=kt>ActionState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>rawData</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;role&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>UpdateUserSchema</span> <span class=o>=</span> <span class=nx>z</span><span class=p>.</span><span class=kt>object</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>min</span><span class=p>(</span><span class=mi>1</span><span class=p>).</span><span class=nx>max</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>z.enum</span><span class=p>([</span><span class=s2>&#34;USER&#34;</span><span class=p>,</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>validated</span> <span class=o>=</span> <span class=nx>UpdateUserSchema</span><span class=p>.</span><span class=nx>safeParse</span><span class=p>(</span><span class=nx>rawData</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>validated</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;Validation error&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span>: <span class=kt>validated.error.flatten</span><span class=p>().</span><span class=nx>fieldErrors</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>update</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span>: <span class=kt>validated.data</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;User updated successfully&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;Failed to update user&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=delete>Delete</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Add to app/users/actions.ts
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>deleteUser</span><span class=p>(</span><span class=nx>userId</span>: <span class=kt>string</span><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=k>delete</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;User deleted successfully&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;Failed to delete user&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=error-handling-best-practices>Error Handling Best Practices</h2><p>Prisma errors are typed as <code>PrismaClientKnownRequestError</code>. Handle them based on error codes.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/errors.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>DbResult</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>;</span> <span class=nx>data</span>: <span class=kt>T</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>;</span> <span class=nx>error</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>withDbError</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>operation</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>DbResult</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>operation</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>data</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>error</span> <span class=k>instanceof</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>PrismaClientKnownRequestError</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>switch</span> <span class=p>(</span><span class=nx>error</span><span class=p>.</span><span class=nx>code</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2002&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=sb>`Unique constraint violation: </span><span class=si>${</span><span class=p>(</span><span class=nx>error</span><span class=p>.</span><span class=nx>meta</span><span class=o>?</span><span class=p>.</span><span class=nx>target</span> <span class=kr>as</span> <span class=kt>string</span><span class=p>[])</span><span class=o>?</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>&#34;, &#34;</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2025&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=s2>&#34;Record not found&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2003&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>              <span class=s2>&#34;Foreign key constraint violation: related record does not exist&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>default</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=sb>`Database error: </span><span class=si>${</span><span class=nx>error</span><span class=p>.</span><span class=nx>code</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>error</span><span class=o>:</span> <span class=s2>&#34;An unexpected error occurred&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Usage example:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>result</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>withDbError</span><span class=p>(()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=s2>&#34;test@example.com&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s2>&#34;Test&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>result</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>error</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// result.data is inferred as User type
+</span></span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>id</span><span class=p>);</span>
+</span></span></code></pre></div><h2 id=type-safe-query-patterns>Type-Safe Query Patterns</h2><p>Leveraging Prisma&rsquo;s type inference ensures query result types are automatically determined.</p><h3 id=partial-retrieval-with-select>Partial Retrieval with <code>select</code></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Using select narrows the return type automatically
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>userEmails</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// name is not included, so userEmails[0].name causes a compile error
+</span></span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Type: { id: string; email: string }[]
+</span></span></span></code></pre></div><h3 id=reusable-query-definitions-with-prismavalidator>Reusable Query Definitions with <code>Prisma.validator</code></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Define type-safe query arguments
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>userWithPosts</span> <span class=o>=</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>validator</span><span class=p>&lt;</span><span class=nt>Prisma.UserDefaultArgs</span><span class=p>&gt;()({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Derive the return type
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>UserWithPosts</span> <span class=o>=</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>UserGetPayload</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>userWithPosts</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Reusable function
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>getUserWithPosts</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>userId</span>: <span class=kt>string</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>UserWithPosts</span> <span class=err>|</span> <span class=na>null</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findUnique</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span><span class=nx>userWithPosts</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=type-safe-dynamic-where-conditions>Type-Safe Dynamic <code>where</code> Conditions</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>buildUserFilter</span><span class=p>(</span><span class=nx>params</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role?</span>: <span class=kt>Role</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createdAfter?</span>: <span class=kt>Date</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span><span class=o>:</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>UserWhereInput</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>conditions</span>: <span class=kt>Prisma.UserWhereInput</span><span class=p>[]</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>search</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>OR</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>params.search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>params.search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>role</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>role</span>: <span class=kt>params.role</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>createdAfter</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=p>{</span> <span class=nx>gte</span>: <span class=kt>params.createdAfter</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>conditions</span><span class=p>.</span><span class=nx>length</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>?</span> <span class=p>{</span> <span class=nx>AND</span>: <span class=kt>conditions</span> <span class=p>}</span> <span class=o>:</span> <span class=p>{};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=avoiding-the-n1-problem>Avoiding the N+1 Problem</h2><p>The N+1 problem occurs when fetching relational data issues an additional query for each parent record. Prisma prevents this with <code>include</code> and <code>select</code>.</p><h3 id=problematic-pattern-n1>Problematic Pattern (N+1)</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// BAD: Fetching posts individually for each user (N+1 queries)
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>user</span> <span class=k>of</span> <span class=nx>users</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>posts</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>authorId</span>: <span class=kt>user.id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=solution-with-include>Solution with <code>include</code></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// OK: Fetch relations in a single query
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// Issues a JOIN query
+</span></span></span><span class=line><span class=cl>    <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h3 id=fetching-only-required-fields-with-select>Fetching Only Required Fields with <code>select</code></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// BETTER: Fetch only needed fields to reduce data transfer
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>title</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>published</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>take</span>: <span class=kt>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_count</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>posts</span>: <span class=kt>true</span> <span class=p>},</span> <span class=c1>// Count posts only
+</span></span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h3 id=optimizing-deeply-nested-relations>Optimizing Deeply Nested Relations</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Avoid N+1 in multi-level relations with include/select
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>posts</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>title</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>author</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>profile</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>avatar</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>tags</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>name</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h2 id=transaction-handling>Transaction Handling</h2><p>Use Prisma&rsquo;s transaction features to execute multiple DB operations atomically. For details on transaction isolation levels, see <a href=https://yuhi-sa.github.io/en/posts/20240518_db_transaction/1/>Transaction Isolation Levels and Data Inconsistencies</a>.</p><h3 id=sequential-transactions>Sequential Transactions</h3><p>Pass multiple operations as an array. All succeed or all are rolled back.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=p>[</span><span class=nx>user</span><span class=p>,</span> <span class=nx>post</span><span class=p>]</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=s2>&#34;new@example.com&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s2>&#34;New User&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>title</span><span class=o>:</span> <span class=s2>&#34;My First Post&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>content</span><span class=o>:</span> <span class=s2>&#34;Hello, world!&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>authorId</span><span class=o>:</span> <span class=s2>&#34;existing-user-id&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl><span class=p>]);</span>
+</span></span></code></pre></div><h3 id=interactive-transactions>Interactive Transactions</h3><p>Use for complex transaction logic with conditional branching.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// Create user with profile and initial post atomically
+</span></span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>createUserWithProfile</span><span class=p>(</span><span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>email</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>bio?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>(</span><span class=kr>async</span> <span class=p>(</span><span class=nx>tx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 1. Create user
+</span></span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>user</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>email</span>: <span class=kt>data.email</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span>: <span class=kt>data.name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 2. Create profile
+</span></span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>profile</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>userId</span>: <span class=kt>user.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>bio</span>: <span class=kt>data.bio</span> <span class=o>??</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 3. Create welcome post
+</span></span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>title</span><span class=o>:</span> <span class=s2>&#34;Hello!&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>content</span><span class=o>:</span> <span class=sb>`Hi, I&#39;m </span><span class=si>${</span><span class=nx>data</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb>. Nice to meet you!`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>authorId</span>: <span class=kt>user.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>published</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>user</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=transaction-timeout-and-isolation-level-configuration>Transaction Timeout and Isolation Level Configuration</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=kr>async</span> <span class=p>(</span><span class=nx>tx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Heavy operations
+</span></span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>user</span> <span class=k>of</span> <span class=nx>users</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>update</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>user.id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>role</span><span class=o>:</span> <span class=s2>&#34;USER&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>maxWait</span>: <span class=kt>5000</span><span class=p>,</span> <span class=c1>// Max wait time to start transaction (ms)
+</span></span></span><span class=line><span class=cl>    <span class=nx>timeout</span>: <span class=kt>10000</span><span class=p>,</span> <span class=c1>// Max transaction execution time (ms)
+</span></span></span><span class=line><span class=cl>    <span class=nx>isolationLevel</span>: <span class=kt>Prisma.TransactionIsolationLevel.Serializable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div><h2 id=real-world-example-user-management-api>Real-World Example: User Management API</h2><p>Here is a practical user management implementation that integrates all the patterns covered above.</p><h3 id=directory-structure>Directory Structure</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>app/
+</span></span><span class=line><span class=cl>  users/
+</span></span><span class=line><span class=cl>    page.tsx          # User list (Server Component)
+</span></span><span class=line><span class=cl>    [id]/
+</span></span><span class=line><span class=cl>      page.tsx        # User detail (Server Component)
+</span></span><span class=line><span class=cl>    actions.ts        # Server Actions (CRUD)
+</span></span><span class=line><span class=cl>    queries.ts        # Data fetching functions
+</span></span><span class=line><span class=cl>lib/
+</span></span><span class=line><span class=cl>  prisma.ts           # Prisma Client singleton
+</span></span><span class=line><span class=cl>  errors.ts           # Error handling utilities
+</span></span><span class=line><span class=cl>prisma/
+</span></span><span class=line><span class=cl>  schema.prisma       # Schema definition
+</span></span></code></pre></div><h3 id=user-detail-page>User Detail Page</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/[id]/page.tsx
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>notFound</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;next/navigation&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Props</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span>: <span class=kt>Promise</span><span class=o>&lt;</span><span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span> <span class=p>}</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>UserDetailPage</span><span class=p>({</span> <span class=nx>params</span> <span class=p>}</span><span class=o>:</span> <span class=nx>Props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>}</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>params</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>user</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findUnique</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>take</span>: <span class=kt>10</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>_count</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>posts</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>user</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>notFound</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>email</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>profile</span><span class=o>?</span><span class=p>.</span><span class=nx>bio</span> <span class=o>&amp;&amp;</span> <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>profile</span><span class=p>.</span><span class=nx>bio</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span><span class=nx>Posts</span> <span class=p>({</span><span class=nx>user</span><span class=p>.</span><span class=nx>_count</span><span class=p>.</span><span class=nx>posts</span><span class=p>})&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>posts</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>post</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span> <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>post</span><span class=p>.</span><span class=nx>id</span><span class=p>}&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>title</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>))}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=calling-server-actions-from-client-components>Calling Server Actions from Client Components</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/create-form.tsx
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;use client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useActionState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createUser</span><span class=p>,</span> <span class=kr>type</span> <span class=nx>ActionState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;./actions&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>initialState</span>: <span class=kt>ActionState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>CreateUserForm() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>state</span><span class=p>,</span> <span class=nx>formAction</span><span class=p>,</span> <span class=nx>isPending</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useActionState</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>createUser</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>initialState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>formAction</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;email&#34;</span><span class=p>&gt;</span><span class=nx>Email</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>required</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=o>?</span><span class=p>.</span><span class=nx>email</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=s>&#34;error&#34;</span><span class=p>&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=p>.</span><span class=nx>email</span><span class=p>[</span><span class=mi>0</span><span class=p>]}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;name&#34;</span><span class=p>&gt;</span><span class=nx>Name</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;name&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;name&#34;</span> <span class=na>required</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=o>?</span><span class=p>.</span><span class=nx>name</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=s>&#34;error&#34;</span><span class=p>&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=p>.</span><span class=nx>name</span><span class=p>[</span><span class=mi>0</span><span class=p>]}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;role&#34;</span><span class=p>&gt;</span><span class=nx>Role</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>select</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;role&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;role&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>option</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;USER&#34;</span><span class=p>&gt;</span><span class=nx>User</span><span class=p>&lt;/</span><span class=nt>option</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>option</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;ADMIN&#34;</span><span class=p>&gt;</span><span class=nx>Admin</span><span class=p>&lt;/</span><span class=nt>option</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>select</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span> <span class=na>disabled</span><span class=o>=</span><span class=p>{</span><span class=nx>isPending</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>isPending</span> <span class=o>?</span> <span class=s2>&#34;Creating...&#34;</span> <span class=o>:</span> <span class=s2>&#34;Create User&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>message</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>success</span> <span class=o>?</span> <span class=s2>&#34;success&#34;</span> <span class=o>:</span> <span class=s2>&#34;error&#34;</span><span class=p>}&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>message</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=summary>Summary</h2><p>Here is a summary of the patterns covered in this article.</p><table><thead><tr><th>Pattern</th><th>Purpose</th></tr></thead><tbody><tr><td>Singleton</td><td>Prevent connection pool exhaustion in dev</td></tr><tr><td>Server Components direct fetch</td><td>Eliminate API layer to reduce code and latency</td></tr><tr><td>Server Actions + Zod</td><td>Type-safe form handling and validation</td></tr><tr><td><code>withDbError</code> wrapper</td><td>Unified Prisma error handling</td></tr><tr><td><code>Prisma.validator</code></td><td>Reusable, type-safe query definitions</td></tr><tr><td><code>include</code> / <code>select</code></td><td>Avoid N+1 problem and optimize data transfer</td></tr><tr><td>Interactive transactions</td><td>Atomic execution of multiple operations</td></tr></tbody></table><p>Combining these patterns enables you to build a type-safe, performant data access layer.</p><h2 id=related-articles>Related Articles</h2><ul><li><a href=https://yuhi-sa.github.io/en/posts/20260125_prisma_jst/1/>Prisma and MySQL Timezone Mismatch</a> - Explains the causes and solutions for JST/UTC mismatches in Prisma.</li><li><a href=https://yuhi-sa.github.io/en/posts/20240518_db_transaction/1/>Transaction Isolation Levels and Data Inconsistencies</a> - Covers the theoretical background of transaction isolation levels.</li><li><a href=https://yuhi-sa.github.io/en/posts/20231124_t3/1/>Technical Challenges of Sharing prom-client Metrics Between Next.js App Router and Pages Router</a> - Discusses global state sharing challenges between App Router and Pages Router.</li></ul><hr><h3 id=related-tools>Related Tools</h3><ul><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-formatter/>JSON Formatter (DevToolBox)</a> - JSON formatting and validation tool</li><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-to-typescript/>JSON to TypeScript (DevToolBox)</a> - Auto-generate TypeScript type definitions from JSON</li><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/sql-formatter/>SQL Formatter (DevToolBox)</a> - SQL formatting tool</li></ul></div><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="2153"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/en/posts/20260311_python_csv/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span><span class=post-nav__title>Efficient CSV File Processing in Python: csv, pandas, and polars Compared</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20240504_use_client/1/>Proper Usage Patterns for the use client Directive in Next.js App Router</a></h3><div class=card-meta><time datetime=2024-05-03>May 3, 2024</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20231218_hugo/1/>Integrating TypeScript and React into a Hugo Theme</a></h3><div class=card-meta><time datetime=2023-12-18>December 18, 2023</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20260306_devtoolbox/1/>DevToolBox - 85+ Free Online Developer Tools</a></h3><div class=card-meta><time datetime=2026-03-06>March 6, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/en/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/en/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Next.js App Router + Prisma Practical Patterns: Type-Safe Database Operations</span>
+<meta itemprop=position content="4"></li></ol></nav></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container pt-4 pb-3" style="border-top:2px solid var(--accent,#e54d2e)"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2026 yuhi-sa. All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p><p class="sister-sites text-muted small mt-3 mb-0">Tools:
+<a href=https://yuhi-sa.github.io/devtoolbox/ class=text-decoration-none>DevToolBox</a>
+|
+<a href=https://yuhi-sa.github.io/calcbox/ class=text-decoration-none>CalcBox</a>
+|
+<a href=https://yuhi-sa.github.io/pomodoro/ class=text-decoration-none>Pomodoro Timer</a></p><p class="social-links text-muted small mt-1 mb-0"><a href=https://www.youtube.com/@yuhi-sa target=_blank rel=noopener class=text-decoration-none>YouTube</a>
+|
+<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Next.js App Router \u002b Prisma Practical Patterns: Type-Safe Database Operations","url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20260311_nextjs_prisma\/1\/","description":"Practical patterns for database operations with Prisma in Next.js App Router. Covers singleton pattern, Server Actions, N\u002b1 prevention, transactions, and type-safe queries.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>

@@ -1,0 +1,618 @@
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N+1対策、トランザクション処理など。"><meta name=keywords content="Next.js,Prisma,App Router,Server Actions,TypeScript,ORM,データベース,N+1問題"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/><meta property="og:type" content="article"><meta property="og:title" content="Next.js App Router + Prisma 実践パターン：型安全なDB操作の設計"><meta property="og:description" content="Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N+1対策、トランザクション処理など。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-03-11T11:00:00+09:00"><meta property="article:modified_time" content="2026-03-11T10:38:23+09:00"><meta property="article:tag" content="Next.js"><meta property="article:tag" content="Prisma"><meta property="article:tag" content="TypeScript"><meta property="article:tag" content="Web開発"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Next.js App Router + Prisma 実践パターン：型安全なDB操作の設計"><meta name=twitter:description content="Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N+1対策、トランザクション処理など。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Next.js App Router + Prisma 実践パターン：型安全なDB操作の設計 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260311_nextjs_prisma/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Next.js App Router \u002b Prisma 実践パターン：型安全なDB操作の設計","description":"Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N\u002b1対策、トランザクション処理など。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-03-11T11:00:00\u002b09:00","dateModified":"2026-03-11T10:38:23\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260311_nextjs_prisma\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260311_nextjs_prisma\/1\/","wordCount":1560,"keywords":["Next.js","Prisma","TypeScript","Web開発"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT8M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"Next.js App Router \u002b Prisma 実践パターン：型安全なDB操作の設計"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.9d6d8fa69ecfbf1dc3bf0c9651f1d6f6bda86c6112544c52b1fa8a1f185baa2e.css integrity="sha256-nW2Ppp7Pvx3DvwyWUfHW9r2obGESVExSsfqKHxhbqi4=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Next.js App Router + Prisma 実践パターン：型安全なDB操作の設計</h1><p class="lead article-description" itemprop=description>Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N+1対策、トランザクション処理など。</p><div class=article-meta><time datetime=2026-03-11T11:00:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+March 11, 2026
+</time><time datetime=2026-03-11T10:38:23+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated
+March 11, 2026
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+8 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/next.js/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Next.js
+</a><a href=/tags/prisma/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Prisma
+</a><a href=/tags/typescript/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>TypeScript
+</a><a href=/tags/web%E9%96%8B%E7%99%BA/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Web開発</a></div></header><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>Next.js App RouterとPrismaを組み合わせることで、型安全なデータベース操作をServer ComponentsやServer Actionsから直接行えます。本記事では、実務で使える設計パターンをコード例とともに解説します。</p><p>Prismaの基本的なタイムゾーン設定については<a href=https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/>PrismaとMySQLのタイムゾーン不整合問題</a>を、トランザクションの理論的背景については<a href=https://yuhi-sa.github.io/posts/20240518_db_transaction/1/>トランザクションの分離レベルと防げる不整合</a>を参照してください。</p><h2 id=前提prisma-schemaの定義>前提：Prisma Schemaの定義</h2><p>本記事では以下のスキーマを例として使用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>//</span> <span class=n>prisma</span><span class=o>/</span><span class=n>schema</span><span class=o>.</span><span class=n>prisma</span>
+</span></span><span class=line><span class=cl><span class=n>generator</span> <span class=n>client</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>provider</span> <span class=o>=</span> <span class=s2>&#34;prisma-client-js&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>datasource</span> <span class=n>db</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>provider</span> <span class=o>=</span> <span class=s2>&#34;postgresql&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=n>url</span>      <span class=o>=</span> <span class=n>env</span><span class=p>(</span><span class=s2>&#34;DATABASE_URL&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>User</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>        <span class=ne>String</span>   <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>email</span>     <span class=ne>String</span>   <span class=err>@</span><span class=n>unique</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span>      <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>role</span>      <span class=n>Role</span>     <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>USER</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>posts</span>     <span class=n>Post</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=n>profile</span>   <span class=n>Profile</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>createdAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>now</span><span class=p>())</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;created_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>updatedAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>updatedAt</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;updated_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;users&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Post</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>        <span class=ne>String</span>   <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>title</span>     <span class=ne>String</span>
+</span></span><span class=line><span class=cl>  <span class=n>content</span>   <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>published</span> <span class=n>Boolean</span>  <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=bp>false</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>author</span>    <span class=n>User</span>     <span class=err>@</span><span class=n>relation</span><span class=p>(</span><span class=n>fields</span><span class=p>:</span> <span class=p>[</span><span class=n>authorId</span><span class=p>],</span> <span class=n>references</span><span class=p>:</span> <span class=p>[</span><span class=n>id</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=n>authorId</span>  <span class=ne>String</span>   <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;author_id&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>tags</span>      <span class=n>Tag</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=n>createdAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>now</span><span class=p>())</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;created_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>updatedAt</span> <span class=n>DateTime</span> <span class=err>@</span><span class=n>updatedAt</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;updated_at&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;posts&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Profile</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>     <span class=ne>String</span>  <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>bio</span>    <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>avatar</span> <span class=ne>String</span><span class=err>?</span>
+</span></span><span class=line><span class=cl>  <span class=n>user</span>   <span class=n>User</span>    <span class=err>@</span><span class=n>relation</span><span class=p>(</span><span class=n>fields</span><span class=p>:</span> <span class=p>[</span><span class=n>userId</span><span class=p>],</span> <span class=n>references</span><span class=p>:</span> <span class=p>[</span><span class=n>id</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>  <span class=n>userId</span> <span class=ne>String</span>  <span class=err>@</span><span class=n>unique</span> <span class=err>@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;user_id&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;profiles&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>model</span> <span class=n>Tag</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>id</span>    <span class=ne>String</span> <span class=err>@</span><span class=n>id</span> <span class=err>@</span><span class=n>default</span><span class=p>(</span><span class=n>cuid</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span>  <span class=ne>String</span> <span class=err>@</span><span class=n>unique</span>
+</span></span><span class=line><span class=cl>  <span class=n>posts</span> <span class=n>Post</span><span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=err>@@</span><span class=n>map</span><span class=p>(</span><span class=s2>&#34;tags&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>enum</span> <span class=n>Role</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>USER</span>
+</span></span><span class=line><span class=cl>  <span class=n>ADMIN</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=prisma-clientのシングルトンパターン>Prisma Clientのシングルトンパターン</h2><p>Next.jsの開発環境では<code>next dev</code>がホットリロードを行うたびにモジュールが再読み込みされます。Prisma Clientを通常通りインスタンス化すると、リロードのたびに新しいコネクションが生成され、最終的にコネクションプールが枯渇します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/prisma.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>PrismaClient</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>globalForPrisma</span> <span class=o>=</span> <span class=nx>globalThis</span> <span class=kr>as</span> <span class=kt>unknown</span> <span class=kr>as</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span>: <span class=kt>PrismaClient</span> <span class=o>|</span> <span class=kc>undefined</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>prisma</span> <span class=o>=</span> <span class=nx>globalForPrisma</span><span class=p>.</span><span class=nx>prisma</span> <span class=o>??</span> <span class=k>new</span> <span class=nx>PrismaClient</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>process</span><span class=p>.</span><span class=nx>env</span><span class=p>.</span><span class=nx>NODE_ENV</span> <span class=o>!==</span> <span class=s2>&#34;production&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>globalForPrisma</span><span class=p>.</span><span class=nx>prisma</span> <span class=o>=</span> <span class=nx>prisma</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>ポイントは以下の通りです。</p><ul><li><code>globalThis</code>にPrisma Clientを保持することで、ホットリロード時も同一インスタンスを再利用する</li><li>本番環境では<code>globalThis</code>への代入をスキップする（本番ではホットリロードが発生しないため不要）</li><li><a href=https://yuhi-sa.github.io/posts/20231124_t3/1/>T3 Stackの構成</a>でも同様のパターンが推奨されている</li></ul><h2 id=server-componentsからの直接dbアクセス>Server Componentsからの直接DBアクセス</h2><p>App RouterのServer Componentsでは、コンポーネント内から直接Prisma Clientを呼び出せます。APIエンドポイントを経由する必要がありません。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/page.tsx
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>UsersPage() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>take</span>: <span class=kt>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span><span class=err>ユーザー一覧</span><span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>users</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>user</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span> <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>id</span><span class=p>}&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>name</span> <span class=o>??</span> <span class=nx>user</span><span class=p>.</span><span class=nx>email</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>))}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Server Componentsからの直接アクセスの利点は以下の通りです。</p><ul><li>API層が不要になるため、コード量とレイテンシが削減される</li><li><code>fetch</code>のキャッシュ設計を考慮する必要がない（DB直接アクセスのため）</li><li>コンポーネントに必要なデータだけを取得できる</li></ul><h3 id=キャッシュ制御>キャッシュ制御</h3><p>Server Componentsのデータ取得では、Next.jsのキャッシュ動作に注意が必要です。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// 動的レンダリングを強制する場合
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>dynamic</span> <span class=o>=</span> <span class=s2>&#34;force-dynamic&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// または revalidate を設定する場合
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>revalidate</span> <span class=o>=</span> <span class=mi>60</span><span class=p>;</span> <span class=c1>// 60秒ごとに再検証
+</span></span></span></code></pre></div><h2 id=server-actionsでのcrud実装>Server ActionsでのCRUD実装</h2><p>Server Actionsを使うことで、フォームの送信からDB操作までをサーバーサイドで完結できます。</p><h3 id=create作成>Create（作成）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/actions.ts
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;use server&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>revalidatePath</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;next/cache&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>z</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;zod&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>CreateUserSchema</span> <span class=o>=</span> <span class=nx>z</span><span class=p>.</span><span class=kt>object</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>email</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>email</span><span class=p>(</span><span class=s2>&#34;有効なメールアドレスを入力してください&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>min</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s2>&#34;名前は必須です&#34;</span><span class=p>).</span><span class=nx>max</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span>: <span class=kt>z.enum</span><span class=p>([</span><span class=s2>&#34;USER&#34;</span><span class=p>,</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>]).</span><span class=k>default</span><span class=p>(</span><span class=s2>&#34;USER&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>ActionState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>success</span>: <span class=kt>boolean</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>message</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>errors?</span>: <span class=kt>Record</span><span class=p>&lt;</span><span class=nt>string</span><span class=p>,</span> <span class=na>string</span><span class=err>[]</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>createUser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>_prevState</span>: <span class=kt>ActionState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>rawData</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;email&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;role&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>validated</span> <span class=o>=</span> <span class=nx>CreateUserSchema</span><span class=p>.</span><span class=nx>safeParse</span><span class=p>(</span><span class=nx>rawData</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>validated</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;バリデーションエラー&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span>: <span class=kt>validated.error.flatten</span><span class=p>().</span><span class=nx>fieldErrors</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span>: <span class=kt>validated.data</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーを作成しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>error</span> <span class=k>instanceof</span> <span class=nb>Error</span> <span class=o>&amp;&amp;</span> <span class=nx>error</span><span class=p>.</span><span class=nx>message</span><span class=p>.</span><span class=nx>includes</span><span class=p>(</span><span class=s2>&#34;Unique constraint&#34;</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;このメールアドレスは既に登録されています&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーの作成に失敗しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=read取得>Read（取得）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/queries.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 型安全なクエリ引数を定義
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>GetUsersParams</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>page?</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>perPage?</span>: <span class=kt>number</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span><span class=o>?:</span> <span class=s2>&#34;USER&#34;</span> <span class=o>|</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>getUsers</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>page</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>perPage</span> <span class=o>=</span> <span class=mi>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=o>:</span> <span class=nx>GetUsersParams</span> <span class=o>=</span> <span class=p>{})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>where</span>: <span class=kt>Prisma.UserWhereInput</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...(</span><span class=nx>search</span> <span class=o>&amp;&amp;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>OR</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=p>...(</span><span class=nx>role</span> <span class=o>&amp;&amp;</span> <span class=p>{</span> <span class=nx>role</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>users</span><span class=p>,</span> <span class=nx>total</span><span class=p>]</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>Promise</span><span class=p>.</span><span class=nx>all</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>skip</span><span class=o>:</span> <span class=p>(</span><span class=nx>page</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=nx>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>take</span>: <span class=kt>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>}),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>count</span><span class=p>({</span> <span class=nx>where</span> <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=p>]);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>users</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>pagination</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>page</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>perPage</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>total</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>totalPages</span>: <span class=kt>Math.ceil</span><span class=p>(</span><span class=nx>total</span> <span class=o>/</span> <span class=nx>perPage</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=update更新>Update（更新）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/actions.ts に追加
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>updateUser</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>userId</span>: <span class=kt>string</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>_prevState</span>: <span class=kt>ActionState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>formData</span>: <span class=kt>FormData</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>rawData</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>formData.get</span><span class=p>(</span><span class=s2>&#34;role&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>UpdateUserSchema</span> <span class=o>=</span> <span class=nx>z</span><span class=p>.</span><span class=kt>object</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>z.string</span><span class=p>().</span><span class=nx>min</span><span class=p>(</span><span class=mi>1</span><span class=p>).</span><span class=nx>max</span><span class=p>(</span><span class=mi>100</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=nx>role</span>: <span class=kt>z.enum</span><span class=p>([</span><span class=s2>&#34;USER&#34;</span><span class=p>,</span> <span class=s2>&#34;ADMIN&#34;</span><span class=p>]),</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>validated</span> <span class=o>=</span> <span class=nx>UpdateUserSchema</span><span class=p>.</span><span class=nx>safeParse</span><span class=p>(</span><span class=nx>rawData</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>validated</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;バリデーションエラー&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>errors</span>: <span class=kt>validated.error.flatten</span><span class=p>().</span><span class=nx>fieldErrors</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>update</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span>: <span class=kt>validated.data</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーを更新しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーの更新に失敗しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=delete削除>Delete（削除）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/actions.ts に追加
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>deleteUser</span><span class=p>(</span><span class=nx>userId</span>: <span class=kt>string</span><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>ActionState</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=k>delete</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>revalidatePath</span><span class=p>(</span><span class=s2>&#34;/users&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーを削除しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;ユーザーの削除に失敗しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=エラーハンドリングのベストプラクティス>エラーハンドリングのベストプラクティス</h2><p>Prismaが投げるエラーは<code>PrismaClientKnownRequestError</code>として型付けされています。エラーコードに応じた適切なハンドリングを行います。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// lib/errors.ts
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>type</span> <span class=nx>DbResult</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>;</span> <span class=nx>data</span>: <span class=kt>T</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>;</span> <span class=nx>error</span>: <span class=kt>string</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>withDbError</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>operation</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>DbResult</span><span class=p>&lt;</span><span class=nt>T</span><span class=p>&gt;&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>data</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>operation</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>true</span><span class=p>,</span> <span class=nx>data</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>error</span> <span class=k>instanceof</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>PrismaClientKnownRequestError</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>switch</span> <span class=p>(</span><span class=nx>error</span><span class=p>.</span><span class=nx>code</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2002&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=sb>`一意制約違反: </span><span class=si>${</span><span class=p>(</span><span class=nx>error</span><span class=p>.</span><span class=nx>meta</span><span class=o>?</span><span class=p>.</span><span class=nx>target</span> <span class=kr>as</span> <span class=kt>string</span><span class=p>[])</span><span class=o>?</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>&#34;, &#34;</span><span class=p>)</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2025&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=s2>&#34;対象のレコードが見つかりません&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=s2>&#34;P2003&#34;</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=s2>&#34;外部キー制約違反: 関連レコードが存在しません&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>        <span class=k>default</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>return</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nx>error</span><span class=o>:</span> <span class=sb>`データベースエラー: </span><span class=si>${</span><span class=nx>error</span><span class=p>.</span><span class=nx>code</span><span class=si>}</span><span class=sb>`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=p>};</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>{</span> <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span> <span class=nx>error</span><span class=o>:</span> <span class=s2>&#34;予期しないエラーが発生しました&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>使用例は以下の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>result</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>withDbError</span><span class=p>(()</span> <span class=o>=&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=s2>&#34;test@example.com&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s2>&#34;Test&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>result</span><span class=p>.</span><span class=nx>success</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>error</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// result.data は User 型として推論される
+</span></span></span><span class=line><span class=cl><span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>data</span><span class=p>.</span><span class=nx>id</span><span class=p>);</span>
+</span></span></code></pre></div><h2 id=型安全なクエリパターン>型安全なクエリパターン</h2><p>Prismaの型推論を最大限活用することで、クエリ結果の型が自動的に決定されます。</p><h3 id=selectによる部分取得><code>select</code>による部分取得</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// select を使うと、返り値の型が自動的に絞り込まれる
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>userEmails</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>email</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// name は含まれないため、userEmails[0].name はコンパイルエラーになる
+</span></span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 型: { id: string; email: string }[]
+</span></span></span></code></pre></div><h3 id=prismavalidatorによる再利用可能なクエリ定義><code>Prisma.validator</code>による再利用可能なクエリ定義</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>Prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@prisma/client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// クエリの引数を型安全に定義
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>userWithPosts</span> <span class=o>=</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>validator</span><span class=p>&lt;</span><span class=nt>Prisma.UserDefaultArgs</span><span class=p>&gt;()({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 戻り値の型を導出
+</span></span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>UserWithPosts</span> <span class=o>=</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>UserGetPayload</span><span class=p>&lt;</span><span class=nt>typeof</span> <span class=na>userWithPosts</span><span class=p>&gt;;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 再利用可能な関数
+</span></span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>getUserWithPosts</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>userId</span>: <span class=kt>string</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=o>:</span> <span class=nx>Promise</span><span class=p>&lt;</span><span class=nt>UserWithPosts</span> <span class=err>|</span> <span class=na>null</span><span class=p>&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findUnique</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>userId</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span><span class=nx>userWithPosts</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=動的なwhere条件の型安全な構築>動的な<code>where</code>条件の型安全な構築</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>buildUserFilter</span><span class=p>(</span><span class=nx>params</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>search?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>role?</span>: <span class=kt>Role</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>createdAfter?</span>: <span class=kt>Date</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span><span class=o>:</span> <span class=nx>Prisma</span><span class=p>.</span><span class=nx>UserWhereInput</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>conditions</span>: <span class=kt>Prisma.UserWhereInput</span><span class=p>[]</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>search</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>OR</span><span class=o>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>name</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>params.search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=p>{</span> <span class=nx>contains</span>: <span class=kt>params.search</span><span class=p>,</span> <span class=nx>mode</span><span class=o>:</span> <span class=s2>&#34;insensitive&#34;</span> <span class=p>}</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>role</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>role</span>: <span class=kt>params.role</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=nx>params</span><span class=p>.</span><span class=nx>createdAfter</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>conditions</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=p>{</span> <span class=nx>gte</span>: <span class=kt>params.createdAfter</span> <span class=p>}</span> <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>conditions</span><span class=p>.</span><span class=nx>length</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>?</span> <span class=p>{</span> <span class=nx>AND</span>: <span class=kt>conditions</span> <span class=p>}</span> <span class=o>:</span> <span class=p>{};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=n1問題の回避>N+1問題の回避</h2><p>N+1問題は、リレーションを持つデータを取得する際に、親レコードごとに追加のクエリが発行される問題です。Prismaでは<code>include</code>と<code>select</code>を使って回避します。</p><h3 id=問題のあるパターンn1>問題のあるパターン（N+1）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// NG: ユーザーごとに投稿を個別取得（N+1クエリ）
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>user</span> <span class=k>of</span> <span class=nx>users</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>posts</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>authorId</span>: <span class=kt>user.id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=includeによる解決><code>include</code>による解決</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// OK: 1回のクエリでリレーションを含めて取得
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span>: <span class=kt>true</span><span class=p>,</span> <span class=c1>// JOINクエリが発行される
+</span></span></span><span class=line><span class=cl>    <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h3 id=selectによる必要なフィールドだけの取得><code>select</code>による必要なフィールドだけの取得</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// BETTER: 必要なフィールドのみを取得し、転送量を削減
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>name</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>title</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>published</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>take</span>: <span class=kt>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_count</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>posts</span>: <span class=kt>true</span> <span class=p>},</span> <span class=c1>// 投稿数のみカウント
+</span></span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h3 id=ネストが深いリレーションの最適化>ネストが深いリレーションの最適化</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// 多段リレーションでも include/select でN+1を回避
+</span></span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>posts</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>findMany</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>  <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>id</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>title</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>author</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>profile</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>avatar</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>tags</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>name</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></div><h2 id=トランザクション処理>トランザクション処理</h2><p>複数のDB操作をアトミックに実行するには、Prismaのトランザクション機能を使います。トランザクションの分離レベルについては<a href=https://yuhi-sa.github.io/posts/20240518_db_transaction/1/>トランザクションの分離レベルと防げる不整合</a>で詳しく解説しています。</p><h3 id=sequential-transactions順次トランザクション>Sequential transactions（順次トランザクション）</h3><p>複数の操作を配列で渡し、すべてが成功するか、すべてがロールバックされます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>const</span> <span class=p>[</span><span class=nx>user</span><span class=p>,</span> <span class=nx>post</span><span class=p>]</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>email</span><span class=o>:</span> <span class=s2>&#34;new@example.com&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s2>&#34;New User&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>prisma</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>title</span><span class=o>:</span> <span class=s2>&#34;初めての投稿&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>content</span><span class=o>:</span> <span class=s2>&#34;こんにちは&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>authorId</span><span class=o>:</span> <span class=s2>&#34;existing-user-id&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>}),</span>
+</span></span><span class=line><span class=cl><span class=p>]);</span>
+</span></span></code></pre></div><h3 id=interactive-transactions対話的トランザクション>Interactive transactions（対話的トランザクション）</h3><p>条件分岐を含む複雑なトランザクション処理に使用します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// ユーザーの作成と同時にプロフィールと初回投稿を作成
+</span></span></span><span class=line><span class=cl><span class=kr>async</span> <span class=kd>function</span> <span class=nx>createUserWithProfile</span><span class=p>(</span><span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>email</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>name</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nx>bio?</span>: <span class=kt>string</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>(</span><span class=kr>async</span> <span class=p>(</span><span class=nx>tx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 1. ユーザー作成
+</span></span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>user</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>email</span>: <span class=kt>data.email</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>name</span>: <span class=kt>data.name</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 2. プロフィール作成
+</span></span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>profile</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>userId</span>: <span class=kt>user.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>bio</span>: <span class=kt>data.bio</span> <span class=o>??</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 3. ウェルカム投稿作成
+</span></span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>post</span><span class=p>.</span><span class=nx>create</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>      <span class=nx>data</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>title</span><span class=o>:</span> <span class=s2>&#34;はじめまして&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>content</span><span class=o>:</span> <span class=sb>`</span><span class=si>${</span><span class=nx>data</span><span class=p>.</span><span class=nx>name</span><span class=si>}</span><span class=sb>です。よろしくお願いします。`</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>authorId</span>: <span class=kt>user.id</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>published</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>user</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=トランザクションのタイムアウトと分離レベル設定>トランザクションのタイムアウトと分離レベル設定</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>$transaction</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=kr>async</span> <span class=p>(</span><span class=nx>tx</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 重い処理
+</span></span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>users</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findMany</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kr>const</span> <span class=nx>user</span> <span class=k>of</span> <span class=nx>users</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>await</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>update</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>        <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span>: <span class=kt>user.id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>data</span><span class=o>:</span> <span class=p>{</span> <span class=nx>role</span><span class=o>:</span> <span class=s2>&#34;USER&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>});</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>maxWait</span>: <span class=kt>5000</span><span class=p>,</span> <span class=c1>// トランザクション開始までの最大待機時間（ms）
+</span></span></span><span class=line><span class=cl>    <span class=nx>timeout</span>: <span class=kt>10000</span><span class=p>,</span> <span class=c1>// トランザクションの最大実行時間（ms）
+</span></span></span><span class=line><span class=cl>    <span class=nx>isolationLevel</span>: <span class=kt>Prisma.TransactionIsolationLevel.Serializable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div><h2 id=real-world-example-ユーザー管理api>Real-world example: ユーザー管理API</h2><p>ここまでのパターンを統合した、実践的なユーザー管理の実装例を示します。</p><h3 id=ディレクトリ構成>ディレクトリ構成</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>app/
+</span></span><span class=line><span class=cl>  users/
+</span></span><span class=line><span class=cl>    page.tsx          # ユーザー一覧（Server Component）
+</span></span><span class=line><span class=cl>    [id]/
+</span></span><span class=line><span class=cl>      page.tsx        # ユーザー詳細（Server Component）
+</span></span><span class=line><span class=cl>    actions.ts        # Server Actions（CRUD）
+</span></span><span class=line><span class=cl>    queries.ts        # データ取得関数
+</span></span><span class=line><span class=cl>lib/
+</span></span><span class=line><span class=cl>  prisma.ts           # Prisma Clientシングルトン
+</span></span><span class=line><span class=cl>  errors.ts           # エラーハンドリングユーティリティ
+</span></span><span class=line><span class=cl>prisma/
+</span></span><span class=line><span class=cl>  schema.prisma       # スキーマ定義
+</span></span></code></pre></div><h3 id=ユーザー詳細ページ>ユーザー詳細ページ</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/[id]/page.tsx
+</span></span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>prisma</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@/lib/prisma&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>notFound</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;next/navigation&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=nx>Props</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>params</span>: <span class=kt>Promise</span><span class=o>&lt;</span><span class=p>{</span> <span class=nx>id</span>: <span class=kt>string</span> <span class=p>}</span><span class=o>&gt;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=k>default</span> <span class=kr>async</span> <span class=kd>function</span> <span class=nx>UserDetailPage</span><span class=p>({</span> <span class=nx>params</span> <span class=p>}</span><span class=o>:</span> <span class=nx>Props</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>}</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>params</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>user</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>prisma</span><span class=p>.</span><span class=nx>user</span><span class=p>.</span><span class=nx>findUnique</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>id</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=nx>include</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>profile</span>: <span class=kt>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nx>posts</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>where</span><span class=o>:</span> <span class=p>{</span> <span class=nx>published</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>orderBy</span><span class=o>:</span> <span class=p>{</span> <span class=nx>createdAt</span><span class=o>:</span> <span class=s2>&#34;desc&#34;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>take</span>: <span class=kt>10</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=nx>_count</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>select</span><span class=o>:</span> <span class=p>{</span> <span class=nx>posts</span>: <span class=kt>true</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>      <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>user</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>notFound</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>email</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>profile</span><span class=o>?</span><span class=p>.</span><span class=nx>bio</span> <span class=o>&amp;&amp;</span> <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>user</span><span class=p>.</span><span class=nx>profile</span><span class=p>.</span><span class=nx>bio</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span><span class=err>投稿一覧（</span><span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>_count</span><span class=p>.</span><span class=nx>posts</span><span class=p>}</span><span class=err>件）</span><span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>user</span><span class=p>.</span><span class=nx>posts</span><span class=p>.</span><span class=nx>map</span><span class=p>((</span><span class=nx>post</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>li</span> <span class=na>key</span><span class=o>=</span><span class=p>{</span><span class=nx>post</span><span class=p>.</span><span class=nx>id</span><span class=p>}&gt;{</span><span class=nx>post</span><span class=p>.</span><span class=nx>title</span><span class=p>}&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>))}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>main</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=クライアントコンポーネントからのserver-action呼び出し>クライアントコンポーネントからのServer Action呼び出し</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>// app/users/create-form.tsx
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;use client&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>useActionState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;react&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createUser</span><span class=p>,</span> <span class=kr>type</span> <span class=nx>ActionState</span> <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;./actions&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>initialState</span>: <span class=kt>ActionState</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>success</span>: <span class=kt>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>message</span><span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>CreateUserForm() {</span>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=p>[</span><span class=nx>state</span><span class=p>,</span> <span class=nx>formAction</span><span class=p>,</span> <span class=nx>isPending</span><span class=p>]</span> <span class=o>=</span> <span class=nx>useActionState</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>createUser</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>initialState</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;</span><span class=nt>form</span> <span class=na>action</span><span class=o>=</span><span class=p>{</span><span class=nx>formAction</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;email&#34;</span><span class=p>&gt;</span><span class=err>メールアドレス</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;email&#34;</span> <span class=na>required</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=o>?</span><span class=p>.</span><span class=nx>email</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=s>&#34;error&#34;</span><span class=p>&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=p>.</span><span class=nx>email</span><span class=p>[</span><span class=mi>0</span><span class=p>]}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;name&#34;</span><span class=p>&gt;</span><span class=err>名前</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;name&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;name&#34;</span> <span class=na>required</span> <span class=p>/&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=o>?</span><span class=p>.</span><span class=nx>name</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=s>&#34;error&#34;</span><span class=p>&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>errors</span><span class=p>.</span><span class=nx>name</span><span class=p>[</span><span class=mi>0</span><span class=p>]}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>)}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>label</span> <span class=na>htmlFor</span><span class=o>=</span><span class=s>&#34;role&#34;</span><span class=p>&gt;</span><span class=err>ロール</span><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>select</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;role&#34;</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;role&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>option</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;USER&#34;</span><span class=p>&gt;</span><span class=err>一般ユーザー</span><span class=p>&lt;/</span><span class=nt>option</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>          <span class=p>&lt;</span><span class=nt>option</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;ADMIN&#34;</span><span class=p>&gt;</span><span class=err>管理者</span><span class=p>&lt;/</span><span class=nt>option</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>select</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;</span><span class=nt>button</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;submit&#34;</span> <span class=na>disabled</span><span class=o>=</span><span class=p>{</span><span class=nx>isPending</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span><span class=nx>isPending</span> <span class=o>?</span> <span class=s2>&#34;作成中...&#34;</span> <span class=o>:</span> <span class=s2>&#34;ユーザーを作成&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>message</span> <span class=o>&amp;&amp;</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>p</span> <span class=na>className</span><span class=o>=</span><span class=p>{</span><span class=nx>state</span><span class=p>.</span><span class=nx>success</span> <span class=o>?</span> <span class=s2>&#34;success&#34;</span> <span class=o>:</span> <span class=s2>&#34;error&#34;</span><span class=p>}&gt;{</span><span class=nx>state</span><span class=p>.</span><span class=nx>message</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>      <span class=p>)}</span>
+</span></span><span class=line><span class=cl>    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h2 id=まとめ>まとめ</h2><p>本記事で紹介したパターンを整理します。</p><table><thead><tr><th>パターン</th><th>目的</th></tr></thead><tbody><tr><td>シングルトン</td><td>dev環境でのコネクションプール枯渇を防止</td></tr><tr><td>Server Components直接取得</td><td>API層を排除してコード量とレイテンシを削減</td></tr><tr><td>Server Actions + Zod</td><td>型安全なフォーム処理とバリデーション</td></tr><tr><td><code>withDbError</code>ラッパー</td><td>Prismaエラーの統一的なハンドリング</td></tr><tr><td><code>Prisma.validator</code></td><td>再利用可能で型安全なクエリ定義</td></tr><tr><td><code>include</code> / <code>select</code></td><td>N+1問題の回避とデータ転送量の最適化</td></tr><tr><td>Interactive transactions</td><td>複数操作のアトミックな実行</td></tr></tbody></table><p>これらのパターンを組み合わせることで、型安全かつパフォーマンスの良いデータアクセス層を構築できます。</p><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260125_prisma_jst/1/>PrismaとMySQLのタイムゾーン不整合問題</a> - PrismaでのJST/UTC不整合の原因と対策を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20240518_db_transaction/1/>トランザクションの分離レベルと防げる不整合</a> - トランザクション分離レベルの理論的背景を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20231124_t3/1/>Next.jsのApp RouterとPages Router間におけるprom-clientメトリクス共有の技術的課題</a> - App RouterとPages Router間でのグローバル状態共有の課題を解説しています。</li></ul><hr><h3 id=関連ツール>関連ツール</h3><ul><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-formatter/>JSON整形ツール（DevToolBox）</a> - JSONデータの整形・検証ツール</li><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-to-typescript/>JSON→TypeScript変換（DevToolBox）</a> - JSONからTypeScript型定義を自動生成</li><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/sql-formatter/>SQLフォーマッター（DevToolBox）</a> - SQL文の整形・フォーマットツール</li></ul></div><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="1560"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260311_nextjs_prisma/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260311_python_csv/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span><span class=post-nav__title>PythonでCSVファイルを効率的に読み書きする方法：csv・pandas・polars比較</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20240504_use_client/1/>Next.js App Routerでのuse clientディレクティブの適切な使用パターン</a></h3><div class=card-meta><time datetime=2024-05-03>May 3, 2024</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20231218_hugo/1/>HugoテーマのカスタマイズでTypeScriptとReactを統合する方法</a></h3><div class=card-meta><time datetime=2023-12-18>December 18, 2023</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260306_devtoolbox/1/>DevToolBox - 開発者向け無料オンラインツール85種類以上を公開</a></h3><div class=card-meta><time datetime=2026-03-06>March 6, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Next.js App Router + Prisma 実践パターン：型安全なDB操作の設計</span>
+<meta itemprop=position content="4"></li></ol></nav></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container pt-4 pb-3" style="border-top:2px solid var(--accent,#e54d2e)"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="copyright-text text-muted mb-2">&copy; 2026 yuhi-sa. All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p><p class="sister-sites text-muted small mt-3 mb-0">Tools:
+<a href=https://yuhi-sa.github.io/devtoolbox/ class=text-decoration-none>DevToolBox</a>
+|
+<a href=https://yuhi-sa.github.io/calcbox/ class=text-decoration-none>CalcBox</a>
+|
+<a href=https://yuhi-sa.github.io/pomodoro/ class=text-decoration-none>Pomodoro Timer</a></p><p class="social-links text-muted small mt-1 mb-0"><a href=https://www.youtube.com/@yuhi-sa target=_blank rel=noopener class=text-decoration-none>YouTube</a>
+|
+<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}})</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Next.js App Router \u002b Prisma 実践パターン：型安全なDB操作の設計","url":"https:\/\/yuhi-sa.github.io\/posts\/20260311_nextjs_prisma\/1\/","description":"Next.js App RouterでPrismaを使ったデータベース操作の実践パターンを解説。シングルトン、Server Actions、N\u002b1対策、トランザクション処理など。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
