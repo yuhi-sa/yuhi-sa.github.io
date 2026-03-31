@@ -15,15 +15,15 @@ March 11, 2026
 V^{\*} = \lim_{k \to \infty} (B_{*}^{k}V)(s)
 \]</li><li><p><strong>方策反復法</strong>
 「方策評価」と「方策改善」の2ステップを繰り返し、最適方策を求めます。</p><ol><li><strong>方策評価</strong>: 現在の方策 \(\pi\) の下での価値関数 \(V^\pi\) を、ベルマン<strong>期待</strong>作用素を用いて計算します。
-\(
+\[
 (B_{\pi}v)(s) = \sum_a \pi(a|s) (g(s,a) + \gamma \sum_{s'} p_T(s'|s,a)v(s'))
-\)
-\(
+\]
+\[
 V^{\pi} = \lim_{k \to \infty} (B_{\pi}^{k}V)(s)
-\)</li><li><strong>方策改善</strong>: 計算した価値関数 \(V^\pi\) を使って、より良い方策を貪欲に決定します。
-\(
+\]</li><li><strong>方策改善</strong>: 計算した価値関数 \(V^\pi\) を使って、より良い方策を貪欲に決定します。
+\[
 \pi(s) = \arg\max_a \{g(s,a) + \gamma \sum_{s'} p_T(s'|s,a)V^\pi(s')\}
-\)</li></ol></li></ul><h2 id=強化学習>強化学習</h2><p>環境のダイナミクスが<strong>未知</strong>の場合の逐次的意思決定問題。
+\]</li></ol></li></ul><h2 id=強化学習>強化学習</h2><p>環境のダイナミクスが<strong>未知</strong>の場合の逐次的意思決定問題。
 エージェントは環境と相互作用しながらデータを収集し、そのデータから最適な方策を学習します。</p><h3 id=価値ベースの手法>価値ベースの手法</h3><p>価値関数（状態価値関数Vや行動価値関数Q）を推定し、それに基づいて暗黙的に方策を決定します。</p><ul><li><p><strong>TD法 (Temporal-Difference Learning)</strong>
 方策 \(\pi\) を固定し、その下での<strong>状態価値関数V</strong>を推定します。TD誤差 \(\delta\) を用いてオンラインで価値関数を更新します。</p>\[
 \delta_t = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)
@@ -41,18 +41,18 @@ V^{\pi} = \lim_{k \to \infty} (B_{\pi}^{k}V)(s)
 \hat{Q}(s_t, a_t) \leftarrow \hat{Q}(s_t, a_t) + \alpha_t \delta_t
 \]</li></ul><h3 id=方策ベースの手法>方策ベースの手法</h3><p>価値関数を介さず、方策 \(\pi_\theta\) を直接パラメータ \(\theta\) でモデル化し、最適化します。</p><ul><li><strong>方策勾配法</strong>
 性能指標 \(J(\theta)\) を最大化するように、勾配 \(\nabla_\theta J(\theta)\) を計算し、方策パラメータ \(\theta\) を更新します。
-\(
+\[
 \theta_{t+1} = \theta_t + \alpha \nabla_\theta J(\theta_t)
-\)</li></ul><h3 id=アクタークリティック法>アクタークリティック法</h3><p>価値ベースと方策ベースの手法を組み合わせたものです。</p><ul><li><strong>アクター</strong>: 方策 \(\pi_\theta\) を更新（行動を選択）</li><li><strong>クリティック</strong>: 価値関数を学習し、アクターが選択した行動を評価</li></ul><p>TD誤差 \(\delta_t\) を用いてアクターとクリティックの両方を更新します。</p><ul><li><strong>クリティックの更新 (価値関数の学習)</strong>
-\(
+\]</li></ul><h3 id=アクタークリティック法>アクタークリティック法</h3><p>価値ベースと方策ベースの手法を組み合わせたものです。</p><ul><li><strong>アクター</strong>: 方策 \(\pi_\theta\) を更新（行動を選択）</li><li><strong>クリティック</strong>: 価値関数を学習し、アクターが選択した行動を評価</li></ul><p>TD誤差 \(\delta_t\) を用いてアクターとクリティックの両方を更新します。</p><ul><li><strong>クリティックの更新 (価値関数の学習)</strong>
+\[
 \delta_t = r_t + \gamma \hat{V}_w(s_{t+1}) - \hat{V}_w(s_t)
-\)
-\(
+\]
+\[
 w_{t+1} = w_t + \alpha_w \delta_t \nabla_w \hat{V}_w(s_t)
-\)</li><li><strong>アクターの更新 (方策の学習)</strong>
-\(
+\]</li><li><strong>アクターの更新 (方策の学習)</strong>
+\[
 \theta_{t+1} = \theta_t + \alpha_\theta \delta_t \nabla_\theta \log \pi_\theta(a_t|s_t)
-\)</li></ul><h3 id=関数近似>関数近似</h3><p>状態空間が広大または連続的な場合、価値関数や方策をテーブルで表現する代わりに、パラメータ \(w\) や \(\theta\) を持つ関数（線形関数やニューラルネットワークなど）で近似します。</p><ul><li><p><strong>価値関数近似</strong>
+\]</li></ul><h3 id=関数近似>関数近似</h3><p>状態空間が広大または連続的な場合、価値関数や方策をテーブルで表現する代わりに、パラメータ \(w\) や \(\theta\) を持つ関数（線形関数やニューラルネットワークなど）で近似します。</p><ul><li><p><strong>価値関数近似</strong>
 TD法やQ学習などの更新則に、関数近似を組み合わせます。例えば、近似Q学習では重み \(w\) を以下のように更新します。</p>\[
 \delta_t = r_t + \gamma \max_{a'} \hat{Q}_w(s_{t+1}, a') - \hat{Q}_w(s_t, a_t)
 \]\[

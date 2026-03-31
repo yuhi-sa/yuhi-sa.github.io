@@ -15,15 +15,15 @@ Directly computes the optimal value function by repeatedly applying the Bellman 
 V^{\*} = \lim_{k \to \infty} (B_{*}^{k}V)(s)
 \]</li><li><p><strong>Policy Iteration</strong>
 Iterates between two steps &ndash; &ldquo;policy evaluation&rdquo; and &ldquo;policy improvement&rdquo; &ndash; to find the optimal policy.</p><ol><li><strong>Policy Evaluation</strong>: Computes the value function \(V^\pi\) under the current policy \(\pi\) using the Bellman <strong>expectation</strong> operator.
-\(
+\[
 (B_{\pi}v)(s) = \sum_a \pi(a|s) (g(s,a) + \gamma \sum_{s'} p_T(s'|s,a)v(s'))
-\)
-\(
+\]
+\[
 V^{\pi} = \lim_{k \to \infty} (B_{\pi}^{k}V)(s)
-\)</li><li><strong>Policy Improvement</strong>: Greedily determines a better policy using the computed value function \(V^\pi\).
-\(
+\]</li><li><strong>Policy Improvement</strong>: Greedily determines a better policy using the computed value function \(V^\pi\).
+\[
 \pi(s) = \arg\max_a \{g(s,a) + \gamma \sum_{s'} p_T(s'|s,a)V^\pi(s')\}
-\)</li></ol></li></ul><h2 id=reinforcement-learning>Reinforcement Learning</h2><p>Sequential decision-making problems where the environment dynamics are <strong>unknown</strong>.
+\]</li></ol></li></ul><h2 id=reinforcement-learning>Reinforcement Learning</h2><p>Sequential decision-making problems where the environment dynamics are <strong>unknown</strong>.
 The agent collects data through interaction with the environment and learns the optimal policy from that data.</p><h3 id=value-based-methods>Value-Based Methods</h3><p>These methods estimate a value function (state-value function V or action-value function Q) and implicitly derive a policy from it.</p><ul><li><p><strong>TD Learning (Temporal-Difference Learning)</strong>
 Fixes a policy \(\pi\) and estimates the <strong>state-value function V</strong> under it. The value function is updated online using the TD error \(\delta\).</p>\[
 \delta_t = r_t + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)
@@ -41,18 +41,18 @@ Estimates the <strong>action-value function Q</strong>. Unlike Q-Learning, the n
 \hat{Q}(s_t, a_t) \leftarrow \hat{Q}(s_t, a_t) + \alpha_t \delta_t
 \]</li></ul><h3 id=policy-based-methods>Policy-Based Methods</h3><p>These methods directly model and optimize the policy \(\pi_\theta\) with parameters \(\theta\), without going through a value function.</p><ul><li><strong>Policy Gradient Methods</strong>
 Compute the gradient \(\nabla_\theta J(\theta)\) to maximize a performance measure \(J(\theta)\), and update the policy parameters \(\theta\).
-\(
+\[
 \theta_{t+1} = \theta_t + \alpha \nabla_\theta J(\theta_t)
-\)</li></ul><h3 id=actor-critic-methods>Actor-Critic Methods</h3><p>These methods combine value-based and policy-based approaches.</p><ul><li><strong>Actor</strong>: Updates the policy \(\pi_\theta\) (selects actions)</li><li><strong>Critic</strong>: Learns a value function and evaluates the actions chosen by the actor</li></ul><p>Both the actor and critic are updated using the TD error \(\delta_t\).</p><ul><li><strong>Critic Update (Value Function Learning)</strong>
-\(
+\]</li></ul><h3 id=actor-critic-methods>Actor-Critic Methods</h3><p>These methods combine value-based and policy-based approaches.</p><ul><li><strong>Actor</strong>: Updates the policy \(\pi_\theta\) (selects actions)</li><li><strong>Critic</strong>: Learns a value function and evaluates the actions chosen by the actor</li></ul><p>Both the actor and critic are updated using the TD error \(\delta_t\).</p><ul><li><strong>Critic Update (Value Function Learning)</strong>
+\[
 \delta_t = r_t + \gamma \hat{V}_w(s_{t+1}) - \hat{V}_w(s_t)
-\)
-\(
+\]
+\[
 w_{t+1} = w_t + \alpha_w \delta_t \nabla_w \hat{V}_w(s_t)
-\)</li><li><strong>Actor Update (Policy Learning)</strong>
-\(
+\]</li><li><strong>Actor Update (Policy Learning)</strong>
+\[
 \theta_{t+1} = \theta_t + \alpha_\theta \delta_t \nabla_\theta \log \pi_\theta(a_t|s_t)
-\)</li></ul><h3 id=function-approximation>Function Approximation</h3><p>When the state space is large or continuous, value functions and policies are approximated using parameterized functions (such as linear functions or neural networks) with parameters \(w\) or \(\theta\), instead of tabular representations.</p><ul><li><p><strong>Value Function Approximation</strong>
+\]</li></ul><h3 id=function-approximation>Function Approximation</h3><p>When the state space is large or continuous, value functions and policies are approximated using parameterized functions (such as linear functions or neural networks) with parameters \(w\) or \(\theta\), instead of tabular representations.</p><ul><li><p><strong>Value Function Approximation</strong>
 Combines function approximation with update rules such as TD learning and Q-Learning. For example, in approximate Q-Learning, the weights \(w\) are updated as follows:</p>\[
 \delta_t = r_t + \gamma \max_{a'} \hat{Q}_w(s_{t+1}, a') - \hat{Q}_w(s_t, a_t)
 \]\[
