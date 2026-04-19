@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://yuhi-sa.github.io/pomodoro/sitemap.xml
