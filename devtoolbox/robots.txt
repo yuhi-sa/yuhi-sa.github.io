@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://yuhi-sa.github.io/devtoolbox/sitemap.xml
