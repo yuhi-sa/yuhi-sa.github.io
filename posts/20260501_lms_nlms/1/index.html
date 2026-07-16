@@ -10,7 +10,7 @@ July 15, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
 6 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理
 </a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python
-</a><a href=/tags/%E9%81%A9%E5%BF%9C%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>適応フィルタ</a></div></header><div class="ad-slot top-banner text-center my-3"><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-9558545098866170 data-ad-slot=1450698480 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>LMS（Least Mean Squares）アルゴリズムは、ウィーナーフィルタの最適解を<strong>確率的勾配降下法</strong>で逐次近似する適応フィルタ手法です。実装が極めて単純（演算量 \(O(L)\)
+</a><a href=/tags/%E9%81%A9%E5%BF%9C%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>適応フィルタ</a></div></header><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>LMS（Least Mean Squares）アルゴリズムは、ウィーナーフィルタの最適解を<strong>確率的勾配降下法</strong>で逐次近似する適応フィルタ手法です。実装が極めて単純（演算量 \(O(L)\)
 ）で安定性も高いため、エコーキャンセラ、ノイズキャンセレーション、チャネル等化、システム同定など幅広い分野で実用されています。</p><p>定常確率過程を前提とした<a href=https://yuhi-sa.github.io/posts/20260226_wiener_filter/1/>ウィーナーフィルタ</a>は、信号統計（自己相関 \(R_{yy}\)
 と相互相関 \(R_{sy}\)
 ）が既知という強い仮定を置きます。LMSは統計が未知でも観測サンプルから直接フィルタ係数を更新できる点で、より実用的です。</p><h2 id=問題設定>問題設定</h2><p>長さ \(L\)

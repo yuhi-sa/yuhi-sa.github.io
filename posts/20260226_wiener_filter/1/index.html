@@ -10,7 +10,7 @@ July 10, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
 5 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>フィルタリング
 </a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python
-</a><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理</a></div></header><div class="ad-slot top-banner text-center my-3"><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-9558545098866170 data-ad-slot=1450698480 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>ウィーナーフィルタは、平均二乗誤差（MSE）を最小化する<strong>最適線形フィルタ</strong>です。ノイズを含む観測信号から元の信号を推定する問題において、定常確率過程の枠組みで理論的に最適な解を与えます。</p><h2 id=問題設定>問題設定</h2><p>ノイズを含む観測信号:</p>\[y(t) = s(t) + n(t) \tag{1}\]<p>ここで \(s(t)\)
+</a><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理</a></div></header><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>ウィーナーフィルタは、平均二乗誤差（MSE）を最小化する<strong>最適線形フィルタ</strong>です。ノイズを含む観測信号から元の信号を推定する問題において、定常確率過程の枠組みで理論的に最適な解を与えます。</p><h2 id=問題設定>問題設定</h2><p>ノイズを含む観測信号:</p>\[y(t) = s(t) + n(t) \tag{1}\]<p>ここで \(s(t)\)
 は所望の信号、\(n(t)\)
 はノイズです。フィルタ \(h(t)\)
 を通した出力 \(\hat{s}(t)\)

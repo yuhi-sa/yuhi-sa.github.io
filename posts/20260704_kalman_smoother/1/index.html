@@ -11,7 +11,7 @@ July 15, 2026
 11 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>機械学習
 </a><a href=/tags/%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>フィルタリング
 </a><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理
-</a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class="ad-slot top-banner text-center my-3"><ins class=adsbygoogle style=display:block data-ad-client=ca-pub-9558545098866170 data-ad-slot=1450698480 data-ad-format=auto data-full-width-responsive=true></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class=article-content itemprop=articleBody><h2 id=はじめにフィルタリングとスムージングの違い>はじめに：フィルタリングとスムージングの違い</h2><p>状態空間モデルにおける状態推定には、使える観測の範囲によって 2 つの問題設定があります。</p><ul><li><strong>フィルタリング</strong>：時刻 \(k\)
+</a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class=article-content itemprop=articleBody><h2 id=はじめにフィルタリングとスムージングの違い>はじめに：フィルタリングとスムージングの違い</h2><p>状態空間モデルにおける状態推定には、使える観測の範囲によって 2 つの問題設定があります。</p><ul><li><strong>フィルタリング</strong>：時刻 \(k\)
 までの観測 \(y_{1:k}\)
 を用いた推定 → \(p(x_k \mid y_{1:k})\)
 。<strong>因果的（causal）</strong> な処理で、観測が届くたびに推定を更新できるため <strong>オンライン・リアルタイム処理</strong> に適します。</li><li><strong>スムージング</strong>：時刻 \(k\)
