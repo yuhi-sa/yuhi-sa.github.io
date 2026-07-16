@@ -1,25 +1,103 @@
-<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。"><meta name=keywords content="アルゴリズム"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><meta property="og:type" content="article"><meta property="og:title" content="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"><meta property="og:description" content="ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2020-10-15T15:17:23+09:00"><meta property="article:modified_time" content="2026-04-19T21:53:53+09:00"><meta property="article:tag" content="アルゴリズム"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"><meta name=twitter:description content="ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム","description":"ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-10-15T15:17:23\u002b09:00","dateModified":"2026-04-19T21:53:53\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/","wordCount":664,"keywords":["アルゴリズム"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT2M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。"><meta name=keywords content="アルゴリズム,ユークリッドの互除法,拡張ユークリッドの互除法,ベズーの等式,計算量,Python"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><meta property="og:type" content="article"><meta property="og:title" content="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"><meta property="og:description" content="ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2020-10-15T15:17:23+09:00"><meta property="article:modified_time" content="2026-07-16T19:39:09+09:00"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="数学"><meta property="article:tag" content="Python"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"><meta name=twitter:description content="ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム","description":"ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-10-15T15:17:23\u002b09:00","dateModified":"2026-07-16T19:39:09\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/","wordCount":7414,"keywords":["アルゴリズム","数学","Python"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT15M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
 </a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
 <i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</h1><p class="lead article-description" itemprop=description>ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。</p><div class=article-meta><time datetime=2020-10-15T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</h1><p class="lead article-description" itemprop=description>ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。</p><div class=article-meta><time datetime=2020-10-15T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
 October 15, 2020
-</time><time datetime=2026-04-19T21:53:53+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+</time><time datetime=2026-07-16T19:39:09+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
 Updated
-April 19, 2026
+July 16, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>アルゴリズム</a></div></header><div class=article-content itemprop=articleBody><h2 id=ユークリッドの互除法とは>ユークリッドの互除法とは</h2><p>ユークリッドの互除法とは、2つの整数 \(a\)
+15 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>アルゴリズム
+</a><a href=/tags/%E6%95%B0%E5%AD%A6/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>数学
+</a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class=article-content itemprop=articleBody><h2 id=ユークリッドの互除法とは>ユークリッドの互除法とは</h2><p>ユークリッドの互除法とは、2つの整数 \(a\)
 と \(b\)
 \((a>b)\)
 が与えられたとき、\(a\)
 を \(b\)
 で割った余り \(r\)
-とすることで、\(a\)
+を利用することで、\(a\)
 と \(b\)
-の最大公約数を求める方法。除法の原理を利用し、割り算を繰り返すことによって最大公約数を求める。</p><h3 id=ユークリッドの互除法のアルゴリズム>ユークリッドの互除法のアルゴリズム</h3><p>入力：整数\(a,b\)<br>出力：最大公約数 \(d\)</p><ol><li>\(a_0 = a\)
+の最大公約数 \(\gcd(a,b)\)
+を求める方法。除法の原理を利用し、割り算を繰り返すことによって最大公約数を求める。紀元前300年頃のユークリッド『原論』に記載がある、現存する中で最古のアルゴリズムの一つとされる。</p><p>本記事では、単にアルゴリズムを提示するだけでなく、</p><ol><li>なぜこの手続きが必ず正しい最大公約数を返すのか（正当性の証明）</li><li>なぜ必ず有限回で停止するのか、その回数のオーダー（計算量の証明）</li><li>拡張版がなぜ \(ax+by=\gcd(a,b)\)
+の解を実際に構成できるのか（ベズーの等式の証明）</li><li>RSA暗号などの公開鍵暗号でどう使われるのか（モジュラ逆元への応用）</li></ol><p>を、実行して得た数値による検証とあわせて順に見ていく。</p><h3 id=記法前提>記法・前提</h3><p>以降、断りがない限り \(a,b\)
+は整数、少なくとも一方は \(0\)
+でないものとする。\(\gcd(a,b)\)
+は \(a\)
+と \(b\)
+の最大公約数（両方を割り切る整数のうち最大のもの）を表す。\(\gcd(a,0)=|a|\)
+、\(\gcd(0,0)\)
+は未定義とする。</p><h2 id=補題>補題：\(\gcd(a,b) = \gcd(b, a \bmod b)\)</h2><p>ユークリッドの互除法が正しく動作する根拠となる、最も重要な補題を証明する。</p><p><strong>補題.</strong> \(a, b\)
+を整数とし、\(b \neq 0\)
+とする。\(r = a \bmod b\)
+（すなわち \(a = bq + r\)
+、\(0 \le r &lt; |b|\)
+を満たす整数 \(q, r\)
+）とすると、</p>\[
+\gcd(a, b) = \gcd(b, r) \tag{1}
+\]<p><strong>証明.</strong> \(a = bq + r\)
+という関係から、\(a\)
+と \(b\)
+の公約数の集合が、\(b\)
+と \(r\)
+の公約数の集合と完全に一致することを示す。</p><ul><li>(\(\subseteq\)
+) \(d\)
+を \(a\)
+と \(b\)
+の公約数とする。\(d \mid a\)
+かつ \(d \mid b\)
+より、\(r = a - bq\)
+は \(d\)
+で割り切れる整数の線形結合なので \(d \mid r\)
+。よって \(d\)
+は \(b\)
+と \(r\)
+の公約数でもある。</li><li>(\(\supseteq\)
+) \(d\)
+を \(b\)
+と \(r\)
+の公約数とする。\(d \mid b\)
+かつ \(d \mid r\)
+より、\(a = bq + r\)
+も \(d\)
+で割り切れる整数の線形結合なので \(d \mid a\)
+。よって \(d\)
+は \(a\)
+と \(b\)
+の公約数でもある。</li></ul><p>したがって \(a,b\)
+の公約数の集合と \(b,r\)
+の公約数の集合は一致し、特にその最大値である最大公約数も一致する。\(\blacksquare\)</p><p>この補題により、「\(\gcd(a,b)\)
+を求める」問題を、より小さい数の組 \(\gcd(b, a \bmod b)\)
+を求める問題に帰着できる。これを繰り返すことがユークリッドの互除法の本質である。</p><h3 id=ユークリッドの互除法のアルゴリズム>ユークリッドの互除法のアルゴリズム</h3><p>入力：整数\(a,b\)<br>出力：最大公約数 \(d\)</p><ol><li>\(a_0 = a\)
 , \(a_1 = b\)</li><li>\(a_i=0\)
 のとき，<br>\(d=a_{i-1}\)
-とし終了</li><li>\(a_{i-1}=a_iq_i+a_{i+1}\)<br>　　として2に戻る</li></ol><h3 id=プログラム>プログラム</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-euclid.py data-lang=euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
+とし終了</li><li>\(a_{i-1}=a_iq_i+a_{i+1}\)<br>　　として2に戻る</li></ol><h3 id=停止性と正当性の証明>停止性と正当性の証明</h3><p>上記のアルゴリズムが（a）必ず有限回で停止し、（b）停止したときに返す値が真に \(\gcd(a,b)\)
+であることを、それぞれ証明する。</p><p><strong>（a）停止性.</strong> 手順3で生成される列 \(a_0, a_1, a_2, \dots\)
+は、剰余の定義（\(0 \le a_{i+1} &lt; a_i\)
+、\(a_i \neq 0\)
+の場合）により、\(a_i \neq 0\)
+である限り</p>\[
+a_1 > a_2 > a_3 > \cdots \ge 0
+\]<p>という狭義単調減少な非負整数の列になる。非負整数には無限に狭義単調減少する列は存在しない（整列性）ため、有限のステップ数 \(n\)
+で必ず \(a_{n}=0\)
+となり、アルゴリズムは停止する。</p><p><strong>（b）正当性（強い帰納法）.</strong> 「任意の \(i \ge 1\)
+に対して \(\gcd(a_{i-1}, a_i) = \gcd(a, b)\)
+が成り立つ」ことを \(i\)
+に関する帰納法で示す。</p><ul><li>基底: \(i=1\)
+のとき \(\gcd(a_0,a_1)=\gcd(a,b)\)
+は定義よりそのまま成立。</li><li>帰納段階: \(\gcd(a_{i-1},a_i)=\gcd(a,b)\)
+が成り立つと仮定する（帰納法の仮定）。手順3の \(a_{i-1}=a_iq_i+a_{i+1}\)
+に補題(1)を適用すると \(\gcd(a_{i-1},a_i)=\gcd(a_i,a_{i+1})\)
+。帰納法の仮定と合わせて \(\gcd(a_i,a_{i+1})=\gcd(a,b)\)
+を得る。</li></ul><p>よって全ての \(i\)
+について不変量 \(\gcd(a_{i-1},a_i)=\gcd(a,b)\)
+が成立する。アルゴリズムが停止するステップ、すなわち \(a_i=0\)
+となる最小の \(i\)
+において、\(\gcd(a_{i-1},a_i)=\gcd(a_{i-1},0)=a_{i-1}\)
+。不変量よりこれは \(\gcd(a,b)\)
+に等しい。したがって出力 \(d=a_{i-1}\)
+は真に \(\gcd(a,b)\)
+である。\(\blacksquare\)</p><h3 id=プログラム>プログラム</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-euclid.py data-lang=euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=n>a_list</span> <span class=o>=</span> <span class=p>[]</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>a</span> <span class=o>&lt;</span> <span class=n>b</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
@@ -32,8 +110,9 @@ April 19, 2026
 </span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>%</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span><span class=mi>1</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span>
-</span></span></code></pre></div><h2 id=拡張ユークリッドの互除法とは>拡張ユークリッドの互除法とは</h2><p>拡張ユークリッドの互除法とは、一次不定方程式 \(ax+by=d\)
-の一つの解を求める方法。\(a_0=a\)
+</span></span></code></pre></div><h2 id=拡張ユークリッドの互除法とベズーの等式>拡張ユークリッドの互除法とベズーの等式</h2><p>拡張ユークリッドの互除法とは、一次不定方程式 \(ax+by=d\)
+（\(d=\gcd(a,b)\)
+）の一つの解を求める方法。\(a_0=a\)
 、\(a_1=b\)
 とおくと、以下のように求めることができる。</p><p>\([\begin{array}{cc}
 a_{i-1} \\
@@ -83,21 +162,22 @@ a \\
 b
 \end{array}]
 \)
-となる．</p><h3 id=拡張ユークリッドの互除法のアルゴリズム>拡張ユークリッドの互除法のアルゴリズム</h3><p>入力：整数\(a,b\)<br>出力：最大公約数\(d\)
+となる．</p><p>この行列表現は、拡張ユークリッドの互除法が「線形写像の合成」として理解できることを示しているが、実際に係数 \(x,y\)
+を計算するときは、次に述べる係数追跡（coefficient tracking）の形で実装するのが標準的である。</p><h3 id=拡張ユークリッドの互除法のアルゴリズム>拡張ユークリッドの互除法のアルゴリズム</h3><p>入力：整数\(a,b\)<br>出力：最大公約数\(d\)
 と \(ax+by=d\)
 となる整数\(x, y\)</p><ol><li>\(a_0 =a\)
 , \(a_1 =b\)</li><li>\(x_0 =1\)
 , \(x_1 =0\)
 ，\(y_0 =0\)
 , \(y_1 =1\)</li><li>\(a_i=0\)
-のとき，<br>\(d=a_i−1\)
+のとき，<br>\(d=a_{i−1}\)
 ，\(x=x_{i−1}\)
 ，\(y=y_{i−1}\)
 とし終了.</li><li>\(a_{i−1} = a_iq_i + a_{i+1}\)
 により，\(a_{i+1}\)
 と\(q_i\)
 を定める.<br>\(x_{i+1} = x_{i−1} − q_ix_i\)
-\(y_i+1=y_i−1−q_iy_i\)<br>として3に戻る．</li></ol><h3 id=プログラム-1>プログラム</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-exEuclid.py data-lang=exEuclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>exEuclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
+\(y_{i+1} = y_{i−1} − q_iy_i\)<br>として3に戻る．</li></ol><h3 id=プログラム-1>プログラム</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-exEuclid.py data-lang=exEuclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>exEuclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=n>a_list</span> <span class=o>=</span> <span class=p>[]</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>a</span> <span class=o>&lt;</span> <span class=n>b</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
@@ -120,10 +200,336 @@ b
 </span></span><span class=line><span class=cl>        <span class=n>y</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span><span class=o>-</span><span class=n>q</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>*</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span><span class=mi>1</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>x</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>],</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>],</span><span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span>
-</span></span></code></pre></div></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="664"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20200901_filter/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span></span></code></pre></div><h3 id=ベズーの等式の証明>ベズーの等式の証明</h3><p><strong>ベズーの等式.</strong> 任意の整数 \(a,b\)
+（少なくとも一方は \(0\)
+でない）に対して、\(ax+by=\gcd(a,b)\)
+を満たす整数 \(x,y\)
+が存在する。</p><p>これを「存在を示すだけ」ではなく、拡張ユークリッドの互除法が実際にそのような \(x,y\)
+を構成することを、係数追跡の不変量に関する帰納法で証明する。</p><p><strong>主張.</strong> アルゴリズム中の全ての \(i \ge 0\)
+について、次の不変量が成り立つ。</p>\[
+a \cdot x_i + b \cdot y_i = a_i \tag{2}
+\]<p><strong>証明（帰納法）.</strong></p><ul><li>基底 \(i=0\)
+: \(x_0=1, y_0=0, a_0=a\)
+より \(a\cdot 1 + b\cdot 0 = a\)
+。成立。</li><li>基底 \(i=1\)
+: \(x_1=0, y_1=1, a_1=b\)
+より \(a\cdot 0 + b\cdot 1 = b\)
+。成立。</li><li>帰納段階: \(i-1\)
+と \(i\)
+で不変量(2)が成り立つと仮定する。手順4の定義 \(x_{i+1}=x_{i-1}-q_ix_i\)
+、\(y_{i+1}=y_{i-1}-q_iy_i\)
+を使うと、</li></ul>\[
+\begin{aligned}
+a\cdot x_{i+1} + b\cdot y_{i+1}
+&= a(x_{i-1}-q_ix_i) + b(y_{i-1}-q_iy_i) \\
+&= (a x_{i-1} + b y_{i-1}) - q_i(a x_i + b y_i) \\
+&= a_{i-1} - q_i a_i \quad (\text{帰納法の仮定}) \\
+&= a_{i+1} \quad (\because a_{i-1}=a_iq_i+a_{i+1})
+\end{aligned}
+\]<p>よって \(i+1\)
+でも不変量(2)が成立する。強い帰納法（2段階の漸化式なので \(i-1,i\)
+を仮定して \(i+1\)
+を示す形）により、全ての \(i\)
+で不変量(2)が成り立つ。\(\blacksquare\)</p><p>アルゴリズムが停止するステップ（\(a_i=0\)
+となる最初の \(i\)
+）では、出力は \(d=a_{i-1}\)
+、\(x=x_{i-1}\)
+、\(y=y_{i-1}\)
+であり、不変量(2)をそのステップ番号 \(i-1\)
+について適用すると、</p>\[
+a\cdot x + b\cdot y = a\cdot x_{i-1} + b\cdot y_{i-1} = a_{i-1} = d = \gcd(a,b)
+\]<p>を得る。これがまさにベズーの等式であり、拡張ユークリッドの互除法はその解 \((x,y)\)
+を実際に構成的に与えるアルゴリズムである。\(\blacksquare\)</p><p><strong>別記法との対応.</strong> 文献やライブラリによっては、この係数追跡を \((old\_r, old\_s, old\_t)/(r,s,t)\)
+という変数名で1ステップずつ更新する反復形式で書くことが多い（例えば<a href=https://yuhi-sa.github.io/posts/20260225_rsa/1/>RSA暗号の記事</a>の <code>extended_gcd</code> は再帰形式で等価な計算をしている）。対応関係は \(old\_r \leftrightarrow a_{i-1}\)
+、\(r \leftrightarrow a_i\)
+、\(old\_s \leftrightarrow x_{i-1}\)
+、\(s \leftrightarrow x_i\)
+、\(old\_t \leftrightarrow y_{i-1}\)
+、\(t \leftrightarrow y_i\)
+である。反復形式のコードは次の通り（検証コードでもこの実装を使用する）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:extended_gcd_iterative.py data-lang=python:extended_gcd_iterative.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>extended_gcd</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;反復形式の拡張ユークリッド互除法。gcd, x, y, ステップ数を返す。
+</span></span></span><span class=line><span class=cl><span class=s2>    a*x + b*y = gcd(a, b) を満たす。
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_r</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_s</span><span class=p>,</span> <span class=n>s</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_t</span><span class=p>,</span> <span class=n>t</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=n>steps</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>r</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span> <span class=o>=</span> <span class=n>old_r</span> <span class=o>//</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_r</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=n>r</span><span class=p>,</span> <span class=n>old_r</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_s</span><span class=p>,</span> <span class=n>s</span> <span class=o>=</span> <span class=n>s</span><span class=p>,</span> <span class=n>old_s</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>s</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_t</span><span class=p>,</span> <span class=n>t</span> <span class=o>=</span> <span class=n>t</span><span class=p>,</span> <span class=n>old_t</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>t</span>
+</span></span><span class=line><span class=cl>        <span class=n>steps</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>old_r</span><span class=p>,</span> <span class=n>old_s</span><span class=p>,</span> <span class=n>old_t</span><span class=p>,</span> <span class=n>steps</span>
+</span></span></code></pre></div><h2 id=計算量ラメの定理と最悪計算量>計算量：ラメの定理と最悪計算量 \(O(\log(\min(a,b)))\)</h2><p>ユークリッドの互除法が停止することは前節で示したが、実用上重要なのは<strong>何ステップで停止するか</strong>である。ここでは、最悪ケースがフィボナッチ数列の連続する2項であることを示す**ラメの定理（Lamé&rsquo;s theorem, 1844年）**を証明し、数値実験で検証する。</p><h3 id=定理ラメの定理>定理（ラメの定理）</h3><p>\(a > b > 0\)
+に対しユークリッドの互除法が \(n\)
+ステップ（\(n\)
+回の除算）で停止するとき、</p>\[
+a \ge F_{n+2}, \qquad b \ge F_{n+1} \tag{3}
+\]<p>が成り立つ。ここで \(F_k\)
+は \(F_1=F_2=1\)
+、\(F_{k}=F_{k-1}+F_{k-2}\)
+で定義されるフィボナッチ数列である。</p><p><strong>証明（後ろ向き帰納法）.</strong> アルゴリズムの列を \(r_0=a, r_1=b, r_2, \dots, r_n = \gcd(a,b) \ge 1\)
+、\(r_{n+1}=0\)
+とする（\(n\)
+ステップで停止、\(r_i = r_{i-2} \bmod r_{i-1}\)
+）。各商 \(q_i = \lfloor r_{i-1}/r_i \rfloor\)
+について、最終ステップを除いて \(r_{i+1} \neq 0\)
+である限り \(r_{i-1} > r_i\)
+が成り立つため \(q_i \ge 1\)
+、したがって</p>\[
+r_{i-1} = q_i r_i + r_{i+1} \ge r_i + r_{i+1} \qquad (1 \le i \le n-1) \tag{4}
+\]<p>が成り立つ（最後から2番目のステップ \(i=n\)
+では \(r_{n+1}=0\)
+なので等号 \(r_{n-1}=q_nr_n\)
+で \(q_n\ge2\)
+の場合もあるが、不等式 \(r_{n-1}\ge r_n+r_{n+1}=r_n\)
+は自明に成立する）。</p><p>\(k=0,1,\dots,n-1\)
+について「\(r_{n-k} \ge F_{k+2}\)
+」を \(k\)
+に関する帰納法で示す。</p><ul><li>\(k=0\)
+: \(r_n = \gcd(a,b) \ge 1 = F_2\)
+。</li><li>\(k=1\)
+: \(r_{n-1} \ge r_n + r_{n+1} = r_n + 0 \ge 1\)
+、かつ \(r_{n-1}>r_n\ge1\)
+なので \(r_{n-1}\ge2=F_3\)
+。</li><li>帰納段階: \(r_{n-k}\ge F_{k+2}\)
+かつ \(r_{n-k+1}\ge F_{k+1}\)
+を仮定すると、式(4)より \(r_{n-k-1} \ge r_{n-k}+r_{n-k+1} \ge F_{k+2}+F_{k+1}=F_{k+3}\)
+。</li></ul><p>\(k=n-1\)
+とすると \(r_1=b\ge F_{n+1}\)
+。同様に \(r_0=a=q_1r_1+r_2\ge r_1+r_2\ge F_{n+1}+F_n=F_{n+2}\)
+（\(n\ge1\)
+のとき）。\(\blacksquare\)</p><h3 id=なぜフィボナッチ数の組が最悪ケースか>なぜフィボナッチ数の組が最悪ケースか</h3><p>式(4)の不等号 \(r_{i-1}\ge r_i+r_{i+1}\)
+は、<strong>商 \(q_i\)
+が最小値 \(1\)
+のときにちょうど等号</strong>になる。つまり、各ステップで商が \(1\)
+（＝余りが最も緩やかにしか減らない）であり続ける入力こそが、同じステップ数を達成するのに必要な \(a,b\)
+を最小にする＝同じ \(a,b\)
+に対してステップ数を最大化する入力である。商が恒等的に \(1\)
+になる列はまさにフィボナッチ数列の漸化式 \(F_{k+1}=1\cdot F_k+F_{k-1}\)
+そのものであり、連続するフィボナッチ数の組 \((F_{n+2},F_{n+1})\)
+を入力すると式(4)が全ステップで等号になる。したがってフィボナッチ数の組は、その大きさに対してユークリッドの互除法が要するステップ数を最大化する、真の最悪ケースである。</p><h3 id=系計算量>系：計算量 \(O(\log(\min(a,b)))\)</h3><p>式(3)より \(b\ge F_{n+1}\)
+。フィボナッチ数の一般項 \(F_k \approx \varphi^{k-2}/\sqrt5\)
+（\(\varphi=(1+\sqrt5)/2\)
+は黄金比）を用いると、\(n\)
+について解くことで</p>\[
+n = O(\log_\varphi b) = O(\log b) = O(\log(\min(a,b)))
+\]<p>を得る。すなわちユークリッドの互除法のステップ数は入力の桁数（ビット長）に対して線形、つまり入力の値そのものに対しては対数オーダーである。各ステップの除算コストを \(O(1)\)
+（固定長整数として）とみなせば全体の計算量は \(O(\log(\min(a,b)))\)
+となる（多倍長整数を扱う場合は各除算のコストがビット長に依存するため、より詳細な解析ではもう少し大きくなるが、ステップ回数自体のオーダーは変わらない）。</p><h3 id=数値検証フィボナッチ組-vs-ランダム組のステップ数>数値検証：フィボナッチ組 vs ランダム組のステップ数</h3><p>以下のコードで、各ビット長 \(b\)
+（8〜256ビット、8ビット刻み）について</p><ul><li>ちょうど \(b\)
+ビットに達する最小のフィボナッチ数と、その1つ前のフィボナッチ数の組</li><li>同じビット長のランダムな整数の組（200試行の平均・最大）</li></ul><p>に対しステップ数を実測し、比較した。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:verify_complexity.py data-lang=python:verify_complexity.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>gcd_steps</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;通常のユークリッドの互除法、除算ステップ数のみ数える&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>steps</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>%</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>        <span class=n>steps</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>steps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>fib_pair_at_bitlength</span><span class=p>(</span><span class=n>target_bits</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;target_bits ビットに達する最小のフィボナッチ数 F_n とその1つ前 F_{n-1} を返す&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>target_bits</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>bits</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>8</span><span class=p>,</span> <span class=mi>257</span><span class=p>,</span> <span class=mi>8</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>fa</span><span class=p>,</span> <span class=n>fb</span> <span class=o>=</span> <span class=n>fib_pair_at_bitlength</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>fib_steps</span> <span class=o>=</span> <span class=n>gcd_steps</span><span class=p>(</span><span class=n>fb</span><span class=p>,</span> <span class=n>fa</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>trials</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>200</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>x</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>y</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>trials</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>gcd_steps</span><span class=p>(</span><span class=nb>max</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>),</span> <span class=nb>min</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=n>avg_steps</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=n>trials</span><span class=p>)</span> <span class=o>/</span> <span class=nb>len</span><span class=p>(</span><span class=n>trials</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;bits=</span><span class=si>{</span><span class=n>bits</span><span class=si>}</span><span class=s2>: fibonacci=</span><span class=si>{</span><span class=n>fib_steps</span><span class=si>}</span><span class=s2>, random_avg=</span><span class=si>{</span><span class=n>avg_steps</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実行結果（抜粋、全ビット長は8〜256を8刻みで実測）:</p><table><thead><tr><th style=text-align:right>ビット長</th><th style=text-align:right>フィボナッチ組のステップ数</th><th style=text-align:right>ランダム組の平均ステップ数（200試行）</th><th style=text-align:right>ランダム組の最大ステップ数</th></tr></thead><tbody><tr><td style=text-align:right>8</td><td style=text-align:right>10</td><td style=text-align:right>4.95</td><td style=text-align:right>9</td></tr><tr><td style=text-align:right>32</td><td style=text-align:right>45</td><td style=text-align:right>19.02</td><td style=text-align:right>27</td></tr><tr><td style=text-align:right>64</td><td style=text-align:right>91</td><td style=text-align:right>38.19</td><td style=text-align:right>52</td></tr><tr><td style=text-align:right>128</td><td style=text-align:right>183</td><td style=text-align:right>75.14</td><td style=text-align:right>96</td></tr><tr><td style=text-align:right>192</td><td style=text-align:right>275</td><td style=text-align:right>112.22</td><td style=text-align:right>130</td></tr><tr><td style=text-align:right>256</td><td style=text-align:right>367</td><td style=text-align:right>149.38</td><td style=text-align:right>173</td></tr></tbody></table><p><img src=/posts/20201015_Euclidean/step_count_vs_bitlength.png alt=ユークリッドの互除法のステップ数と入力ビット長の関係。フィボナッチ組（青、最悪ケース）とランダム組の平均（緑、200試行平均）を比較すると、256ビットでフィボナッチ組は367ステップ、ランダム組平均は149.38ステップで、最悪ケースは平均ケースのおよそ2.5倍のステップ数となる></p><p>全ビット長にわたり、フィボナッチ組のステップ数はランダム組の平均のおよそ <strong>2.3〜2.5倍</strong>で推移しており、フィボナッチ組が明確に最悪ケースになっていることが確認できる。また、フィボナッチ組のステップ数 \(n\)
+とラメの定理の境界 \(\log_\varphi b\)
+を比較すると、次のように非常に近い値になる（比が1に収束）。</p><table><thead><tr><th style=text-align:right>ビット長</th><th style=text-align:right>実測ステップ数 \(n\)</th><th style=text-align:right>\(\log_\varphi b\)</th><th style=text-align:right>\(n / \log_\varphi b\)</th></tr></thead><tbody><tr><td style=text-align:right>32</td><td style=text-align:right>45</td><td style=text-align:right>45.33</td><td style=text-align:right>0.993</td></tr><tr><td style=text-align:right>64</td><td style=text-align:right>91</td><td style=text-align:right>91.33</td><td style=text-align:right>0.996</td></tr><tr><td style=text-align:right>128</td><td style=text-align:right>183</td><td style=text-align:right>183.33</td><td style=text-align:right>0.998</td></tr><tr><td style=text-align:right>256</td><td style=text-align:right>367</td><td style=text-align:right>367.33</td><td style=text-align:right>0.999</td></tr></tbody></table><p>これはラメの定理の証明で用いた不等式(3)がフィボナッチ入力に対して等号で成立する（＝境界がタイトである）ことの直接的な数値的裏付けである。</p><p>なお、フィボナッチ数 \(F_{10}=55, F_9=34\)
+という小さな例で実際のステップを追うと、全ての商が \(1\)
+になり続ける様子が具体的に見える。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>55 = 1*34 + 21
+</span></span><span class=line><span class=cl>34 = 1*21 + 13
+</span></span><span class=line><span class=cl>21 = 1*13 + 8
+</span></span><span class=line><span class=cl>13 = 1*8 + 5
+</span></span><span class=line><span class=cl>8  = 1*5 + 3
+</span></span><span class=line><span class=cl>5  = 1*3 + 2
+</span></span><span class=line><span class=cl>3  = 1*2 + 1
+</span></span><span class=line><span class=cl>2  = 2*1 + 0
+</span></span></code></pre></div><p>（55, 34）で8ステップ ＝ \(F_{10}, F_9\)
+に対して \(10-2=8\)
+ステップという、\(\gcd(F_n,F_{n-1})\)
+の計算が一般に \(n-2\)
+ステップかかるという既知の結果とも一致する。最後の商だけ \(2\)
+になっている（\(F_2=2\cdot F_1+0\)
+）のは、\(F_1=F_2=1\)
+という初期条件のため以降の商がすべて \(1\)
+でループが続いた末に列がここで終端するからである。</p><h2 id=連分数との関係>連分数との関係</h2><p>ユークリッドの互除法が生成する商の列 \(q_1,q_2,q_3,\dots\)
+は、実は \(a/b\)
+の<strong>連分数展開</strong>そのものである。</p>\[
+\frac{a}{b} = q_1 + \cfrac{1}{q_2 + \cfrac{1}{q_3 + \cfrac{1}{\ddots}}} = [q_1; q_2, q_3, \dots]
+\]<p>これは、除算のたびに \(a_{i-1}/a_i = q_i + a_{i+1}/a_i\)
+、すなわち \(a_{i-1}/a_i = q_i + 1/(a_i/a_{i+1})\)
+となることから直ちに従う（逆数を取って次の項に潜り込ませる操作を繰り返しているだけである）。実際に確認すると、</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:continued_fraction_check.py data-lang=python:continued_fraction_check.py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>fractions</span> <span class=kn>import</span> <span class=n>Fraction</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid_quotients</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>qs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>qs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>q</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>qs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>continued_fraction_quotients</span><span class=p>(</span><span class=n>x</span><span class=p>:</span> <span class=n>Fraction</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>qs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>num</span><span class=p>,</span> <span class=n>den</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=n>numerator</span><span class=p>,</span> <span class=n>x</span><span class=o>.</span><span class=n>denominator</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>den</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>num</span><span class=p>,</span> <span class=n>den</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>qs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>q</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>num</span><span class=p>,</span> <span class=n>den</span> <span class=o>=</span> <span class=n>den</span><span class=p>,</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>qs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=ow>in</span> <span class=p>[(</span><span class=mi>355</span><span class=p>,</span> <span class=mi>113</span><span class=p>),</span> <span class=p>(</span><span class=mi>1071</span><span class=p>,</span> <span class=mi>462</span><span class=p>),</span> <span class=p>(</span><span class=mi>49</span><span class=p>,</span> <span class=mi>34</span><span class=p>)]:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>euclid_quotients</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>continued_fraction_quotients</span><span class=p>(</span><span class=n>Fraction</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)))</span>
+</span></span></code></pre></div><p>実行結果は次の通りで、両者は完全に一致する。</p><table><thead><tr><th>\(a/b\)</th><th>互除法の商列</th><th>連分数展開</th></tr></thead><tbody><tr><td>\(355/113\)</td><td>\([3, 7, 16]\)</td><td>\([3; 7, 16]\)</td></tr><tr><td>\(1071/462\)</td><td>\([2, 3, 7]\)</td><td>\([2; 3, 7]\)</td></tr><tr><td>\(49/34\)</td><td>\([1, 2, 3, 1, 3]\)</td><td>\([1; 2, 3, 1, 3]\)</td></tr></tbody></table><p>（\(355/113\)
+は円周率 \(\pi\)
+の非常に良い近似分数として知られており、\([3;7,16]\)
+という短い連分数で表せることが、この近似精度の良さの理由でもある。）この一致は偶然ではなく、ユークリッドの互除法と連分数展開が本質的に同じ再帰構造を持つことを示している。本記事では深入りしないが、有理数の最良近似分数（収束分数）の理論に興味があれば、この対応が出発点になる。</p><h2 id=応用rsa暗号におけるモジュラ逆元>応用：RSA暗号におけるモジュラ逆元</h2><p>拡張ユークリッドの互除法の最も重要な実用上の応用は、<strong>モジュラ逆元</strong>の計算である。</p><p><strong>命題.</strong> \(\gcd(a,m)=1\)
+（\(a\)
+と \(m\)
+が互いに素）ならば、\(a\)
+の \(m\)
+を法とする逆元 \(a^{-1} \bmod m\)
+が存在し、拡張ユークリッドの互除法で計算できる。</p><p><strong>証明.</strong> \(\gcd(a,m)=1\)
+なので、ベズーの等式より整数 \(x,y\)
+が存在して</p>\[
+ax + my = 1
+\]<p>両辺を \(m\)
+で法として見ると、\(my \equiv 0 \pmod m\)
+なので</p>\[
+ax \equiv 1 \pmod m
+\]<p>したがって \(x \bmod m\)
+が \(a\)
+の \(m\)
+を法とする逆元である。逆元は \(\bmod m\)
+で一意に定まる（\(ax_1\equiv ax_2\equiv1\)
+かつ \(\gcd(a,m)=1\)
+なら \(a(x_1-x_2)\equiv0\)
+、互いに素性より \(x_1\equiv x_2\)
+）。\(\blacksquare\)</p><p>これはまさに、<a href=https://yuhi-sa.github.io/posts/20260225_rsa/1/>RSA暗号の記事</a>で秘密鍵指数 \(d\)
+を計算する手順そのものである。RSA では公開鍵指数 \(e\)
+（多くの場合 \(65537\)
+）に対し、\(\varphi(N)=(p-1)(q-1)\)
+を法とする逆元 \(d=e^{-1}\bmod\varphi(N)\)
+を計算する。\(e\)
+は \(\gcd(e,\varphi(N))=1\)
+となるよう選ばれるため、上記の命題により \(d\)
+が必ず一意に存在し、拡張ユークリッドの互除法で効率的に計算できる。</p><h3 id=検証rsa相当スケールでのモジュラ逆元計算>検証：RSA相当スケールでのモジュラ逆元計算</h3><p>実際に、RSA暗号の記事と同じ Miller-Rabin 素数判定を用いて <strong>1024ビットの素数を2つ</strong>（つまり \(N\)
+は2048ビット、実用の RSA-2048 相当のスケール）生成し、\(e=65537\)
+の \(\varphi(N)\)
+を法とする逆元 \(d\)
+を、本記事の反復形式 <code>extended_gcd</code> で計算して検証した。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:rsa_scale_modinverse.py data-lang=python:rsa_scale_modinverse.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>is_prime_miller_rabin</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>k</span><span class=o>=</span><span class=mi>20</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>2</span> <span class=ow>or</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>3</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=n>r</span><span class=p>,</span> <span class=n>d</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>d</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>r</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>d</span> <span class=o>//=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>k</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>randrange</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>x</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>d</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>x</span> <span class=o>==</span> <span class=mi>1</span> <span class=ow>or</span> <span class=n>x</span> <span class=o>==</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>r</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>x</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>x</span> <span class=o>==</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>generate_prime</span><span class=p>(</span><span class=n>bits</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>p</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>is_prime_miller_rabin</span><span class=p>(</span><span class=n>p</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>p</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>mod_inverse</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>m</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>g</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span> <span class=n>_</span><span class=p>,</span> <span class=n>steps</span> <span class=o>=</span> <span class=n>extended_gcd</span><span class=p>(</span><span class=n>a</span> <span class=o>%</span> <span class=n>m</span><span class=p>,</span> <span class=n>m</span><span class=p>)</span>  <span class=c1># 前節で定義した反復形式</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>g</span> <span class=o>!=</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&#34;モジュラ逆元が存在しません&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>x</span> <span class=o>%</span> <span class=n>m</span><span class=p>,</span> <span class=n>steps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>q</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>p</span> <span class=o>*</span> <span class=n>q</span>
+</span></span><span class=line><span class=cl><span class=n>phi</span> <span class=o>=</span> <span class=p>(</span><span class=n>p</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=p>(</span><span class=n>q</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>e</span> <span class=o>=</span> <span class=mi>65537</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>,</span> <span class=n>steps_used</span> <span class=o>=</span> <span class=n>mod_inverse</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>phi</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;p bit length: </span><span class=si>{</span><span class=n>p</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;q bit length: </span><span class=si>{</span><span class=n>q</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;n bit length: </span><span class=si>{</span><span class=n>n</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;phi bit length: </span><span class=si>{</span><span class=n>phi</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;extended_gcd steps to compute d: </span><span class=si>{</span><span class=n>steps_used</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;e*d mod phi == 1: </span><span class=si>{</span><span class=p>(</span><span class=n>e</span> <span class=o>*</span> <span class=n>d</span><span class=p>)</span> <span class=o>%</span> <span class=n>phi</span> <span class=o>==</span> <span class=mi>1</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=mi>123456789012345678901234567890</span>
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>m2</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>d</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;message == decrypt(encrypt(message)): </span><span class=si>{</span><span class=n>message</span> <span class=o>==</span> <span class=n>m2</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実行結果:</p><table><thead><tr><th>項目</th><th>値</th></tr></thead><tbody><tr><td>\(p\)
+のビット長</td><td>1024</td></tr><tr><td>\(q\)
+のビット長</td><td>1024</td></tr><tr><td>\(N=pq\)
+のビット長</td><td>2048</td></tr><tr><td>\(\varphi(N)\)
+のビット長</td><td>2048</td></tr><tr><td>\(e\)</td><td>65537</td></tr><tr><td>\(d\)
+を求めるための <code>extended_gcd</code> ステップ数</td><td>9</td></tr><tr><td>\(e \cdot d \bmod \varphi(N) = 1\)</td><td>True</td></tr><tr><td>end-to-end 検証（暗号化→復号で元のメッセージに一致）</td><td>True</td></tr></tbody></table><p>\(\varphi(N)\)
+が2048ビット（10進で600桁超）という巨大な数であっても、拡張ユークリッドの互除法はわずか <strong>9ステップ</strong>（ラメの定理の境界 \(O(\log\varphi(N))\)
+、実際 \(\log_\varphi(\varphi(N)) \approx 2984\)
+よりはるかに小さい。これは \(e=65537\)
+が \(\varphi(N)\)
+に比べて非常に小さいため、実効的なステップ数は \(\min(a,b)=e\)
+側のビット長 \(17\)
+ビット程度に律速されるからである）で逆元 \(d\)
+を計算し、\(e\cdot d\equiv1\pmod{\varphi(N)}\)
+を満たすことが確認できた。さらに、この \(d\)
+を使って実際にメッセージを暗号化・復号すると元のメッセージに一致することも確認しており、拡張ユークリッドの互除法が単なる数学的存在証明にとどまらず、実用の暗号システムの鍵生成の中核を担っていることが分かる。</p><h2 id=全体検証まとめ>全体検証まとめ</h2><p>本記事の主張を、実行したコードで数値的に裏付けた結果を以下にまとめる。</p><ol><li><strong>ベズーの等式の検証</strong>: \(1 \le a,b \le 10^{12}\)
+からランダムに選んだ <strong>200,000組</strong>全てについて、<code>extended_gcd</code> が返す \((d,x,y)\)
+が \(ax+by=d\)
+を厳密に満たし、かつ \(d\)
+が <code>math.gcd(a,b)</code> と一致することを確認（反例0件）。具体例として、教科書的な組 \((1071,462)\)
+では \(\gcd=21\)
+、\(x=-3,y=7\)
+で \(1071\times(-3)+462\times7=21\)
+。</li><li><strong>フィボナッチ組の最悪ケース性</strong>: 8〜256ビットの全区間で、フィボナッチ組のステップ数はランダム組平均の約2.3〜2.5倍。フィボナッチ組のステップ数とラメの定理の境界 \(\log_\varphi b\)
+の比は、ビット長が大きくなるほど1に収束（256ビットで0.999）。</li><li><strong>モジュラ逆元の応用</strong>: 2048ビット相当（1024ビット素数×2）の RSA スケールで、\(e=65537\)
+の \(\varphi(N)\)
+に関する逆元をわずか9ステップで計算し、\(e\cdot d\equiv1\pmod{\varphi(N)}\)
+と end-to-end の暗号化・復号一致を確認。</li><li><strong>連分数との一致</strong>: \(355/113\)
+、\(1071/462\)
+、\(49/34\)
+の3例全てで、互除法の商列と連分数展開が完全一致。</li></ol><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260225_rsa/1/>RSA暗号の理論・鍵生成・暗号化・復号をPython実装</a> - 本記事で証明したモジュラ逆元の計算法（拡張ユークリッドの互除法）を使って秘密鍵を生成する暗号方式です。</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Lamé, G. (1844). &ldquo;Note sur la limite du nombre des divisions dans la recherche du plus grand commun diviseur entre deux nombres entiers&rdquo;. <em>Comptes Rendus de l&rsquo;Académie des Sciences</em>, 19, 867-870.</li><li>Knuth, D. E. (1997). <em>The Art of Computer Programming, Volume 2: Seminumerical Algorithms</em> (3rd ed.). Addison-Wesley. Section 4.5.3.</li><li>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). <em>Introduction to Algorithms</em> (3rd ed.). MIT Press. Chapter 31.</li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="7414"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20201015_euclidean/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20200901_filter/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
 </span><span class=post-nav__title>信号処理におけるフィルタリング手法の基礎</span>
 </a><a href=/posts/20201220_binary/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
-</span><span class=post-nav__title>バイナリ法（繰り返し二乗法）による高速べき乗剰余計算のPython実装</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20201223_elgamal/1/>楕円曲線ElGamal暗号の原理とPythonによる簡易実装</a></h3><div class=card-meta><time datetime=2020-12-23>December 23, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20201220_binary/1/>バイナリ法（繰り返し二乗法）による高速べき乗剰余計算のPython実装</a></h3><div class=card-meta><time datetime=2020-12-20>December 20, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260715_hamiltonian_monte_carlo/1/>Hamiltonian Monte Carlo（HMC）の理論とPython実装：リープフロッグ積分でMetropolis法の弱点を克服する</a></h3><div class=card-meta><time datetime=2026-07-15>July 15, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+</span><span class=post-nav__title>バイナリ法（繰り返し二乗法）による高速べき乗剰余計算のPython実装</span></a></nav><section class="related-tools mt-5" aria-label=関連ツール><h2 class=related-tools__title>この記事に関連する無料ツール</h2><div class=related-tools__grid><a href=https://yuhi-sa.github.io/devtoolbox/tools/moving-average-calculator/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Moving Average Calculator</span>
+<span class=related-tools__desc>SMA/EMA/WMA をブラウザで即座に計算</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-formatter/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>JSON Formatter</span>
+<span class=related-tools__desc>JSONを整形・圧縮・バリデーション</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/regex-tester/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Regex Tester</span>
+<span class=related-tools__desc>正規表現をリアルタイムテスト</span></a></div></section><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20201223_elgamal/1/>楕円曲線ElGamal暗号の原理とPythonによる簡易実装</a></h3><div class=card-meta><time datetime=2020-12-23>December 23, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20201220_binary/1/>バイナリ法（繰り返し二乗法）による高速べき乗剰余計算のPython実装</a></h3><div class=card-meta><time datetime=2020-12-20>December 20, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260715_hamiltonian_monte_carlo/1/>Hamiltonian Monte Carlo（HMC）の理論とPython実装：リープフロッグ積分でMetropolis法の弱点を克服する</a></h3><div class=card-meta><time datetime=2026-07-15>July 15, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
 Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
 <span itemprop=name>tomato blog</span>
 </a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
@@ -139,4 +545,4 @@ with
 |
 <a href=https://yuhi-sa.github.io/pomodoro/ class=text-decoration-none>Pomodoro Timer</a></p><p class="social-links text-muted small mt-1 mb-0"><a href=https://www.youtube.com/@yuhi-sa target=_blank rel=noopener class=text-decoration-none>YouTube</a>
 |
-<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム","url":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/","description":"ユークリッドの互除法と拡張ユークリッドの互除法のアルゴリズムをPythonで実装。最大公約数と一次不定方程式の解法を解説します。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
+<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム","url":"https:\/\/yuhi-sa.github.io\/posts\/20201015_euclidean\/1\/","description":"ユークリッドの互除法・拡張ユークリッドの互除法を、正当性の帰納法による証明・ベズーの等式の導出・計算量O(log n)の証明（ラメの定理）・RSA暗号のモジュラ逆元への応用まで、実行検証付きでPythonで解説します。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>

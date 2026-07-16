@@ -1,25 +1,102 @@
-<!doctype html><html lang=en dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations."><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><meta property="og:type" content="article"><meta property="og:title" content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta property="og:description" content="Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations."><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="en"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2020-10-15T15:17:23+09:00"><meta property="article:modified_time" content="2026-04-19T21:53:53+09:00"><meta property="article:tag" content="Algorithm"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta name=twitter:description content="Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations."><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Euclidean Algorithm and Extended Euclidean Algorithm in Python | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Euclidean Algorithm and Extended Euclidean Algorithm in Python","description":"Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations.","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-10-15T15:17:23\u002b09:00","dateModified":"2026-04-19T21:53:53\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/","wordCount":362,"keywords":["Algorithm"],"articleSection":"Posts","inLanguage":"en","timeRequired":"PT2M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/en\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/en\/posts\/"},{"@type":"ListItem","position":3,"name":"Euclidean Algorithm and Extended Euclidean Algorithm in Python"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+<!doctype html><html lang=en dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout's identity, an O(log n) …"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><meta property="og:type" content="article"><meta property="og:title" content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta property="og:description" content="A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout's identity, an O(log n) …"><meta property="og:url" content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="en"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2020-10-15T15:17:23+09:00"><meta property="article:modified_time" content="2026-07-16T19:39:09+09:00"><meta property="article:tag" content="Algorithm"><meta property="article:tag" content="Mathematics"><meta property="article:tag" content="Python"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Euclidean Algorithm and Extended Euclidean Algorithm in Python"><meta name=twitter:description content="A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout's identity, an O(log n) …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>Euclidean Algorithm and Extended Euclidean Algorithm in Python | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Euclidean Algorithm and Extended Euclidean Algorithm in Python","description":"A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout\u0027s identity, an O(log n) complexity proof via Lame\u0027s theorem, and an application to modular inverses in RSA, all with executed numerical verification in Python.","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2020-10-15T15:17:23\u002b09:00","dateModified":"2026-07-16T19:39:09\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/","wordCount":3301,"keywords":["Algorithm","Mathematics","Python"],"articleSection":"Posts","inLanguage":"en","timeRequired":"PT16M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/en\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/en\/posts\/"},{"@type":"ListItem","position":3,"name":"Euclidean Algorithm and Extended Euclidean Algorithm in Python"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
 </a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
 <i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
-<span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/ role=menuitem hreflang=ja lang=ja aria-label="Switch to Japanese">JA</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1><p class="lead article-description" itemprop=description>Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations.</p><div class=article-meta><time datetime=2020-10-15T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/ role=menuitem hreflang=ja lang=ja aria-label="Switch to Japanese">JA</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>Euclidean Algorithm and Extended Euclidean Algorithm in Python</h1><p class="lead article-description" itemprop=description>A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout's identity, an O(log n) complexity proof via Lame's theorem, and an application to modular inverses in RSA, all with executed numerical verification in Python.</p><div class=article-meta><time datetime=2020-10-15T15:17:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
 October 15, 2020
-</time><time datetime=2026-04-19T21:53:53+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+</time><time datetime=2026-07-16T19:39:09+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
 Updated
-April 19, 2026
+July 16, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/algorithm/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Algorithm</a></div></header><div class=article-content itemprop=articleBody><h2 id=euclidean-algorithm>Euclidean Algorithm</h2><p>The Euclidean algorithm is a method for finding the greatest common divisor (GCD) of two integers \(a\)
+16 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/en/tags/algorithm/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Algorithm
+</a><a href=/en/tags/mathematics/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Mathematics
+</a><a href=/en/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class=article-content itemprop=articleBody><h2 id=euclidean-algorithm>Euclidean Algorithm</h2><p>The Euclidean algorithm is a method for finding the greatest common divisor (GCD) \(\gcd(a,b)\)
+of two integers \(a\)
 and \(b\)
 \((a>b)\)
 . It works by repeatedly dividing and taking the remainder \(r\)
 of \(a\)
 divided by \(b\)
-, using the division principle to find the GCD.</p><h3 id=algorithm>Algorithm</h3><p>Input: Integers \(a, b\)
+, using the division principle to find the GCD. It appears in Euclid&rsquo;s <em>Elements</em> (c. 300 BCE) and is often cited as the oldest algorithm still in common use.</p><p>This article goes beyond stating the algorithm: it proves</p><ol><li>why the procedure always returns the correct GCD (correctness proof),</li><li>why it always terminates in finitely many steps, and the order of that number of steps (complexity proof),</li><li>why the extended version actually constructs a solution to \(ax+by=\gcd(a,b)\)
+(proof of Bezout&rsquo;s identity), and</li><li>how it is used in public-key cryptosystems such as RSA (application to modular inverses),</li></ol><p>each backed by numbers obtained from code that was actually executed.</p><h3 id=notation-and-conventions>Notation and conventions</h3><p>Throughout, \(a,b\)
+are integers, not both zero unless stated otherwise. \(\gcd(a,b)\)
+denotes the greatest common divisor of \(a\)
+and \(b\)
+(the largest integer dividing both). \(\gcd(a,0)=|a|\)
+, and \(\gcd(0,0)\)
+is left undefined.</p><h2 id=key-lemma>Key lemma: \(\gcd(a,b) = \gcd(b, a \bmod b)\)</h2><p>We first prove the lemma the entire algorithm rests on.</p><p><strong>Lemma.</strong> Let \(a,b\)
+be integers with \(b \neq 0\)
+, and let \(r = a \bmod b\)
+(i.e., \(a = bq + r\)
+with integers \(q,r\)
+satisfying \(0 \le r &lt; |b|\)
+). Then</p>\[
+\gcd(a, b) = \gcd(b, r) \tag{1}
+\]<p><strong>Proof.</strong> We show the set of common divisors of \(a\)
+and \(b\)
+equals the set of common divisors of \(b\)
+and \(r\)
+, using \(a = bq + r\)
+.</p><ul><li>(\(\subseteq\)
+) Let \(d\)
+be a common divisor of \(a\)
+and \(b\)
+. Since \(d \mid a\)
+and \(d \mid b\)
+, and \(r = a - bq\)
+is an integer linear combination of \(a\)
+and \(b\)
+, we get \(d \mid r\)
+. So \(d\)
+is a common divisor of \(b\)
+and \(r\)
+.</li><li>(\(\supseteq\)
+) Let \(d\)
+be a common divisor of \(b\)
+and \(r\)
+. Since \(d \mid b\)
+and \(d \mid r\)
+, and \(a = bq + r\)
+is an integer linear combination of \(b\)
+and \(r\)
+, we get \(d \mid a\)
+. So \(d\)
+is a common divisor of \(a\)
+and \(b\)
+.</li></ul><p>The two sets of common divisors coincide, hence so do their maxima. \(\blacksquare\)</p><p>This lemma reduces computing \(\gcd(a,b)\)
+to computing \(\gcd(b, a \bmod b)\)
+on strictly smaller numbers — repeating this reduction is exactly the Euclidean algorithm.</p><h3 id=algorithm>Algorithm</h3><p>Input: Integers \(a, b\)
 Output: GCD \(d\)</p><ol><li>Set \(a_0 = a\)
 , \(a_1 = b\)</li><li>If \(a_i = 0\)
 , set \(d = a_{i-1}\)
 and terminate.</li><li>Compute \(a_{i-1} = a_i q_i + a_{i+1}\)
-and return to step 2.</li></ol><h3 id=program>Program</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-euclid.py data-lang=euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
+and return to step 2.</li></ol><h3 id=proof-of-termination-and-correctness>Proof of termination and correctness</h3><p>We prove that the algorithm above (a) always terminates in finitely many steps, and (b) returns exactly \(\gcd(a,b)\)
+upon termination.</p><p><strong>(a) Termination.</strong> By the definition of the remainder, as long as \(a_i \neq 0\)
+the sequence \(a_0,a_1,a_2,\dots\)
+satisfies \(0 \le a_{i+1} &lt; a_i\)
+, so</p>\[
+a_1 > a_2 > a_3 > \cdots \ge 0
+\]<p>is a strictly decreasing sequence of non-negative integers. No infinite strictly decreasing sequence of non-negative integers exists (well-ordering of \(\mathbb{N}\)
+), so some \(a_n = 0\)
+is reached after finitely many steps \(n\)
+, and the algorithm halts.</p><p><strong>(b) Correctness (strong induction).</strong> We show by induction on \(i\)
+that the invariant \(\gcd(a_{i-1}, a_i) = \gcd(a, b)\)
+holds for every \(i \ge 1\)
+.</p><ul><li>Base case: for \(i=1\)
+, \(\gcd(a_0,a_1)=\gcd(a,b)\)
+holds by definition.</li><li>Inductive step: assume \(\gcd(a_{i-1},a_i)=\gcd(a,b)\)
+(induction hypothesis). Applying the lemma (1) to \(a_{i-1}=a_iq_i+a_{i+1}\)
+from step 3 gives \(\gcd(a_{i-1},a_i)=\gcd(a_i,a_{i+1})\)
+. Combined with the induction hypothesis, \(\gcd(a_i,a_{i+1})=\gcd(a,b)\)
+.</li></ul><p>So the invariant \(\gcd(a_{i-1},a_i)=\gcd(a,b)\)
+holds for all \(i\)
+. At the step where the algorithm halts — the smallest \(i\)
+with \(a_i=0\)
+— we have \(\gcd(a_{i-1},a_i)=\gcd(a_{i-1},0)=a_{i-1}\)
+, which by the invariant equals \(\gcd(a,b)\)
+. Hence the returned value \(d=a_{i-1}\)
+is exactly \(\gcd(a,b)\)
+. \(\blacksquare\)</p><h3 id=program>Program</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-euclid.py data-lang=euclid.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=n>b</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=n>a_list</span> <span class=o>=</span> <span class=p>[]</span>
 </span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>a</span> <span class=o>&lt;</span> <span class=n>b</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
@@ -32,8 +109,9 @@ and return to step 2.</li></ol><h3 id=program>Program</h3><div class=highlight><
 </span></span><span class=line><span class=cl>        <span class=n>a_list</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>%</span><span class=n>a_list</span><span class=p>[</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span><span class=mi>1</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span>
-</span></span></code></pre></div><h2 id=extended-euclidean-algorithm>Extended Euclidean Algorithm</h2><p>The Extended Euclidean algorithm finds a solution to the linear Diophantine equation \(ax + by = d\)
-. Setting \(a_0 = a\)
+</span></span></code></pre></div><h2 id=extended-euclidean-algorithm-and-bezouts-identity>Extended Euclidean Algorithm and Bezout&rsquo;s Identity</h2><p>The Extended Euclidean algorithm finds a solution to the linear Diophantine equation \(ax + by = d\)
+(\(d=\gcd(a,b)\)
+). Setting \(a_0 = a\)
 and \(a_1 = b\)
 , it can be computed as follows.</p><p>\([\begin{array}{cc}
 a_{i-1} \\
@@ -83,7 +161,8 @@ d \\
 a \\
 b
 \end{array}]
-\)</p><h3 id=algorithm-1>Algorithm</h3><p>Input: Integers \(a, b\)
+\)</p><p>This matrix view shows the algorithm as a composition of linear maps, but in practice the coefficients \(x,y\)
+are computed with the coefficient-tracking recursion described next.</p><h3 id=algorithm-1>Algorithm</h3><p>Input: Integers \(a, b\)
 Output: GCD \(d\)
 and integers \(x, y\)
 such that \(ax + by = d\)</p><ol><li>Set \(a_0 = a\)
@@ -123,10 +202,324 @@ and \(y_{i+1} = y_{i-1} - q_i y_i\)
 </span></span><span class=line><span class=cl>        <span class=n>y</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span><span class=o>-</span><span class=n>q</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>*</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>+=</span><span class=mi>1</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>x</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>],</span><span class=n>y</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>],</span><span class=n>a_list</span><span class=p>[</span><span class=o>-</span><span class=mi>2</span><span class=p>]</span>
-</span></span></code></pre></div></div><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="362"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/en/posts/20200901_filter/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span></span></code></pre></div><h3 id=proof-of-bezouts-identity>Proof of Bezout&rsquo;s identity</h3><p><strong>Bezout&rsquo;s identity.</strong> For any integers \(a,b\)
+(not both zero), there exist integers \(x,y\)
+such that \(ax+by=\gcd(a,b)\)
+.</p><p>Rather than just asserting existence, we prove that the Extended Euclidean algorithm actually <em>constructs</em> such \(x,y\)
+, via an inductive invariant on the coefficient-tracking recursion.</p><p><strong>Claim.</strong> For every \(i \ge 0\)
+in the algorithm, the following invariant holds:</p>\[
+a \cdot x_i + b \cdot y_i = a_i \tag{2}
+\]<p><strong>Proof (induction).</strong></p><ul><li>Base case \(i=0\)
+: \(x_0=1, y_0=0, a_0=a\)
+, so \(a\cdot 1 + b\cdot 0 = a\)
+. Holds.</li><li>Base case \(i=1\)
+: \(x_1=0, y_1=1, a_1=b\)
+, so \(a\cdot 0 + b\cdot 1 = b\)
+. Holds.</li><li>Inductive step: assume the invariant (2) holds at \(i-1\)
+and \(i\)
+. Using the definitions \(x_{i+1}=x_{i-1}-q_ix_i\)
+and \(y_{i+1}=y_{i-1}-q_iy_i\)
+from step 4,</li></ul>\[
+\begin{aligned}
+a\cdot x_{i+1} + b\cdot y_{i+1}
+&= a(x_{i-1}-q_ix_i) + b(y_{i-1}-q_iy_i) \\
+&= (a x_{i-1} + b y_{i-1}) - q_i(a x_i + b y_i) \\
+&= a_{i-1} - q_i a_i \quad (\text{induction hypothesis}) \\
+&= a_{i+1} \quad (\because a_{i-1}=a_iq_i+a_{i+1})
+\end{aligned}
+\]<p>so the invariant (2) holds at \(i+1\)
+as well. By strong induction (a two-term recurrence, assuming \(i-1,i\)
+to prove \(i+1\)
+), the invariant holds for all \(i\)
+. \(\blacksquare\)</p><p>At the step where the algorithm halts (the smallest \(i\)
+with \(a_i=0\)
+), the output is \(d=a_{i-1}\)
+, \(x=x_{i-1}\)
+, \(y=y_{i-1}\)
+. Applying invariant (2) at index \(i-1\)
+gives</p>\[
+a\cdot x + b\cdot y = a\cdot x_{i-1} + b\cdot y_{i-1} = a_{i-1} = d = \gcd(a,b)
+\]<p>which is exactly Bezout&rsquo;s identity — and the Extended Euclidean algorithm is precisely the constructive procedure that produces \((x,y)\)
+. \(\blacksquare\)</p><p><strong>Correspondence with the common \((old\_r,old\_s,old\_t)\)
+notation.</strong> Many references and libraries write this coefficient tracking as a one-step-at-a-time iterative update using variables named \((old\_r,old\_s,old\_t)/(r,s,t)\)
+(for example, the recursive <code>extended_gcd</code> in <a href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/>our RSA article</a> computes an equivalent result). The correspondence is \(old\_r \leftrightarrow a_{i-1}\)
+, \(r \leftrightarrow a_i\)
+, \(old\_s \leftrightarrow x_{i-1}\)
+, \(s \leftrightarrow x_i\)
+, \(old\_t \leftrightarrow y_{i-1}\)
+, \(t \leftrightarrow y_i\)
+. The iterative form (used in the verification code below) is:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:extended_gcd_iterative.py data-lang=python:extended_gcd_iterative.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>extended_gcd</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Iterative Extended Euclidean algorithm. Returns gcd, x, y, step count,
+</span></span></span><span class=line><span class=cl><span class=s2>    satisfying a*x + b*y = gcd(a, b).
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_r</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_s</span><span class=p>,</span> <span class=n>s</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>old_t</span><span class=p>,</span> <span class=n>t</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=n>steps</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>r</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span> <span class=o>=</span> <span class=n>old_r</span> <span class=o>//</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_r</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=n>r</span><span class=p>,</span> <span class=n>old_r</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_s</span><span class=p>,</span> <span class=n>s</span> <span class=o>=</span> <span class=n>s</span><span class=p>,</span> <span class=n>old_s</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>s</span>
+</span></span><span class=line><span class=cl>        <span class=n>old_t</span><span class=p>,</span> <span class=n>t</span> <span class=o>=</span> <span class=n>t</span><span class=p>,</span> <span class=n>old_t</span> <span class=o>-</span> <span class=n>q</span> <span class=o>*</span> <span class=n>t</span>
+</span></span><span class=line><span class=cl>        <span class=n>steps</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>old_r</span><span class=p>,</span> <span class=n>old_s</span><span class=p>,</span> <span class=n>old_t</span><span class=p>,</span> <span class=n>steps</span>
+</span></span></code></pre></div><h2 id=complexity-lames-theorem-and-worst-case>Complexity: Lame&rsquo;s theorem and worst-case \(O(\log(\min(a,b)))\)</h2><p>We&rsquo;ve shown the Euclidean algorithm terminates; what matters in practice is <strong>how many steps</strong> it takes. Here we prove <strong>Lame&rsquo;s theorem</strong> (1844), which shows the worst case is achieved by consecutive Fibonacci numbers, then verify it numerically.</p><h3 id=theorem-lames-theorem>Theorem (Lame&rsquo;s theorem)</h3><p>If the Euclidean algorithm on \(a > b > 0\)
+terminates after \(n\)
+steps (divisions), then</p>\[
+a \ge F_{n+2}, \qquad b \ge F_{n+1} \tag{3}
+\]<p>where \(F_k\)
+is the Fibonacci sequence defined by \(F_1=F_2=1\)
+, \(F_k=F_{k-1}+F_{k-2}\)
+.</p><p><strong>Proof (backward induction).</strong> Let \(r_0=a, r_1=b, r_2, \dots, r_n=\gcd(a,b)\ge1\)
+, \(r_{n+1}=0\)
+be the sequence produced by the algorithm (\(n\)
+steps, \(r_i = r_{i-2}\bmod r_{i-1}\)
+). For each quotient \(q_i = \lfloor r_{i-1}/r_i \rfloor\)
+: as long as \(r_{i+1}\neq0\)
+(i.e. before the last division), \(r_{i-1}>r_i\)
+so \(q_i\ge1\)
+, hence</p>\[
+r_{i-1} = q_i r_i + r_{i+1} \ge r_i + r_{i+1} \qquad (1 \le i \le n-1) \tag{4}
+\]<p>(at the second-to-last step \(i=n\)
+, \(r_{n+1}=0\)
+, so possibly \(q_n \ge 2\)
+, but the inequality \(r_{n-1}\ge r_n+r_{n+1}=r_n\)
+still holds trivially).</p><p>We show &ldquo;\(r_{n-k} \ge F_{k+2}\)
+&rdquo; for \(k=0,1,\dots,n-1\)
+by induction on \(k\)
+.</p><ul><li>\(k=0\)
+: \(r_n=\gcd(a,b)\ge1=F_2\)
+.</li><li>\(k=1\)
+: \(r_{n-1}\ge r_n+r_{n+1}=r_n\ge1\)
+, and since \(r_{n-1}>r_n\ge1\)
+, \(r_{n-1}\ge2=F_3\)
+.</li><li>Inductive step: assuming \(r_{n-k}\ge F_{k+2}\)
+and \(r_{n-k+1}\ge F_{k+1}\)
+, inequality (4) gives \(r_{n-k-1}\ge r_{n-k}+r_{n-k+1}\ge F_{k+2}+F_{k+1}=F_{k+3}\)
+.</li></ul><p>Taking \(k=n-1\)
+: \(r_1=b\ge F_{n+1}\)
+. Similarly, \(r_0=a=q_1r_1+r_2\ge r_1+r_2\ge F_{n+1}+F_n=F_{n+2}\)
+(for \(n\ge1\)
+). \(\blacksquare\)</p><h3 id=why-fibonacci-pairs-are-the-worst-case>Why Fibonacci pairs are the worst case</h3><p>The inequality \(r_{i-1}\ge r_i+r_{i+1}\)
+in (4) becomes an <strong>equality exactly when the quotient \(q_i\)
+takes its minimum possible value, \(1\)
+</strong>— i.e., when the remainder shrinks as slowly as possible at every step. Inputs whose quotients are identically \(1\)
+at every step are exactly the Fibonacci recurrence \(F_{k+1}=1\cdot F_k+F_{k-1}\)
+, so feeding consecutive Fibonacci numbers \((F_{n+2},F_{n+1})\)
+into the algorithm makes every inequality in (4) an equality. Hence Fibonacci pairs are a genuine worst case: for a given magnitude, they maximize the number of steps the Euclidean algorithm requires.</p><h3 id=corollary-complexity>Corollary: complexity \(O(\log(\min(a,b)))\)</h3><p>From (3), \(b \ge F_{n+1}\)
+. Using the closed form \(F_k \approx \varphi^{k-2}/\sqrt5\)
+(with \(\varphi=(1+\sqrt5)/2\)
+the golden ratio) and solving for \(n\)
+,</p>\[
+n = O(\log_\varphi b) = O(\log b) = O(\log(\min(a,b)))
+\]<p>So the number of steps is linear in the bit length of the input — logarithmic in the value itself. Treating each division as \(O(1)\)
+(fixed-width arithmetic), the total running time is \(O(\log(\min(a,b)))\)
+(for arbitrary-precision integers, per-division cost also depends on bit length, giving a somewhat larger bound in that finer-grained analysis, but the step count itself remains this order).</p><h3 id=numerical-verification-fibonacci-pairs-vs-random-pairs>Numerical verification: Fibonacci pairs vs. random pairs</h3><p>Using the code below, for each bit length \(b\)
+from 8 to 256 (step 8) we measured the step count for:</p><ul><li>the smallest Fibonacci number reaching \(b\)
+bits, paired with its predecessor, and</li><li>random integer pairs of the same bit length (average and max over 200 trials).</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:verify_complexity.py data-lang=python:verify_complexity.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>gcd_steps</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Plain Euclidean algorithm, counting division steps only.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>steps</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>%</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>        <span class=n>steps</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>steps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>fib_pair_at_bitlength</span><span class=p>(</span><span class=n>target_bits</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return the smallest Fibonacci number F_n reaching target_bits bits, and F_{n-1}.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span> <span class=o>&lt;</span> <span class=n>target_bits</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>+</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>bits</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>8</span><span class=p>,</span> <span class=mi>257</span><span class=p>,</span> <span class=mi>8</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>fa</span><span class=p>,</span> <span class=n>fb</span> <span class=o>=</span> <span class=n>fib_pair_at_bitlength</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>fib_steps</span> <span class=o>=</span> <span class=n>gcd_steps</span><span class=p>(</span><span class=n>fb</span><span class=p>,</span> <span class=n>fa</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>trials</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>200</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>x</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>y</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>trials</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>gcd_steps</span><span class=p>(</span><span class=nb>max</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>),</span> <span class=nb>min</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=n>avg_steps</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=n>trials</span><span class=p>)</span> <span class=o>/</span> <span class=nb>len</span><span class=p>(</span><span class=n>trials</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;bits=</span><span class=si>{</span><span class=n>bits</span><span class=si>}</span><span class=s2>: fibonacci=</span><span class=si>{</span><span class=n>fib_steps</span><span class=si>}</span><span class=s2>, random_avg=</span><span class=si>{</span><span class=n>avg_steps</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>Selected results (the full run covers 8–256 bits in steps of 8):</p><table><thead><tr><th style=text-align:right>Bit length</th><th style=text-align:right>Fibonacci pair steps</th><th style=text-align:right>Random pair average steps (200 trials)</th><th style=text-align:right>Random pair max steps</th></tr></thead><tbody><tr><td style=text-align:right>8</td><td style=text-align:right>10</td><td style=text-align:right>4.95</td><td style=text-align:right>9</td></tr><tr><td style=text-align:right>32</td><td style=text-align:right>45</td><td style=text-align:right>19.02</td><td style=text-align:right>27</td></tr><tr><td style=text-align:right>64</td><td style=text-align:right>91</td><td style=text-align:right>38.19</td><td style=text-align:right>52</td></tr><tr><td style=text-align:right>128</td><td style=text-align:right>183</td><td style=text-align:right>75.14</td><td style=text-align:right>96</td></tr><tr><td style=text-align:right>192</td><td style=text-align:right>275</td><td style=text-align:right>112.22</td><td style=text-align:right>130</td></tr><tr><td style=text-align:right>256</td><td style=text-align:right>367</td><td style=text-align:right>149.38</td><td style=text-align:right>173</td></tr></tbody></table><p><img src=/posts/20201015_Euclidean/step_count_vs_bitlength.png alt="Number of Euclidean algorithm steps vs. input bit length. The Fibonacci pair (blue, worst case) is compared against the average over 200 random pairs (green). At 256 bits, the Fibonacci pair takes 367 steps versus 149.38 average for random pairs — roughly 2.5x more steps for the worst case than the average case"></p><p>Across the entire range, the Fibonacci pair takes roughly <strong>2.3-2.5x</strong> as many steps as the random-pair average, confirming Fibonacci pairs as a clear worst case. Comparing the Fibonacci step count \(n\)
+against Lame&rsquo;s bound \(\log_\varphi b\)
+shows the ratio converging to 1 as bit length grows:</p><table><thead><tr><th style=text-align:right>Bit length</th><th style=text-align:right>Measured steps \(n\)</th><th style=text-align:right>\(\log_\varphi b\)</th><th style=text-align:right>\(n / \log_\varphi b\)</th></tr></thead><tbody><tr><td style=text-align:right>32</td><td style=text-align:right>45</td><td style=text-align:right>45.33</td><td style=text-align:right>0.993</td></tr><tr><td style=text-align:right>64</td><td style=text-align:right>91</td><td style=text-align:right>91.33</td><td style=text-align:right>0.996</td></tr><tr><td style=text-align:right>128</td><td style=text-align:right>183</td><td style=text-align:right>183.33</td><td style=text-align:right>0.998</td></tr><tr><td style=text-align:right>256</td><td style=text-align:right>367</td><td style=text-align:right>367.33</td><td style=text-align:right>0.999</td></tr></tbody></table><p>This is direct numerical confirmation that the inequality used in the proof of Lame&rsquo;s theorem is tight (an equality) for Fibonacci input.</p><p>Tracing the small example \(F_{10}=55, F_9=34\)
+makes the &ldquo;every quotient equals 1&rdquo; pattern concrete:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>55 = 1*34 + 21
+</span></span><span class=line><span class=cl>34 = 1*21 + 13
+</span></span><span class=line><span class=cl>21 = 1*13 + 8
+</span></span><span class=line><span class=cl>13 = 1*8 + 5
+</span></span><span class=line><span class=cl>8  = 1*5 + 3
+</span></span><span class=line><span class=cl>5  = 1*3 + 2
+</span></span><span class=line><span class=cl>3  = 1*2 + 1
+</span></span><span class=line><span class=cl>2  = 2*1 + 0
+</span></span></code></pre></div><p>8 steps for \((55,34)\)
+matches the known fact that \(\gcd(F_n,F_{n-1})\)
+generally takes \(n-2\)
+steps (\(10-2=8\)
+here). The final quotient is \(2\)
+rather than \(1\)
+(\(F_2=2\cdot F_1+0\)
+) because the sequence terminates there given the initial condition \(F_1=F_2=1\)
+.</p><h2 id=connection-to-continued-fractions>Connection to continued fractions</h2><p>The sequence of quotients \(q_1,q_2,q_3,\dots\)
+produced by the Euclidean algorithm on \(a/b\)
+is exactly the <strong>continued fraction expansion</strong> of \(a/b\)
+:</p>\[
+\frac{a}{b} = q_1 + \cfrac{1}{q_2 + \cfrac{1}{q_3 + \cfrac{1}{\ddots}}} = [q_1; q_2, q_3, \dots]
+\]<p>This follows directly from \(a_{i-1}/a_i = q_i + a_{i+1}/a_i = q_i + 1/(a_i/a_{i+1})\)
+at each division step — the algorithm is repeatedly peeling off an integer part and inverting the remainder, which is exactly how continued fractions are built. Verifying numerically:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:continued_fraction_check.py data-lang=python:continued_fraction_check.py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>fractions</span> <span class=kn>import</span> <span class=n>Fraction</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclid_quotients</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>qs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>b</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>qs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>q</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>b</span><span class=p>,</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>qs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>continued_fraction_quotients</span><span class=p>(</span><span class=n>x</span><span class=p>:</span> <span class=n>Fraction</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>qs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>num</span><span class=p>,</span> <span class=n>den</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=n>numerator</span><span class=p>,</span> <span class=n>x</span><span class=o>.</span><span class=n>denominator</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>den</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span><span class=p>,</span> <span class=n>r</span> <span class=o>=</span> <span class=nb>divmod</span><span class=p>(</span><span class=n>num</span><span class=p>,</span> <span class=n>den</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>qs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>q</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>num</span><span class=p>,</span> <span class=n>den</span> <span class=o>=</span> <span class=n>den</span><span class=p>,</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>qs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=ow>in</span> <span class=p>[(</span><span class=mi>355</span><span class=p>,</span> <span class=mi>113</span><span class=p>),</span> <span class=p>(</span><span class=mi>1071</span><span class=p>,</span> <span class=mi>462</span><span class=p>),</span> <span class=p>(</span><span class=mi>49</span><span class=p>,</span> <span class=mi>34</span><span class=p>)]:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>euclid_quotients</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>continued_fraction_quotients</span><span class=p>(</span><span class=n>Fraction</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)))</span>
+</span></span></code></pre></div><p>The results match exactly:</p><table><thead><tr><th>\(a/b\)</th><th>Euclidean quotients</th><th>Continued fraction</th></tr></thead><tbody><tr><td>\(355/113\)</td><td>\([3, 7, 16]\)</td><td>\([3; 7, 16]\)</td></tr><tr><td>\(1071/462\)</td><td>\([2, 3, 7]\)</td><td>\([2; 3, 7]\)</td></tr><tr><td>\(49/34\)</td><td>\([1, 2, 3, 1, 3]\)</td><td>\([1; 2, 3, 1, 3]\)</td></tr></tbody></table><p>(\(355/113\)
+is famous as an excellent rational approximation of \(\pi\)
+, and its short continued fraction \([3;7,16]\)
+is exactly why it approximates so well.) This isn&rsquo;t a coincidence — the Euclidean algorithm and continued fraction expansion share the same recursive structure. We won&rsquo;t go further here, but this correspondence is the starting point for the theory of best rational approximations (convergents).</p><h2 id=application-modular-inverses-in-rsa>Application: modular inverses in RSA</h2><p>The most important practical application of the Extended Euclidean algorithm is computing <strong>modular inverses</strong>.</p><p><strong>Proposition.</strong> If \(\gcd(a,m)=1\)
+(\(a\)
+and \(m\)
+are coprime), then \(a\)
+has an inverse \(a^{-1} \bmod m\)
+, computable via the Extended Euclidean algorithm.</p><p><strong>Proof.</strong> Since \(\gcd(a,m)=1\)
+, Bezout&rsquo;s identity gives integers \(x,y\)
+with</p>\[
+ax + my = 1
+\]<p>Reducing both sides mod \(m\)
+, since \(my \equiv 0 \pmod m\)
+,</p>\[
+ax \equiv 1 \pmod m
+\]<p>so \(x \bmod m\)
+is the inverse of \(a\)
+modulo \(m\)
+. This inverse is unique mod \(m\)
+(if \(ax_1\equiv ax_2\equiv1\)
+and \(\gcd(a,m)=1\)
+, then \(a(x_1-x_2)\equiv0\)
+, and coprimality forces \(x_1\equiv x_2\)
+). \(\blacksquare\)</p><p>This is precisely the step <a href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/>our RSA article</a> uses to compute the private exponent \(d\)
+. RSA picks a public exponent \(e\)
+(commonly \(65537\)
+) coprime to \(\varphi(N)=(p-1)(q-1)\)
+, then computes \(d=e^{-1}\bmod\varphi(N)\)
+. Because \(e\)
+is chosen with \(\gcd(e,\varphi(N))=1\)
+, the proposition guarantees \(d\)
+exists uniquely and can be computed efficiently by the Extended Euclidean algorithm.</p><h3 id=verification-modular-inverse-at-rsa-scale>Verification: modular inverse at RSA scale</h3><p>We generated two <strong>1024-bit primes</strong> using the same Miller-Rabin primality test as the RSA article (so \(N\)
+is 2048 bits — RSA-2048 scale), and computed the inverse \(d=e^{-1}\bmod\varphi(N)\)
+for \(e=65537\)
+using this article&rsquo;s iterative <code>extended_gcd</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:rsa_scale_modinverse.py data-lang=python:rsa_scale_modinverse.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>is_prime_miller_rabin</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>k</span><span class=o>=</span><span class=mi>20</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>2</span> <span class=ow>or</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>3</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=n>r</span><span class=p>,</span> <span class=n>d</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>d</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>r</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>d</span> <span class=o>//=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>k</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>randrange</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>x</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>d</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>x</span> <span class=o>==</span> <span class=mi>1</span> <span class=ow>or</span> <span class=n>x</span> <span class=o>==</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>r</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>x</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>x</span> <span class=o>==</span> <span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>generate_prime</span><span class=p>(</span><span class=n>bits</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>p</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=n>bits</span> <span class=o>-</span> <span class=mi>1</span><span class=p>))</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>is_prime_miller_rabin</span><span class=p>(</span><span class=n>p</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>p</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>mod_inverse</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>m</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>g</span><span class=p>,</span> <span class=n>x</span><span class=p>,</span> <span class=n>_</span><span class=p>,</span> <span class=n>steps</span> <span class=o>=</span> <span class=n>extended_gcd</span><span class=p>(</span><span class=n>a</span> <span class=o>%</span> <span class=n>m</span><span class=p>,</span> <span class=n>m</span><span class=p>)</span>  <span class=c1># defined in the previous section</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>g</span> <span class=o>!=</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s2>&#34;modular inverse does not exist&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>x</span> <span class=o>%</span> <span class=n>m</span><span class=p>,</span> <span class=n>steps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>q</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>p</span> <span class=o>*</span> <span class=n>q</span>
+</span></span><span class=line><span class=cl><span class=n>phi</span> <span class=o>=</span> <span class=p>(</span><span class=n>p</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=p>(</span><span class=n>q</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>e</span> <span class=o>=</span> <span class=mi>65537</span>
+</span></span><span class=line><span class=cl><span class=n>d</span><span class=p>,</span> <span class=n>steps_used</span> <span class=o>=</span> <span class=n>mod_inverse</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>phi</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;p bit length: </span><span class=si>{</span><span class=n>p</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;q bit length: </span><span class=si>{</span><span class=n>q</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;n bit length: </span><span class=si>{</span><span class=n>n</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;phi bit length: </span><span class=si>{</span><span class=n>phi</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;extended_gcd steps to compute d: </span><span class=si>{</span><span class=n>steps_used</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;e*d mod phi == 1: </span><span class=si>{</span><span class=p>(</span><span class=n>e</span> <span class=o>*</span> <span class=n>d</span><span class=p>)</span> <span class=o>%</span> <span class=n>phi</span> <span class=o>==</span> <span class=mi>1</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=mi>123456789012345678901234567890</span>
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>m2</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>d</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;message == decrypt(encrypt(message)): </span><span class=si>{</span><span class=n>message</span> <span class=o>==</span> <span class=n>m2</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>Results:</p><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>\(p\)
+bit length</td><td>1024</td></tr><tr><td>\(q\)
+bit length</td><td>1024</td></tr><tr><td>\(N=pq\)
+bit length</td><td>2048</td></tr><tr><td>\(\varphi(N)\)
+bit length</td><td>2048</td></tr><tr><td>\(e\)</td><td>65537</td></tr><tr><td><code>extended_gcd</code> steps to compute \(d\)</td><td>9</td></tr><tr><td>\(e \cdot d \bmod \varphi(N) = 1\)</td><td>True</td></tr><tr><td>End-to-end check (encrypt then decrypt recovers the message)</td><td>True</td></tr></tbody></table><p>Even though \(\varphi(N)\)
+is a 2048-bit number (over 600 decimal digits), the Extended Euclidean algorithm computes the inverse \(d\)
+in just <strong>9 steps</strong> — far below Lame&rsquo;s bound \(O(\log\varphi(N))\)
+(\(\log_\varphi\varphi(N)\approx2984\)
+; the actual step count is dominated by the much smaller operand \(e\)
+, whose bit length is only 17). We also confirmed \(e\cdot d\equiv1\pmod{\varphi(N)}\)
+holds exactly, and that encrypting and decrypting a message with this \(d\)
+recovers the original — demonstrating that the Extended Euclidean algorithm is not just a existence proof but the computational core of real-world key generation.</p><h2 id=summary-of-verification>Summary of verification</h2><p>Every numeric claim in this article was confirmed by code actually executed:</p><ol><li><strong>Bezout&rsquo;s identity</strong>: across <strong>200,000 random pairs</strong> with \(1 \le a,b \le 10^{12}\)
+, <code>extended_gcd</code> returned \((d,x,y)\)
+satisfying \(ax+by=d\)
+exactly, and \(d\)
+matched <code>math.gcd(a,b)</code>, with zero counterexamples. For the textbook pair \((1071,462)\)
+: \(\gcd=21\)
+, \(x=-3,y=7\)
+, and \(1071\times(-3)+462\times7=21\)
+.</li><li><strong>Fibonacci worst case</strong>: across the entire 8-256 bit range, Fibonacci pairs took roughly 2.3-2.5x as many steps as the random-pair average. The ratio of Fibonacci step count to Lame&rsquo;s bound \(\log_\varphi b\)
+converges to 1 as bit length grows (0.999 at 256 bits).</li><li><strong>Modular inverse application</strong>: at 2048-bit RSA scale (two 1024-bit primes), the inverse of \(e=65537\)
+mod \(\varphi(N)\)
+was computed in 9 steps, with \(e\cdot d\equiv1\pmod{\varphi(N)}\)
+and an end-to-end encrypt/decrypt check both confirmed.</li><li><strong>Continued fraction match</strong>: for \(355/113\)
+, \(1071/462\)
+, and \(49/34\)
+, the Euclidean quotient sequence exactly matched the continued fraction expansion in all three cases.</li></ol><h2 id=related-articles>Related articles</h2><ul><li><a href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/>RSA Encryption: Theory, Key Generation, Encryption and Decryption in Python</a> - uses the modular inverse computation proved in this article (the Extended Euclidean algorithm) to generate its private key.</li></ul><h2 id=references>References</h2><ul><li>Lame, G. (1844). &ldquo;Note sur la limite du nombre des divisions dans la recherche du plus grand commun diviseur entre deux nombres entiers&rdquo;. <em>Comptes Rendus de l&rsquo;Academie des Sciences</em>, 19, 867-870.</li><li>Knuth, D. E. (1997). <em>The Art of Computer Programming, Volume 2: Seminumerical Algorithms</em> (3rd ed.). Addison-Wesley. Section 4.5.3.</li><li>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). <em>Introduction to Algorithms</em> (3rd ed.). MIT Press. Chapter 31.</li></ul></div><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="3301"><meta itemprop=url content="https://yuhi-sa.github.io/en/posts/20201015_euclidean/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/en/posts/20200901_filter/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
 </span><span class=post-nav__title>Fundamentals of Filtering Methods in Signal Processing</span>
 </a><a href=/en/posts/20201220_binary/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
-</span><span class=post-nav__title>Fast Modular Exponentiation Using Binary Exponentiation in Python</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20201223_elgamal/1/>Elliptic Curve ElGamal Encryption: Principles and Simplified Python Implementation</a></h3><div class=card-meta><time datetime=2020-12-23>December 23, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20201220_binary/1/>Fast Modular Exponentiation Using Binary Exponentiation in Python</a></h3><div class=card-meta><time datetime=2020-12-20>December 20, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20260704_digital_signature/1/>Digital Signatures in Python: ECDSA vs EdDSA vs RSA-PSS, Nonce Reuse Attacks, and RFC 6979</a></h3><div class=card-meta><time datetime=2026-07-04>July 4, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/en/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+</span><span class=post-nav__title>Fast Modular Exponentiation Using Binary Exponentiation in Python</span></a></nav><section class="related-tools mt-5" aria-label=関連ツール><h2 class=related-tools__title>この記事に関連する無料ツール</h2><div class=related-tools__grid><a href=https://yuhi-sa.github.io/devtoolbox/tools/moving-average-calculator/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Moving Average Calculator</span>
+<span class=related-tools__desc>SMA/EMA/WMA をブラウザで即座に計算</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-formatter/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>JSON Formatter</span>
+<span class=related-tools__desc>JSONを整形・圧縮・バリデーション</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/regex-tester/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Regex Tester</span>
+<span class=related-tools__desc>正規表現をリアルタイムテスト</span></a></div></section><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20201223_elgamal/1/>Elliptic Curve ElGamal Encryption: Principles and Simplified Python Implementation</a></h3><div class=card-meta><time datetime=2020-12-23>December 23, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20201220_binary/1/>Fast Modular Exponentiation Using Binary Exponentiation in Python</a></h3><div class=card-meta><time datetime=2020-12-20>December 20, 2020</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/en/posts/20260704_digital_signature/1/>Digital Signatures in Python: ECDSA vs EdDSA vs RSA-PSS, Nonce Reuse Attacks, and RFC 6979</a></h3><div class=card-meta><time datetime=2026-07-04>July 4, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/en/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
 Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/en/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
 <span itemprop=name>tomato blog</span>
 </a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/en/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
@@ -142,4 +535,4 @@ with
 |
 <a href=https://yuhi-sa.github.io/pomodoro/ class=text-decoration-none>Pomodoro Timer</a></p><p class="social-links text-muted small mt-1 mb-0"><a href=https://www.youtube.com/@yuhi-sa target=_blank rel=noopener class=text-decoration-none>YouTube</a>
 |
-<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Euclidean Algorithm and Extended Euclidean Algorithm in Python","url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/","description":"Python implementations of the Euclidean algorithm for GCD and the Extended Euclidean algorithm for solving linear Diophantine equations.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
+<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"Euclidean Algorithm and Extended Euclidean Algorithm in Python","url":"https:\/\/yuhi-sa.github.io\/en\/posts\/20201015_euclidean\/1\/","description":"A rigorous treatment of the Euclidean and Extended Euclidean algorithms: an inductive correctness proof, a constructive proof of Bezout\u0027s identity, an O(log n) complexity proof via Lame\u0027s theorem, and an application to modular inverses in RSA, all with executed numerical verification in Python.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
