@@ -1,30 +1,458 @@
-<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta name=keywords content="制御"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><meta property="og:type" content="article"><meta property="og:title" content="H∞制御"><meta property="og:description" content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210405_hinf/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2021-04-05T13:00:23+09:00"><meta property="article:modified_time" content="2026-04-19T21:53:53+09:00"><meta property="article:tag" content="制御"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="H∞制御"><meta name=twitter:description content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>H∞制御 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20210405_hinf/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"H∞制御","description":"H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-04-05T13:00:23\u002b09:00","dateModified":"2026-04-19T21:53:53\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210405_hinf\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210405_hinf\/1\/","wordCount":802,"keywords":["制御"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT2M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"H∞制御"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta name=keywords content="制御"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><meta property="og:type" content="article"><meta property="og:title" content="H∞制御"><meta property="og:description" content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20210405_hinf/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2021-04-05T13:00:23+09:00"><meta property="article:modified_time" content="2026-07-16T20:32:15+09:00"><meta property="article:tag" content="制御"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="H∞制御"><meta name=twitter:description content="H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>H∞制御 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20210405_hinf/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20210405_hinf/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"H∞制御","description":"H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2021-04-05T13:00:23\u002b09:00","dateModified":"2026-07-16T20:32:15\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20210405_hinf\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20210405_hinf\/1\/","wordCount":10713,"keywords":["制御"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT22M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"H∞制御"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
 </a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
 <i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
 <span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20210405_hinf/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>H∞制御</h1><p class="lead article-description" itemprop=description>H∞制御（H-infinity control）の基礎を解説。H∞ノルムの定義、外乱抑制のための制御器設計、ミニマックス問題としての定式化を紹介します。</p><div class=article-meta><time datetime=2021-04-05T13:00:23+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
 April 5, 2021
-</time><time datetime=2026-04-19T21:53:53+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+</time><time datetime=2026-07-16T20:32:15+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
 Updated
-April 19, 2026
+July 16, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
-2 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E5%88%B6%E5%BE%A1/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>制御</a></div></header><div class=article-content itemprop=articleBody><p>H∞制御（H-infinity control）は、ロバスト制御理論の一つであり、システムに加わる<strong>外乱</strong>や<strong>モデルの不確かさ</strong>に対して、制御性能を保証することを目的とした制御器設計手法です。特に、最悪ケースの外乱に対するシステムの応答を最小化することを目指します。</p><h2 id=hノルム>H∞ノルム</h2><p>H∞制御では、システムの性能を評価するために<strong>H∞ノルム</strong>という概念を用います。H∞ノルムは、システムの周波数応答の最大ゲインを表し、外乱から出力への影響の最大値を意味します。</p><p>外乱 \(w\)
-から制御対象の出力 \(z\)
-への閉ループ伝達関数を \(T_{zw}\)
-とすると、そのH∞ノルムは以下のように定義されます。</p>\[ ||T*{zw}||*\infty = \sup*{\omega} ||T*{zw}(j\omega)|| \]<p>これは、全ての周波数 \(\omega\)
-における伝達関数のゲインの最大値（ピーク値）を示します。</p><p>また、エネルギーゲインの観点からは、以下のように定義されます。</p>\[ ||T*{zw}||*\infty = \sup\_{w \neq 0} \frac{||z||\_2}{||w||\_2} \]<p>ここで、\(||\cdot||_2\)
-は信号のL2ノルム（エネルギー）を表します。</p>\[ ||z||\_2^2 = \int_0^\infty z^T(t)z(t)dt \]<p></p>\[ ||w||\_2^2 = \int_0^\infty w^T(t)w(t)dt \]<p>H∞制御問題の目的は、このH∞ノルム \(||T_{zw}||_\infty\)
+22 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E5%88%B6%E5%BE%A1/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>制御</a></div></header><div class=article-content itemprop=articleBody><p>H∞制御（H-infinity control）は、ロバスト制御理論の一つであり、システムに加わる<strong>外乱</strong>や<strong>モデルの不確かさ</strong>に対して、制御性能を保証することを目的とした制御器設計手法です。特に、最悪ケースの外乱に対するシステムの応答を最小化することを目指します。</p><p>古典制御（<a href=https://yuhi-sa.github.io/posts/20210318_pid/1/>PID制御</a>や<a href=https://yuhi-sa.github.io/posts/20260711_nyquist_root_locus/1/>ゲイン余裕・位相余裕による安定余裕の評価</a>）は、あらかじめ決められた1つのプラントモデルに対して制御器を設計し、事後的に安定余裕でロバスト性を確認します。これに対しH∞制御は、<strong>プラントの不確かさそのものを設計変数に組み込み</strong>、想定される不確かさの集合すべてに対して性能を保証する制御器を、最適化問題として直接求める点が本質的に異なります。本記事では、その理論的な柱である<strong>小ゲイン定理</strong>・<strong>H∞ノルム</strong>・<strong>標準H∞制御問題</strong>・<strong>リカッチ方程式による制御器の存在条件</strong>を、可能な限り導出を追いながら解説し、最後に <code>python-control</code>（SLICOTベースの <code>hinfsyn</code>）を使った数値実験で、PID制御との頑健性の違いを実測します。</p><h2 id=hノルム>H∞ノルム</h2><h3 id=定義>定義</h3><p>外乱 \(w\)
+から評価出力 \(z\)
+への閉ループ伝達関数を \(T_{zw}(s)\)
+とすると、そのH∞ノルムは周波数応答の最大特異値の上限として定義されます。</p>\[
+\|T_{zw}\|_\infty = \sup_{\omega \in \mathbb{R}} \bar\sigma\big(T_{zw}(j\omega)\big)
+\]<p>ここで \(\bar\sigma(\cdot)\)
+は行列の最大特異値です。SISO（1入力1出力）系では \(\bar\sigma(T_{zw}(j\omega)) = |T_{zw}(j\omega)|\)
+となるので、H∞ノルムは単純にボード線図のゲイン曲線のピーク値（最悪周波数でのゲイン）に一致します。</p><h3 id=なぜ最悪ケースのゲインなのか誘導l2ノルムとしての意味>なぜ「最悪ケースのゲイン」なのか：誘導L2ノルムとしての意味</h3><p>H∞ノルムのもう一つの顔は、<strong>信号のエネルギー比の上限</strong>です。</p>\[
+\|z\|_2^2 = \int_0^\infty z^T(t) z(t)\, dt, \qquad
+\|w\|_2^2 = \int_0^\infty w^T(t) w(t)\, dt
+\]<p>とL2ノルム（信号エネルギー）を定義すると、安定なシステム \(T_{zw}\)
+について次の等式が成り立ちます。</p>\[
+\|T_{zw}\|_\infty = \sup_{w \in L_2,\, w \neq 0} \frac{\|z\|_2}{\|w\|_2}
+\]<p>これは「H∞ノルムは有限エネルギー入力に対する誘導ノルム（induced norm）である」という主張で、天下り的に見えるので証明の要点を追っておきます。</p><p><strong>上界の証明（\(\leq\)
+）</strong>: パーセバルの定理より、時間領域のエネルギーは周波数領域のエネルギーに等しく保存されます。</p>\[
+\|z\|_2^2 = \frac{1}{2\pi}\int_{-\infty}^{\infty} \|\hat Z(j\omega)\|^2 d\omega
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} \|T_{zw}(j\omega)\hat W(j\omega)\|^2 d\omega
+\]<p>最大特異値の定義より、任意のベクトル \(v\)
+に対し \(\|T_{zw}(j\omega) v\| \leq \bar\sigma(T_{zw}(j\omega))\|v\|\)
+が成り立つので、</p>\[
+\|z\|_2^2 \leq \frac{1}{2\pi}\int_{-\infty}^{\infty} \bar\sigma(T_{zw}(j\omega))^2 \|\hat W(j\omega)\|^2 d\omega
+\leq \|T_{zw}\|_\infty^2 \cdot \frac{1}{2\pi}\int_{-\infty}^{\infty} \|\hat W(j\omega)\|^2 d\omega = \|T_{zw}\|_\infty^2 \|w\|_2^2
+\]<p>したがって \(\|z\|_2/\|w\|_2 \leq \|T_{zw}\|_\infty\)
+が任意の \(w\)
+について成り立ちます。</p><p><strong>下界の証明（\(\geq\)
+、達成可能性）</strong>: ピーク周波数を \(\omega_0 = \arg\sup_\omega \bar\sigma(T_{zw}(j\omega))\)
+とし、\(T_{zw}(j\omega_0)\)
+の最大特異値に対応する右特異ベクトル方向 \(v_0\)
+の入力を考えます。\(w(t)\)
+として、周波数 \(\omega_0\)
+を中心とする帯域幅 \(\varepsilon\)
+の狭帯域信号（方向は \(v_0\)
+）を作ると、\(T_{zw}\)
+が連続なので帯域内では \(\bar\sigma(T_{zw}(j\omega)) \approx \bar\sigma(T_{zw}(j\omega_0))\)
+とみなせ、出力エネルギーと入力エネルギーの比は \(\varepsilon \to 0\)
+の極限で \(\bar\sigma(T_{zw}(j\omega_0)) = \|T_{zw}\|_\infty\)
+に収束します。</p><p>以上より上界と下界が一致し、\(\sup_w \|z\|_2/\|w\|_2 = \|T_{zw}\|_\infty\)
+が成立します。つまり<strong>H∞ノルムは、あらゆる有限エネルギー外乱の中で最も出力を増幅させる方向・周波数を選んだときのゲイン</strong>であり、これが「最悪ケースのゲイン」と呼ばれる所以です。</p><h3 id=数値検証>数値検証</h3><p>この等式を実際に確認します。軽く減衰した2次系 \(G(s) = \dfrac{1}{s^2+0.4s+4}\)
+（固有振動数 \(\omega_n=2\,\mathrm{rad/s}\)
+、減衰比 \(\zeta=0.1\)
+）を例に、H∞ノルムを2通りの方法で計算しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>control</span> <span class=k>as</span> <span class=nn>ct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>G</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=mf>1.0</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mf>0.4</span><span class=p>,</span> <span class=mi>4</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>norm_inf</span><span class=p>,</span> <span class=n>wpeak</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>linfnorm</span><span class=p>(</span><span class=n>G</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;control.linfnorm: ||G||inf = </span><span class=si>{</span><span class=n>norm_inf</span><span class=si>:</span><span class=s2>.6f</span><span class=si>}</span><span class=s2> at w = </span><span class=si>{</span><span class=n>wpeak</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2> rad/s&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>logspace</span><span class=p>(</span><span class=o>-</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>200000</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>mag</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>G</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;brute force sup: max|G(jw)| = </span><span class=si>{</span><span class=n>mag</span><span class=o>.</span><span class=n>max</span><span class=p>()</span><span class=si>:</span><span class=s2>.6f</span><span class=si>}</span><span class=s2> at w = </span><span class=si>{</span><span class=n>w</span><span class=p>[</span><span class=n>np</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>mag</span><span class=p>)]</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2> rad/s&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>control.linfnorm: ||G||inf = 1.256297 at w = 1.9799 rad/s
+</span></span><span class=line><span class=cl>brute force sup: max|G(jw)| = 1.256297 at w = 1.9799 rad/s
+</span></span></code></pre></div><p><code>python-control</code> の内部アルゴリズム（周波数グリッドの最大値ではなく、状態空間の固有値問題を反復して求める厳密解法）とブルートフォースな周波数走査が、小数点以下6桁まで完全に一致しました。ピーク周波数 \(\omega=1.98\,\mathrm{rad/s}\)
+が共振周波数 \(\omega_n=2\)
+にほぼ一致することも、軽減衰系の直感と整合します。</p><h3 id=h制御問題の目的>H∞制御問題の目的</h3><p>H∞制御問題の目的は、このH∞ノルム \(\|T_{zw}\|_\infty\)
 を、ある正の定数 \(\gamma\)
 以下に抑えるような制御器 \(K\)
-を設計することです。つまり、</p>\[ ||T*{zw}||*\infty &lt; \gamma \]<p>を満たす制御器を見つけることです。この \(\gamma\)
-は<strong>性能指標</strong>または<strong>ゲイン</strong>と呼ばれ、小さいほど外乱抑制性能が高いことを意味します。</p><h2 id=h制御問題の定式化>H∞制御問題の定式化</h2><p>H∞制御問題は、状態空間表現を用いて、以下の最適化問題として定式化されることが多いです。</p>\[ \min*K \sup*{w \neq 0} \frac{||z||\_2}{||w||\_2} \]<p>これは、制御器 \(K\)
-を設計することで、外乱 \(w\)
-から出力 \(z\)
-へのエネルギーゲインを最小化することを目指します。</p><p>また、ゲーム理論的な視点から、以下のように表現されることもあります。</p>\[ \min_u \max_w \int_0^\infty (z^T(t)z(t) - \gamma^2 w^T(t)w(t)) dt \]<p>これは、制御入力 \(u\)
-を選択することで \(z^T(t)z(t)\)
-を最小化し、同時に最悪ケースの外乱 \(w\)
-が \(w^T(t)w(t)\)
-を最大化するという、ミニマックス問題として捉えられます。</p><p>H∞制御は、航空宇宙、ロボット工学、プロセス制御など、高いロバスト性が求められる様々な分野で応用されています。</p></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="802"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210405_hinf/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20210329_bin/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+を設計することです。</p>\[
+\|T_{zw}\|_\infty &lt; \gamma
+\]<p>を満たす制御器を見つけることが目標であり、\(\gamma\)
+は<strong>性能指標</strong>と呼ばれ、小さいほど外乱抑制性能が高いことを意味します。ゲーム理論的な視点からは、以下のミニマックス問題として表現されます。</p>\[
+\min_u \max_w \int_0^\infty \big(z^T(t)z(t) - \gamma^2 w^T(t)w(t)\big)\, dt
+\]<p>制御入力 \(u\)
+が \(z^Tz\)
+を最小化しようとする一方、最悪ケースの外乱 \(w\)
+は \(w^Tw\)
+を最大化しようとする——この \(u\)
+と \(w\)
+のゼロサムゲームの鞍点を求める問題が、後述するリカッチ方程式の導出の出発点になります。</p><h2 id=小ゲイン定理>小ゲイン定理</h2><p>H∞制御がロバスト性を保証できる理論的な根拠が**小ゲイン定理（Small Gain Theorem）**です。</p><h3 id=設定>設定</h3><p>安定な公称システム \(M(s)\)
+と、安定だが大きさ以外は未知の不確かさ \(\Delta(s)\)
+が、次のようにフィードバックループを構成しているとします。</p>\[
+y = Mu, \qquad u = w + \Delta y
+\]<p>これは、外部入力 \(w\)
+に不確かさ由来の摂動 \(\Delta y\)
+が加算的に加わる、標準的な \(M\)
+–\(\Delta\)
+構造です。\(u\)
+について解くと、</p>\[
+u = w + \Delta M u \;\; \Longrightarrow \;\; (I - \Delta M) u = w \;\; \Longrightarrow \;\; u = (I - \Delta M)^{-1} w
+\]<p>この閉ループが内部安定であるための条件を考えます。</p><h3 id=定理と証明>定理と証明</h3><p><strong>小ゲイン定理</strong>: \(M, \Delta\)
+がともに安定（右半平面に極を持たない）で、</p>\[
+\|M\|_\infty \, \|\Delta\|_\infty &lt; 1
+\]<p>が成り立つならば、任意のそのような \(\Delta\)
+に対して閉ループ \((I-\Delta M)^{-1}\)
+は内部安定である。</p><p><strong>証明1（縮小写像・ノイマン級数による証明）</strong>: 誘導ノルムの劣乗法性（submultiplicativity）より、各周波数 \(\omega\)
+で</p>\[
+\bar\sigma(\Delta(j\omega)M(j\omega)) \leq \bar\sigma(\Delta(j\omega))\,\bar\sigma(M(j\omega)) \leq \|\Delta\|_\infty \|M\|_\infty &lt; 1
+\]<p>が成り立ちます。よって作用素 \(\Delta M\)
+のスペクトル半径（各周波数での最大特異値）が一様に1未満となり、\((I-\Delta M)^{-1}\)
+はノイマン級数</p>\[
+(I - \Delta M)^{-1} = \sum_{k=0}^{\infty} (\Delta M)^k
+\]<p>として収束します（等比級数の収束条件 \(\|\Delta M\|&lt;1\)
+と同じ理屈です）。この級数は安定な有理関数の積・和の可算和として構成されているため、右半平面で有界・解析的であり、\((I-\Delta M)^{-1}\)
+自体が安定な伝達関数になります。つまり、ループを構成する信号は常に有界となり、内部安定性が保証されます。</p><p><strong>証明2（ナイキストの安定判別法との関係）</strong>: <a href=https://yuhi-sa.github.io/posts/20260711_nyquist_root_locus/1/>ナイキスト線図・根軌跡の記事</a>で見たように、開ループ伝達関数の特性方程式 \(\det(I - L(s)) = 0\)
+の根の位置は、ナイキスト軌跡の臨界点まわりの回転数 \(Z=N+P\)
+で判定できます。ここでは \(L=\Delta M\)
+が開ループ伝達関数に相当します。</p><ul><li>\(\Delta=0\)
+（不確かさがない公称ループ）のとき、\(M\)
+が安定なら明らかに閉ループも安定（\(Z=0\)
+）です。</li><li>\(\Delta\)
+を \(0\)
+から実際の値まで連続的にスケーリングするホモトピー \(\Delta_\tau = \tau\Delta\ (\tau \in [0,1])\)
+を考えると、小ゲイン条件より全ての \(\tau, \omega\)
+に対して \(\bar\sigma(\Delta_\tau(j\omega)M(j\omega)) \leq \tau\|\Delta\|_\infty\|M\|_\infty &lt; 1\)
+なので、\(\det(I-\Delta_\tau(j\omega)M(j\omega))\)
+の固有値（特性利得）は複素平面上で常に半径1未満の円内にあり、臨界点 \(1+0j\)
+に到達も包囲もできません。</li><li>したがって \(\tau\)
+を連続的に動かす間、ナイキスト軌跡が臨界点をまたぐことはなく、回転数 \(N\)
+は変化しません。\(\tau=0\)
+で \(Z=0\)
+（安定）だったので、\(\tau=1\)
+（実際の \(\Delta\)
+）でも \(Z=0\)
+、すなわち閉ループは安定であり続けます。</li></ul><p>この2つの証明はそれぞれ「作用素論的な縮小写像」と「複素関数論的な連続変形（ホモトピー）」という異なる立場からの説明ですが、同じ結論——<strong>ループゲインの積が1未満なら不安定化しない</strong>——を与えます。小ゲイン定理は十分条件であり必要条件ではない（つまり\(\|M\|_\infty\|\Delta\|_\infty \geq 1\)
+でも安定な場合はある）ことに注意が必要です。これは、\(\Delta\)
+の位相情報を一切使わず大きさのみで評価する、保守的な（安全側の）判定だからです。</p><h3 id=数値検証小ゲイン条件のタイトさ>数値検証：小ゲイン条件のタイトさ</h3><p>小ゲイン定理が「十分条件としてどれだけタイトか」を、後述の数値実験で構成する \(M(s) = W_3(s)T(s)\)
+（ロバスト性重み × 相補感度関数）を使って確認します。実定数ゲイン \(\delta\)
+による摂動 \(\Delta = \delta\)
+を、\(M\)
+を含むループ \(1 - \delta M(s) = 0\)
+に対してスイープし、特性方程式の根が虚軸を横切る \(\delta\)
+を探索しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>logspace</span><span class=p>(</span><span class=o>-</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>20000</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Mpeak</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>M</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>))</span><span class=o>.</span><span class=n>max</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;||M||_inf = </span><span class=si>{</span><span class=n>Mpeak</span><span class=si>:</span><span class=s2>.5f</span><span class=si>}</span><span class=s2>  -&gt;  small-gain bound 1/||M||_inf = </span><span class=si>{</span><span class=mi>1</span><span class=o>/</span><span class=n>Mpeak</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>delta</span> <span class=ow>in</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>20</span><span class=p>,</span> <span class=mi>4001</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>poles</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>poles</span><span class=p>(</span><span class=n>ct</span><span class=o>.</span><span class=n>feedback</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=o>-</span><span class=n>delta</span><span class=o>*</span><span class=n>M</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>np</span><span class=o>.</span><span class=n>all</span><span class=p>(</span><span class=n>poles</span><span class=o>.</span><span class=n>real</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;instability first occurs near delta = </span><span class=si>{</span><span class=n>delta</span><span class=si>:</span><span class=s2>.3f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>||M||_inf = 0.13930  -&gt;  small-gain bound 1/||M||_inf = 7.1786
+</span></span><span class=line><span class=cl>instability first occurs near delta = 7.255
+</span></span></code></pre></div><p>小ゲイン定理が保証する安定限界 \(1/\|M\|_\infty = 7.179\)
+に対し、実際に不安定化するのは \(\delta \approx 7.255\)
+でした。理論的な下限（保証値）が実際の不安定化点よりわずかに小さい（約1%の保守性）ことが確認でき、小ゲイン定理が「十分条件」として機能しつつも、この例ではほぼタイトであることが分かります。</p><h2 id=標準h制御問題の定式化>標準H∞制御問題の定式化</h2><h3 id=一般化プラント>一般化プラント</h3><p>H∞制御では、制御対象そのものではなく、<strong>外乱・評価出力・重み関数まで含めた「一般化プラント」</strong> \(P(s)\)
+を設計対象とします。\(P\)
+は外乱 \(w\)
+・制御入力 \(u\)
+を入力とし、評価出力 \(z\)
+（性能を測る仮想信号）・観測 \(y\)
+（制御器に渡される信号）を出力とする、次のブロック構造を持ちます。</p>\[
+\begin{bmatrix} z \\ y \end{bmatrix}
+= P(s) \begin{bmatrix} w \\ u \end{bmatrix}
+= \begin{bmatrix} P_{11}(s) & P_{12}(s) \\ P_{21}(s) & P_{22}(s) \end{bmatrix}
+\begin{bmatrix} w \\ u \end{bmatrix}
+\]<p>制御器 \(K(s)\)
+は観測 \(y\)
+から制御入力を生成します（\(u = Ky\)
+）。この閉ループ構造は、信号線で書けば</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>      +------------------+
+</span></span><span class=line><span class=cl>  w -&gt;|                  |-&gt; z
+</span></span><span class=line><span class=cl>      |     P(s)         |
+</span></span><span class=line><span class=cl>  u -&gt;|                  |-&gt; y
+</span></span><span class=line><span class=cl>      +------------------+
+</span></span><span class=line><span class=cl>        ^                |
+</span></span><span class=line><span class=cl>        |     K(s)       |
+</span></span><span class=line><span class=cl>        +----------------+
+</span></span></code></pre></div><p>に相当します。</p><h3 id=下側線形分数変換lower-lftの導出>下側線形分数変換（Lower LFT）の導出</h3><p>\(w\)
+から \(z\)
+への閉ループ伝達関数を、\(u=Ky\)
+を代入して求めます。</p>\[
+z = P_{11}w + P_{12}u, \qquad y = P_{21}w + P_{22}u, \qquad u = Ky
+\]<p>第2式に \(u=Ky\)
+を代入すると \(y = P_{21}w + P_{22}Ky\)
+となり、\(y\)
+について解くと</p>\[
+(I - P_{22}K)y = P_{21}w \;\;\Longrightarrow\;\; y = (I-P_{22}K)^{-1}P_{21}w
+\]<p>これを \(u=Ky\)
+に代入し、さらに \(z\)
+の式に代入すると、</p>\[
+z = P_{11}w + P_{12}K(I-P_{22}K)^{-1}P_{21}w
+\]<p>したがって、\(w\)
+から \(z\)
+への閉ループ伝達関数（<strong>下側線形分数変換</strong> \(F_l(P,K)\)
+）は</p>\[
+T_{zw}(s) = F_l(P,K) = P_{11} + P_{12}K(I-P_{22}K)^{-1}P_{21}
+\]<p>となります。標準H∞制御問題とは、この \(T_{zw}\)
+の内部安定性を保ちながら \(\|T_{zw}\|_\infty &lt; \gamma\)
+を達成する \(K\)
+を求める問題です。</p><h3 id=具体例混合感度問題への当てはめ>具体例：混合感度問題への当てはめ</h3><p>後の数値実験で使う「混合感度（S/KS/T）」設計問題を、この一般化プラントの枠組みで具体的に書き下します。制御対象を \(G(s)\)
+、性能重み \(W_1\)
+、制御努力重み \(W_2\)
+、ロバスト性重み \(W_3\)
+とし、\(w=r\)
+（目標値）、\(e=r-Gu\)
+（偏差）とすると、評価出力を</p>\[
+z_1 = W_1 e = W_1 w - W_1 G u, \qquad z_2 = W_2 u, \qquad z_3 = W_3 G u, \qquad y = w - Gu
+\]<p>と定義すれば、</p>\[
+P_{11} = \begin{bmatrix} W_1 \\ 0 \\ 0 \end{bmatrix}, \quad
+P_{12} = \begin{bmatrix} -W_1 G \\ W_2 \\ W_3 G \end{bmatrix}, \quad
+P_{21} = I, \quad P_{22} = -G
+\]<p>となります。感度関数 \(S=(I+GK)^{-1}\)
+、相補感度関数 \(T=I-S\)
+を使うと、閉ループは \(z_1 = W_1 S w\)
+、\(z_2 = W_2 KS w\)
+、\(z_3 = W_3 T w\)
+と書け、\(\|T_{zw}\|_\infty&lt;\gamma\)
+は3つの周波数重み付き伝達関数 \(W_1S,\ W_2KS,\ W_3T\)
+を同時に \(\gamma\)
+未満に抑える問題に帰着します。<code>python-control</code> の <code>control.mixsyn(G, W1, W2, W3)</code> は、まさにこの一般化プラントを内部で構成し <code>hinfsyn</code> に渡す関数です。</p><h2 id=リカッチ方程式による存在条件>リカッチ方程式による存在条件</h2><h3 id=状態フィードバック全情報問題の導出>状態フィードバック（全情報）問題の導出</h3><p>一般の出力フィードバックH∞制御問題の完全な導出は長くなるため、まず本質が見える<strong>状態フィードバック（full-information）問題</strong>を完全に導出し、一般の場合は結果と参考文献を示します。</p><p>プラントを</p>\[
+\dot x = Ax + B_1 w + B_2 u, \qquad z = \begin{bmatrix} C_1 x \\ u \end{bmatrix}, \quad D_{12}^TD_{12}=I,\ C_1^TD_{12}=0
+\]<p>とし、状態 \(x\)
+を直接観測できる（\(y=x\)
+）状況を考えます。目的は、コスト</p>\[
+J_\gamma(u,w) = \int_0^\infty \big(x^TC_1^TC_1x + u^Tu - \gamma^2w^Tw\big)\,dt
+\]<p>の鞍点 \(\min_u\max_w J_\gamma\)
+を求めることです（\(J_\gamma&lt;0\)
+を全ての \(w\neq0\)
+で達成できれば \(\|T_{zw}\|_\infty&lt;\gamma\)
+が示せます）。価値関数を \(V(x)=x^TXx\)
+（\(X=X^T\geq0\)
+）と仮定し、ハミルトン・ヤコビ・アイザックス方程式</p>\[
+\frac{d}{dt}(x^TXx) + x^TC_1^TC_1x + u^Tu - \gamma^2w^Tw = 0
+\]<p>を \(\dot x = Ax+B_1w+B_2u\)
+に沿って評価すると、</p>\[
+x^T(A^TX+XA+C_1^TC_1)x + 2w^TB_1^TXx + 2u^TB_2^TXx + u^Tu - \gamma^2w^Tw = 0
+\]<p>\(u,w\)
+についてそれぞれ平方完成すると、</p>\[
+u^Tu+2u^TB_2^TXx = (u+B_2^TXx)^T(u+B_2^TXx) - x^TXB_2B_2^TXx
+\]
+\[
+-\gamma^2w^Tw+2w^TB_1^TXx = -\gamma^2(w-\gamma^{-2}B_1^TXx)^T(w-\gamma^{-2}B_1^TXx) + \gamma^{-2}x^TXB_1B_1^TXx
+\]<p>これらを代入すると、\(x\)
+に依存する残りの項がすべて消えるために \(X\)
+が満たすべき条件として、次の**H∞代数リカッチ方程式（ARE）**が導かれます。</p>\[
+A^TX+XA+X\big(\gamma^{-2}B_1B_1^T-B_2B_2^T\big)X+C_1^TC_1=0
+\]<p>このとき鞍点を与える制御則・最悪外乱は、平方完成の非負項をゼロにする選択</p>\[
+u^\star = -B_2^TXx \quad (\text{最適制御}), \qquad w^\star = \gamma^{-2}B_1^TXx \quad (\text{最悪外乱})
+\]<p>です。</p><h3 id=ハミルトン行列の固有値条件とγ反復>ハミルトン行列の固有値条件とγ反復</h3><p>このAREが安定化解 \(X\geq0\)
+を持つかどうかは、対応する<strong>ハミルトン行列</strong></p>\[
+H_\gamma = \begin{bmatrix} A & -(B_2B_2^T-\gamma^{-2}B_1B_1^T) \\ -C_1^TC_1 & -A^T \end{bmatrix}
+\]<p>の固有値配置で判定できます。\(H_\gamma\)
+が虚軸上に固有値を持たない（\(\mathrm{dom}(\mathrm{Ric})\)
+に属する）ことが、安定化解 \(X=X^T\geq0\)
+が存在するための必要十分条件です。\(\gamma\)
+を大きくすると条件は緩くなり(\(\gamma\to\infty\)
+でH2制御に帰着)、\(\gamma\)
+を小さくしていくとどこかで \(H_\gamma\)
+の固有値が虚軸に達し、それ以下では解が存在しなくなります。この境界値 \(\gamma_{\min}\)
+を求めるために、\(\gamma\)
+を外側のループで二分探索しながら「その \(\gamma\)
+で安定化解が存在するか」を内側で判定する——これが**γ反復（gamma iteration）**の考え方です。実務で使われる <code>hinfsyn</code>（SLICOTのSB10AD）も、出力フィードバック版（\(X_\infty,Y_\infty\)
+の2本のリカッチ方程式とスペクトル半径条件 \(\rho(X_\infty Y_\infty)&lt;\gamma^2\)
+）に対して内部的にこのγ反復を実行しています（Doyle, Glover, Khargonekar & Francis, 1989）。</p><h3 id=数値検証-1>数値検証</h3><p>質量・ばね・ダンパ系 \(\ddot x + 0.4\dot x+4x=u+w\)
+を状態空間表現し、\(B_1=[1,0]^T\)
+（外乱が位置に直接加わる）、\(B_2=[0,1]^T\)
+（制御力）、\(C_1=\mathrm{diag}(1,0)\)
+（位置のみを評価）として、\(\gamma\)
+を二分探索でスイープし、ハミルトン行列の固有値が虚軸に最も近づく点を追跡しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>scipy.linalg</span> <span class=kn>import</span> <span class=n>eig</span><span class=p>,</span> <span class=n>solve_continuous_are</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mf>0.0</span><span class=p>,</span> <span class=mf>1.0</span><span class=p>],</span> <span class=p>[</span><span class=o>-</span><span class=mf>4.0</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.4</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl><span class=n>B1</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mf>1.0</span><span class=p>],</span> <span class=p>[</span><span class=mf>0.0</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl><span class=n>B2</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mf>0.0</span><span class=p>],</span> <span class=p>[</span><span class=mf>1.0</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl><span class=n>C1</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>0.0</span><span class=p>],</span> <span class=p>[</span><span class=mf>0.0</span><span class=p>,</span> <span class=mf>0.0</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl><span class=n>Q</span> <span class=o>=</span> <span class=n>C1</span><span class=o>.</span><span class=n>T</span> <span class=o>@</span> <span class=n>C1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>min_abs_real</span><span class=p>(</span><span class=n>gamma</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>R</span> <span class=o>=</span> <span class=n>B2</span> <span class=o>@</span> <span class=n>B2</span><span class=o>.</span><span class=n>T</span> <span class=o>-</span> <span class=p>(</span><span class=mf>1.0</span><span class=o>/</span><span class=n>gamma</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span> <span class=o>*</span> <span class=p>(</span><span class=n>B1</span> <span class=o>@</span> <span class=n>B1</span><span class=o>.</span><span class=n>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>H</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>block</span><span class=p>([[</span><span class=n>A</span><span class=p>,</span> <span class=o>-</span><span class=n>R</span><span class=p>],</span> <span class=p>[</span><span class=o>-</span><span class=n>Q</span><span class=p>,</span> <span class=o>-</span><span class=n>A</span><span class=o>.</span><span class=n>T</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>min</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>eig</span><span class=p>(</span><span class=n>H</span><span class=p>,</span> <span class=n>right</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span><span class=o>.</span><span class=n>real</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>lo</span><span class=p>,</span> <span class=n>hi</span> <span class=o>=</span> <span class=mf>1.5</span><span class=p>,</span> <span class=mf>2.0</span>  <span class=c1># lo: 虚軸上（解なし）, hi: 虚軸外（解あり）</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>60</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>mid</span> <span class=o>=</span> <span class=p>(</span><span class=n>lo</span> <span class=o>+</span> <span class=n>hi</span><span class=p>)</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>min_abs_real</span><span class=p>(</span><span class=n>mid</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mf>1e-9</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>lo</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>hi</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;gamma_min (bisection) = </span><span class=si>{</span><span class=n>hi</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>gamma</span> <span class=o>=</span> <span class=n>hi</span> <span class=o>+</span> <span class=mf>0.01</span>
+</span></span><span class=line><span class=cl><span class=n>R</span> <span class=o>=</span> <span class=n>B2</span> <span class=o>@</span> <span class=n>B2</span><span class=o>.</span><span class=n>T</span> <span class=o>-</span> <span class=p>(</span><span class=mf>1.0</span><span class=o>/</span><span class=n>gamma</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span> <span class=o>*</span> <span class=p>(</span><span class=n>B1</span> <span class=o>@</span> <span class=n>B1</span><span class=o>.</span><span class=n>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>X</span> <span class=o>=</span> <span class=n>solve_continuous_are</span><span class=p>(</span><span class=n>A</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>eye</span><span class=p>(</span><span class=mi>2</span><span class=p>),</span> <span class=n>Q</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>inv</span><span class=p>(</span><span class=n>R</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;X =</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>X</span><span class=p>,</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>eig(X) =&#34;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>eigvals</span><span class=p>(</span><span class=n>X</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;closed-loop eig(A - B2 B2^T X) =&#34;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>eigvals</span><span class=p>(</span><span class=n>A</span> <span class=o>-</span> <span class=n>B2</span> <span class=o>@</span> <span class=n>B2</span><span class=o>.</span><span class=n>T</span> <span class=o>@</span> <span class=n>X</span><span class=p>))</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>gamma_min (bisection) = 1.5992
+</span></span><span class=line><span class=cl>X =
+</span></span><span class=line><span class=cl> [[2.36716484 0.37766372]
+</span></span><span class=line><span class=cl> [0.37766372 0.58509291]]
+</span></span><span class=line><span class=cl>eig(X) = [2.44389691+0.j 0.50836083+0.j]
+</span></span><span class=line><span class=cl>closed-loop eig(A - B2 B2^T X) = [-0.49254645+2.03348511j -0.49254645-2.03348511j]
+</span></span></code></pre></div><p>境界値は \(\gamma_{\min}\approx1.599\)
+と求まりました。その少し上の \(\gamma=1.609\)
+で解いたリカッチ方程式の解 \(X\)
+は固有値 \(2.444,\ 0.508\)
+を持ち、確かに正定値（\(X\geq0\)
+）です。さらに、この \(X\)
+による状態フィードバック \(u=-B_2^TXx\)
+を施した閉ループ \(A-B_2B_2^TX\)
+の固有値は \(-0.493\pm2.033j\)
+となり、実部が負（安定）であることも確認できました。理論通り、ハミルトン行列が虚軸に固有値を持たなくなる境界 \(\gamma_{\min}\)
+を境に、安定化解の存在と閉ループ安定性が同時に成立/消滅することが数値的に確認できます。</p><h2 id=有界実補題bounded-real-lemma>有界実補題（Bounded Real Lemma）</h2><p>制御器を介さず、<strong>固定された安定システム \(G(s)\)
+のH∞ノルムそのもの</strong>をリカッチ方程式で特徴づける定理が有界実補題です。</p><p><strong>定理</strong>: 状態空間実現を \(G(s)=C(sI-A)^{-1}B\)
+（\(A\)
+は安定, \(D=0\)
+の場合）とすると、次の2つは同値である。</p><ol><li>\(\|G\|_\infty &lt; \gamma\)</li><li>次のARE（有界実リカッチ方程式）が安定化解 \(X=X^T\geq0\)
+を持つ。</li></ol>\[
+A^TX + XA + \gamma^{-2}XBB^TX + C^TC = 0
+\]<p>これは前節の状態フィードバックのAREで \(B_2=0\)
+（制御入力がない）とした特別な場合に対応しており、上界・下界の証明も同様の完全平方の議論で行えます（詳細は Zhou, Doyle & Glover, <em>Robust and Optimal Control</em>, 1996, Ch.4 を参照）。直感的には、「\(G\)
+を外部から見たときの最悪ゲイン \(\gamma\)
+を、\(\gamma\)
+を境にリカッチ方程式が解けるか解けないかという代数的な問いに変換した」ものです。</p><h3 id=数値検証-2>数値検証</h3><p>先ほどの \(G(s)=1/(s^2+0.4s+4)\)
+に対し、有界実リカッチ方程式に対応するハミルトン行列の固有値が虚軸に最も近づく \(\gamma\)
+を二分探索で求め、<code>control.linfnorm</code> が計算した実際のH∞ノルムと突き合わせます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>ss</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf2ss</span><span class=p>(</span><span class=n>G</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>A</span><span class=p>,</span> <span class=n>B</span><span class=p>,</span> <span class=n>C</span><span class=p>,</span> <span class=n>D</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>ss</span><span class=o>.</span><span class=n>A</span><span class=p>),</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>ss</span><span class=o>.</span><span class=n>B</span><span class=p>),</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>ss</span><span class=o>.</span><span class=n>C</span><span class=p>),</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>ss</span><span class=o>.</span><span class=n>D</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>brl_min_re</span><span class=p>(</span><span class=n>gamma</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>R</span> <span class=o>=</span> <span class=o>-</span><span class=p>(</span><span class=n>gamma</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>eye</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>H</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>block</span><span class=p>([[</span><span class=n>A</span><span class=p>,</span> <span class=o>-</span><span class=n>B</span> <span class=o>@</span> <span class=n>np</span><span class=o>.</span><span class=n>linalg</span><span class=o>.</span><span class=n>inv</span><span class=p>(</span><span class=n>R</span><span class=p>)</span> <span class=o>@</span> <span class=n>B</span><span class=o>.</span><span class=n>T</span><span class=p>],</span> <span class=p>[</span><span class=o>-</span><span class=n>C</span><span class=o>.</span><span class=n>T</span> <span class=o>@</span> <span class=n>C</span><span class=p>,</span> <span class=o>-</span><span class=n>A</span><span class=o>.</span><span class=n>T</span><span class=p>]])</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>np</span><span class=o>.</span><span class=n>min</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>eig</span><span class=p>(</span><span class=n>H</span><span class=p>,</span> <span class=n>right</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span><span class=o>.</span><span class=n>real</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>lo</span><span class=p>,</span> <span class=n>hi</span> <span class=o>=</span> <span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>60</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>mid</span> <span class=o>=</span> <span class=p>(</span><span class=n>lo</span> <span class=o>+</span> <span class=n>hi</span><span class=p>)</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>brl_min_re</span><span class=p>(</span><span class=n>mid</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mf>1e-9</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>lo</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>hi</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;BRL gamma_min (Hamiltonian) = </span><span class=si>{</span><span class=n>hi</span><span class=si>:</span><span class=s2>.12f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;control.linfnorm ||G||_inf   = </span><span class=si>{</span><span class=n>norm_inf</span><span class=si>:</span><span class=s2>.12f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>BRL gamma_min (Hamiltonian) = 1.256297269074
+</span></span><span class=line><span class=cl>control.linfnorm ||G||_inf   = 1.256297269074
+</span></span></code></pre></div><p>小数点以下12桁まで、ハミルトン行列の固有値配置から求めた境界値と、<code>linfnorm</code> が別アルゴリズム（状態空間の固有値問題を直接解く手法）で求めたH∞ノルムが<strong>完全に一致</strong>しました。これは有界実補題「\(\|G\|_\infty&lt;\gamma \iff\)
+リカッチ方程式が解を持つ」を、理論と独立に実装された2つの数値計算で相互検証したことになります。</p><h2 id=数値例質量ばねダンパ系のh制御とpid制御の比較>数値例：質量・ばね・ダンパ系のH∞制御とPID制御の比較</h2><p>以上の理論を踏まえ、モデル化誤差を持つ具体的なプラントに対してH∞制御器を設計し、PID制御と頑健性を比較します。実装には <code>python-control</code>（v0.10.2）と <code>slycot</code>（SLICOTのPythonラッパー、<code>hinfsyn</code> が内部で使用）を用いました。</p><h3 id=プラントと不確かさ>プラントと不確かさ</h3><p>質量・ばね・ダンパ系 \(m\ddot x + c\dot x + kx = u\)
+を公称値 \(m=1\,\mathrm{kg}\)
+, \(c=0.4\,\mathrm{Ns/m}\)
+, \(k=4\,\mathrm{N/m}\)
+（固有振動数 \(\omega_n=2\,\mathrm{rad/s}\)
+、減衰比 \(\zeta=0.1\)
+の軽減衰系）でモデル化します。</p>\[
+G(s) = \frac{1}{ms^2+cs+k} = \frac{1}{s^2+0.4s+4}
+\]<p>これに対し、設計モデルに含めない<strong>アクチュエータの遅れ</strong>（未モデル化動特性、遮断周波数 \(p=15\,\mathrm{rad/s}\)
+）を不確かさとして導入します。</p>\[
+G_{\mathrm{true}}(s) = G(s)\cdot\frac{p}{s+p}
+\]<p>この乗法的不確かさの厳密な大きさは \(\Delta_{\mathrm{mult}}(s) = G_{\mathrm{true}}/G-1 = -s/(s+p)\)
+で、\(|\Delta_{\mathrm{mult}}(j\omega)|=\omega/\sqrt{\omega^2+p^2}\)
+は低周波でほぼ0、高周波で1に漸近する典型的な未モデル化動特性の形をしています。</p><h3 id=重み関数の設計>重み関数の設計</h3><p>混合感度問題として、以下の3つの重み関数を設計しました。</p><ul><li><strong>性能重み</strong> \(W_1(s) = \dfrac{s/1.5+2}{s+0.002}\)
+：直流ゲインが極めて大きく（積分作用に相当し定常偏差をほぼ0にする）、ピーク感度上限 \(M_1=1.5\)
+、帯域幅目安 \(2\,\mathrm{rad/s}\)
+。</li><li><strong>制御努力重み</strong> \(W_2(s)=0.1\)
+：制御信号の過大な高周波ゲインを抑制。</li><li><strong>ロバスト性重み</strong> \(W_3(s) = \dfrac{1.15s}{s+15}\)
+：未モデル化遅れの厳密な誤差形状 \(s/(s+p)\)
+に対し15%の安全マージンを載せたもの。\(\|\Delta_{\mathrm{mult}}/W_3\|_\infty = 1/1.15\approx0.87&lt;1\)
+となるよう正規化しています。</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>control</span> <span class=k>as</span> <span class=nn>ct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>m</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>k_nom</span> <span class=o>=</span> <span class=mf>1.0</span><span class=p>,</span> <span class=mf>0.4</span><span class=p>,</span> <span class=mf>4.0</span>
+</span></span><span class=line><span class=cl><span class=n>p_act</span> <span class=o>=</span> <span class=mf>15.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>plant</span><span class=p>(</span><span class=n>k</span><span class=p>,</span> <span class=n>lag</span><span class=o>=</span><span class=kc>False</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>G</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=mf>1.0</span><span class=p>],</span> <span class=p>[</span><span class=n>m</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>k</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>lag</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>G</span> <span class=o>=</span> <span class=n>G</span> <span class=o>*</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=n>p_act</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=n>p_act</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>G</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>G_nom</span> <span class=o>=</span> <span class=n>plant</span><span class=p>(</span><span class=n>k_nom</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>W1</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=mi>1</span><span class=o>/</span><span class=mf>1.5</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mf>0.002</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>W2</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=mf>0.1</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>W3</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=mf>1.15</span><span class=p>,</span> <span class=mi>0</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=n>p_act</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>K</span><span class=p>,</span> <span class=n>CL</span><span class=p>,</span> <span class=n>info</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>mixsyn</span><span class=p>(</span><span class=n>G_nom</span><span class=p>,</span> <span class=n>w1</span><span class=o>=</span><span class=n>W1</span><span class=p>,</span> <span class=n>w2</span><span class=o>=</span><span class=n>W2</span><span class=p>,</span> <span class=n>w3</span><span class=o>=</span><span class=n>W3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>gamma</span> <span class=o>=</span> <span class=n>info</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;achieved gamma = </span><span class=si>{</span><span class=n>gamma</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>achieved gamma = 1.1493
+</span></span></code></pre></div><p>達成された \(\gamma=1.149\)
+は、性能重み・制御努力重み・ロバスト性重み3つを同時に満たす閉ループが構成できたことを意味します（\(\gamma\)
+が1に近いほど、要求した重みの設計仕様がほぼそのまま達成されたことになります）。</p><h3 id=感度関数の確認とロバスト安定性の検証>感度関数の確認とロバスト安定性の検証</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>L_nom</span> <span class=o>=</span> <span class=n>G_nom</span> <span class=o>*</span> <span class=n>K</span>
+</span></span><span class=line><span class=cl><span class=n>S_nom</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>feedback</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>L_nom</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>T_nom</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>minreal</span><span class=p>(</span><span class=mi>1</span> <span class=o>-</span> <span class=n>S_nom</span><span class=p>,</span> <span class=n>verbose</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>logspace</span><span class=p>(</span><span class=o>-</span><span class=mi>2</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>4000</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;max|S| = </span><span class=si>{</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>S_nom</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>))</span><span class=o>.</span><span class=n>max</span><span class=p>()</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2> at w=</span><span class=si>{</span><span class=n>w</span><span class=p>[</span><span class=n>np</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>S_nom</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>)))]</span><span class=si>:</span><span class=s2>.2f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;max|T| = </span><span class=si>{</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>T_nom</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>))</span><span class=o>.</span><span class=n>max</span><span class=p>()</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>W3T</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>minreal</span><span class=p>(</span><span class=n>W3</span> <span class=o>*</span> <span class=n>T_nom</span><span class=p>,</span> <span class=n>verbose</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>w3t_mag</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>W3T</span><span class=p>(</span><span class=mi>1</span><span class=n>j</span><span class=o>*</span><span class=n>w</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;max|W3*T| = </span><span class=si>{</span><span class=n>w3t_mag</span><span class=o>.</span><span class=n>max</span><span class=p>()</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>  -&gt; robust stability </span><span class=si>{</span><span class=s1>&#39;GUARANTEED&#39;</span> <span class=k>if</span> <span class=n>w3t_mag</span><span class=o>.</span><span class=n>max</span><span class=p>()</span><span class=o>&lt;</span><span class=mi>1</span> <span class=k>else</span> <span class=s1>&#39;NOT guaranteed&#39;</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>max|S| = 1.2118 at w=4.08
+</span></span><span class=line><span class=cl>max|T| = 0.9989
+</span></span><span class=line><span class=cl>max|W3*T| = 0.1393  -&gt; robust stability GUARANTEED
+</span></span></code></pre></div><p>ピーク感度 \(\max|S|=1.212\)
+は良好な値（一般に2未満が目安）です。小ゲイン定理の核心である \(\max|W_3T|=0.139&lt;1\)
+が成立しており、これは「アクチュエータ遅れとして想定した不確かさの正規化された大きさ \(\|\Delta\|_\infty\leq1\)
+」の範囲内であれば、<strong>どんな不確かさが実現してもこの閉ループは安定であり続ける</strong>ことを理論的に保証しています（先述の小ゲイン定理の数値検証と同じ \(M=W_3T\)
+です）。</p><p>下図は、感度関数 \(S\)
+・相補感度関数 \(T\)
+と、それぞれの設計仕様 \(1/W_1\)
+（性能上限）・\(1/W_3\)
+（ロバスト性上限）を重ねたものです。\(S\)
+が低周波で \(1/W_1\)
+の下に収まり（良好な追従性能）、\(T\)
+が高周波で \(1/W_3\)
+の下に収まっている（ロバスト性の確保）ことがトレードオフとして視覚化されています。</p><p><img src=/posts/20210405_Hinf/hinf_mixed_sensitivity.png alt="Mixed-sensitivity H-infinity design: S, T, and weight bounds"></p><h3 id=pid制御器との比較>PID制御器との比較</h3><p>比較対象として、ITAE最適規範（3次系）でチューニングしたPID制御器を用意しました。閉ループ特性多項式を \(s^3+1.75\omega_ns^2+2.15\omega_n^2s+\omega_n^3\)
+（\(\omega_n=3\,\mathrm{rad/s}\)
+）に一致させると、</p>\[
+K_d = 1.75\omega_n - c = 4.850,\quad K_p = 2.15\omega_n^2-k_{\mathrm{nom}}=15.350,\quad K_i=\omega_n^3=27.000
+\]<p>というゲインが得られます。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>wn_c</span> <span class=o>=</span> <span class=mf>3.0</span>
+</span></span><span class=line><span class=cl><span class=n>Kd</span> <span class=o>=</span> <span class=mf>1.75</span><span class=o>*</span><span class=n>wn_c</span> <span class=o>-</span> <span class=n>c</span>
+</span></span><span class=line><span class=cl><span class=n>Kp</span> <span class=o>=</span> <span class=mf>2.15</span><span class=o>*</span><span class=n>wn_c</span><span class=o>**</span><span class=mi>2</span> <span class=o>-</span> <span class=n>k_nom</span>
+</span></span><span class=line><span class=cl><span class=n>Ki</span> <span class=o>=</span> <span class=n>wn_c</span><span class=o>**</span><span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>PID</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>tf</span><span class=p>([</span><span class=n>Kd</span><span class=p>,</span> <span class=n>Kp</span><span class=p>,</span> <span class=n>Ki</span><span class=p>],</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;PID gains: Kp=</span><span class=si>{</span><span class=n>Kp</span><span class=si>:</span><span class=s2>.3f</span><span class=si>}</span><span class=s2> Ki=</span><span class=si>{</span><span class=n>Ki</span><span class=si>:</span><span class=s2>.3f</span><span class=si>}</span><span class=s2> Kd=</span><span class=si>{</span><span class=n>Kd</span><span class=si>:</span><span class=s2>.3f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>PID gains: Kp=15.350 Ki=27.000 Kd=4.850
+</span></span></code></pre></div><p>この2つの制御器を、次の4つのシナリオでステップ応答比較しました。</p><table><thead><tr><th>シナリオ</th><th>制御器</th><th>オーバーシュート</th><th>2%整定時間</th><th>閉ループ最大 \(\mathrm{Re}(\text{極})\)</th></tr></thead><tbody><tr><td>公称（\(k=4.0\)
+、遅れなし）</td><td>H∞</td><td>0.90%</td><td>1.300 s</td><td>−0.2000</td></tr><tr><td>公称</td><td>PID</td><td>17.08%</td><td>1.984 s</td><td>−1.5629</td></tr><tr><td>設計想定の不確かさ（\(k=4.0\)
+＋遅れ）</td><td>H∞</td><td>4.03%</td><td>2.040 s</td><td>−0.2000</td></tr><tr><td>設計想定の不確かさ</td><td>PID</td><td>31.98%</td><td>2.322 s</td><td>−1.7792</td></tr><tr><td>ストレステスト（\(k=3.2\)
+＋遅れ）</td><td>H∞</td><td>20.74%</td><td>97.19 s</td><td>−0.0230</td></tr><tr><td>ストレステスト（\(k=3.2\)
+＋遅れ）</td><td>PID</td><td>35.33%</td><td>2.454 s</td><td>−1.6922</td></tr><tr><td>ストレステスト（\(k=4.8\)
+＋遅れ）</td><td>H∞</td><td>8.15%</td><td>6.369 s</td><td>−0.4106</td></tr><tr><td>ストレステスト（\(k=4.8\)
+＋遅れ）</td><td>PID</td><td>28.83%</td><td>2.178 s</td><td>−1.8475</td></tr></tbody></table><p>「設計想定の不確かさ」（W3で明示的に考慮したアクチュエータ遅れのみ）の範囲では、H∞制御はオーバーシュート4.03%とPIDの31.98%を大きく下回り、小ゲイン定理の保証通りロバスト性の恩恵が明確に表れています。下図左（nominal）・右（ストレステスト）でこの違いを視覚的に確認できます。</p><p><img src=/posts/20210405_Hinf/hinf_step_comparison.png alt="Step response comparison: H-infinity vs ITAE-PID under nominal and stress-test plants"></p><h3 id=注意点小ゲイン定理の保証は想定した不確かさの範囲内に限られる>注意点：小ゲイン定理の保証は「想定した不確かさの範囲内」に限られる</h3><p>一方で「ストレステスト」（アクチュエータ遅れに加え、\(W_3\)
+の設計に含めていない<strong>ばね定数 \(k\)
+の変動</strong>を同時に加えたケース）では、興味深い逆転が起こりました。\(k=3.2\)
+（公称より20%低下）のケースでは、H∞制御の閉ループ最大極の実部はわずか \(-0.023\)
+まで虚軸に接近し、2%整定時間は<strong>97.19秒</strong>（公称時の1.30秒の約75倍）にまで悪化しています。対照的に、PID制御はこのシナリオでも2.45秒で収束し、オーバーシュートこそ大きいものの実用上はむしろ頑健に振る舞いました。</p><p>さらに \(k\)
+を下げていくと、H∞制御は \(k\approx3.086\)
+（公称より約22.9%低下、アクチュエータ遅れとの複合）で閉ループが不安定化することが二分探索で確認できました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>lo</span><span class=p>,</span> <span class=n>hi</span> <span class=o>=</span> <span class=mf>2.8</span><span class=p>,</span> <span class=mf>4.0</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>40</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>mid</span> <span class=o>=</span> <span class=p>(</span><span class=n>lo</span> <span class=o>+</span> <span class=n>hi</span><span class=p>)</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=n>G_true</span> <span class=o>=</span> <span class=n>plant</span><span class=p>(</span><span class=n>mid</span><span class=p>,</span> <span class=n>lag</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>stable</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>all</span><span class=p>(</span><span class=n>ct</span><span class=o>.</span><span class=n>poles</span><span class=p>(</span><span class=n>ct</span><span class=o>.</span><span class=n>feedback</span><span class=p>(</span><span class=n>G_true</span><span class=o>*</span><span class=n>K</span><span class=p>,</span> <span class=mi>1</span><span class=p>))</span><span class=o>.</span><span class=n>real</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>stable</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>hi</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>lo</span> <span class=o>=</span> <span class=n>mid</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;H-infinity controller unstable below k = </span><span class=si>{</span><span class=n>hi</span><span class=si>:</span><span class=s2>.4f</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>H-infinity controller unstable below k = 3.0858
+</span></span></code></pre></div><p>これは決してH∞制御が劣っているという意味ではなく、<strong>小ゲイン定理・BRLが与える頑健安定性の保証は、設計時に \(\Delta\)
+としてモデル化した不確かさの構造とサイズにのみ及ぶ</strong>という、極めて重要な限界を示しています。今回の \(W_3\)
+はアクチュエータ遅れという特定の不確かさだけを表現しており、ばね定数という別種の（構造化された・パラメトリックな）不確かさは一切考慮されていません。\(\max|W_3T|=0.139\)
+という余裕のある小ゲイン条件は、あくまで「アクチュエータ遅れ方向の不確かさ」に対してのみ意味を持ち、それ以外の方向の摂動に対しては何の保証も与えません。</p><p>このような複数種類・構造化された不確かさを同時に扱うには、多入力多出力の不確かさブロックに対して個別に正規化を行う<strong>構造化特異値 \(\mu\)
+（structured singular value）とD-K反復</strong>によるμ-synthesisが本来必要です（Doyle, 1982; Skogestad & Postlethwaite, <em>Multivariable Feedback Control</em>, 2005, Ch.8）。本記事のスコープを超えるため深入りしませんが、「H∞制御＝万能にロバスト」ではなく「<strong>設計時に明示した不確かさに対してのみ、数学的に証明された保証を持つ</strong>」という点は、実務で不確かさをモデル化する際の重要な注意点です。</p><h3 id=外乱抑制性能>外乱抑制性能</h3><p>最後に、公称プラントに対する出力外乱の抑制性能を比較します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Sdist_hinf</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>feedback</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>G_nom</span><span class=o>*</span><span class=n>K</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Sdist_pid</span> <span class=o>=</span> <span class=n>ct</span><span class=o>.</span><span class=n>feedback</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>G_nom</span><span class=o>*</span><span class=n>PID</span><span class=p>)</span>
+</span></span></code></pre></div><p>積分作用を持つ点は両者共通のため定常偏差はいずれも0に収束しますが、過渡応答の収束速度はステップ応答と同じ傾向（H∞: 1.30秒、PID: 1.98秒、公称プラントにおいて）を示しました。</p><h2 id=まとめ>まとめ</h2><ul><li><strong>H∞ノルム</strong> \(\|T_{zw}\|_\infty=\sup_\omega\bar\sigma(T_{zw}(j\omega))\)
+は、有限エネルギー（\(L_2\)
+）入力に対する誘導ノルムであり、最悪ケースのゲインを表す。数値実験で <code>control.linfnorm</code> とブルートフォース探索が小数点以下6桁まで一致することを確認した。</li><li><strong>小ゲイン定理</strong>は \(\|M\|_\infty\|\Delta\|_\infty&lt;1\)
+を、ノイマン級数の収束（作用素論）とナイキストの安定判別法の連続変形（複素関数論）の2通りで証明できる十分条件であり、数値実験では理論的な安定限界（\(1/\|M\|_\infty=7.179\)
+）と実際の不安定化点（\(\delta\approx7.255\)
+）が約1%の保守性で一致した。</li><li><strong>標準H∞制御問題</strong>は一般化プラント \(P\)
+の下側線形分数変換 \(F_l(P,K)=P_{11}+P_{12}K(I-P_{22}K)^{-1}P_{21}\)
+として定式化され、混合感度問題はその特別な場合として具体的に書き下せる。</li><li><strong>H∞代数リカッチ方程式</strong>は、状態フィードバック問題の鞍点条件（HJI方程式）の平方完成から導出でき、対応するハミルトン行列が虚軸上に固有値を持たないことが解の存在条件（γ反復の判定基準）となる。数値例では \(\gamma_{\min}\approx1.599\)
+の境界で解の存在と閉ループ安定性が同時に消滅することを確認した。</li><li><strong>有界実補題</strong>はこの考え方を制御器なしの固定システムに適用したもので、\(\|G\|_\infty&lt;\gamma\)
+とリカッチ方程式の可解性が同値であることを、独立な2つのアルゴリズム（ハミルトン行列の固有値判定と <code>linfnorm</code>）で小数点以下12桁一致という形で数値的に検証した。</li><li><strong>数値例</strong>では、質量・ばね・ダンパ系にアクチュエータ遅れの不確かさを持たせ、<code>control.mixsyn</code>（\(\gamma=1.149\)
+）で設計したH∞制御器が、想定した不確かさの範囲内ではPIDより大幅にロバスト（オーバーシュート4.03% vs 31.98%）である一方、<strong>設計時に想定していない種類の不確かさ（ばね定数の変動）に対しては保証が及ばず、\(k\approx3.086\)
+で不安定化する</strong>ことを確認した。ロバスト制御の保証は、常に「何を不確かさとしてモデル化したか」に依存することを、実測をもって示した。</li></ul><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260711_nyquist_root_locus/1/>ナイキスト線図・根軌跡・安定余裕の読み方とPython実装</a> - 小ゲイン定理の証明で用いたナイキストの安定判別法 \(Z=N+P\)
+の基礎を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20210318_pid/1/>PID制御の基礎</a> - 本記事でH∞制御器と比較したPID制御の理論的基盤です。</li><li><a href=https://yuhi-sa.github.io/posts/20260225_pid_impl/1/>PID制御のPython実装：シミュレーションとチューニング</a> - PID制御器の実装・チューニング手法をさらに詳しく解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260224_ekf/1/>拡張カルマンフィルタ（EKF）の理論とPython実装</a> - 状態推定におけるH∞フィルタとの関係を参考文献に含む姉妹分野です。</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Doyle, J. C., Glover, K., Khargonekar, P. P., & Francis, B. A. (1989). &ldquo;State-space solutions to standard H2 and H∞ control problems.&rdquo; <em>IEEE Transactions on Automatic Control</em>, 34(8), 831–847.</li><li>Zhou, K., Doyle, J. C., & Glover, K. (1996). <em>Robust and Optimal Control</em>. Prentice Hall.</li><li>Skogestad, S., & Postlethwaite, I. (2005). <em>Multivariable Feedback Control: Analysis and Design</em> (2nd ed.). Wiley.</li><li>Doyle, J. C. (1982). &ldquo;Analysis of feedback systems with structured uncertainties.&rdquo; <em>IEE Proceedings D</em>, 129(6), 242–250.</li><li><a href=https://python-control.readthedocs.io/en/latest/generated/control.hinfsyn.html>python-control: <code>hinfsyn</code> documentation</a></li><li><a href=http://www.slicot.org/>SLICOT: Subroutine Library in Systems and Control Theory</a></li></ul><hr><h2 id=関連ツール>関連ツール</h2><ul><li><a href=https://yuhi-sa.github.io/devtoolbox/>DevToolBox - 開発者向け無料ツール集</a> - JSON整形、正規表現テスターなど90種類以上の開発者向けツール</li><li><a href=https://yuhi-sa.github.io/calcbox/>CalcBox - 暮らしの計算ツール</a> - 統計計算、周波数変換など60種類以上の計算ツール</li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="10713"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20210405_hinf/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20210329_bin/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
 </span><span class=post-nav__title>Pythonによる2進数変換とビットごとの論理演算（OR, XOR）</span>
 </a><a href=/posts/20210409_ubuntu_ssh/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
 </span><span class=post-nav__title>Ubuntu環境でのローカルDNSサーバー設定ガイド</span></a></nav><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20210318_pid/1/>PID制御の基礎理論と各要素の役割</a></h3><div class=card-meta><time datetime=2021-03-18>March 18, 2021</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260716_hpa_pid_control/1/>KubernetesのHorizontal Pod Autoscaler(HPA)をPID制御として実測する：比率制御とPIDのオーバーシュート・整定時間を比較する</a></h3><div class=card-meta><time datetime=2026-07-16>July 16, 2026</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260711_nyquist_root_locus/1/>ナイキスト線図・根軌跡・安定余裕の読み方とPython実装：ゲイン余裕・位相余裕で閉ループ安定性を評価する</a></h3><div class=card-meta><time datetime=2026-07-11>July 11, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
