@@ -1,14 +1,14 @@
-<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta name=keywords content="畳み込み,相関,cross-correlation,auto-correlation,畳み込み定理,FFT,高速畳み込み,信号処理,Python,NumPy,SciPy,移動平均"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><meta property="og:type" content="article"><meta property="og:title" content="畳み込みと相関の基礎：理論・畳み込み定理・Python実装"><meta property="og:description" content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-05-02T11:00:00+09:00"><meta property="article:modified_time" content="2026-07-03T17:17:42+09:00"><meta property="article:tag" content="信号処理"><meta property="article:tag" content="Python"><meta property="article:tag" content="畳み込み"><meta property="article:tag" content="相関"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="畳み込みと相関の基礎：理論・畳み込み定理・Python実装"><meta name=twitter:description content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>畳み込みと相関の基礎：理論・畳み込み定理・Python実装 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260502_convolution_correlation/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"畳み込みと相関の基礎：理論・畳み込み定理・Python実装","description":"numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode=\u0027full\/same\/valid\u0027 の使い分け、連続\/離散の定義、畳み込み定理（Fourier 変換との関係）、FFT 高速畳み込み、相互相関と自己相関、移動平均フィルタとの関係、画像処理応用まで体系的に解説。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-05-02T11:00:00\u002b09:00","dateModified":"2026-07-03T17:17:42\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260502_convolution_correlation\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260502_convolution_correlation\/1\/","wordCount":3186,"keywords":["信号処理","Python","畳み込み","相関"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT7M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"畳み込みと相関の基礎：理論・畳み込み定理・Python実装"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta name=keywords content="畳み込み,相関,cross-correlation,auto-correlation,畳み込み定理,FFT,高速畳み込み,信号処理,Python,NumPy,SciPy,移動平均"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><meta property="og:type" content="article"><meta property="og:title" content="畳み込みと相関の基礎：理論・畳み込み定理・Python実装"><meta property="og:description" content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-05-02T11:00:00+09:00"><meta property="article:modified_time" content="2026-07-18T00:39:06+09:00"><meta property="article:tag" content="信号処理"><meta property="article:tag" content="Python"><meta property="article:tag" content="畳み込み"><meta property="article:tag" content="相関"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="畳み込みと相関の基礎：理論・畳み込み定理・Python実装"><meta name=twitter:description content="numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係 …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>畳み込みと相関の基礎：理論・畳み込み定理・Python実装 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260502_convolution_correlation/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"畳み込みと相関の基礎：理論・畳み込み定理・Python実装","description":"numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode=\u0027full\/same\/valid\u0027 の使い分け、連続\/離散の定義、畳み込み定理（Fourier 変換との関係）、FFT 高速畳み込み、相互相関と自己相関、移動平均フィルタとの関係、画像処理応用まで体系的に解説。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-05-02T11:00:00\u002b09:00","dateModified":"2026-07-18T00:39:06\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260502_convolution_correlation\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260502_convolution_correlation\/1\/","wordCount":10143,"keywords":["信号処理","Python","畳み込み","相関"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT21M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"畳み込みと相関の基礎：理論・畳み込み定理・Python実装"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
 </a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
 <i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
 <span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20260502_convolution_correlation/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>畳み込みと相関の基礎：理論・畳み込み定理・Python実装</h1><p class="lead article-description" itemprop=description>numpy.convolve・numpy.correlate・scipy.signal.fftconvolve・scipy.signal.correlate を使い畳み込みと相関を Python 実装。mode='full/same/valid' の使い分け、連続/離散の定義、畳み込み定理（Fourier 変換との関係）、FFT 高速畳み込み、相互相関と自己相関、移動平均フィルタとの関係、画像処理応用まで体系的に解説。</p><div class=article-meta><time datetime=2026-05-02T11:00:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
 May 2, 2026
-</time><time datetime=2026-07-03T17:17:42+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+</time><time datetime=2026-07-18T00:39:06+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
 Updated
-July 3, 2026
+July 18, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
-7 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理
+21 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E4%BF%A1%E5%8F%B7%E5%87%A6%E7%90%86/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>信号処理
 </a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python
 </a><a href=/tags/%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>畳み込み
 </a><a href=/tags/%E7%9B%B8%E9%96%A2/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>相関</a></div></header><div class=article-content itemprop=articleBody><h2 id=はじめに>はじめに</h2><p>信号処理の世界では、**畳み込み（convolution）<strong>と</strong>相関（correlation）**が根本的な役割を担っています。フィルタリング、特徴抽出、パターンマッチング、システム同定など、応用範囲は極めて広く、<a href=https://yuhi-sa.github.io/posts/20260225_fft/1/>FFT</a>や<a href=https://yuhi-sa.github.io/posts/20260226_wavelet/1/>ウェーブレット変換</a>といった周波数解析手法もこれらの概念を土台にしています。</p><p>本記事では、連続/離散の畳み込みと相関の定義を確認し、両者の数学的関係を整理します。さらに<strong>畳み込み定理</strong>を通じて時間領域と周波数領域がどのように接続されるかを示し、<code>np.convolve</code>・<code>scipy.signal.correlate</code> および FFT による高速畳み込みを Python で実装・比較します。最後に<a href=https://yuhi-sa.github.io/posts/20260225_moving_average/1/>移動平均フィルタ</a>が「ボックス窓との畳み込み」として表現されることを確認します。</p><h2 id=畳み込みの定義>畳み込みの定義</h2><h3 id=連続時間の畳み込み>連続時間の畳み込み</h3><p>2つの連続関数 \(f(t)\)
@@ -37,13 +37,161 @@ July 3, 2026
 とした特殊な場合が<strong>自己相関</strong>で、信号自身の周期性や類似ラグを検出するのに使われます。</p>\[R_{xx}[\ell] = \sum_{n=-\infty}^{\infty} x[n] \cdot x[n + \ell] \tag{4}\]<p>\(R_{xx}[0]\)
 は信号の総エネルギー（または分散）に対応し、自己相関は \(\ell = 0\)
 で最大値をとります。</p><h3 id=畳み込みとの関係>畳み込みとの関係</h3><p>相互相関と畳み込みは<strong>第二引数を時間反転するか否か</strong>だけが異なります。実数信号では次の関係が成り立ちます。</p>\[R_{xy}[\ell] = (x * \tilde{y})[\ell], \quad \tilde{y}[n] = y[-n] \tag{5}\]<p>つまり、相関は「時間反転した信号との畳み込み」として実装できます。複素信号の場合は時間反転に加えて複素共役をとります（\(\tilde{y}[n] = y^*[-n]\)
-）。</p><h2 id=畳み込み定理>畳み込み定理</h2><h3 id=時間領域畳み込み--周波数領域積>時間領域畳み込み ↔ 周波数領域積</h3><p>畳み込みの最も強力な性質は、<strong>周波数領域では単純な積になる</strong>ことです。離散フーリエ変換（DFT）を \(\mathcal{F}\)
-で表すと、</p>\[\mathcal{F}\{x * h\}[k] = X[k] \cdot H[k] \tag{6}\]<p>逆に、時間領域の積は周波数領域の畳み込みに対応します（<a href=https://yuhi-sa.github.io/posts/20260228_fft_window_psd/1/>窓関数とPSDの記事</a>で扱ったスペクトル漏れの根拠）。</p>\[\mathcal{F}\{x \cdot h\}[k] = \frac{1}{N}(X * H)[k] \tag{7}\]<h3 id=高速畳み込みの計算量>高速畳み込みの計算量</h3><p>長さ \(N\)
-同士の素朴な畳み込みは \(O(N^2)\)
-ですが、畳み込み定理と \(O(N \log N)\)
-の<a href=https://yuhi-sa.github.io/posts/20260225_fft/1/>FFT</a>を組み合わせると、</p>\[y = \mathcal{F}^{-1}\{ \mathcal{F}\{x\} \cdot \mathcal{F}\{h\} \} \tag{8}\]<p>として \(O(N \log N)\)
-で計算できます。長いカーネルでは数桁の高速化が得られます。なお、線形畳み込みを得るには循環畳み込みを避けるため、両信号を \(N + M - 1\)
-以上の長さへゼロパディングする必要があります。</p><h3 id=相関定理>相関定理</h3><p>相関にも同様の定理が成り立ちます。</p>\[\mathcal{F}\{R_{xy}\}[k] = X^*[k] \cdot Y[k] \tag{9}\]<p>特に自己相関のフーリエ変換は<strong>パワースペクトル密度</strong>に等しく（Wiener–Khinchin の定理）、PSD 推定の理論的基盤となっています。</p><h2 id=python-実装>Python 実装</h2><h3 id=npconvolve-と-scipysignalcorrelate><code>np.convolve</code> と <code>scipy.signal.correlate</code></h3><p>最初に基本的なAPIで挙動を確認します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+）。</p><h3 id=マッチドフィルタとの関係>マッチドフィルタとの関係</h3><p>なぜ相関演算が「マッチドフィルタ（matched filter）」と呼ばれる検出器の実体になるのかを、雑音下の最適検出問題として導出します。既知の波形（テンプレート）\(s[n]\)
+（\(n = 0, \dots, K-1\)
+）が加法性白色雑音 \(w[n]\)
+（平均0、分散 \(\sigma^2\)
+、各サンプル独立）に埋もれて受信されるとします。</p>\[
+r[n] = s[n] + w[n]
+\]<p>この \(r[n]\)
+を長さ \(K\)
+のFIRフィルタ \(h[n]\)
+に通した出力 \(y[n] = (r * h)[n]\)
+のうち、テンプレートがちょうど窓内に収まる時刻 \(n = K-1\)
+でのサンプルに着目すると、</p>\[
+y[K-1] = \sum_{k=0}^{K-1} r[k]\, h[K-1-k] = \underbrace{\sum_{k=0}^{K-1} s[k]\, h[K-1-k]}_{\text{信号成分 } S} + \underbrace{\sum_{k=0}^{K-1} w[k]\, h[K-1-k]}_{\text{雑音成分 } W}
+\]<p>信号成分 \(S\)
+は決定論的な定数であり、雑音成分 \(W\)
+は分散 \(\text{Var}[W] = \sigma^2 \sum_{k=0}^{K-1} h[K-1-k]^2\)
+を持つ確率変数です（\(w[k]\)
+が独立なため分散が線形に加算されます）。出力のSN比は</p>\[
+\text{SNR}(h) = \frac{S^2}{\text{Var}[W]} = \frac{\left(\sum_{k=0}^{K-1} s[k]\, h[K-1-k]\right)^{\!2}}{\sigma^2 \sum_{k=0}^{K-1} h[K-1-k]^2}
+\]<p>で与えられます。分子にコーシー・シュワルツの不等式を適用すると、</p>\[
+S^2 = \left(\sum_{k=0}^{K-1} s[k]\, h[K-1-k]\right)^{\!2} \le \left(\sum_{k=0}^{K-1} s[k]^2\right)\left(\sum_{k=0}^{K-1} h[K-1-k]^2\right)
+\]<p>であり、等号は \(h[K-1-k] \propto s[k]\)
+、すなわち</p>\[
+h[n] = c \cdot s[K-1-n] \tag{6}
+\]<p>（\(c\)
+は任意定数）のときにのみ成立します。このとき \(\text{SNR} = \sum_k s[k]^2 / \sigma^2\)
+（信号エネルギー÷雑音分散）が達成され、これが線形フィルタの中で到達可能な最大値です。式\((6)\)
+は「テンプレートを時間反転したフィルタ」そのものであり、式\((5)\)
+の関係に照らせば、この \(h\)
+を用いた畳み込み \((r * h)\)
+は \(r\)
+とテンプレート \(s\)
+の相互相関 \(R_{rs}\)
+に一致します。つまり「未知の到来時刻を持つ既知波形をSN比最大で検出する最適フィルタ」は、テンプレートとの相関演算そのものであり、これが相関がマッチドフィルタとして機能する数学的根拠です。レーダー・ソナー・GPS信号捕捉など「既知波形の検出」を要するあらゆる場面でこの結果が使われています。</p><h2 id=畳み込み定理>畳み込み定理</h2><h3 id=畳み込み定理の証明連続時間>畳み込み定理の証明（連続時間）</h3><p>畳み込みの最も強力な性質は、<strong>時間領域の畳み込みが周波数領域では単純な積になる</strong>ことです。まず連続時間で、この事実を定義から直接証明します。フーリエ変換を</p>\[
+\mathcal{F}\{f\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} f(t)\, e^{-j\omega t}\, dt
+\]<p>と定義します。式\((1)\)
+の畳み込みにこの定義を適用すると、</p>\[
+\mathcal{F}\{f * g\}(\omega) = \int_{-\infty}^{\infty} \left( \int_{-\infty}^{\infty} f(\tau)\, g(t - \tau)\, d\tau \right) e^{-j\omega t}\, dt
+\]<p>被積分関数が可積分であれば（\(f, g \in L^1(\mathbb{R})\)
+）フビニの定理により積分順序を交換でき、</p>\[
+\mathcal{F}\{f * g\}(\omega) = \int_{-\infty}^{\infty} f(\tau) \left( \int_{-\infty}^{\infty} g(t - \tau)\, e^{-j\omega t}\, dt \right) d\tau
+\]<p>を得ます。内側の積分に<strong>変数変換</strong> \(u = t - \tau\)
+（すなわち \(t = u + \tau\)
+、\(dt = du\)
+、積分範囲は \(\tau\)
+に依らず \((-\infty, \infty)\)
+のまま）を施すと、</p>\[
+\int_{-\infty}^{\infty} g(t - \tau)\, e^{-j\omega t}\, dt = \int_{-\infty}^{\infty} g(u)\, e^{-j\omega(u + \tau)}\, du = e^{-j\omega \tau} \int_{-\infty}^{\infty} g(u)\, e^{-j\omega u}\, du = e^{-j\omega \tau}\, G(\omega)
+\]<p>となります（\(e^{-j\omega\tau}\)
+は \(u\)
+に依存しないため積分の外に出せます）。これを代入すれば、</p>\[
+\mathcal{F}\{f * g\}(\omega) = \int_{-\infty}^{\infty} f(\tau)\, e^{-j\omega \tau}\, G(\omega)\, d\tau = G(\omega) \int_{-\infty}^{\infty} f(\tau)\, e^{-j\omega \tau}\, d\tau = F(\omega)\, G(\omega)
+\]<p>と、目的の関係 \(\mathcal{F}\{f * g\} = F \cdot G\)
+が畳み込みとフーリエ変換の定義のみから導かれます。鍵となるのは「時間反転・シフトされた \(g(t-\tau)\)
+」を変数変換で通常の \(g(u)\)
+に戻す操作であり、これによりフーリエ核 \(e^{-j\omega\tau}\)
+を積分の外に括り出せる点にあります。</p><h3 id=離散フーリエ変換における畳み込み定理と巡回畳み込み>離散フーリエ変換における畳み込み定理と巡回畳み込み</h3><p>離散信号でも全く同じ議論が成り立ちますが、変数変換が「\(\bmod N\)
+の巡回シフト」になる点が本質的に異なります。長さ \(N\)
+の離散フーリエ変換を</p>\[
+X[k] = \sum_{n=0}^{N-1} x[n]\, e^{-j2\pi kn/N}
+\]<p>と定義し、長さ \(N\)
+の2信号 \(x[n], h[n]\)
+に対する**巡回畳み込み（circular convolution）**を</p>\[
+(x \circledast h)[n] = \sum_{m=0}^{N-1} x[m]\, h[(n - m) \bmod N] \tag{7}
+\]<p>と定義します（線形畳み込み式\((2)\)
+とは異なり、添字が \(N\)
+を法として折り返される点に注意）。このDFTを取ると、</p>\[
+\mathcal{F}\{x \circledast h\}[k] = \sum_{n=0}^{N-1} \left( \sum_{m=0}^{N-1} x[m]\, h[(n-m) \bmod N] \right) e^{-j2\pi kn/N}
+\]<p>和の順序を交換し、内側の和に変数変換 \(p = (n - m) \bmod N\)
+（したがって \(n \equiv m + p \pmod N\)
+）を施します。複素指数 \(e^{-j2\pi kn/N}\)
+は \(n\)
+について周期 \(N\)
+であるため、\(n\)
+を \(m+p\)
+の代表元のどれで取っても値は変わらず、</p>\[
+\mathcal{F}\{x \circledast h\}[k] = \sum_{m=0}^{N-1} x[m]\, e^{-j2\pi km/N} \sum_{p=0}^{N-1} h[p]\, e^{-j2\pi kp/N} = X[k]\, H[k] \tag{8}
+\]<p>が得られます。連続時間の変数変換 \(u=t-\tau\)
+が「並進」だったのに対し、離散DFTでは「\(\bmod N\)
+の巡回シフト」に置き換わる点が唯一の違いです。重要なのは、この定理が成り立つのは<strong>巡回畳み込み</strong> \(\circledast\)
+に対してであり、式\((2)\)
+の<strong>線形畳み込み</strong>そのものではない、という点です。両者の違いと、線形畳み込みをFFTで計算する際にゼロパディングが必要な理由を後の節で見ます。</p><p>逆に、時間領域の積は周波数領域の（巡回）畳み込みに対応します（<a href=https://yuhi-sa.github.io/posts/20260228_fft_window_psd/1/>窓関数とPSDの記事</a>で扱ったスペクトル漏れの根拠）。</p>\[
+\mathcal{F}\{x \cdot h\}[k] = \frac{1}{N}(X \circledast H)[k] \tag{9}
+\]<h3 id=直接畳み込みの計算量-の導出>直接畳み込みの計算量：\(O(NM)\)
+の導出</h3><p>長さ \(N\)
+の \(x\)
+と長さ \(M\)
+の \(h\)
+の線形畳み込み \(y[n] = \sum_k x[k] h[n-k]\)
+（式\((2)\)
+）を素朴に計算する場合に必要な乗算回数を正確に数えます。出力の各点 \(y[n]\)
+の計算で有効な項は、\(k \in [0, N-1]\)
+かつ \(n-k \in [0, M-1]\)
+を満たす \(k\)
+についてのみ存在します。\(m = n - k\)
+とおくと、これは「\(k \in [0,N-1]\)
+、\(m \in [0,M-1]\)
+の組 \((k,m)\)
+すべてに対し、出力インデックス \(n = k+m\)
+に \(x[k] h[m]\)
+を1回加算する」という操作に対応します。\((k,m)\)
+の組は重複なくちょうど \(N \times M\)
+通り存在するため、<strong>乗算回数は厳密に \(NM\)
+回</strong>であり、これが \(O(NM)\)
+（\(N \sim M\)
+のとき \(O(N^2)\)
+）という計算量の由来です。</p><h3 id=fftによる高速化>FFTによる高速化：\(O((N+M)\log(N+M))\)</h3><p>畳み込み定理（式\((8)\)
+）と、<a href=https://yuhi-sa.github.io/posts/20260225_fft/1/>Cooley–Tukeyアルゴリズムによる \(O(N\log N)\)
+のFFT</a>を組み合わせると、線形畳み込みは次の手順で計算できます。</p>\[
+y = \mathcal{F}^{-1}\{ \mathcal{F}\{x\} \cdot \mathcal{F}\{h\} \} \tag{10}
+\]<p>必要なのは長さ \(N_{\text{fft}}\)
+の順方向FFT2回・要素積1回（\(O(N_{\text{fft}})\)
+）・逆FFT1回であり、合計で \(O(N_{\text{fft}} \log N_{\text{fft}})\)
+です。\(N_{\text{fft}}\)
+は次節で導出するように \(N+M-1\)
+程度に取れば十分なので、全体の計算量は \(O((N+M)\log(N+M))\)
+となります。カーネルが長い（\(M\)
+が \(N\)
+に対して無視できない）場合、直接法の \(O(NM)\)
+に比べて数桁の高速化が得られます。</p><h3 id=線形畳み込みと巡回畳み込みの違いゼロパディング>線形畳み込みと巡回畳み込みの違い、ゼロパディング</h3><p>式\((8)\)
+の畳み込み定理はDFT長 \(N_{\text{fft}}\)
+上の<strong>巡回畳み込み</strong>に対して成り立つため、FFTでそのまま計算すると得られるのは巡回畳み込みであって、式\((2)\)
+の線形畳み込みではありません。両者を一致させる条件を導出します。</p><p>長さ \(N\)
+の \(x\)
+と長さ \(M\)
+の \(h\)
+の線形畳み込み \(y = x * h\)
+は、非零区間が \(n = 0, \dots, N+M-2\)
+（長さ \(L = N+M-1\)
+）に限られます。\(x, h\)
+をどちらも長さ \(N_{\text{fft}} \ge L\)
+になるよう末尾にゼロを詰めてから式\((7)\)
+の巡回畳み込みを取ると、</p>\[
+(x \circledast h)[n] = \sum_{m=0}^{N_{\text{fft}}-1} x[m]\, h[(n-m) \bmod N_{\text{fft}}]
+\]<p>において、\(x[m] \neq 0\)
+となるのは \(m \in [0, N-1]\)
+、\(h[\cdot] \neq 0\)
+となるのは引数が \([0, M-1]\)
+のときに限られます。\(N_{\text{fft}} \ge L = N+M-1\)
+であれば、\(n \in [0, N_{\text{fft}}-1]\)
+の範囲で \(n - m\)
+が負になったり \(N_{\text{fft}}\)
+を超えて折り返したりすることがなく（\(0 \le n-m \le N_{\text{fft}}-1\)
+が保証される）、巡回畳み込みは線形畳み込みと完全に一致します（\(n \ge L\)
+の部分はゼロ）。</p><p>一方、\(N_{\text{fft}} &lt; L\)
+の場合、線形畳み込みの本来 \(n \ge N_{\text{fft}}\)
+に現れるはずの値が \(n \bmod N_{\text{fft}}\)
+の位置に折り返して加算され、<strong>エイリアシング（折り返し誤差）<strong>として観測されます。特に影響を受けるのは先頭 \(L - N_{\text{fft}}\)
+サンプルであり、\(N_{\text{fft}} = N\)
+（ゼロパディングなし）の場合は先頭 \(M-1\)
+サンプルが汚染されます。したがって、FFTで線形畳み込みを正しく計算するには、</strong>\(N_{\text{fft}} \ge N + M - 1\)
+を満たすようゼロパディングする</strong>必要があります。実装上は基数2 FFTの都合上 \(N_{\text{fft}}\)
+を2のべき乗に切り上げることが多いですが、<code>scipy.fft.next_fast_len</code> を使えば2・3・5・7の積で表せる「高速な合成数長」の中から最小のものを選べるため、常に2のべき乗にするより無駄なパディングを減らせます。この現象は後のPython実装で数値的に確認します。</p><h3 id=相関定理>相関定理</h3><p>相関にも同様の定理が成り立ちます。</p>\[
+\mathcal{F}\{R_{xy}\}[k] = X^*[k] \cdot Y[k] \tag{11}
+\]<p>特に自己相関のフーリエ変換は<strong>パワースペクトル密度</strong>に等しく（Wiener–Khinchin の定理）、PSD 推定の理論的基盤となっています。</p><h2 id=python-実装>Python 実装</h2><h3 id=npconvolve-と-scipysignalcorrelate><code>np.convolve</code> と <code>scipy.signal.correlate</code></h3><p>最初に基本的なAPIで挙動を確認します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
 </span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>scipy.signal</span> <span class=kn>import</span> <span class=n>correlate</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>,</span> <span class=mf>4.0</span><span class=p>,</span> <span class=mf>5.0</span><span class=p>])</span>
@@ -81,7 +229,7 @@ July 3, 2026
 </span></span><span class=line><span class=cl><span class=n>y_fft</span> <span class=o>=</span> <span class=n>fftconvolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>t_fft</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span> <span class=o>-</span> <span class=n>t0</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 自前 FFT 畳み込み（式 (8) の実装）</span>
+</span></span><span class=line><span class=cl><span class=c1># 自前 FFT 畳み込み（式 (10) の実装）</span>
 </span></span><span class=line><span class=cl><span class=n>L</span> <span class=o>=</span> <span class=n>N</span> <span class=o>+</span> <span class=n>M</span> <span class=o>-</span> <span class=mi>1</span>
 </span></span><span class=line><span class=cl><span class=n>n_fft</span> <span class=o>=</span> <span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=nb>int</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>ceil</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>log2</span><span class=p>(</span><span class=n>L</span><span class=p>)))</span>
 </span></span><span class=line><span class=cl><span class=n>t0</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
@@ -97,11 +245,158 @@ July 3, 2026
 </span></span></code></pre></div><p>実行例では、\(N = 65536\)
 、\(M = 4096\)
 で <code>np.convolve</code> が数百 ms かかるのに対し、<code>fftconvolve</code> は十数 ms 程度で完了し、結果の最大誤差は浮動小数点誤差レベル（\(10^{-10}\)
-オーダー）です。</p><h3 id=移動平均との接続>移動平均との接続</h3><p>長さ \(L\)
+オーダー）です。この誤差の小ささ自体が、式\((8)\)
+の畳み込み定理（時間領域畳み込み＝周波数領域の積の逆変換）が数値的にも成立していることの直接的な検証になっています。</p><h3 id=巡回畳み込みとエイリアシングの数値実験>巡回畳み込みとエイリアシングの数値実験</h3><p>前節で導出した「ゼロパディングが不十分だと巡回畳み込みは線形畳み込みとずれる」という主張を、実際にFFTで確認します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mf>1.</span><span class=p>,</span> <span class=mf>2.</span><span class=p>,</span> <span class=mf>3.</span><span class=p>,</span> <span class=mf>4.</span><span class=p>,</span> <span class=mf>5.</span><span class=p>,</span> <span class=mf>6.</span><span class=p>,</span> <span class=mf>7.</span><span class=p>,</span> <span class=mf>8.</span><span class=p>])</span>   <span class=c1># N=8</span>
+</span></span><span class=line><span class=cl><span class=n>h</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mf>1.</span><span class=p>,</span> <span class=mf>1.</span><span class=p>,</span> <span class=mf>1.</span><span class=p>,</span> <span class=mf>1.</span><span class=p>])</span>                    <span class=c1># M=4</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 真の線形畳み込み（長さ N+M-1=11）</span>
+</span></span><span class=line><span class=cl><span class=n>y_linear</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>convolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 巡回畳み込み：ゼロパディングなし（FFT長=N=8、不十分）</span>
+</span></span><span class=line><span class=cl><span class=n>Xf</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Hf</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>h</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>y_circular_noP</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>real</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>ifft</span><span class=p>(</span><span class=n>Xf</span> <span class=o>*</span> <span class=n>Hf</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 巡回畳み込み：十分な長さへゼロパディング（N+M-1=11 以上、16に切り上げ）</span>
+</span></span><span class=line><span class=cl><span class=n>n_fft</span> <span class=o>=</span> <span class=mi>16</span>
+</span></span><span class=line><span class=cl><span class=n>Xf2</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=n>n_fft</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Hf2</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>fft</span><span class=p>(</span><span class=n>h</span><span class=p>,</span> <span class=n>n</span><span class=o>=</span><span class=n>n_fft</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>y_circular_pad</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>real</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>fft</span><span class=o>.</span><span class=n>ifft</span><span class=p>(</span><span class=n>Xf2</span> <span class=o>*</span> <span class=n>Hf2</span><span class=p>))[:</span><span class=mi>11</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;linear conv        :&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>round</span><span class=p>(</span><span class=n>y_linear</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;circular (n_fft=8) :&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>round</span><span class=p>(</span><span class=n>y_circular_noP</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;circular (n_fft=16):&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>round</span><span class=p>(</span><span class=n>y_circular_pad</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;max diff, no padding:&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>y_circular_noP</span> <span class=o>-</span> <span class=n>y_linear</span><span class=p>[:</span><span class=mi>8</span><span class=p>])))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;max diff, padded    :&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>y_circular_pad</span> <span class=o>-</span> <span class=n>y_linear</span><span class=p>)))</span>
+</span></span></code></pre></div><p>実行結果は次の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>linear conv        : [ 1.  3.  6. 10. 14. 18. 22. 26. 21. 15.  8.]
+</span></span><span class=line><span class=cl>circular (n_fft=8) : [22. 18. 14. 10. 14. 18. 22. 26.]
+</span></span><span class=line><span class=cl>circular (n_fft=16): [ 1.  3.  6. 10. 14. 18. 22. 26. 21. 15.  8.]
+</span></span><span class=line><span class=cl>max diff, no padding: 21.0
+</span></span><span class=line><span class=cl>max diff, padded    : 1.7763568394002505e-15
+</span></span></code></pre></div><p>ゼロパディングなし（<code>n_fft=8</code>）では、線形畳み込みの末尾3サンプル（インデックス8, 9, 10の値 21, 15, 8）が先頭3サンプル（インデックス0, 1, 2）に折り返して加算されており（例えば <code>22 = 1 + 21</code>、<code>18 = 3 + 15</code>、<code>14 = 6 + 8</code>）、最大誤差は21.0にも達します。一方、\(N_{\text{fft}}=16 \ge L=11\)
+を満たすようゼロパディングすると、巡回畳み込みは浮動小数点誤差レベル（\(\sim 10^{-15}\)
+）で線形畳み込みと一致します。この結果を図示すると次のようになります。</p><p><img src=/posts/20260502_convolution_correlation/circular_convolution_aliasing.png alt=線形畳み込みと巡回畳み込みの比較。左：ゼロパディングなし（FFT長8）では末尾3サンプルが先頭に折り返してエイリアシングが生じる。右：十分な長さ（FFT長16）にゼロパディングすると巡回畳み込みは線形畳み込みと完全に一致する></p><h3 id=相関とマッチドフィルタの数値実験>相関とマッチドフィルタの数値実験</h3><p>式\((6)\)
+の結論——「未知の到来時刻の既知波形を検出する最適フィルタはテンプレートとの相関」——を、雑音に埋もれたパルスの検出で確認します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>scipy.signal</span> <span class=kn>import</span> <span class=n>correlate</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>seed</span><span class=p>(</span><span class=mi>7</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>N</span> <span class=o>=</span> <span class=mi>2000</span>
+</span></span><span class=line><span class=cl><span class=n>pulse</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>exp</span><span class=p>(</span><span class=o>-</span><span class=mf>0.5</span> <span class=o>*</span> <span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=o>-</span><span class=mi>15</span><span class=p>,</span> <span class=mi>16</span><span class=p>)</span> <span class=o>/</span> <span class=mf>4.0</span><span class=p>)</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span>  <span class=c1># ガウスパルス（長さ31）</span>
+</span></span><span class=line><span class=cl><span class=n>true_delay</span> <span class=o>=</span> <span class=mi>823</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>signal</span> <span class=o>=</span> <span class=mf>0.6</span> <span class=o>*</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=n>N</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>signal</span><span class=p>[</span><span class=n>true_delay</span><span class=p>:</span><span class=n>true_delay</span> <span class=o>+</span> <span class=nb>len</span><span class=p>(</span><span class=n>pulse</span><span class=p>)]</span> <span class=o>+=</span> <span class=n>pulse</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># マッチドフィルタ = テンプレートとの相関</span>
+</span></span><span class=line><span class=cl><span class=n>mf_output</span> <span class=o>=</span> <span class=n>correlate</span><span class=p>(</span><span class=n>signal</span><span class=p>,</span> <span class=n>pulse</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;same&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>raw_argmax</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>mf_output</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;true pulse center index :&#39;</span><span class=p>,</span> <span class=n>true_delay</span> <span class=o>+</span> <span class=nb>len</span><span class=p>(</span><span class=n>pulse</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;matched filter argmax   :&#39;</span><span class=p>,</span> <span class=n>raw_argmax</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;SNR before (peak/std)   :&#39;</span><span class=p>,</span> <span class=n>pulse</span><span class=o>.</span><span class=n>max</span><span class=p>()</span> <span class=o>/</span> <span class=n>signal</span><span class=o>.</span><span class=n>std</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;SNR after MF (peak/std) :&#39;</span><span class=p>,</span> <span class=n>mf_output</span><span class=o>.</span><span class=n>max</span><span class=p>()</span> <span class=o>/</span> <span class=n>mf_output</span><span class=o>.</span><span class=n>std</span><span class=p>())</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>true pulse center index : 838
+</span></span><span class=line><span class=cl>matched filter argmax   : 839
+</span></span><span class=line><span class=cl>SNR before (peak/std)   : 1.675499480245094
+</span></span><span class=line><span class=cl>SNR after MF (peak/std) : 4.836095661428964
+</span></span></code></pre></div><p>真のパルス中心（インデックス838）に対し、マッチドフィルタ出力が最大値をとる位置（839）はわずか1サンプルのずれで一致しています。さらに、生信号でのSN比（ピーク振幅÷信号全体の標準偏差）が約1.68であるのに対し、マッチドフィルタ通過後のSN比は約4.84まで改善しており、約2.9倍のSN比向上が得られています。これは式\((6)\)
+で導いた「コーシー・シュワルツの等号成立条件（\(h[n] \propto s[K-1-n]\)
+）」がまさにこの相関演算に対応するためです。</p><h3 id=直接畳み込みとfft畳み込みの計算時間比較>直接畳み込みとFFT畳み込みの計算時間比較</h3><p>\(O(NM)\)
+の直接法と \(O((N+M)\log(N+M))\)
+のFFT法の実測クロスオーバー点を、信号長を変えながら計測します。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>scipy.signal</span> <span class=kn>import</span> <span class=n>fftconvolve</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>seed</span><span class=p>(</span><span class=mi>42</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Ns</span> <span class=o>=</span> <span class=p>[</span><span class=mi>8</span><span class=p>,</span> <span class=mi>16</span><span class=p>,</span> <span class=mi>32</span><span class=p>,</span> <span class=mi>64</span><span class=p>,</span> <span class=mi>128</span><span class=p>,</span> <span class=mi>256</span><span class=p>,</span> <span class=mi>512</span><span class=p>,</span> <span class=mi>1024</span><span class=p>,</span> <span class=mi>2048</span><span class=p>,</span> <span class=mi>4096</span><span class=p>,</span> <span class=mi>8192</span><span class=p>,</span> <span class=mi>16384</span><span class=p>,</span> <span class=mi>32768</span><span class=p>,</span> <span class=mi>65536</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>N</span> <span class=ow>in</span> <span class=n>Ns</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=n>N</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>h</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=n>N</span><span class=p>)</span>  <span class=c1># N=M の正方ケース</span>
+</span></span><span class=line><span class=cl>    <span class=n>reps</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nb>int</span><span class=p>(</span><span class=mi>2000</span> <span class=o>/</span> <span class=n>N</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>t0</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>reps</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>y_direct</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>convolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>t_direct</span> <span class=o>=</span> <span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span> <span class=o>-</span> <span class=n>t0</span><span class=p>)</span> <span class=o>/</span> <span class=n>reps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>t0</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>reps</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>y_fft</span> <span class=o>=</span> <span class=n>fftconvolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>t_fft</span> <span class=o>=</span> <span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span> <span class=o>-</span> <span class=n>t0</span><span class=p>)</span> <span class=o>/</span> <span class=n>reps</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>N</span><span class=si>:</span><span class=s1>6d</span><span class=si>}</span><span class=s1> | direct </span><span class=si>{</span><span class=n>t_direct</span><span class=o>*</span><span class=mf>1e3</span><span class=si>:</span><span class=s1>9.4f</span><span class=si>}</span><span class=s1> ms | fft </span><span class=si>{</span><span class=n>t_fft</span><span class=o>*</span><span class=mf>1e3</span><span class=si>:</span><span class=s1>8.4f</span><span class=si>}</span><span class=s1> ms | speedup </span><span class=si>{</span><span class=n>t_direct</span><span class=o>/</span><span class=n>t_fft</span><span class=si>:</span><span class=s1>6.2f</span><span class=si>}</span><span class=s1>x&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><p>実測結果（NumPy 2.4 / SciPy 1.18 環境）は以下の通りです。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>     N=M | direct [ms] |  fft [ms] | speedup
+</span></span><span class=line><span class=cl>       8 |      0.0010 |    0.0357 |   0.03x
+</span></span><span class=line><span class=cl>      16 |      0.0011 |    0.0270 |   0.04x
+</span></span><span class=line><span class=cl>      32 |      0.0014 |    0.0266 |   0.05x
+</span></span><span class=line><span class=cl>      64 |      0.0022 |    0.0282 |   0.08x
+</span></span><span class=line><span class=cl>     128 |      0.0045 |    0.0292 |   0.15x
+</span></span><span class=line><span class=cl>     256 |      0.0128 |    0.0335 |   0.38x
+</span></span><span class=line><span class=cl>     512 |      0.0422 |    0.1506 |   0.28x
+</span></span><span class=line><span class=cl>    1024 |      0.1620 |    0.0808 |   2.00x
+</span></span><span class=line><span class=cl>    2048 |      0.6563 |    0.1754 |   3.74x
+</span></span><span class=line><span class=cl>    4096 |      2.6386 |    0.1340 |  19.70x
+</span></span><span class=line><span class=cl>    8192 |     10.7775 |    0.3876 |  27.80x
+</span></span><span class=line><span class=cl>   16384 |     50.5015 |    0.7445 |  67.84x
+</span></span><span class=line><span class=cl>   32768 |    207.4742 |    1.5122 | 137.20x
+</span></span><span class=line><span class=cl>   65536 |    852.2690 |    2.8904 | 294.86x
+</span></span></code></pre></div><p>\(N=M \le 512\)
+では直接法の方が速く（FFTの固定オーバーヘッドが支配的）、<strong>\(N=M=1024\)
+付近でクロスオーバーが生じ</strong>、それ以降はFFT法が急速に優位になります。\(N=M=65536\)
+では約295倍の高速化が得られており、\(O(NM)\)
+と \(O(N\log N)\)
+の理論通りの傾向が実測でも確認できます。カーネルが短い（\(M \ll N\)
+）実用上のFIRフィルタ設計ではこの分岐点はカーネル長 \(M\)
+にも依存するため、SciPyは <code>scipy.signal.choose_conv_method</code> により信号長・カーネル長・データ型から最適な方式を自動選択する機能を提供しています。</p><h3 id=オーバーラップアド法オーバーラップセーブ法>オーバーラップアド法・オーバーラップセーブ法</h3><p>FFT畳み込みは高速ですが、信号長 \(N\)
+が非常に大きい（ストリーミング処理やメモリに乗り切らない長さ）場合、\(N_{\text{fft}} \approx N\)
+の巨大な1回のFFTを計算するのは非効率・非現実的です。そこで長い信号をブロックに分割し、短いカーネル \(h\)
+（長さ \(M\)
+）との畳み込みをブロック単位でFFT計算し、あとから正しくつなぎ合わせる手法が使われます。</p><ul><li><strong>オーバーラップアド法（Overlap-Add, OLA）</strong>：入力を長さ \(L\)
+の重ならないブロックに分割し、各ブロックと \(h\)
+の畳み込み（長さ \(L+M-1\)
+）をFFTで計算します。隣接ブロックの出力は \(M-1\)
+サンプルだけ重なるため、この重なり部分を<strong>加算</strong>して連結します。</li><li><strong>オーバーラップセーブ法（Overlap-Save, OLS）</strong>：各ブロックの先頭に直前ブロックの末尾 \(M-1\)
+サンプルを付加してから長さ \(L\)
+の巡回畳み込みを計算し、先頭 \(M-1\)
+サンプル（エイリアシングで汚染される部分）を<strong>破棄</strong>して残りだけを採用します。加算が不要な代わりに、出力の一部を捨てる点が異なります。</li></ul><p>どちらも1回あたりのFFT長を \(M\)
+程度に抑えたまま、全体としては単一の巨大FFTと同じ結果が得られます。SciPyには <code>scipy.signal.oaconvolve</code> としてOLA法が実装されています。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>scipy.signal</span> <span class=kn>import</span> <span class=n>fftconvolve</span><span class=p>,</span> <span class=n>oaconvolve</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>seed</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>N</span> <span class=o>=</span> <span class=mi>2_000_000</span>   <span class=c1># 長い信号（ストリーミングを想定）</span>
+</span></span><span class=line><span class=cl><span class=n>M</span> <span class=o>=</span> <span class=mi>65</span>          <span class=c1># 短いFIRカーネル</span>
+</span></span><span class=line><span class=cl><span class=n>x</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=n>N</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>h</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=n>M</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>t0</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>y_full_fft</span> <span class=o>=</span> <span class=n>fftconvolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>t_full</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span> <span class=o>-</span> <span class=n>t0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>t0</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>y_oa</span> <span class=o>=</span> <span class=n>oaconvolve</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>h</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s1>&#39;full&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>t_oa</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span> <span class=o>-</span> <span class=n>t0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;max abs diff:&#39;</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>(</span><span class=n>y_full_fft</span> <span class=o>-</span> <span class=n>y_oa</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;single-shot fftconvolve: </span><span class=si>{</span><span class=n>t_full</span><span class=o>*</span><span class=mf>1e3</span><span class=si>:</span><span class=s1>.1f</span><span class=si>}</span><span class=s1> ms&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;oaconvolve (block OLA) : </span><span class=si>{</span><span class=n>t_oa</span><span class=o>*</span><span class=mf>1e3</span><span class=si>:</span><span class=s1>.1f</span><span class=si>}</span><span class=s1> ms&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>max abs diff: 3.019806626980426e-14
+</span></span><span class=line><span class=cl>single-shot fftconvolve: 66.5 ms
+</span></span><span class=line><span class=cl>oaconvolve (block OLA) : 16.7 ms
+</span></span></code></pre></div><p>両者の出力は浮動小数点誤差レベル（\(3.0 \times 10^{-14}\)
+）で完全に一致しており、ブロック処理でも正しく線形畳み込みが再現できることが確認できます。さらに、\(N=2{,}000{,}000\)
+、\(M=65\)
+というカーネルが信号に比べて極端に短いケースでは、単一の巨大FFT（66.5 ms）よりもブロック分割したOLA（16.7 ms）の方がおよそ4倍高速でした。これは、\(N_{\text{fft}} \approx N\)
+の1回の巨大FFTがメモリ帯域に律速されるのに対し、ブロックサイズを適切に選んだOLAはキャッシュに収まる小さなFFTを繰り返すことで実効効率を高められるためです。</p><h3 id=移動平均との接続>移動平均との接続</h3><p>長さ \(L\)
 の単純移動平均（SMA）は、係数がすべて \(1/L\)
 の<strong>ボックス窓</strong> \(h_{\text{box}}[n]\)
-との畳み込みに等価です。</p>\[h_{\text{box}}[n] = \frac{1}{L}, \quad 0 \leq n \leq L - 1 \tag{10}\]
-\[y[n] = \frac{1}{L}\sum_{k=0}^{L-1} x[n - k] = (x * h_{\text{box}})[n] \tag{11}\]<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+との畳み込みに等価です。</p>\[h_{\text{box}}[n] = \frac{1}{L}, \quad 0 \leq n \leq L - 1 \tag{12}\]
+\[
+y[n] = \frac{1}{L}\sum_{k=0}^{L-1} x[n - k] = (x * h_{\text{box}})[n] \tag{13}
+\]<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>seed</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
@@ -129,11 +424,23 @@ July 3, 2026
 </span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>grid</span><span class=p>(</span><span class=kc>True</span><span class=p>,</span> <span class=n>alpha</span><span class=o>=</span><span class=mf>0.3</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>tight_layout</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>
-</span></span></code></pre></div><p>両者の出力は端効果の処理を除いて一致し、移動平均が畳み込みの特殊例であることが確認できます。フィルタ係数を変えれば（例: 三角窓・Hann 窓）、自然と FIR フィルタへ拡張できます。</p><h2 id=まとめ>まとめ</h2><ul><li>畳み込みは「片方を反転してずらし、積和をとる」操作であり、LTI システムの応答を完全に記述する</li><li>相関は時間反転を伴わない積和で、相互相関 \(R_{xy}\)
+</span></span></code></pre></div><p>両者の出力は端効果の処理を除いて一致し、移動平均が畳み込みの特殊例であることが確認できます。フィルタ係数を変えれば（例: 三角窓・Hann 窓）、自然と FIR フィルタへ拡張できます。</p><h2 id=発展深層学習における畳み込み定理の再評価2023年以降>発展：深層学習における畳み込み定理の再評価（2023年以降）</h2><p>畳み込み定理は100年近い歴史を持つ古典的な結果ですが、2023年以降のディープラーニング研究において、Transformerの自己注意機構が持つ \(O(L^2)\)
+（系列長 \(L\)
+の2乗）の計算量を回避する手段として再評価されています。</p><p>Gu らの<strong>S4（Structured State Space Sequence model）</strong>（2022, ICLR）は、状態空間モデルから導かれる大域的な畳み込みカーネルをFFTで適用することで、系列全体にわたる依存関係を \(O(L \log L)\)
+で捉えます。これを継承した<strong>Hyena Hierarchy</strong>（Poli et al., ICML 2023）は、自己注意を「陰的にパラメータ化された長い畳み込み」と乗法的ゲーティングの組み合わせで完全に置き換えるアーキテクチャで、最適化済みの注意機構に対し系列長8,192で同等、系列長65,536では約100倍高速という結果を報告しています。数万〜数十万トークンの推論タスクでは既存の劣線形手法（状態空間モデル等）に対して50ポイント以上の精度改善を達成し、標準的な言語モデリングベンチマーク（WikiText103, The Pile）でも密な注意機構を使わないアーキテクチャとして最高性能を示しました。</p><p>もっとも、式\((10)\)
+のFFT畳み込みは3回のFFT（順方向2回・逆1回）と要素積という複数のメモリ律速なカーネル呼び出しを要するため、GPU上では理論上の計算量優位性がそのまま実行時間に反映されにくいという実装上の課題がありました。<strong>FlashFFTConv</strong>（Fu et al., 2023）は、FFTをモナーク分解（Monarch decomposition）により行列積の連続として書き換え、GPUのテンソルコアで実行できるようにカーネルを融合する手法で、PyTorch標準のFFT畳み込みに対し最大7.93倍の高速化、エンドツーエンドで最大4.4倍の高速化を報告しています。これにより、Hyena-GPT-sのPerplexityが2.3ポイント改善し、M2-BERT-baseのGLUEスコアが3.3ポイント向上し、高解像度画像タスクPath-512では従来50%を超えられなかった精度が96.1%に到達したと報告されています。</p><p>本記事で導出した「畳み込み定理によりFFTで高速化できる」という古典的な事実、そして「線形畳み込みを正しく計算するにはゼロパディングが必要」という注意点は、こうした最新のシーケンスモデリング研究の実装においても本質的に同じ形で登場する基礎理論です。</p><h2 id=まとめ>まとめ</h2><ul><li>畳み込みは「片方を反転してずらし、積和をとる」操作であり、LTI システムの応答を完全に記述する</li><li>畳み込み定理 \(\mathcal{F}\{x \circledast h\} = X \cdot H\)
+（式\((8)\)
+）は、連続時間では変数変換 \(u=t-\tau\)
+、離散DFTでは \(\bmod N\)
+の巡回シフトという変数変換によって、定義から直接証明できる</li><li>DFTの畳み込み定理が成り立つのは<strong>巡回畳み込み</strong>に対してであり、線形畳み込みと一致させるには \(N_{\text{fft}} \ge N+M-1\)
+を満たすゼロパディングが必須。不十分だと先頭サンプルにエイリアシングが生じる（実験では最大誤差21.0 → ゼロパディング後は \(10^{-15}\)
+オーダーに収束）</li><li>相関は時間反転を伴わない積和で、相互相関 \(R_{xy}\)
 はテンプレートマッチング、自己相関 \(R_{xx}\)
-は周期検出に用いる</li><li>畳み込み定理（式 \((6)\)
-）により時間領域畳み込みは周波数領域の積になり、FFT で \(O(N \log N)\)
-の高速畳み込みが可能になる</li><li>移動平均はボックス窓との畳み込みであり、FIR フィルタの最も単純なケースとして位置付けられる</li><li>Wiener–Khinchin の定理により、自己相関と PSD は同一概念の異なる表現である</li></ul><p>これらの基礎を押さえることで、フィルタ設計・スペクトル解析・時間-周波数解析が一貫した数学体系として理解できるようになります。</p><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260225_fft/1/>高速フーリエ変換（FFT）の仕組みとPython実装</a> - 本記事の畳み込み定理の前提となる DFT/FFT のアルゴリズムを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260228_fft_window_psd/1/>窓関数とパワースペクトル密度（PSD）の理論とPython実装</a> - 自己相関と PSD の関係（Wiener–Khinchin 定理）の応用として PSD 推定法を扱っています。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_wavelet/1/>ウェーブレット変換の理論とPython実装</a> - 畳み込みを基盤とする時間-周波数解析の発展形を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260225_moving_average/1/>移動平均フィルタの種類と比較</a> - 移動平均がボックス窓との畳み込みであることを踏まえ、SMA・WMA・EMA を比較しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260429_autocorrelation/1/>自己相関・相互相関の理論とPython実装</a> - 本記事の相関の定義をベースに、ACF/PACFを使った時系列分析や遅延推定（GCC-PHAT）まで詳しく扱います。</li><li><a href=https://yuhi-sa.github.io/posts/20260429_cepstrum/1/>ケプストラム分析の理論とPython実装</a> - 畳み込みを対数スペクトルで分解する代表的応用。F0推定・スペクトル包絡推定の枠組みを提供します。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_fir_iir/1/>FIRフィルタとIIRフィルタの比較</a> - 畳み込みの定式化を直接的に実装するFIRフィルタと、再帰的構造を取るIIRの設計思想の違いを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260505_dtft_dft_fft/1/>DTFT・DFT・FFTの関係を体系的に理解する</a> - 畳み込み定理が成立する周波数変換（DTFT・DFT）の階層関係を整理し、FFT畳み込みの理論的背景を補完します。</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Oppenheim, A. V., & Schafer, R. W. (2009). <em>Discrete-Time Signal Processing</em> (3rd ed.). Prentice Hall.</li><li>Smith, S. W. (1997). <em>The Scientist and Engineer&rsquo;s Guide to Digital Signal Processing</em>. California Technical Publishing.</li><li><a href=https://numpy.org/doc/stable/reference/generated/numpy.convolve.html>NumPy convolve documentation</a></li><li><a href=https://docs.scipy.org/doc/scipy/reference/signal.html>SciPy signal documentation</a></li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="3186"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260502_gaussian_process/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+は周期検出に用いる。コーシー・シュワルツの不等式から「既知波形を最大SN比で検出する最適フィルタ＝相関演算（マッチドフィルタ）」であることも厳密に導ける</li><li>直接畳み込み \(O(NM)\)
+とFFT畳み込み \(O((N+M)\log(N+M))\)
+の実測クロスオーバーは \(N=M\approx 1024\)
+付近にあり、\(N=M=65536\)
+では約295倍の高速化が得られる</li><li>信号が極端に長い場合はオーバーラップアド／オーバーラップセーブ法でブロック単位のFFT畳み込みに分割でき、実験では単一の巨大FFTより約4倍高速だった</li><li>移動平均はボックス窓との畳み込みであり、FIR フィルタの最も単純なケースとして位置付けられる</li><li>Wiener–Khinchin の定理により、自己相関と PSD は同一概念の異なる表現である</li><li>2023年以降、畳み込み定理とFFTは Hyena Hierarchy や FlashFFTConv など、Transformerの自己注意に代わる劣二次時間の系列モデリング手法の中核技術として再評価されている</li></ul><p>これらの基礎を押さえることで、フィルタ設計・スペクトル解析・時間-周波数解析が一貫した数学体系として理解できるようになります。</p><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260225_fft/1/>高速フーリエ変換（FFT）の仕組みとPython実装</a> - 本記事の畳み込み定理の前提となる DFT/FFT のアルゴリズムを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260228_fft_window_psd/1/>窓関数とパワースペクトル密度（PSD）の理論とPython実装</a> - 自己相関と PSD の関係（Wiener–Khinchin 定理）の応用として PSD 推定法を扱っています。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_wavelet/1/>ウェーブレット変換の理論とPython実装</a> - 畳み込みを基盤とする時間-周波数解析の発展形を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260225_moving_average/1/>移動平均フィルタの種類と比較</a> - 移動平均がボックス窓との畳み込みであることを踏まえ、SMA・WMA・EMA を比較しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260429_autocorrelation/1/>自己相関・相互相関の理論とPython実装</a> - 本記事の相関の定義をベースに、ACF/PACFを使った時系列分析や遅延推定（GCC-PHAT）まで詳しく扱います。</li><li><a href=https://yuhi-sa.github.io/posts/20260429_cepstrum/1/>ケプストラム分析の理論とPython実装</a> - 畳み込みを対数スペクトルで分解する代表的応用。F0推定・スペクトル包絡推定の枠組みを提供します。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_fir_iir/1/>FIRフィルタとIIRフィルタの比較</a> - 畳み込みの定式化を直接的に実装するFIRフィルタと、再帰的構造を取るIIRの設計思想の違いを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260505_dtft_dft_fft/1/>DTFT・DFT・FFTの関係を体系的に理解する</a> - 畳み込み定理が成立する周波数変換（DTFT・DFT）の階層関係を整理し、FFT畳み込みの理論的背景を補完します。</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Oppenheim, A. V., & Schafer, R. W. (2009). <em>Discrete-Time Signal Processing</em> (3rd ed.). Prentice Hall.</li><li>Smith, S. W. (1997). <em>The Scientist and Engineer&rsquo;s Guide to Digital Signal Processing</em>. California Technical Publishing.</li><li>Gu, A., Goel, K., & Ré, C. (2022). <em>Efficiently Modeling Long Sequences with Structured State Spaces</em>. ICLR 2022.</li><li>Poli, M., Massaroli, S., Nguyen, E., et al. (2023). <em>Hyena Hierarchy: Towards Larger Convolutional Language Models</em>. ICML 2023. <a href=https://arxiv.org/abs/2302.10866>arXiv:2302.10866</a></li><li>Fu, D. Y., Kumbong, H., Nguyen, E., & Ré, C. (2023). <em>FlashFFTConv: Efficient Convolutions for Long Sequences with Tensor Cores</em>. <a href=https://arxiv.org/abs/2311.05908>arXiv:2311.05908</a></li><li><a href=https://numpy.org/doc/stable/reference/generated/numpy.convolve.html>NumPy convolve documentation</a></li><li><a href=https://docs.scipy.org/doc/scipy/reference/signal.html>SciPy signal documentation</a></li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="10143"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260502_convolution_correlation/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260502_gaussian_process/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
 </span><span class=post-nav__title>ガウス過程回帰の基礎とPython実装</span>
 </a><a href=/posts/20260505_dtft_dft_fft/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
 </span><span class=post-nav__title>DTFT・DFT・FFTの違いを整理する：定義・関係・Python実装</span></a></nav><section class="related-tools mt-5" aria-label=関連ツール><h2 class=related-tools__title>この記事に関連する無料ツール</h2><div class=related-tools__grid><a href=https://yuhi-sa.github.io/devtoolbox/tools/moving-average-calculator/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
