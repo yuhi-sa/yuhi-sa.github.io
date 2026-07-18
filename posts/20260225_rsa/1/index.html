@@ -1,14 +1,14 @@
-<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta name=keywords content="RSA暗号,公開鍵暗号,素因数分解,オイラーの定理,Python,暗号化,復号"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><meta property="og:type" content="article"><meta property="og:title" content="RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定"><meta property="og:description" content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260225_rsa/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-02-25T12:00:00+09:00"><meta property="article:modified_time" content="2026-07-16T19:39:09+09:00"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="暗号"><meta property="article:tag" content="Python"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定"><meta name=twitter:description content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow\/math.gcd\/拡張ユークリッド\/ミラーラビン素数判定","description":"pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較・OAEP パディング・RSA-2048\/RSA-4096 鍵長選定・Shor アルゴリズムへの耐量子移行まで網羅。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-02-25T12:00:00\u002b09:00","dateModified":"2026-07-16T19:39:09\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260225_rsa\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260225_rsa\/1\/","wordCount":4512,"keywords":["アルゴリズム","暗号","Python"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT10M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow\/math.gcd\/拡張ユークリッド\/ミラーラビン素数判定"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta name=keywords content="RSA暗号,公開鍵暗号,素因数分解,オイラーの定理,Python,暗号化,復号"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><meta property="og:type" content="article"><meta property="og:title" content="RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定"><meta property="og:description" content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260225_rsa/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-02-25T12:00:00+09:00"><meta property="article:modified_time" content="2026-07-18T12:16:20+09:00"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="暗号"><meta property="article:tag" content="Python"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定"><meta name=twitter:description content="pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較 …"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260225_rsa/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow\/math.gcd\/拡張ユークリッド\/ミラーラビン素数判定","description":"pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較・OAEP パディング・RSA-2048\/RSA-4096 鍵長選定・Shor アルゴリズムへの耐量子移行まで網羅。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-02-25T12:00:00\u002b09:00","dateModified":"2026-07-18T12:16:20\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260225_rsa\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260225_rsa\/1\/","wordCount":14695,"keywords":["アルゴリズム","暗号","Python"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT30M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow\/math.gcd\/拡張ユークリッド\/ミラーラビン素数判定"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.1ec04fdc993a5b5595d16f27944e26b559c9a12383ca878923c6fd2532e08475.css integrity="sha256-HsBP3Jk6W1WV0W8nlE4mtVnJoSODyoeJI8b9JTLghHU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname==="px.a8.net"||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
 </a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
 <i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
 <span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20260225_rsa/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>RSA暗号の理論・鍵生成・暗号化・復号をPython実装：pow/math.gcd/拡張ユークリッド/ミラーラビン素数判定</h1><p class="lead article-description" itemprop=description>pow・math.gcd・sympy.isprime・gmpy2.powmod・Crypto.PublicKey.RSA で RSA 公開鍵暗号の鍵生成・暗号化・復号を Python 実装。Miller-Rabin 素数判定・拡張ユークリッド互除法・mod 逆元・オイラーの定理・RSA 問題と離散対数問題の安全性比較・OAEP パディング・RSA-2048/RSA-4096 鍵長選定・Shor アルゴリズムへの耐量子移行まで網羅。</p><div class=article-meta><time datetime=2026-02-25T12:00:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
 February 25, 2026
-</time><time datetime=2026-07-16T19:39:09+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+</time><time datetime=2026-07-18T12:16:20+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
 Updated
-July 16, 2026
+July 18, 2026
 </time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
-10 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>アルゴリズム
+30 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>アルゴリズム
 </a><a href=/tags/%E6%9A%97%E5%8F%B7/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>暗号
 </a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class=article-content itemprop=articleBody><h2 id=rsa暗号とは>RSA暗号とは</h2><p>RSA暗号は、1977年にRon <strong>R</strong>ivest、Adi <strong>S</strong>hamir、Leonard <strong>A</strong>dleman の3名によって発表された<strong>公開鍵暗号方式</strong>です。公開鍵暗号とは、暗号化に使う鍵（公開鍵）と復号に使う鍵（秘密鍵）が異なる暗号方式であり、公開鍵を広く公開しても安全性が保たれるという特徴があります。</p><p>RSA暗号の安全性は、<strong>大きな合成数の素因数分解が計算上困難である</strong>という事実に基づいています。現在でも、鍵交換やデジタル署名など幅広い用途で利用されています。</p><h2 id=数学的基礎>数学的基礎</h2><p>RSA暗号を理解するために、いくつかの数学的な概念を整理します。</p><h3 id=素因数分解問題>素因数分解問題</h3><p>2つの大きな素数 \(p\)
 と \(q\)
@@ -195,7 +195,376 @@ c^d \equiv m \cdot 1^k \equiv m \pmod{N} \tag{7}
 </span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>bits</span><span class=si>}</span><span class=s2>bit: keygen=</span><span class=si>{</span><span class=n>keygen_time</span><span class=o>*</span><span class=mi>1000</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>ms, &#34;</span>
 </span></span><span class=line><span class=cl>          <span class=sa>f</span><span class=s2>&#34;enc=</span><span class=si>{</span><span class=n>enc_time</span><span class=o>*</span><span class=mf>1e6</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>us, dec=</span><span class=si>{</span><span class=n>dec_time</span><span class=o>*</span><span class=mf>1e6</span><span class=si>:</span><span class=s2>.1f</span><span class=si>}</span><span class=s2>us&#34;</span><span class=p>)</span>
 </span></span></code></pre></div><p><img src=/posts/20260225_rsa/rsa_key_length_benchmark.png alt=RSA鍵長ごとの鍵生成時間（左）と復号時間（右）。両対数プロットではないが縦軸は対数スケール。鍵長が2倍になるごとに鍵生成時間は約5〜6倍に増加する></p><table><thead><tr><th>鍵長</th><th>鍵生成時間</th><th>復号時間（べき乗剰余）</th></tr></thead><tbody><tr><td>128 bit</td><td>3.6 ms</td><td>142.8 μs</td></tr><tr><td>256 bit</td><td>29.2 ms</td><td>905.0 μs</td></tr><tr><td>512 bit</td><td>325.8 ms</td><td>4,881.0 μs</td></tr><tr><td>768 bit</td><td>1,664.0 ms</td><td>14,353.4 μs</td></tr><tr><td>1024 bit</td><td>9,726.6 ms</td><td>32,711.3 μs</td></tr></tbody></table><p><strong>鍵生成時間は鍵長にほぼ指数的に増加</strong>しており、128→1024ビット（8倍）で鍵生成時間は約2,700倍になっています。これは Miller-Rabin 素数判定の試し割り・べき乗剰余計算のコストがビット長の増加とともに重くなることに加え、指定ビット長のランダム奇数が素数である確率が<a href=https://ja.wikipedia.org/wiki/%E7%B4%A0%E6%95%B0%E5%AE%9A%E7%90%86>素数定理</a>よりおおよそ \(1/\ln(2^{bits})\)
-で低下し、素数が見つかるまでの試行回数が増えるためです。実務で使われる <strong>RSA-2048</strong> では、本記事のような純粋なPython実装では鍵生成に数分〜数十分かかる場合があり、実用ライブラリ（<code>cryptography</code>、OpenSSL等）は GMP 等の多倍長演算ライブラリと最適化されたアルゴリズムで数十ミリ秒〜数百ミリ秒に短縮しています。一方、<strong>復号（べき乗剰余）自体は鍵生成ほど急激には増加せず</strong>、1024ビットでも約33msに収まっており、鍵生成の重さが実務上のボトルネックであることがわかります。</p><h2 id=セキュリティに関する注意>セキュリティに関する注意</h2><p>本記事の実装は教育目的であり、以下の理由から実用環境では使用すべきではありません。</p><ul><li><strong>パディングの欠如</strong>: 実際のRSA暗号では、OAEP（Optimal Asymmetric Encryption Padding）などのパディング方式を適用します。パディングなしのRSA（教科書的RSA）は、選択暗号文攻撃などの複数の攻撃手法に対して脆弱です。</li><li><strong>鍵長</strong>: 本実装のデフォルト512ビットは現在では安全ではありません。実用上は最低でも <strong>2048ビット</strong> が推奨されています。</li><li><strong>量子コンピュータの脅威</strong>: ショアのアルゴリズム（Shor&rsquo;s algorithm）を用いれば、十分な規模の量子コンピュータで素因数分解を多項式時間で解くことが可能です。これにより、将来的にRSA暗号は安全ではなくなる可能性があり、耐量子暗号（Post-Quantum Cryptography）への移行が進められています。</li></ul><hr><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260226_oauth2_oidc/1/>OAuth 2.0/OIDC入門</a> - RSAがJWT署名に使われるOAuth 2.0/OIDCプロトコルを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_zero_trust/1/>ゼロトラストセキュリティの概要と導入</a> - RSA暗号が基盤技術として使われるゼロトラストアーキテクチャを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260715_post_quantum_lwe/1/>耐量子暗号入門：Learning With Errors（LWE）とRegev暗号をPythonで実装</a> - 本記事の素因数分解問題がShorのアルゴリズムで量子コンピュータに破られる理由と、その代替となるLWE問題を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260223_security_certs/1/>セキュリティ資格比較：CISSP vs 情報処理安全確保支援士</a> - 暗号技術が試験範囲に含まれるセキュリティ資格の比較を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20230907_dh/1/>Diffie-Hellman鍵交換プロトコル：理論とPython実装</a> - RSAとは異なるアプローチで安全な鍵交換を実現するDHプロトコルを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</a> - 本記事の秘密鍵生成で使うモジュラ逆元計算（拡張ユークリッドの互除法）の正当性証明・ベズーの等式の構成的証明・計算量を詳しく解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201220_binary/1/>繰り返し二乗法による高速べき乗剰余計算のPython実装</a> - RSA暗号の暗号化・復号で使われるべき乗剰余計算のアルゴリズムを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201223_elgamal/1/>楕円曲線ElGamal暗号の原理とPythonによる簡易実装</a> - RSAとは異なる数学的基盤（楕円曲線上の離散対数問題）に基づく公開鍵暗号を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260614_cryptography_roadmap/1/>暗号ロードマップ：対称鍵・公開鍵・ハッシュ・鍵交換の体系ハブ</a> — RSA を「公開鍵暗号（素因数分解）」枠で位置づけ、DH・楕円曲線暗号・ハッシュとの関係を俯瞰するメタハブ。</li><li><a href=https://yuhi-sa.github.io/posts/20260614_diffie_hellman/1/>Diffie-Hellman 鍵交換の理論と Python 実装（離散対数問題）</a> — RSA とは異なる「離散対数問題」を安全性根拠とする鍵交換プロトコル。素因数分解 vs 離散対数の対比で理解が深まります。</li><li><a href=https://yuhi-sa.github.io/posts/20260702_elliptic_curve_cryptography/1/>楕円曲線暗号（ECC）の数学と Python 実装</a> — 256 bit 鍵で RSA 3072 bit 相当の安全性を実現する現代の主流方式。点加算・ECDLP・ECDH・ECDSA・X25519 を詳解。</li><li><a href=https://yuhi-sa.github.io/posts/20260703_aes_symmetric_crypto/1/>AES / ChaCha20 対称鍵暗号の理論と Python 実装</a> — RSA が遅いからこそハイブリッド構成で本体を担う対称鍵暗号。ラウンド構成・GF(2^8)・暗号モード・AEAD を詳解。</li><li><a href=https://yuhi-sa.github.io/posts/20260704_digital_signature/1/>デジタル署名（ECDSA / EdDSA / RSA-PSS）の理論と Python 実装</a> — RSA の「秘密鍵で署名・公開鍵で検証」を実用化した署名スキーム。RSA-PSS のランダムパディングと hash-then-sign パラダイムを詳解。</li></ul><h3 id=関連ツール>関連ツール</h3><ul><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/hash-generator/>ハッシュ生成ツール（DevToolBox）</a> - MD5・SHA対応のハッシュ生成ツール</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Rivest, R. L., Shamir, A., & Adleman, L. (1978). &ldquo;A method for obtaining digital signatures and public-key cryptosystems&rdquo;. <em>Communications of the ACM</em>, 21(2), 120-126.</li><li>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). <em>Introduction to Algorithms</em> (3rd ed.). MIT Press.</li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="4512"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260225_rsa/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260225_fft/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+で低下し、素数が見つかるまでの試行回数が増えるためです。実務で使われる <strong>RSA-2048</strong> では、本記事のような純粋なPython実装では鍵生成に数分〜数十分かかる場合があり、実用ライブラリ（<code>cryptography</code>、OpenSSL等）は GMP 等の多倍長演算ライブラリと最適化されたアルゴリズムで数十ミリ秒〜数百ミリ秒に短縮しています。一方、<strong>復号（べき乗剰余）自体は鍵生成ほど急激には増加せず</strong>、1024ビットでも約33msに収まっており、鍵生成の重さが実務上のボトルネックであることがわかります。</p><h2 id=秘密鍵の運用を誤ると起きる攻撃>秘密鍵の運用を誤ると起きる攻撃</h2><p>RSA暗号の安全性は素因数分解の困難性に基づいていますが、実装や鍵管理を誤ると、<strong>素因数分解を一切実行せずに</strong>秘密鍵や平文を復元できてしまう攻撃が複数知られています。以下では代表的な4種類の攻撃——Wienerの攻撃・共通法攻撃・パディングオラクル攻撃・タイミングサイドチャネル攻撃——について、その数理的な仕組みを導出した上で、実際に攻撃コードを実装して検証します。</p><h3 id=秘密指数dが小さすぎる場合wienerの攻撃>秘密指数dが小さすぎる場合:Wienerの攻撃</h3><p>復号の計算 \(m = c^d \bmod N\)
+（式 \(\text{(5)}\)
+）を高速化したいという動機から、秘密指数 \(d\)
+を先に小さい値に固定し、そこから公開指数 \(e\)
+を逆算する、という誤った最適化を行いたくなることがあります。しかし、<strong>Michael Wiener が1990年に示したのは、\(p&lt;q&lt;2p\)
+かつ \(d &lt; N^{0.25}/3\)
+程度まで \(d\)
+が小さい場合、公開鍵 \((N, e)\)
+だけから、\(e/N\)
+の連分数展開を使って \(d\)
+を効率的に復元できる</strong>という事実です。</p><h4 id=攻撃の導出>攻撃の導出</h4><p>秘密鍵生成の式 \(\text{(3)}\)
+より \(ed \equiv 1 \pmod{\varphi(N)}\)
+なので、ある正整数 \(k\)
+が存在して</p>\[
+ed - k\varphi(N) = 1 \tag{8}
+\]<p>が成り立ちます（\(k = (ed-1)/\varphi(N)\)
+）。式 \(\text{(8)}\)
+の両辺を \(d\varphi(N)\)
+で割ると、</p>\[
+\frac{e}{\varphi(N)} - \frac{k}{d} = \frac{1}{d\varphi(N)} \tag{9}
+\]<p>を得ます。ここで、\(k\)
+と \(d\)
+の最大公約数を考えると、式 \(\text{(8)}\)
+より \(\gcd(k, d)\)
+は \(1\)
+を割り切るため \(\gcd(k,d)=1\)
+、すなわち \(k/d\)
+は既約分数です（後で使う連分数の定理はこの既約性を要求します）。また \(e &lt; \varphi(N)\)
+かつ \(ed = 1+k\varphi(N) > \varphi(N)\)
+より \(d > 1\)
+なので \(k \ge 1\)
+が成り立ちます。</p><p>攻撃者が知っているのは \(N\)
+であって \(\varphi(N)\)
+ではないため、式 \(\text{(9)}\)
+の \(e/\varphi(N)\)
+を \(e/N\)
+に置き換えたときの誤差を評価する必要があります。\(\varphi(N) = N-p-q+1\)
+なので、\(p+q\)
+が \(N\)
+に比べて十分小さければ \(\varphi(N) \approx N\)
+です。\(p &lt; q &lt; 2p\)
+という（RSA鍵生成でよく見られる）バランスの取れた素数選択を仮定すると、\(N = pq > p^2\)
+より \(p &lt; \sqrt{N}\)
+、また \(q &lt; 2p\)
+より</p>\[
+p + q - 1 &lt; 3p &lt; 3\sqrt{N} \tag{10}
+\]<p>が成り立ちます。つまり \(N - \varphi(N) = p+q-1 &lt; 3\sqrt{N}\)
+です。これを使って \(e/N - k/d\)
+を評価します。</p>\[
+\frac{e}{N} - \frac{k}{d}
+= \underbrace{e\left(\frac{1}{N}-\frac{1}{\varphi(N)}\right)}_{=-e(N-\varphi(N))/(N\varphi(N))} + \underbrace{\left(\frac{e}{\varphi(N)}-\frac{k}{d}\right)}_{=1/(d\varphi(N)) \text{（式(9)）}}
+\tag{11}
+\]<p>三角不等式と \(e &lt; \varphi(N)\)
+（したがって \(e/\varphi(N) &lt; 1\)
+）、および式 \(\text{(10)}\)
+を使うと、</p>\[
+\left|\frac{e}{N}-\frac{k}{d}\right|
+\le \frac{e(N-\varphi(N))}{N\varphi(N)} + \frac{1}{d\varphi(N)}
+&lt; \frac{N-\varphi(N)}{N} + \frac{1}{d\varphi(N)}
+&lt; \frac{3}{\sqrt{N}} + \frac{1}{d\varphi(N)}
+\tag{12}
+\]<p>を得ます。\(\varphi(N)\)
+は \(N\)
+とほぼ同じ桁数の巨大な数なので、\(d\)
+が \(N^{0.25}\)
+程度以下である限り第2項 \(1/(d\varphi(N))\)
+は第1項 \(3/\sqrt{N}\)
+に比べて無視できるほど小さく、実質的に</p>\[
+\left|\frac{e}{N}-\frac{k}{d}\right| = O\!\left(\frac{1}{\sqrt{N}}\right) \tag{13}
+\]<p>という評価が成り立ちます。ここで<strong>連分数の最良近似定理</strong>（Legendreの定理）を使います。</p><blockquote><p><strong>定理（連分数の最良近似）.</strong> 実数 \(x\)
+と、\(\gcd(h,k)=1\)
+を満たす整数 \(h,k\)
+が \(|x - h/k| &lt; 1/(2k^2)\)
+を満たすならば、\(h/k\)
+は \(x\)
+の（単純）連分数展開の収束子（convergent）のいずれかと一致する。</p></blockquote><p>式 \(\text{(13)}\)
+の評価を \(1/(2d^2)\)
+と比較すると、\(3/\sqrt{N} &lt; 1/(2d^2)\)
+すなわち \(d^2 &lt; \sqrt{N}/6\)
+、つまり</p>\[
+d &lt; \frac{N^{0.25}}{\sqrt{6}} \approx 0.408\, N^{0.25} \tag{14}
+\]<p>という範囲で、\(k/d\)
+が \(e/N\)
+の連分数展開の収束子として現れることが保証されます。この導出は不等式評価を粗く済ませているため定数がやや緩くなっていますが（Wienerの原論文ではより precise な評価により \(d &lt; N^{0.25}/3 \approx 0.333\, N^{0.25}\)
+というタイトな定数まで詰めています）、<strong>\(d\)
+が \(N\)
+の4乗根のオーダーより小さいと、公開鍵だけから連分数展開で \(d\)
+を復元できてしまう</strong>という本質的な仕組みは、この導出で正確に説明できています。</p><h4 id=攻撃アルゴリズム>攻撃アルゴリズム</h4><p>\(e/N\)
+の連分数展開 \([a_0; a_1, a_2, \ldots]\)
+の収束子 \(h_i/k_i\)
+を先頭から順に計算し、各収束子を「\(k\)
+の候補 \(=h_i\)
+、\(d\)
+の候補 \(=k_i\)
+」として式 \(\text{(8)}\)
+に代入し、\(\varphi(N)\)
+の候補 \(\hat\varphi = (e\hat d - 1)/\hat k\)
+を整数として計算できるか（割り切れるか）を確認します。割り切れた場合、\(p+q = N - \hat\varphi + 1\)
+が分かるので、\(p, q\)
+は2次方程式</p>\[
+x^2 - (N-\hat\varphi+1)x + N = 0 \tag{15}
+\]<p>の根として求まります（判別式が完全平方数になり、かつ根の積が \(N\)
+に一致すれば、その収束子が正しい \(k/d\)
+です）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:wiener_attack.py data-lang=python:wiener_attack.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>math</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>continued_fraction</span><span class=p>(</span><span class=n>num</span><span class=p>,</span> <span class=n>den</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;num/den の連分数展開の係数列 [a0, a1, ...] を返す&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>cf</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>den</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>a</span> <span class=o>=</span> <span class=n>num</span> <span class=o>//</span> <span class=n>den</span>
+</span></span><span class=line><span class=cl>        <span class=n>cf</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>num</span><span class=p>,</span> <span class=n>den</span> <span class=o>=</span> <span class=n>den</span><span class=p>,</span> <span class=n>num</span> <span class=o>-</span> <span class=n>a</span> <span class=o>*</span> <span class=n>den</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>cf</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>convergents</span><span class=p>(</span><span class=n>cf</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;連分数係数列から収束子 (h_i, k_i) の列を返す&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>convs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>h_prev2</span><span class=p>,</span> <span class=n>h_prev1</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=n>k_prev2</span><span class=p>,</span> <span class=n>k_prev1</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>a</span> <span class=ow>in</span> <span class=n>cf</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=o>=</span> <span class=n>a</span> <span class=o>*</span> <span class=n>h_prev1</span> <span class=o>+</span> <span class=n>h_prev2</span>
+</span></span><span class=line><span class=cl>        <span class=n>k</span> <span class=o>=</span> <span class=n>a</span> <span class=o>*</span> <span class=n>k_prev1</span> <span class=o>+</span> <span class=n>k_prev2</span>
+</span></span><span class=line><span class=cl>        <span class=n>convs</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>h</span><span class=p>,</span> <span class=n>k</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>h_prev2</span><span class=p>,</span> <span class=n>h_prev1</span> <span class=o>=</span> <span class=n>h_prev1</span><span class=p>,</span> <span class=n>h</span>
+</span></span><span class=line><span class=cl>        <span class=n>k_prev2</span><span class=p>,</span> <span class=n>k_prev1</span> <span class=o>=</span> <span class=n>k_prev1</span><span class=p>,</span> <span class=n>k</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>convs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>wiener_attack</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;公開鍵 (e, n) のみから、連分数展開の収束子 k/d を全探索してdを復元する&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>cf</span> <span class=o>=</span> <span class=n>continued_fraction</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=n>k</span><span class=p>,</span> <span class=n>d</span><span class=p>)</span> <span class=ow>in</span> <span class=n>convergents</span><span class=p>(</span><span class=n>cf</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>k</span> <span class=o>==</span> <span class=mi>0</span> <span class=ow>or</span> <span class=n>d</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>e</span> <span class=o>*</span> <span class=n>d</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>%</span> <span class=n>k</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=n>phi_candidate</span> <span class=o>=</span> <span class=p>(</span><span class=n>e</span> <span class=o>*</span> <span class=n>d</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>//</span> <span class=n>k</span>  <span class=c1># 式(8)を逆算</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>=</span> <span class=n>n</span> <span class=o>-</span> <span class=n>phi_candidate</span> <span class=o>+</span> <span class=mi>1</span>  <span class=c1># p + q の候補（式(15)の係数）</span>
+</span></span><span class=line><span class=cl>        <span class=n>disc</span> <span class=o>=</span> <span class=n>s</span> <span class=o>*</span> <span class=n>s</span> <span class=o>-</span> <span class=mi>4</span> <span class=o>*</span> <span class=n>n</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>disc</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=n>sqrt_disc</span> <span class=o>=</span> <span class=n>math</span><span class=o>.</span><span class=n>isqrt</span><span class=p>(</span><span class=n>disc</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>sqrt_disc</span> <span class=o>*</span> <span class=n>sqrt_disc</span> <span class=o>!=</span> <span class=n>disc</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>        <span class=n>p</span> <span class=o>=</span> <span class=p>(</span><span class=n>s</span> <span class=o>+</span> <span class=n>sqrt_disc</span><span class=p>)</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>        <span class=n>q</span> <span class=o>=</span> <span class=p>(</span><span class=n>s</span> <span class=o>-</span> <span class=n>sqrt_disc</span><span class=p>)</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>p</span> <span class=o>*</span> <span class=n>q</span> <span class=o>==</span> <span class=n>n</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>d</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>q</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>None</span>
+</span></span></code></pre></div><h4 id=実行検証1小さいdを狙った鍵からの復元>実行検証1:小さいdを狙った鍵からの復元</h4><p>前節の <code>generate_prime</code>・<code>mod_inverse</code> を使い、512ビット素数を2つ（\(N\)
+は約1024ビット）生成した上で、意図的に \(d\)
+を \(N^{0.25}/3\)
+の内側になるよう小さく選び、そこから \(e = d^{-1} \bmod \varphi(N)\)
+を逆算しました（実運用では絶対に行ってはいけない鍵生成です）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:wiener_demo.py data-lang=python:wiener_demo.py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>math</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>random</span><span class=o>.</span><span class=n>seed</span><span class=p>(</span><span class=mi>42</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>bits</span> <span class=o>=</span> <span class=mi>512</span>
+</span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>q</span> <span class=o>=</span> <span class=n>generate_prime</span><span class=p>(</span><span class=n>bits</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>p</span> <span class=o>*</span> <span class=n>q</span>
+</span></span><span class=line><span class=cl><span class=n>phi</span> <span class=o>=</span> <span class=p>(</span><span class=n>p</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=p>(</span><span class=n>q</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>target_d_bits</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>math</span><span class=o>.</span><span class=n>log2</span><span class=p>(</span><span class=n>n</span><span class=p>)</span> <span class=o>/</span> <span class=mi>4</span><span class=p>)</span> <span class=o>-</span> <span class=mi>2</span>  <span class=c1># N^0.25 よりやや小さいビット長を狙う</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>d</span> <span class=o>=</span> <span class=n>random</span><span class=o>.</span><span class=n>getrandbits</span><span class=p>(</span><span class=n>target_d_bits</span><span class=p>)</span> <span class=o>|</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>d</span> <span class=o>&gt;</span> <span class=mi>2</span> <span class=ow>and</span> <span class=n>math</span><span class=o>.</span><span class=n>gcd</span><span class=p>(</span><span class=n>d</span><span class=p>,</span> <span class=n>phi</span><span class=p>)</span> <span class=o>==</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>e</span> <span class=o>=</span> <span class=n>mod_inverse</span><span class=p>(</span><span class=n>d</span><span class=p>,</span> <span class=n>phi</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>e</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>result</span> <span class=o>=</span> <span class=n>wiener_attack</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>recovered_d</span><span class=p>,</span> <span class=n>rp</span><span class=p>,</span> <span class=n>rq</span> <span class=o>=</span> <span class=n>result</span>
+</span></span><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=mi>123456789</span>
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>m2</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>c</span><span class=p>,</span> <span class=n>recovered_d</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>recovered_d</span> <span class=o>==</span> <span class=n>d</span><span class=p>,</span> <span class=nb>sorted</span><span class=p>([</span><span class=n>rp</span><span class=p>,</span> <span class=n>rq</span><span class=p>])</span> <span class=o>==</span> <span class=nb>sorted</span><span class=p>([</span><span class=n>p</span><span class=p>,</span> <span class=n>q</span><span class=p>]),</span> <span class=n>m2</span> <span class=o>==</span> <span class=n>message</span><span class=p>)</span>
+</span></span></code></pre></div><p>実際に実行したところ、\(N\)
+は <strong>1023ビット</strong>、選んだ秘密指数 \(d\)
+は <strong>253ビット</strong>（\(N^{0.25}\)
+のビット長は約256ビットなので、確かに \(N^{0.25}\)
+の内側）で、\(N^{0.25}/3 \approx 3.060 \times 10^{76}\)
+という基準に対して十分小さい値になっていました。この \((N, e)\)
+だけを入力として <code>wiener_attack</code> を実行した結果、<strong>元の \(d\)
+と完全に一致する値が復元され、\(p, q\)
+も正しく復元され、復元した \(d\)
+で実際に暗号文を復号すると元の平文と一致する</strong>ことを確認しました。攻撃者は素因数分解を一切行わず、連分数展開という \(O(\log N)\)
+回程度の反復計算だけで秘密鍵を丸ごと手に入れています。</p><h4 id=実行検証2境界付近での成功率スキャン>実行検証2:境界付近での成功率スキャン</h4><p>式 \(\text{(14)}\)
+の理論的な保証は「この範囲なら<strong>必ず</strong>成功する」という十分条件であり、それを超えたら必ず失敗するという意味ではありません。そこで、\(d\)
+の大きさを \(N^{0.25}\)
+に対する比率として様々に変化させ（256ビット素数2個、\(N\)
+は約512ビット）、各比率ごとに40〜50回試行して攻撃の成功率を測定しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:wiener_scan.py data-lang=python:wiener_scan.py><span class=line><span class=cl><span class=n>ratios</span> <span class=o>=</span> <span class=p>[</span><span class=mf>0.33</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mf>1.5</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>12</span><span class=p>,</span> <span class=mi>16</span><span class=p>,</span> <span class=mi>24</span><span class=p>,</span> <span class=mi>32</span><span class=p>,</span> <span class=mi>48</span><span class=p>,</span> <span class=mi>64</span><span class=p>,</span> <span class=mi>100</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=c1># 各ratioについて、d = ratio * N**0.25 程度になるようdを選び、</span>
+</span></span><span class=line><span class=cl><span class=c1># generate_prime(256) で N を作り直しながら trials_per_ratio=40〜50 回試行し、</span>
+</span></span><span class=line><span class=cl><span class=c1># wiener_attack(e, n) が元のdと一致するかどうかで成功率を集計する</span>
+</span></span></code></pre></div><p><img src=/posts/20260225_rsa/wiener_attack_success_rate.png alt="Wienerの攻撃の成功率と秘密指数dの大きさ（N^0.25比）の関係。理論的保証の境界（ratio=1/3）より内側では常に100%成功するが、境界を超えても比率2程度までは高確率で成功し、比率100付近でほぼ0%まで緩やかに低下する"></p><p>結果は図の通りで、理論的保証の境界（\(\text{ratio}=1/3\)
+）より内側の比率 \(0.33, 1\)
+では成功率 <strong>100%</strong>、境界のすぐ外側の比率 \(1.5, 2\)
+でも成功率 <strong>74%, 78%</strong> と高く、比率が大きくなるにつれて緩やかに低下し（比率 \(6, 8\)
+で20%、比率 \(24\)
+で2%）、比率 \(100\)
+で成功率 <strong>0%</strong> となりました。これは、式 \(\text{(12)}\)
+の不等式評価が「最悪ケースでも保証される」十分条件であるのに対し、実際の \(p, q, e\)
+の組み合わせでは誤差項がもっと小さく収まることが多く、境界を多少超えても収束子として \(k/d\)
+が現れるケースが少なくないためです。<strong>理論的な境界は安全側に倒した目安であり、実務上は \(d\)
+を \(N^{0.25}\)
+の定数倍程度まで小さくすることさえ危険</strong>だと分かります。</p><h4 id=実務上の対策>実務上の対策</h4><p>現在推奨されている鍵生成手順（本記事の「鍵生成」節）は \(e = 65537\)
+をあらかじめ固定し、そこから \(d = e^{-1} \bmod \varphi(N)\)
+を計算します。この手順で得られる \(d\)
+は \(\varphi(N)\)
+とほぼ同じ桁数のランダムな値になり、\(N^{0.25}\)
+よりはるかに大きくなるため、Wienerの攻撃は原理的に成立しません。<strong>危険なのは、復号の高速化を狙って \(d\)
+を先に小さい値に決め打ちしてしまう実装</strong>です（RSA-CRTによる復号高速化とは別の話で、CRTは \(d\)
+自体を小さくするものではありません）。NIST SP 800-56B などの標準では、\(d\)
+が十分大きいこと（目安として \(d > N^{0.5}\)
+程度）を鍵生成時にチェックすることが推奨されています。</p><h3 id=同じ法nを使い回すと起きる攻撃共通法攻撃common-modulus-attack>同じ法Nを使い回すと起きる攻撃:共通法攻撃（Common Modulus Attack）</h3><p>複数のユーザーで同じ \(N\)
+（したがって同じ \(p, q\)
+）を使い回し、それぞれ異なる公開指数 \(e_1, e_2\)
+（\(\gcd(e_1, e_2)=1\)
+）を使って<strong>同じ平文</strong> \(m\)
+を暗号化すると、<a href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/>拡張ユークリッドの互除法</a>だけを使って、\(p, q\)
+はおろか \(d_1, d_2\)
+すら知らずに \(m\)
+を復元できてしまいます。</p><h4 id=攻撃の導出-1>攻撃の導出</h4><p>暗号文は</p>\[
+c_1 = m^{e_1} \bmod N, \qquad c_2 = m^{e_2} \bmod N \tag{16}
+\]<p>です。\(\gcd(e_1, e_2) = 1\)
+なので、<a href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/>ベズーの等式</a>より、拡張ユークリッドの互除法で</p>\[
+a e_1 + b e_2 = 1 \tag{17}
+\]<p>を満たす整数 \(a, b\)
+（少なくとも一方は負）を効率的に計算できます。ここで注目すべきは、Wienerの攻撃や本記事の正当性の証明（式 \(\text{(6)}\)
+-\(\text{(7)}\)
+）が \(\varphi(N)\)
+を法とした合同式を経由していたのに対し、<strong>この式 \(\text{(17)}\)
+は \(\varphi(N)\)
+を一切介さない、整数としての厳密な等式</strong>だという点です。したがって、</p>\[
+c_1^{\,a} \cdot c_2^{\,b} \equiv m^{a e_1} \cdot m^{b e_2} \equiv m^{a e_1 + b e_2} \equiv m^{1} \equiv m \pmod{N} \tag{18}
+\]<p>が、オイラーの定理を使うまでもなく<strong>恒等式として</strong>成り立ちます。\(a, b\)
+の少なくとも一方が負の整数になりますが、これは単に \(c_1^{-|a|} \equiv (c_1^{-1})^{|a|} \pmod N\)
+とモジュラ逆元（本記事の「モジュラ逆元」節）を使って計算すればよいだけです。</p><h4 id=実行検証>実行検証</h4><p>512ビット素数2つから \(N\)
+を生成し、同じ \(N\)
+に対して異なる公開指数 \(e_1, e_2\)
+（\(\gcd(e_1,e_2)=1\)
+を確認済み）で同一平文を2通りに暗号化し、攻撃者の視点（\(N, e_1, e_2, c_1, c_2\)
+のみ既知、\(p, q, d_1, d_2\)
+は一切使わない）で平文を復元しました。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:common_modulus_attack.py data-lang=python:common_modulus_attack.py><span class=line><span class=cl><span class=n>message</span> <span class=o>=</span> <span class=nb>int</span><span class=o>.</span><span class=n>from_bytes</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;COMMON MODULUS ATTACK DEMO&#34;</span><span class=p>,</span> <span class=s2>&#34;big&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>c1</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>e1</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>c2</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=n>e2</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 攻撃者は n, e1, e2, c1, c2 のみを知っている</span>
+</span></span><span class=line><span class=cl><span class=n>g</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>extended_gcd</span><span class=p>(</span><span class=n>e1</span><span class=p>,</span> <span class=n>e2</span><span class=p>)</span>  <span class=c1># 前掲(ユークリッドの互除法の記事と同じ関数)</span>
+</span></span><span class=line><span class=cl><span class=k>assert</span> <span class=n>g</span> <span class=o>==</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>c1_term</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>mod_inverse</span><span class=p>(</span><span class=n>c1</span><span class=p>,</span> <span class=n>n</span><span class=p>),</span> <span class=o>-</span><span class=n>a</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span> <span class=k>if</span> <span class=n>a</span> <span class=o>&lt;</span> <span class=mi>0</span> <span class=k>else</span> <span class=nb>pow</span><span class=p>(</span><span class=n>c1</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>c2_term</span> <span class=o>=</span> <span class=nb>pow</span><span class=p>(</span><span class=n>mod_inverse</span><span class=p>(</span><span class=n>c2</span><span class=p>,</span> <span class=n>n</span><span class=p>),</span> <span class=o>-</span><span class=n>b</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span> <span class=k>if</span> <span class=n>b</span> <span class=o>&lt;</span> <span class=mi>0</span> <span class=k>else</span> <span class=nb>pow</span><span class=p>(</span><span class=n>c2</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>recovered</span> <span class=o>=</span> <span class=p>(</span><span class=n>c1_term</span> <span class=o>*</span> <span class=n>c2_term</span><span class=p>)</span> <span class=o>%</span> <span class=n>n</span>
+</span></span></code></pre></div><p>実行の結果、\(\gcd(e_1, e_2) = 1\)
+であることを確認した上で、拡張ユークリッドの互除法から得た \(a, b\)
+は非常に大きな整数（\(e_1, e_2\)
+とほぼ同じ桁数）で、実際に \(a e_1 + b e_2 = 1\)
+を満たしていました。この \(a, b\)
+から式 \(\text{(18)}\)
+に従って計算した <code>recovered</code> は元の <code>message</code> と<strong>完全に一致</strong>し、バイト列に戻すと <code>b'COMMON MODULUS ATTACK DEMO'</code> という元の文字列がそのまま復元されました。\(p, q\)
+の値はおろか、いずれの秘密鍵 \(d_1, d_2\)
+も一度も使っていません。</p><h4 id=教訓と関連する攻撃>教訓と関連する攻撃</h4><p>この攻撃が成立する根本原因は、「\(N\)
+を共有した瞬間に、片方の秘密鍵情報がもう片方の暗号文の"解錠"に使えてしまう」という数学的事実にあります。<strong>鍵ペアは常に独立した \(N\)
+（独立した \(p, q\)
+）から生成する</strong>のが唯一の対策です。よく似た状況として、<strong>同じメッセージを異なる \(N\)
+（ただし小さい共通の \(e\)
+、典型的には \(e=3\)
+）で複数の受信者に送る</strong>と、<a href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/>中国剰余定理</a>を使って平文を復元できる <strong>Håstadのブロードキャスト攻撃</strong>（1988年）も知られています。共通法攻撃とは前提条件も使う数論的道具（拡張ユークリッド互除法 vs 中国剰余定理）も異なりますが、「鍵やメッセージの使い回しが致命傷になる」という教訓は共通しています。</p><h3 id=パディングの欠如がもたらす脆弱性パディングオラクル攻撃>パディングの欠如がもたらす脆弱性:パディングオラクル攻撃</h3><p>本記事の実装（<code>encrypt</code>/<code>decrypt</code>）は、平文の整数 \(m\)
+をそのまま \(m^e \bmod N\)
+するだけの**教科書的RSA（textbook RSA）**です。これには構造的な問題があります。\(m_1, m_2\)
+の暗号文を \(c_1, c_2\)
+とすると、</p>\[
+c_1 \cdot c_2 \equiv m_1^e m_2^e \equiv (m_1 m_2)^e \pmod{N} \tag{19}
+\]<p>が成り立つため、<strong>暗号文の積が平文の積の暗号文になる</strong>という乗法準同型性（malleability）を持ちます。これにより暗号文を攻撃者が意味のある形で改ざんできてしまい、実用上は必ず<strong>パディング方式</strong>を併用します。ここでは歴史的に重要な2つのパディング方式、PKCS#1 v1.5 と OAEP を実装し、両者の安全性の違いを実行検証します。</p><h4 id=pkcs1-v15パディングとbleichenbacher攻撃>PKCS#1 v1.5パディングとBleichenbacher攻撃</h4><p>PKCS#1 v1.5 は、\(k\)
+バイトの暗号化ブロック（\(k\)
+は \(N\)
+のバイト長）を</p>\[
+\texttt{EB} = \texttt{0x00} \;\|\; \texttt{0x02} \;\|\; \texttt{PS} \;\|\; \texttt{0x00} \;\|\; M \tag{20}
+\]<p>という形式で構成します。<code>PS</code> は8バイト以上のランダムな非ゼロバイト列（パディング）で、その直後の <code>0x00</code> が区切りとしてメッセージ <code>M</code> の開始位置を示します。復号側は、復号結果がこの形式に従っているかを検証してから <code>M</code> を取り出します。</p><p><strong>Daniel Bleichenbacher は1998年、この検証処理自体をオラクル（ある暗号文が有効なパディングに復号されるかどうかを教えてくれる関数）として悪用できることを示しました</strong>（通称 Million Message Attack）。攻撃者は、ターゲットの暗号文 \(c_0\)
+（平文 \(m_0\)
+、\(m_0\)
+は未知）に対して、既知の整数 \(s\)
+を使い</p>\[
+c' = c_0 \cdot s^e \bmod N \equiv (s \cdot m_0)^e \pmod N \tag{21}
+\]<p>という暗号文を作ります。これは \(s \cdot m_0 \bmod N\)
+の暗号文になっており、サーバーに \(c'\)
+を送って「パディングが有効か」だけを聞き出せれば、\(s \cdot m_0 \bmod N\)
+の先頭バイトが <code>0x00 0x02</code> になる範囲を少しずつ絞り込め、最終的に \(m_0\)
+を再構成できます（式 \(\text{(21)}\)
+は式 \(\text{(19)}\)
+と同じ乗法準同型性を利用しており、パディングの検証結果だけがサーバーから漏れる1ビットの情報になっている点がポイントです）。</p><h5 id=実行検証-1>実行検証</h5><p>自前でPKCS#1 v1.5のエンコード・デコード・オラクル関数を実装し、以下を検証しました（<code>k</code>バイトの小さめのRSA鍵を使用）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:pkcs1v15_oracle.py data-lang=python:pkcs1v15_oracle.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>pkcs1_v15_pad</span><span class=p>(</span><span class=n>msg</span><span class=p>,</span> <span class=n>k</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;EB = 0x00 || 0x02 || PS(ランダム非ゼロ,8バイト以上) || 0x00 || M&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_len</span> <span class=o>=</span> <span class=n>k</span> <span class=o>-</span> <span class=nb>len</span><span class=p>(</span><span class=n>msg</span><span class=p>)</span> <span class=o>-</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps</span> <span class=o>=</span> <span class=nb>bytes</span><span class=p>(</span><span class=n>random</span><span class=o>.</span><span class=n>randint</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>255</span><span class=p>)</span> <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>ps_len</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=sa>b</span><span class=s2>&#34;</span><span class=se>\x00\x02</span><span class=s2>&#34;</span> <span class=o>+</span> <span class=n>ps</span> <span class=o>+</span> <span class=sa>b</span><span class=s2>&#34;</span><span class=se>\x00</span><span class=s2>&#34;</span> <span class=o>+</span> <span class=n>msg</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>pkcs1_v15_unpad_oracle</span><span class=p>(</span><span class=n>eb</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;パディングオラクル: 構造(0x00 0x02 ... 0x00 ...)が正しいかだけを返す&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>eb</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>11</span> <span class=ow>or</span> <span class=n>eb</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>!=</span> <span class=mh>0x00</span> <span class=ow>or</span> <span class=n>eb</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>!=</span> <span class=mh>0x02</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=n>idx</span> <span class=o>=</span> <span class=n>eb</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;</span><span class=se>\x00</span><span class=s2>&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>idx</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span> <span class=ow>and</span> <span class=n>idx</span> <span class=o>&gt;=</span> <span class=mi>2</span> <span class=o>+</span> <span class=mi>8</span>
+</span></span></code></pre></div><p>まず、ランダムな暗号文がたまたま「有効なパディング」に見える確率を測定しました。\(c^d \bmod N\)
+は \(c\)
+が一様乱数のとき \(N\)
+上ほぼ一様に分布するため、<strong>実際にRSA秘密鍵で復号する方法</strong>と<strong>復号をバイパスして直接一様乱数をサンプリングする方法</strong>は統計的に同じ分布に従います（この等価性を、192ビットの小さい \(N\)
+に対して30万件ずつ実行し、双方とも0件でクロスチェックしました）。この等価性を使い、<strong>実用的な2048ビットのRSA鍵</strong>に対して500万件を一様サンプリングで試行したところ、<strong>86件が有効なパディングと判定され、観測確率は \(1.72\times10^{-5}\)
+</strong>（約1/58,140）となり、パディション先頭2バイトの一致だけに基づく理論値のオーダー \(2^{-16} \approx 1.53\times10^{-5}\)
+と近い値が得られました。</p><p>次に、Bleichenbacherの攻撃の最初のステップ（式 \(\text{(21)}\)
+の \(s\)
+を小さい方から順に試して最初に有効なパディションが得られる \(s\)
+を探す、いわゆる"blinding"探索）を、<strong>秘密鍵を一切使わず、パディングオラクルへの問い合わせだけ</strong>で実際に再現しました（192ビットの小さいRSA鍵を使用、<code>oracle_query</code> の内部で毎回本物の秘密鍵復号を実行）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:bleichenbacher_step1.py data-lang=python:bleichenbacher_step1.py><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>c_candidate</span> <span class=o>=</span> <span class=p>(</span><span class=n>c0</span> <span class=o>*</span> <span class=nb>pow</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=n>e</span><span class=p>,</span> <span class=n>n</span><span class=p>))</span> <span class=o>%</span> <span class=n>n</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>oracle_query</span><span class=p>(</span><span class=n>c_candidate</span><span class=p>):</span>  <span class=c1># 内部でpow(c_candidate, d, n)を実行しパディションを判定</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span></code></pre></div><p>実行の結果、<strong>\(s = 1{,}265{,}823\)
+で初めて有効なパディションが見つかり、それまでに実際のRSA復号を伴うオラクル問い合わせが1,265,822回</strong>必要でした。この「100万回オーダーの問い合わせが必要」という規模感こそが、Bleichenbacherの攻撃が"Million Message Attack"と呼ばれる所以です。実際の攻撃では、この最初の絞り込みに続いて区間の二分探索的な絞り込みを繰り返すため、鍵長やサーバーの応答速度次第では数千〜数百万回のオラクル問い合わせで秘密鍵を使わずに暗号文全体を復号できてしまいます。</p><h4 id=oaepランダムオラクルモデルでの解決>OAEP:ランダムオラクルモデルでの解決</h4><p><strong>OAEP（Optimal Asymmetric Encryption Padding、Bellare–Rogaway, 1994）</strong> は、ハッシュ関数 \(H\)
+とマスク生成関数 \(\text{MGF1}\)
+（ハッシュを繰り返し適用して任意長のマスクを作る関数）を使い、ランダムなシード \(\text{seed}\)
+でメッセージ全体を撹拌します。</p>\[
+\begin{aligned}
+\texttt{DB} &= H(\texttt{label}) \,\|\, \texttt{PS(ゼロ埋め)} \,\|\, \texttt{0x01} \,\|\, M \\
+\texttt{maskedDB} &= \texttt{DB} \oplus \text{MGF1}(\texttt{seed}) \\
+\texttt{maskedSeed} &= \texttt{seed} \oplus \text{MGF1}(\texttt{maskedDB}) \\
+\texttt{EM} &= \texttt{0x00} \,\|\, \texttt{maskedSeed} \,\|\, \texttt{maskedDB}
+\end{aligned}
+\tag{22}
+\]<p>PKCS#1 v1.5との決定的な違いは、<strong>有効性の判定がハッシュ値 \(H(\texttt{label})\)
+とのビット単位の完全一致に帰着する</strong>点です。PKCS#1 v1.5では「先頭2バイトが固定値、かつどこかに0x00がある」という緩い構造チェックだったのに対し、OAEPでは（SHA-256を使う場合）<strong>256ビットのハッシュ値が丸ごと一致しない限り無効</strong>と判定されます。ランダムオラクルモデル（ハッシュ関数を理想的なランダム関数とみなす解析手法）のもとで、OAEPはRSAが一方向性トラップドア置換であるという仮定だけから <strong>IND-CCA2安全性</strong>（選択暗号文攻撃に対する識別不可能性、復号オラクルを持つ攻撃者でも平文の情報を一切引き出せないという強い安全性）を達成できることが証明されています。</p><h5 id=実行検証-2>実行検証</h5><p><code>hashlib.sha256</code> と自前実装の <code>MGF1</code> でOAEPのエンコード・デコードを実装し、実際のRSA暗号化・復号を通した正当性を確認した上で、以下を検証しました（SHA-256を使うためオーバーヘッドが \(2 \times 32 + 2 = 66\)
+バイト必要になり、300ビット素数2つ、\(N\)
+を約599ビットとして実験しました）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python:oaep.py data-lang=python:oaep.py><span class=line><span class=cl><span class=k>def</span> <span class=nf>oaep_unpad</span><span class=p>(</span><span class=n>em</span><span class=p>,</span> <span class=n>k</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=sa>b</span><span class=s2>&#34;&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;全チェックを単一のブール値にまとめ、途中でreturnしない
+</span></span></span><span class=line><span class=cl><span class=s2>    (早期returnで失敗理由を分岐させるとManger攻撃の糸口になるため)&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>l_hash</span> <span class=o>=</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>sha256</span><span class=p>(</span><span class=n>label</span><span class=p>)</span><span class=o>.</span><span class=n>digest</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span> <span class=o>=</span> <span class=n>em</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>masked_seed</span><span class=p>,</span> <span class=n>masked_db</span> <span class=o>=</span> <span class=n>em</span><span class=p>[</span><span class=mi>1</span><span class=p>:</span><span class=mi>1</span><span class=o>+</span><span class=mi>32</span><span class=p>],</span> <span class=n>em</span><span class=p>[</span><span class=mi>1</span><span class=o>+</span><span class=mi>32</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>    <span class=n>seed</span> <span class=o>=</span> <span class=n>xor_bytes</span><span class=p>(</span><span class=n>masked_seed</span><span class=p>,</span> <span class=n>mgf1</span><span class=p>(</span><span class=n>masked_db</span><span class=p>,</span> <span class=mi>32</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>db</span> <span class=o>=</span> <span class=n>xor_bytes</span><span class=p>(</span><span class=n>masked_db</span><span class=p>,</span> <span class=n>mgf1</span><span class=p>(</span><span class=n>seed</span><span class=p>,</span> <span class=n>k</span> <span class=o>-</span> <span class=mi>33</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>l_hash_prime</span><span class=p>,</span> <span class=n>rest</span> <span class=o>=</span> <span class=n>db</span><span class=p>[:</span><span class=mi>32</span><span class=p>],</span> <span class=n>db</span><span class=p>[</span><span class=mi>32</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>    <span class=n>sep_idx</span> <span class=o>=</span> <span class=n>rest</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;</span><span class=se>\x01</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>ps_ok</span> <span class=o>=</span> <span class=n>sep_idx</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span> <span class=ow>and</span> <span class=nb>all</span><span class=p>(</span><span class=n>b</span> <span class=o>==</span> <span class=mi>0</span> <span class=k>for</span> <span class=n>b</span> <span class=ow>in</span> <span class=n>rest</span><span class=p>[:</span><span class=n>sep_idx</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>valid</span> <span class=o>=</span> <span class=p>(</span><span class=n>y</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=ow>and</span> <span class=p>(</span><span class=n>l_hash_prime</span> <span class=o>==</span> <span class=n>l_hash</span><span class=p>)</span> <span class=ow>and</span> <span class=n>ps_ok</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>valid</span><span class=p>,</span> <span class=p>(</span><span class=n>rest</span><span class=p>[</span><span class=n>sep_idx</span><span class=o>+</span><span class=mi>1</span><span class=p>:]</span> <span class=k>if</span> <span class=n>valid</span> <span class=k>else</span> <span class=kc>None</span><span class=p>)</span>
+</span></span></code></pre></div><p>この599ビットの鍵に対して、<strong>実際のRSA秘密鍵復号を経由した</strong>ランダム暗号文5万件のうち、有効なOAEPパディションと判定されたものは<strong>0件</strong>でした（<code>lHash</code> の256ビット完全一致という条件だけで確率 \(2^{-256}\)
+のオーダーになるため、天文学的な試行回数がなければ偶然の一致は事実上起こりません）。さらに、正当な暗号化・復号を通した後の平文ブロック <code>EM</code> の<strong>1ビットだけ</strong>を反転させたものを2,000パターン用意し、いずれもデコード後のオラクル判定を通るかを確認したところ、<strong>2,000件すべてで無効と判定</strong>されました。PKCS#1 v1.5では <code>PS</code> 領域深くのバイトを変えても先頭2バイトと区切り文字だけを見る検証は影響を受けませんが、OAEPでは \(\text{MGF1}\)
+による拡散のおかげで、暗号文のどの1ビットを変えても復号結果全体が予測不能に変化し、ハッシュ一致という強い検証をほぼ確実に破壊することが、この実験から定量的に確認できました。</p><h4 id=manger攻撃とrobot攻撃実装の落とし穴>Manger攻撃とROBOT攻撃:実装の落とし穴</h4><p>OAEPの安全性証明は「復号オラクルが有効/無効の1ビットしか返さない」ことを前提にしています。しかし2001年、<strong>James Manger は、OAEPの検証を<code>if y != 0: raise ...</code>、<code>if l_hash_prime != l_hash: raise ...</code>のように複数の早期returnに分けて実装すると、「先頭バイト \(Y\)
+が0かどうか」という1ビットだけがエラーの種類や応答時間の違いとして漏れてしまい、Bleichenbacherの攻撃と同種の絞り込みが可能になる</strong>ことを示しました。前節のコードで <code>valid = (y == 0) and (l_hash_prime == l_hash) and ps_ok</code> と<strong>全チェックを単一の式にまとめ、途中でreturnしない</strong>実装にしていたのはこのためです。さらに2018年には、<strong>ROBOT攻撃</strong>（Böck, Somorovsky, Young）が、F5・Citrix・IBMなど9社以上の実装で、20年前のBleichenbacherの攻撃がTLSサーバー上でそのまま再現できることを実証しました。<strong>パディング方式そのものの安全性証明と、それを実装したコードの安全性は別問題であり、後者は定数時間性・エラーハンドリングの一様性という実装レベルの規律によってのみ担保される</strong>、というのがこの2つの攻撃が残した教訓です。</p><h3 id=タイミングサイドチャネルへの言及復号は定数時間でなければならない>タイミングサイドチャネルへの言及:復号は定数時間でなければならない</h3><p>パディングオラクル攻撃が「サーバーの応答内容の違い」を悪用する攻撃だったのに対し、<strong>タイミングサイドチャネル攻撃</strong>は「サーバーの応答"時間"の違い」を悪用します。<a href=https://yuhi-sa.github.io/posts/20201220_binary/1/>繰り返し二乗法とモンゴメリラダーの記事</a>で詳しく検証した通り、素朴な二進法べき乗算 \(c^d \bmod N\)
+の乗算回数は秘密指数 \(d\)
+のハミング重みに依存するため、実行時間の統計的な差が秘密鍵のビットパターンに関する情報を漏らします（Paul Kocher, 1996年、RSA/DH/DSSに対する原理実証）。同記事の実測では、2048ビット相当の法のもとで**素朴な二進法べき乗算は条件間で最大121.6%の実行時間差が生じたのに対し、モンゴメリラダーはわずか0.1%**とほぼ完全にビットパターンから独立していました。</p><p>興味深いことに、本記事のBleichenbacher攻撃の実装で使った「\(s\)
+を小さい方から順に試す」操作も、暗号業界では慣習的に &ldquo;blinding&rdquo; と呼ばれる操作です。しかし意味は正反対です。<strong>攻撃者側のblinding</strong>（Bleichenbacherの攻撃）は、既知の \(s\)
+を掛けてサーバーに問い合わせを繰り返すことで秘密情報を引き出す操作である一方、<strong>防御側のRSA blinding</strong>（Kocherのタイミング攻撃への対策として提案）は、復号の直前に \(c' = c \cdot r^e \bmod N\)
+（\(r\)
+は攻撃者に予測できないランダム値）としてから復号し、最後に \(r^{-1}\)
+を掛けて補正することで、<strong>実行時間が攻撃者の制御下にない乱数 \(r\)
+に依存するようになり、秘密指数 \(d\)
+のビットパターンとの相関を破壊する</strong>という対策です。同じ数学的操作（乗法準同型性の利用）が、攻撃にも防御にも使われるという対比は、RSAの構造的な特徴（式 \(\text{(19)}\)
+）が諸刃の剣であることをよく表しています。実務では、モンゴメリラダーによる演算回数の均一化とRSA blindingによる乱数化を<strong>併用</strong>し、実行時間から秘密鍵の情報が一切漏れないようにするのが標準的な設計です。</p><h3 id=現在の安全性評価と耐量子暗号への移行>現在の安全性評価と耐量子暗号への移行</h3><p>最後に、RSAの安全性に関する最新の状況を整理します。</p><p><strong>古典計算機による素因数分解の記録</strong>は、2020年にGNFS（一般数体篩法）で分解された <strong>RSA-250（829ビット）</strong> が現時点でも最大であり、実用的なRSA-2048（2048ビット）は未だ分解されていません。2024年前後にはD-Wave等の量子アニーラによる「RSA-2048を解いた」という趣旨の主張が話題になりましたが、これらは実際にはショアのアルゴリズムとは異なる手法によるものであり、いずれも実用的なRSA鍵の脅威にはなっていません（ショアのアルゴリズムを厳密に実装した量子回路での素因数分解の実績は、2025年時点でも48ビット程度の小さな数にとどまります）。一方、理論面では2025年5月にCraig Gidneyが、RSA-2048を分解するのに必要な物理量子ビット数の見積もりを、誤り訂正のオーバーヘッドを含めても<strong>100万個未満・実行時間1週間未満</strong>まで引き下げる論文を発表しており（2019年時点の見積もり約2,000万量子ビットから大幅に改善）、アルゴリズム・ハードウェア両面での改善が着実に進んでいることを示しています。現状の量子コンピュータの物理量子ビット数はこれよりまだ数桁小さく、直ちにRSA-2048が脅かされる状況にはありませんが、この傾向を踏まえた移行の準備が各国で進められています。</p><p>標準化の面では、<strong>NISTは2024年8月、格子暗号ベースの耐量子暗号標準 FIPS 203（ML-KEM、旧CRYSTALS-Kyber、鍵カプセル化）・FIPS 204（ML-DSA、旧CRYSTALS-Dilithium、署名）・FIPS 205（SLH-DSA、ハッシュベース署名）を正式に確定</strong>し、2016年から続いた標準化プロセスに区切りをつけました。続く2024年11月のNIST IR 8547（移行計画のドラフト）では、<strong>RSA-2048やECC P-256など112ビット安全性の暗号は2030年までに非推奨化、2035年までに使用禁止</strong>という移行スケジュールが示されています。RSAが破られる根拠となる数論的問題（素因数分解）が量子コンピュータ上のショアのアルゴリズムで多項式時間で解けてしまう仕組みと、格子問題（Learning With Errors）がなぜ量子コンピュータにも耐性を持つと考えられているかについては、<a href=https://yuhi-sa.github.io/posts/20260715_post_quantum_lwe/1/>耐量子暗号入門の記事</a>でRegev暗号のフルスクラッチ実装とともに詳しく解説しています。</p><h2 id=セキュリティに関する注意まとめ>セキュリティに関する注意（まとめ）</h2><p>本記事の実装は教育目的であり、以下の理由から実用環境では使用すべきではありません。</p><ul><li><strong>パディングの欠如</strong>: 教科書的RSAは乗法準同型性（式 \(\text{(19)}\)
+）を持ち、選択暗号文攻撃に脆弱です。実務では前節で検証したOAEPなど、証明可能安全性を持つパディング方式を使う必要があります。</li><li><strong>秘密指数dの大きさ</strong>: \(d\)
+を高速化のために小さくすると、Wienerの攻撃で公開鍵だけから復元されてしまいます。\(e=65537\)
+から \(d\)
+を逆算する標準的な手順に従う限り問題は生じません。</li><li><strong>Nの使い回し</strong>: 同じ法 \(N\)
+を複数の鍵ペアで共有すると、共通法攻撃で平文が復元されます。鍵ペアは必ず独立した \(p, q\)
+から生成する必要があります。</li><li><strong>タイミングサイドチャネル</strong>: 定数時間性のない実装は、復号処理の実行時間から秘密鍵の情報が漏れます。実務ではモンゴメリラダーとRSA blindingを組み合わせた実装が必要です。</li><li><strong>鍵長</strong>: 本実装のデフォルト512ビットは現在では安全ではありません。実用上は最低でも <strong>2048ビット</strong> が推奨されており、2030年代にはRSA自体からの移行が求められています。</li><li><strong>量子コンピュータの脅威</strong>: ショアのアルゴリズムにより、十分な規模の量子コンピュータが実現すればRSAは多項式時間で解読されます。耐量子暗号（Post-Quantum Cryptography）への移行が各国で進行中です。</li></ul><hr><h2 id=関連記事>関連記事</h2><ul><li><a href=https://yuhi-sa.github.io/posts/20260226_oauth2_oidc/1/>OAuth 2.0/OIDC入門</a> - RSAがJWT署名に使われるOAuth 2.0/OIDCプロトコルを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260226_zero_trust/1/>ゼロトラストセキュリティの概要と導入</a> - RSA暗号が基盤技術として使われるゼロトラストアーキテクチャを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260715_post_quantum_lwe/1/>耐量子暗号入門：Learning With Errors（LWE）とRegev暗号をPythonで実装</a> - 本記事の素因数分解問題がShorのアルゴリズムで量子コンピュータに破られる理由と、その代替となるLWE問題を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260223_security_certs/1/>セキュリティ資格比較：CISSP vs 情報処理安全確保支援士</a> - 暗号技術が試験範囲に含まれるセキュリティ資格の比較を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20230907_dh/1/>Diffie-Hellman鍵交換プロトコル：理論とPython実装</a> - RSAとは異なるアプローチで安全な鍵交換を実現するDHプロトコルを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201015_euclidean/1/>ユークリッドの互除法と拡張ユークリッドの互除法のpythonプログラム</a> - 本記事の秘密鍵生成で使うモジュラ逆元計算（拡張ユークリッドの互除法）の正当性証明・ベズーの等式の構成的証明・計算量を詳しく解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201220_binary/1/>繰り返し二乗法による高速べき乗剰余計算のPython実装</a> - RSA暗号の暗号化・復号で使われるべき乗剰余計算のアルゴリズムを解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20201223_elgamal/1/>楕円曲線ElGamal暗号の原理とPythonによる簡易実装</a> - RSAとは異なる数学的基盤（楕円曲線上の離散対数問題）に基づく公開鍵暗号を解説しています。</li><li><a href=https://yuhi-sa.github.io/posts/20260614_cryptography_roadmap/1/>暗号ロードマップ：対称鍵・公開鍵・ハッシュ・鍵交換の体系ハブ</a> — RSA を「公開鍵暗号（素因数分解）」枠で位置づけ、DH・楕円曲線暗号・ハッシュとの関係を俯瞰するメタハブ。</li><li><a href=https://yuhi-sa.github.io/posts/20260614_diffie_hellman/1/>Diffie-Hellman 鍵交換の理論と Python 実装（離散対数問題）</a> — RSA とは異なる「離散対数問題」を安全性根拠とする鍵交換プロトコル。素因数分解 vs 離散対数の対比で理解が深まります。</li><li><a href=https://yuhi-sa.github.io/posts/20260702_elliptic_curve_cryptography/1/>楕円曲線暗号（ECC）の数学と Python 実装</a> — 256 bit 鍵で RSA 3072 bit 相当の安全性を実現する現代の主流方式。点加算・ECDLP・ECDH・ECDSA・X25519 を詳解。</li><li><a href=https://yuhi-sa.github.io/posts/20260703_aes_symmetric_crypto/1/>AES / ChaCha20 対称鍵暗号の理論と Python 実装</a> — RSA が遅いからこそハイブリッド構成で本体を担う対称鍵暗号。ラウンド構成・GF(2^8)・暗号モード・AEAD を詳解。</li><li><a href=https://yuhi-sa.github.io/posts/20260704_digital_signature/1/>デジタル署名（ECDSA / EdDSA / RSA-PSS）の理論と Python 実装</a> — RSA の「秘密鍵で署名・公開鍵で検証」を実用化した署名スキーム。RSA-PSS のランダムパディングと hash-then-sign パラダイムを詳解。</li></ul><h3 id=関連ツール>関連ツール</h3><ul><li><a href=https://yuhi-sa.github.io/devtoolbox/tools/hash-generator/>ハッシュ生成ツール（DevToolBox）</a> - MD5・SHA対応のハッシュ生成ツール</li></ul><h2 id=参考文献>参考文献</h2><ul><li>Rivest, R. L., Shamir, A., & Adleman, L. (1978). &ldquo;A method for obtaining digital signatures and public-key cryptosystems&rdquo;. <em>Communications of the ACM</em>, 21(2), 120-126.</li><li>Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). <em>Introduction to Algorithms</em> (3rd ed.). MIT Press.</li></ul></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="14695"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260225_rsa/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260225_fft/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
 </span><span class=post-nav__title>高速フーリエ変換（FFT）の理論とPython実装：scipy.fft / numpy.fft によるスペクトル解析</span>
 </a><a href=/posts/20260225_pid_impl/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
 </span><span class=post-nav__title>PID制御のPython実装：シミュレーションとチューニング</span></a></nav><section class="related-tools mt-5" aria-label=関連ツール><h2 class=related-tools__title>この記事に関連する無料ツール</h2><div class=related-tools__grid><a href=https://yuhi-sa.github.io/devtoolbox/tools/moving-average-calculator/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
