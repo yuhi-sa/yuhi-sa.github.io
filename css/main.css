@@ -668,44 +668,59 @@ body {
 
 .book-card__links {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-2);
 }
 
 .book-card__link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  padding: 0.2rem 0.75rem;
+  border-radius: 6px;
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   transition:
-    transform var(--transition-fast),
+    background-color var(--transition-fast),
     box-shadow var(--transition-fast);
 }
 
-.book-card__link img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+/* Beats `.article-content a` (accent color + underline), including :visited */
+.book-card__links a.book-card__link,
+.book-card__links a.book-card__link:visited,
+.book-card__links a.book-card__link:hover {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .book-card__link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .book-card__link--yahoo {
-  background-color: #ff0033;
+  background-color: #e4002b;
+}
+
+.book-card__link--yahoo:hover {
+  background-color: #b80022;
 }
 
 .book-card__link--rakuten {
   background-color: #bf0000;
 }
 
+.book-card__link--rakuten:hover {
+  background-color: #990000;
+}
+
 .book-card__link--amazon {
-  background-color: #ff9900;
+  background-color: #c2410c;
+}
+
+.book-card__link--amazon:hover {
+  background-color: #9e350a;
 }
 
 /* ============================================
