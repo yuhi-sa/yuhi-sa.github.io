@@ -688,6 +688,15 @@ body {
   background-color: #e88b00;
 }
 
+.rakuten-card .amazon-card__cta {
+  background-color: #bf0000;
+  color: #ffffff;
+}
+
+.rakuten-card .amazon-card__link:hover .amazon-card__cta {
+  background-color: #990000;
+}
+
 /* ============================================
  * TOOL CARD (inline DevToolBox / CalcBox link)
  * ============================================ */
