@@ -697,6 +697,15 @@ body {
   background-color: #990000;
 }
 
+.yahoo-card .amazon-card__cta {
+  background-color: #ff0033;
+  color: #ffffff;
+}
+
+.yahoo-card .amazon-card__link:hover .amazon-card__cta {
+  background-color: #cc0029;
+}
+
 /* ============================================
  * TOOL CARD (inline DevToolBox / CalcBox link)
  * ============================================ */
