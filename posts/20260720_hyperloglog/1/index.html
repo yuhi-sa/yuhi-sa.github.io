@@ -1,0 +1,261 @@
+<!doctype html><html lang=ja dir=ltr data-theme=light><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#e74c3c"><meta name=format-detection content="telephone=no"><meta name=robots content="index,follow"><meta name=description content="HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。"><meta name=keywords content="HyperLogLog,カーディナリティ推定,ユニークユーザー数,確率的データ構造,Redis PFCOUNT,BigQuery APPROX_COUNT_DISTINCT,Flajolet,調和平均,Bloom Filter"><meta name=author content="yuhi-sa"><link rel=canonical href=https://yuhi-sa.github.io/posts/20260720_hyperloglog/1/><meta property="og:type" content="article"><meta property="og:title" content="HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04/√mを実装・実験で徹底解説"><meta property="og:description" content="HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。"><meta property="og:url" content="https://yuhi-sa.github.io/posts/20260720_hyperloglog/1/"><meta property="og:site_name" content="tomato blog"><meta property="og:locale" content="ja"><meta property="og:image" content="https://yuhi-sa.github.io/ogp.jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="article:published_time" content="2026-07-20T17:10:00+09:00"><meta property="article:modified_time" content="2026-07-23T08:13:53+09:00"><meta property="article:tag" content="アルゴリズム"><meta property="article:tag" content="データ構造"><meta property="article:tag" content="データベース"><meta property="article:tag" content="Python"><meta property="article:section" content="posts"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04/√mを実装・実験で徹底解説"><meta name=twitter:description content="HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。"><meta name=twitter:image content="https://yuhi-sa.github.io/ogp.jpeg"><title>HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04/√mを実装・実験で徹底解説 | tomato blog</title><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preconnect href=https://cdn.jsdelivr.net crossorigin><link rel=preconnect href=https://pagead2.googlesyndication.com crossorigin><link rel=dns-prefetch href=https://pagead2.googlesyndication.com><link rel=icon href=https://yuhi-sa.github.io/favicon.ico><link rel=alternate hreflang=en href=https://yuhi-sa.github.io/en/posts/20260720_hyperloglog/1/><link rel=alternate hreflang=ja href=https://yuhi-sa.github.io/posts/20260720_hyperloglog/1/><link rel=alternate hreflang=x-default href=https://yuhi-sa.github.io/posts/20260720_hyperloglog/1/><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04\/√mを実装・実験で徹底解説","description":"HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04\/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。","author":{"@type":"Person","name":"yuhi-sa","url":"https:\/\/yuhi-sa.github.io\/"},"publisher":{"@type":"Organization","name":"tomato blog","logo":{"@type":"ImageObject","url":"https:\/\/yuhi-sa.github.io\/ogp.jpeg"},"url":"https:\/\/yuhi-sa.github.io\/"},"datePublished":"2026-07-20T17:10:00\u002b09:00","dateModified":"2026-07-23T08:13:53\u002b09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/yuhi-sa.github.io\/posts\/20260720_hyperloglog\/1\/"},"url":"https:\/\/yuhi-sa.github.io\/posts\/20260720_hyperloglog\/1\/","wordCount":8919,"keywords":["アルゴリズム","データ構造","データベース","Python"],"articleSection":"Posts","inLanguage":"ja","timeRequired":"PT18M"}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"tomato blog","item":"https:\/\/yuhi-sa.github.io\/"},{"@type":"ListItem","position":2,"name":"Posts","item":"https:\/\/yuhi-sa.github.io\/posts\/"},{"@type":"ListItem","position":3,"name":"HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04\/√mを実装・実験で徹底解説"}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin=anonymous referrerpolicy=no-referrer><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH crossorigin=anonymous><link rel=stylesheet href=/css/variables.min.72a177faa7b12de55dcc39c4ab6b6392116718d5e2735dab0214511354ecb973.css integrity="sha256-cqF3+qexLeVdzDnEq2tjkhFnGNXic12rAhRRE1TsuXM=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.839a103ebcb9c32cf680fd3f919bcf838e2ea98e1805efd9149e293504a9b80e.css integrity="sha256-g5oQPry5wyz2gP0/kZvPg44uqY4YBe/ZFJ4pNQSpuA4=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e379066489e20d5433ca35ac1f468fd9e8859705a62d77a79bb7379ac3613848.css integrity="sha256-43kGZIniDVQzyjWsH0aP2eiFlwWmLXenm7c3msNhOEg=" crossorigin=anonymous><style>body{font-family:-apple-system,BlinkMacSystemFont,inter,segoe ui,Roboto,sans-serif;line-height:1.5;color:#000;background:#fff}[data-theme=dark] body{color:#fff;background:#000}.container{max-width:768px;margin:0 auto;padding:0 1rem}</style><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:!0,processEnvironments:!0},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}}</script><script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js id=mathjax-script async></script></head><body itemscope itemtype=https://schema.org/WebPage class=theme-tomatohugo><a href=#main-content class="skip-link sr-only sr-only-focusable" aria-label="Skip to main content">Skip to main content</a><header role=banner class=site-header><nav class="navbar navbar-expand-lg navbar-light bg-light" role=navigation aria-label="Main navigation"><div class=container><a class=navbar-brand href=https://yuhi-sa.github.io/ aria-label="Return to tomato blog homepage">tomato blog
+</a><button class="navbar-toggler d-lg-none" type=button data-bs-toggle=collapse data-bs-target=#navbarNav aria-controls=navbarNav aria-expanded=false aria-label="Toggle navigation menu">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarNav><ul class="navbar-nav ms-auto" role=menubar><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/ role=menuitem aria-label="Navigate to Blog">Blog</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/tags/ role=menuitem aria-label="Navigate to Tags">Tags</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/about/ role=menuitem aria-label="Navigate to About">About</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/devtoolbox/ role=menuitem aria-label="Navigate to DevToolBox">DevToolBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/calcbox/ role=menuitem aria-label="Navigate to CalcBox">CalcBox</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/pomodoro/ role=menuitem aria-label="Navigate to Pomodoro">Pomodoro</a></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/posts/privacy_policy/ role=menuitem aria-label="Navigate to Privacy policy">Privacy policy</a></li><li class=nav-item role=none><button id=darkModeToggle class="nav-link btn btn-link border-0" type=button role=menuitem aria-label="Toggle dark mode" title="Switch between light and dark themes">
+<i class="fas fa-moon" id=darkModeIcon aria-hidden=true></i>
+<span class="d-lg-none ms-2">ダークモード</span></button></li><li class=nav-item role=none><a class=nav-link href=https://yuhi-sa.github.io/en/posts/20260720_hyperloglog/1/ role=menuitem hreflang=en lang=en aria-label="Switch to English">EN</a></li></ul></div></div></nav><script data-ad-client=ca-pub-9558545098866170 async crossorigin=anonymous src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script></header><main id=main-content role=main class=site-main aria-label="Main content"><div class="container mt-4"><div class="row justify-content-center"><div class=col-lg-8><article itemscope itemtype=https://schema.org/Article><header class=article-header><h1 itemprop=headline>HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04/√mを実装・実験で徹底解説</h1><p class="lead article-description" itemprop=description>HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。</p><div class=article-meta><time datetime=2026-07-20T17:10:00+09:00 itemprop=datePublished><i class="far fa-calendar-alt me-1" aria-hidden=true></i>
+July 20, 2026
+</time><time datetime=2026-07-23T08:13:53+09:00 itemprop=dateModified class=ms-3><i class="far fa-edit me-1" aria-hidden=true></i>
+Updated
+July 23, 2026
+</time><span aria-label="Reading time" class=ms-3><i class="far fa-clock me-1" aria-hidden=true></i>
+18 min read</span></div><div class=article-tags role=group aria-label="Article tags"><a href=/tags/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>アルゴリズム
+</a><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>データ構造
+</a><a href=/tags/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>データベース
+</a><a href=/tags/python/ class="badge badge-custom text-decoration-none me-1" rel=tag itemprop=keywords>Python</a></div></header><div class=article-content itemprop=articleBody><h2 id=1-ユニーク数カウントは何が難しいか>1. ユニーク数カウントは何が難しいか</h2><p>「このログに何種類のユーザーIDが含まれるか」「今日のユニークアクセス数は何件か」——一見単純に見えるこの問いは、データ量が数百万〜数十億件になった瞬間に、地味だが厄介な工学上の課題に変わる。</p><p>正確に数えたければ方法は1つしかない。<strong>すでに見た要素を1件残らず記憶しておき、新しい要素が来るたびに「見たことがあるか」を照合する</strong>ことである。実装としては典型的にはハッシュセット(Pythonなら<code>set</code>)を使うが、この方式にはメモリという避けられないコストが伴う。要素数が\(n\)
+件あれば、ハッシュセットが消費するメモリは\(n\)
+に比例して増え続ける。後の第7節で実測するが、Pythonの<code>set</code>は要素1件あたり数十〜100バイト程度を消費するため、1億件のユニークIDを正確に数えようとすると、それだけで数GBのメモリが必要になる。</p><p>さらに厄介なのが<strong>分散環境でのマージ</strong>である。ログがサーバー数十台に分散して溜まっている状況で「全サーバー合計のユニーク数」を求めたい場合、各サーバーが持つ集合をすべて1箇所に集めて和集合を取らなければならない。集合のサイズがそのままネットワーク転送量になるため、正確な集合ベースの手法は分散集計と本質的に相性が悪い。</p><p>この問題に対し、「多少の誤差は許容するので、メモリと通信量を劇的に減らしたい」というアプローチを取るのが確率的データ構造(probabilistic data structure)である。その源流は Philippe Flajolet と G. Nigel Martin が1985年に発表した論文 &ldquo;
+<a href=https://algo.inria.fr/flajolet/Publications/FlMa85.pdf>Probabilistic Counting Algorithms for Data Base Applications</a>
+"(Journal of Computer and System Sciences)にある確率的カウント法(Flajolet–Martinアルゴリズム)まで遡る。これを土台に、LogLog法を経て2007年に Flajolet, Fusy, Gandouet, Meunier の4名が発表した論文 &ldquo;
+<a href=https://dmtcs.episciences.org/3545>HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm</a>
+"(AofA 2007)が、本記事の主役である**HyperLogLog(HLL)**である。要素をハッシュするだけの1パス処理で、標準誤差\(1.04/\sqrt{m}\)
+という驚くほど小さい誤差を、レジスタ数\(m\)
+個ぶんの固定メモリだけで達成する。本記事ではこの理論を導入し、Pythonで自作実装したうえで、理論値と実測値がどこまで一致するかを検証する。</p><h2 id=2-直感-先頭に0がk個並ぶハッシュを見たらどう考えるか>2. 直感: 「先頭に0がk個並ぶハッシュを見た」らどう考えるか</h2><p>HyperLogLogの核心にあるアイデアは、突き詰めればコイン投げの確率と同じくらい単純である。</p><p>公正なコインを投げ続けて「表が\(k\)
+回連続する」事象を考える。1回表が出る確率は\(1/2\)
+なので、\(k\)
+回連続で表が出る確率は\(2^{-k}\)
+である。逆に言えば、<strong>もし「表が\(k\)
+回連続」という事象を実際に1回でも観測できたなら、それはだいたい\(2^{k}\)
+回に1回しか起きない事象を引き当てたということになる</strong>。</p><p>これをハッシュ値に置き換える。理想的なハッシュ関数は出力のビット列をコイン投げの列とみなせる(各ビットが独立に0/1をほぼ等確率で取る)。ある要素のハッシュ値の<strong>先頭に0が\(k\)
+個連続している</strong>のを観測したら、それは確率\(2^{-(k+1)}\)
+程度の珍しい事象であり、「これまでに投入したユニーク要素の数はだいたい\(2^{k+1}\)
+個くらいだったはずだ」と逆算できる。要素をどれだけ何回重複して入れても、同じ要素は同じハッシュ値になるため、この推定は<strong>重複に対して不変</strong>という嬉しい性質を持つ。</p><p><img src=/posts/20260720_hyperloglog/fig1_mechanism.png alt=HyperLogLogの直感とレジスタ分割の仕組み。上段はコイン投げの喩えで先頭連続0の個数kが珍しいほど多くのユニーク要素を見た証拠になることを示し、下段はハッシュ値を上位ビット(レジスタ番号)と残りビット(rank)に分割し、m個のレジスタそれぞれが独立に最大rankを記録する仕組みを示す></p><p>これがそのままFlajolet–Martin型のアルゴリズムの原型であり、たった1個のレジスタ\(R\)
+(観測した中で最大の先頭連続0の個数)を覚えておくだけで、\(2^{R}\)
+のオーダーでユニーク数を推定できる。次節では、この「1個のレジスタ」方式がなぜそのままでは使い物にならないかを説明する。</p><h2 id=3-単一推定器の分散問題とm個のレジスタ調和平均>3. 単一推定器の分散問題とm個のレジスタ+調和平均</h2><p>前節の\(R\)
+を使った推定には致命的な弱点がある。<strong>推定量の分散が大きすぎる</strong>のだ。\(R\)
+は「これまで見た中の最大値」であり、最大値の分布は裾が長い(まれに極端に大きな\(R\)
+を引く)。\(2^R\)
+のような指数関数を通すと、そのわずかな\(R\)
+のブレが推定値を2倍・4倍にしてしまう。1個のコインだけを見て「表が出る確率」を推定するようなもので、原理的に安定しない。</p><p>これを安定させる素朴な方法は、独立したハッシュ関数を\(m\)
+個用意して\(m\)
+個の\(R\)
+を求め、平均を取ることである。しかし\(m\)
+個のハッシュ関数を毎回計算するのはハッシュ計算コストが\(m\)
+倍になり非効率で、しかも本当に独立な\(m\)
+個のハッシュ関数を用意すること自体が面倒である。</p><p>HyperLogLogの巧妙な点は、<strong>1回のハッシュ計算だけで\(m\)
+個の独立な推定器を模擬する</strong>ことにある(この手法はstochastic averagingと呼ばれる)。ハッシュ値のビット列を2つに分割し、</p><ul><li><strong>上位\(b\)
+ビット</strong>(値は\(0\)
+〜\(m-1\)
+、\(m=2^b\)
+)を<strong>レジスタ番号 \(idx\)
+</strong>として使う</li><li><strong>残りの\((64-b)\)
+ビット</strong>の中で「先頭から連続する0の個数+1」を<strong>rank</strong>として計算する</li></ul><p>という手順を踏む。要素を1件処理するたびに、その要素が属するレジスタ\(idx\)
+の値を「これまでの値」と「今回のrank」の<strong>大きい方</strong>に更新する(\(M[idx] \leftarrow \max(M[idx], \text{rank})\)
+)。全要素を処理し終えると、\(m\)
+個のレジスタそれぞれが独立に(ただし互いに素な部分集合について)「先頭連続0が最大何個だったか」を記録した状態になる。図の下段がこの仕組みを表している。</p><p>最後の一手が<strong>調和平均</strong>である。各レジスタの値\(M_j\)
+から\(2^{M_j}\)
+を計算すると、これは「そのレジスタが担当した要素群のユニーク数」のおおよその逆数スケールの推定値になる。ここで単純な算術平均を取ると、まれに極端に大きな\(M_j\)
+を引いたレジスタ1つが\(2^{M_j}\)
+を通じて平均全体を吹き飛ばしてしまう。<strong>調和平均は大きな値の影響を強く減衰させる性質を持つ</strong>ため、外れ値耐性が高く、\(m\)
+個のレジスタ全体の分散を\(1/m\)
+のオーダーまで抑え込める。これがHyperLogLogがまさに「調和平均を取る」という設計になっている理由であり、Flajolet et al. (2007)が理論的に\(1.04/\sqrt{m}\)
+という驚くほど小さい標準誤差を導出できた核心部分である。</p><h2 id=4-推定式バイアス補正小規模領域のlinear-counting>4. 推定式・バイアス補正・小規模領域のlinear counting</h2><p>前節の考え方を数式にする。レジスタ配列\(M[0..m-1]\)
+が与えられたとき、生の推定値は</p>\[
+E = \alpha_m \, m^{2} \left( \sum_{j=0}^{m-1} 2^{-M_j} \right)^{-1}
+\]<p>で計算される。\(\sum_j 2^{-M_j}\)
+の逆数に\(m\)
+を掛けた量は「\(2^{M_j}\)
+たちの調和平均」に\(m\)
+を掛けたものに等しく(調和平均の定義 \(m/\sum_j (2^{M_j})^{-1}\)
+そのもの)、前節で述べた「調和平均でユニーク数を推定する」という設計をそのまま数式化したものになっている。\(\alpha_m\)
+はバイアス補正定数で、Flajolet et al. (2007)により</p>\[
+\alpha_m =
+\begin{cases}
+0.673 & (m=16) \\
+0.697 & (m=32) \\
+0.709 & (m=64) \\
+\dfrac{0.7213}{1+1.079/m} & (m \ge 128)
+\end{cases}
+\]<p>と与えられている。この定数はMax推定量が持つ系統的なバイアス(Mellin変換を使った解析による)を打ち消すためのもので、本記事で扱う\(m=256\)
+〜\(16{,}384\)
+はすべて\(m\ge128\)
+の式に当てはまる。</p><p>この推定式は、要素数\(n\)
+が十分大きい範囲では標準誤差</p>\[
+\frac{\sigma[E]}{n} \approx \frac{1.04}{\sqrt{m}}
+\]<p>を実現する。ここで重要なのは、<strong>この誤差は\(n\)
+に依存しない</strong>という点である。\(n\)
+が10万でも1億でも、\(m\)
+さえ固定していれば相対誤差はほぼ変わらない。これが後述するRedisやGA4がカーディナリティによらず固定サイズのスケッチで運用できる理由である。</p><p>ただし、上の式がそのまま機能するのは\(n\)
+がある程度大きいときに限られる。\(n\)
+がレジスタ数\(m\)
+に対して小さいと、多くのレジスタがまだ一度も更新されず0のままになり、\(E\)
+は不安定になる。Flajolet et al. (2007)はこれに対し、生の推定値\(E \le 2.5m\)
+のとき、<strong>linear counting</strong>と呼ばれる古典的な補正式に切り替えることを提案している。</p>\[
+E^{*} = m \ln\frac{m}{V}
+\]<p>ここで\(V\)
+は値が0のままのレジスタの個数である。これは「\(m\)
+個のビンに\(n\)
+個のボールを投げたとき、空のビンが\(V\)
+個残る確率」というクーポン収集問題型の統計から導かれる式で、\(n\)
+がレジスタ数に対して小さい領域(=先頭連続0がほとんど発生しない領域)を高精度にカバーする。逆に、32bitハッシュを使う古典的な実装では\(2^{32}\)
+に近い超巨大なカーディナリティ向けの補正も必要になるが、本記事の実装は64bitハッシュを使っており(\(2^{64}\)
+は実験で扱う\(n\le100\)
+万よりも桁違いに大きい)、この補正は実質的に発生しないため省略する。</p><h2 id=5-python実装>5. Python実装</h2><p>blake2bで64bit整数ハッシュを作り、レジスタ配列は1レジスタ1バイトの<code>bytearray</code>で管理する(rankは最大でも64程度なので実際には6bitで足りるが、実装の単純さを優先した)。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hashlib</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>math</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>SALT</span> <span class=o>=</span> <span class=sa>b</span><span class=s2>&#34;hyperloglog-blog-20260720&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>hash64</span><span class=p>(</span><span class=n>key</span><span class=p>:</span> <span class=nb>bytes</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;blake2bで64bit整数ハッシュを得る。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>d</span> <span class=o>=</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>blake2b</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>salt</span><span class=o>=</span><span class=n>SALT</span><span class=p>[:</span><span class=mi>16</span><span class=p>],</span> <span class=n>digest_size</span><span class=o>=</span><span class=mi>8</span><span class=p>)</span><span class=o>.</span><span class=n>digest</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>int</span><span class=o>.</span><span class=n>from_bytes</span><span class=p>(</span><span class=n>d</span><span class=p>,</span> <span class=s2>&#34;big&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>alpha_m</span><span class=p>(</span><span class=n>m</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>float</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Flajolet et al. 2007のバイアス補正係数alpha_m(m&gt;=128の漸近式)。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mf>0.7213</span> <span class=o>/</span> <span class=p>(</span><span class=mi>1</span> <span class=o>+</span> <span class=mf>1.079</span> <span class=o>/</span> <span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>HyperLogLog</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=nb>int</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;b: レジスタ番号に使うビット数。レジスタ数 m = 2^b。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>=</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>m</span> <span class=o>=</span> <span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>registers</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>rem_bits</span> <span class=o>=</span> <span class=mi>64</span> <span class=o>-</span> <span class=n>b</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_hash</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>h</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;64bit整数ハッシュ値を1件登録する。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>idx</span> <span class=o>=</span> <span class=n>h</span> <span class=o>&gt;&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>rem_bits</span>
+</span></span><span class=line><span class=cl>        <span class=n>remainder</span> <span class=o>=</span> <span class=n>h</span> <span class=o>&amp;</span> <span class=p>((</span><span class=mi>1</span> <span class=o>&lt;&lt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>rem_bits</span><span class=p>)</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>remainder</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>rank</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>rem_bits</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>rank</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>rem_bits</span> <span class=o>-</span> <span class=n>remainder</span><span class=o>.</span><span class=n>bit_length</span><span class=p>()</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>rank</span> <span class=o>&gt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>registers</span><span class=p>[</span><span class=n>idx</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>registers</span><span class=p>[</span><span class=n>idx</span><span class=p>]</span> <span class=o>=</span> <span class=n>rank</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>bytes</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>add_hash</span><span class=p>(</span><span class=n>hash64</span><span class=p>(</span><span class=n>key</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>raw_estimate</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>float</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>m</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>m</span>
+</span></span><span class=line><span class=cl>        <span class=n>inv_sum</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=mf>2.0</span> <span class=o>**</span> <span class=p>(</span><span class=o>-</span><span class=n>r</span><span class=p>)</span> <span class=k>for</span> <span class=n>r</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>registers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>alpha_m</span><span class=p>(</span><span class=n>m</span><span class=p>)</span> <span class=o>*</span> <span class=n>m</span> <span class=o>*</span> <span class=n>m</span> <span class=o>/</span> <span class=n>inv_sum</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>estimate</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>float</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;小規模補正(linear counting)込みの推定値。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>m</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>m</span>
+</span></span><span class=line><span class=cl>        <span class=n>e</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>raw_estimate</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>e</span> <span class=o>&lt;=</span> <span class=mf>2.5</span> <span class=o>*</span> <span class=n>m</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>zeros</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>registers</span><span class=o>.</span><span class=n>count</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>zeros</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>m</span> <span class=o>*</span> <span class=n>math</span><span class=o>.</span><span class=n>log</span><span class=p>(</span><span class=n>m</span> <span class=o>/</span> <span class=n>zeros</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>e</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>merge</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>other</span><span class=p>:</span> <span class=s2>&#34;HyperLogLog&#34;</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=s2>&#34;HyperLogLog&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;レジスタごとのmaxを取るだけで和集合のHLLになる。&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=bp>self</span><span class=o>.</span><span class=n>b</span> <span class=o>==</span> <span class=n>other</span><span class=o>.</span><span class=n>b</span>
+</span></span><span class=line><span class=cl>        <span class=n>out</span> <span class=o>=</span> <span class=n>HyperLogLog</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>out</span><span class=o>.</span><span class=n>registers</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=nb>max</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>)</span> <span class=k>for</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span> <span class=ow>in</span> <span class=nb>zip</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>registers</span><span class=p>,</span> <span class=n>other</span><span class=o>.</span><span class=n>registers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>out</span>
+</span></span></code></pre></div><p><code>idx = h >> self.rem_bits</code>でハッシュの上位\(b\)
+ビットを取り出してレジスタ番号にし、残りのビットの<code>bit_length()</code>からrankを求めている。<code>merge</code>メソッドがレジスタごとのmax(要素ごとのmax操作)を取るだけという単純さは、次の第7節で見る「分散集計への強さ」に直結する。</p><h2 id=6-実験1-誤差はレジスタ数mだけで決まるか>6. 実験1: 誤差はレジスタ数mだけで決まるか</h2><p>理論上、相対標準誤差は\(1.04/\sqrt{m}\)
+で、真のカーディナリティ\(n\)
+には依存しないはずである。これを実測で確かめる。</p><p>レジスタ数\(m \in \{256, 1{,}024, 4{,}096, 16{,}384\}\)
+(\(b\in\{8,10,12,14\}\)
+)のそれぞれについて、真のカーディナリティ\(n\)
+を\(100{,}000\)
+から\(1{,}000{,}000\)
+まで10万刻みで10点動かし、各点で乱数シードを変えた<strong>30試行</strong>を実施した(要素はtrialごとに異なる乱数を混ぜたユニークな文字列)。各試行・各\(n\)
+で相対誤差\((E-n)/n\)
+を計算し、全体のRMS(二乗平均平方根)を「実測の相対標準誤差」とした。</p><table><thead><tr><th style=text-align:right>\(b\)</th><th style=text-align:right>\(m\)</th><th style=text-align:right>実測RMS相対誤差</th><th style=text-align:right>理論値 \(1.04/\sqrt{m}\)</th><th style=text-align:right>平均バイアス</th></tr></thead><tbody><tr><td style=text-align:right>8</td><td style=text-align:right>256</td><td style=text-align:right>6.858%</td><td style=text-align:right>6.500%</td><td style=text-align:right>+0.480%</td></tr><tr><td style=text-align:right>10</td><td style=text-align:right>1,024</td><td style=text-align:right>3.638%</td><td style=text-align:right>3.250%</td><td style=text-align:right>-0.325%</td></tr><tr><td style=text-align:right>12</td><td style=text-align:right>4,096</td><td style=text-align:right>1.675%</td><td style=text-align:right>1.625%</td><td style=text-align:right>+0.228%</td></tr><tr><td style=text-align:right>14</td><td style=text-align:right>16,384</td><td style=text-align:right>0.744%</td><td style=text-align:right>0.813%</td><td style=text-align:right>+0.082%</td></tr></tbody></table><p><img src=/posts/20260720_hyperloglog/fig2_error_vs_m.png alt="実験1の結果。レジスタ数mを256から16384まで振ったときの相対誤差(log scale)を、理論標準誤差1.04/√mの破線と重ねてプロットした図。各mについて薄い点はn=10万〜100万の10通りの実測RMS誤差、濃い点は全体RMSで、理論線にほぼ乗っている"></p><p>図から分かる通り、\(m\)
+を4倍にするたびに誤差はほぼ半分(=\(\sqrt{4}=2\)
+分の1)になっており、対数スケール上で理論直線とほぼ完全に重なっている。また、薄く重ねた各\(n\)
+(10万〜100万の10点)ごとの実測誤差も、同じ\(m\)
+の中ではほぼ同じ水準に集まっており、<strong>誤差が\(n\)
+に依存せず\(m\)
+だけで決まる</strong>という理論の主張が実測でも成立していることが確認できた。バイアス(平均相対誤差)もすべて1%未満に収まっており、\(\alpha_m\)
+による補正が実際に機能していることも裏付けられた。</p><h2 id=7-実験2-メモリ比較とマージ可能性>7. 実験2: メモリ比較とマージ可能性</h2><h3 id=メモリ比較-正確なsetとの差>メモリ比較: 正確なsetとの差</h3><p><code>tracemalloc</code>で、Pythonの<code>set</code>に文字列キーを追加し続けたときの実測メモリと、HyperLogLogのレジスタ配列(理論値: \(m \times 6\,\text{bit}\)
+、実装上は1レジスタ1バイトのbytearrayだが理論上必要なのは6bitで足りる)を比較した。</p><table><thead><tr><th style=text-align:right>\(n\)</th><th style=text-align:right>正確なset実測メモリ</th><th style=text-align:right>1件あたり</th></tr></thead><tbody><tr><td style=text-align:right>10,000</td><td style=text-align:right>1,087.3 KB</td><td style=text-align:right>111.34 B</td></tr><tr><td style=text-align:right>100,000</td><td style=text-align:right>9,944.7 KB</td><td style=text-align:right>101.83 B</td></tr><tr><td style=text-align:right>1,000,000</td><td style=text-align:right>92,230.0 KB</td><td style=text-align:right>94.44 B</td></tr><tr><td style=text-align:right>10,000,000</td><td style=text-align:right>866,527.9 KB</td><td style=text-align:right>88.73 B</td></tr></tbody></table><table><thead><tr><th style=text-align:right>\(b\)</th><th style=text-align:right>\(m\)</th><th style=text-align:right>HyperLogLogレジスタメモリ</th></tr></thead><tbody><tr><td style=text-align:right>8</td><td style=text-align:right>256</td><td style=text-align:right>192 B (0.188 KB)</td></tr><tr><td style=text-align:right>10</td><td style=text-align:right>1,024</td><td style=text-align:right>768 B (0.750 KB)</td></tr><tr><td style=text-align:right>12</td><td style=text-align:right>4,096</td><td style=text-align:right>3,072 B (3.000 KB)</td></tr><tr><td style=text-align:right>14</td><td style=text-align:right>16,384</td><td style=text-align:right>12,288 B (<strong>12.000 KB</strong>)</td></tr></tbody></table><p><img src=/posts/20260720_hyperloglog/fig3_memory.png alt="実験2の結果。ユニーク要素数nを1万から1000万まで振ったときの正確なsetの実測メモリ(実線、右肩上がり)と、HyperLogLog(m=16384)のレジスタメモリ12KB(赤い水平線、nに依らず一定)を対数スケールで比較した図。n=100万地点で両者の差は約7,686倍に達する"></p><p>\(n=1{,}000{,}000\)
+の時点で、正確な<code>set</code>は約90MB(92,230.0 KB)を消費するのに対し、\(m=16{,}384\)
+のHyperLogLogはわずか12KBで済み、その差は<strong>約7,686倍</strong>に達する。しかもHyperLogLogのメモリは\(n\)
+がどれだけ増えても12KBのまま一定である(図の赤い水平線)。これが「ユニーク数を12KBで数える」という本記事タイトルの根拠であり、後述するRedisの実装が採用している値そのものでもある。</p><h3 id=マージ可能性-2つのhllを合体させても誤差範囲に収まるか>マージ可能性: 2つのHLLを合体させても誤差範囲に収まるか</h3><p>分散環境での実用性を左右する最重要プロパティが<strong>マージ可能性</strong>である。\(m=16{,}384\)
+のHyperLogLogを2つ用意し、\(|A|=600{,}000\)
+、\(|B|=600{,}000\)
+、うち\(180{,}000\)
+件を共通部分とした(真の和集合サイズ\(|A\cup B|=1{,}020{,}000\)
+)。レジスタごとのmaxを取るだけの<code>merge</code>を実行し、和集合の推定値を求める試行を10回行った。</p><table><thead><tr><th>指標</th><th style=text-align:right>値</th></tr></thead><tbody><tr><td>真の和集合サイズ \(\lvert A\cup B\rvert\)</td><td style=text-align:right>1,020,000</td></tr><tr><td>マージ推定値の平均相対誤差(10試行)</td><td style=text-align:right>+0.089%</td></tr><tr><td>マージ推定値のRMS相対誤差(10試行)</td><td style=text-align:right>0.536%</td></tr><tr><td>理論標準誤差 \(1.04/\sqrt{16{,}384}\)</td><td style=text-align:right>0.812%</td></tr></tbody></table><p>マージ後の推定誤差は理論標準誤差(0.812%)の範囲に収まっており、**「\(A\)
+のHLLと\(B\)
+のHLLをそれぞれ独立に作ってから、あとでレジスタごとのmaxを取るだけで、最初から\(A\cup B\)
+全体を1つのHLLに投入したのと(誤差の範囲で)同じ結果が得られる」**ことが実測で裏付けられた。これは、サーバーごとにローカルでHLLを作り、中央には12KBのスケッチだけを送って<code>max</code>を取ればグローバルなユニーク数が求まる、という分散集計アーキテクチャがそのまま成立することを意味する。第1節で述べた「正確な集合は転送量が要素数に比例して重い」という問題を、HyperLogLogは構造的に解消している。</p><h2 id=8-実システムでの使われ方>8. 実システムでの使われ方</h2><p>HyperLogLogは学術的な理論にとどまらず、大規模データ基盤の随所で実際に採用されている。</p><p><strong>Redis PFADD/PFCOUNT/PFMERGE</strong>: Redisは<code>PFADD</code>でHyperLogLogに要素を追加し、<code>PFCOUNT</code>で推定カーディナリティを取得し、<code>PFMERGE</code>で複数のHLLを和集合にマージするコマンド群を提供している。
+<a href=https://redis.io/docs/latest/commands/pfcount/>Redis公式ドキュメント</a>
+によれば、密(dense)表現は「16,384個の6bitカウンタを格納する12,288バイトの文字列」であり、標準誤差は**0.81%**とされている。これは本記事の実験2で検証した\(m=16{,}384\)
+のケースとまったく同じ設定であり、理論値\(1.04/\sqrt{16384}\approx0.81\%\)
+とも一致する。小さいカーディナリティの間はスパース表現に自動的に切り替わり、メモリをさらに節約する仕組みも備えている。</p><p><strong>BigQuery HLL_COUNT関数群 / APPROX_COUNT_DISTINCT</strong>:
+<a href=https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions>BigQueryのHyperLogLog++関数群</a>
+は、<code>HLL_COUNT.INIT</code>でスケッチを作り、<code>HLL_COUNT.MERGE</code>で複数のスケッチを結合し、<code>HLL_COUNT.EXTRACT</code>でカーディナリティを取り出す設計になっている。スケッチ自体を<code>BYTES</code>型として中間テーブルに保存できるため、日次パーティションごとに事前計算したスケッチを後から自由にマージして「任意の期間のユニークユーザー数」を再計算できる。精度を指定しない場合は<code>APPROX_COUNT_DISTINCT</code>が内部で同じHLL++を使う。ここで言う「精度(precision)」が本記事の\(b\)
+(レジスタ番号ビット数)に相当し、精度を上げるほど誤差は減るがメモリは増えるというトレードオフは第6節の実験で確認した通りである。</p><p><strong>Google Analytics 4 (GA4)</strong>:
+<a href=https://developers.google.com/analytics/blog/2022/hll>Google公式のGA4解説記事</a>
+によれば、GA4は「アクティブユーザー数」「合計ユーザー数」に精度14(=\(m=16{,}384\)
+)、「セッション数」に精度12(=\(m=4{,}096\)
+)のHyperLogLog++を適用している。偶然にも、これは本記事の実験1・2で検証した\(m=4{,}096\)
+・\(m=16{,}384\)
+のケースとぴったり同じ設定であり、GA4の管理画面に表示されるユーザー数・セッション数が「新規ユーザー数」を除いて厳密な値ではなく確率的推定値である背景には、まさに本記事で検証してきた仕組みが動いている。</p><p><strong>ブルームフィルタとの対比</strong>:
+<a href=https://yuhi-sa.github.io/posts/20260720_bloom_filter/1/>ブルームフィルタの記事</a>
+で扱ったブルームフィルタと、本記事のHyperLogLogは、どちらも「ハッシュ関数」「固定サイズの配列」「マージ可能性」という骨格を共有する確率的データ構造の兄弟分である。しかし答える問いがまったく違う。ブルームフィルタは**「この要素は集合に存在するか?(Yes/No)」<strong>という</strong>メンバーシップ判定<strong>に答え、偽陽性はあっても偽陰性は絶対に起きないという非対称な保証を持つ。一方HyperLogLogは</strong>「この集合には何種類の要素があるか?(カーディナリティ)」<strong>という</strong>個数の推定**に答え、個々の要素についての情報(その要素が入っているかどうか)は一切保持しない。実務では両者は排他的ではなく併用されることも多く、たとえば「一度でも見たURLかどうかをブルームフィルタで足切りしつつ、ユニークURL数はHyperLogLogで並行して数える」といった組み合わせが考えられる。</p><h2 id=まとめ>まとめ</h2><p>HyperLogLogは、ハッシュ値の先頭連続0の個数という単純な統計量を、\(m\)
+個のレジスタに分担させて調和平均で統合するだけで、標準誤差\(1.04/\sqrt{m}\)
+というきわめて小さい誤差でユニーク数を推定できる確率的データ構造である。本記事の実測では、\(m=256\)
+〜\(16{,}384\)
+の4通りすべてで理論値と実測RMS誤差がほぼ一致し(例: \(m=16{,}384\)
+で理論0.813%に対し実測0.744%)、正確な<code>set</code>と比べて\(n=100\)
+万件で約7,686倍省メモリであり、さらに2つのHLLをレジスタごとのmaxでマージした推定値も理論誤差の範囲に収まることを確認できた。RedisのPFCOUNT(標準誤差0.81%・12KB)、BigQueryのHLL_COUNT関数、GA4のユーザー数・セッション数集計など、実システムでの採用例もまさに本記事で検証した\(m\)
+の値そのものであり、理論・実装・実測のすべてが一貫して整合していることが確認できた。</p><h3 id=faq>FAQ</h3><p><strong>Q1. HyperLogLogの誤差はどのくらいですか?</strong>
+標準誤差は\(1.04/\sqrt{m}\)
+で近似でき、真のカーディナリティ\(n\)
+には(小規模領域を除き)ほぼ依存しない。たとえば\(m=16{,}384\)
+(Redisの標準的な密表現、GA4のユーザー数集計と同じ設定)なら約0.81%、\(m=4{,}096\)
+なら約1.6%である。本記事の実験1でこの理論値と実測RMS誤差がほぼ一致することを確認した。</p><p><strong>Q2. なぜ算術平均ではなく調和平均を使うのですか?</strong>
+各レジスタの値\(M_j\)
+から\(2^{M_j}\)
+を計算すると、まれに極端に大きな\(M_j\)
+を引いたレジスタ1つが算術平均全体を吹き飛ばしてしまう(裾の重い分布のため)。調和平均は大きな値の影響を強く減衰させる性質を持ち、この外れ値耐性のおかげで\(m\)
+個のレジスタ全体の分散を\(1/m\)
+のオーダーまで小さく抑えられる。これがFlajolet et al. (2007)が\(1.04/\sqrt{m}\)
+という誤差を達成できた核心である。</p><p><strong>Q3. 正確なユニーク数が必要な場合はどうすればいいですか?</strong>
+課金計算や監査など、1件の誤差も許されない用途ではHyperLogLogは使うべきではない。正確な<code>COUNT(DISTINCT)</code>やハッシュセットによる厳密なカウントを使う必要がある。逆に、ダッシュボードの表示用途、分散環境での概算集計、メモリ・通信量が支配的なボトルネックになる規模のデータでは、HyperLogLogの1%未満の誤差は十分許容範囲であることが多い。</p><p><strong>Q4. ブルームフィルタとの違いは何ですか?</strong>
+両者ともハッシュベースの確率的データ構造で、固定サイズの配列とマージ可能性を持つ点は共通している。しかし、ブルームフィルタは「特定の要素が集合に含まれるか(メンバーシップ判定)」に答え、偽陽性はあるが偽陰性は起きないという非対称な保証を持つのに対し、HyperLogLogは「集合に何種類の要素があるか(カーディナリティ)」を推定するだけで、個々の要素の在・不在についての情報は一切持たない。詳細は
+<a href=https://yuhi-sa.github.io/posts/20260720_bloom_filter/1/>ブルームフィルタの記事</a>
+を参照してほしい。</p><p>他の分野の定番書は
+<a href=https://yuhi-sa.github.io/posts/20260720_engineer_books/1/>エンジニアにおすすめの技術書10選</a>
+にまとめている。</p></div><aside class=affiliate-card><p class=affiliate-card__label>あわせて読みたい</p><a href=/posts/20260711_recommended_books/1/ class=affiliate-card__title>Pythonで信号処理・機械学習・制御を学ぶおすすめ技術書12選【2026年・レベル別】</a><p class=affiliate-card__desc>この記事の分野を体系的に学べる技術書を、入門から発展までレベル別に厳選して紹介しています。</p></aside><div class="ad-slot in-content my-3"><ins class=adsbygoogle style=display:block;text-align:center data-ad-layout=in-article data-ad-format=fluid data-ad-client=ca-pub-9558545098866170 data-ad-slot=7406531508></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><footer class=article-footer></footer><meta itemprop=wordCount content="8919"><meta itemprop=url content="https://yuhi-sa.github.io/posts/20260720_hyperloglog/1/"></article><nav class="post-nav mt-5" aria-label="Post navigation"><a href=/posts/20260720_circuit_breaker/1/ class="post-nav__item post-nav__item--prev"><span class="post-nav__label text-muted"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>前の記事
+</span><span class=post-nav__title>サーキットブレーカーパターンとは?Closed/Open/Half-Openの仕組みをシミュレーションで徹底解説</span>
+</a><a href=/posts/20260720_idempotency/1/ class="post-nav__item post-nav__item--next"><span class="post-nav__label text-muted">次の記事<i class="fas fa-arrow-right ms-1" aria-hidden=true></i>
+</span><span class=post-nav__title>冪等性(べきとうせい)とは?APIリトライで二重課金を防ぐIdempotency-Key設計を実例で徹底解説</span></a></nav><section class="related-tools mt-5" aria-label=関連ツール><h2 class=related-tools__title>この記事に関連する無料ツール</h2><div class=related-tools__grid><a href=https://yuhi-sa.github.io/devtoolbox/tools/moving-average-calculator/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Moving Average Calculator</span>
+<span class=related-tools__desc>SMA/EMA/WMA をブラウザで即座に計算</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/json-formatter/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>JSON Formatter</span>
+<span class=related-tools__desc>JSONを整形・圧縮・バリデーション</span>
+</a><a href=https://yuhi-sa.github.io/devtoolbox/tools/regex-tester/ class=related-tools__item rel=related><span class=related-tools__badge>DevToolBox
+</span><span class=related-tools__name>Regex Tester</span>
+<span class=related-tools__desc>正規表現をリアルタイムテスト</span></a></div></section><section class="related-posts mt-5" aria-label="Related posts"><h2 class=related-posts__title>関連記事</h2><div class=related-posts__grid><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260720_bloom_filter/1/>ブルームフィルタとは?仕組み・偽陽性率の数式・最適設計を実装と実験で徹底解説</a></h3><div class=card-meta><time datetime=2026-07-20>July 20, 2026</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260720_consistent_hashing/1/>コンシステントハッシュ法とは?仕組み・仮想ノード・再配置の最小化を実装と実験で徹底解説</a></h3><div class=card-meta><time datetime=2026-07-20>July 20, 2026</time></div></article><article class=related-posts__item><h3 class=related-posts__item-title><a href=/posts/20260313_probabilistic_ds/1/>確率的データ構造入門：Bloom FilterとHyperLogLogのPython実装</a></h3><div class=card-meta><time datetime=2026-03-13>March 13, 2026</time></div></article></div></section><nav class="article-navigation mt-4" aria-label="Article navigation"><a href=/posts/ class="btn btn-outline-secondary btn-sm mb-3"><i class="fas fa-arrow-left me-1" aria-hidden=true></i>
+Back to posts</a><nav aria-label="Breadcrumb navigation" class=breadcrumb-nav role=navigation><ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item aria-label="Navigate to homepage"><i class="fas fa-home" aria-hidden=true></i>
+<span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="1"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/ itemprop=item aria-label="Navigate to tomato blog"><span itemprop=name>tomato blog</span>
+</a><meta itemprop=position content="2"></li><li class=breadcrumb-item itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=https://yuhi-sa.github.io/posts/ itemprop=item aria-label="Navigate to Posts"><span itemprop=name>Posts</span>
+</a><meta itemprop=position content="3"></li><li class="breadcrumb-item active" aria-current=page itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04/√mを実装・実験で徹底解説</span>
+<meta itemprop=position content="4"></li></ol></nav></nav></div></div></div></main><footer role=contentinfo class=site-footer><div class="container pt-4 pb-3" style="border-top:2px solid var(--accent,#e54d2e)"><div class="row justify-content-center"><div class="col-md-8 text-center"><p class="affiliate-disclosure text-muted small mb-2">当サイトはアフィリエイト広告（Amazonアソシエイト・楽天アフィリエイト・Yahoo!ショッピングアフィリエイト）を利用しています。Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p><p class="copyright-text text-muted mb-2">&copy; 2026 yuhi-sa. All rights reserved.</p><p class="theme-attribution text-muted small mt-2 mb-0">Powered by
+<a href=https://gohugo.io/ target=_blank rel=noopener class=text-decoration-none>Hugo</a>
+with
+<a href=https://github.com/yuhi-sa/tomatohugo target=_blank rel=noopener class=text-decoration-none>TomatoHugo</a></p><p class="sister-sites text-muted small mt-3 mb-0">Tools:
+<a href=https://yuhi-sa.github.io/devtoolbox/ class=text-decoration-none>DevToolBox</a>
+|
+<a href=https://yuhi-sa.github.io/calcbox/ class=text-decoration-none>CalcBox</a>
+|
+<a href=https://yuhi-sa.github.io/pomodoro/ class=text-decoration-none>Pomodoro Timer</a></p><p class="social-links text-muted small mt-1 mb-0"><a href=https://www.youtube.com/@yuhi-sa target=_blank rel=noopener class=text-decoration-none>YouTube</a>
+|
+<a href=https://github.com/yuhi-sa target=_blank rel=noopener class=text-decoration-none>GitHub</a></p></div></div></div></footer><script src=https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js integrity=sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz crossorigin=anonymous defer></script><script src=/js/dark-mode.min.3e457dc8346f064bee795e6f9b73e1516dcd059e750c521fe4b445f9ea9a7821.js integrity="sha256-PkV9yDRvBkvueV5vm3PhUW3NBZ51DFIf5LRF+eqaeCE=" defer></script><script>window.addEventListener("load",function(){const e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-LN6QP6VVM3",document.head.appendChild(e),e.onload=function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}e("js",new Date),e("config","G-LN6QP6VVM3")}}),function(){window.dataLayer=window.dataLayer||[];function e(){dataLayer.push(arguments)}document.addEventListener("click",function(t){const n=t.target.closest&&t.target.closest("a[href]");if(!n)return;let s;try{s=new URL(n.href)}catch{return}const o=n.rel&&n.rel.indexOf("sponsored")!==-1||s.hostname.indexOf("amazon.co.jp")!==-1&&s.search.indexOf("tag=")!==-1;if(!o)return;const i=s.hostname,a=n.closest(".affiliate-card")?"affiliate_card":n.closest(".amazon-card")?"amazon_card":"inline";e("event","affiliate_click",{link_domain:i,link_slot:a,link_text:(n.textContent||"").trim().slice(0,80)})})}()</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","name":"HyperLogLogとは?ユニーク数を12KBで数える仕組みと誤差1.04\/√mを実装・実験で徹底解説","url":"https:\/\/yuhi-sa.github.io\/posts\/20260720_hyperloglog\/1\/","description":"HyperLogLogはハッシュ値先頭の連続ゼロ数とm個のレジスタの調和平均でユニーク数を推定する確率的データ構造である。標準誤差1.04\/√mをPython自作実装で検証し、精度、正確なsetとのメモリ比較、2つのHLLのマージ精度を実測した決定版。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"tomato blog","url":"https:\/\/yuhi-sa.github.io\/"}}</script></body></html>
