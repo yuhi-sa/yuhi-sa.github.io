@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+  新パスのサイトマップインデックス（2026-09-04 追加）。
+
+  背景: GSC の /sitemap.xml のレコードが「最終読み込み 2024/10/18」で固着しており、
+  同じパスへの再送信は6回とも効果がなかった。古い状態を引きずらない別レコードを
+  作るため、インデックスも子サイトマップも新しいパスで用意する。
+  既存の /sitemap.xml・/ja/sitemap.xml・/en/sitemap.xml は変更せず並存させる。
+
+  子サイトマップは Hugo が毎ビルド生成する動的ファイル（SITEMAP2026 出力形式）。
+  このインデックス自体は参照先が固定なので静的でよい。
+  <lastmod> は任意項目のため、静的ファイルで古い値が固定されるのを避けて省略している。
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://yuhi-sa.github.io/sitemap-2026.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://yuhi-sa.github.io/en/sitemap-2026.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://yuhi-sa.github.io/devtoolbox/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://yuhi-sa.github.io/calcbox/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://yuhi-sa.github.io/pomodoro/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>

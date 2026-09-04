@@ -5,6 +5,7 @@ Disallow:
 
 
 Sitemap: https://yuhi-sa.github.io/sitemap.xml
+Sitemap: https://yuhi-sa.github.io/sitemap-index-2026.xml
 Sitemap: https://yuhi-sa.github.io/devtoolbox/sitemap.xml
 Sitemap: https://yuhi-sa.github.io/calcbox/sitemap.xml
 Sitemap: https://yuhi-sa.github.io/pomodoro/sitemap.xml
